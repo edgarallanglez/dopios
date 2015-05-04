@@ -26,17 +26,23 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6XG-d9-Zz8">
-                                <rect key="frame" x="116" y="280" width="300" height="112"/>
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B70-0g-FHm" customClass="FBLoginView">
+                                <rect key="frame" x="96" y="333" width="300" height="80"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="9aY-3B-mXB" secondAttribute="centerX" id="0JB-qE-eH8"/>
+                            <constraint firstAttribute="centerX" secondItem="B70-0g-FHm" secondAttribute="centerX" id="KrB-DM-cBJ"/>
+                            <constraint firstItem="B70-0g-FHm" firstAttribute="top" secondItem="9aY-3B-mXB" secondAttribute="bottom" constant="100" id="d6e-fg-h06"/>
                             <constraint firstAttribute="centerY" secondItem="9aY-3B-mXB" secondAttribute="centerY" id="xxX-0X-eZS"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="fbLoginView" destination="B70-0g-FHm" id="XRX-mF-3B0"/>
+                        <outlet property="name_txt" destination="9aY-3B-mXB" id="NtS-Ec-IVy"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>

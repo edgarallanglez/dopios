@@ -9,6 +9,7 @@
 import UIKit
 
 class ViewController: UIViewController, FBLoginViewDelegate{
+    @IBOutlet var name_txt: UILabel!
     @IBOutlet var fbLoginView : FBLoginView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,9 +30,13 @@ class ViewController: UIViewController, FBLoginViewDelegate{
         println("User Name: \(user.name)")
         var userEmail = user.objectForKey("email") as! String
         println("User Email: \(userEmail)")
+        
+        name_txt.text="Hola "+user.name+"!";
     }
     
     func loginViewShowingLoggedOutUser(loginView : FBLoginView!) {
+        name_txt.text="Hola! ";
+        
         println("User Logged Out")
     }
     
