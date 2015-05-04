@@ -7,6 +7,7 @@
 //
 
 #import <FacebookSDK/FacebookSDK.h>
+#import "A0JWTDecoder.h"
 
 #ifndef dop_FacebookHeader_h
 #define dop_FacebookHeader_h
