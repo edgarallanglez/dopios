@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="NXt-XB-PrX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Login View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="dop" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="vXZ-lx-hvc" userLabel="Login View Controller" customClass="LoginViewController" customModule="dop" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -16,39 +17,73 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Te hace falta ver mas Bax :)" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9aY-3B-mXB">
-                                <rect key="frame" x="156" y="135" width="207" height="95"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="95" id="lcT-yj-LHH"/>
-                                    <constraint firstAttribute="width" constant="207" id="tQ0-TB-ZWT"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B70-0g-FHm" customClass="FBLoginView">
-                                <rect key="frame" x="96" y="333" width="300" height="80"/>
+                            <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="ugN-9a-zrS" userLabel="LoginButtonView">
+                                <rect key="frame" x="150" y="25" width="300" height="100"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4x1-vM-hMg">
+                                        <rect key="frame" x="0.0" y="35" width="90" height="30"/>
+                                        <color key="backgroundColor" red="0.18458803994162742" green="0.36053154191202796" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="facebook">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FLf-aV-rGy">
+                                        <rect key="frame" x="105" y="35" width="90" height="30"/>
+                                        <color key="backgroundColor" red="0.14901960780000001" green="0.65098039220000004" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="twitter">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jL9-pn-5KQ">
+                                        <rect key="frame" x="210" y="35" width="90" height="30"/>
+                                        <color key="backgroundColor" red="0.98431372549999996" green="0.14835795512672031" blue="0.30381992529584595" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="google+">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
-                                    <rect key="frame" x="50" y="348" width="300" height="80"/>
-                                </variation>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="2tn-EY-DRh"/>
+                                    <constraint firstAttribute="width" constant="300" id="hjA-XX-y9e"/>
+                                </constraints>
                             </view>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sdL-1O-Lfg" userLabel="username">
+                                <rect key="frame" x="41" y="207" width="518" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="KRF-lL-DHP"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HU1-A0-rLf" userLabel="password">
+                                <rect key="frame" x="41" y="271" width="518" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="ddZ-lt-T6q"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="centerX" secondItem="9aY-3B-mXB" secondAttribute="centerX" id="0JB-qE-eH8"/>
-                            <constraint firstAttribute="centerX" secondItem="B70-0g-FHm" secondAttribute="centerX" id="KrB-DM-cBJ"/>
-                            <constraint firstItem="B70-0g-FHm" firstAttribute="top" secondItem="9aY-3B-mXB" secondAttribute="bottom" constant="100" id="d6e-fg-h06"/>
-                            <constraint firstAttribute="centerY" secondItem="9aY-3B-mXB" secondAttribute="centerY" id="xxX-0X-eZS"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="HU1-A0-rLf" secondAttribute="bottom" constant="299" id="13e-yi-M5a"/>
+                            <constraint firstItem="HU1-A0-rLf" firstAttribute="top" secondItem="sdL-1O-Lfg" secondAttribute="bottom" constant="34" id="53S-le-mfb"/>
+                            <constraint firstAttribute="centerX" secondItem="ugN-9a-zrS" secondAttribute="centerX" id="C2a-oR-dsB"/>
+                            <constraint firstItem="ugN-9a-zrS" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="5" id="IiM-t3-cFY"/>
+                            <constraint firstItem="sdL-1O-Lfg" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="25" id="NP4-dS-NsN"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="sdL-1O-Lfg" secondAttribute="trailing" constant="25" id="eN8-J0-DGC"/>
+                            <constraint firstItem="HU1-A0-rLf" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="25" id="tXk-Fs-wST"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="HU1-A0-rLf" secondAttribute="trailing" constant="25" id="vlW-9e-Eir"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="fbLoginView" destination="B70-0g-FHm" id="XRX-mF-3B0"/>
-                        <outlet property="name_txt" destination="9aY-3B-mXB" id="NtS-Ec-IVy"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-298" y="754"/>
         </scene>
         <!--Reveal View Controller-->
         <scene sceneID="3nY-1O-UVn">
@@ -141,6 +176,7 @@
                         <viewControllerLayoutGuide type="bottom" id="37d-tA-MMx"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="W3U-ac-5LL">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -159,6 +195,7 @@
                         <viewControllerLayoutGuide type="bottom" id="OCC-Xu-geL"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="BBH-0V-Xi6">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
