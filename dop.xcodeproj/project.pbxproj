@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5EB7F5045CBA1E6517FC412C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6621ACA586864569D9570E60 /* libPods.a */; };
 		9D33260F1AF7ED1C00498801 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D33260E1AF7ED1C00498801 /* AppDelegate.swift */; };
 		9D3326111AF7ED1C00498801 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3326101AF7ED1C00498801 /* ViewController.swift */; };
 		9D3326141AF7ED1C00498801 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D3326121AF7ED1C00498801 /* Main.storyboard */; };
 		9D3326161AF7ED1C00498801 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D3326151AF7ED1C00498801 /* Images.xcassets */; };
 		9D3326191AF7ED1C00498801 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D3326171AF7ED1C00498801 /* LaunchScreen.xib */; };
 		9D3326251AF7ED1C00498801 /* dopTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3326241AF7ED1C00498801 /* dopTests.swift */; };
+		A03333101AF831D70063D926 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A033330F1AF831D70063D926 /* FacebookSDK.framework */; };
 		F276781AF429499B34BE549B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50F97B854D180DA0D0C5E605 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +39,7 @@
 		9D33261E1AF7ED1C00498801 /* dopTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = dopTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D3326231AF7ED1C00498801 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9D3326241AF7ED1C00498801 /* dopTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dopTests.swift; sourceTree = "<group>"; };
+		A033330F1AF831D70063D926 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../Documents/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
 		A0AE939A1AF8041A00D02315 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		D958C9144CA5E41124EFC2B1 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		FCA1098DCB55F659FBE730C9 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -50,6 +51,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F276781AF429499B34BE549B /* libPods.a in Frameworks */,
+				A03333101AF831D70063D926 /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,6 +77,7 @@
 		079462BCCDF3FAF530C45E4E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A033330F1AF831D70063D926 /* FacebookSDK.framework */,
 				50F97B854D180DA0D0C5E605 /* libPods.a */,
 			);
 			name = Frameworks;
@@ -109,7 +112,6 @@
 				9D3326121AF7ED1C00498801 /* Main.storyboard */,
 				9D3326151AF7ED1C00498801 /* Images.xcassets */,
 				9D3326171AF7ED1C00498801 /* LaunchScreen.xib */,
-				A0AE93951AF801B400D02315 /* frameworks */,
 				9D33260C1AF7ED1C00498801 /* Supporting Files */,
 			);
 			path = dop;
@@ -138,13 +140,6 @@
 				9D3326231AF7ED1C00498801 /* Info.plist */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		A0AE93951AF801B400D02315 /* frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -414,6 +409,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/dop",
+					/Users/Eduardo/Documents/FacebookSDK,
 				);
 				INFOPLIST_FILE = dop/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -430,6 +426,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/dop",
+					/Users/Eduardo/Documents/FacebookSDK,
 				);
 				INFOPLIST_FILE = dop/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
