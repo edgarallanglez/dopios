@@ -14,6 +14,9 @@
 		9D3326191AF7ED1C00498801 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D3326171AF7ED1C00498801 /* LaunchScreen.xib */; };
 		9D3326251AF7ED1C00498801 /* dopTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3326241AF7ED1C00498801 /* dopTests.swift */; };
 		A03333101AF831D70063D926 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A033330F1AF831D70063D926 /* FacebookSDK.framework */; };
+		A0365FDE1AF9542A000A325D /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0365FDD1AF9542A000A325D /* SWRevealViewController.m */; };
+		A0365FE01AF95518000A325D /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0365FDF1AF95518000A325D /* MenuController.swift */; };
+		A09AB4DB1AF95A26004287F7 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09AB4DA1AF95A26004287F7 /* DashboardViewController.swift */; };
 		F276781AF429499B34BE549B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50F97B854D180DA0D0C5E605 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -40,6 +43,10 @@
 		9D3326231AF7ED1C00498801 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9D3326241AF7ED1C00498801 /* dopTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dopTests.swift; sourceTree = "<group>"; };
 		A033330F1AF831D70063D926 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../Documents/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
+		A0365FDC1AF9542A000A325D /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
+		A0365FDD1AF9542A000A325D /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
+		A0365FDF1AF95518000A325D /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
+		A09AB4DA1AF95A26004287F7 /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		A0AE939A1AF8041A00D02315 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		D958C9144CA5E41124EFC2B1 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		FCA1098DCB55F659FBE730C9 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -106,10 +113,13 @@
 		9D33260B1AF7ED1C00498801 /* dop */ = {
 			isa = PBXGroup;
 			children = (
+				A0365FDB1AF9463B000A325D /* SWRevealViewController */,
 				9D33260E1AF7ED1C00498801 /* AppDelegate.swift */,
 				9D3326101AF7ED1C00498801 /* ViewController.swift */,
 				A0AE939A1AF8041A00D02315 /* Bridging-Header.h */,
 				9D3326121AF7ED1C00498801 /* Main.storyboard */,
+				A0365FDF1AF95518000A325D /* MenuController.swift */,
+				A09AB4DA1AF95A26004287F7 /* DashboardViewController.swift */,
 				9D3326151AF7ED1C00498801 /* Images.xcassets */,
 				9D3326171AF7ED1C00498801 /* LaunchScreen.xib */,
 				9D33260C1AF7ED1C00498801 /* Supporting Files */,
@@ -140,6 +150,15 @@
 				9D3326231AF7ED1C00498801 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A0365FDB1AF9463B000A325D /* SWRevealViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A0365FDC1AF9542A000A325D /* SWRevealViewController.h */,
+				A0365FDD1AF9542A000A325D /* SWRevealViewController.m */,
+			);
+			name = SWRevealViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -277,8 +296,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0365FE01AF95518000A325D /* MenuController.swift in Sources */,
 				9D3326111AF7ED1C00498801 /* ViewController.swift in Sources */,
 				9D33260F1AF7ED1C00498801 /* AppDelegate.swift in Sources */,
+				A0365FDE1AF9542A000A325D /* SWRevealViewController.m in Sources */,
+				A09AB4DB1AF95A26004287F7 /* DashboardViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
