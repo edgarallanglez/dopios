@@ -163,9 +163,14 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item 1" id="IOe-D5-SgW"/>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" title="View" id="nsM-lF-9Hu">
-                        <barButtonItem key="leftBarButtonItem" image="menu" id="eDn-09-xhg"/>
+                        <barButtonItem key="leftBarButtonItem" image="menu" id="eDn-09-xhg">
+                            <color key="tintColor" red="0.096404523480000004" green="0.096404523480000004" blue="0.096404523480000004" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
                     </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="menuButton" destination="eDn-09-xhg" id="wrM-WA-YKd"/>
                     </connections>
@@ -213,13 +218,13 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kzt-7p-ndR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1872" y="1090"/>
+            <point key="canvasLocation" x="1894.5" y="1108"/>
         </scene>
     </scenes>
     <resources>
         <image name="menu" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="LNr-ih-gHl"/>
+        <segue reference="v5w-3x-YAe"/>
     </inferredMetricsTieBreakers>
 </document>
