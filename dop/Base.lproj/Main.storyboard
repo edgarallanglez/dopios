@@ -33,6 +33,9 @@
                                                 <integer key="value" value="40"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="FBlogin:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="PIX-mp-rHe"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FLf-aV-rGy">
                                         <rect key="frame" x="105" y="10" width="80" height="80"/>
@@ -86,6 +89,13 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OyP-6l-WrR" customClass="FBLoginView">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="16" y="459" width="100" height="100"/>
+                                </variation>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -98,9 +108,19 @@
                             <constraint firstItem="HU1-A0-rLf" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="25" id="tXk-Fs-wST"/>
                             <constraint firstAttribute="trailingMargin" secondItem="HU1-A0-rLf" secondAttribute="trailing" constant="25" id="vlW-9e-Eir"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="OyP-6l-WrR"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="OyP-6l-WrR"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
-                        <outlet property="FBLogin" destination="4x1-vM-hMg" id="T2X-wY-RAg"/>
+                        <outlet property="fbLoginView" destination="OyP-6l-WrR" id="vUv-AB-sZi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
