@@ -17,6 +17,8 @@
 		A0365FDE1AF9542A000A325D /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0365FDD1AF9542A000A325D /* SWRevealViewController.m */; };
 		A0365FE01AF95518000A325D /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0365FDF1AF95518000A325D /* MenuController.swift */; };
 		A09AB4DB1AF95A26004287F7 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09AB4DA1AF95A26004287F7 /* DashboardViewController.swift */; };
+		A09AB4E21AF99136004287F7 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09AB4E01AF99136004287F7 /* DataManager.swift */; };
+		A09AB4E31AF99136004287F7 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09AB4E11AF99136004287F7 /* SwiftyJSON.swift */; };
 		F276781AF429499B34BE549B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50F97B854D180DA0D0C5E605 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -47,6 +49,8 @@
 		A0365FDD1AF9542A000A325D /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		A0365FDF1AF95518000A325D /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		A09AB4DA1AF95A26004287F7 /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
+		A09AB4E01AF99136004287F7 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		A09AB4E11AF99136004287F7 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		A0AE939A1AF8041A00D02315 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		D958C9144CA5E41124EFC2B1 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		FCA1098DCB55F659FBE730C9 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -118,6 +122,8 @@
 				9D3326101AF7ED1C00498801 /* LoginViewController.swift */,
 				A0AE939A1AF8041A00D02315 /* Bridging-Header.h */,
 				9D3326121AF7ED1C00498801 /* Main.storyboard */,
+				A09AB4E01AF99136004287F7 /* DataManager.swift */,
+				A09AB4E11AF99136004287F7 /* SwiftyJSON.swift */,
 				A0365FDF1AF95518000A325D /* MenuController.swift */,
 				A09AB4DA1AF95A26004287F7 /* DashboardViewController.swift */,
 				9D3326151AF7ED1C00498801 /* Images.xcassets */,
@@ -297,9 +303,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				A0365FE01AF95518000A325D /* MenuController.swift in Sources */,
+				A09AB4E21AF99136004287F7 /* DataManager.swift in Sources */,
 				9D3326111AF7ED1C00498801 /* LoginViewController.swift in Sources */,
 				9D33260F1AF7ED1C00498801 /* AppDelegate.swift in Sources */,
 				A0365FDE1AF9542A000A325D /* SWRevealViewController.m in Sources */,
+				A09AB4E31AF99136004287F7 /* SwiftyJSON.swift in Sources */,
 				A09AB4DB1AF95A26004287F7 /* DashboardViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
