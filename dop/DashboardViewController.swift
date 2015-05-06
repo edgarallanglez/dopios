@@ -1,5 +1,5 @@
 //
-//  PhotoViewController.swift
+//  DashboardViewController.swift
 //  dop
 //
 //  Created by Jose Eduardo Quintero Gutiérrez on 05/05/15.
@@ -38,18 +38,18 @@ class DashboardViewController: UIViewController {
                 let coupon_limit = String(stringInterpolationSegment: subJson["limit"])
                 let coupon_exp = String(stringInterpolationSegment: subJson["end_date"])
                 let modelo = Coupon(name: coupon_name,limit: coupon_limit,exp: coupon_exp)
-                
+
                 self.coupons.append(modelo)
-                
+
                 println(coupon_name)
             }
-            
-            
-           
-            
+
+
+
         }
-        
-        
+    
+
+
     }
     override func viewDidAppear(animated: Bool) {
         getCoupons()

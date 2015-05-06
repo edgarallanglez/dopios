@@ -17,7 +17,7 @@ class CouponController {
   class func getAllCouponsWithSuccess(success: ((couponsData: NSData!) -> Void)) {
     loadDataFromURL(NSURL(string: getCoupons)!, completion:{(data, error) -> Void in
         if let urlData = data {
-          success(couponsData: urlData)
+            success(couponsData: urlData)
         }
     })
   }
@@ -35,7 +35,6 @@ class CouponController {
           completion(data: nil, error: statusError)
         } else {
           completion(data: data, error: nil)
-            
             
         }
       }
