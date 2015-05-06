@@ -11,6 +11,8 @@ import UIKit
 class DashboardViewController: UIViewController {
     @IBOutlet weak var menuButton:UIBarButtonItem!
 
+    var coupons = [Coupon]()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -23,7 +25,34 @@ class DashboardViewController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    }
+    func getCoupons(){
+        coupons = [Coupon]()
+        
+        CouponController.getAllCouponsWithSuccess { (couponsData) -> Void in
+            let json = JSON(data: couponsData)
+            
+            for (index: String, subJson: JSON) in json{
+                
+                let coupon_name = String(stringInterpolationSegment: subJson["name"])
+                let coupon_limit = String(stringInterpolationSegment: subJson["limit"])
+                let coupon_exp = String(stringInterpolationSegment: subJson["end_date"])
+                let modelo = Coupon(name: coupon_name,limit: coupon_limit,exp: coupon_exp)
+                
+                self.coupons.append(modelo)
+                
+                println(coupon_name)
+            }
+            
+            
+           
+            
+        }
+        
+        
+    }
+    override func viewDidAppear(animated: Bool) {
+        getCoupons()
     }
     
 
