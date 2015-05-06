@@ -17,7 +17,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         FBLoginView.self
         FBProfilePictureView.self
+        
+        if FBSession.activeSession().state.value == FBSessionStateCreatedTokenLoaded.value {
+            FBSession.openActiveSessionWithReadPermissions(["public_profile"], allowLoginUI: false, completionHandler: {
+                (session, state, error) -> Void in
+                self.sessionStateChanged(session, state: state, error: error)
+            })
+        }
         return true
+    }
+    
+    func sessionStateChanged(session : FBSession, state : FBSessionState, error : NSError?)
+    {
+        println("algo paso")
     }
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {

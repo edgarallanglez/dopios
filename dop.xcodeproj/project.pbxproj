@@ -13,7 +13,7 @@
 		9D3326161AF7ED1C00498801 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D3326151AF7ED1C00498801 /* Images.xcassets */; };
 		9D3326191AF7ED1C00498801 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D3326171AF7ED1C00498801 /* LaunchScreen.xib */; };
 		9D3326251AF7ED1C00498801 /* dopTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3326241AF7ED1C00498801 /* dopTests.swift */; };
-		A03333101AF831D70063D926 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A033330F1AF831D70063D926 /* FacebookSDK.framework */; };
+		9DCD8DBD1AFAAF5B00FE96EA /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DCD8DBC1AFAAF5B00FE96EA /* FacebookSDK.framework */; };
 		A0365FDE1AF9542A000A325D /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0365FDD1AF9542A000A325D /* SWRevealViewController.m */; };
 		A0365FE01AF95518000A325D /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0365FDF1AF95518000A325D /* MenuController.swift */; };
 		A09AB4DB1AF95A26004287F7 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09AB4DA1AF95A26004287F7 /* DashboardViewController.swift */; };
@@ -45,7 +45,7 @@
 		9D33261E1AF7ED1C00498801 /* dopTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = dopTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D3326231AF7ED1C00498801 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9D3326241AF7ED1C00498801 /* dopTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dopTests.swift; sourceTree = "<group>"; };
-		A033330F1AF831D70063D926 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../Documents/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
+		9DCD8DBC1AFAAF5B00FE96EA /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../../Downloads/FacebookSDK.framework; sourceTree = "<group>"; };
 		A0365FDC1AF9542A000A325D /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		A0365FDD1AF9542A000A325D /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		A0365FDF1AF95518000A325D /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
@@ -63,8 +63,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9DCD8DBD1AFAAF5B00FE96EA /* FacebookSDK.framework in Frameworks */,
 				F276781AF429499B34BE549B /* libPods.a in Frameworks */,
-				A03333101AF831D70063D926 /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,7 +90,7 @@
 		079462BCCDF3FAF530C45E4E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				A033330F1AF831D70063D926 /* FacebookSDK.framework */,
+				9DCD8DBC1AFAAF5B00FE96EA /* FacebookSDK.framework */,
 				50F97B854D180DA0D0C5E605 /* libPods.a */,
 			);
 			name = Frameworks;
@@ -452,6 +452,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/dop",
 					/Users/Eduardo/Documents/FacebookSDK,
+					/Users/Allan/Downloads,
 				);
 				INFOPLIST_FILE = dop/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -469,6 +470,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/dop",
 					/Users/Eduardo/Documents/FacebookSDK,
+					/Users/Allan/Downloads,
 				);
 				INFOPLIST_FILE = dop/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
