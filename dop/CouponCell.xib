@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell autoresizesSubviews="NO" contentMode="center" selectionStyle="default" indentationWidth="10" reuseIdentifier="CouponCell" rowHeight="75" id="KGk-i7-Jjw" customClass="CouponCell" customModule="dop" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="320" translatesAutoresizingMaskIntoConstraints="NO" id="3Bf-96-uIE">
+                        <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="227" id="Vhk-Sk-d8F"/>
+                            <constraint firstAttribute="height" constant="30" id="sfe-Jr-adr"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                        <variation key="heightClass=compact-widthClass=compact">
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <mask key="constraints">
+                                <include reference="Vhk-Sk-d8F"/>
+                                <include reference="sfe-Jr-adr"/>
+                            </mask>
+                        </variation>
+                    </label>
+                    <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="320" translatesAutoresizingMaskIntoConstraints="NO" id="sPj-9t-gVz">
+                        <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="hy7-dM-Af9"/>
+                            <constraint firstAttribute="width" constant="179" id="l2J-V4-PU0"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                        <variation key="heightClass=compact-widthClass=compact">
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <mask key="constraints">
+                                <include reference="hy7-dM-Af9"/>
+                                <include reference="l2J-V4-PU0"/>
+                            </mask>
+                        </variation>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YVI-kM-69L">
+                        <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="50" id="5JZ-R7-CeW"/>
+                            <constraint firstAttribute="height" constant="50" id="txm-gx-e2F"/>
+                        </constraints>
+                        <variation key="heightClass=compact-widthClass=compact" misplaced="YES">
+                            <rect key="frame" x="5" y="13" width="50" height="51"/>
+                            <mask key="constraints">
+                                <include reference="5JZ-R7-CeW"/>
+                                <include reference="txm-gx-e2F"/>
+                            </mask>
+                        </variation>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="3Bf-96-uIE" firstAttribute="leading" secondItem="YVI-kM-69L" secondAttribute="trailing" constant="15" id="5lH-39-mjq"/>
+                    <constraint firstItem="3Bf-96-uIE" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="6Rb-Rd-Mr3"/>
+                    <constraint firstItem="sPj-9t-gVz" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="33" id="a91-gT-Ks8"/>
+                    <constraint firstAttribute="centerY" secondItem="YVI-kM-69L" secondAttribute="centerY" id="lRt-NR-3du"/>
+                    <constraint firstItem="YVI-kM-69L" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="vYl-QC-CxS"/>
+                    <constraint firstItem="sPj-9t-gVz" firstAttribute="leading" secondItem="YVI-kM-69L" secondAttribute="trailing" constant="15" id="zaf-zw-cpQ"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="subviews">
+                        <exclude reference="sPj-9t-gVz"/>
+                    </mask>
+                </variation>
+                <variation key="heightClass=compact-widthClass=compact">
+                    <mask key="subviews">
+                        <include reference="sPj-9t-gVz"/>
+                        <include reference="YVI-kM-69L"/>
+                    </mask>
+                    <mask key="constraints">
+                        <include reference="a91-gT-Ks8"/>
+                        <include reference="zaf-zw-cpQ"/>
+                        <include reference="5lH-39-mjq"/>
+                        <include reference="6Rb-Rd-Mr3"/>
+                        <include reference="lRt-NR-3du"/>
+                        <include reference="vYl-QC-CxS"/>
+                    </mask>
+                </variation>
+            </tableViewCellContentView>
+            <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+            <connections>
+                <outlet property="branchImage" destination="YVI-kM-69L" id="eEP-ho-xWA"/>
+                <outlet property="expLbl" destination="sPj-9t-gVz" id="l52-zK-qGI"/>
+                <outlet property="nameLbl" destination="3Bf-96-uIE" id="wBU-fF-Q7W"/>
+            </connections>
+            <point key="canvasLocation" x="321" y="215.5"/>
+        </tableViewCell>
+    </objects>
+</document>

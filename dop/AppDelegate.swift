@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func sessionStateChanged(session : FBSession, state : FBSessionState, error : NSError?)
     {
-        println("algo paso")
+       
     }
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
