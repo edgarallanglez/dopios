@@ -32,7 +32,6 @@ class LoginViewController: UIViewController, FBLoginViewDelegate{
         println("User Name: \(user.name)")
         var userEmail = user.objectForKey("email") as! String
         println("User Email: \(userEmail)")
-        
 //        name_txt.text="Hola "+user.name+"!";
     }
     
@@ -52,14 +51,12 @@ class LoginViewController: UIViewController, FBLoginViewDelegate{
     }
     
     @IBAction func FBlogin(sender: UIButton) {
-        if (FBSession.activeSession().state.value == FBSessionStateOpen.value || FBSession.activeSession().state.value == FBSessionStateOpenTokenExtended.value)
-        {
+        if (FBSession.activeSession().state.value == FBSessionStateOpen.value || FBSession.activeSession().state.value == FBSessionStateOpenTokenExtended.value) {
             // Close the session and remove the access token from the cache
             // The session state handler (in the app delegate) will be called automatically
             FBSession.activeSession().closeAndClearTokenInformation()
         }
-        else
-        {
+        else {
             // Open a session showing the user the login UI
             // You must ALWAYS ask for public_profile permissions when opening a session
             FBSession.openActiveSessionWithReadPermissions(["public_profile"], allowLoginUI: true, completionHandler: {
@@ -69,6 +66,9 @@ class LoginViewController: UIViewController, FBLoginViewDelegate{
                 // Call the app delegate's sessionStateChanged:state:error method to handle session state changes
                 appDelegate.sessionStateChanged(session, state: state, error: error)
             })
+            self.performSegueWithIdentifier("showDashboard", sender: self)
+
         }
     }
+    
 }
