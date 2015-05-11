@@ -13,7 +13,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="320" translatesAutoresizingMaskIntoConstraints="NO" id="3Bf-96-uIE">
+                    <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="320" translatesAutoresizingMaskIntoConstraints="NO" id="3Bf-96-uIE">
                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="227" id="Vhk-Sk-d8F"/>
@@ -47,7 +47,7 @@
                             </mask>
                         </variation>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YVI-kM-69L">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YVI-kM-69L">
                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="50" id="5JZ-R7-CeW"/>
@@ -83,10 +83,10 @@
                     <mask key="constraints">
                         <include reference="a91-gT-Ks8"/>
                         <include reference="zaf-zw-cpQ"/>
-                        <include reference="5lH-39-mjq"/>
-                        <include reference="6Rb-Rd-Mr3"/>
                         <include reference="lRt-NR-3du"/>
                         <include reference="vYl-QC-CxS"/>
+                        <include reference="5lH-39-mjq"/>
+                        <include reference="6Rb-Rd-Mr3"/>
                     </mask>
                 </variation>
             </tableViewCellContentView>

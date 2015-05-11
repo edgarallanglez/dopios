@@ -14,7 +14,6 @@
 		9D3326161AF7ED1C00498801 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D3326151AF7ED1C00498801 /* Images.xcassets */; };
 		9D3326191AF7ED1C00498801 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D3326171AF7ED1C00498801 /* LaunchScreen.xib */; };
 		9D3326251AF7ED1C00498801 /* dopTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3326241AF7ED1C00498801 /* dopTests.swift */; };
-		9DCD8DBD1AFAAF5B00FE96EA /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DCD8DBC1AFAAF5B00FE96EA /* FacebookSDK.framework */; };
 		A0365FDE1AF9542A000A325D /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0365FDD1AF9542A000A325D /* SWRevealViewController.m */; };
 		A0365FE01AF95518000A325D /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0365FDF1AF95518000A325D /* MenuController.swift */; };
 		A04E388A1AFC3549007C7B69 /* starbucks.gif in Resources */ = {isa = PBXBuildFile; fileRef = A04E38891AFC3549007C7B69 /* starbucks.gif */; };
@@ -47,7 +46,6 @@
 		9D33261E1AF7ED1C00498801 /* dopTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = dopTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D3326231AF7ED1C00498801 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9D3326241AF7ED1C00498801 /* dopTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dopTests.swift; sourceTree = "<group>"; };
-		9DCD8DBC1AFAAF5B00FE96EA /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../../Downloads/FacebookSDK.framework; sourceTree = "<group>"; };
 		A0365FDC1AF9542A000A325D /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		A0365FDD1AF9542A000A325D /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		A0365FDF1AF95518000A325D /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
@@ -69,7 +67,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9DCD8DBD1AFAAF5B00FE96EA /* FacebookSDK.framework in Frameworks */,
 				65EC6882BB170A306933497E /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -96,7 +93,6 @@
 		079462BCCDF3FAF530C45E4E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9DCD8DBC1AFAAF5B00FE96EA /* FacebookSDK.framework */,
 				CECB1B0D2622156BB92843B9 /* libPods.a */,
 			);
 			name = Frameworks;
