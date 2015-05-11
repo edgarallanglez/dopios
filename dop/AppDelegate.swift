@@ -27,9 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    func sessionStateChanged(session : FBSession, state : FBSessionState, error : NSError?)
-    {
-       
+    func sessionStateChanged(session : FBSession, state : FBSessionState, error : NSError?) {
+        println("el estado cambio")
     }
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
