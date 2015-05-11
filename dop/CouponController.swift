@@ -23,7 +23,7 @@ class CouponController {
   }
 
   
-    class func loadDataFromURL(url: NSURL, completion:(data: NSData?, error: NSError?) -> Void) {
+  class func loadDataFromURL(url: NSURL, completion:(data: NSData?, error: NSError?) -> Void) {
     var session = NSURLSession.sharedSession()
     
     let loadDataTask = session.dataTaskWithURL(url, completionHandler: { (data: NSData!, response: NSURLResponse!, error: NSError!) -> Void in
