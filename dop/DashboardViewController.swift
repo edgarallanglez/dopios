@@ -28,10 +28,12 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         var nib = UINib(nibName: "CouponCell", bundle: nil)
         couponsTableView.registerNib(nib, forCellReuseIdentifier: "CouponCell")
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    func getCoupons(){
+    
+    func getCoupons() {
         coupons = [Coupon]()
         
         CouponController.getAllCouponsWithSuccess { (couponsData) -> Void in
@@ -58,14 +60,16 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
             self.couponsTableView.reloadData()
         }
     }
+    
     override func viewDidAppear(animated: Bool) {
         getCoupons()
     }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return coupons.count
     }
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
-    {
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
      
         
         var cell:CouponCell = tableView.dequeueReusableCellWithIdentifier("CouponCell", forIndexPath: indexPath) as! CouponCell
