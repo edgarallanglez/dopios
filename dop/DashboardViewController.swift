@@ -53,12 +53,13 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
                 namex = String(coupon_name)
             }
             
-            var alert = UIAlertController(title: "Alert", message: namex, preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.Default, handler: nil))
-            self.presentViewController(alert, animated: true, completion: nil)
+            dispatch_async(dispatch_get_main_queue(), {
+                self.couponsTableView.reloadData()
+            });
             
-            self.couponsTableView.reloadData()
+
         }
+        
     }
     
     override func viewDidAppear(animated: Bool) {
