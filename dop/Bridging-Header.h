@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Edgar Allan Glez. All rights reserved.
 //
 
-#import <FacebookSDK/FacebookSDK.h>
+#import "FBSDKCoreKit"
 //#import "A0JWTDecoder.h"
 #import "SWRevealViewController.h"
 
