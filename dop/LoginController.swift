@@ -12,7 +12,7 @@ class LoginController {
     
     class func loginWithFacebook(params:[String:AnyObject],success: ((couponsData: NSData!) -> Void)) {
         let url = "http://104.236.141.44:5000/user/login/facebook"
-        Utilities.sendDataToURL(NSURL(string: url)!, params: params, completion:{(data, error) -> Void in
+        Utilities.sendDataToURL(NSURL(string: url)!, params: params, completion: {(data, error) -> Void in
             if let urlData = data {
                 success(couponsData: urlData)
             }
