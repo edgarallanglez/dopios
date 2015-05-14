@@ -9,37 +9,28 @@
 
 import Foundation
 
-let getCoupons = "http://104.236.141.44:5000/api/coupon/all/get"
 
 class CouponController {
     
   
   class func getAllCouponsWithSuccess(success: ((couponsData: NSData!) -> Void)) {
-    loadDataFromURL(NSURL(string: getCoupons)!, completion:{(data, error) -> Void in
+    let url = "http://104.236.141.44:5000/api/coupon/all/get"
+    Utilities.loadDataFromURL(NSURL(string: url)!, completion:{(data, error) -> Void in
         if let urlData = data {
             success(couponsData: urlData)
         }
     })
   }
-
-  
-  class func loadDataFromURL(url: NSURL, completion:(data: NSData?, error: NSError?) -> Void) {
-    var session = NSURLSession.sharedSession()
     
-    let loadDataTask = session.dataTaskWithURL(url, completionHandler: { (data: NSData!, response: NSURLResponse!, error: NSError!) -> Void in
-      if let responseError = error {
-        completion(data: nil, error: responseError)
-      } else if let httpResponse = response as? NSHTTPURLResponse {
-        if httpResponse.statusCode != 200 {
-          var statusError = NSError(domain:"com.dop", code:httpResponse.statusCode, userInfo:[NSLocalizedDescriptionKey : "HTTP status code has unexpected value."])
-          completion(data: nil, error: statusError)
-        } else {
-          completion(data: data, error: nil)
-            
+  class func takeCouponWithSuccess(params:[String:AnyObject],success: ((couponsData: NSData!) -> Void)) {
+    let url = "http://104.236.141.44:5000/api/coupon/user/take"
+    Utilities.sendDataToURL(NSURL(string: url)!,params: params, completion:{(data, error) -> Void in
+        if let urlData = data {
+            success(couponsData: urlData)
         }
-      }
-    })
+     })
+   }
+
     
-    loadDataTask.resume()
-  }
+    
 }

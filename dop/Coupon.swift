@@ -9,11 +9,13 @@
 import Foundation
 
 class Coupon:NSObject,Printable{
+    let id:Int
     let name:String
     let limit:String
     let exp: String
     
-    init(name: String?, limit: String?, exp: String? ) {
+    init(id:Int!,name: String!, limit: String!, exp: String! ) {
+        self.id=id
         self.name = name ?? ""
         self.limit = limit ?? ""
         self.exp = exp ?? ""

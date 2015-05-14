@@ -32,12 +32,25 @@ class LoginViewController: UIViewController, FBLoginViewDelegate{
         println("User Name: \(user.name)")
         var userEmail = user.objectForKey("email") as! String
         println("User Email: \(userEmail)")
-//        name_txt.text="Hola "+user.name+"!";
+        
+        let params:[String: AnyObject] = [
+            "facebook_key" : user.objectID,
+            "names" : user.first_name,
+            "surnames":user.last_name,
+            "taken_date" : "2015-01-01"]
+        
+        LoginController.loginWithFacebook(params){(couponsData) -> Void in
+            let json = JSON(data: couponsData)
+            println(json)
+        }
+        
+        
+        
+        User.userId=user.objectID
+
     }
     
     func loginViewShowingLoggedOutUser(loginView : FBLoginView!) {
-//        name_txt.text="Hola! ";
-        
         println("User Logged Out")
     }
     
