@@ -37,7 +37,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate{
             "facebook_key" : user.objectID,
             "names" : user.first_name,
             "surnames":user.last_name,
-            "taken_date" : "2015-01-01"]
+            "birth_date" : "2015-01-01"]
         
         LoginController.loginWithFacebook(params){(couponsData) -> Void in
             let json = JSON(data: couponsData)
