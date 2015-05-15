@@ -44,12 +44,12 @@ class LoginViewController: UIViewController, FBLoginViewDelegate{
             let jwt = String(stringInterpolationSegment:json["token"])
             var error:NSError?
             
-            let payload = A0JWTDecoder.payloadOfJWT(jwt, error: &error)
-            
+            //let payload = A0JWTDecoder.payloadOfJWT(jwt, error: &error)
+            User.userToken=String(stringInterpolationSegment:jwt)
+            //User.userEmail=userEmail
+            //User.userName=user.username
             dispatch_async(dispatch_get_main_queue(), {
-                User.userToken=String(stringInterpolationSegment:payload)
-                User.userEmail=userEmail
-                User.userName=user.username
+                self.performSegueWithIdentifier("showDashboard", sender: self)
             });
         }
     }
@@ -83,7 +83,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate{
                 // Call the app delegate's sessionStateChanged:state:error method to handle session state changes
                 appDelegate.sessionStateChanged(session, state: state, error: error)
             })
-            self.performSegueWithIdentifier("showDashboard", sender: self)
+            //self.performSegueWithIdentifier("showDashboard", sender: self)
 
         }
     }

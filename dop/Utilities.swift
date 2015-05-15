@@ -34,6 +34,8 @@ class Utilities {
         var session = NSURLSession.sharedSession()
         let request = NSMutableURLRequest(URL: url)
         request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
+       
+        request.addValue(User.userToken, forHTTPHeaderField: "Authorization")
         request.HTTPMethod = "POST"
         var err: NSError?
         request.HTTPBody = NSJSONSerialization.dataWithJSONObject(params, options: NSJSONWritingOptions.allZeros, error: &err)
