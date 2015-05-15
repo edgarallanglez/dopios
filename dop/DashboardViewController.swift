@@ -131,12 +131,12 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
     
     func takeCoupon(coupon_id:Int) {
         let params:[String: AnyObject] = [
-            "user_id" : User.userId,
             "coupon_id" : coupon_id,
             "taken_date" : "2015-01-01"]
-        
+
         CouponController.takeCouponWithSuccess(params){(couponsData) -> Void in
-            let json = JSON(data: couponsData)            
+            let json = JSON(data: couponsData)
+
             println(json)
         }
         

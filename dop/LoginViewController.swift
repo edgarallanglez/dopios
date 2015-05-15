@@ -27,27 +27,31 @@ class LoginViewController: UIViewController, FBLoginViewDelegate{
     }
     
     func loginViewFetchedUserInfo(loginView : FBLoginView!, user: FBGraphUser) {
-        println("User: \(user)")
-        println("User ID: \(user.objectID)")
-        println("User Name: \(user.name)")
         var userEmail = user.objectForKey("email") as! String
-        println("User Email: \(userEmail)")
         
         let params:[String: AnyObject] = [
             "facebook_key" : user.objectID,
-            "names" : user.first_name,
+            "names" : user.first_name+" "+user.middle_name,
             "surnames":user.last_name,
             "birth_date" : "2015-01-01"]
         
-        LoginController.loginWithFacebook(params){(couponsData) -> Void in
+        
+        LoginController.loginWithFacebook(params){ (couponsData) -> Void in
+            
             let json = JSON(data: couponsData)
-            println(json)
+            
+            print(json)
+            let jwt = String(stringInterpolationSegment:json["token"])
+            var error:NSError?
+            
+            //let payload = A0JWTDecoder.payloadOfJWT(jwt, error: &error)
+            User.userToken=String(stringInterpolationSegment:jwt)
+            //User.userEmail=userEmail
+            //User.userName=user.username
+            dispatch_async(dispatch_get_main_queue(), {
+                self.performSegueWithIdentifier("showDashboard", sender: self)
+            });
         }
-        
-        
-        
-        User.userId=user.objectID
-
     }
     
     func loginViewShowingLoggedOutUser(loginView : FBLoginView!) {
@@ -79,7 +83,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate{
                 // Call the app delegate's sessionStateChanged:state:error method to handle session state changes
                 appDelegate.sessionStateChanged(session, state: state, error: error)
             })
-            self.performSegueWithIdentifier("showDashboard", sender: self)
+            //self.performSegueWithIdentifier("showDashboard", sender: self)
 
         }
     }

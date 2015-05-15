@@ -9,7 +9,8 @@
 import UIKit
 
 class User: NSObject {
-    static var userId:String=""
+    static var userToken:String=""
     static var userEmail:String=""
     static var userName:String=""
+    
 }
