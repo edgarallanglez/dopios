@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import TwitterKit
+import Fabric
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,6 +17,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
+        
+        
+        Twitter.sharedInstance().startWithConsumerKey("mNtK5gCZ1KZsZdzGbwPrDZvwR", consumerSecret: "X70nDMV3aFCObSuL0k3u9NaaadNtSDlhmmjIlQhWZzzF4RAUiO")
+        
+        Fabric.with([Twitter.sharedInstance()])
+        
+        
+       
         FBLoginView.self
         FBProfilePictureView.self
         
@@ -32,8 +43,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
-        var wasHandled:Bool = FBAppCall.handleOpenURL(url, sourceApplication: sourceApplication)
-        return wasHandled
+        var wasHandledFB:Bool = FBAppCall.handleOpenURL(url, sourceApplication: sourceApplication)
+        
+        var wasHandledGG:Bool = GPPURLHandler.handleURL(url, sourceApplication: sourceApplication, annotation: annotation)
+        
+        return wasHandledGG;
+
     }
     
     func applicationWillResignActive(application: UIApplication) {
@@ -57,6 +72,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
+
 
 
 }

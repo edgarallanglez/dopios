@@ -19,4 +19,24 @@ class LoginController {
             }
         })
     }
+    
+    class func loginWithTwitter(params:[String:AnyObject],success: ((couponsData: NSData!) -> Void)) {
+        let url = "http://104.236.141.44:5000/user/login/twitter"
+        
+        Utilities.sendDataToURL(NSURL(string: url)!,params: params, completion:{(data, error) -> Void in
+            if let urlData = data {
+                success(couponsData: urlData)
+            }
+        })
+    }
+    
+    class func loginWithGoogle(params:[String:AnyObject],success: ((couponsData: NSData!) -> Void)) {
+        let url = "http://104.236.141.44:5000/user/login/google"
+        
+        Utilities.sendDataToURL(NSURL(string: url)!,params: params, completion:{(data, error) -> Void in
+            if let urlData = data {
+                success(couponsData: urlData)
+            }
+        })
+    }
 }
