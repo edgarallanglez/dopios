@@ -166,7 +166,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
             var error:NSError?
             
             //let payload = A0JWTDecoder.payloadOfJWT(jwt, error: &error)
-            User.userToken=String(stringInterpolationSegment:jwt)
+            User.userToken = String(stringInterpolationSegment: jwt)
             //User.userEmail=userEmail
             //User.userName=user.username
             dispatch_async(dispatch_get_main_queue(), {
