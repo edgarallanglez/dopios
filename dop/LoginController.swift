@@ -10,18 +10,7 @@ import Foundation
 
 class LoginController {
     
-    class func loginWithFacebook(params:[String:AnyObject],success: ((couponsData: NSData!) -> Void)) {
-        let url = "http://104.236.141.44:5000/user/login/facebook"
-        Utilities.sendDataToURL(NSURL(string: url)!, params: params, completion: {(data, error) -> Void in
-            if let urlData = data {
-                success(couponsData: urlData)
-            }
-        })
-    }
-    
-    class func loginWithTwitter(params:[String:AnyObject],success: ((couponsData: NSData!) -> Void)) {
-        let url = "http://104.236.141.44:5000/user/login/twitter"
-        
+    class func loginWithSocial(url:String,params:[String:AnyObject],success: ((couponsData: NSData!) -> Void)) {
         Utilities.sendDataToURL(NSURL(string: url)!,params: params, completion:{(data, error) -> Void in
             if let urlData = data {
                 success(couponsData: urlData)
@@ -29,13 +18,4 @@ class LoginController {
         })
     }
     
-    class func loginWithGoogle(params:[String:AnyObject],success: ((couponsData: NSData!) -> Void)) {
-        let url = "http://104.236.141.44:5000/user/login/google"
-        
-        Utilities.sendDataToURL(NSURL(string: url)!,params: params, completion:{(data, error) -> Void in
-            if let urlData = data {
-                success(couponsData: urlData)
-            }
-        })
-    }
 }

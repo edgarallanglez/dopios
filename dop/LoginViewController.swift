@@ -48,33 +48,9 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
                         "birth_date" : "2015-01-01"
                         ]
                     
-                    LoginController.loginWithTwitter(params){ (couponsData) -> Void in
-                        
-                        let json = JSON(data: couponsData)
-                        
-                        print(json)
-                        let jwt = String(stringInterpolationSegment:json["token"])
-                        var error:NSError?
-                        
-                        User.userToken=String(stringInterpolationSegment:jwt)
-                        //User.userEmail=userEmail
-                        //User.userName=user.username
-                        dispatch_async(dispatch_get_main_queue(), {
-                            //self.performSegueWithIdentifier("showDashboard", sender: self)
-                        });
-                    }
+                    self.socialLogin("twitter", params: params)
                     
                 })
-            /*if let shareEmailViewController = TWTRShareEmailViewController(completion: {
-                    (email: String!, error: NSError!) in
-                    if (email != nil) {
-                        print("\(email)")
-                    } else {
-                        print("\(error)")
-                    }
-                }) {
-                    self.presentViewController(shareEmailViewController, animated: true, completion: nil)
-               }*/
                 
             } else {
                 println("error: \(error.localizedDescription)");
@@ -82,6 +58,9 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
             
         }
         
+    }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
     }
     
     //Google + login
@@ -105,21 +84,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
                 "birth_date" : "2015-01-01",
                 "email": userEmail!]
             
-            LoginController.loginWithGoogle(params){ (couponsData) -> Void in
-                
-                let json = JSON(data: couponsData)
-                
-                print(json)
-                let jwt = String(stringInterpolationSegment:json["token"])
-                var error:NSError?
-                
-                User.userToken=String(stringInterpolationSegment:jwt)
-                //User.userEmail=userEmail
-                //User.userName=user.username
-                dispatch_async(dispatch_get_main_queue(), {
-                    //self.performSegueWithIdentifier("showDashboard", sender: self)
-                });
-            }
+            self.socialLogin("google", params: params)
 
             
         } else {
@@ -141,6 +106,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
     }
 
     
+    
     // Facebook Delegate Methods
     func loginViewShowingLoggedInUser(loginView : FBLoginView!) {
         println("User Logged In")
@@ -149,30 +115,18 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
     func loginViewFetchedUserInfo(loginView : FBLoginView!, user: FBGraphUser) {
         var userEmail = user.objectForKey("email") as! String
         
+        
+    
         let params:[String: AnyObject] = [
             "facebook_key" : user.objectID,
             "names" : user.first_name+" "+user.middle_name,
             "surnames":user.last_name,
             "birth_date" : "2015-01-01",
-            "email": userEmail]
+            "email": userEmail,
+            "main_image":"https://graph.facebook.com/\(user.objectID)/picture?type=large"]
         
         
-        LoginController.loginWithFacebook(params){ (couponsData) -> Void in
-            
-            let json = JSON(data: couponsData)
-            
-            print(json)
-            let jwt = String(stringInterpolationSegment:json["token"])
-            var error:NSError?
-            
-            //let payload = A0JWTDecoder.payloadOfJWT(jwt, error: &error)
-            User.userToken = String(stringInterpolationSegment: jwt)
-            //User.userEmail=userEmail
-            //User.userName=user.username
-            dispatch_async(dispatch_get_main_queue(), {
-                //self.performSegueWithIdentifier("showDashboard", sender: self)
-            });
-        }
+        self.socialLogin("facebook", params: params)
     }
     
     func loginViewShowingLoggedOutUser(loginView : FBLoginView!) {
@@ -183,10 +137,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
         println("Error: \(handleError.localizedDescription)")
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+
     
     @IBAction func FBlogin(sender: UIButton) {
         if (FBSession.activeSession().state.value == FBSessionStateOpen.value || FBSession.activeSession().state.value == FBSessionStateOpenTokenExtended.value) {
@@ -204,8 +155,27 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
                 // Call the app delegate's sessionStateChanged:state:error method to handle session state changes
                 appDelegate.sessionStateChanged(session, state: state, error: error)
             })
-            //self.performSegueWithIdentifier("showDashboard", sender: self)
-
+        }
+    }
+    
+    
+    
+    // Social login Call
+    func socialLogin(type:String,params:[String:AnyObject]){
+        LoginController.loginWithSocial("http://104.236.141.44:5000/user/login/"+type,params:params){ (couponsData) -> Void in
+            
+            let json = JSON(data: couponsData)
+            
+            print(json)
+            let jwt = String(stringInterpolationSegment:json["token"])
+            var error:NSError?
+            
+            User.userToken=String(stringInterpolationSegment:jwt)
+            //User.userEmail=String(stringInterpolationSegment:userEmail)
+            //User.userName=user.username
+            dispatch_async(dispatch_get_main_queue(), {
+                self.performSegueWithIdentifier("showDashboard", sender: self)
+            });
         }
     }
     
