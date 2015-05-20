@@ -50,6 +50,9 @@
                                                 <integer key="value" value="40"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="signInWithTwitter:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="AcS-kF-Mh5"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jL9-pn-5KQ">
                                         <rect key="frame" x="210" y="10" width="80" height="80"/>
@@ -65,6 +68,9 @@
                                                 <integer key="value" value="40"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="signInWithGoogle:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="aKh-m1-Aen"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -121,6 +127,7 @@
                     </view>
                     <connections>
                         <outlet property="fbLoginView" destination="OyP-6l-WrR" id="vUv-AB-sZi"/>
+                        <outlet property="twtButton" destination="FLf-aV-rGy" id="fpV-Pc-y94"/>
                         <segue destination="NXt-XB-PrX" kind="show" identifier="showDashboard" id="NZR-gR-mOn"/>
                     </connections>
                 </viewController>
