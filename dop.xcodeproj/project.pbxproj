@@ -19,7 +19,7 @@
 		A0365FE01AF95518000A325D /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0365FDF1AF95518000A325D /* MenuController.swift */; };
 		A048608E1B0D4B7B009FEF1F /* GoogleOpenSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A048608C1B0D4B7B009FEF1F /* GoogleOpenSource.framework */; };
 		A048608F1B0D4B7B009FEF1F /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A048608D1B0D4B7B009FEF1F /* GooglePlus.framework */; };
-		A04860931B0D4D46009FEF1F /* A0JWTDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = A04860921B0D4D46009FEF1F /* A0JWTDecoder.m */; };
+		A04860961B0D5355009FEF1F /* A0JWTDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = A04860951B0D5355009FEF1F /* A0JWTDecoder.m */; };
 		A04E388A1AFC3549007C7B69 /* starbucks.gif in Resources */ = {isa = PBXBuildFile; fileRef = A04E38891AFC3549007C7B69 /* starbucks.gif */; };
 		A09AB4DB1AF95A26004287F7 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09AB4DA1AF95A26004287F7 /* DashboardViewController.swift */; };
 		A09AB4E21AF99136004287F7 /* CouponController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09AB4E01AF99136004287F7 /* CouponController.swift */; };
@@ -77,8 +77,8 @@
 		A0365FDF1AF95518000A325D /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		A048608C1B0D4B7B009FEF1F /* GoogleOpenSource.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleOpenSource.framework; sourceTree = "<group>"; };
 		A048608D1B0D4B7B009FEF1F /* GooglePlus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GooglePlus.framework; sourceTree = "<group>"; };
-		A04860911B0D4D46009FEF1F /* A0JWTDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = A0JWTDecoder.h; path = "../../../Downloads/JWTDecode.iOS-master/Pod/Classes/A0JWTDecoder.h"; sourceTree = "<group>"; };
-		A04860921B0D4D46009FEF1F /* A0JWTDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = A0JWTDecoder.m; path = "../../../Downloads/JWTDecode.iOS-master/Pod/Classes/A0JWTDecoder.m"; sourceTree = "<group>"; };
+		A04860941B0D5355009FEF1F /* A0JWTDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = A0JWTDecoder.h; sourceTree = "<group>"; };
+		A04860951B0D5355009FEF1F /* A0JWTDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = A0JWTDecoder.m; sourceTree = "<group>"; };
 		A04E38891AFC3549007C7B69 /* starbucks.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = starbucks.gif; sourceTree = "<group>"; };
 		A09AB4DA1AF95A26004287F7 /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		A09AB4E01AF99136004287F7 /* CouponController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CouponController.swift; sourceTree = "<group>"; };
@@ -253,8 +253,8 @@
 		A04860901B0D4D3B009FEF1F /* JWTDecode */ = {
 			isa = PBXGroup;
 			children = (
-				A04860911B0D4D46009FEF1F /* A0JWTDecoder.h */,
-				A04860921B0D4D46009FEF1F /* A0JWTDecoder.m */,
+				A04860941B0D5355009FEF1F /* A0JWTDecoder.h */,
+				A04860951B0D5355009FEF1F /* A0JWTDecoder.m */,
 			);
 			name = JWTDecode;
 			sourceTree = "<group>";
@@ -413,7 +413,7 @@
 				A09AB4E21AF99136004287F7 /* CouponController.swift in Sources */,
 				A0EB97B01B05131E005112EF /* Utilities.swift in Sources */,
 				9D3326111AF7ED1C00498801 /* LoginViewController.swift in Sources */,
-				A04860931B0D4D46009FEF1F /* A0JWTDecoder.m in Sources */,
+				A04860961B0D5355009FEF1F /* A0JWTDecoder.m in Sources */,
 				A09AB4E51AFA880E004287F7 /* Coupon.swift in Sources */,
 				9D33260F1AF7ED1C00498801 /* AppDelegate.swift in Sources */,
 				A0365FDE1AF9542A000A325D /* SWRevealViewController.m in Sources */,
