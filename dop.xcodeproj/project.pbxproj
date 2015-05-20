@@ -13,8 +13,13 @@
 		9D3326161AF7ED1C00498801 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D3326151AF7ED1C00498801 /* Images.xcassets */; };
 		9D3326191AF7ED1C00498801 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D3326171AF7ED1C00498801 /* LaunchScreen.xib */; };
 		9D3326251AF7ED1C00498801 /* dopTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3326241AF7ED1C00498801 /* dopTests.swift */; };
+		9DAC6E1B1B0D4DFD0079F0DF /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DAC6E181B0D4DFD0079F0DF /* Fabric.framework */; };
+		9DAC6E1C1B0D4DFD0079F0DF /* TwitterCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DAC6E191B0D4DFD0079F0DF /* TwitterCore.framework */; };
+		9DAC6E1D1B0D4DFD0079F0DF /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DAC6E1A1B0D4DFD0079F0DF /* TwitterKit.framework */; };
 		9DC027241B0130E400DDD3DA /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DC027231B0130E400DDD3DA /* FacebookSDK.framework */; };
-		A00782611B0BAF8D00E77AA6 /* GooglePlus.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A00782601B0BAF8D00E77AA6 /* GooglePlus.bundle */; };
+		9DECD9B61B0D4B1E007D90A9 /* GoogleOpenSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DECD9B31B0D4B1E007D90A9 /* GoogleOpenSource.framework */; };
+		9DECD9B71B0D4B1E007D90A9 /* GooglePlus.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9DECD9B41B0D4B1E007D90A9 /* GooglePlus.bundle */; };
+		9DECD9B81B0D4B1E007D90A9 /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DECD9B51B0D4B1E007D90A9 /* GooglePlus.framework */; };
 		A0365FDE1AF9542A000A325D /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0365FDD1AF9542A000A325D /* SWRevealViewController.m */; };
 		A0365FE01AF95518000A325D /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0365FDF1AF95518000A325D /* MenuController.swift */; };
 		A04E388A1AFC3549007C7B69 /* starbucks.gif in Resources */ = {isa = PBXBuildFile; fileRef = A04E38891AFC3549007C7B69 /* starbucks.gif */; };
@@ -25,13 +30,8 @@
 		A0EB97AD1B03E16A005112EF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EB97AC1B03E16A005112EF /* User.swift */; };
 		A0EB97B01B05131E005112EF /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EB97AF1B05131E005112EF /* Utilities.swift */; };
 		A0EB97B21B051F02005112EF /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EB97B11B051F02005112EF /* LoginController.swift */; };
-		A0EB97B71B0A96C5005112EF /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EB97B51B0A96C5005112EF /* TwitterKit.framework */; };
-		A0EB97B91B0A9769005112EF /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A0EB97B81B0A9769005112EF /* TwitterKitResources.bundle */; };
-		A0EB97BF1B0AA329005112EF /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EB97BE1B0AA329005112EF /* Fabric.framework */; };
 		A0EB97C61B0B9F8D005112EF /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EB97C51B0B9F8D005112EF /* libz.dylib */; };
 		A0EB97C81B0B9F9B005112EF /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EB97C71B0B9F9B005112EF /* libc++.dylib */; };
-		A0EB97CB1B0BA043005112EF /* GoogleOpenSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EB97C91B0BA043005112EF /* GoogleOpenSource.framework */; };
-		A0EB97CC1B0BA043005112EF /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EB97CA1B0BA043005112EF /* GooglePlus.framework */; };
 		A0EB97CE1B0BA77E005112EF /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EB97CD1B0BA77E005112EF /* SystemConfiguration.framework */; };
 		A0EB97D01B0BA78B005112EF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EB97CF1B0BA78B005112EF /* Security.framework */; };
 		A0EB97D21B0BA793005112EF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EB97D11B0BA793005112EF /* QuartzCore.framework */; };
@@ -69,8 +69,13 @@
 		9D33261E1AF7ED1C00498801 /* dopTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = dopTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D3326231AF7ED1C00498801 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9D3326241AF7ED1C00498801 /* dopTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dopTests.swift; sourceTree = "<group>"; };
+		9DAC6E181B0D4DFD0079F0DF /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		9DAC6E191B0D4DFD0079F0DF /* TwitterCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterCore.framework; sourceTree = "<group>"; };
+		9DAC6E1A1B0D4DFD0079F0DF /* TwitterKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterKit.framework; sourceTree = "<group>"; };
 		9DC027231B0130E400DDD3DA /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
-		A00782601B0BAF8D00E77AA6 /* GooglePlus.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GooglePlus.bundle; path = "../../Downloads/google-plus-ios-sdk-1.7.1/GooglePlus.bundle"; sourceTree = "<group>"; };
+		9DECD9B31B0D4B1E007D90A9 /* GoogleOpenSource.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleOpenSource.framework; sourceTree = "<group>"; };
+		9DECD9B41B0D4B1E007D90A9 /* GooglePlus.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GooglePlus.bundle; sourceTree = "<group>"; };
+		9DECD9B51B0D4B1E007D90A9 /* GooglePlus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GooglePlus.framework; sourceTree = "<group>"; };
 		A0365FDC1AF9542A000A325D /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		A0365FDD1AF9542A000A325D /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		A0365FDF1AF95518000A325D /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
@@ -83,13 +88,8 @@
 		A0EB97AC1B03E16A005112EF /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A0EB97AF1B05131E005112EF /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		A0EB97B11B051F02005112EF /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
-		A0EB97B51B0A96C5005112EF /* TwitterKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TwitterKit.framework; path = "../../Downloads/Fabric-master/TwitterKit.framework"; sourceTree = "<group>"; };
-		A0EB97B81B0A9769005112EF /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TwitterKitResources.bundle; path = "../../Downloads/Fabric-master/TwitterKit.framework/Versions/A/Resources/TwitterKitResources.bundle"; sourceTree = "<group>"; };
-		A0EB97BE1B0AA329005112EF /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = "../../Downloads/Fabric-master/Fabric.framework"; sourceTree = "<group>"; };
 		A0EB97C51B0B9F8D005112EF /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		A0EB97C71B0B9F9B005112EF /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
-		A0EB97C91B0BA043005112EF /* GoogleOpenSource.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleOpenSource.framework; path = ../../.Trash/GoogleOpenSource.framework; sourceTree = "<group>"; };
-		A0EB97CA1B0BA043005112EF /* GooglePlus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GooglePlus.framework; path = ../../.Trash/GooglePlus.framework; sourceTree = "<group>"; };
 		A0EB97CD1B0BA77E005112EF /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		A0EB97CF1B0BA78B005112EF /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		A0EB97D11B0BA793005112EF /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -111,25 +111,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9DECD9B81B0D4B1E007D90A9 /* GooglePlus.framework in Frameworks */,
 				A0EB97E41B0BA7DD005112EF /* AddressBook.framework in Frameworks */,
 				A0EB97E21B0BA7D5005112EF /* AssetsLibrary.framework in Frameworks */,
 				A0EB97E01B0BA7CE005112EF /* CoreData.framework in Frameworks */,
 				A0EB97DE1B0BA7C5005112EF /* CoreLocation.framework in Frameworks */,
+				9DAC6E1B1B0D4DFD0079F0DF /* Fabric.framework in Frameworks */,
 				A0EB97DC1B0BA7C0005112EF /* CoreMotion.framework in Frameworks */,
 				A0EB97DA1B0BA7B8005112EF /* CoreTelephony.framework in Frameworks */,
+				9DECD9B61B0D4B1E007D90A9 /* GoogleOpenSource.framework in Frameworks */,
 				A0EB97D81B0BA7AD005112EF /* CoreText.framework in Frameworks */,
+				9DAC6E1C1B0D4DFD0079F0DF /* TwitterCore.framework in Frameworks */,
+				9DAC6E1D1B0D4DFD0079F0DF /* TwitterKit.framework in Frameworks */,
 				A0EB97D61B0BA7A5005112EF /* Foundation.framework in Frameworks */,
 				A0EB97D41B0BA79C005112EF /* MediaPlayer.framework in Frameworks */,
 				A0EB97D21B0BA793005112EF /* QuartzCore.framework in Frameworks */,
 				A0EB97D01B0BA78B005112EF /* Security.framework in Frameworks */,
 				A0EB97CE1B0BA77E005112EF /* SystemConfiguration.framework in Frameworks */,
 				A0EB97C81B0B9F9B005112EF /* libc++.dylib in Frameworks */,
-				A0EB97CC1B0BA043005112EF /* GooglePlus.framework in Frameworks */,
-				A0EB97CB1B0BA043005112EF /* GoogleOpenSource.framework in Frameworks */,
 				A0EB97C61B0B9F8D005112EF /* libz.dylib in Frameworks */,
 				9DC027241B0130E400DDD3DA /* FacebookSDK.framework in Frameworks */,
-				A0EB97B71B0A96C5005112EF /* TwitterKit.framework in Frameworks */,
-				A0EB97BF1B0AA329005112EF /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,6 +147,12 @@
 		079462BCCDF3FAF530C45E4E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9DAC6E181B0D4DFD0079F0DF /* Fabric.framework */,
+				9DAC6E191B0D4DFD0079F0DF /* TwitterCore.framework */,
+				9DAC6E1A1B0D4DFD0079F0DF /* TwitterKit.framework */,
+				9DECD9B31B0D4B1E007D90A9 /* GoogleOpenSource.framework */,
+				9DECD9B41B0D4B1E007D90A9 /* GooglePlus.bundle */,
+				9DECD9B51B0D4B1E007D90A9 /* GooglePlus.framework */,
 				A0EB97E31B0BA7DD005112EF /* AddressBook.framework */,
 				A0EB97E11B0BA7D5005112EF /* AssetsLibrary.framework */,
 				A0EB97DF1B0BA7CE005112EF /* CoreData.framework */,
@@ -159,13 +166,7 @@
 				A0EB97CF1B0BA78B005112EF /* Security.framework */,
 				A0EB97CD1B0BA77E005112EF /* SystemConfiguration.framework */,
 				A0EB97C71B0B9F9B005112EF /* libc++.dylib */,
-				A00782601B0BAF8D00E77AA6 /* GooglePlus.bundle */,
-				A0EB97C91B0BA043005112EF /* GoogleOpenSource.framework */,
-				A0EB97CA1B0BA043005112EF /* GooglePlus.framework */,
 				A0EB97C51B0B9F8D005112EF /* libz.dylib */,
-				A0EB97BE1B0AA329005112EF /* Fabric.framework */,
-				A0EB97B81B0A9769005112EF /* TwitterKitResources.bundle */,
-				A0EB97B51B0A96C5005112EF /* TwitterKit.framework */,
 				9DC027231B0130E400DDD3DA /* FacebookSDK.framework */,
 			);
 			name = Frameworks;
@@ -359,8 +360,7 @@
 				9D3326141AF7ED1C00498801 /* Main.storyboard in Resources */,
 				9D3326191AF7ED1C00498801 /* LaunchScreen.xib in Resources */,
 				9D3326161AF7ED1C00498801 /* Images.xcassets in Resources */,
-				A0EB97B91B0A9769005112EF /* TwitterKitResources.bundle in Resources */,
-				A00782611B0BAF8D00E77AA6 /* GooglePlus.bundle in Resources */,
+				9DECD9B71B0D4B1E007D90A9 /* GooglePlus.bundle in Resources */,
 				A0F7E9211AFAE48500A4F0F2 /* CouponCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -542,6 +542,7 @@
 					"/Users/Eduardo/Downloads/Fabric-master",
 					"/Users/Eduardo/Downloads/google-plus-ios-sdk-1.7.1",
 					/Users/Eduardo/.Trash,
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = dop/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -564,6 +565,7 @@
 					"/Users/Eduardo/Downloads/Fabric-master",
 					"/Users/Eduardo/Downloads/google-plus-ios-sdk-1.7.1",
 					/Users/Eduardo/.Trash,
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = dop/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
