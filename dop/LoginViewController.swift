@@ -31,7 +31,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
         self.fbLoginView.delegate = self
         self.fbLoginView.readPermissions = ["public_profile", "email", "user_friends"]
         
-        Twitter.sharedInstance().logInWithCompletion { (session: TWTRSession!, error: NSError!) -> Void in
+     /*   Twitter.sharedInstance().logInWithCompletion { (session: TWTRSession!, error: NSError!) -> Void in
             if (session != nil) {
                 Twitter.sharedInstance().APIClient.loadUserWithID(session.userID, completion: { (twtrUser: TWTRUser!,
                     error: NSError!) -> Void in
@@ -57,7 +57,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
             }
             
         }
-        
+        */
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -69,7 +69,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
         signIn.authenticate();
     }
     func finishedWithAuth(auth: GTMOAuth2Authentication!, error: NSError!) {
-        if (GPPSignIn.sharedInstance().googlePlusUser != nil){
+       if (GPPSignIn.sharedInstance().googlePlusUser != nil){
             println("Sign in")
             var user = GPPSignIn.sharedInstance().googlePlusUser
             var userId=GPPSignIn.sharedInstance().googlePlusUser.identifier
