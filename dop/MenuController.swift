@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TwitterKit
 
 class MenuController: UIViewController, FBLoginViewDelegate, GPPSignInDelegate {
 
@@ -27,20 +28,24 @@ class MenuController: UIViewController, FBLoginViewDelegate, GPPSignInDelegate {
 
 
     @IBAction func logoutSession(sender: UIButton) {
-
+        //G+ logout
         GPPSignIn.sharedInstance().signOut();
-//        GPPSignIn.sharedInstance().disconnect();
+        //GPPSignIn.sharedInstance().disconnect();
         if (GPPSignIn.sharedInstance().googlePlusUser == nil) {
             self.dismissViewControllerAnimated(true, completion: nil)
         } else {
             println("existo");
         }
         
+        // Facebook logout
         if (FBSession.activeSession().state.value == FBSessionStateOpen.value || FBSession.activeSession().state.value == FBSessionStateOpenTokenExtended.value) {
             // Close the session and remove the access token from the cache
             // The session state handler (in the app delegate) will be called automatically
             FBSession.activeSession().closeAndClearTokenInformation()
         }
+        
+        // Twitter logout
+        Twitter.sharedInstance().logOut()
     }
 
     func finishedWithAuth(auth: GTMOAuth2Authentication!, error: NSError!) {
