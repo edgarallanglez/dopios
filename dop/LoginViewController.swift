@@ -31,6 +31,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
         self.fbLoginView.delegate = self
         self.fbLoginView.readPermissions = ["public_profile", "email", "user_friends"]
         
+        
      /*   Twitter.sharedInstance().logInWithCompletion { (session: TWTRSession!, error: NSError!) -> Void in
             if (session != nil) {
                 Twitter.sharedInstance().APIClient.loadUserWithID(session.userID, completion: { (twtrUser: TWTRUser!,
@@ -77,7 +78,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
             var userEmail = user.emails.first?.value ?? ""
             println(user.name.JSONString());
             
-            let params:[String: AnyObject] = [
+            let params:[String: String] = [
                 "google_key" : userId,
                 "names" : user.name.givenName,
                 "surnames":user.name.familyName,
@@ -117,7 +118,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
         
         
     
-        let params:[String: AnyObject] = [
+        let params:[String: String] = [
             "facebook_key" : user.objectID,
             "names" : user.first_name+" "+user.middle_name,
             "surnames":user.last_name,
@@ -125,7 +126,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
             "email": userEmail,
             "main_image":"https://graph.facebook.com/\(user.objectID)/picture?type=large"]
         
-        
+        User.userImageUrl="https://graph.facebook.com/\(user.objectID)/picture?type=large"
         self.socialLogin("facebook", params: params)
     }
     
@@ -161,7 +162,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
     
     
     // Social login Call
-    func socialLogin(type:String,params:[String:AnyObject]){
+    func socialLogin(type:String,params:[String:String]){
         LoginController.loginWithSocial("http://104.236.141.44:5000/user/login/"+type,params:params){ (couponsData) -> Void in
             
             let json = JSON(data: couponsData)
@@ -171,6 +172,10 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
             var error:NSError?
             
             User.userToken=String(stringInterpolationSegment:jwt)
+            
+            
+            User.userImageUrl=String(stringInterpolationSegment: params["main_image"]!)
+           
             //User.userEmail=String(stringInterpolationSegment:userEmail)
             //User.userName=user.username
             dispatch_async(dispatch_get_main_queue(), {
