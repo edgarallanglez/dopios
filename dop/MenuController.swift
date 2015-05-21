@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MenuController: UIViewController {
+class MenuController: UIViewController, FBLoginViewDelegate, GPPSignInDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +25,57 @@ class MenuController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+
+    @IBAction func logoutSession(sender: UIButton) {
+
+        GPPSignIn.sharedInstance().signOut();
+//        GPPSignIn.sharedInstance().disconnect();
+        if (GPPSignIn.sharedInstance().googlePlusUser == nil) {
+            self.dismissViewControllerAnimated(true, completion: nil)
+        } else {
+            println("existo");
+        }
+        
+        if (FBSession.activeSession().state.value == FBSessionStateOpen.value || FBSession.activeSession().state.value == FBSessionStateOpenTokenExtended.value) {
+            // Close the session and remove the access token from the cache
+            // The session state handler (in the app delegate) will be called automatically
+            FBSession.activeSession().closeAndClearTokenInformation()
+        }
+    }
+
+    func finishedWithAuth(auth: GTMOAuth2Authentication!, error: NSError!) {
+        if (GPPSignIn.sharedInstance().googlePlusUser != nil){
+            println("Sign in")
+            var user = GPPSignIn.sharedInstance().googlePlusUser
+            var userId=GPPSignIn.sharedInstance().googlePlusUser.identifier
+            
+            var userEmail = user.emails.first?.value ?? ""
+            println(user.name.JSONString());
+            
+            let params:[String: AnyObject] = [
+                "google_key" : userId,
+                "names" : user.name.givenName,
+                "surnames":user.name.familyName,
+                "birth_date" : "2015-01-01",
+                "email": userEmail!]
+            
+//            self.socialLogin("google", params: params)
+            
+            
+        } else {
+            println("Signed out.");
+        }
+        
+    }
+    
+    func didDisconnectWithError(error: NSError!) {
+        if (error != nil) {
+           println("Received error \(error)");
+        } else {
+    // The user is signed out and disconnected.
+    // Clean up user data as specified by the Google+ terms.
+        }
+    }
 
     
     // MARK: - Table view data source
