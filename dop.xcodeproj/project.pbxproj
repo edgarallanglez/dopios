@@ -25,6 +25,8 @@
 		A0578C5F1B0E40D30033B5BD /* GoogleOpenSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0578C5C1B0E40D30033B5BD /* GoogleOpenSource.framework */; };
 		A0578C601B0E40D30033B5BD /* GooglePlus.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A0578C5D1B0E40D30033B5BD /* GooglePlus.bundle */; };
 		A0578C611B0E40D30033B5BD /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0578C5E1B0E40D30033B5BD /* GooglePlus.framework */; };
+		A0578C641B0E7D2B0033B5BD /* UserProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0578C621B0E7D2B0033B5BD /* UserProfileController.swift */; };
+		A0578C651B0E7D2B0033B5BD /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0578C631B0E7D2B0033B5BD /* UserProfileViewController.swift */; };
 		A09AB4DB1AF95A26004287F7 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09AB4DA1AF95A26004287F7 /* DashboardViewController.swift */; };
 		A09AB4E21AF99136004287F7 /* CouponController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09AB4E01AF99136004287F7 /* CouponController.swift */; };
 		A09AB4E31AF99136004287F7 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09AB4E11AF99136004287F7 /* SwiftyJSON.swift */; };
@@ -85,6 +87,8 @@
 		A0578C5C1B0E40D30033B5BD /* GoogleOpenSource.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleOpenSource.framework; path = dop/GoogleOpenSource.framework; sourceTree = "<group>"; };
 		A0578C5D1B0E40D30033B5BD /* GooglePlus.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GooglePlus.bundle; path = dop/GooglePlus.bundle; sourceTree = "<group>"; };
 		A0578C5E1B0E40D30033B5BD /* GooglePlus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GooglePlus.framework; path = dop/GooglePlus.framework; sourceTree = "<group>"; };
+		A0578C621B0E7D2B0033B5BD /* UserProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileController.swift; sourceTree = "<group>"; };
+		A0578C631B0E7D2B0033B5BD /* UserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		A09AB4DA1AF95A26004287F7 /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		A09AB4E01AF99136004287F7 /* CouponController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CouponController.swift; sourceTree = "<group>"; };
 		A09AB4E11AF99136004287F7 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
@@ -209,6 +213,8 @@
 				A09AB4E11AF99136004287F7 /* SwiftyJSON.swift */,
 				A09AB4DA1AF95A26004287F7 /* DashboardViewController.swift */,
 				A0EB97AF1B05131E005112EF /* Utilities.swift */,
+				A0578C621B0E7D2B0033B5BD /* UserProfileController.swift */,
+				A0578C631B0E7D2B0033B5BD /* UserProfileViewController.swift */,
 				A0EB97B31B052074005112EF /* Login */,
 				A0EB97AE1B03E198005112EF /* User */,
 				A09AB4E61AFA9609004287F7 /* Coupon */,
@@ -413,9 +419,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				A0365FE01AF95518000A325D /* MenuController.swift in Sources */,
+				A0578C651B0E7D2B0033B5BD /* UserProfileViewController.swift in Sources */,
 				A0EB97B21B051F02005112EF /* LoginController.swift in Sources */,
 				A09AB4E21AF99136004287F7 /* CouponController.swift in Sources */,
 				A0EB97B01B05131E005112EF /* Utilities.swift in Sources */,
+				A0578C641B0E7D2B0033B5BD /* UserProfileController.swift in Sources */,
 				9D3326111AF7ED1C00498801 /* LoginViewController.swift in Sources */,
 				A04860961B0D5355009FEF1F /* A0JWTDecoder.m in Sources */,
 				A09AB4E51AFA880E004287F7 /* Coupon.swift in Sources */,

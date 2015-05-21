@@ -260,10 +260,10 @@
             </objects>
             <point key="canvasLocation" x="2926.5" y="2159"/>
         </scene>
-        <!--View Controller-->
+        <!--User Profile View Controller-->
         <scene sceneID="ejZ-Wu-Mma">
             <objects>
-                <viewController id="OTe-uN-tYr" sceneMemberID="viewController">
+                <viewController id="OTe-uN-tYr" customClass="UserProfileViewController" customModule="dop" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="5iW-CO-HJh"/>
                         <viewControllerLayoutGuide type="bottom" id="8eR-hC-hd7"/>
@@ -271,12 +271,28 @@
                     <view key="view" contentMode="scaleToFill" id="lCw-QF-4Ah">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UAO-gA-YRr">
+                                <rect key="frame" x="240" y="97" width="120" height="120"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="YVI-fc-DCd"/>
+                                    <constraint firstAttribute="height" constant="120" id="ew0-nb-Afs"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="UAO-gA-YRr" firstAttribute="top" secondItem="5iW-CO-HJh" secondAttribute="bottom" constant="33" id="RUj-97-H2B"/>
+                            <constraint firstAttribute="centerX" secondItem="UAO-gA-YRr" secondAttribute="centerX" id="z9G-ug-9yH"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="profile_image" destination="UAO-gA-YRr" id="uid-uN-c9n"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tyD-zm-42m" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3721.5" y="2159"/>
+            <point key="canvasLocation" x="3721" y="2159"/>
         </scene>
         <!--View-->
         <scene sceneID="RLG-2o-LsD">
@@ -393,6 +409,6 @@
         <image name="menu" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="LNr-ih-gHl"/>
+        <segue reference="v5w-3x-YAe"/>
     </inferredMetricsTieBreakers>
 </document>
