@@ -78,7 +78,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
             var userEmail = user.emails.first?.value ?? ""
             println(user.name.JSONString());
             
-            let params:[String: AnyObject] = [
+            let params:[String: String] = [
                 "google_key" : userId,
                 "names" : user.name.givenName,
                 "surnames":user.name.familyName,
@@ -118,7 +118,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
         
         
     
-        let params:[String: AnyObject] = [
+        let params:[String: String] = [
             "facebook_key" : user.objectID,
             "names" : user.first_name+" "+user.middle_name,
             "surnames":user.last_name,
@@ -162,7 +162,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
     
     
     // Social login Call
-    func socialLogin(type:String,params:[String:AnyObject]){
+    func socialLogin(type:String,params:[String:String]){
         LoginController.loginWithSocial("http://104.236.141.44:5000/user/login/"+type,params:params){ (couponsData) -> Void in
             
             let json = JSON(data: couponsData)
@@ -173,7 +173,8 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
             
             User.userToken=String(stringInterpolationSegment:jwt)
             
-            User.userImageUrl=String(stringInterpolationSegment: params["main_image"])
+            
+            User.userImageUrl=String(stringInterpolationSegment: params["main_image"]!)
            
             //User.userEmail=String(stringInterpolationSegment:userEmail)
             //User.userName=user.username
