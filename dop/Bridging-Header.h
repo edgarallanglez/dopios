@@ -10,7 +10,6 @@
 #define dop_Bridging_h
 #import <GooglePlus/GooglePlus.h>
 #import <GoogleOpenSource/GoogleOpenSource.h>
-
 #endif
 
 #import <FacebookSDK/FacebookSDK.h>

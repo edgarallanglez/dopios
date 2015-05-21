@@ -20,12 +20,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         
-       Twitter.sharedInstance().startWithConsumerKey("mNtK5gCZ1KZsZdzGbwPrDZvwR", consumerSecret: "X70nDMV3aFCObSuL0k3u9NaaadNtSDlhmmjIlQhWZzzF4RAUiO")
+        Twitter.sharedInstance().startWithConsumerKey("mNtK5gCZ1KZsZdzGbwPrDZvwR", consumerSecret: "X70nDMV3aFCObSuL0k3u9NaaadNtSDlhmmjIlQhWZzzF4RAUiO")
         
         Fabric.with([Twitter.sharedInstance()])
         
-        
-       
         FBLoginView.self
         FBProfilePictureView.self
         
@@ -38,6 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    
     func sessionStateChanged(session : FBSession, state : FBSessionState, error : NSError?) {
         println("el estado cambio")
     }
@@ -47,7 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         var wasHandledGG:Bool = GPPURLHandler.handleURL(url, sourceApplication: sourceApplication, annotation: annotation)
         
-        return wasHandledGG;
+        return  wasHandledGG || wasHandledFB
 
     }
     
