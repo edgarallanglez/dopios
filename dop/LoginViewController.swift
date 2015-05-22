@@ -49,7 +49,10 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
             
             var userEmail = user.emails.first?.value ?? ""
             println(user.name.JSONString());
-            
+        
+            var userImage = String(stringInterpolationSegment: user.image.url)+"&sz=100"
+        
+        println(userImage)
             let params:[String: String] = [
                 "google_key" : userId,
                 "names" : user.name.givenName,
@@ -112,6 +115,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
     }
     
     func loginViewFetchedUserInfo(loginView : FBLoginView!, user: FBGraphUser) {
+        
         var userEmail = user.objectForKey("email") as! String
         
         
@@ -123,9 +127,9 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
             "birth_date" : "2015-01-01",
             "email": userEmail,
             "main_image":"https://graph.facebook.com/\(user.objectID)/picture?type=large"]
-        
-        User.userImageUrl="https://graph.facebook.com/\(user.objectID)/picture?type=large"
-        self.socialLogin("facebook", params: params)
+        dispatch_async(dispatch_get_main_queue(), {
+            self.socialLogin("facebook", params: params)
+        })
     }
     
     func loginViewShowingLoggedOutUser(loginView : FBLoginView!) {
