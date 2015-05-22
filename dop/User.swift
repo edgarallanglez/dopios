@@ -15,4 +15,5 @@ class User: NSObject {
     static var userImageUrl:String = ""
     static var loginType = ""
     static var activeSession = false
+    static var userSurnames = ""
 }

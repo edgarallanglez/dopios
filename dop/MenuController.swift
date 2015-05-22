@@ -11,6 +11,9 @@ import TwitterKit
 
 class MenuController: UIViewController, FBLoginViewDelegate, GPPSignInDelegate {
 
+    @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var userName: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -26,7 +29,15 @@ class MenuController: UIViewController, FBLoginViewDelegate, GPPSignInDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
+    override func viewDidAppear(animated: Bool) {
+        if let checkedUrl = NSURL(string:User.userImageUrl) {
+            downloadImage(checkedUrl)
+        }
+        profileImage.layer.masksToBounds = true
+        self.userName.text = User.userName + " " + User.userSurnames
+        println(User.userName)
+    }
 
     @IBAction func logoutSession(sender: UIButton) {
         
@@ -83,6 +94,17 @@ class MenuController: UIViewController, FBLoginViewDelegate, GPPSignInDelegate {
         
     }
     
+    func downloadImage(url:NSURL){
+        println("Started downloading \"\(url.lastPathComponent!.stringByDeletingPathExtension)\".")
+        Utilities.getDataFromUrl(url) { data in
+            dispatch_async(dispatch_get_main_queue()) {
+                println("Finished downloading \"\(url.lastPathComponent!.stringByDeletingPathExtension)\".")
+                self.profileImage.image = UIImage(data: data!)
+            }
+        }
+        
+    }
+
     func didDisconnectWithError(error: NSError!) {
         if (error != nil) {
            println("Received error \(error)");
