@@ -50,7 +50,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
             var userEmail = user.emails.first?.value ?? ""
             println(user.name.JSONString());
         
-            var userImage = String(stringInterpolationSegment: user.image.url)+"&sz=100"
+            var userImage = String(stringInterpolationSegment: user.image.url)+"&sz=320"
         
         println(userImage)
             let params:[String: String] = [
@@ -83,12 +83,15 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
                             var fullNameArr = split(twtrUser.name) {$0 == " "}
                             var firstName: String = fullNameArr[0]
                             var lastName: String! = fullNameArr.count > 1 ? fullNameArr[1] : nil
+                            var userImage = twtrUser.profileImageLargeURL
                             
                             let params:[String: String] = [
                                 "twitter_key" : twtrUser.userID,
                                 "names" : firstName,
                                 "surnames": lastName,
-                                "birth_date" : "2015-01-01"
+                                "birth_date" : "2015-01-01",
+                                "email" : "",
+                                "main_image" : userImage
                             ]
                             
                             self.socialLogin("twitter", params: params)
