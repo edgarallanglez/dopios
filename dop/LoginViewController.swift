@@ -132,7 +132,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
     
         let params:[String: String] = [
             "facebook_key" : user.objectID,
-            "names" : user.first_name+" "+user.middle_name,
+            "names" : user.first_name + " " + user.middle_name,
             "surnames":user.last_name,
             "birth_date" : "2015-01-01",
             "email": userEmail,
@@ -187,7 +187,9 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
             User.userImageUrl = String(stringInterpolationSegment: params["main_image"]!)
            
             //User.userEmail=String(stringInterpolationSegment:userEmail)
-            //User.userName=user.username
+            User.userName = String(stringInterpolationSegment: params["names"]!)
+            User.userSurnames = String(stringInterpolationSegment: params["surnames"]!)
+            
             dispatch_async(dispatch_get_main_queue(), {
                 if (!User.activeSession) {
                     self.performSegueWithIdentifier("showDashboard", sender: self)
