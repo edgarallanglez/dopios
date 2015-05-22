@@ -31,6 +31,12 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         var nib = UINib(nibName: "CouponCell", bundle: nil)
         couponsTableView.registerNib(nib, forCellReuseIdentifier: "CouponCell")
         
+        var locationManager: CLLocationManager!
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestAlwaysAuthorization()
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -136,6 +142,9 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         let params:[String: AnyObject] = [
             "coupon_id" : coupon_id,
             "taken_date" : "2015-01-01"]
+        
+        locationManager.startUpdatingLocation()
+
 
         CouponController.takeCouponWithSuccess(params){(couponsData) -> Void in
             let json = JSON(data: couponsData)
@@ -143,6 +152,13 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
             println(json)
         }
         
+    }
+    
+    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+        var locValue:CLLocationCoordinate2D = manager.location.coordinate
+
+        println("locations = \(locValue.latitude)")
+        locationManager.stopUpdatingLocation()
     }
 
 }

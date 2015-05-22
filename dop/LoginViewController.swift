@@ -199,7 +199,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
     }
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-        println("locations = \(locations)")
+        
         locationManager.stopUpdatingLocation()
     }
     
