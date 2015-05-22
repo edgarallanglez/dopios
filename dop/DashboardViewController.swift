@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DashboardViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class DashboardViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate {
     
     @IBOutlet weak var menuButton:UIBarButtonItem!
     @IBOutlet var couponsTableView: UITableView!
