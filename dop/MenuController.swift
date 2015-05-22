@@ -37,6 +37,7 @@ class MenuController: UIViewController, FBLoginViewDelegate, GPPSignInDelegate {
                 //GPPSignIn.sharedInstance().disconnect();
                 if (GPPSignIn.sharedInstance().googlePlusUser == nil) {
                     self.dismissViewControllerAnimated(true, completion: nil)
+                    User.activeSession = false
                 }
             case("facebook"):
                 // Facebook logout
@@ -45,11 +46,13 @@ class MenuController: UIViewController, FBLoginViewDelegate, GPPSignInDelegate {
                     // The session state handler (in the app delegate) will be called automatically
                     FBSession.activeSession().closeAndClearTokenInformation()
                     self.dismissViewControllerAnimated(true, completion: nil)
+                    User.activeSession = false
                 }
             case("twitter"):
                 // Twitter logout
                 Twitter.sharedInstance().logOut()
                 self.dismissViewControllerAnimated(true, completion: nil)
+                User.activeSession = false
         default:
             println("no hay sesion activa")
         }
