@@ -31,34 +31,6 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
         self.fbLoginView.delegate = self
         self.fbLoginView.readPermissions = ["public_profile", "email", "user_friends"]
         
-        
-     /*   Twitter.sharedInstance().logInWithCompletion { (session: TWTRSession!, error: NSError!) -> Void in
-            if (session != nil) {
-                Twitter.sharedInstance().APIClient.loadUserWithID(session.userID, completion: { (twtrUser: TWTRUser!,
-                    error: NSError!) -> Void in
-
-                    
-                    var fullNameArr = split(twtrUser.name) {$0 == " "}
-                    var firstName: String = fullNameArr[0]
-                    var lastName: String! = fullNameArr.count > 1 ? fullNameArr[1] : nil
-                    
-                    let params:[String: AnyObject] = [
-                        "twitter_key" : twtrUser.userID,
-                        "names" : firstName,
-                        "surnames": lastName,
-                        "birth_date" : "2015-01-01"
-                        ]
-                    
-                    self.socialLogin("twitter", params: params)
-                    
-                })
-                
-            } else {
-                println("error: \(error.localizedDescription)");
-            }
-            
-        }
-        */
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -102,7 +74,32 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
     @IBAction func signInWithTwitter(sender: UIButton) {
         Twitter.sharedInstance().logInWithCompletion { (session: TWTRSession!, error: NSError!) -> Void in
             if (session != nil) {
-                println("signed in as \(session.userName)");
+                Twitter.sharedInstance().logInWithCompletion { (session: TWTRSession!, error: NSError!) -> Void in
+                    if (session != nil) {
+                        Twitter.sharedInstance().APIClient.loadUserWithID(session.userID, completion: { (twtrUser: TWTRUser!,
+                            error: NSError!) -> Void in
+                            
+                            
+                            var fullNameArr = split(twtrUser.name) {$0 == " "}
+                            var firstName: String = fullNameArr[0]
+                            var lastName: String! = fullNameArr.count > 1 ? fullNameArr[1] : nil
+                            
+                            let params:[String: String] = [
+                                "twitter_key" : twtrUser.userID,
+                                "names" : firstName,
+                                "surnames": lastName,
+                                "birth_date" : "2015-01-01"
+                            ]
+                            
+                            self.socialLogin("twitter", params: params)
+                            
+                        })
+                        
+                    } else {
+                        println("error: \(error.localizedDescription)");
+                    }
+                    
+                }
             } else {
                 println("error: \(error.localizedDescription)");
             }
@@ -154,7 +151,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
             // Open a session showing the user the login UI
             // You must ALWAYS ask for public_profile permissions when opening a session
             FBSession.openActiveSessionWithReadPermissions(["public_profile"], allowLoginUI: true, completionHandler: {
-                (session:FBSession!, state:FBSessionState, error:NSError!) in
+                (session: FBSession!, state: FBSessionState, error: NSError!) in
                 
                 let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                 // Call the app delegate's sessionStateChanged:state:error method to handle session state changes
@@ -166,16 +163,16 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
     
     
     // Social login Call
-    func socialLogin(type:String,params:[String:String]){
-        LoginController.loginWithSocial("http://104.236.141.44:5000/user/login/"+type,params:params){ (couponsData) -> Void in
-            
+    func socialLogin(type: String, params: [String:String]!){
+        LoginController.loginWithSocial("http://104.236.141.44:5000/user/login/" + type, params: params){ (couponsData) -> Void in
+            User.loginType = type
             let json = JSON(data: couponsData)
-            
+            println(type)
             print(json)
-            let jwt = String(stringInterpolationSegment:json["token"])
+            let jwt = String(stringInterpolationSegment: json["token"])
             var error:NSError?
             
-            User.userToken=String(stringInterpolationSegment:jwt)
+            User.userToken = String(stringInterpolationSegment: jwt)
             
             
             User.userImageUrl=String(stringInterpolationSegment: params["main_image"]!)

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TwitterKit
 
 class MenuController: UIViewController, FBLoginViewDelegate, GPPSignInDelegate {
 
@@ -28,19 +29,29 @@ class MenuController: UIViewController, FBLoginViewDelegate, GPPSignInDelegate {
 
 
     @IBAction func logoutSession(sender: UIButton) {
-
-        GPPSignIn.sharedInstance().signOut();
-//        GPPSignIn.sharedInstance().disconnect();
-        if (GPPSignIn.sharedInstance().googlePlusUser == nil) {
-            self.dismissViewControllerAnimated(true, completion: nil)
-        } else {
-            println("existo");
-        }
         
-        if (FBSession.activeSession().state.value == FBSessionStateOpen.value || FBSession.activeSession().state.value == FBSessionStateOpenTokenExtended.value) {
-            // Close the session and remove the access token from the cache
-            // The session state handler (in the app delegate) will be called automatically
-            FBSession.activeSession().closeAndClearTokenInformation()
+        switch(User.loginType) {
+            case("google"):
+                //G+ logout
+                GPPSignIn.sharedInstance().signOut();
+                //GPPSignIn.sharedInstance().disconnect();
+                if (GPPSignIn.sharedInstance().googlePlusUser == nil) {
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                }
+            case("facebook"):
+                // Facebook logout
+                if (FBSession.activeSession().state.value == FBSessionStateOpen.value || FBSession.activeSession().state.value == FBSessionStateOpenTokenExtended.value) {
+                    // Close the session and remove the access token from the cache
+                    // The session state handler (in the app delegate) will be called automatically
+                    FBSession.activeSession().closeAndClearTokenInformation()
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                }
+            case("twitter"):
+                // Twitter logout
+                Twitter.sharedInstance().logOut()
+                self.dismissViewControllerAnimated(true, completion: nil)
+        default:
+            println("no hay sesion activa")
         }
     }
 
