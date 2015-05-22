@@ -58,8 +58,8 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
                 "names" : user.name.givenName,
                 "surnames":user.name.familyName,
                 "birth_date" : "2015-01-01",
-                "email": userEmail!
-            ]
+                "email": userEmail!,
+                "main_image":userImage]
             
             self.socialLogin("google", params: params)
 
@@ -176,7 +176,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
             User.userToken = String(stringInterpolationSegment: jwt)
             
             
-//            User.userImageUrl=String(stringInterpolationSegment: params["main_image"]!)
+            User.userImageUrl=String(stringInterpolationSegment: params["main_image"]!)
            
             //User.userEmail=String(stringInterpolationSegment:userEmail)
             //User.userName=user.username
