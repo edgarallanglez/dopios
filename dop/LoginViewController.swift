@@ -9,14 +9,15 @@
 import UIKit
 import TwitterKit
 
-class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDelegate{
+class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDelegate, CLLocationManagerDelegate {
 
 
     @IBOutlet weak var fbLoginView: FBLoginView!
     @IBOutlet var twtButton: UIButton!
     
     var kClientId = "517644806961-ocmqel4aloa86mtsn5jsmmuvi3fcdpln.apps.googleusercontent.com";
-
+    var locationManager: CLLocationManager!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -26,6 +27,12 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
         signIn.scopes = [kGTLAuthScopePlusLogin,kGTLAuthScopePlusUserinfoEmail];
         signIn.trySilentAuthentication();
         signIn.delegate = self;
+        
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestAlwaysAuthorization()
+        locationManager.startUpdatingLocation()
 
         
         self.fbLoginView.delegate = self
@@ -187,9 +194,17 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
                 if (!User.activeSession) {
                     self.performSegueWithIdentifier("showDashboard", sender: self)
                     User.activeSession = true
+                    
                 }
             });
         }
     }
+    
+    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+        println("locations = \(locations)")
+        locationManager.stopUpdatingLocation()
+    }
+    
+ 
     
 }
