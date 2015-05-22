@@ -130,9 +130,8 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
             "birth_date" : "2015-01-01",
             "email": userEmail,
             "main_image":"https://graph.facebook.com/\(user.objectID)/picture?type=large"]
-        dispatch_async(dispatch_get_main_queue(), {
-            self.socialLogin("facebook", params: params)
-        })
+        
+        self.socialLogin("facebook", params: params)
     }
     
     func loginViewShowingLoggedOutUser(loginView : FBLoginView!) {
