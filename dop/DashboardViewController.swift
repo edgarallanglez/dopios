@@ -8,13 +8,16 @@
 
 import UIKit
 
-class DashboardViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class DashboardViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate {
+    
     @IBOutlet weak var menuButton:UIBarButtonItem!
     @IBOutlet var couponsTableView: UITableView!
     
     let simpleTableIdentifier = "CouponCell";
 
     var coupons = [Coupon]()
+
+    var locationManager: CLLocationManager!
 
     override func viewDidLoad() {
         super.viewDidLoad()
