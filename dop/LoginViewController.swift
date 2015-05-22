@@ -117,7 +117,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
     func loginViewFetchedUserInfo(loginView : FBLoginView!, user: FBGraphUser) {
         
         var userEmail = user.objectForKey("email") as! String
-        
+        println("entre aqui")
         
     
         let params:[String: String] = [
@@ -167,20 +167,22 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
         LoginController.loginWithSocial("http://104.236.141.44:5000/user/login/" + type, params: params){ (couponsData) -> Void in
             User.loginType = type
             let json = JSON(data: couponsData)
-            println(type)
-            print(json)
+
             let jwt = String(stringInterpolationSegment: json["token"])
             var error:NSError?
             
             User.userToken = String(stringInterpolationSegment: jwt)
             
             
-            User.userImageUrl=String(stringInterpolationSegment: params["main_image"]!)
+            User.userImageUrl = String(stringInterpolationSegment: params["main_image"]!)
            
             //User.userEmail=String(stringInterpolationSegment:userEmail)
             //User.userName=user.username
             dispatch_async(dispatch_get_main_queue(), {
-                self.performSegueWithIdentifier("showDashboard", sender: self)
+                if (!User.activeSession) {
+                    self.performSegueWithIdentifier("showDashboard", sender: self)
+                    User.activeSession = true
+                }
             });
         }
     }
