@@ -10,12 +10,13 @@ import UIKit
 
 class CouponCell: UITableViewCell {
 
-    @IBOutlet var nameLbl: UILabel!
-    @IBOutlet var expLbl: UILabel!
-    @IBOutlet var limitLbl: UILabel!
-    @IBOutlet var otro: UILabel!
+    @IBOutlet weak var nameLbl: UILabel!
+//    @IBOutlet var expLbl: UILabel!
+//    @IBOutlet var limitLbl: UILabel!
+//    @IBOutlet var otro: UILabel!
     @IBOutlet var branchImage: UIImageView!
- 
+    var radius: CGFloat = 2
+
     
     func loadItem(#title: String) {
         nameLbl.text = title
@@ -23,6 +24,17 @@ class CouponCell: UITableViewCell {
         branchImage.layer.masksToBounds = true
         branchImage.layer.cornerRadius = 25
 
+    }
+    
+    override func layoutSubviews() {
+        layer.cornerRadius = radius
+        let shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: radius)
+        
+        layer.masksToBounds = false
+        layer.shadowColor = UIColor.blackColor().CGColor
+        layer.shadowOffset = CGSize(width: 0, height: 3);
+        layer.shadowOpacity = 0.5
+        layer.shadowPath = shadowPath.CGPath
     }
     
     required init(coder aDecoder: NSCoder) {

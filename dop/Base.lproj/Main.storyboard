@@ -318,43 +318,29 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="75" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="8GJ-8r-L3Y">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="separatorColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="140" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="8GJ-8r-L3Y">
+                                <rect key="frame" x="10" y="0.0" width="580" height="600"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="LnE-pO-m5e" id="ndU-O9-dtY"/>
                                     <outlet property="delegate" destination="LnE-pO-m5e" id="Voi-AC-YRm"/>
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="8GJ-8r-L3Y" secondAttribute="trailing" id="EOo-nw-LsI"/>
-                            <constraint firstItem="8GJ-8r-L3Y" firstAttribute="top" secondItem="q4c-hL-qxp" secondAttribute="bottom" id="TXv-1r-Ug3"/>
-                            <constraint firstAttribute="bottom" secondItem="8GJ-8r-L3Y" secondAttribute="bottom" constant="64" id="W94-h2-W4B"/>
-                            <constraint firstItem="8GJ-8r-L3Y" firstAttribute="leading" secondItem="BBH-0V-Xi6" secondAttribute="leading" id="k2T-Dt-bcW"/>
+                            <constraint firstAttribute="trailing" secondItem="8GJ-8r-L3Y" secondAttribute="trailing" constant="10" id="FsQ-cA-5es"/>
+                            <constraint firstAttribute="centerY" secondItem="8GJ-8r-L3Y" secondAttribute="centerY" id="Pi5-tt-FJC"/>
+                            <constraint firstItem="8GJ-8r-L3Y" firstAttribute="top" secondItem="BBH-0V-Xi6" secondAttribute="top" id="Q1f-UZ-R8L"/>
+                            <constraint firstAttribute="centerX" secondItem="8GJ-8r-L3Y" secondAttribute="centerX" id="azk-dl-6uk"/>
+                            <constraint firstItem="8GJ-8r-L3Y" firstAttribute="leading" secondItem="BBH-0V-Xi6" secondAttribute="leading" constant="10" id="vMQ-2s-sRw"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="8GJ-8r-L3Y"/>
-                            </mask>
-                            <mask key="constraints">
-                                <exclude reference="EOo-nw-LsI"/>
-                                <exclude reference="TXv-1r-Ug3"/>
-                                <exclude reference="W94-h2-W4B"/>
-                                <exclude reference="k2T-Dt-bcW"/>
-                            </mask>
-                        </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
                                 <include reference="8GJ-8r-L3Y"/>
-                            </mask>
-                            <mask key="constraints">
-                                <include reference="EOo-nw-LsI"/>
-                                <include reference="TXv-1r-Ug3"/>
-                                <include reference="W94-h2-W4B"/>
-                                <include reference="k2T-Dt-bcW"/>
                             </mask>
                         </variation>
                     </view>
