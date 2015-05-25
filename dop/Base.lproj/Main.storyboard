@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -243,14 +243,26 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vjh-IM-9le">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <state key="normal" title="Cerrar Sesión">
+                                <state key="normal" title="perfil">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="29" y="254" width="94" height="30"/>
+                                    <rect key="frame" x="29" y="254" width="34" height="30"/>
                                 </variation>
                                 <connections>
                                     <segue destination="OTe-uN-tYr" kind="show" id="hWG-cM-bem"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="56P-Wj-Ycc">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="amigos">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="53" y="310" width="50" height="30"/>
+                                </variation>
+                                <connections>
+                                    <segue destination="b8R-QZ-FSx" kind="show" id="bfl-mh-RFp"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -258,11 +270,13 @@
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="Vjh-IM-9le"/>
+                                <exclude reference="56P-Wj-Ycc"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
                                 <include reference="Vjh-IM-9le"/>
+                                <include reference="56P-Wj-Ycc"/>
                             </mask>
                         </variation>
                     </view>
@@ -305,6 +319,46 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tyD-zm-42m" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3721.5" y="2159"/>
+        </scene>
+        <!--Friends View Controller-->
+        <scene sceneID="g67-F1-aZg">
+            <objects>
+                <viewController id="b8R-QZ-FSx" customClass="FriendsViewController" customModule="dop" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fZr-Au-JPb"/>
+                        <viewControllerLayoutGuide type="bottom" id="LYy-WV-QcB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="0G4-MP-krF">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="18l-i1-60n">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="16" y="0.0" width="368" height="600"/>
+                                </variation>
+                                <connections>
+                                    <outlet property="dataSource" destination="b8R-QZ-FSx" id="KnY-d6-DsA"/>
+                                    <outlet property="delegate" destination="b8R-QZ-FSx" id="ANV-DQ-yTO"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="18l-i1-60n" firstAttribute="top" secondItem="0G4-MP-krF" secondAttribute="topMargin" id="Hxd-2c-hkW"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="18l-i1-60n" secondAttribute="trailing" id="iwO-MZ-5ge"/>
+                            <constraint firstItem="LYy-WV-QcB" firstAttribute="top" secondItem="18l-i1-60n" secondAttribute="bottom" id="mJh-Tb-Mwe"/>
+                            <constraint firstItem="18l-i1-60n" firstAttribute="leading" secondItem="0G4-MP-krF" secondAttribute="leadingMargin" id="ugF-PR-YbL"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="18l-i1-60n" id="Ufj-I4-p9W"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="j5Z-Km-6dS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3756" y="2939"/>
         </scene>
         <!--View-->
         <scene sceneID="RLG-2o-LsD">

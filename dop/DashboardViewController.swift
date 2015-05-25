@@ -13,7 +13,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
     @IBOutlet weak var menuButton:UIBarButtonItem!
     @IBOutlet var couponsTableView: UITableView!
     
-    let simpleTableIdentifier = "CouponCell";
+    var locValue:CLLocationCoordinate2D?
 
     var coupons = [Coupon]()
 
@@ -31,11 +31,11 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         var nib = UINib(nibName: "CouponCell", bundle: nil)
         couponsTableView.registerNib(nib, forCellReuseIdentifier: "CouponCell")
         
-        var locationManager: CLLocationManager!
         locationManager = CLLocationManager()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestAlwaysAuthorization()
+        locationManager.startUpdatingLocation()
         
     }
     
@@ -139,11 +139,16 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     func takeCoupon(coupon_id:Int) {
+        
+        var latitude = String(stringInterpolationSegment:locValue!.latitude)
+        var longitude = String(stringInterpolationSegment: locValue!.longitude)
+
         let params:[String: AnyObject] = [
             "coupon_id" : coupon_id,
-            "taken_date" : "2015-01-01"]
+            "taken_date" : "2015-01-01",
+            "latitude" : latitude,
+            "longitude" : longitude]
         
-        locationManager.startUpdatingLocation()
 
 
         CouponController.takeCouponWithSuccess(params){(couponsData) -> Void in
@@ -155,9 +160,9 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-        var locValue:CLLocationCoordinate2D = manager.location.coordinate
+        locValue = manager.location.coordinate
 
-        println("locations = \(locValue.latitude)")
+        println("locations = \(locValue!.latitude)")
         locationManager.stopUpdatingLocation()
     }
 
