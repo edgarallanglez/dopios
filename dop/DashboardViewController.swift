@@ -37,6 +37,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
         
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -76,16 +77,19 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         getCoupons()
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return coupons.count
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
      
         
-        var cell:CouponCell = tableView.dequeueReusableCellWithIdentifier("CouponCell", forIndexPath: indexPath) as! CouponCell
+        var cell: CouponCell = tableView.dequeueReusableCellWithIdentifier("CouponCell", forIndexPath: indexPath) as! CouponCell
         
-
         let model = self.coupons[indexPath.row]
 
         var (title) = model.name
@@ -157,6 +161,17 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
             println(json)
         }
         
+    }
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 15
+    }
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        var view:UIView = UIView()
+        view.backgroundColor = UIColor.clearColor()
+        
+        return view
     }
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
