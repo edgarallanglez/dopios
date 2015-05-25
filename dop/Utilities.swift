@@ -11,8 +11,11 @@ import Foundation
 class Utilities {
     class func loadDataFromURL(url: NSURL, completion: (data: NSData?, error: NSError?) -> Void) {
         var session = NSURLSession.sharedSession()
-        
-        let loadDataTask = session.dataTaskWithURL(url, completionHandler: { (data: NSData!, response: NSURLResponse!, error: NSError!) -> Void in
+        let request = NSMutableURLRequest(URL: url)
+        request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
+        request.addValue(User.userToken, forHTTPHeaderField: "Authorization")
+
+        let loadDataTask = session.dataTaskWithRequest(request, completionHandler: { (data: NSData!, response: NSURLResponse!, error: NSError!) -> Void in
             if let responseError = error {
                 completion(data: nil, error: responseError)
             } else if let httpResponse = response as? NSHTTPURLResponse {

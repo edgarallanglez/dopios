@@ -31,6 +31,11 @@
 		A09AB4E21AF99136004287F7 /* CouponController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09AB4E01AF99136004287F7 /* CouponController.swift */; };
 		A09AB4E31AF99136004287F7 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09AB4E11AF99136004287F7 /* SwiftyJSON.swift */; };
 		A09AB4E51AFA880E004287F7 /* Coupon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09AB4E41AFA880E004287F7 /* Coupon.swift */; };
+		A0BB9BB91B13E4F1000BA261 /* FriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BB9BB71B13E4F1000BA261 /* FriendCell.swift */; };
+		A0BB9BBA1B13E4F1000BA261 /* FriendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0BB9BB81B13E4F1000BA261 /* FriendCell.xib */; };
+		A0DF72911B13A66C006EE8F4 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DF72901B13A66C006EE8F4 /* FriendsViewController.swift */; };
+		A0DF72931B13AEBF006EE8F4 /* FriendsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DF72921B13AEBF006EE8F4 /* FriendsController.swift */; };
+		A0DF72951B13E262006EE8F4 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DF72941B13E262006EE8F4 /* Friend.swift */; };
 		A0EB97AD1B03E16A005112EF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EB97AC1B03E16A005112EF /* User.swift */; };
 		A0EB97B01B05131E005112EF /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EB97AF1B05131E005112EF /* Utilities.swift */; };
 		A0EB97B21B051F02005112EF /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EB97B11B051F02005112EF /* LoginController.swift */; };
@@ -94,6 +99,11 @@
 		A09AB4E11AF99136004287F7 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		A09AB4E41AFA880E004287F7 /* Coupon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coupon.swift; sourceTree = "<group>"; };
 		A0AE939A1AF8041A00D02315 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
+		A0BB9BB71B13E4F1000BA261 /* FriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendCell.swift; sourceTree = "<group>"; };
+		A0BB9BB81B13E4F1000BA261 /* FriendCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendCell.xib; sourceTree = "<group>"; };
+		A0DF72901B13A66C006EE8F4 /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
+		A0DF72921B13AEBF006EE8F4 /* FriendsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsController.swift; sourceTree = "<group>"; };
+		A0DF72941B13E262006EE8F4 /* Friend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		A0EB97AC1B03E16A005112EF /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A0EB97AF1B05131E005112EF /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		A0EB97B11B051F02005112EF /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
@@ -215,6 +225,7 @@
 				A0EB97AF1B05131E005112EF /* Utilities.swift */,
 				A0578C621B0E7D2B0033B5BD /* UserProfileController.swift */,
 				A0578C631B0E7D2B0033B5BD /* UserProfileViewController.swift */,
+				A0BB9BB61B13E4CA000BA261 /* Friend */,
 				A0EB97B31B052074005112EF /* Login */,
 				A0EB97AE1B03E198005112EF /* User */,
 				A09AB4E61AFA9609004287F7 /* Coupon */,
@@ -278,6 +289,18 @@
 				A0F7E91F1AFAE48500A4F0F2 /* CouponCell.xib */,
 			);
 			name = Coupon;
+			sourceTree = "<group>";
+		};
+		A0BB9BB61B13E4CA000BA261 /* Friend */ = {
+			isa = PBXGroup;
+			children = (
+				A0DF72901B13A66C006EE8F4 /* FriendsViewController.swift */,
+				A0BB9BB71B13E4F1000BA261 /* FriendCell.swift */,
+				A0BB9BB81B13E4F1000BA261 /* FriendCell.xib */,
+				A0DF72941B13E262006EE8F4 /* Friend.swift */,
+				A0DF72921B13AEBF006EE8F4 /* FriendsController.swift */,
+			);
+			name = Friend;
 			sourceTree = "<group>";
 		};
 		A0EB97AE1B03E198005112EF /* User */ = {
@@ -385,6 +408,7 @@
 				9D3326161AF7ED1C00498801 /* Images.xcassets in Resources */,
 				A0578C601B0E40D30033B5BD /* GooglePlus.bundle in Resources */,
 				A0F7E9211AFAE48500A4F0F2 /* CouponCell.xib in Resources */,
+				A0BB9BBA1B13E4F1000BA261 /* FriendCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -418,6 +442,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0DF72931B13AEBF006EE8F4 /* FriendsController.swift in Sources */,
+				A0BB9BB91B13E4F1000BA261 /* FriendCell.swift in Sources */,
+				A0DF72911B13A66C006EE8F4 /* FriendsViewController.swift in Sources */,
 				A0365FE01AF95518000A325D /* MenuController.swift in Sources */,
 				A0578C651B0E7D2B0033B5BD /* UserProfileViewController.swift in Sources */,
 				A0EB97B21B051F02005112EF /* LoginController.swift in Sources */,
@@ -429,6 +456,7 @@
 				A09AB4E51AFA880E004287F7 /* Coupon.swift in Sources */,
 				9D33260F1AF7ED1C00498801 /* AppDelegate.swift in Sources */,
 				A0365FDE1AF9542A000A325D /* SWRevealViewController.m in Sources */,
+				A0DF72951B13E262006EE8F4 /* Friend.swift in Sources */,
 				A0F7E9201AFAE48500A4F0F2 /* CouponCell.swift in Sources */,
 				A09AB4E31AF99136004287F7 /* SwiftyJSON.swift in Sources */,
 				A0EB97AD1B03E16A005112EF /* User.swift in Sources */,
