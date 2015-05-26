@@ -11,12 +11,14 @@ import Foundation
 class Coupon:NSObject,Printable{
     let id:Int
     let name:String
+    let couponDescription:String
     let limit:String
     let exp: String
     
-    init(id:Int!,name: String!, limit: String!, exp: String! ) {
-        self.id=id
+    init(id: Int!, name: String!, description: String!, limit: String!, exp: String! ) {
+        self.id = id
         self.name = name ?? ""
+        self.couponDescription = description ?? ""
         self.limit = limit ?? ""
         self.exp = exp ?? ""
     }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
@@ -16,14 +16,14 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IWF-Hg-aX5">
                         <rect key="frame" x="0.0" y="0.0" width="330" height="119"/>
                         <subviews>
-                            <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="320" translatesAutoresizingMaskIntoConstraints="NO" id="sPj-9t-gVz">
-                                <rect key="frame" x="76" y="45" width="179" height="30"/>
+                            <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Titulo" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="320" translatesAutoresizingMaskIntoConstraints="NO" id="sPj-9t-gVz">
+                                <rect key="frame" x="76" y="20" width="179" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="hy7-dM-Af9"/>
                                     <constraint firstAttribute="width" constant="179" id="l2J-V4-PU0"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.17505129420000001" green="0.17505129420000001" blue="0.17505129420000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="heightClass=compact-widthClass=compact">
                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -47,14 +47,26 @@
                                     </mask>
                                 </variation>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Descripcion" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RTu-FA-LRz">
+                                <rect key="frame" x="76" y="49" width="246" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.17505129419191923" green="0.17505129419191923" blue="0.17505129419191923" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="sPj-9t-gVz" firstAttribute="centerY" secondItem="IWF-Hg-aX5" secondAttribute="centerY" id="3gT-41-KZf"/>
                             <constraint firstItem="sPj-9t-gVz" firstAttribute="centerX" secondItem="IWF-Hg-aX5" secondAttribute="centerX" id="4W4-vu-vIv"/>
                             <constraint firstItem="sPj-9t-gVz" firstAttribute="centerY" secondItem="YVI-kM-69L" secondAttribute="centerY" id="9do-Yw-Ul5"/>
+                            <constraint firstItem="sPj-9t-gVz" firstAttribute="top" secondItem="IWF-Hg-aX5" secondAttribute="top" constant="20" id="Ws6-Me-LD4"/>
+                            <constraint firstAttribute="centerY" secondItem="YVI-kM-69L" secondAttribute="centerY" id="XBK-Te-XcV"/>
                             <constraint firstItem="YVI-kM-69L" firstAttribute="leading" secondItem="IWF-Hg-aX5" secondAttribute="leading" constant="10" id="hws-ZA-wW1"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="9do-Yw-Ul5"/>
+                            </mask>
+                        </variation>
                     </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -69,6 +81,7 @@
             <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
             <connections>
                 <outlet property="branchImage" destination="YVI-kM-69L" id="eEP-ho-xWA"/>
+                <outlet property="descriptionLbl" destination="RTu-FA-LRz" id="mIT-wg-nz1"/>
                 <outlet property="nameLbl" destination="sPj-9t-gVz" id="drM-cs-9zm"/>
             </connections>
             <point key="canvasLocation" x="328" y="203"/>
