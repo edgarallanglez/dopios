@@ -12,14 +12,17 @@ class FriendCell: UITableViewCell {
 
     @IBOutlet var name: UILabel!
     @IBOutlet var user_image: UIImageView!
+    
+    var friend_id:String = ""
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
     }
     
-    func loadItem(#title: String, image: NSURL) {
+    func loadItem(#title: String, image: NSURL, friend_id: String) {
         name.text = title
-        //user_image.image=UIImage(named: "starbucks.gif")
+        self.friend_id = friend_id
+
         user_image.layer.masksToBounds = true
         user_image.layer.cornerRadius = 22.5
         
@@ -29,7 +32,31 @@ class FriendCell: UITableViewCell {
                 self.user_image.image = UIImage(data: data!)
             }
         }
+        
+        let button   = UIButton.buttonWithType(UIButtonType.System) as! UIButton
+        button.frame = CGRectMake(290, 20, 90, 30)
+        button.backgroundColor = UIColor.greenColor()
+        button.setTitle("Amigo", forState: UIControlState.Normal)
+        button.addTarget(self, action: "buttonAction:", forControlEvents: UIControlEvents.TouchUpInside)
+        
+        self.viewForBaselineLayout()!.addSubview(button)
+        
+        println("Id es \(friend_id)")
+        
     }
+    
+    func buttonAction(sender:UIButton!){
+        let params:[String: String] = [
+            "friends_id": friend_id]
+        FriendsController.deleteFriend(params){(couponsData) -> Void in
+            let json = JSON(data: couponsData)
+            
+            println(json)
+        }
+    }
+    
+    
+  
     
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
