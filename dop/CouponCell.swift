@@ -14,12 +14,14 @@ class CouponCell: UITableViewCell {
 //    @IBOutlet var expLbl: UILabel!
 //    @IBOutlet var limitLbl: UILabel!
 //    @IBOutlet var otro: UILabel!
+    @IBOutlet weak var descriptionLbl: UILabel!
     @IBOutlet var branchImage: UIImageView!
     var radius: CGFloat = 2
 
     
-    func loadItem(#title: String) {
+    func loadItem(#title: String, description: String) {
         nameLbl.text = title
+        descriptionLbl.text = description
         branchImage.image=UIImage(named: "starbucks.gif")
         branchImage.layer.masksToBounds = true
         branchImage.layer.cornerRadius = 25
@@ -33,7 +35,7 @@ class CouponCell: UITableViewCell {
         layer.masksToBounds = false
         layer.shadowColor = UIColor.blackColor().CGColor
         layer.shadowOffset = CGSize(width: 0, height: 3);
-        layer.shadowOpacity = 0.5
+        layer.shadowOpacity = 0.3
         layer.shadowPath = shadowPath.CGPath
     }
     

@@ -370,7 +370,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="140" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="8GJ-8r-L3Y">
+                            <tableView clipsSubviews="YES" contentMode="center" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="140" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="8GJ-8r-L3Y">
                                 <rect key="frame" x="10" y="0.0" width="580" height="600"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
@@ -390,11 +390,6 @@
                             <constraint firstAttribute="centerX" secondItem="8GJ-8r-L3Y" secondAttribute="centerX" id="azk-dl-6uk"/>
                             <constraint firstItem="8GJ-8r-L3Y" firstAttribute="leading" secondItem="BBH-0V-Xi6" secondAttribute="leading" constant="10" id="vMQ-2s-sRw"/>
                         </constraints>
-                        <variation key="widthClass=compact">
-                            <mask key="subviews">
-                                <include reference="8GJ-8r-L3Y"/>
-                            </mask>
-                        </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item 1" id="IOe-D5-SgW"/>
                     <toolbarItems/>

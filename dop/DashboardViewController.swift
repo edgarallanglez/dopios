@@ -54,9 +54,10 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
             for (index: String, subJson: JSON) in json["data"]{
                 var coupon_id = String(stringInterpolationSegment:subJson["coupon_id"]).toInt()
                 let coupon_name = String(stringInterpolationSegment: subJson["name"])
+                let coupon_description = String(stringInterpolationSegment: subJson["description"])
                 let coupon_limit = String(stringInterpolationSegment: subJson["limit"])
                 let coupon_exp = String(stringInterpolationSegment: subJson["end_date"])
-                let model = Coupon(id:coupon_id,name: coupon_name,limit: coupon_limit,exp: coupon_exp)
+                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp)
 
                 self.coupons.append(model)
 
@@ -85,19 +86,58 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         return 1
     }
     
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 15
+    }
+//
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        var view:UIView = UIView()
+        view.backgroundColor = UIColor.clearColor()
+        
+        return view
+    }
+    
+//    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+//        cell.contentView.backgroundColor = UIColor.clearColor()
+//        
+//        var whiteRoundedCornerView:UIView!
+//        whiteRoundedCornerView = UIView(frame: CGRectMake(5, 10, self.view.bounds.width-10, 100))
+//        whiteRoundedCornerView.backgroundColor = UIColor(red: 174/255.0, green: 174/255.0, blue: 174/255.0, alpha: 1.0)
+//        whiteRoundedCornerView.layer.masksToBounds = false
+//        
+//        whiteRoundedCornerView.layer.shadowOpacity = 1.55;
+//        
+//        
+//        
+//        whiteRoundedCornerView.layer.shadowOffset = CGSizeMake(1, 0);
+//        whiteRoundedCornerView.layer.shadowColor=UIColor(red: 53/255.0, green: 143/255.0, blue: 185/255.0, alpha: 1.0).CGColor
+//        
+//        
+//        
+//        whiteRoundedCornerView.layer.cornerRadius=3.0
+//        whiteRoundedCornerView.layer.shadowOffset=CGSizeMake(-1, -1)
+//        whiteRoundedCornerView.layer.shadowOpacity=0.5
+//        cell.contentView.addSubview(whiteRoundedCornerView)
+//        cell.contentView.sendSubviewToBack(whiteRoundedCornerView)
+//        
+//        
+//    }
+
+
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
      
         
         var cell: CouponCell = tableView.dequeueReusableCellWithIdentifier("CouponCell", forIndexPath: indexPath) as! CouponCell
         
-        let model = self.coupons[indexPath.row]
-
+        let model = self.coupons[indexPath.section]
         var (title) = model.name
+        var description = model.couponDescription
         
-        cell.loadItem(title: title)
+        cell.loadItem(title: title, description: description)
 
         return cell
     }
+    
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         
     }
@@ -161,17 +201,6 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
             println(json)
         }
         
-    }
-    
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 15
-    }
-    
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        var view:UIView = UIView()
-        view.backgroundColor = UIColor.clearColor()
-        
-        return view
     }
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
