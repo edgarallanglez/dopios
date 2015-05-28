@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9D0DB4711B17D2DB0009FE6C /* NearbyMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0DB4701B17D2DB0009FE6C /* NearbyMapViewController.swift */; };
 		9D33260F1AF7ED1C00498801 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D33260E1AF7ED1C00498801 /* AppDelegate.swift */; };
 		9D3326111AF7ED1C00498801 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3326101AF7ED1C00498801 /* LoginViewController.swift */; };
 		9D3326161AF7ED1C00498801 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D3326151AF7ED1C00498801 /* Images.xcassets */; };
@@ -68,6 +69,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9D0DB4701B17D2DB0009FE6C /* NearbyMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyMapViewController.swift; sourceTree = "<group>"; };
 		9D3326091AF7ED1C00498801 /* dop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D33260D1AF7ED1C00498801 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9D33260E1AF7ED1C00498801 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -192,6 +194,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		9D0DB46F1B17D2A50009FE6C /* Nearby */ = {
+			isa = PBXGroup;
+			children = (
+				9D0DB4701B17D2DB0009FE6C /* NearbyMapViewController.swift */,
+			);
+			name = Nearby;
+			sourceTree = "<group>";
+		};
 		9D3326001AF7ED1C00498801 = {
 			isa = PBXGroup;
 			children = (
@@ -225,6 +235,7 @@
 				A0EB97AF1B05131E005112EF /* Utilities.swift */,
 				A0578C621B0E7D2B0033B5BD /* UserProfileController.swift */,
 				A0578C631B0E7D2B0033B5BD /* UserProfileViewController.swift */,
+				9D0DB46F1B17D2A50009FE6C /* Nearby */,
 				A0BB9BB61B13E4CA000BA261 /* Friend */,
 				A0EB97B31B052074005112EF /* Login */,
 				A0EB97AE1B03E198005112EF /* User */,
@@ -456,6 +467,7 @@
 				A09AB4E51AFA880E004287F7 /* Coupon.swift in Sources */,
 				9D33260F1AF7ED1C00498801 /* AppDelegate.swift in Sources */,
 				A0365FDE1AF9542A000A325D /* SWRevealViewController.m in Sources */,
+				9D0DB4711B17D2DB0009FE6C /* NearbyMapViewController.swift in Sources */,
 				A0DF72951B13E262006EE8F4 /* Friend.swift in Sources */,
 				A0F7E9201AFAE48500A4F0F2 /* CouponCell.swift in Sources */,
 				A09AB4E31AF99136004287F7 /* SwiftyJSON.swift in Sources */,
