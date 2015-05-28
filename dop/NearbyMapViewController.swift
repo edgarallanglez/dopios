@@ -7,7 +7,9 @@
 //
 
 import Foundation
+import MapKit
 
 class NearbyMapViewController: UIViewController {
     
+    @IBOutlet weak var nearbyMap: MKMapView!
 }
