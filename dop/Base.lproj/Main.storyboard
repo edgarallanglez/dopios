@@ -203,8 +203,11 @@
                                     <constraint firstAttribute="width" constant="50" id="9GI-PY-SdF"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f3b-KE-9yH">
-                                <rect key="frame" x="94" y="40" width="300" height="26"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f3b-KE-9yH">
+                                <rect key="frame" x="94" y="50" width="300" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="dtF-Y2-GB0"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <color key="textColor" red="0.15232402146464652" green="0.15232402146464652" blue="0.15232402146464652" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -212,6 +215,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="f3b-KE-9yH" firstAttribute="leading" secondItem="A9n-eI-zlZ" secondAttribute="trailing" constant="18" id="Ofw-nj-4cA"/>
                             <constraint firstItem="A9n-eI-zlZ" firstAttribute="top" secondItem="f3b-KE-9yH" secondAttribute="top" id="QjC-4J-3Sf"/>
                             <constraint firstAttribute="centerY" secondItem="paV-lh-hGE" secondAttribute="centerY" id="Rae-oS-ZHS"/>
                             <constraint firstItem="A9n-eI-zlZ" firstAttribute="top" secondItem="nKg-cG-Rgd" secondAttribute="bottom" constant="30" id="UTE-5q-RXk"/>
