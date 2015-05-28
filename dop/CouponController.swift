@@ -24,7 +24,7 @@ class CouponController {
     
     class func takeCouponWithSuccess(params:[String:AnyObject],success: ((couponsData: NSData!) -> Void)) {
         let url = "http://104.236.141.44:5000/api/coupon/user/take"
-        Utilities.sendDataToURL(NSURL(string: url)!,params: params, completion:{(data, error) -> Void in
+        Utilities.sendDataToURL(NSURL(string: url)!, method:"POST", params: params, completion:{(data, error) -> Void in
             if let urlData = data {
                 success(couponsData: urlData)
             }

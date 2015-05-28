@@ -32,13 +32,13 @@ class Utilities {
         loadDataTask.resume()
     }
     
-    class func sendDataToURL(url: NSURL,params: [String:AnyObject], completion: (data:NSData?,error:NSError?)->Void) {
+    class func sendDataToURL(url: NSURL, method: String,params: [String:AnyObject], completion: (data:NSData?,error:NSError?)->Void) {
         
         var session = NSURLSession.sharedSession()
         let request = NSMutableURLRequest(URL: url)
         request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
         request.addValue(User.userToken, forHTTPHeaderField: "Authorization")
-        request.HTTPMethod = "POST"
+        request.HTTPMethod = method
         var err: NSError?
         request.HTTPBody = NSJSONSerialization.dataWithJSONObject(params, options: NSJSONWritingOptions.allZeros, error: &err)
         
@@ -53,11 +53,8 @@ class Utilities {
                     completion(data: nil, error: statusError)
                 } else {
                     completion(data: data, error: nil)
-                    
                 }
             }
-
-            
         })
         task.resume()
     }

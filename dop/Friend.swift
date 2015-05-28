@@ -9,13 +9,15 @@
 import UIKit
 
 class Friend: NSObject {
-    let id:Int
+    let friend_id:String
+    let user_id:Int
     let names:String
     let surnames:String
     let main_image: String
     
-    init(id:Int!,names: String!, surnames: String!, main_image: String! ) {
-        self.id=id
+    init(friend_id:String!, user_id:Int!,names: String!, surnames: String!, main_image: String! ) {
+        self.friend_id = friend_id
+        self.user_id = user_id
         self.names = names ?? ""
         self.surnames = surnames ?? ""
         self.main_image = main_image ?? ""

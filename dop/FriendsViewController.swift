@@ -32,7 +32,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         var (title) = model.names
         let imageUrl = NSURL(string: model.main_image)
         
-        cell.loadItem(title: title, image: imageUrl!)
+        cell.loadItem(title: title, image: imageUrl!, friend_id: model.friend_id)
         
         return cell
     }
@@ -47,13 +47,16 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
             
             var namex = "";
             for (index: String, subJson: JSON) in json["data"]{
+                var friend_id = String(stringInterpolationSegment:subJson["friends_id"])
                 var user_id = String(stringInterpolationSegment:subJson["user_id"]).toInt()
                 let user_name = String(stringInterpolationSegment: subJson["names"])
                 let user_surnames = String(stringInterpolationSegment: subJson["surnames"])
                 let main_image = String(stringInterpolationSegment: subJson["main_image"])
-                let model = Friend(id: user_id, names: user_name, surnames: user_surnames, main_image: main_image)
+                let model = Friend(friend_id: friend_id,user_id: user_id, names: user_name, surnames: user_surnames, main_image: main_image)
                 
                 self.friends.append(model)
+                
+                println(json)
                 
             }
             

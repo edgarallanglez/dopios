@@ -29,7 +29,7 @@ class CouponCell: UITableViewCell {
     override func layoutSubviews() {
         layer.cornerRadius = radius
         let shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: radius)
-        
+
         layer.masksToBounds = false
         layer.shadowColor = UIColor.blackColor().CGColor
         layer.shadowOffset = CGSize(width: 0, height: 3);
