@@ -27,6 +27,11 @@
 		A0578C611B0E40D30033B5BD /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0578C5E1B0E40D30033B5BD /* GooglePlus.framework */; };
 		A0578C641B0E7D2B0033B5BD /* UserProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0578C621B0E7D2B0033B5BD /* UserProfileController.swift */; };
 		A0578C651B0E7D2B0033B5BD /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0578C631B0E7D2B0033B5BD /* UserProfileViewController.swift */; };
+		A082F4831B18CEE6001C8C52 /* NewsfeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A082F4821B18CEE6001C8C52 /* NewsfeedViewController.swift */; };
+		A082F4851B18CF01001C8C52 /* NewsfeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A082F4841B18CF01001C8C52 /* NewsfeedController.swift */; };
+		A082F4871B18E4FF001C8C52 /* NewsfeedNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A082F4861B18E4FF001C8C52 /* NewsfeedNote.swift */; };
+		A082F48A1B1920F8001C8C52 /* NewsfeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A082F4881B1920F8001C8C52 /* NewsfeedCell.swift */; };
+		A082F48B1B1920F8001C8C52 /* NewsfeedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A082F4891B1920F8001C8C52 /* NewsfeedCell.xib */; };
 		A09AB4DB1AF95A26004287F7 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09AB4DA1AF95A26004287F7 /* DashboardViewController.swift */; };
 		A09AB4E21AF99136004287F7 /* CouponController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09AB4E01AF99136004287F7 /* CouponController.swift */; };
 		A09AB4E31AF99136004287F7 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09AB4E11AF99136004287F7 /* SwiftyJSON.swift */; };
@@ -94,6 +99,11 @@
 		A0578C5E1B0E40D30033B5BD /* GooglePlus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GooglePlus.framework; path = dop/GooglePlus.framework; sourceTree = "<group>"; };
 		A0578C621B0E7D2B0033B5BD /* UserProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileController.swift; sourceTree = "<group>"; };
 		A0578C631B0E7D2B0033B5BD /* UserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
+		A082F4821B18CEE6001C8C52 /* NewsfeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsfeedViewController.swift; sourceTree = "<group>"; };
+		A082F4841B18CF01001C8C52 /* NewsfeedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsfeedController.swift; sourceTree = "<group>"; };
+		A082F4861B18E4FF001C8C52 /* NewsfeedNote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsfeedNote.swift; sourceTree = "<group>"; };
+		A082F4881B1920F8001C8C52 /* NewsfeedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsfeedCell.swift; sourceTree = "<group>"; };
+		A082F4891B1920F8001C8C52 /* NewsfeedCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsfeedCell.xib; sourceTree = "<group>"; };
 		A09AB4DA1AF95A26004287F7 /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		A09AB4E01AF99136004287F7 /* CouponController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CouponController.swift; sourceTree = "<group>"; };
 		A09AB4E11AF99136004287F7 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
@@ -225,6 +235,7 @@
 				A0EB97AF1B05131E005112EF /* Utilities.swift */,
 				A0578C621B0E7D2B0033B5BD /* UserProfileController.swift */,
 				A0578C631B0E7D2B0033B5BD /* UserProfileViewController.swift */,
+				A082F4811B18CEC7001C8C52 /* Newsfeed */,
 				A0BB9BB61B13E4CA000BA261 /* Friend */,
 				A0EB97B31B052074005112EF /* Login */,
 				A0EB97AE1B03E198005112EF /* User */,
@@ -278,6 +289,18 @@
 				A04860951B0D5355009FEF1F /* A0JWTDecoder.m */,
 			);
 			name = JWTDecode;
+			sourceTree = "<group>";
+		};
+		A082F4811B18CEC7001C8C52 /* Newsfeed */ = {
+			isa = PBXGroup;
+			children = (
+				A082F4821B18CEE6001C8C52 /* NewsfeedViewController.swift */,
+				A082F4861B18E4FF001C8C52 /* NewsfeedNote.swift */,
+				A082F4841B18CF01001C8C52 /* NewsfeedController.swift */,
+				A082F4881B1920F8001C8C52 /* NewsfeedCell.swift */,
+				A082F4891B1920F8001C8C52 /* NewsfeedCell.xib */,
+			);
+			name = Newsfeed;
 			sourceTree = "<group>";
 		};
 		A09AB4E61AFA9609004287F7 /* Coupon */ = {
@@ -405,6 +428,7 @@
 				A04E388A1AFC3549007C7B69 /* starbucks.gif in Resources */,
 				A0578C541B0D64AD0033B5BD /* TwitterKitResources.bundle in Resources */,
 				9D3326191AF7ED1C00498801 /* LaunchScreen.xib in Resources */,
+				A082F48B1B1920F8001C8C52 /* NewsfeedCell.xib in Resources */,
 				9D3326161AF7ED1C00498801 /* Images.xcassets in Resources */,
 				A0578C601B0E40D30033B5BD /* GooglePlus.bundle in Resources */,
 				A0F7E9211AFAE48500A4F0F2 /* CouponCell.xib in Resources */,
@@ -443,20 +467,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				A0DF72931B13AEBF006EE8F4 /* FriendsController.swift in Sources */,
+				A082F4851B18CF01001C8C52 /* NewsfeedController.swift in Sources */,
 				A0BB9BB91B13E4F1000BA261 /* FriendCell.swift in Sources */,
 				A0DF72911B13A66C006EE8F4 /* FriendsViewController.swift in Sources */,
 				A0365FE01AF95518000A325D /* MenuController.swift in Sources */,
 				A0578C651B0E7D2B0033B5BD /* UserProfileViewController.swift in Sources */,
+				A082F4871B18E4FF001C8C52 /* NewsfeedNote.swift in Sources */,
 				A0EB97B21B051F02005112EF /* LoginController.swift in Sources */,
 				A09AB4E21AF99136004287F7 /* CouponController.swift in Sources */,
 				A0EB97B01B05131E005112EF /* Utilities.swift in Sources */,
 				A0578C641B0E7D2B0033B5BD /* UserProfileController.swift in Sources */,
 				9D3326111AF7ED1C00498801 /* LoginViewController.swift in Sources */,
 				A04860961B0D5355009FEF1F /* A0JWTDecoder.m in Sources */,
+				A082F48A1B1920F8001C8C52 /* NewsfeedCell.swift in Sources */,
 				A09AB4E51AFA880E004287F7 /* Coupon.swift in Sources */,
 				9D33260F1AF7ED1C00498801 /* AppDelegate.swift in Sources */,
 				A0365FDE1AF9542A000A325D /* SWRevealViewController.m in Sources */,
 				A0DF72951B13E262006EE8F4 /* Friend.swift in Sources */,
+				A082F4831B18CEE6001C8C52 /* NewsfeedViewController.swift in Sources */,
 				A0F7E9201AFAE48500A4F0F2 /* CouponCell.swift in Sources */,
 				A09AB4E31AF99136004287F7 /* SwiftyJSON.swift in Sources */,
 				A0EB97AD1B03E16A005112EF /* User.swift in Sources */,

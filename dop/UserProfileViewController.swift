@@ -34,7 +34,7 @@ class UserProfileViewController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-    }
+            }
     
     override func viewDidAppear(animated: Bool) {
         if let checkedUrl = NSURL(string:User.userImageUrl) {
