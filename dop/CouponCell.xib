@@ -47,8 +47,8 @@
                                     </mask>
                                 </variation>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Descripcion" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RTu-FA-LRz">
-                                <rect key="frame" x="76" y="49" width="246" height="36"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RTu-FA-LRz">
+                                <rect key="frame" x="76" y="49" width="246" height="62"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.17505129419191923" green="0.17505129419191923" blue="0.17505129419191923" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -57,16 +57,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="sPj-9t-gVz" firstAttribute="centerX" secondItem="IWF-Hg-aX5" secondAttribute="centerX" id="4W4-vu-vIv"/>
-                            <constraint firstItem="sPj-9t-gVz" firstAttribute="centerY" secondItem="YVI-kM-69L" secondAttribute="centerY" id="9do-Yw-Ul5"/>
                             <constraint firstItem="sPj-9t-gVz" firstAttribute="top" secondItem="IWF-Hg-aX5" secondAttribute="top" constant="20" id="Ws6-Me-LD4"/>
                             <constraint firstAttribute="centerY" secondItem="YVI-kM-69L" secondAttribute="centerY" id="XBK-Te-XcV"/>
                             <constraint firstItem="YVI-kM-69L" firstAttribute="leading" secondItem="IWF-Hg-aX5" secondAttribute="leading" constant="10" id="hws-ZA-wW1"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="9do-Yw-Ul5"/>
-                            </mask>
-                        </variation>
                     </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
