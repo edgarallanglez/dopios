@@ -28,10 +28,8 @@ class NewsfeedViewController: UIViewController, UITableViewDataSource, UITableVi
         
         let model = self.newsfeed[indexPath.row]
         
-        let imageUrl = NSURL(string: model.user_image)
+        cell.loadItem(model,viewController: self)
         
-        
-        cell.loadItem(newsfeed_description: model.names, user_image: imageUrl! , friend_id: "", coupon_name: model.coupon_name, branch_name: model.branch_name)
         
         return cell
     }
@@ -80,6 +78,19 @@ class NewsfeedViewController: UIViewController, UITableViewDataSource, UITableVi
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let cell = sender as? NewsfeedCell {
+
+            let i = tableView.indexPathForCell(cell)!.row
+            let model = self.newsfeed[i]
+
+            if segue.identifier == "userProfile" {
+                let vc = segue.destinationViewController as! UserProfileViewController
+                vc.userId = model.user_id
+            }
+        }
+        
     }
     
 

@@ -318,6 +318,7 @@
                     <tabBarItem key="tabBarItem" title="Item 2" id="GGq-MD-JNo"/>
                     <connections>
                         <outlet property="tableView" destination="OZc-ML-bCf" id="b7Y-Ms-gf2"/>
+                        <segue destination="OTe-uN-tYr" kind="show" identifier="userProfile" id="Xpw-UC-3s2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o4o-23-0wi" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -359,7 +360,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tyD-zm-42m" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3721.5" y="2159"/>
+            <point key="canvasLocation" x="3811.5" y="2211"/>
         </scene>
         <!--Friends View Controller-->
         <scene sceneID="g67-F1-aZg">
