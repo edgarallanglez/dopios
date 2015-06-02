@@ -13,6 +13,11 @@ class UserProfileViewController: UIViewController {
 
     @IBOutlet weak var fontCalis: UIButton!
     @IBOutlet var profile_image: UIImageView!
+    
+    var userImage:String="http://upload.wikimedia.org/wikipedia/commons/5/5b/Ultraviolet_image_of_the_Cygnus_Loop_Nebula_crop.jpg"
+    
+    var userId:Int!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,12 +48,14 @@ class UserProfileViewController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-    }
+            }
     
     override func viewDidAppear(animated: Bool) {
-        if let checkedUrl = NSURL(string:User.userImageUrl) {
+        if let checkedUrl = NSURL(string:userImage) {
             downloadImage(checkedUrl)
         }
+        
+        println("El id es \(userId)")
     }
 
 

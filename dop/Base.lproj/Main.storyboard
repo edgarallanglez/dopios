@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E26a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -305,7 +305,7 @@
         <!--Item 2-->
         <scene sceneID="fwB-7u-O1r">
             <objects>
-                <viewController id="TTn-gh-Dpv" sceneMemberID="viewController">
+                <viewController id="TTn-gh-Dpv" customClass="NewsfeedViewController" customModule="dop" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="IO3-pJ-NPT"/>
                         <viewControllerLayoutGuide type="bottom" id="37d-tA-MMx"/>
@@ -314,50 +314,52 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vjh-IM-9le">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <state key="normal" title="perfil">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="29" y="254" width="34" height="30"/>
-                                </variation>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="170" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="OZc-ML-bCf">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
-                                    <segue destination="OTe-uN-tYr" kind="show" id="hWG-cM-bem"/>
+                                    <outlet property="dataSource" destination="TTn-gh-Dpv" id="ehz-7c-BhE"/>
+                                    <outlet property="delegate" destination="TTn-gh-Dpv" id="oAc-5m-lPv"/>
                                 </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="56P-Wj-Ycc">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <state key="normal" title="amigos">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="53" y="310" width="50" height="30"/>
-                                </variation>
-                                <connections>
-                                    <segue destination="b8R-QZ-FSx" kind="show" id="bfl-mh-RFp"/>
-                                </connections>
-                            </button>
+                            </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="OZc-ML-bCf" secondAttribute="trailing" id="2Jg-L3-0Lx"/>
+                            <constraint firstItem="OZc-ML-bCf" firstAttribute="leading" secondItem="W3U-ac-5LL" secondAttribute="leading" id="LCr-Ax-jPa"/>
+                            <constraint firstItem="37d-tA-MMx" firstAttribute="top" secondItem="OZc-ML-bCf" secondAttribute="bottom" id="lMe-Nu-MUt"/>
+                            <constraint firstItem="OZc-ML-bCf" firstAttribute="top" secondItem="IO3-pJ-NPT" secondAttribute="bottom" id="sc1-Tw-LfW"/>
+                        </constraints>
                         <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="Vjh-IM-9le"/>
-                                <exclude reference="56P-Wj-Ycc"/>
+                            <mask key="constraints">
+                                <exclude reference="2Jg-L3-0Lx"/>
+                                <exclude reference="LCr-Ax-jPa"/>
+                                <exclude reference="sc1-Tw-LfW"/>
+                                <exclude reference="lMe-Nu-MUt"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
-                                <include reference="Vjh-IM-9le"/>
-                                <include reference="56P-Wj-Ycc"/>
+                                <include reference="OZc-ML-bCf"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="2Jg-L3-0Lx"/>
+                                <include reference="LCr-Ax-jPa"/>
+                                <include reference="sc1-Tw-LfW"/>
+                                <include reference="lMe-Nu-MUt"/>
                             </mask>
                         </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item 2" id="GGq-MD-JNo"/>
+                    <connections>
+                        <outlet property="tableView" destination="OZc-ML-bCf" id="b7Y-Ms-gf2"/>
+                        <segue destination="OTe-uN-tYr" kind="show" identifier="userProfile" id="Xpw-UC-3s2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o4o-23-0wi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2926.5" y="2159"/>
+            <point key="canvasLocation" x="3079.5" y="2202"/>
         </scene>
         <!--User Profile View Controller-->
         <scene sceneID="ejZ-Wu-Mma">
@@ -371,12 +373,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="n3z-gg-bUX">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="n3z-gg-bUX">
                                 <rect key="frame" x="240" y="116" width="120" height="120"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="S6p-Lk-MIb"/>
                                     <constraint firstAttribute="height" constant="120" id="p9N-T7-WDg"/>
                                 </constraints>
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="140" y="116" width="120" height="120"/>
+                                </variation>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OHt-p6-VTn">
                                 <rect key="frame" x="277" y="326" width="46" height="30"/>
@@ -415,7 +420,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="18l-i1-60n">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <variation key="widthClass=compact" misplaced="YES">
+                                <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
                                     <rect key="frame" x="16" y="0.0" width="368" height="600"/>
                                 </variation>
                                 <connections>
