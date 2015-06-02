@@ -18,7 +18,7 @@ class FriendsController: NSObject {
         })
     }
     
-    class func deleteFriend(params:[String:AnyObject],success: ((couponsData: NSData!) -> Void)) {
+    class func deleteFriend(params:[String:AnyObject], success: ((couponsData: NSData!) -> Void)) {
         let url = "http://104.236.141.44:5000/user/friends/delete"
         Utilities.sendDataToURL(NSURL(string: url)!, method:"PUT",params: params, completion:{(data, error) -> Void in
             if let urlData = data {
