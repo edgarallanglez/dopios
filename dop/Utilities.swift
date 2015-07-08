@@ -63,4 +63,43 @@ class Utilities {
             completion(data: NSData(data: data))
             }.resume()
     }
+    
+    class func relativeTimeInString(value: NSTimeInterval) -> String {
+            func getTimeData(value: NSTimeInterval) -> (count: Int, suffix: String) {
+                let count = Int(floor(value))
+                let suffix = count != 1 ? "s" : ""
+                return (count: count, suffix: suffix)
+            }
+            
+            let value = -value
+            switch value {
+            case 0...15: return "just now"
+                
+            case 0..<60:
+                let timeData = getTimeData(value)
+                return "\(timeData.count) second\(timeData.suffix) ago"
+                
+            case 0..<3600:
+                let timeData = getTimeData(value/60)
+                return "\(timeData.count) minute\(timeData.suffix) ago"
+                
+            case 0..<86400:
+                let timeData = getTimeData(value/3600)
+                return "\(timeData.count) hour\(timeData.suffix) ago"
+                
+            case 0..<604800:
+                let timeData = getTimeData(value/86400)
+                return "\(timeData.count) days\(timeData.suffix) ago"
+                
+            default:
+                let timeData = getTimeData(value/604800)
+                return "\(timeData.count) week\(timeData.suffix) ago"
+            }
+    }
 }
+
+/*
+let time = NSDate(timeIntervalSince1970: timestamp).timeIntervalSinceNow
+let relativeTimeString = NSDate.relativeTimeInString(time)
+println(relativeTimeString)
+*/
