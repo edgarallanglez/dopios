@@ -278,7 +278,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="170" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="OZc-ML-bCf">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="170" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="OZc-ML-bCf">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -319,6 +319,7 @@
                     <connections>
                         <outlet property="tableView" destination="OZc-ML-bCf" id="b7Y-Ms-gf2"/>
                         <segue destination="OTe-uN-tYr" kind="show" identifier="userProfile" id="Xpw-UC-3s2"/>
+                        <segue destination="b8R-QZ-FSx" kind="show" identifier="friendList" id="xhY-CC-qhd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o4o-23-0wi" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -337,15 +338,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="n3z-gg-bUX">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="n3z-gg-bUX">
                                 <rect key="frame" x="240" y="116" width="120" height="120"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="S6p-Lk-MIb"/>
                                     <constraint firstAttribute="height" constant="120" id="p9N-T7-WDg"/>
                                 </constraints>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="140" y="116" width="120" height="120"/>
-                                </variation>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
