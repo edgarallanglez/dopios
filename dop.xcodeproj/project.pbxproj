@@ -14,7 +14,10 @@
 		9D3326161AF7ED1C00498801 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D3326151AF7ED1C00498801 /* Images.xcassets */; };
 		9D3326191AF7ED1C00498801 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D3326171AF7ED1C00498801 /* LaunchScreen.xib */; };
 		9D3326251AF7ED1C00498801 /* dopTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3326241AF7ED1C00498801 /* dopTests.swift */; };
+		9D4C047E1B18E9F200D5DCEE /* iconfonts-fontawesome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4C047D1B18E9F200D5DCEE /* iconfonts-fontawesome.swift */; };
+		9D4C04811B18EB0200D5DCEE /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9D4C04801B18EAF600D5DCEE /* FontAwesome.ttf */; };
 		9DAAE7B71B0E810B00209588 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DAAE7B51B0E810B00209588 /* Main.storyboard */; };
+		9DB6121A1B192FCC004B8DB8 /* NearbyMapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB612191B192FCC004B8DB8 /* NearbyMapController.swift */; };
 		A0365FDE1AF9542A000A325D /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0365FDD1AF9542A000A325D /* SWRevealViewController.m */; };
 		A0365FE01AF95518000A325D /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0365FDF1AF95518000A325D /* MenuController.swift */; };
 		A04860961B0D5355009FEF1F /* A0JWTDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = A04860951B0D5355009FEF1F /* A0JWTDecoder.m */; };
@@ -86,7 +89,10 @@
 		9D33261E1AF7ED1C00498801 /* dopTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = dopTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D3326231AF7ED1C00498801 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9D3326241AF7ED1C00498801 /* dopTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dopTests.swift; sourceTree = "<group>"; };
+		9D4C047D1B18E9F200D5DCEE /* iconfonts-fontawesome.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "iconfonts-fontawesome.swift"; path = "../../../../Downloads/BizziBodyFontAwesomeUIButtons_COMPLETE-master/BizziBodyFontAwesomeUIButtons_COMPLETE/iconfonts-fontawesome.swift"; sourceTree = "<group>"; };
+		9D4C04801B18EAF600D5DCEE /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
 		9DAAE7B61B0E810B00209588 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		9DB612191B192FCC004B8DB8 /* NearbyMapController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyMapController.swift; sourceTree = "<group>"; };
 		A0365FDC1AF9542A000A325D /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		A0365FDD1AF9542A000A325D /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		A0365FDF1AF95518000A325D /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
@@ -212,6 +218,7 @@
 			isa = PBXGroup;
 			children = (
 				9D0DB4701B17D2DB0009FE6C /* NearbyMapViewController.swift */,
+				9DB612191B192FCC004B8DB8 /* NearbyMapController.swift */,
 			);
 			name = Nearby;
 			sourceTree = "<group>";
@@ -238,6 +245,8 @@
 		9D33260B1AF7ED1C00498801 /* dop */ = {
 			isa = PBXGroup;
 			children = (
+				9D4C04801B18EAF600D5DCEE /* FontAwesome.ttf */,
+				9D4C047D1B18E9F200D5DCEE /* iconfonts-fontawesome.swift */,
 				A04860901B0D4D3B009FEF1F /* JWTDecode */,
 				A0365FDB1AF9463B000A325D /* SWRevealViewController */,
 				9D33260E1AF7ED1C00498801 /* AppDelegate.swift */,
@@ -444,6 +453,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D4C04811B18EB0200D5DCEE /* FontAwesome.ttf in Resources */,
 				9DAAE7B71B0E810B00209588 /* Main.storyboard in Resources */,
 				A04E388A1AFC3549007C7B69 /* starbucks.gif in Resources */,
 				A0578C541B0D64AD0033B5BD /* TwitterKitResources.bundle in Resources */,
@@ -492,7 +502,7 @@
 				A0DF72911B13A66C006EE8F4 /* FriendsViewController.swift in Sources */,
 				A0365FE01AF95518000A325D /* MenuController.swift in Sources */,
 				A0578C651B0E7D2B0033B5BD /* UserProfileViewController.swift in Sources */,
-				A082F4871B18E4FF001C8C52 /* NewsfeedNote.swift in Sources */,
+				9DB6121A1B192FCC004B8DB8 /* NearbyMapController.swift in Sources */,
 				A0EB97B21B051F02005112EF /* LoginController.swift in Sources */,
 				A09AB4E21AF99136004287F7 /* CouponController.swift in Sources */,
 				A0EB97B01B05131E005112EF /* Utilities.swift in Sources */,
@@ -508,6 +518,7 @@
 				A082F4831B18CEE6001C8C52 /* NewsfeedViewController.swift in Sources */,
 				A0F7E9201AFAE48500A4F0F2 /* CouponCell.swift in Sources */,
 				A09AB4E31AF99136004287F7 /* SwiftyJSON.swift in Sources */,
+				9D4C047E1B18E9F200D5DCEE /* iconfonts-fontawesome.swift in Sources */,
 				A0EB97AD1B03E16A005112EF /* User.swift in Sources */,
 				A09AB4DB1AF95A26004287F7 /* DashboardViewController.swift in Sources */,
 			);

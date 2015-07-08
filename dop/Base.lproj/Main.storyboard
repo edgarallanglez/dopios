@@ -246,19 +246,55 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mwc-a1-OhP">
-                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                                <rect key="frame" x="0.0" y="64" width="600" height="492"/>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zk2-7x-9XQ">
+                                <rect key="frame" x="549" y="506" width="35" height="35"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="3dM-9v-Z9X"/>
+                                    <constraint firstAttribute="width" constant="35" id="nv2-bt-NG2"/>
+                                </constraints>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="currentLocation:" destination="N9P-Ri-FBS" eventType="touchUpInside" id="mbR-hW-m5w"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gjv-u2-ATO">
+                                <rect key="frame" x="551" y="466" width="33" height="30"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Near">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="getNearestBranches:" destination="N9P-Ri-FBS" eventType="touchUpInside" id="ecU-No-ZbL"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="gjv-u2-ATO" secondAttribute="trailing" id="7Oa-sW-dQG"/>
+                            <constraint firstItem="zk2-7x-9XQ" firstAttribute="top" secondItem="gjv-u2-ATO" secondAttribute="bottom" constant="10" id="epe-EQ-mkT"/>
                             <constraint firstItem="Mwc-a1-OhP" firstAttribute="leading" secondItem="c5S-FP-gzy" secondAttribute="leading" id="f70-f7-M5N"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="zk2-7x-9XQ" secondAttribute="trailing" id="kGJ-r7-5O0"/>
                             <constraint firstAttribute="trailing" secondItem="Mwc-a1-OhP" secondAttribute="trailing" id="ncl-av-yrz"/>
+                            <constraint firstItem="MKz-N0-fGi" firstAttribute="top" secondItem="zk2-7x-9XQ" secondAttribute="bottom" constant="15" id="rZe-1r-i04"/>
                             <constraint firstItem="Mwc-a1-OhP" firstAttribute="top" secondItem="KrA-f2-dz9" secondAttribute="bottom" id="vo2-Ih-w6D"/>
                             <constraint firstItem="MKz-N0-fGi" firstAttribute="top" secondItem="Mwc-a1-OhP" secondAttribute="bottom" id="zvg-ii-Gqc"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Map" id="h8c-Nj-m1S"/>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="currentLocationLbl" destination="zk2-7x-9XQ" id="JM6-Km-8aw"/>
                         <outlet property="nearbyMap" destination="Mwc-a1-OhP" id="vrC-cO-9eT"/>
                     </connections>
                 </viewController>
@@ -345,6 +381,12 @@
                                     <constraint firstAttribute="height" constant="120" id="p9N-T7-WDg"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OHt-p6-VTn">
+                                <rect key="frame" x="277" y="326" width="46" height="30"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -353,12 +395,13 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="fontCalis" destination="OHt-p6-VTn" id="4bO-RJ-LgN"/>
                         <outlet property="profile_image" destination="n3z-gg-bUX" id="4Tf-BD-FAe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tyD-zm-42m" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3811.5" y="2211"/>
+            <point key="canvasLocation" x="3721" y="2159"/>
         </scene>
         <!--Friends View Controller-->
         <scene sceneID="g67-F1-aZg">

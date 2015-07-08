@@ -10,6 +10,8 @@ import UIKit
 
 class UserProfileViewController: UIViewController {
 
+
+    @IBOutlet weak var fontCalis: UIButton!
     @IBOutlet var profile_image: UIImageView!
     
     var userImage:String=""
@@ -23,6 +25,13 @@ class UserProfileViewController: UIViewController {
         profile_image.layer.cornerRadius=60
         profile_image.layer.masksToBounds=true
         
+        var buttonString = String.fontAwesomeString("fa-heart")
+        var buttonStringAttributed = NSMutableAttributedString(string: buttonString, attributes: [NSFontAttributeName:UIFont(name: "HelveticaNeue", size: 11.00)!])
+        buttonStringAttributed.addAttribute(NSFontAttributeName, value: UIFont.iconFontOfSize("FontAwesome", fontSize: 50), range: NSRange(location: 0,length: 1))
+        
+        fontCalis.titleLabel?.textAlignment = .Center
+        fontCalis.titleLabel?.numberOfLines = 2
+        fontCalis.setAttributedTitle(buttonStringAttributed, forState: .Normal)
         
         UserProfileController.getUserProfile("http://104.236.141.44:5000/user/\(userId)/profile"){ profileData in
             
