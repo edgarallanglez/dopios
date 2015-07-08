@@ -15,14 +15,22 @@ class CouponCell: UITableViewCell {
 //    @IBOutlet var limitLbl: UILabel!
 //    @IBOutlet var otro: UILabel!
     @IBOutlet weak var descriptionLbl: UILabel!
-    @IBOutlet var branchImage: UIImageView!
+    @IBOutlet weak var branchImage: UIButton!
+
+    
+    @IBAction func branchProfile(sender: UIButton) {
+        self.viewController!.performSegueWithIdentifier("userProfile", sender: self)
+    }
+    
+
+    
     var radius: CGFloat = 2
 
     
     func loadItem(#title: String, description: String) {
         nameLbl.text = title
         descriptionLbl.text = description
-        branchImage.image=UIImage(named: "starbucks.gif")
+        branchImage.setBackgroundImage(UIImage(named: "starbucks.gif"), forState: UIControlState.Normal)
         branchImage.layer.masksToBounds = true
         branchImage.layer.cornerRadius = 25
 

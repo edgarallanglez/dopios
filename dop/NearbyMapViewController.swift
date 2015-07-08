@@ -20,7 +20,6 @@ class NearbyMapViewController: UIViewController, CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        centerMapOnLocation(initialLocation)
         locationManager = CLLocationManager()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -36,8 +35,6 @@ class NearbyMapViewController: UIViewController, CLLocationManagerDelegate {
         currentLocationLbl.setAttributedTitle(buttonStringAttributed, forState: .Normal)
 
     }
-    
-    let initialLocation = CLLocation(latitude: 21.282778, longitude: -157.829444)
     
     let regionRadius: CLLocationDistance = 1000
     
@@ -62,7 +59,7 @@ class NearbyMapViewController: UIViewController, CLLocationManagerDelegate {
         var latitude = String(stringInterpolationSegment: coordinate!.latitude)
         var longitude = String(stringInterpolationSegment: coordinate!.longitude)
         
-        var params:[String:AnyObject] = [
+        let params:[String:AnyObject] = [
             "latitude": latitude,
             "longitude": longitude,
             "radio": 10
@@ -70,7 +67,19 @@ class NearbyMapViewController: UIViewController, CLLocationManagerDelegate {
         
         NearbyMapController.getNearestBranches(params) {(branchesData) -> Void in
             let json = JSON(data: branchesData)
-            println(branchesData)
+            for (index, location) in json["data"] {
+                var latitude = location["latitude"].double
+                var longitude = location["longitude"].double
+
+                var newLocation = CLLocationCoordinate2DMake(latitude!, longitude!)
+                dispatch_async(dispatch_get_main_queue()) {
+                // Drop a pin
+                    var dropPin = MKPointAnnotation()
+                    dropPin.coordinate = newLocation
+                    dropPin.title = location["name"].string
+                    self.nearbyMap.addAnnotation(dropPin)
+                }
+            }
         }
     }
     

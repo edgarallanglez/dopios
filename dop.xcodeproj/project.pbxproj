@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9D0C16841B4DC6EB0088DE2F /* BranchProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0C16831B4DC6EB0088DE2F /* BranchProfileViewController.swift */; };
 		9D0DB4711B17D2DB0009FE6C /* NearbyMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0DB4701B17D2DB0009FE6C /* NearbyMapViewController.swift */; };
 		9D0DB4731B17DE5A0009FE6C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D0DB4721B17DE5A0009FE6C /* MapKit.framework */; };
 		9D33260F1AF7ED1C00498801 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D33260E1AF7ED1C00498801 /* AppDelegate.swift */; };
@@ -78,6 +79,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9D0C16831B4DC6EB0088DE2F /* BranchProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BranchProfileViewController.swift; sourceTree = "<group>"; };
 		9D0DB4701B17D2DB0009FE6C /* NearbyMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyMapViewController.swift; sourceTree = "<group>"; };
 		9D0DB4721B17DE5A0009FE6C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		9D3326091AF7ED1C00498801 /* dop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dop.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -214,6 +216,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		9D0C16821B4DC6AE0088DE2F /* BranchProfile */ = {
+			isa = PBXGroup;
+			children = (
+				9D0C16831B4DC6EB0088DE2F /* BranchProfileViewController.swift */,
+			);
+			name = BranchProfile;
+			sourceTree = "<group>";
+		};
 		9D0DB46F1B17D2A50009FE6C /* Nearby */ = {
 			isa = PBXGroup;
 			children = (
@@ -245,6 +255,7 @@
 		9D33260B1AF7ED1C00498801 /* dop */ = {
 			isa = PBXGroup;
 			children = (
+				9D0C16821B4DC6AE0088DE2F /* BranchProfile */,
 				9D4C04801B18EAF600D5DCEE /* FontAwesome.ttf */,
 				9D4C047D1B18E9F200D5DCEE /* iconfonts-fontawesome.swift */,
 				A04860901B0D4D3B009FEF1F /* JWTDecode */,
@@ -496,6 +507,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D0C16841B4DC6EB0088DE2F /* BranchProfileViewController.swift in Sources */,
 				A0DF72931B13AEBF006EE8F4 /* FriendsController.swift in Sources */,
 				A082F4851B18CF01001C8C52 /* NewsfeedController.swift in Sources */,
 				A0BB9BB91B13E4F1000BA261 /* FriendCell.swift in Sources */,
@@ -503,6 +515,7 @@
 				A0365FE01AF95518000A325D /* MenuController.swift in Sources */,
 				A0578C651B0E7D2B0033B5BD /* UserProfileViewController.swift in Sources */,
 				9DB6121A1B192FCC004B8DB8 /* NearbyMapController.swift in Sources */,
+				A082F4871B18E4FF001C8C52 /* NewsfeedNote.swift in Sources */,
 				A0EB97B21B051F02005112EF /* LoginController.swift in Sources */,
 				A09AB4E21AF99136004287F7 /* CouponController.swift in Sources */,
 				A0EB97B01B05131E005112EF /* Utilities.swift in Sources */,

@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E26a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -33,34 +36,44 @@
                                     </mask>
                                 </variation>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YVI-kM-69L">
-                                <rect key="frame" x="10" y="35" width="50" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="5JZ-R7-CeW"/>
-                                    <constraint firstAttribute="height" constant="50" id="txm-gx-e2F"/>
-                                </constraints>
-                                <variation key="heightClass=compact-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="5" y="13" width="50" height="51"/>
-                                    <mask key="constraints">
-                                        <include reference="5JZ-R7-CeW"/>
-                                        <include reference="txm-gx-e2F"/>
-                                    </mask>
-                                </variation>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RTu-FA-LRz">
-                                <rect key="frame" x="76" y="49" width="246" height="62"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RTu-FA-LRz">
+                                <rect key="frame" x="77" y="49" width="245" height="62"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.17505129419191923" green="0.17505129419191923" blue="0.17505129419191923" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w86-Ra-Hu3">
+                                <rect key="frame" x="5" y="35" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="0rq-hc-Ghe"/>
+                                    <constraint firstAttribute="height" constant="50" id="clC-ZK-usc"/>
+                                </constraints>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="branchProfile:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="UJJ-LC-CWZ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="sPj-9t-gVz" firstAttribute="centerX" secondItem="IWF-Hg-aX5" secondAttribute="centerX" id="4W4-vu-vIv"/>
+                            <constraint firstItem="RTu-FA-LRz" firstAttribute="bottom" secondItem="IWF-Hg-aX5" secondAttribute="bottomMargin" id="91n-ZM-7Ze"/>
+                            <constraint firstItem="RTu-FA-LRz" firstAttribute="top" secondItem="IWF-Hg-aX5" secondAttribute="topMargin" constant="2" id="9gg-hQ-ieb"/>
+                            <constraint firstItem="w86-Ra-Hu3" firstAttribute="leading" secondItem="IWF-Hg-aX5" secondAttribute="leading" constant="5" id="B3H-cV-BLp"/>
                             <constraint firstItem="sPj-9t-gVz" firstAttribute="top" secondItem="IWF-Hg-aX5" secondAttribute="top" constant="20" id="Ws6-Me-LD4"/>
-                            <constraint firstAttribute="centerY" secondItem="YVI-kM-69L" secondAttribute="centerY" id="XBK-Te-XcV"/>
-                            <constraint firstItem="YVI-kM-69L" firstAttribute="leading" secondItem="IWF-Hg-aX5" secondAttribute="leading" constant="10" id="hws-ZA-wW1"/>
+                            <constraint firstItem="RTu-FA-LRz" firstAttribute="top" secondItem="IWF-Hg-aX5" secondAttribute="top" constant="49" id="ckq-xi-Wlk"/>
+                            <constraint firstItem="RTu-FA-LRz" firstAttribute="trailing" secondItem="IWF-Hg-aX5" secondAttribute="trailingMargin" id="ghV-oB-vh3"/>
+                            <constraint firstAttribute="centerY" secondItem="w86-Ra-Hu3" secondAttribute="centerY" id="gjb-kr-fqx"/>
+                            <constraint firstItem="RTu-FA-LRz" firstAttribute="leading" secondItem="w86-Ra-Hu3" secondAttribute="trailing" constant="22" id="pDP-U2-kGi"/>
+                            <constraint firstItem="w86-Ra-Hu3" firstAttribute="baseline" secondItem="RTu-FA-LRz" secondAttribute="firstBaseline" id="xz5-Oo-Ccg"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="9gg-hQ-ieb"/>
+                            </mask>
+                        </variation>
                     </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -74,7 +87,7 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
             <connections>
-                <outlet property="branchImage" destination="YVI-kM-69L" id="eEP-ho-xWA"/>
+                <outlet property="branchImage" destination="w86-Ra-Hu3" id="jq9-Yo-aOD"/>
                 <outlet property="descriptionLbl" destination="RTu-FA-LRz" id="mIT-wg-nz1"/>
                 <outlet property="nameLbl" destination="sPj-9t-gVz" id="drM-cs-9zm"/>
             </connections>
