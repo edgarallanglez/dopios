@@ -83,17 +83,17 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
             if (session != nil) {
                 Twitter.sharedInstance().logInWithCompletion { (session: TWTRSession!, error: NSError!) -> Void in
                     if (session != nil) {
-                        Twitter.sharedInstance().APIClient.loadUserWithID(session.userID, completion: { (twtrUser: TWTRUser!,
-                            error: NSError!) -> Void in
+                        Twitter.sharedInstance().APIClient.loadUserWithID(session.userID) { twtrUser,
+                            NSError -> Void in
                             
                             
-                            var fullNameArr = split(twtrUser.name) {$0 == " "}
+                            var fullNameArr = split(twtrUser!.name) {$0 == " "}
                             var firstName: String = fullNameArr[0]
                             var lastName: String! = fullNameArr.count > 1 ? fullNameArr[1] : nil
-                            var userImage = twtrUser.profileImageLargeURL
+                            var userImage = twtrUser!.profileImageLargeURL
                             
                             let params:[String: String] = [
-                                "twitter_key" : twtrUser.userID,
+                                "twitter_key" : twtrUser!.userID,
                                 "names" : firstName,
                                 "surnames": lastName,
                                 "birth_date" : "2015-01-01",
@@ -103,7 +103,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
                             
                             self.socialLogin("twitter", params: params)
                             
-                        })
+                        }
                         
                     } else {
                         println("error: \(error.localizedDescription)");

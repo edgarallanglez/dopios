@@ -133,7 +133,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         var (title) = model.name
         var description = model.couponDescription
         
-        cell.loadItem(title: title, description: description)
+        cell.loadItem(title: title, description: description, viewController: self)
 
         return cell
     }
@@ -208,6 +208,21 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 
         println("locations = \(locValue!.latitude)")
         locationManager.stopUpdatingLocation()
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let cell = sender as? CouponCell {
+            
+            let i = couponsTableView.indexPathForCell(cell)!.section
+            let model = self.coupons[i]
+            
+            if segue.identifier == "branchProfile" {
+                let view = segue.destinationViewController as! BranchProfileViewController
+                view.branchLogo.image = UIImage(named: "starbucks.gif")
+//                vc.userImage = model.user_image
+            }
+        }
+        
     }
 
 }

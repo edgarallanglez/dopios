@@ -10,4 +10,7 @@ import UIKit
 
 class BranchProfileViewController: UIViewController {
     
+    @IBOutlet weak var branchLogo: UIImageView!
+    
+    
 }

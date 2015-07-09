@@ -20,7 +20,7 @@ class NewsfeedCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-    func loadItem(newsfeed_note:NewsfeedNote,viewController:NewsfeedViewController) {
+    func loadItem(newsfeed_note:NewsfeedNote, viewController:NewsfeedViewController) {
         self.newsfeed_description.text = "utilizó \(newsfeed_note.coupon_name) en \(newsfeed_note.branch_name)"
         
         self.user_image.layer.masksToBounds = true

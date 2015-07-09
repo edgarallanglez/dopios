@@ -28,7 +28,7 @@ class NewsfeedViewController: UIViewController, UITableViewDataSource, UITableVi
         
         let model = self.newsfeed[indexPath.row]
         
-        cell.loadItem(model,viewController: self)
+        cell.loadItem(model, viewController: self)
         
         
         return cell
