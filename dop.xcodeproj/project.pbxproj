@@ -15,7 +15,6 @@
 		9D3326161AF7ED1C00498801 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D3326151AF7ED1C00498801 /* Images.xcassets */; };
 		9D3326191AF7ED1C00498801 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D3326171AF7ED1C00498801 /* LaunchScreen.xib */; };
 		9D3326251AF7ED1C00498801 /* dopTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3326241AF7ED1C00498801 /* dopTests.swift */; };
-		9D4C047E1B18E9F200D5DCEE /* iconfonts-fontawesome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4C047D1B18E9F200D5DCEE /* iconfonts-fontawesome.swift */; };
 		9D4C04811B18EB0200D5DCEE /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9D4C04801B18EAF600D5DCEE /* FontAwesome.ttf */; };
 		9DAAE7B71B0E810B00209588 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DAAE7B51B0E810B00209588 /* Main.storyboard */; };
 		9DB6121A1B192FCC004B8DB8 /* NearbyMapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB612191B192FCC004B8DB8 /* NearbyMapController.swift */; };
@@ -25,14 +24,15 @@
 		A04860981B0D5658009FEF1F /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A04860971B0D5658009FEF1F /* FacebookSDK.framework */; };
 		A04E388A1AFC3549007C7B69 /* starbucks.gif in Resources */ = {isa = PBXBuildFile; fileRef = A04E38891AFC3549007C7B69 /* starbucks.gif */; };
 		A0578C521B0D64AD0033B5BD /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0578C4E1B0D64AD0033B5BD /* Fabric.framework */; };
-		A0578C531B0D64AD0033B5BD /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0578C4F1B0D64AD0033B5BD /* TwitterKit.framework */; };
-		A0578C541B0D64AD0033B5BD /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A0578C501B0D64AD0033B5BD /* TwitterKitResources.bundle */; };
 		A0578C551B0D64AD0033B5BD /* TwitterCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0578C511B0D64AD0033B5BD /* TwitterCore.framework */; };
 		A0578C5F1B0E40D30033B5BD /* GoogleOpenSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0578C5C1B0E40D30033B5BD /* GoogleOpenSource.framework */; };
 		A0578C601B0E40D30033B5BD /* GooglePlus.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A0578C5D1B0E40D30033B5BD /* GooglePlus.bundle */; };
 		A0578C611B0E40D30033B5BD /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0578C5E1B0E40D30033B5BD /* GooglePlus.framework */; };
 		A0578C641B0E7D2B0033B5BD /* UserProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0578C621B0E7D2B0033B5BD /* UserProfileController.swift */; };
 		A0578C651B0E7D2B0033B5BD /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0578C631B0E7D2B0033B5BD /* UserProfileViewController.swift */; };
+		A05F78251B502C6000371708 /* iconfonts-fontawesome.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05F78241B502C6000371708 /* iconfonts-fontawesome.swift */; };
+		A05F782D1B5039FB00371708 /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A05F782C1B5039FB00371708 /* TwitterKit.framework */; };
+		A05F782F1B503A4E00371708 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A05F782E1B503A4E00371708 /* Social.framework */; };
 		A082F4831B18CEE6001C8C52 /* NewsfeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A082F4821B18CEE6001C8C52 /* NewsfeedViewController.swift */; };
 		A082F4851B18CF01001C8C52 /* NewsfeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A082F4841B18CF01001C8C52 /* NewsfeedController.swift */; };
 		A082F4871B18E4FF001C8C52 /* NewsfeedNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A082F4861B18E4FF001C8C52 /* NewsfeedNote.swift */; };
@@ -91,7 +91,6 @@
 		9D33261E1AF7ED1C00498801 /* dopTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = dopTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D3326231AF7ED1C00498801 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9D3326241AF7ED1C00498801 /* dopTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dopTests.swift; sourceTree = "<group>"; };
-		9D4C047D1B18E9F200D5DCEE /* iconfonts-fontawesome.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "iconfonts-fontawesome.swift"; path = "../../../../Downloads/BizziBodyFontAwesomeUIButtons_COMPLETE-master/BizziBodyFontAwesomeUIButtons_COMPLETE/iconfonts-fontawesome.swift"; sourceTree = "<group>"; };
 		9D4C04801B18EAF600D5DCEE /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
 		9DAAE7B61B0E810B00209588 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9DB612191B192FCC004B8DB8 /* NearbyMapController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyMapController.swift; sourceTree = "<group>"; };
@@ -103,14 +102,15 @@
 		A04860971B0D5658009FEF1F /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = dop/FacebookSDK.framework; sourceTree = "<group>"; };
 		A04E38891AFC3549007C7B69 /* starbucks.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = starbucks.gif; sourceTree = "<group>"; };
 		A0578C4E1B0D64AD0033B5BD /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
-		A0578C4F1B0D64AD0033B5BD /* TwitterKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterKit.framework; sourceTree = "<group>"; };
-		A0578C501B0D64AD0033B5BD /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TwitterKitResources.bundle; path = TwitterKit.framework/Versions/A/Resources/TwitterKitResources.bundle; sourceTree = "<group>"; };
 		A0578C511B0D64AD0033B5BD /* TwitterCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterCore.framework; sourceTree = "<group>"; };
 		A0578C5C1B0E40D30033B5BD /* GoogleOpenSource.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleOpenSource.framework; path = dop/GoogleOpenSource.framework; sourceTree = "<group>"; };
 		A0578C5D1B0E40D30033B5BD /* GooglePlus.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GooglePlus.bundle; path = dop/GooglePlus.bundle; sourceTree = "<group>"; };
 		A0578C5E1B0E40D30033B5BD /* GooglePlus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GooglePlus.framework; path = dop/GooglePlus.framework; sourceTree = "<group>"; };
 		A0578C621B0E7D2B0033B5BD /* UserProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileController.swift; sourceTree = "<group>"; };
 		A0578C631B0E7D2B0033B5BD /* UserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
+		A05F78241B502C6000371708 /* iconfonts-fontawesome.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "iconfonts-fontawesome.swift"; path = "../../../../../var/folders/f6/7xdzz3ss04vgzhfsyvhvrm680000gn/T/com.apple.iChat/Messages/Transfers/iconfonts-fontawesome.swift"; sourceTree = "<group>"; };
+		A05F782C1B5039FB00371708 /* TwitterKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TwitterKit.framework; path = ../../Downloads/TwitterKit.framework; sourceTree = "<group>"; };
+		A05F782E1B503A4E00371708 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		A082F4821B18CEE6001C8C52 /* NewsfeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsfeedViewController.swift; sourceTree = "<group>"; };
 		A082F4841B18CF01001C8C52 /* NewsfeedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsfeedController.swift; sourceTree = "<group>"; };
 		A082F4861B18E4FF001C8C52 /* NewsfeedNote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsfeedNote.swift; sourceTree = "<group>"; };
@@ -152,6 +152,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A05F782F1B503A4E00371708 /* Social.framework in Frameworks */,
 				A04860981B0D5658009FEF1F /* FacebookSDK.framework in Frameworks */,
 				A0EB97E41B0BA7DD005112EF /* AddressBook.framework in Frameworks */,
 				A0578C5F1B0E40D30033B5BD /* GoogleOpenSource.framework in Frameworks */,
@@ -160,7 +161,6 @@
 				A0EB97E01B0BA7CE005112EF /* CoreData.framework in Frameworks */,
 				A0578C611B0E40D30033B5BD /* GooglePlus.framework in Frameworks */,
 				A0578C551B0D64AD0033B5BD /* TwitterCore.framework in Frameworks */,
-				A0578C531B0D64AD0033B5BD /* TwitterKit.framework in Frameworks */,
 				A0578C521B0D64AD0033B5BD /* Fabric.framework in Frameworks */,
 				A0EB97DE1B0BA7C5005112EF /* CoreLocation.framework in Frameworks */,
 				A0EB97DC1B0BA7C0005112EF /* CoreMotion.framework in Frameworks */,
@@ -173,6 +173,7 @@
 				A0EB97CE1B0BA77E005112EF /* SystemConfiguration.framework in Frameworks */,
 				A0EB97C81B0B9F9B005112EF /* libc++.dylib in Frameworks */,
 				A0EB97C61B0B9F8D005112EF /* libz.dylib in Frameworks */,
+				A05F782D1B5039FB00371708 /* TwitterKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -189,13 +190,13 @@
 		079462BCCDF3FAF530C45E4E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A05F782E1B503A4E00371708 /* Social.framework */,
+				A05F782C1B5039FB00371708 /* TwitterKit.framework */,
 				9D0DB4721B17DE5A0009FE6C /* MapKit.framework */,
 				A0578C5C1B0E40D30033B5BD /* GoogleOpenSource.framework */,
 				A0578C5D1B0E40D30033B5BD /* GooglePlus.bundle */,
 				A0578C5E1B0E40D30033B5BD /* GooglePlus.framework */,
 				A0578C4E1B0D64AD0033B5BD /* Fabric.framework */,
-				A0578C4F1B0D64AD0033B5BD /* TwitterKit.framework */,
-				A0578C501B0D64AD0033B5BD /* TwitterKitResources.bundle */,
 				A0578C511B0D64AD0033B5BD /* TwitterCore.framework */,
 				A0EB97E31B0BA7DD005112EF /* AddressBook.framework */,
 				A0EB97E11B0BA7D5005112EF /* AssetsLibrary.framework */,
@@ -257,7 +258,7 @@
 			children = (
 				9D0C16821B4DC6AE0088DE2F /* BranchProfile */,
 				9D4C04801B18EAF600D5DCEE /* FontAwesome.ttf */,
-				9D4C047D1B18E9F200D5DCEE /* iconfonts-fontawesome.swift */,
+				A05F78241B502C6000371708 /* iconfonts-fontawesome.swift */,
 				A04860901B0D4D3B009FEF1F /* JWTDecode */,
 				A0365FDB1AF9463B000A325D /* SWRevealViewController */,
 				9D33260E1AF7ED1C00498801 /* AppDelegate.swift */,
@@ -467,7 +468,6 @@
 				9D4C04811B18EB0200D5DCEE /* FontAwesome.ttf in Resources */,
 				9DAAE7B71B0E810B00209588 /* Main.storyboard in Resources */,
 				A04E388A1AFC3549007C7B69 /* starbucks.gif in Resources */,
-				A0578C541B0D64AD0033B5BD /* TwitterKitResources.bundle in Resources */,
 				9D3326191AF7ED1C00498801 /* LaunchScreen.xib in Resources */,
 				A082F48B1B1920F8001C8C52 /* NewsfeedCell.xib in Resources */,
 				9D3326161AF7ED1C00498801 /* Images.xcassets in Resources */,
@@ -525,13 +525,13 @@
 				A082F48A1B1920F8001C8C52 /* NewsfeedCell.swift in Sources */,
 				A09AB4E51AFA880E004287F7 /* Coupon.swift in Sources */,
 				9D33260F1AF7ED1C00498801 /* AppDelegate.swift in Sources */,
+				A05F78251B502C6000371708 /* iconfonts-fontawesome.swift in Sources */,
 				A0365FDE1AF9542A000A325D /* SWRevealViewController.m in Sources */,
 				9D0DB4711B17D2DB0009FE6C /* NearbyMapViewController.swift in Sources */,
 				A0DF72951B13E262006EE8F4 /* Friend.swift in Sources */,
 				A082F4831B18CEE6001C8C52 /* NewsfeedViewController.swift in Sources */,
 				A0F7E9201AFAE48500A4F0F2 /* CouponCell.swift in Sources */,
 				A09AB4E31AF99136004287F7 /* SwiftyJSON.swift in Sources */,
-				9D4C047E1B18E9F200D5DCEE /* iconfonts-fontawesome.swift in Sources */,
 				A0EB97AD1B03E16A005112EF /* User.swift in Sources */,
 				A09AB4DB1AF95A26004287F7 /* DashboardViewController.swift in Sources */,
 			);
@@ -665,6 +665,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/dop",
 					"$(PROJECT_DIR)",
+					/Users/Eduardo/Downloads,
 				);
 				INFOPLIST_FILE = dop/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -683,6 +684,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/dop",
 					"$(PROJECT_DIR)",
+					/Users/Eduardo/Downloads,
 				);
 				INFOPLIST_FILE = dop/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
