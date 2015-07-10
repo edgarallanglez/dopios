@@ -7,10 +7,16 @@
 //
 
 import UIKit
+import MapKit
 
-class BranchProfileViewController: UIViewController {
+class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBOutlet weak var branchLogo: UIImageView!
+    @IBOutlet weak var branchName: UILabel!
+    @IBOutlet weak var branchLocationMap: MKMapView!
     
+    override func viewDidLoad() {
+        branchLogo.image = UIImage(named: "starbucks.gif")
+    }
     
 }
