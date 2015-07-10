@@ -218,7 +218,6 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
             
             if segue.identifier == "branchProfile" {
                 let view = segue.destinationViewController as! BranchProfileViewController
-                view.branchLogo.image = UIImage(named: "starbucks.gif")
 //                vc.userImage = model.user_image
             }
         }
