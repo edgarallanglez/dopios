@@ -321,6 +321,11 @@
                                     <constraint firstAttribute="width" constant="320" id="pm9-d2-aqL"/>
                                 </constraints>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <exclude reference="pm9-d2-aqL"/>
+                                    </mask>
+                                </variation>
                                 <connections>
                                     <outlet property="dataSource" destination="TTn-gh-Dpv" id="ehz-7c-BhE"/>
                                     <outlet property="delegate" destination="TTn-gh-Dpv" id="oAc-5m-lPv"/>
@@ -333,6 +338,9 @@
                             <constraint firstItem="OZc-ML-bCf" firstAttribute="top" secondItem="W3U-ac-5LL" secondAttribute="top" id="6U4-MU-V9V"/>
                             <constraint firstItem="OZc-ML-bCf" firstAttribute="leading" secondItem="W3U-ac-5LL" secondAttribute="leading" id="Egk-nU-ZGa"/>
                             <constraint firstItem="OZc-ML-bCf" firstAttribute="leading" secondItem="W3U-ac-5LL" secondAttribute="leading" id="LCr-Ax-jPa"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="OZc-ML-bCf" secondAttribute="trailing" constant="64" id="VRB-mb-WRD"/>
+                            <constraint firstItem="OZc-ML-bCf" firstAttribute="top" secondItem="IO3-pJ-NPT" secondAttribute="bottom" id="ep2-rn-5aP"/>
+                            <constraint firstItem="37d-tA-MMx" firstAttribute="top" secondItem="OZc-ML-bCf" secondAttribute="bottom" constant="427" id="igl-71-PWf"/>
                             <constraint firstItem="37d-tA-MMx" firstAttribute="top" secondItem="OZc-ML-bCf" secondAttribute="bottom" id="lMe-Nu-MUt"/>
                             <constraint firstItem="OZc-ML-bCf" firstAttribute="top" secondItem="IO3-pJ-NPT" secondAttribute="bottom" id="sc1-Tw-LfW"/>
                             <constraint firstAttribute="bottomMargin" secondItem="OZc-ML-bCf" secondAttribute="bottom" constant="32" id="yco-UG-eua"/>
@@ -341,7 +349,10 @@
                             <mask key="constraints">
                                 <exclude reference="2Jg-L3-0Lx"/>
                                 <exclude reference="LCr-Ax-jPa"/>
+                                <exclude reference="VRB-mb-WRD"/>
+                                <exclude reference="ep2-rn-5aP"/>
                                 <exclude reference="sc1-Tw-LfW"/>
+                                <exclude reference="igl-71-PWf"/>
                                 <exclude reference="lMe-Nu-MUt"/>
                             </mask>
                         </variation>
@@ -350,10 +361,16 @@
                                 <include reference="OZc-ML-bCf"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="2Jg-L3-0Lx"/>
+                                <exclude reference="2Jg-L3-0Lx"/>
+                                <exclude reference="6U4-MU-V9V"/>
+                                <exclude reference="Egk-nU-ZGa"/>
                                 <include reference="LCr-Ax-jPa"/>
-                                <include reference="sc1-Tw-LfW"/>
-                                <include reference="lMe-Nu-MUt"/>
+                                <include reference="VRB-mb-WRD"/>
+                                <include reference="ep2-rn-5aP"/>
+                                <exclude reference="sc1-Tw-LfW"/>
+                                <exclude reference="yco-UG-eua"/>
+                                <include reference="igl-71-PWf"/>
+                                <exclude reference="lMe-Nu-MUt"/>
                             </mask>
                         </variation>
                     </view>
@@ -396,7 +413,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Branch Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lly-UW-hoi">
                                 <rect key="frame" x="248" y="194" width="105" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="sB9-0F-GXj">
@@ -488,7 +505,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="18l-i1-60n">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
+                                <variation key="widthClass=compact" misplaced="YES">
                                     <rect key="frame" x="16" y="0.0" width="368" height="600"/>
                                 </variation>
                                 <connections>

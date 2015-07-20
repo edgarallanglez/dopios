@@ -34,6 +34,7 @@
 		A05F78251B502C6000371708 /* iconfonts-fontawesome.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05F78241B502C6000371708 /* iconfonts-fontawesome.swift */; };
 		A05F782D1B5039FB00371708 /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A05F782C1B5039FB00371708 /* TwitterKit.framework */; };
 		A05F782F1B503A4E00371708 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A05F782E1B503A4E00371708 /* Social.framework */; };
+		A05F78311B505DED00371708 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A05F78301B505DED00371708 /* Accounts.framework */; };
 		A082F4831B18CEE6001C8C52 /* NewsfeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A082F4821B18CEE6001C8C52 /* NewsfeedViewController.swift */; };
 		A082F4851B18CF01001C8C52 /* NewsfeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A082F4841B18CF01001C8C52 /* NewsfeedController.swift */; };
 		A082F4871B18E4FF001C8C52 /* NewsfeedNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A082F4861B18E4FF001C8C52 /* NewsfeedNote.swift */; };
@@ -113,6 +114,7 @@
 		A05F78241B502C6000371708 /* iconfonts-fontawesome.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "iconfonts-fontawesome.swift"; path = "../../../../../var/folders/f6/7xdzz3ss04vgzhfsyvhvrm680000gn/T/com.apple.iChat/Messages/Transfers/iconfonts-fontawesome.swift"; sourceTree = "<group>"; };
 		A05F782C1B5039FB00371708 /* TwitterKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TwitterKit.framework; path = ../../Downloads/TwitterKit.framework; sourceTree = "<group>"; };
 		A05F782E1B503A4E00371708 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		A05F78301B505DED00371708 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		A082F4821B18CEE6001C8C52 /* NewsfeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsfeedViewController.swift; sourceTree = "<group>"; };
 		A082F4841B18CF01001C8C52 /* NewsfeedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsfeedController.swift; sourceTree = "<group>"; };
 		A082F4861B18E4FF001C8C52 /* NewsfeedNote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsfeedNote.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A05F78311B505DED00371708 /* Accounts.framework in Frameworks */,
 				A05F782F1B503A4E00371708 /* Social.framework in Frameworks */,
 				A04860981B0D5658009FEF1F /* FacebookSDK.framework in Frameworks */,
 				A0EB97E41B0BA7DD005112EF /* AddressBook.framework in Frameworks */,
@@ -192,6 +195,7 @@
 		079462BCCDF3FAF530C45E4E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A05F78301B505DED00371708 /* Accounts.framework */,
 				A05F782E1B503A4E00371708 /* Social.framework */,
 				A05F782C1B5039FB00371708 /* TwitterKit.framework */,
 				9D0DB4721B17DE5A0009FE6C /* MapKit.framework */,
