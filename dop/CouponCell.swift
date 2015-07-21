@@ -32,12 +32,11 @@ class CouponCell: UITableViewCell {
         nameLbl.text = coupon.name
         descriptionLbl.text = coupon.couponDescription
         
-        branchImage.alpha = 0
         branchImage.layer.masksToBounds = true
         branchImage.layer.cornerRadius = 25
         self.viewController = viewController
         
-        let imageUrl = NSURL(string: "http://104.236.141.44/branches/images/\(coupon.branch_id)/\(coupon.logo)")
+        //let imageUrl = NSURL(string: "http://104.236.141.44/branches/images/\(coupon.branch_id)/\(coupon.logo)")
 
       /*  Utilities.getDataFromUrl(imageUrl!) { data in
             dispatch_async(dispatch_get_main_queue()) {
