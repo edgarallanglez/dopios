@@ -16,8 +16,8 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
     var locValue:CLLocationCoordinate2D?
 
     var coupons = [Coupon]()
-    //let jsonImages : JSON!
-    let cachedImages = NSDictionary()
+    
+    var cachedImages: [String: UIImage] = [:]
 
     var locationManager: CLLocationManager!
 
@@ -32,7 +32,6 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
             menuButton.action = "revealToggle:"
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
-        
         
         
         var nib = UINib(nibName: "CouponCell", bundle: nil)
@@ -146,44 +145,42 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         let imageUrl = NSURL(string: "http://104.236.141.44/branches/images/\(model.branch_id)/\(model.logo)")
         
         
-        let identifier = "Cell\(indexPath.row)"
+        let identifier = "Cell\(indexPath.section)"
         
-        if(self.cachedImages.objectForKey(identifier) != nil){
-            
+        println(identifier)
+        if(self.cachedImages[identifier] != nil){
+            let cell_image_saved : UIImage = self.cachedImages[identifier]!
+
+            cell.branchImage.setBackgroundImage(cell_image_saved, forState: UIControlState.Normal)
         } else{
         
             var s = String(UTF8String: identifier)
             
             
-        
-            Utilities.getDataFromUrl(imageUrl!) { data in
-                let lockQueue = dispatch_queue_create(s!, nil)
-                dispatch_async(lockQueue) {
-                    
-                    
+            cell.branchImage.alpha = 0
 
+            Utilities.getDataFromUrl(imageUrl!) { data in
+                dispatch_async(dispatch_get_main_queue()) {
+                    
                     println("Finished downloading \"\(imageUrl!.lastPathComponent!.stringByDeletingPathExtension)\".")
                 
                     var cell_image : UIImage = UIImage()
                     cell_image = UIImage ( data: data!)!
-                
-                
-                    if tableView.indexPathForCell(cell)?.row == indexPath.row{
-                        var dict:Dictionary = ["image": UIImage()]
-                        
-                        //self.cachedImages.setValue(cell_image, forUndefinedKey: identifier)
-                       // self.cachedImages.setValue(cell_image, forKey: identifier)
-                    
-                        //let cell_image_saved : UIImage = self.cachedImages.valueForKey(identifier) as! UIImage
 
-                       // cell.branchImage.setBackgroundImage(cell_image_saved, forState: UIControlState.Normal)
+                    if tableView.indexPathForCell(cell)?.section == indexPath.section{
+                        self.cachedImages[identifier] = cell_image
+                        
+                        let cell_image_saved : UIImage = self.cachedImages[identifier]!
+
+                        cell.branchImage.setBackgroundImage(cell_image_saved, forState: UIControlState.Normal)
+                        
+                        UIView.animateWithDuration(0.5, animations: {
+                            cell.branchImage.alpha = 1
+                        })
                    
-                    
                     }
                
-                    UIView.animateWithDuration(0.5, animations: {
-                        cell.branchImage.alpha = 1
-                    })
+                    
                 }
             }
         }
