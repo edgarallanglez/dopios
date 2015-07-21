@@ -17,7 +17,7 @@ class CouponCell: UITableViewCell {
     @IBOutlet weak var descriptionLbl: UILabel!
     @IBOutlet weak var branchImage: UIButton!
 
-    var viewController: DashboardViewController?
+    var viewController: UIViewController?
     
     @IBAction func branchProfile(sender: UIButton) {
         self.viewController!.performSegueWithIdentifier("branchProfile", sender: self)
@@ -28,7 +28,7 @@ class CouponCell: UITableViewCell {
     var radius: CGFloat = 2
 
     
-    func loadItem(#title: String, description: String, viewController: DashboardViewController) {
+    func loadItem(#title: String, description: String, viewController: UIViewController) {
         nameLbl.text = title
         descriptionLbl.text = description
         branchImage.setBackgroundImage(UIImage(named: "starbucks.gif"), forState: UIControlState.Normal)
