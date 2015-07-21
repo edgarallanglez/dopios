@@ -16,17 +16,24 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
     var locValue:CLLocationCoordinate2D?
 
     var coupons = [Coupon]()
+    //let jsonImages : JSON!
+    let cachedImages = NSDictionary()
 
     var locationManager: CLLocationManager!
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
 
         if self.revealViewController() != nil {
             menuButton.target = self.revealViewController()
             menuButton.action = "revealToggle:"
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
+        
+        
         
         var nib = UINib(nibName: "CouponCell", bundle: nil)
         couponsTableView.registerNib(nib, forCellReuseIdentifier: "CouponCell")
@@ -57,7 +64,10 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
                 let coupon_description = String(stringInterpolationSegment: subJson["description"])
                 let coupon_limit = String(stringInterpolationSegment: subJson["limit"])
                 let coupon_exp = String(stringInterpolationSegment: subJson["end_date"])
-                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp)
+                let coupon_logo = String(stringInterpolationSegment: subJson["logo"])
+                let branch_id = String(stringInterpolationSegment: subJson["branch_id"]).toInt()
+
+                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo,branch_id:branch_id)
 
                 self.coupons.append(model)
 
@@ -126,14 +136,57 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
      
-        
         var cell: CouponCell = tableView.dequeueReusableCellWithIdentifier("CouponCell", forIndexPath: indexPath) as! CouponCell
         
         let model = self.coupons[indexPath.section]
-        var (title) = model.name
-        var description = model.couponDescription
         
-        cell.loadItem(title: title, description: description, viewController: self)
+        
+        cell.loadItem(model, viewController: self)
+        
+        let imageUrl = NSURL(string: "http://104.236.141.44/branches/images/\(model.branch_id)/\(model.logo)")
+        
+        
+        let identifier = "Cell\(indexPath.row)"
+        
+        if(self.cachedImages.objectForKey(identifier) != nil){
+            
+        } else{
+        
+            var s = String(UTF8String: identifier)
+            
+            
+        
+            Utilities.getDataFromUrl(imageUrl!) { data in
+                let lockQueue = dispatch_queue_create(s!, nil)
+                dispatch_async(lockQueue) {
+                    
+                    
+
+                    println("Finished downloading \"\(imageUrl!.lastPathComponent!.stringByDeletingPathExtension)\".")
+                
+                    var cell_image : UIImage = UIImage()
+                    cell_image = UIImage ( data: data!)!
+                
+                
+                    if tableView.indexPathForCell(cell)?.row == indexPath.row{
+                        var dict:Dictionary = ["image": UIImage()]
+                        
+                        //self.cachedImages.setValue(cell_image, forUndefinedKey: identifier)
+                       // self.cachedImages.setValue(cell_image, forKey: identifier)
+                    
+                        //let cell_image_saved : UIImage = self.cachedImages.valueForKey(identifier) as! UIImage
+
+                       // cell.branchImage.setBackgroundImage(cell_image_saved, forState: UIControlState.Normal)
+                   
+                    
+                    }
+               
+                    UIView.animateWithDuration(0.5, animations: {
+                        cell.branchImage.alpha = 1
+                    })
+                }
+            }
+        }
 
         return cell
     }
