@@ -17,6 +17,8 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var couponTimeline: UITableView!
     
     var branchId: Int!
+    var logo: UIImage!
+    var logoString: String!
     let regionRadius: CLLocationDistance = 500
     var coupons = [Coupon]()
     var json: JSON!
@@ -24,6 +26,7 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         var nib = UINib(nibName: "CouponCell", bundle: nil)
         couponTimeline.registerNib(nib, forCellReuseIdentifier: "CouponCell")
+        branchLogo.image = self.logo
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -32,8 +35,7 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func getBranchProfile() {
-        branchLogo.image = UIImage(named: "starbucks.gif")
-        BranchProfileController.getBranchProfileWithSuccess(2, success: { (branchData) -> Void in
+        BranchProfileController.getBranchProfileWithSuccess(branchId, success: { (branchData) -> Void in
             let data = JSON(data: branchData)
             var json = data["data"]
             json = json[0]
@@ -55,7 +57,7 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
     
     func getBranchCouponTimeline() {
         coupons = [Coupon]()
-        BranchProfileController.getBranchCouponTimeline(2, success: { (couponsData) -> Void in
+        BranchProfileController.getBranchCouponTimeline(branchId, success: { (couponsData) -> Void in
             let json = JSON(data: couponsData)
             
             var namex = "";
@@ -65,7 +67,7 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
                 let coupon_description = subJson["description"].string!
                 let coupon_limit = "hoy"
                 let coupon_exp = subJson["end_date"].string!
-                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo:"starbucks.gif", branch_id: 2)
+                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: self.logoString, branch_id: self.branchId)
                 println(subJson)
                 
                 self.coupons.append(model)
@@ -80,7 +82,7 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
                                 let coupon_description = subJson["description"].string ?? ""
                                 let coupon_limit = "Mañana"
                                 let coupon_exp = subJson["end_date"].string ?? ""
-                                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo:"starbucks.gif", branch_id: 2)
+                                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: self.logoString, branch_id: self.branchId)
                 println(subJson)
                 
                                 self.coupons.append(model)
@@ -95,13 +97,28 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
                                 let coupon_description = subJson["description"].string ?? ""
                                 let coupon_limit = "pasado mañana"
                                 let coupon_exp = subJson["end_date"].string ?? ""
-                                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo:"starbucks.gif", branch_id: 2)
+                                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: self.logoString, branch_id: self.branchId)
                 println(subJson)
                 
                                 self.coupons.append(model)
                 
                                 println(coupon_name)
                                 namex = coupon_name
+            }
+            
+            for (index: String, subJson: JSON) in json["new_promo"]{
+                var coupon_id = subJson["coupon_id"].int!
+                let coupon_name = subJson["name"].string ?? ""
+                let coupon_description = subJson["description"].string ?? ""
+                let coupon_limit = "pasado mañana"
+                let coupon_exp = subJson["end_date"].string ?? ""
+                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: self.logoString, branch_id: self.branchId)
+                println(subJson)
+                
+                self.coupons.append(model)
+                
+                println(coupon_name)
+                namex = coupon_name
             }
             
             dispatch_async(dispatch_get_main_queue(), {
@@ -133,7 +150,7 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
         var description = model.couponDescription
         
         cell.loadItem(model, viewController: self)
-        
+        cell.branchImage.setBackgroundImage(self.logo, forState: UIControlState.Normal)
         return cell
     }
     

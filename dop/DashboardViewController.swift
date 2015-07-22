@@ -66,7 +66,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
                 let coupon_logo = String(stringInterpolationSegment: subJson["logo"])
                 let branch_id = String(stringInterpolationSegment: subJson["branch_id"]).toInt()
 
-                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo,branch_id:branch_id)
+                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id:branch_id)
 
                 self.coupons.append(model)
 
@@ -268,7 +268,10 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
             
             if segue.identifier == "branchProfile" {
                 let view = segue.destinationViewController as! BranchProfileViewController
-//                vc.userImage = model.user_image
+                view.branchId = model.branch_id
+                view.logo = cell.branchImage.currentBackgroundImage
+                view.logoString = model.logo
+                
             }
         }
         
