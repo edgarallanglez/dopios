@@ -18,9 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-     /* Twitter.sharedInstance().startWithConsumerKey("mNtK5gCZ1KZsZdzGbwPrDZvwR", consumerSecret: "X70nDMV3aFCObSuL0k3u9NaaadNtSDlhmmjIlQhWZzzF4RAUiO")
+     Twitter.sharedInstance().startWithConsumerKey("mNtK5gCZ1KZsZdzGbwPrDZvwR", consumerSecret: "X70nDMV3aFCObSuL0k3u9NaaadNtSDlhmmjIlQhWZzzF4RAUiO")
         
-        Fabric.with([Twitter.sharedInstance()])*/
+        Fabric.with([Twitter.sharedInstance()])
         
                 
         FBLoginView.self

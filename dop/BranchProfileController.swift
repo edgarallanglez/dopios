@@ -18,4 +18,13 @@ class BranchProfileController {
             }
         })
     }
+    
+    class func getBranchCouponTimeline(branchId: Int, success: ((branchData: NSData!) -> Void)) {
+        let url = "http://104.236.141.44:5000/api/coupon/all/\(branchId)/get"
+        Utilities.loadDataFromURL(NSURL(string: url)!, completion: {(data, error) -> Void in
+            if let urlData = data {
+                success(branchData: urlData)
+            }
+        })
+    }
 }

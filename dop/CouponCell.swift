@@ -17,7 +17,7 @@ class CouponCell: UITableViewCell {
     @IBOutlet weak var descriptionLbl: UILabel!
     @IBOutlet weak var branchImage: UIButton!
 
-    var viewController: DashboardViewController?
+    var viewController: UIViewController?
     
     @IBAction func branchProfile(sender: UIButton) {
         self.viewController!.performSegueWithIdentifier("branchProfile", sender: self)
@@ -28,26 +28,13 @@ class CouponCell: UITableViewCell {
     var radius: CGFloat = 2
 
     
-    func loadItem(coupon:Coupon, viewController: DashboardViewController) {
+    func loadItem(coupon:Coupon, viewController: UIViewController) {
         nameLbl.text = coupon.name
         descriptionLbl.text = coupon.couponDescription
-        
+//        branchImage.setBackgroundImage(UIImage(named: coupon.logo), forState: UIControlState.Normal)
         branchImage.layer.masksToBounds = true
         branchImage.layer.cornerRadius = 25
         self.viewController = viewController
-        
-        //let imageUrl = NSURL(string: "http://104.236.141.44/branches/images/\(coupon.branch_id)/\(coupon.logo)")
-
-      /*  Utilities.getDataFromUrl(imageUrl!) { data in
-            dispatch_async(dispatch_get_main_queue()) {
-                println("Finished downloading \"\(imageUrl!.lastPathComponent!.stringByDeletingPathExtension)\".")
-                self.branchImage.setBackgroundImage(UIImage(data:data!), forState: UIControlState.Normal)
-                
-                UIView.animateWithDuration(0.5, animations: {
-                    self.branchImage.alpha = 1
-                })
-            }
-        }*/
 
     }
     
