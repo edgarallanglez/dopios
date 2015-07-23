@@ -153,10 +153,6 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 
             cell.branchImage.setBackgroundImage(cell_image_saved, forState: UIControlState.Normal)
         } else{
-        
-            var s = String(UTF8String: identifier)
-            
-            
             cell.branchImage.alpha = 0
 
             Utilities.getDataFromUrl(imageUrl!) { data in
