@@ -26,6 +26,9 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         super.viewDidLoad()
         
         
+        self.title = "Dashboard"
+        self.navigationController?.navigationBar.topItem!.title = "Dashboard"
+
 
         if self.revealViewController() != nil {
             menuButton.target = self.revealViewController()
@@ -153,10 +156,6 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 
             cell.branchImage.setBackgroundImage(cell_image_saved, forState: UIControlState.Normal)
         } else{
-        
-            var s = String(UTF8String: identifier)
-            
-            
             cell.branchImage.alpha = 0
 
             Utilities.getDataFromUrl(imageUrl!) { data in

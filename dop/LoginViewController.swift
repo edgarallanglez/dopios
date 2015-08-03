@@ -215,7 +215,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
     
     // Social login Call
     func socialLogin(type: String, params: [String:String]!){
-        LoginController.loginWithSocial("http://104.236.141.44:5000/user/login/" + type, params: params){ (couponsData) -> Void in
+      /*  LoginController.loginWithSocial("http://104.236.141.44:5000/user/login/" + type, params: params){ (couponsData) -> Void in
             User.loginType = type
             let json = JSON(data: couponsData)
 
@@ -238,7 +238,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
                     
                 }
             });
-        }
+        }*/
     }
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {

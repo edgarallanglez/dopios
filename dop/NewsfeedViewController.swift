@@ -11,6 +11,8 @@ import UIKit
 class NewsfeedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var newsfeed = [NewsfeedNote]()
+    var cachedImages: [String: UIImage] = [:]
+
     
     @IBOutlet var tableView: UITableView!
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -29,6 +31,45 @@ class NewsfeedViewController: UIViewController, UITableViewDataSource, UITableVi
         let model = self.newsfeed[indexPath.row]
         
         cell.loadItem(model, viewController: self)
+        
+        let imageUrl = NSURL(string: model.user_image)
+        
+        
+        let identifier = "Cell\(indexPath.row)"
+        
+        if(self.cachedImages[identifier] != nil){
+            let cell_image_saved : UIImage = self.cachedImages[identifier]!
+            
+            cell.user_image.image = cell_image_saved
+        } else{
+            cell.user_image.alpha = 0
+            
+            Utilities.getDataFromUrl(imageUrl!) { data in
+                dispatch_async(dispatch_get_main_queue()) {
+                    
+                    println("Finished downloading \"\(imageUrl!.lastPathComponent!.stringByDeletingPathExtension)\".")
+                    
+                    var cell_image : UIImage = UIImage()
+                    cell_image = UIImage ( data: data!)!
+                    
+                    if tableView.indexPathForCell(cell)?.row == indexPath.row{
+                        self.cachedImages[identifier] = cell_image
+                        
+                        let cell_image_saved : UIImage = self.cachedImages[identifier]!
+                        
+                        cell.user_image.image = cell_image_saved
+                        
+                        UIView.animateWithDuration(0.5, animations: {
+                            cell.user_image.alpha = 1
+                        })
+                        
+                    }
+                    
+                    
+                }
+            }
+        }
+
         
         
         return cell
