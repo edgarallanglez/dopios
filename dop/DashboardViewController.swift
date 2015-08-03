@@ -26,6 +26,9 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         super.viewDidLoad()
         
         
+        self.title = "Dashboard"
+        self.navigationController?.navigationBar.topItem!.title = "Dashboard"
+
 
         if self.revealViewController() != nil {
             menuButton.target = self.revealViewController()

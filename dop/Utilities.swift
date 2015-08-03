@@ -9,6 +9,9 @@
 import Foundation
 
 class Utilities {
+    class var dopColor: UIColor {
+        return UIColor( red: 201.0/255.0 , green: 0.0/255.0 , blue: 112/255.0, alpha:1.0)
+    }
     class func loadDataFromURL(url: NSURL, completion: (data: NSData?, error: NSError?) -> Void) {
         var session = NSURLSession.sharedSession()
         let request = NSMutableURLRequest(URL: url)

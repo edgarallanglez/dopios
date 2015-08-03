@@ -30,7 +30,7 @@ class NewsfeedCell: UITableViewCell {
         self.username_button.addTarget(self, action: "goToUserProfile:", forControlEvents: UIControlEvents.TouchUpInside)
         self.viewController=viewController
         
-        let imageUrl = NSURL(string: newsfeed_note.user_image)
+        /*let imageUrl = NSURL(string: newsfeed_note.user_image)
         
         
         Utilities.getDataFromUrl(imageUrl!) { data in
@@ -42,7 +42,7 @@ class NewsfeedCell: UITableViewCell {
                     self.user_image.alpha = 1
                 })
             }
-        }
+        }*/
         
     }
     
