@@ -18,6 +18,7 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
         self.title = "Cupones"
         self.navigationController?.navigationBar.topItem!.title = "Hoy tenemos:"
         
+        
     
     }
     

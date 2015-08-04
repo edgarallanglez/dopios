@@ -14,4 +14,5 @@ class PromoCollectionCell: UICollectionViewCell {
     @IBOutlet var branch_banner: UIImageView!
     @IBOutlet var heart: UIImageView!
     @IBOutlet var likes: UILabel!
+    
 }

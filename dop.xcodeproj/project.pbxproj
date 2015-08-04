@@ -37,9 +37,9 @@
 		A05F78311B505DED00371708 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A05F78301B505DED00371708 /* Accounts.framework */; };
 		A060F77A1B6C4CA3009D6ADB /* TabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A060F7791B6C4CA3009D6ADB /* TabbarController.swift */; };
 		A060F77C1B6FE4BA009D6ADB /* PromoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A060F77B1B6FE4BA009D6ADB /* PromoViewController.swift */; };
-		A060F77E1B700355009D6ADB /* starbucks_banner.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A060F77D1B700355009D6ADB /* starbucks_banner.jpg */; };
-		A060F7801B701669009D6ADB /* heart.png in Resources */ = {isa = PBXBuildFile; fileRef = A060F77F1B701669009D6ADB /* heart.png */; };
 		A060F7821B70184F009D6ADB /* PromoCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A060F7811B70184F009D6ADB /* PromoCollectionCell.swift */; };
+		A060F7841B701EFE009D6ADB /* heart.png in Resources */ = {isa = PBXBuildFile; fileRef = A060F7831B701EFE009D6ADB /* heart.png */; };
+		A060F7861B702FAC009D6ADB /* CouponDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A060F7851B702FAC009D6ADB /* CouponDetailViewController.swift */; };
 		A082F4831B18CEE6001C8C52 /* NewsfeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A082F4821B18CEE6001C8C52 /* NewsfeedViewController.swift */; };
 		A082F4851B18CF01001C8C52 /* NewsfeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A082F4841B18CF01001C8C52 /* NewsfeedController.swift */; };
 		A082F4871B18E4FF001C8C52 /* NewsfeedNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A082F4861B18E4FF001C8C52 /* NewsfeedNote.swift */; };
@@ -123,8 +123,9 @@
 		A060F7791B6C4CA3009D6ADB /* TabbarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabbarController.swift; sourceTree = "<group>"; };
 		A060F77B1B6FE4BA009D6ADB /* PromoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromoViewController.swift; sourceTree = "<group>"; };
 		A060F77D1B700355009D6ADB /* starbucks_banner.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = starbucks_banner.jpg; sourceTree = "<group>"; };
-		A060F77F1B701669009D6ADB /* heart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heart.png; sourceTree = "<group>"; };
 		A060F7811B70184F009D6ADB /* PromoCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromoCollectionCell.swift; sourceTree = "<group>"; };
+		A060F7831B701EFE009D6ADB /* heart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heart.png; sourceTree = "<group>"; };
+		A060F7851B702FAC009D6ADB /* CouponDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CouponDetailViewController.swift; sourceTree = "<group>"; };
 		A082F4821B18CEE6001C8C52 /* NewsfeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsfeedViewController.swift; sourceTree = "<group>"; };
 		A082F4841B18CF01001C8C52 /* NewsfeedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsfeedController.swift; sourceTree = "<group>"; };
 		A082F4861B18E4FF001C8C52 /* NewsfeedNote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsfeedNote.swift; sourceTree = "<group>"; };
@@ -290,6 +291,7 @@
 				A060F7791B6C4CA3009D6ADB /* TabbarController.swift */,
 				A060F77B1B6FE4BA009D6ADB /* PromoViewController.swift */,
 				A060F7811B70184F009D6ADB /* PromoCollectionCell.swift */,
+				A060F7851B702FAC009D6ADB /* CouponDetailViewController.swift */,
 				A082F4811B18CEC7001C8C52 /* Newsfeed */,
 				9D0DB46F1B17D2A50009FE6C /* Nearby */,
 				A0BB9BB61B13E4CA000BA261 /* Friend */,
@@ -306,7 +308,7 @@
 		9D33260C1AF7ED1C00498801 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				A060F77F1B701669009D6ADB /* heart.png */,
+				A060F7831B701EFE009D6ADB /* heart.png */,
 				A04E38891AFC3549007C7B69 /* starbucks.gif */,
 				A060F77D1B700355009D6ADB /* starbucks_banner.jpg */,
 				9D33260D1AF7ED1C00498801 /* Info.plist */,
@@ -489,6 +491,7 @@
 			files = (
 				9D3904FA1B6FFC9E00FA380A /* Images.xcassets in Resources */,
 				9D4C04811B18EB0200D5DCEE /* FontAwesome.ttf in Resources */,
+				A060F7841B701EFE009D6ADB /* heart.png in Resources */,
 				9DAAE7B71B0E810B00209588 /* Main.storyboard in Resources */,
 				A04E388A1AFC3549007C7B69 /* starbucks.gif in Resources */,
 				9D3326191AF7ED1C00498801 /* LaunchScreen.xib in Resources */,
@@ -531,6 +534,7 @@
 			files = (
 				9D697C7A1B5EF13000D786AA /* iconfonts-fontawesome.swift in Sources */,
 				9D0C16841B4DC6EB0088DE2F /* BranchProfileViewController.swift in Sources */,
+				A060F7861B702FAC009D6ADB /* CouponDetailViewController.swift in Sources */,
 				A0DF72931B13AEBF006EE8F4 /* FriendsController.swift in Sources */,
 				A082F4851B18CF01001C8C52 /* NewsfeedController.swift in Sources */,
 				A0BB9BB91B13E4F1000BA261 /* FriendCell.swift in Sources */,

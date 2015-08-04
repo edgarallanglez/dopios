@@ -21,8 +21,12 @@ class TabbarController: UITabBarController {
         self.navigationController?.navigationBar.titleTextAttributes = [
             NSForegroundColorAttributeName: UIColor.whiteColor()
         ]
-
         
+        
+        self.navigationItem.backBarButtonItem?.setTitleTextAttributes( [NSForegroundColorAttributeName: UIColor.whiteColor()], forState: UIControlState.Normal)
+       
+
+    
         
     }
 
