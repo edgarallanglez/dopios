@@ -42,10 +42,6 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidAppear(animated: Bool) {
 //        getBranchProfile()
 //        getBranchCouponTimeline()
-        var application: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-//        var tabBarController = application.tabBarController as? UITabBarController
-//        var selectedIndex:Int = application.tabBarController!.selectedIndex
-//        application(application: application, didFinishLaunchingWithOptions: self.tabBarController)
    }
     
     func getBranchProfile() {
@@ -187,6 +183,11 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
             break
             
         }
+    }
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        var headerTopView: UIView = UIView()
+        return headerTopView
     }
     
 }
