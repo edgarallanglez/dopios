@@ -15,6 +15,11 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var branchName: UILabel!
     @IBOutlet weak var branchLocationMap: MKMapView!
     @IBOutlet weak var couponTimeline: UITableView!
+    @IBOutlet weak var backgroundImage: UIImageView!
+    
+    @IBOutlet weak var contentTabbed: UIView!
+    
+    @IBOutlet weak var segmentedControlTabs: UISegmentedControl!
     
     var branchId: Int!
     var logo: UIImage!
@@ -23,16 +28,25 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
     var coupons = [Coupon]()
     var json: JSON!
     
+    var tableView:UIView = UIView()
+    
     override func viewDidLoad() {
-        var nib = UINib(nibName: "CouponCell", bundle: nil)
-        couponTimeline.registerNib(nib, forCellReuseIdentifier: "CouponCell")
-        branchLogo.image = self.logo
+//        var nib = UINib(nibName: "CouponCell", bundle: nil)
+//        couponTimeline.registerNib(nib, forCellReuseIdentifier: "CouponCell")
+//        branchLogo.image = self.logo
+        branchLogo.image = UIImage(named: "starbucks.gif")
+        backgroundImage.image = UIImage(named: "starbucks_banner.jpg")
+   
     }
     
     override func viewDidAppear(animated: Bool) {
-        getBranchProfile()
-        getBranchCouponTimeline()
-    }
+//        getBranchProfile()
+//        getBranchCouponTimeline()
+        var application: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+//        var tabBarController = application.tabBarController as? UITabBarController
+//        var selectedIndex:Int = application.tabBarController!.selectedIndex
+//        application(application: application, didFinishLaunchingWithOptions: self.tabBarController)
+   }
     
     func getBranchProfile() {
         BranchProfileController.getBranchProfileWithSuccess(branchId, success: { (branchData) -> Void in
@@ -159,6 +173,20 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
             regionRadius * 2.0, regionRadius * 2.0)
         branchLocationMap.setRegion(coordinateRegion, animated: true)
     }
-    
+
+    @IBAction func segmentedControl(sender: UISegmentedControl) {
+        
+        switch segmentedControlTabs.selectedSegmentIndex {
+        case 0:
+            contentTabbed.backgroundColor = UIColor.greenColor()
+        case 1:
+            contentTabbed.backgroundColor = Utilities.dopColor
+        case 2:
+            contentTabbed.backgroundColor = UIColor.grayColor()
+        default:
+            break
+            
+        }
+    }
     
 }

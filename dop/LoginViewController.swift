@@ -17,8 +17,6 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
     @IBOutlet weak var userNameField: UITextField!
     @IBOutlet weak var dopLogo: UIImageView!
     
-
-    
     var kClientId = "517644806961-ocmqel4aloa86mtsn5jsmmuvi3fcdpln.apps.googleusercontent.com";
     var locationManager: CLLocationManager!
     
@@ -58,7 +56,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
         userNameField.layer.addSublayer(border)
         userNameField.layer.masksToBounds = true
         userNameField.leftView = profileIcon
-        userNameField.leftView!.frame = CGRectMake(10, 13, 55, 30);
+        userNameField.leftView!.frame = CGRectMake(5, 13, 55, 30);
         userNameField.leftView!.contentMode = UIViewContentMode.ScaleAspectFit
         userNameField.leftViewMode = UITextFieldViewMode.Always
         
@@ -70,7 +68,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
         passField.layer.addSublayer(border2)
         passField.layer.masksToBounds = true
         passField.leftView = lockIcon
-        passField.leftView!.frame = CGRectMake(10, 13, 57, 30);
+        passField.leftView!.frame = CGRectMake(5, 13, 57, 30);
         passField.leftView!.contentMode = UIViewContentMode.ScaleAspectFit
         passField.leftViewMode = UITextFieldViewMode.Always
 
@@ -245,7 +243,5 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
         
         locationManager.stopUpdatingLocation()
     }
-    
- 
-    
+        
 }
