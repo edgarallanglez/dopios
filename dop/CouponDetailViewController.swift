@@ -10,12 +10,7 @@ import UIKit
 
 class CouponDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    @IBOutlet var mainView: UIView!
     @IBOutlet var tableView: UITableView!
-    @IBOutlet var branch_logo: UIImageView!
-    @IBOutlet var branch_cover: UIImageView!
-    @IBOutlet var branch_name: UILabel!
-    @IBOutlet var branch_category: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +20,7 @@ class CouponDetailViewController: UIViewController, UITableViewDelegate, UITable
         tableView.registerNib(nib, forCellReuseIdentifier: "NewsfeedCell")
         
         
-        branch_logo.layer.borderColor = UIColor.whiteColor().CGColor
+        /*branch_logo.layer.borderColor = UIColor.whiteColor().CGColor
         
         branch_name.layer.shadowOffset = CGSize(width: 1, height: 3)
         branch_name.layer.shadowOpacity = 1
@@ -37,14 +32,13 @@ class CouponDetailViewController: UIViewController, UITableViewDelegate, UITable
         branch_category.layer.shadowRadius = 3
         branch_category.layer.shadowColor = UIColor.blackColor().CGColor
 
-        //self.navigationController?.navigationBar.topItem?.backBarButtonItem?.tintColor = UIColor.yellowColor()
+        
         
         branch_cover.image = branch_cover.image?.applyLightEffect()
 
-        branch_logo.alpha = 0
+        branch_logo.alpha = 0*/
         
-        
-        mainView.hidden = true
+        //self.navigationController?.navigationBar.topItem?.backBarButtonItem?.tintColor = UIColor.yellowColor()
         
         
         
@@ -52,8 +46,8 @@ class CouponDetailViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     override func viewDidAppear(animated: Bool) {
-        UIView.animateWithDuration(0.4, delay: 0, options: .CurveEaseInOut, animations: {
-            self.branch_logo.alpha = 1
+       /* UIView.animateWithDuration(0.4, delay: 0, options: .CurveEaseInOut, animations: {
+           self.branch_logo.alpha = 1
            var logoTopFrame = self.branch_logo.frame
             logoTopFrame.origin.y -= logoTopFrame.size.height/8
             
@@ -61,7 +55,7 @@ class CouponDetailViewController: UIViewController, UITableViewDelegate, UITable
             self.branch_logo.frame = logoTopFrame
             }, completion: { finished in
 
-        })
+        })*/
     }
 
     override func didReceiveMemoryWarning() {
@@ -85,10 +79,11 @@ class CouponDetailViewController: UIViewController, UITableViewDelegate, UITable
         return 100
     }
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 300
+        return 568
     }
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         var customView :UIView = UIView()
+        
         
         customView = (NSBundle.mainBundle().loadNibNamed("CouponDetailView", owner: self, options: nil)[0] as? UIView)!
 

@@ -379,9 +379,6 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="556" width="400" height="300"/>
-                                </variation>
                                 <connections>
                                     <outlet property="dataSource" destination="Hpm-OJ-mEW" id="YkU-fc-Ynh"/>
                                     <outlet property="delegate" destination="Hpm-OJ-mEW" id="ULc-VK-t3W"/>
@@ -640,16 +637,10 @@
                         </subviews>
                         <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="iae-wH-psn" firstAttribute="leading" secondItem="GND-f5-fkv" secondAttribute="leading" id="4nm-Qc-ekj"/>
-                            <constraint firstAttribute="trailing" secondItem="txi-HI-fr9" secondAttribute="trailing" id="9Cl-nd-zfZ"/>
-                            <constraint firstItem="txi-HI-fr9" firstAttribute="leading" secondItem="GND-f5-fkv" secondAttribute="leading" id="9ok-Cd-Qwd"/>
-                            <constraint firstAttribute="trailing" secondItem="txi-HI-fr9" secondAttribute="trailing" id="EW5-O2-u9U"/>
-                            <constraint firstItem="txi-HI-fr9" firstAttribute="leading" secondItem="GND-f5-fkv" secondAttribute="leading" id="HAo-3S-lvu"/>
-                            <constraint firstItem="8tQ-L5-R7C" firstAttribute="top" secondItem="txi-HI-fr9" secondAttribute="bottom" id="TKG-ee-h77"/>
-                            <constraint firstItem="8tQ-L5-R7C" firstAttribute="top" secondItem="txi-HI-fr9" secondAttribute="bottom" id="dti-8p-fDs"/>
-                            <constraint firstItem="txi-HI-fr9" firstAttribute="top" secondItem="iae-wH-psn" secondAttribute="bottom" id="gma-ZZ-zhr"/>
-                            <constraint firstAttribute="trailing" secondItem="iae-wH-psn" secondAttribute="trailing" id="nxs-sm-dcM"/>
-                            <constraint firstItem="iae-wH-psn" firstAttribute="top" secondItem="GND-f5-fkv" secondAttribute="top" constant="-64" id="z6e-gg-Zwh"/>
+                            <constraint firstItem="8tQ-L5-R7C" firstAttribute="top" secondItem="txi-HI-fr9" secondAttribute="bottom" id="3AE-T4-M8x"/>
+                            <constraint firstItem="txi-HI-fr9" firstAttribute="leading" secondItem="GND-f5-fkv" secondAttribute="leading" id="PPx-QK-5Hh"/>
+                            <constraint firstItem="txi-HI-fr9" firstAttribute="top" secondItem="g3a-uD-fRo" secondAttribute="bottom" id="rgG-P9-YxK"/>
+                            <constraint firstAttribute="trailing" secondItem="txi-HI-fr9" secondAttribute="trailing" id="teb-x1-v8T"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -687,11 +678,6 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="400" height="1200"/>
                     <connections>
-                        <outlet property="branch_category" destination="wAi-9k-gK1" id="k0P-5s-D8D"/>
-                        <outlet property="branch_cover" destination="q9u-i9-thT" id="ijI-xb-sWj"/>
-                        <outlet property="branch_logo" destination="33y-uf-CAB" id="euP-iL-LaG"/>
-                        <outlet property="branch_name" destination="lHT-f1-coE" id="OoN-3i-YYt"/>
-                        <outlet property="mainView" destination="iae-wH-psn" id="qTk-zI-itB"/>
                         <outlet property="tableView" destination="txi-HI-fr9" id="MdI-2K-arA"/>
                     </connections>
                 </viewController>
@@ -1339,7 +1325,6 @@
     <resources>
         <image name="heart.png" width="128" height="128"/>
         <image name="menu" width="22" height="22"/>
-        <image name="starbucks.gif" width="300" height="300"/>
         <image name="starbucks_banner.jpg" width="628" height="353"/>
     </resources>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
