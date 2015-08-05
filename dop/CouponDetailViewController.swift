@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 class CouponDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet var mainView: UIView!
@@ -20,7 +19,8 @@ class CouponDetailViewController: UIViewController, UITableViewDelegate, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        //var CouponDetailNib = UINib(nibName: "CouponDetailView", bundle: nil)
+
         var nib = UINib(nibName: "NewsfeedCell", bundle: nil)
         tableView.registerNib(nib, forCellReuseIdentifier: "NewsfeedCell")
         
@@ -45,7 +45,8 @@ class CouponDetailViewController: UIViewController, UITableViewDelegate, UITable
         
         
         mainView.hidden = true
-
+        
+        
         
         //visualEffectView.setTranslatesAutoresizingMaskIntoConstraints(false)
     }
@@ -72,8 +73,10 @@ class CouponDetailViewController: UIViewController, UITableViewDelegate, UITable
         
         var cell:NewsfeedCell = tableView.dequeueReusableCellWithIdentifier("NewsfeedCell", forIndexPath: indexPath) as! NewsfeedCell
       
+        let model = NewsfeedNote(friend_id: "1", user_id: 1, branch_id: 1, coupon_name: "Cupon prueba", branch_name: "Starbax", names: "Jose Eduardo", surnames: "Quintero Gutierrez", user_image: "http://jsequeiros.com/sites/default/files/imagen-cachorro-comprimir.jpg?1399003306" , branch_image: "http://jsequeiros.com/sites/default/files/imagen-cachorro-comprimir.jpg?1399003306")
+
         
-        cell.textLabel?.text="Hola"
+          cell.loadItem(model, viewController: NewsfeedViewController())
         
         return cell
     }
@@ -86,9 +89,9 @@ class CouponDetailViewController: UIViewController, UITableViewDelegate, UITable
     }
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         var customView :UIView = UIView()
-        /*customView.hidden = false*/
         
-        customView.backgroundColor = UIColor.blackColor()
+        customView = (NSBundle.mainBundle().loadNibNamed("CouponDetailView", owner: self, options: nil)[0] as? UIView)!
+
         return customView
     }
     
