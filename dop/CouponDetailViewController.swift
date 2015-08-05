@@ -9,8 +9,10 @@
 import UIKit
 
 
-class CouponDetailViewController: UIViewController {
+class CouponDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    @IBOutlet var mainView: UIView!
+    @IBOutlet var tableView: UITableView!
     @IBOutlet var branch_logo: UIImageView!
     @IBOutlet var branch_cover: UIImageView!
     @IBOutlet var branch_name: UILabel!
@@ -18,6 +20,11 @@ class CouponDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        var nib = UINib(nibName: "NewsfeedCell", bundle: nil)
+        tableView.registerNib(nib, forCellReuseIdentifier: "NewsfeedCell")
+        
+        
         branch_logo.layer.borderColor = UIColor.whiteColor().CGColor
         
         branch_name.layer.shadowOffset = CGSize(width: 1, height: 3)
@@ -29,16 +36,15 @@ class CouponDetailViewController: UIViewController {
         branch_category.layer.shadowOpacity = 1
         branch_category.layer.shadowRadius = 3
         branch_category.layer.shadowColor = UIColor.blackColor().CGColor
-        
-        self.navigationController?.navigationBar.topItem?.backBarButtonItem?.tintColor = UIColor.yellowColor()
+
+        //self.navigationController?.navigationBar.topItem?.backBarButtonItem?.tintColor = UIColor.yellowColor()
         
         branch_cover.image = branch_cover.image?.applyLightEffect()
 
         branch_logo.alpha = 0
         
         
-        
-
+        mainView.hidden = true
 
         
         //visualEffectView.setTranslatesAutoresizingMaskIntoConstraints(false)
@@ -62,15 +68,29 @@ class CouponDetailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        var cell:NewsfeedCell = tableView.dequeueReusableCellWithIdentifier("NewsfeedCell", forIndexPath: indexPath) as! NewsfeedCell
+      
+        
+        cell.textLabel?.text="Hola"
+        
+        return cell
     }
-    */
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 100
+    }
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 300
+    }
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        var customView :UIView = UIView()
+        /*customView.hidden = false*/
+        
+        customView.backgroundColor = UIColor.blackColor()
+        return customView
+    }
+    
 
 }
