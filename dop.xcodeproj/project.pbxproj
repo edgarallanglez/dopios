@@ -20,6 +20,7 @@
 		9DA7AA9F1B50309400297690 /* BranchProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA7AA9E1B50309400297690 /* BranchProfileController.swift */; };
 		9DAAE7B71B0E810B00209588 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DAAE7B51B0E810B00209588 /* Main.storyboard */; };
 		9DB6121A1B192FCC004B8DB8 /* NearbyMapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB612191B192FCC004B8DB8 /* NearbyMapController.swift */; };
+		9DB6BB2A1B72A6A000FF2659 /* BranchProfileTopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DB6BB291B72A6A000FF2659 /* BranchProfileTopView.xib */; };
 		A0365FDE1AF9542A000A325D /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0365FDD1AF9542A000A325D /* SWRevealViewController.m */; };
 		A0365FE01AF95518000A325D /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0365FDF1AF95518000A325D /* MenuController.swift */; };
 		A04860961B0D5355009FEF1F /* A0JWTDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = A04860951B0D5355009FEF1F /* A0JWTDecoder.m */; };
@@ -105,6 +106,7 @@
 		9DA7AA9E1B50309400297690 /* BranchProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BranchProfileController.swift; sourceTree = "<group>"; };
 		9DAAE7B61B0E810B00209588 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9DB612191B192FCC004B8DB8 /* NearbyMapController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyMapController.swift; sourceTree = "<group>"; };
+		9DB6BB291B72A6A000FF2659 /* BranchProfileTopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BranchProfileTopView.xib; sourceTree = "<group>"; };
 		A0365FDC1AF9542A000A325D /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		A0365FDD1AF9542A000A325D /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		A0365FDF1AF95518000A325D /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 			children = (
 				9D0C16831B4DC6EB0088DE2F /* BranchProfileViewController.swift */,
 				9DA7AA9E1B50309400297690 /* BranchProfileController.swift */,
+				9DB6BB291B72A6A000FF2659 /* BranchProfileTopView.xib */,
 			);
 			name = BranchProfile;
 			sourceTree = "<group>";
@@ -506,8 +509,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9D3904FA1B6FFC9E00FA380A /* Images.xcassets in Resources */,
-				A060F77E1B700355009D6ADB /* starbucks_banner.jpg in Resources */,
-				A060F7801B701669009D6ADB /* heart.png in Resources */,
 				9D4C04811B18EB0200D5DCEE /* FontAwesome.ttf in Resources */,
 				A060F7841B701EFE009D6ADB /* heart.png in Resources */,
 				9DAAE7B71B0E810B00209588 /* Main.storyboard in Resources */,
@@ -517,6 +518,7 @@
 				A060F78C1B72A307009D6ADB /* CouponDetailView.xib in Resources */,
 				A0578C601B0E40D30033B5BD /* GooglePlus.bundle in Resources */,
 				A0F7E9211AFAE48500A4F0F2 /* CouponCell.xib in Resources */,
+				9DB6BB2A1B72A6A000FF2659 /* BranchProfileTopView.xib in Resources */,
 				A0BB9BBA1B13E4F1000BA261 /* FriendCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

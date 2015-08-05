@@ -10,32 +10,21 @@ import UIKit
 import MapKit
 
 class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
+
     
-    @IBOutlet weak var branchLogo: UIImageView!
-    @IBOutlet weak var branchName: UILabel!
-    @IBOutlet weak var branchLocationMap: MKMapView!
-    @IBOutlet weak var couponTimeline: UITableView!
-    @IBOutlet weak var backgroundImage: UIImageView!
-    
-    @IBOutlet weak var contentTabbed: UIView!
-    
-    @IBOutlet weak var segmentedControlTabs: UISegmentedControl!
-    
+    @IBOutlet weak var tableView: UITableView!
     var branchId: Int!
     var logo: UIImage!
     var logoString: String!
     let regionRadius: CLLocationDistance = 500
     var coupons = [Coupon]()
     var json: JSON!
-    
-    var tableView:UIView = UIView()
+
     
     override func viewDidLoad() {
-//        var nib = UINib(nibName: "CouponCell", bundle: nil)
-//        couponTimeline.registerNib(nib, forCellReuseIdentifier: "CouponCell")
+          var nib = UINib(nibName: "CouponCell", bundle: nil)
+          tableView.registerNib(nib, forCellReuseIdentifier: "CouponCell")
 //        branchLogo.image = self.logo
-        branchLogo.image = UIImage(named: "starbucks.gif")
-        backgroundImage.image = UIImage(named: "starbucks_banner.jpg")
    
     }
     
@@ -44,26 +33,26 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
 //        getBranchCouponTimeline()
    }
     
-    func getBranchProfile() {
-        BranchProfileController.getBranchProfileWithSuccess(branchId, success: { (branchData) -> Void in
-            let data = JSON(data: branchData)
-            var json = data["data"]
-            json = json[0]
-            var latitude = json["latitude"].double
-            var longitude = json["longitude"].double
-            
-            let branchPin = CLLocation(latitude: latitude!, longitude: longitude!)
-            var newLocation = CLLocationCoordinate2DMake(latitude!, longitude!)
-            
-            dispatch_async(dispatch_get_main_queue(), {
-                self.branchName.text = json["name"].string
-                var dropPin = MKPointAnnotation()
-                dropPin.coordinate = newLocation
-                self.branchLocationMap.addAnnotation(dropPin)
-                self.centerMapOnLocation(branchPin)
-            })
-        })
-    }
+//    func getBranchProfile() {
+//        BranchProfileController.getBranchProfileWithSuccess(branchId, success: { (branchData) -> Void in
+//            let data = JSON(data: branchData)
+//            var json = data["data"]
+//            json = json[0]
+//            var latitude = json["latitude"].double
+//            var longitude = json["longitude"].double
+//            
+//            let branchPin = CLLocation(latitude: latitude!, longitude: longitude!)
+//            var newLocation = CLLocationCoordinate2DMake(latitude!, longitude!)
+//            
+//            dispatch_async(dispatch_get_main_queue(), {
+//                self.branchName.text = json["name"].string
+//                var dropPin = MKPointAnnotation()
+//                dropPin.coordinate = newLocation
+//                self.branchLocationMap.addAnnotation(dropPin)
+//                self.centerMapOnLocation(branchPin)
+//            })
+//        })
+//    }
     
     func getBranchCouponTimeline() {
         coupons = [Coupon]()
@@ -132,22 +121,19 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
             }
             
             dispatch_async(dispatch_get_main_queue(), {
-                self.couponTimeline.reloadData()
+//                self.couponTimeline.reloadData()
             })
 
         })
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return coupons.count
-    }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return 10
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 15
+        return 300
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -155,38 +141,38 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
         
         var cell: CouponCell = tableView.dequeueReusableCellWithIdentifier("CouponCell", forIndexPath: indexPath) as! CouponCell
         
-        let model = self.coupons[indexPath.section]
-        var (title) = model.name
-        var description = model.couponDescription
+        let model = Coupon(id: 2, name: "Edgar Allan", description: "Todo Gratis", limit: "20", exp: "1000 pts", logo: "cinepolis.jpeg", branch_id: 2)
         
         cell.loadItem(model, viewController: self)
-        cell.branchImage.setBackgroundImage(self.logo, forState: UIControlState.Normal)
+//        cell.branchImage.setBackgroundImage(self.logo, forState: UIControlState.Normal)
         return cell
     }
     
-    func centerMapOnLocation(location: CLLocation) {
-        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate,
-            regionRadius * 2.0, regionRadius * 2.0)
-        branchLocationMap.setRegion(coordinateRegion, animated: true)
-    }
+//    func centerMapOnLocation(location: CLLocation) {
+//        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate,
+//            regionRadius * 2.0, regionRadius * 2.0)
+//        branchLocationMap.setRegion(coordinateRegion, animated: true)
+//    }
 
-    @IBAction func segmentedControl(sender: UISegmentedControl) {
-        
-        switch segmentedControlTabs.selectedSegmentIndex {
-        case 0:
-            contentTabbed.backgroundColor = UIColor.greenColor()
-        case 1:
-            contentTabbed.backgroundColor = Utilities.dopColor
-        case 2:
-            contentTabbed.backgroundColor = UIColor.grayColor()
-        default:
-            break
-            
-        }
-    }
+//    @IBAction func segmentedControl(sender: UISegmentedControl) {
+////        
+////        switch segmentedControlTabs.selectedSegmentIndex {
+////        case 0:
+////            contentTabbed.backgroundColor = UIColor.greenColor()
+////        case 1:
+////            contentTabbed.backgroundColor = Utilities.dopColor
+////        case 2:
+////            contentTabbed.backgroundColor = UIColor.grayColor()
+////        default:
+////            break
+////            
+////        }
+//    }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         var headerTopView: UIView = UIView()
+        
+        headerTopView = (NSBundle.mainBundle().loadNibNamed("BranchProfileTopView", owner: self, options: nil)[0] as? UIView)!
         return headerTopView
     }
     
