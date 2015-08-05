@@ -8,12 +8,14 @@
 
 import UIKit
 
+
 class CouponDetailViewController: UIViewController {
 
     @IBOutlet var branch_logo: UIImageView!
     @IBOutlet var branch_cover: UIImageView!
     @IBOutlet var branch_name: UILabel!
     @IBOutlet var branch_category: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         branch_logo.layer.borderColor = UIColor.whiteColor().CGColor
@@ -28,7 +30,31 @@ class CouponDetailViewController: UIViewController {
         branch_category.layer.shadowRadius = 3
         branch_category.layer.shadowColor = UIColor.blackColor().CGColor
         
-        self.navigationController?.navigationBar.topItem?.backBarButtonItem?.tintColor = UIColor.whiteColor()
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem?.tintColor = UIColor.yellowColor()
+        
+        branch_cover.image = branch_cover.image?.applyLightEffect()
+
+        branch_logo.alpha = 0
+        
+        
+        
+
+
+        
+        //visualEffectView.setTranslatesAutoresizingMaskIntoConstraints(false)
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        UIView.animateWithDuration(0.4, delay: 0, options: .CurveEaseInOut, animations: {
+            self.branch_logo.alpha = 1
+           var logoTopFrame = self.branch_logo.frame
+            logoTopFrame.origin.y -= logoTopFrame.size.height/8
+            
+            
+            self.branch_logo.frame = logoTopFrame
+            }, completion: { finished in
+
+        })
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,7 +62,7 @@ class CouponDetailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    
     /*
     // MARK: - Navigation
 
