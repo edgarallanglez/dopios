@@ -375,7 +375,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="400" height="1136"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="170" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="txi-HI-fr9">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="170" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="txi-HI-fr9">
+                                <rect key="frame" x="0.0" y="0.0" width="400" height="1087"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -397,10 +398,10 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="3AE-T4-M8x"/>
                                 <exclude reference="PPx-QK-5Hh"/>
                                 <exclude reference="rgG-P9-YxK"/>
                                 <exclude reference="teb-x1-v8T"/>
+                                <exclude reference="3AE-T4-M8x"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -408,10 +409,10 @@
                                 <include reference="txi-HI-fr9"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="3AE-T4-M8x"/>
                                 <include reference="PPx-QK-5Hh"/>
                                 <include reference="rgG-P9-YxK"/>
                                 <include reference="teb-x1-v8T"/>
+                                <include reference="3AE-T4-M8x"/>
                             </mask>
                         </variation>
                     </view>
@@ -677,7 +678,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="180" height="200"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="starbucks_banner.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="2js-1J-sUd">
