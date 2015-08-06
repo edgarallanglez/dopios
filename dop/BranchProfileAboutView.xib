@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="FontAwesome.ttf">
+            <string>FontAwesome</string>
+            <string>FontAwesome</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="BranchProfileAboutView" customModule="dop" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="air-0F-GqA">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="150"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="150" id="Nb9-uh-eEw"/>
+                    </constraints>
+                    <variation key="widthClass=compact" misplaced="YES">
+                        <rect key="frame" x="20" y="225" width="400" height="150"/>
+                    </variation>
+                </mapView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Pg-Yt-PyS">
+                    <rect key="frame" x="0.0" y="150" width="600" height="450"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Blvd. Pedro Infante 403 Desarrollo Urbano 3 ríos" lineBreakMode="tailTruncation" numberOfLines="2" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d2o-0I-4d6">
+                            <rect key="frame" x="52" y="5" width="170" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="8cH-bc-goS"/>
+                                <constraint firstAttribute="width" constant="170" id="Ryr-Xr-T7U"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                            <size key="shadowOffset" width="0.0" height="-2"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="pin" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eYo-0r-hfl">
+                            <rect key="frame" x="15" y="15" width="29" height="21"/>
+                            <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="21"/>
+                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2H6-zo-9dy">
+                            <rect key="frame" x="20" y="70" width="560" height="100"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </string>
+                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        </textView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="clock" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vgO-dw-0kX">
+                            <rect key="frame" x="381" y="15" width="46" height="20"/>
+                            <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="20"/>
+                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lunes a Domingo de 9:00am a 9:00pm" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WYI-uU-Yu4">
+                            <rect key="frame" x="435" y="5" width="150" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="150" id="C1s-y1-iNj"/>
+                                <constraint firstAttribute="height" constant="50" id="fOt-v1-lki"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="d2o-0I-4d6" firstAttribute="leading" secondItem="eYo-0r-hfl" secondAttribute="trailing" constant="8" id="3jQ-Wh-X7D"/>
+                        <constraint firstItem="2H6-zo-9dy" firstAttribute="leading" secondItem="3Pg-Yt-PyS" secondAttribute="leading" constant="20" id="Ebv-hS-M9c"/>
+                        <constraint firstAttribute="trailing" secondItem="2H6-zo-9dy" secondAttribute="trailing" constant="20" id="PVx-NS-5It"/>
+                        <constraint firstItem="vgO-dw-0kX" firstAttribute="top" secondItem="3Pg-Yt-PyS" secondAttribute="top" constant="15" id="QqQ-yZ-jXZ"/>
+                        <constraint firstItem="WYI-uU-Yu4" firstAttribute="leading" secondItem="vgO-dw-0kX" secondAttribute="trailing" constant="8" id="SfZ-pI-LzA"/>
+                        <constraint firstItem="WYI-uU-Yu4" firstAttribute="top" secondItem="3Pg-Yt-PyS" secondAttribute="top" constant="5" id="Sh7-lM-kLi"/>
+                        <constraint firstItem="d2o-0I-4d6" firstAttribute="top" secondItem="3Pg-Yt-PyS" secondAttribute="top" constant="5" id="a3J-ye-jS6"/>
+                        <constraint firstAttribute="trailing" secondItem="WYI-uU-Yu4" secondAttribute="trailing" constant="15" id="gXf-Ap-8K3"/>
+                        <constraint firstItem="2H6-zo-9dy" firstAttribute="top" secondItem="3Pg-Yt-PyS" secondAttribute="top" constant="70" id="oDf-sk-p7w"/>
+                        <constraint firstItem="eYo-0r-hfl" firstAttribute="top" secondItem="3Pg-Yt-PyS" secondAttribute="top" constant="15" id="tmS-v7-sX2"/>
+                        <constraint firstItem="eYo-0r-hfl" firstAttribute="leading" secondItem="3Pg-Yt-PyS" secondAttribute="leading" constant="15" id="vaN-6g-FbP"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="3Pg-Yt-PyS" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="4K0-sl-Mgf"/>
+                <constraint firstItem="3Pg-Yt-PyS" firstAttribute="top" secondItem="air-0F-GqA" secondAttribute="bottom" id="6jM-gH-23a"/>
+                <constraint firstItem="air-0F-GqA" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="FbO-M3-MXp"/>
+                <constraint firstAttribute="bottom" secondItem="3Pg-Yt-PyS" secondAttribute="bottom" id="dAs-3M-whH"/>
+                <constraint firstAttribute="trailing" secondItem="3Pg-Yt-PyS" secondAttribute="trailing" id="jkP-Sg-huc"/>
+                <constraint firstAttribute="trailing" secondItem="air-0F-GqA" secondAttribute="trailing" id="l1j-QG-NLy"/>
+                <constraint firstItem="air-0F-GqA" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="xqm-de-fmd"/>
+            </constraints>
+            <connections>
+                <outlet property="branchDescription" destination="2H6-zo-9dy" id="YuH-tA-BbX"/>
+                <outlet property="branchLocationMap" destination="air-0F-GqA" id="sy4-MV-AS6"/>
+                <outlet property="clockIcon" destination="vgO-dw-0kX" id="ALq-ub-p6y"/>
+                <outlet property="pinIcon" destination="eYo-0r-hfl" id="8xa-yv-ca9"/>
+            </connections>
+            <point key="canvasLocation" x="327" y="234"/>
+        </view>
+    </objects>
+</document>
