@@ -85,7 +85,7 @@ class CouponDetailViewController: UIViewController, UITableViewDelegate, UITable
         var customView :UIView = UIView()
         
         
-        customView = (NSBundle.mainBundle().loadNibNamed("CouponDetailView", owner: self, options: nil)[0] as? UIView)!
+        customView = (NSBundle.mainBundle().loadNibNamed("CouponDetailView", owner: self, options: nil)[0] as? CouponDetailView)!
 
         return customView
     }
