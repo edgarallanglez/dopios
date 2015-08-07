@@ -138,7 +138,7 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 190
+        return 270
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
