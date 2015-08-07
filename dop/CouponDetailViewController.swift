@@ -12,6 +12,8 @@ class CouponDetailViewController: UIViewController, UITableViewDelegate, UITable
 
     @IBOutlet var tableView: UITableView!
     
+    var customView :CouponDetailView = CouponDetailView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //var CouponDetailNib = UINib(nibName: "CouponDetailView", bundle: nil)
@@ -19,43 +21,46 @@ class CouponDetailViewController: UIViewController, UITableViewDelegate, UITable
         var nib = UINib(nibName: "NewsfeedCell", bundle: nil)
         tableView.registerNib(nib, forCellReuseIdentifier: "NewsfeedCell")
         
+        customView = (NSBundle.mainBundle().loadNibNamed("CouponDetailView", owner: self, options: nil)[0] as? CouponDetailView)!
         
-        /*branch_logo.layer.borderColor = UIColor.whiteColor().CGColor
+        customView.branch_logo.layer.borderColor = UIColor.whiteColor().CGColor
         
-        branch_name.layer.shadowOffset = CGSize(width: 1, height: 3)
-        branch_name.layer.shadowOpacity = 1
-        branch_name.layer.shadowRadius = 3
-        branch_name.layer.shadowColor = UIColor.blackColor().CGColor
+        customView.alpha = 0
         
-        branch_category.layer.shadowOffset = CGSize(width: 1, height: 3)
-        branch_category.layer.shadowOpacity = 1
-        branch_category.layer.shadowRadius = 3
-        branch_category.layer.shadowColor = UIColor.blackColor().CGColor
+        
+        customView.branch_name.layer.shadowOffset = CGSize(width: 1, height: 3)
+        customView.branch_name.layer.shadowOpacity = 1
+        customView.branch_name.layer.shadowRadius = 3
+        customView.branch_name.layer.shadowColor = UIColor.blackColor().CGColor
+        
+        customView.branch_category.layer.shadowOffset = CGSize(width: 1, height: 3)
+        customView.branch_category.layer.shadowOpacity = 1
+        customView.branch_category.layer.shadowRadius = 3
+        customView.branch_category.layer.shadowColor = UIColor.blackColor().CGColor
 
         
         
-        branch_cover.image = branch_cover.image?.applyLightEffect()
+        customView.branch_cover.image = customView.branch_cover.image?.applyLightEffect()
 
-        branch_logo.alpha = 0*/
+        customView.branch_logo.alpha = 0
         
         //self.navigationController?.navigationBar.topItem?.backBarButtonItem?.tintColor = UIColor.yellowColor()
         
         
         
         //visualEffectView.setTranslatesAutoresizingMaskIntoConstraints(false)
-    }
+        
+        
+        
+        
+            }
     
     override func viewDidAppear(animated: Bool) {
-       /* UIView.animateWithDuration(0.4, delay: 0, options: .CurveEaseInOut, animations: {
-           self.branch_logo.alpha = 1
-           var logoTopFrame = self.branch_logo.frame
-            logoTopFrame.origin.y -= logoTopFrame.size.height/8
-            
-            
-            self.branch_logo.frame = logoTopFrame
+        UIView.animateWithDuration(0.7, delay: 0, options: .CurveEaseInOut, animations: {
+            self.customView.alpha = 1
             }, completion: { finished in
-
-        })*/
+                
+        })
     }
 
     override func didReceiveMemoryWarning() {
@@ -82,13 +87,11 @@ class CouponDetailViewController: UIViewController, UITableViewDelegate, UITable
         return 568
     }
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        var customView :UIView = UIView()
         
-        
-        customView = (NSBundle.mainBundle().loadNibNamed("CouponDetailView", owner: self, options: nil)[0] as? CouponDetailView)!
-
         return customView
     }
+    
+    
     
 
 }
