@@ -48,10 +48,20 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
        cell.heart.image = cell.heart.image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
        cell.heart.tintColor = UIColor.lightGrayColor()
         
+        cell.viewForBaselineLayout()?.alpha = 0
+        
+        
+        UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseInOut, animations: {
+            cell.viewForBaselineLayout()?.alpha = 1
+            }, completion: { finished in
+                
+        })
+        
         
 
         return cell
     }
+  
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         
@@ -71,8 +81,6 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
         return UIEdgeInsetsMake(20, 20, 20, 20)
     }
 
-    
-    
     
     
 

@@ -22,7 +22,7 @@
                                 <rect key="frame" x="20" y="0.0" width="400" height="225"/>
                             </variation>
                         </imageView>
-                        <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9jo-1c-SY2">
+                        <mapView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" mapType="standard" zoomEnabled="NO" scrollEnabled="NO" rotateEnabled="NO" pitchEnabled="NO" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9jo-1c-SY2">
                             <rect key="frame" x="0.0" y="225" width="400" height="150"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="150" id="hlv-Jf-qTY"/>

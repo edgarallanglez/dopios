@@ -73,9 +73,35 @@ class CouponDetailViewController: UIViewController, UITableViewDelegate, UITable
         var cell:NewsfeedCell = tableView.dequeueReusableCellWithIdentifier("NewsfeedCell", forIndexPath: indexPath) as! NewsfeedCell
       
         let model = NewsfeedNote(friend_id: "1", user_id: 1, branch_id: 1, coupon_name: "Cupon prueba", branch_name: "Starbax", names: "Jose Eduardo", surnames: "Quintero Gutierrez", user_image: "http://jsequeiros.com/sites/default/files/imagen-cachorro-comprimir.jpg?1399003306" , branch_image: "http://jsequeiros.com/sites/default/files/imagen-cachorro-comprimir.jpg?1399003306")
+        
 
         
-          cell.loadItem(model, viewController: NewsfeedViewController())
+        cell.loadItem(model, viewController: NewsfeedViewController())
+        
+        cell.user_image.alpha = 0
+        
+        let imageUrl = NSURL(string: model.user_image)
+
+        Utilities.getDataFromUrl(imageUrl!) { data in
+            dispatch_async(dispatch_get_main_queue()) {
+                
+                println("Finished downloading \"\(imageUrl!.lastPathComponent!.stringByDeletingPathExtension)\".")
+                
+                    var cell_image : UIImage = UIImage()
+                    cell_image = UIImage ( data: data!)!
+                
+                
+                    cell.user_image.image = cell_image
+                    
+                    UIView.animateWithDuration(0.5, animations: {
+                        cell.user_image.alpha = 1
+                    })
+                    
+                }
+                
+                
+            }
+
         
         return cell
     }
@@ -92,6 +118,6 @@ class CouponDetailViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     
-    
 
+    
 }
