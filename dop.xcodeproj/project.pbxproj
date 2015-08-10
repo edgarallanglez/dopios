@@ -10,6 +10,7 @@
 		9D0C16841B4DC6EB0088DE2F /* BranchProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0C16831B4DC6EB0088DE2F /* BranchProfileViewController.swift */; };
 		9D0DB4711B17D2DB0009FE6C /* NearbyMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0DB4701B17D2DB0009FE6C /* NearbyMapViewController.swift */; };
 		9D0DB4731B17DE5A0009FE6C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D0DB4721B17DE5A0009FE6C /* MapKit.framework */; };
+		9D1FCED71B79295700F42F6D /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1FCED61B79295700F42F6D /* SegmentedControl.swift */; };
 		9D33260F1AF7ED1C00498801 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D33260E1AF7ED1C00498801 /* AppDelegate.swift */; };
 		9D3326111AF7ED1C00498801 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3326101AF7ED1C00498801 /* LoginViewController.swift */; };
 		9D3326191AF7ED1C00498801 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D3326171AF7ED1C00498801 /* LaunchScreen.xib */; };
@@ -19,6 +20,9 @@
 		9D697C7A1B5EF13000D786AA /* iconfonts-fontawesome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D697C791B5EF13000D786AA /* iconfonts-fontawesome.swift */; };
 		9DA7AA9F1B50309400297690 /* BranchProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA7AA9E1B50309400297690 /* BranchProfileController.swift */; };
 		9DAAE7B71B0E810B00209588 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DAAE7B51B0E810B00209588 /* Main.storyboard */; };
+		9DB3DABB1B73C28A004AC0F1 /* BranchProfileTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB3DABA1B73C28A004AC0F1 /* BranchProfileTopView.swift */; };
+		9DB3DABD1B73ED96004AC0F1 /* BranchProfileAboutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DB3DABC1B73ED96004AC0F1 /* BranchProfileAboutView.xib */; };
+		9DB3DABF1B740070004AC0F1 /* BranchProfileAboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB3DABE1B740070004AC0F1 /* BranchProfileAboutView.swift */; };
 		9DB6121A1B192FCC004B8DB8 /* NearbyMapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB612191B192FCC004B8DB8 /* NearbyMapController.swift */; };
 		9DB6BB2A1B72A6A000FF2659 /* BranchProfileTopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DB6BB291B72A6A000FF2659 /* BranchProfileTopView.xib */; };
 		A0365FDE1AF9542A000A325D /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0365FDD1AF9542A000A325D /* SWRevealViewController.m */; };
@@ -93,6 +97,7 @@
 		9D0C16831B4DC6EB0088DE2F /* BranchProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BranchProfileViewController.swift; sourceTree = "<group>"; };
 		9D0DB4701B17D2DB0009FE6C /* NearbyMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyMapViewController.swift; sourceTree = "<group>"; };
 		9D0DB4721B17DE5A0009FE6C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		9D1FCED61B79295700F42F6D /* SegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
 		9D3326091AF7ED1C00498801 /* dop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D33260D1AF7ED1C00498801 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9D33260E1AF7ED1C00498801 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -106,6 +111,9 @@
 		9D697C791B5EF13000D786AA /* iconfonts-fontawesome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "iconfonts-fontawesome.swift"; sourceTree = "<group>"; };
 		9DA7AA9E1B50309400297690 /* BranchProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BranchProfileController.swift; sourceTree = "<group>"; };
 		9DAAE7B61B0E810B00209588 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		9DB3DABA1B73C28A004AC0F1 /* BranchProfileTopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BranchProfileTopView.swift; sourceTree = "<group>"; };
+		9DB3DABC1B73ED96004AC0F1 /* BranchProfileAboutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BranchProfileAboutView.xib; sourceTree = "<group>"; };
+		9DB3DABE1B740070004AC0F1 /* BranchProfileAboutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BranchProfileAboutView.swift; sourceTree = "<group>"; };
 		9DB612191B192FCC004B8DB8 /* NearbyMapController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyMapController.swift; sourceTree = "<group>"; };
 		9DB6BB291B72A6A000FF2659 /* BranchProfileTopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BranchProfileTopView.xib; sourceTree = "<group>"; };
 		A0365FDC1AF9542A000A325D /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
@@ -249,6 +257,9 @@
 				9D0C16831B4DC6EB0088DE2F /* BranchProfileViewController.swift */,
 				9DA7AA9E1B50309400297690 /* BranchProfileController.swift */,
 				9DB6BB291B72A6A000FF2659 /* BranchProfileTopView.xib */,
+				9DB3DABA1B73C28A004AC0F1 /* BranchProfileTopView.swift */,
+				9DB3DABC1B73ED96004AC0F1 /* BranchProfileAboutView.xib */,
+				9DB3DABE1B740070004AC0F1 /* BranchProfileAboutView.swift */,
 			);
 			name = BranchProfile;
 			sourceTree = "<group>";
@@ -284,9 +295,10 @@
 		9D33260B1AF7ED1C00498801 /* dop */ = {
 			isa = PBXGroup;
 			children = (
+				9D1FCED61B79295700F42F6D /* SegmentedControl.swift */,
+				9D4C04801B18EAF600D5DCEE /* FontAwesome.ttf */,
 				9D697C791B5EF13000D786AA /* iconfonts-fontawesome.swift */,
 				9D0C16821B4DC6AE0088DE2F /* BranchProfile */,
-				9D4C04801B18EAF600D5DCEE /* FontAwesome.ttf */,
 				A04860901B0D4D3B009FEF1F /* JWTDecode */,
 				A0365FDB1AF9463B000A325D /* SWRevealViewController */,
 				9D33260E1AF7ED1C00498801 /* AppDelegate.swift */,
@@ -514,6 +526,7 @@
 				9D3904FA1B6FFC9E00FA380A /* Images.xcassets in Resources */,
 				9D4C04811B18EB0200D5DCEE /* FontAwesome.ttf in Resources */,
 				A060F7841B701EFE009D6ADB /* heart.png in Resources */,
+				9DB3DABD1B73ED96004AC0F1 /* BranchProfileAboutView.xib in Resources */,
 				9DAAE7B71B0E810B00209588 /* Main.storyboard in Resources */,
 				A04E388A1AFC3549007C7B69 /* starbucks.gif in Resources */,
 				9D3326191AF7ED1C00498801 /* LaunchScreen.xib in Resources */,
@@ -560,10 +573,12 @@
 				9D0C16841B4DC6EB0088DE2F /* BranchProfileViewController.swift in Sources */,
 				A060F7861B702FAC009D6ADB /* CouponDetailViewController.swift in Sources */,
 				A0DF72931B13AEBF006EE8F4 /* FriendsController.swift in Sources */,
+				9D1FCED71B79295700F42F6D /* SegmentedControl.swift in Sources */,
 				A082F4851B18CF01001C8C52 /* NewsfeedController.swift in Sources */,
 				A0BB9BB91B13E4F1000BA261 /* FriendCell.swift in Sources */,
 				A0DF72911B13A66C006EE8F4 /* FriendsViewController.swift in Sources */,
 				A0365FE01AF95518000A325D /* MenuController.swift in Sources */,
+				9DB3DABF1B740070004AC0F1 /* BranchProfileAboutView.swift in Sources */,
 				A0578C651B0E7D2B0033B5BD /* UserProfileViewController.swift in Sources */,
 				9DB6121A1B192FCC004B8DB8 /* NearbyMapController.swift in Sources */,
 				A082F4871B18E4FF001C8C52 /* NewsfeedNote.swift in Sources */,
@@ -585,6 +600,7 @@
 				A0F7E9201AFAE48500A4F0F2 /* CouponCell.swift in Sources */,
 				A060F7891B717DB9009D6ADB /* UIImage+ImageEffects.m in Sources */,
 				A060F77A1B6C4CA3009D6ADB /* TabbarController.swift in Sources */,
+				9DB3DABB1B73C28A004AC0F1 /* BranchProfileTopView.swift in Sources */,
 				9DA7AA9F1B50309400297690 /* BranchProfileController.swift in Sources */,
 				A060F77C1B6FE4BA009D6ADB /* PromoViewController.swift in Sources */,
 				A09AB4E31AF99136004287F7 /* SwiftyJSON.swift in Sources */,

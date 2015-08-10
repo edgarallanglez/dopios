@@ -16,22 +16,27 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
     var branchId: Int!
     var logo: UIImage!
     var logoString: String!
-    let regionRadius: CLLocationDistance = 500
     var coupons = [Coupon]()
     var json: JSON!
+    var headerTopView: BranchProfileTopView = BranchProfileTopView()
+    var selectedIndex: Int = 0
 
     
     override func viewDidLoad() {
-          var nib = UINib(nibName: "CouponCell", bundle: nil)
-          tableView.registerNib(nib, forCellReuseIdentifier: "CouponCell")
-//        branchLogo.image = self.logo
-   
+        var couponNib = UINib(nibName: "CouponCell", bundle: nil)
+        tableView.registerNib(couponNib, forCellReuseIdentifier: "CouponCell")
+        var aboutNib = UINib(nibName: "BranchProfileAboutView", bundle: nil)
+        tableView.registerNib(aboutNib, forCellReuseIdentifier: "BranchProfileAboutView")
+        
+//      branchLogo.image = self.logo
     }
     
     override func viewDidAppear(animated: Bool) {
 //        getBranchProfile()
 //        getBranchCouponTimeline()
    }
+    
+
     
 //    func getBranchProfile() {
 //        BranchProfileController.getBranchProfileWithSuccess(branchId, success: { (branchData) -> Void in
@@ -129,51 +134,36 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
     
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return 1
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 300
+        return 285
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         
-        var cell: CouponCell = tableView.dequeueReusableCellWithIdentifier("CouponCell", forIndexPath: indexPath) as! CouponCell
+        var cell: BranchProfileAboutView = tableView.dequeueReusableCellWithIdentifier("BranchProfileAboutView", forIndexPath: indexPath) as! BranchProfileAboutView
         
-        let model = Coupon(id: 2, name: "Edgar Allan", description: "Todo Gratis", limit: "20", exp: "1000 pts", logo: "cinepolis.jpeg", branch_id: 2)
+//        let model = Coupon(id: 2, name: "Edgar Allan", description: "Todo Gratis", limit: "20", exp: "1000 pts", logo: "cinepolis.jpeg", branch_id: 2)
         
-        cell.loadItem(model, viewController: self)
+//        cell.loadItem(model, viewController: self)
 //        cell.branchImage.setBackgroundImage(self.logo, forState: UIControlState.Normal)
+        var initialLocation = CLLocation(latitude: 24.815471, longitude: -107.397844)
+        cell.loadAbout("Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. ", branchLocation: initialLocation)
         return cell
     }
     
-//    func centerMapOnLocation(location: CLLocation) {
-//        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate,
-//            regionRadius * 2.0, regionRadius * 2.0)
-//        branchLocationMap.setRegion(coordinateRegion, animated: true)
-//    }
-
-//    @IBAction func segmentedControl(sender: UISegmentedControl) {
-////        
-////        switch segmentedControlTabs.selectedSegmentIndex {
-////        case 0:
-////            contentTabbed.backgroundColor = UIColor.greenColor()
-////        case 1:
-////            contentTabbed.backgroundColor = Utilities.dopColor
-////        case 2:
-////            contentTabbed.backgroundColor = UIColor.grayColor()
-////        default:
-////            break
-////            
-////        }
-//    }
-    
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        var headerTopView: UIView = UIView()
-        
-        headerTopView = (NSBundle.mainBundle().loadNibNamed("BranchProfileTopView", owner: self, options: nil)[0] as? UIView)!
+        headerTopView = (NSBundle.mainBundle().loadNibNamed("BranchProfileTopView", owner: self, options: nil)[0] as? BranchProfileTopView)!
+        headerTopView.branchProfileSegmented?.addTarget(self, action: "setTableViewAtIndex", forControlEvents: .ValueChanged)
         return headerTopView
+    }
+    
+    func setTableViewAtIndex() {
+        selectedIndex = headerTopView.branchProfileSegmented.selectedIndex
+        println(selectedIndex)
     }
     
 }
