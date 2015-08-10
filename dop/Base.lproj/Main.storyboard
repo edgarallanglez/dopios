@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Dg5-nB-AdV">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -35,11 +35,6 @@
                                         <state key="normal" title="Iniciar con facebook">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="30"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
                                         <variation key="default">
                                             <mask key="constraints">
                                                 <exclude reference="EnV-5W-Izv"/>
@@ -98,11 +93,6 @@
                                 <state key="normal" title="Iniciar Sesión">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="30"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
                             </button>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yjv-Nz-cEp">
                                 <rect key="frame" x="41" y="519" width="51" height="31"/>
@@ -132,6 +122,7 @@
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="tintColor" red="0.98431372549999996" green="0.1333333333" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="HU1-A0-rLf" secondAttribute="bottom" constant="380" id="13e-yi-M5a"/>
                             <constraint firstItem="HU1-A0-rLf" firstAttribute="top" secondItem="sdL-1O-Lfg" secondAttribute="bottom" constant="25" id="53S-le-mfb"/>
@@ -194,8 +185,10 @@
                     <size key="freeformSize" width="600" height="800"/>
                     <connections>
                         <outlet property="dopLogo" destination="vsO-2Q-CNK" id="EpU-qR-r5K"/>
+                        <outlet property="fbButton" destination="4x1-vM-hMg" id="TZN-Go-CHW"/>
                         <outlet property="fbLoginView" destination="OyP-6l-WrR" id="vUv-AB-sZi"/>
                         <outlet property="passField" destination="HU1-A0-rLf" id="UiM-IA-mUi"/>
+                        <outlet property="signInButton" destination="pCG-Bf-GVw" id="yHG-yy-nep"/>
                         <outlet property="userNameField" destination="sdL-1O-Lfg" id="HcY-BA-wT7"/>
                         <segue destination="NXt-XB-PrX" kind="show" identifier="showDashboard" id="NZR-gR-mOn"/>
                     </connections>

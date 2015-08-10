@@ -7,7 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="BranchProfileTopView" customModule="dop" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="270"/>
+            <rect key="frame" x="0.0" y="0.0" width="600" height="285"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="starbucks_banner.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="x9r-hb-NOG" userLabel="backgroundImage">
@@ -35,27 +35,22 @@
                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </imageView>
-                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="JLV-Ix-aZ7">
-                    <rect key="frame" x="5" y="235" width="590" height="29"/>
-                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <segments>
-                        <segment title="First"/>
-                        <segment title="Second"/>
-                        <segment title="Third"/>
-                    </segments>
-                    <color key="tintColor" red="0.78823529410000004" green="0.0" blue="0.4377000492" alpha="1" colorSpace="calibratedRGB"/>
-                </segmentedControl>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O7C-iJ-66i" userLabel="SegmentedControl" customClass="SegmentedControl" customModule="dop" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="230" width="600" height="55"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="55" id="Qjf-Nu-Pd5"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="O7C-iJ-66i" secondAttribute="trailing" id="4dJ-mI-Ol7"/>
                 <constraint firstItem="x9r-hb-NOG" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="4pP-XN-JvK"/>
-                <constraint firstItem="JLV-Ix-aZ7" firstAttribute="top" secondItem="x9r-hb-NOG" secondAttribute="bottom" constant="5" id="AQL-QG-lFb"/>
+                <constraint firstItem="O7C-iJ-66i" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="E0D-fk-pJH"/>
                 <constraint firstItem="ph0-mH-WMX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="Lkt-T3-c0b"/>
-                <constraint firstItem="JLV-Ix-aZ7" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="5" id="XhY-2b-VQd"/>
                 <constraint firstItem="ph0-mH-WMX" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="130" id="dbd-NR-eWg"/>
                 <constraint firstItem="x9r-hb-NOG" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="eda-bk-Dna"/>
-                <constraint firstAttribute="trailing" secondItem="JLV-Ix-aZ7" secondAttribute="trailing" constant="5" id="fJ9-9d-lQE"/>
-                <constraint firstAttribute="centerX" secondItem="JLV-Ix-aZ7" secondAttribute="centerX" id="h2A-wN-dZM"/>
+                <constraint firstItem="O7C-iJ-66i" firstAttribute="top" secondItem="x9r-hb-NOG" secondAttribute="bottom" id="iu8-Fa-YKp"/>
                 <constraint firstAttribute="trailing" secondItem="x9r-hb-NOG" secondAttribute="trailing" id="orZ-am-iW0"/>
                 <constraint firstAttribute="centerX" secondItem="x9r-hb-NOG" secondAttribute="centerX" id="vbp-hG-tVN"/>
             </constraints>
@@ -63,9 +58,9 @@
             <connections>
                 <outlet property="branchCover" destination="x9r-hb-NOG" id="PpQ-ss-qd6"/>
                 <outlet property="branchLogo" destination="ph0-mH-WMX" id="ypX-gR-mxr"/>
-                <outlet property="branchProfileSegmented" destination="JLV-Ix-aZ7" id="H1F-VV-BG3"/>
+                <outlet property="branchProfileSegmented" destination="O7C-iJ-66i" id="xGG-ge-O59"/>
             </connections>
-            <point key="canvasLocation" x="215" y="-2"/>
+            <point key="canvasLocation" x="215" y="5.5"/>
         </view>
     </objects>
     <resources>

@@ -12,6 +12,6 @@ class BranchProfileTopView: UIView {
     
     @IBOutlet weak var branchCover: UIImageView!
     @IBOutlet weak var branchLogo: UIImageView!
-    @IBOutlet weak var branchProfileSegmented: UISegmentedControl!
-    
+    @IBOutlet weak var branchProfileSegmented: SegmentedControl!
+
 }

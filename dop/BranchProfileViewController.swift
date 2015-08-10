@@ -138,7 +138,7 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 270
+        return 285
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -162,7 +162,8 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func setTableViewAtIndex() {
-        selectedIndex = headerTopView.branchProfileSegmented.selectedSegmentIndex
+        selectedIndex = headerTopView.branchProfileSegmented.selectedIndex
+        println(selectedIndex)
     }
     
 }

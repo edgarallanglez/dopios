@@ -16,12 +16,27 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
     @IBOutlet weak var passField: UITextField!
     @IBOutlet weak var userNameField: UITextField!
     @IBOutlet weak var dopLogo: UIImageView!
+    @IBOutlet weak var signInButton: UIButton!
+    @IBOutlet weak var fbButton: UIButton!
     
     var kClientId = "517644806961-ocmqel4aloa86mtsn5jsmmuvi3fcdpln.apps.googleusercontent.com";
     var locationManager: CLLocationManager!
+
+    override func viewDidAppear(animated: Bool) {
+        var cornerRound:CGFloat
+        
+        if signInButton.frame.height > 70 {
+            cornerRound = 2
+        } else {
+            cornerRound = 1.9
+        }
+        signInButton.layer.cornerRadius = signInButton.frame.height / cornerRound
+        fbButton.layer.cornerRadius = signInButton.frame.height / cornerRound
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        UIApplication.sharedApplication().statusBarStyle = .Default
         
         var signIn = GPPSignIn.sharedInstance();
         signIn.shouldFetchGooglePlusUser = true;
@@ -29,6 +44,8 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
         signIn.scopes = [kGTLAuthScopePlusLogin,kGTLAuthScopePlusUserinfoEmail];
         signIn.trySilentAuthentication();
         signIn.delegate = self;
+        
+        
         
         locationManager = CLLocationManager()
         locationManager.delegate = self

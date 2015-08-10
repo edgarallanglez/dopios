@@ -10,6 +10,7 @@
 		9D0C16841B4DC6EB0088DE2F /* BranchProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0C16831B4DC6EB0088DE2F /* BranchProfileViewController.swift */; };
 		9D0DB4711B17D2DB0009FE6C /* NearbyMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0DB4701B17D2DB0009FE6C /* NearbyMapViewController.swift */; };
 		9D0DB4731B17DE5A0009FE6C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D0DB4721B17DE5A0009FE6C /* MapKit.framework */; };
+		9D1FCED71B79295700F42F6D /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1FCED61B79295700F42F6D /* SegmentedControl.swift */; };
 		9D33260F1AF7ED1C00498801 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D33260E1AF7ED1C00498801 /* AppDelegate.swift */; };
 		9D3326111AF7ED1C00498801 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3326101AF7ED1C00498801 /* LoginViewController.swift */; };
 		9D3326191AF7ED1C00498801 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D3326171AF7ED1C00498801 /* LaunchScreen.xib */; };
@@ -96,6 +97,7 @@
 		9D0C16831B4DC6EB0088DE2F /* BranchProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BranchProfileViewController.swift; sourceTree = "<group>"; };
 		9D0DB4701B17D2DB0009FE6C /* NearbyMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyMapViewController.swift; sourceTree = "<group>"; };
 		9D0DB4721B17DE5A0009FE6C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		9D1FCED61B79295700F42F6D /* SegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
 		9D3326091AF7ED1C00498801 /* dop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D33260D1AF7ED1C00498801 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9D33260E1AF7ED1C00498801 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -293,6 +295,7 @@
 		9D33260B1AF7ED1C00498801 /* dop */ = {
 			isa = PBXGroup;
 			children = (
+				9D1FCED61B79295700F42F6D /* SegmentedControl.swift */,
 				9D4C04801B18EAF600D5DCEE /* FontAwesome.ttf */,
 				9D697C791B5EF13000D786AA /* iconfonts-fontawesome.swift */,
 				9D0C16821B4DC6AE0088DE2F /* BranchProfile */,
@@ -570,6 +573,7 @@
 				9D0C16841B4DC6EB0088DE2F /* BranchProfileViewController.swift in Sources */,
 				A060F7861B702FAC009D6ADB /* CouponDetailViewController.swift in Sources */,
 				A0DF72931B13AEBF006EE8F4 /* FriendsController.swift in Sources */,
+				9D1FCED71B79295700F42F6D /* SegmentedControl.swift in Sources */,
 				A082F4851B18CF01001C8C52 /* NewsfeedController.swift in Sources */,
 				A0BB9BB91B13E4F1000BA261 /* FriendCell.swift in Sources */,
 				A0DF72911B13A66C006EE8F4 /* FriendsViewController.swift in Sources */,
