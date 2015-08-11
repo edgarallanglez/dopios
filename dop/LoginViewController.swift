@@ -230,7 +230,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
     
     // Social login Call
     func socialLogin(type: String, params: [String:String]!){
-      /*  LoginController.loginWithSocial("http://104.236.141.44:5000/user/login/" + type, params: params){ (couponsData) -> Void in
+        LoginController.loginWithSocial("http://45.55.7.118:5000/user/login/" + type, params: params){ (couponsData) -> Void in
             User.loginType = type
             let json = JSON(data: couponsData)
 
@@ -242,7 +242,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
             
             User.userImageUrl = String(stringInterpolationSegment: params["main_image"]!)
            
-            //User.userEmail=String(stringInterpolationSegment:userEmail)
+//            User.userEmail = String(stringInterpolationSegment: userEmail)
             User.userName = String(stringInterpolationSegment: params["names"]!)
             User.userSurnames = String(stringInterpolationSegment: params["surnames"]!)
             
@@ -253,11 +253,10 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
                     
                 }
             });
-        }*/
+        }
     }
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-        
         locationManager.stopUpdatingLocation()
     }
         

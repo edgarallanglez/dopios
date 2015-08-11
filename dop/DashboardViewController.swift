@@ -145,7 +145,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         
         cell.loadItem(model, viewController: self)
         
-        let imageUrl = NSURL(string: "http://104.236.141.44/branches/images/\(model.branch_id)/\(model.logo)")
+        let imageUrl = NSURL(string: "http://45.55.7.118/branches/images/\(model.branch_id)/\(model.logo)")
         
         
         let identifier = "Cell\(indexPath.section)"
