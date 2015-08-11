@@ -242,7 +242,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
             
             User.userImageUrl = String(stringInterpolationSegment: params["main_image"]!)
            
-            //User.userEmail=String(stringInterpolationSegment:userEmail)
+//            User.userEmail = String(stringInterpolationSegment: userEmail)
             User.userName = String(stringInterpolationSegment: params["names"]!)
             User.userSurnames = String(stringInterpolationSegment: params["surnames"]!)
             
@@ -257,7 +257,6 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
     }
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-        
         locationManager.stopUpdatingLocation()
     }
         
