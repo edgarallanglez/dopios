@@ -10,16 +10,20 @@ import UIKit
 
 class PromoViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
     
+    @IBOutlet weak var CouponsCollectionView: UICollectionView!
+    
     private let reuseIdentifier = "PromoCell"
-
+    var coupons = [Coupon]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.title = "Cupones"
-        self.navigationController?.navigationBar.topItem!.title = "Hoy tenemos:"
-        
-        
+        self.navigationController?.navigationBar.topItem!.title = "Hoy tenemos"
+    }
     
+    override func viewDidAppear(animated: Bool) {
+        getCoupons()
     }
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -64,11 +68,9 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
   
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        
         let size = CGSizeMake(180, 200)
         
         return size
-        
     }
     
     
@@ -77,11 +79,42 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
         return UIEdgeInsetsMake(20, 20, 20, 20)
     }
 
-    
+    func getCoupons() {
+        coupons = [Coupon]()
+        
+        CouponController.getAllCouponsWithSuccess { (couponsData) -> Void in
+            let json = JSON(data: couponsData)
+            
+            for (index: String, subJson: JSON) in json["data"]{
+                var coupon_id = subJson["coupon_id"].int
+                let coupon_name = subJson["name"].string
+                let coupon_description = subJson["description"].string
+                let coupon_limit = subJson["limit"].string
+                let coupon_exp = "2015-09-30"
+                let coupon_logo = subJson["logo"].string
+                let branch_id = subJson["branch_id"].int
+                
+                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id)
+                
+                self.coupons.append(model)
+                
+                println(coupon_name)
+            }
+            
+            dispatch_async(dispatch_get_main_queue(), {
+                self.CouponsCollectionView.reloadData()
+            });
+            
+            
+        }
+        
+    }
+
     
 
     /*

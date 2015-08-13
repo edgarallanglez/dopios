@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -448,7 +448,7 @@
             </objects>
             <point key="canvasLocation" x="3298.5" y="3921"/>
         </scene>
-        <!--Item 2-->
+        <!--Newsfeed View Controller-->
         <scene sceneID="fwB-7u-O1r">
             <objects>
                 <viewController id="TTn-gh-Dpv" customClass="NewsfeedViewController" customModule="dop" customModuleProvider="target" sceneMemberID="viewController">
@@ -521,7 +521,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" id="GGq-MD-JNo"/>
+                    <tabBarItem key="tabBarItem" systemItem="topRated" id="GGq-MD-JNo"/>
                     <connections>
                         <outlet property="tableView" destination="OZc-ML-bCf" id="b7Y-Ms-gf2"/>
                         <segue destination="OTe-uN-tYr" kind="show" identifier="userProfile" id="Xpw-UC-3s2"/>
@@ -673,7 +673,7 @@
             </objects>
             <point key="canvasLocation" x="3756" y="2939"/>
         </scene>
-        <!--Item-->
+        <!--View Controller-->
         <scene sceneID="VC5-SY-xD9">
             <objects>
                 <viewController id="Ahl-DB-2Wx" sceneMemberID="viewController">
@@ -686,7 +686,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="c4G-9N-rUu"/>
+                    <tabBarItem key="tabBarItem" systemItem="more" id="c4G-9N-rUu"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jzj-Xc-TLv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -718,7 +718,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="180" height="200"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="starbucks_banner.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="2js-1J-sUd">
@@ -967,6 +967,9 @@
                         </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="1OK-gg-UUm"/>
+                    <connections>
+                        <outlet property="CouponsCollectionView" destination="S6V-kp-QsR" id="4id-Ck-mko"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4dy-aA-Gm0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

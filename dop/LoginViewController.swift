@@ -104,6 +104,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
         var signIn = GPPSignIn.sharedInstance();
         signIn.authenticate();
     }
+    
     func finishedWithAuth(auth: GTMOAuth2Authentication!, error: NSError!) {
        if (GPPSignIn.sharedInstance().googlePlusUser != nil){
             println("Sign in")
@@ -125,12 +126,9 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
                 "main_image":userImage]
             
             self.socialLogin("google", params: params)
-
-            
         } else {
            println("Signed out.");
         }
-    
     }
     
     //Twitter login
@@ -230,7 +228,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
     
     // Social login Call
     func socialLogin(type: String, params: [String:String]!){
-        LoginController.loginWithSocial("http://45.55.7.118:5000/user/login/" + type, params: params){ (couponsData) -> Void in
+        LoginController.loginWithSocial("http:45.55.7.118:5000/user/login/" + type, params: params){ (couponsData) -> Void in
             User.loginType = type
             let json = JSON(data: couponsData)
 
