@@ -10,7 +10,7 @@ import UIKit
 
 class FriendsController: NSObject {
     class func getAllFriendsWithSuccess(success: ((friendsData: NSData!) -> Void)) {
-        let url = "http://104.236.141.44:5000/user/friends/get"
+        let url = "\(Utilities.dopURL)user/friends/get"
         Utilities.loadDataFromURL(NSURL(string: url)!, completion:{(data, error) -> Void in
             if let urlData = data {
                 success(friendsData: urlData)
@@ -19,7 +19,7 @@ class FriendsController: NSObject {
     }
     
     class func deleteFriend(params:[String:AnyObject], success: ((couponsData: NSData!) -> Void)) {
-        let url = "http://104.236.141.44:5000/user/friends/delete"
+        let url = "\(Utilities.dopURL)user/friends/delete"
         Utilities.sendDataToURL(NSURL(string: url)!, method:"PUT",params: params, completion:{(data, error) -> Void in
             if let urlData = data {
                 success(couponsData: urlData)

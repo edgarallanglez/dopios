@@ -56,7 +56,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
     func getCoupons() {
         coupons = [Coupon]()
         
-        CouponController.getAllCouponsWithSuccess { (couponsData) -> Void in
+       /* CouponController.getAllCouponsWithSuccess { (couponsData) -> Void in
             let json = JSON(data: couponsData)
             
             var namex = "";
@@ -83,7 +83,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
             
 
         }
-        
+        */
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -145,7 +145,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         
         cell.loadItem(model, viewController: self)
         
-        let imageUrl = NSURL(string: "http://45.55.7.118/branches/images/\(model.branch_id)/\(model.logo)")
+        let imageUrl = NSURL(string: "\(Utilities.dopURL)\(model.branch_id)/\(model.logo)")
         
         
         let identifier = "Cell\(indexPath.section)"

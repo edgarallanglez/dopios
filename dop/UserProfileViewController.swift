@@ -33,7 +33,7 @@ class UserProfileViewController: UIViewController {
         fontCalis.titleLabel?.numberOfLines = 2
         fontCalis.setAttributedTitle(buttonStringAttributed, forState: .Normal)
         
-        UserProfileController.getUserProfile("http://45.55.7.118:5000/user/\(userId)/profile"){ profileData in
+        UserProfileController.getUserProfile("\(Utilities.dopURL)\(userId)/profile"){ profileData in
             
             let json = JSON(data: profileData)
             println(json)

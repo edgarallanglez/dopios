@@ -4,11 +4,16 @@
 //
 //  Created by Jose Eduardo Quintero Gutiérrez on 14/05/15.
 //  Copyright (c) 2015 Edgar Allan Glez. All rights reserved.
+
 //
 
 import Foundation
 
 class Utilities {
+    
+    class var dopURL: String {
+        return "http://45.55.7.118:5000/"
+    }
     class var dopColor: UIColor {
         return UIColor( red: 201.0/255.0 , green: 0.0/255.0 , blue: 112/255.0, alpha:1.0)
     }

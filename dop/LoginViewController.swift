@@ -92,7 +92,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
         view.addSubview(lockIcon)
         
         self.fbLoginView.delegate = self
-        self.fbLoginView.readPermissions = ["public_profile", "email", "user_friends"]
+        self.fbLoginView.readPermissions = ["public_profile", "email", "user_friends", "user_birthday"]
         
     }
     override func didReceiveMemoryWarning() {
@@ -142,7 +142,6 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
                         Twitter.sharedInstance().APIClient.loadUserWithID(session.userID) { twtrUser,
                             NSError -> Void in
                             
-                            
                             var fullNameArr = split(twtrUser!.name) {$0 == " "}
                             var firstName: String = fullNameArr[0]
                             var lastName: String! = fullNameArr.count > 1 ? fullNameArr[1] : nil
@@ -182,15 +181,16 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
     
     func loginViewFetchedUserInfo(loginView : FBLoginView!, user: FBGraphUser) {
         
-        var userEmail = user.objectForKey("email") as! String
-        println("entre aqui")
+        var userEmail = user.objectForKey("email") as? String ?? ""
+        var birthday = user.birthday ?? "2015-01-01"
+        println("\(birthday )")
         
     
         let params:[String: String] = [
             "facebook_key" : user.objectID,
             "names" : user.first_name + " " + user.middle_name,
             "surnames":user.last_name,
-            "birth_date" : "2015-01-01",
+            "birth_date" : birthday,
             "email": userEmail,
             "main_image":"https://graph.facebook.com/\(user.objectID)/picture?type=large"]
         
@@ -230,7 +230,8 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
     
     // Social login Call
     func socialLogin(type: String, params: [String:String]!){
-        LoginController.loginWithSocial("http://104.236.141.44:5000/user/login/" + type, params: params){ (couponsData) -> Void in
+        println("\(Utilities.dopURL)api/user/login/"+type)
+        LoginController.loginWithSocial("\(Utilities.dopURL)user/login/" + type, params: params){ (couponsData) -> Void in
             User.loginType = type
             let json = JSON(data: couponsData)
 
@@ -242,7 +243,6 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
             
             User.userImageUrl = String(stringInterpolationSegment: params["main_image"]!)
            
-//            User.userEmail = String(stringInterpolationSegment: userEmail)
             User.userName = String(stringInterpolationSegment: params["names"]!)
             User.userSurnames = String(stringInterpolationSegment: params["surnames"]!)
             
@@ -250,7 +250,6 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
                 if (!User.activeSession) {
                     self.performSegueWithIdentifier("showDashboard", sender: self)
                     User.activeSession = true
-                    
                 }
             });
         }
