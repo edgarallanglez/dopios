@@ -25,7 +25,7 @@ class NewsfeedViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         
-        var cell:NewsfeedCell = tableView.dequeueReusableCellWithIdentifier("NewsfeedCell", forIndexPath: indexPath) as! NewsfeedCell
+       var cell:NewsfeedCell = tableView.dequeueReusableCellWithIdentifier("NewsfeedCell", forIndexPath: indexPath) as! NewsfeedCell
         
         
         let model = self.newsfeed[indexPath.row]
@@ -69,11 +69,13 @@ class NewsfeedViewController: UIViewController, UITableViewDataSource, UITableVi
                 }
             }
         }
-
         
+        cell.selectionStyle = UITableViewCellSelectionStyle.None
+
         
         return cell
     }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,6 +86,8 @@ class NewsfeedViewController: UIViewController, UITableViewDataSource, UITableVi
         
         NewsfeedController.getAllFriendsTakingCouponsWithSuccess { (friendsData) -> Void in
             let json = JSON(data: friendsData)
+            
+            println(json)
             
             for (index: String, subJson: JSON) in json["data"]{
                 var friend_id = String(stringInterpolationSegment:subJson["friends_id"])
@@ -134,7 +138,11 @@ class NewsfeedViewController: UIViewController, UITableViewDataSource, UITableVi
         }
         
     }
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: false)
+    }
     
+ 
 
     /*
     // MARK: - Navigation

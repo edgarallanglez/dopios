@@ -20,9 +20,9 @@ class NewsfeedNote: NSObject {
     let branch_image: String
     
     init(friend_id:String!, user_id:Int!, branch_id:Int!, coupon_name: String!, branch_name: String!, names: String!, surnames: String!, user_image: String!, branch_image: String! ) {
-        self.friend_id = friend_id
-        self.user_id = user_id
-        self.branch_id = branch_id
+        self.friend_id = friend_id ?? ""
+        self.user_id = user_id ?? 0
+        self.branch_id = branch_id ?? 0
         self.coupon_name = coupon_name ?? ""
         self.branch_name = branch_name ?? ""
         self.names = names ?? ""

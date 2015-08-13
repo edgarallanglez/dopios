@@ -28,6 +28,8 @@ class TabbarController: UITabBarController {
         
         var imagen:UIImage = UIImage(named: "tabButton")!
         addCenterButtonWithImage(imagen)
+        
+        UIApplication.sharedApplication().statusBarStyle = .LightContent
 
     
         

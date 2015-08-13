@@ -460,19 +460,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="170" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="OZc-ML-bCf">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="170" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="OZc-ML-bCf">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="320" id="pm9-d2-aqL"/>
-                                </constraints>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="64" width="320" height="60"/>
-                                    <mask key="constraints">
-                                        <exclude reference="pm9-d2-aqL"/>
-                                    </mask>
-                                </variation>
                                 <connections>
                                     <outlet property="dataSource" destination="TTn-gh-Dpv" id="ehz-7c-BhE"/>
                                     <outlet property="delegate" destination="TTn-gh-Dpv" id="oAc-5m-lPv"/>
@@ -481,26 +472,17 @@
                         </subviews>
                         <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="OZc-ML-bCf" secondAttribute="trailing" id="2Jg-L3-0Lx"/>
-                            <constraint firstItem="OZc-ML-bCf" firstAttribute="top" secondItem="W3U-ac-5LL" secondAttribute="top" id="6U4-MU-V9V"/>
-                            <constraint firstItem="OZc-ML-bCf" firstAttribute="leading" secondItem="W3U-ac-5LL" secondAttribute="leading" id="Egk-nU-ZGa"/>
-                            <constraint firstItem="OZc-ML-bCf" firstAttribute="leading" secondItem="W3U-ac-5LL" secondAttribute="leading" id="LCr-Ax-jPa"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="OZc-ML-bCf" secondAttribute="trailing" constant="64" id="VRB-mb-WRD"/>
-                            <constraint firstItem="OZc-ML-bCf" firstAttribute="top" secondItem="IO3-pJ-NPT" secondAttribute="bottom" id="ep2-rn-5aP"/>
-                            <constraint firstItem="37d-tA-MMx" firstAttribute="top" secondItem="OZc-ML-bCf" secondAttribute="bottom" constant="427" id="igl-71-PWf"/>
-                            <constraint firstItem="37d-tA-MMx" firstAttribute="top" secondItem="OZc-ML-bCf" secondAttribute="bottom" id="lMe-Nu-MUt"/>
-                            <constraint firstItem="OZc-ML-bCf" firstAttribute="top" secondItem="IO3-pJ-NPT" secondAttribute="bottom" id="sc1-Tw-LfW"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="OZc-ML-bCf" secondAttribute="bottom" constant="32" id="yco-UG-eua"/>
+                            <constraint firstItem="37d-tA-MMx" firstAttribute="top" secondItem="OZc-ML-bCf" secondAttribute="bottom" id="QqC-p2-x7w"/>
+                            <constraint firstAttribute="trailing" secondItem="OZc-ML-bCf" secondAttribute="trailing" id="Yyj-H5-Nw9"/>
+                            <constraint firstItem="OZc-ML-bCf" firstAttribute="leading" secondItem="W3U-ac-5LL" secondAttribute="leading" id="mMe-38-hns"/>
+                            <constraint firstItem="OZc-ML-bCf" firstAttribute="top" secondItem="IO3-pJ-NPT" secondAttribute="bottom" id="nCq-sA-dGU"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="2Jg-L3-0Lx"/>
-                                <exclude reference="LCr-Ax-jPa"/>
-                                <exclude reference="VRB-mb-WRD"/>
-                                <exclude reference="ep2-rn-5aP"/>
-                                <exclude reference="sc1-Tw-LfW"/>
-                                <exclude reference="igl-71-PWf"/>
-                                <exclude reference="lMe-Nu-MUt"/>
+                                <exclude reference="Yyj-H5-Nw9"/>
+                                <exclude reference="mMe-38-hns"/>
+                                <exclude reference="nCq-sA-dGU"/>
+                                <exclude reference="QqC-p2-x7w"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -508,16 +490,10 @@
                                 <include reference="OZc-ML-bCf"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="2Jg-L3-0Lx"/>
-                                <exclude reference="6U4-MU-V9V"/>
-                                <exclude reference="Egk-nU-ZGa"/>
-                                <include reference="LCr-Ax-jPa"/>
-                                <include reference="VRB-mb-WRD"/>
-                                <include reference="ep2-rn-5aP"/>
-                                <exclude reference="sc1-Tw-LfW"/>
-                                <exclude reference="yco-UG-eua"/>
-                                <include reference="igl-71-PWf"/>
-                                <exclude reference="lMe-Nu-MUt"/>
+                                <include reference="Yyj-H5-Nw9"/>
+                                <include reference="mMe-38-hns"/>
+                                <include reference="nCq-sA-dGU"/>
+                                <include reference="QqC-p2-x7w"/>
                             </mask>
                         </variation>
                     </view>

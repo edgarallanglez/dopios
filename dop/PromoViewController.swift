@@ -55,6 +55,7 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
         cell.viewForBaselineLayout()?.alpha = 0
         
         
+        
         UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseInOut, animations: {
             cell.viewForBaselineLayout()?.alpha = 1
             }, completion: { finished in

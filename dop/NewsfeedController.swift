@@ -10,9 +10,10 @@ import UIKit
 
 class NewsfeedController: NSObject {
     class func getAllFriendsTakingCouponsWithSuccess(success: ((friendsData: NSData!) -> Void)) {
-        let url = "http://45.55.7.118:5000/api/coupon/used/get"
+        let url = "\(Utilities.dopURL)api/coupon/used/get"
         Utilities.loadDataFromURL(NSURL(string: url)!, completion:{(data, error) -> Void in
             if let urlData = data {
+ 
                 success(friendsData: urlData)
             }
         })
