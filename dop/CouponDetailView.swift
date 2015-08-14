@@ -22,6 +22,9 @@ class CouponDetailView: UIView {
         self.viewController!.performSegueWithIdentifier("branchProfile", sender: self)
     }
     
+    func loadView(viewController: UIViewController) {
+        self.viewController = viewController
+    }
     
   
 }

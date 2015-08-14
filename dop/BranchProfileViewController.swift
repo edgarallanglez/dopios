@@ -32,8 +32,8 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     override func viewDidAppear(animated: Bool) {
-        getBranchProfile()
-        getBranchCouponTimeline()
+//        getBranchProfile()
+//        getBranchCouponTimeline()
    }
     
 

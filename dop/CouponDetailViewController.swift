@@ -35,6 +35,8 @@ class CouponDetailViewController: UIViewController, UITableViewDelegate, UITable
         customView.branchName.layer.shadowRadius = 3
         customView.branchName.layer.shadowColor = UIColor.blackColor().CGColor
         
+        customView.loadView(self)
+        
         customView.branch_category.layer.shadowOffset = CGSize(width: 1, height: 3)
         customView.branch_category.layer.shadowOpacity = 1
         customView.branch_category.layer.shadowRadius = 3
