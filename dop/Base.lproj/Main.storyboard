@@ -16,6 +16,7 @@
                         <viewControllerLayoutGuide type="bottom" id="stb-ja-ps4"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="vqL-fy-uZe">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="transparentLogo" translatesAutoresizingMaskIntoConstraints="NO" id="17t-ND-Fy0">
@@ -25,13 +26,13 @@
                                     <constraint firstAttribute="height" constant="140" id="djw-dr-y5w"/>
                                 </constraints>
                                 <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="80" y="211" width="180" height="140"/>
+                                    <rect key="frame" x="110" y="231" width="180" height="140"/>
                                 </variation>
                             </imageView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="g5c-vP-1JZ">
                                 <rect key="frame" x="-10" y="-10" width="20" height="20"/>
                                 <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="160" y="408" width="20" height="20"/>
+                                    <rect key="frame" x="190" y="428" width="20" height="20"/>
                                 </variation>
                             </activityIndicatorView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bTk-lf-RsN" customClass="FBLoginView">
@@ -60,11 +61,11 @@
                                 <exclude reference="bTk-lf-RsN"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="2Gt-Ir-qOc"/>
-                                <exclude reference="XAa-8Z-qsN"/>
                                 <exclude reference="4rE-HZ-UNO"/>
                                 <exclude reference="4s3-pQ-5Dk"/>
                                 <exclude reference="ncK-3L-rcn"/>
+                                <exclude reference="2Gt-Ir-qOc"/>
+                                <exclude reference="XAa-8Z-qsN"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -74,11 +75,11 @@
                                 <include reference="bTk-lf-RsN"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="2Gt-Ir-qOc"/>
-                                <include reference="XAa-8Z-qsN"/>
                                 <exclude reference="4rE-HZ-UNO"/>
                                 <include reference="4s3-pQ-5Dk"/>
                                 <include reference="ncK-3L-rcn"/>
+                                <include reference="2Gt-Ir-qOc"/>
+                                <include reference="XAa-8Z-qsN"/>
                             </mask>
                         </variation>
                     </view>
@@ -405,6 +406,7 @@
                                     <constraint firstAttribute="width" constant="35" id="nv2-bt-NG2"/>
                                 </constraints>
                                 <state key="normal" title="Button">
+                                    <color key="titleColor" red="0.78823529410000004" green="0.0" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -420,6 +422,7 @@
                                 <rect key="frame" x="551" y="402" width="33" height="30"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="Near">
+                                    <color key="titleColor" red="0.78823529410000004" green="0.0" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -582,7 +585,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" systemItem="topRated" id="GGq-MD-JNo"/>
+                    <tabBarItem key="tabBarItem" badgeValue="4" systemItem="history" id="GGq-MD-JNo"/>
                     <connections>
                         <outlet property="tableView" destination="OZc-ML-bCf" id="b7Y-Ms-gf2"/>
                         <segue destination="OTe-uN-tYr" kind="show" identifier="userProfile" id="Xpw-UC-3s2"/>
@@ -591,7 +594,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o4o-23-0wi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3079.5" y="2202"/>
+            <point key="canvasLocation" x="3001.5" y="2186"/>
         </scene>
         <!--Branch Profile View Controller-->
         <scene sceneID="y5z-13-09x">
@@ -734,10 +737,10 @@
             </objects>
             <point key="canvasLocation" x="3756" y="2939"/>
         </scene>
-        <!--View Controller-->
+        <!--More-->
         <scene sceneID="VC5-SY-xD9">
             <objects>
-                <viewController id="Ahl-DB-2Wx" sceneMemberID="viewController">
+                <viewController title="More" id="Ahl-DB-2Wx" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="vg7-NH-1vo"/>
                         <viewControllerLayoutGuide type="bottom" id="PkT-w1-rPw"/>
@@ -751,9 +754,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jzj-Xc-TLv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="550.5" y="3231"/>
+            <point key="canvasLocation" x="982.5" y="3091"/>
         </scene>
-        <!--Item-->
+        <!--Promo View Controller-->
         <scene sceneID="NHY-2r-0nr">
             <objects>
                 <viewController id="Oc2-QP-LbR" customClass="PromoViewController" customModule="dop" customModuleProvider="target" sceneMemberID="viewController">
@@ -1027,7 +1030,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="1OK-gg-UUm"/>
+                    <tabBarItem key="tabBarItem" title="" id="1OK-gg-UUm"/>
                     <connections>
                         <outlet property="CouponsCollectionView" destination="S6V-kp-QsR" id="4id-Ck-mko"/>
                     </connections>
@@ -1036,10 +1039,10 @@
             </objects>
             <point key="canvasLocation" x="1689" y="3091"/>
         </scene>
-        <!--View-->
+        <!--Dashboard-->
         <scene sceneID="RLG-2o-LsD">
             <objects>
-                <viewController title="View" id="LnE-pO-m5e" customClass="DashboardViewController" customModule="dop" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Dashboard" id="LnE-pO-m5e" customClass="DashboardViewController" customModule="dop" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="q4c-hL-qxp"/>
                         <viewControllerLayoutGuide type="bottom" id="OCC-Xu-geL"/>
@@ -1107,11 +1110,11 @@
                         <color key="selectedImageTintColor" red="0.78823529410000004" green="0.0" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="LnE-pO-m5e" kind="relationship" relationship="viewControllers" id="uDW-C9-Db6"/>
-                        <segue destination="TTn-gh-Dpv" kind="relationship" relationship="viewControllers" id="9az-13-jEW"/>
-                        <segue destination="N9P-Ri-FBS" kind="relationship" relationship="viewControllers" id="Vcf-e7-spF"/>
-                        <segue destination="Oc2-QP-LbR" kind="relationship" relationship="viewControllers" id="H1d-6n-CAa"/>
-                        <segue destination="Ahl-DB-2Wx" kind="relationship" relationship="viewControllers" id="yWE-H4-69C"/>
+                        <segue destination="LnE-pO-m5e" kind="relationship" relationship="viewControllers" id="rxe-RR-cCA"/>
+                        <segue destination="N9P-Ri-FBS" kind="relationship" relationship="viewControllers" id="PzC-xE-unR"/>
+                        <segue destination="Oc2-QP-LbR" kind="relationship" relationship="viewControllers" id="Ueu-Tp-ucq"/>
+                        <segue destination="TTn-gh-Dpv" kind="relationship" relationship="viewControllers" id="vmc-eb-Wu8"/>
+                        <segue destination="Ahl-DB-2Wx" kind="relationship" relationship="viewControllers" id="Wq8-yb-aM8"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZQr-qy-Vjj" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1143,7 +1146,6 @@
     <resources>
         <image name="heart.png" width="128" height="128"/>
         <image name="menu" width="22" height="22"/>
-        <image name="starbucks_banner.jpg" width="628" height="353"/>
         <image name="transparentLogo" width="618" height="482"/>
     </resources>
     <inferredMetricsTieBreakers>

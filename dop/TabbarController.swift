@@ -68,7 +68,7 @@ class TabbarController: UITabBarController {
     }
     func pressed(sender: UIButton!) {
         
-        self.selectedIndex = 3
+        self.selectedIndex = 2
     }
 
   
