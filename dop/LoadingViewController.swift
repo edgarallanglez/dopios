@@ -60,7 +60,7 @@ class LoadingViewController: UIViewController,FBLoginViewDelegate,CLLocationMana
     // Social login Call
     func socialLogin(type: String, params: [String:String]!){
         println("\(Utilities.dopURL)api/user/login/"+type)
-        LoginController.loginWithSocial("\(Utilities.dopURL)user/login/" + type, params: params){ (couponsData) -> Void in
+        LoginController.loginWithSocial("\(Utilities.dopURL)api/user/login/" + type, params: params){ (couponsData) -> Void in
             User.loginType = type
             let json = JSON(data: couponsData)
             

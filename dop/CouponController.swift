@@ -26,5 +26,13 @@ class CouponController {
             }
         })
     }
+    class func likeCouponWithSuccess(params:[String:AnyObject], success: ((couponsData: NSData!) -> Void)) {
+        let url = "\(Utilities.dopURL)api/coupon/like"
+        Utilities.sendDataToURL(NSURL(string: url)!, method:"POST", params: params, completion:{(data, error) -> Void in
+            if let urlData = data {
+                success(couponsData: urlData)
+            }
+        })
+    }
     
 }
