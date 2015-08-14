@@ -145,6 +145,8 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         
         cell.loadItem(model, viewController: self)
         
+        
+        
         let imageUrl = NSURL(string: "\(Utilities.dopURL)\(model.branch_id)/\(model.logo)")
         
         

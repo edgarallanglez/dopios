@@ -15,4 +15,13 @@ class PromoCollectionCell: UICollectionViewCell {
     @IBOutlet var heart: UIImageView!
     @IBOutlet var likes: UILabel!
     
+    var viewController: UIViewController?
+    
+    func loadItem(coupon:Coupon, viewController: UIViewController) {
+//        nameLbl.text = coupon.name
+        coupon_description.text = coupon.couponDescription
+        //        branchImage.setBackgroundImage(UIImage(named: coupon.logo), forState: UIControlState.Normal)
+        self.viewController = viewController
+        
+    }
 }

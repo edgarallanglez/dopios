@@ -228,7 +228,8 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
     
     // Social login Call
     func socialLogin(type: String, params: [String:String]!){
-        LoginController.loginWithSocial("http:45.55.7.118:5000/user/login/" + type, params: params){ (couponsData) -> Void in
+        println("\(Utilities.dopURL)api/user/login/"+type)
+        LoginController.loginWithSocial("\(Utilities.dopURL)user/login/" + type, params: params){ (couponsData) -> Void in
             User.loginType = type
             let json = JSON(data: couponsData)
 
