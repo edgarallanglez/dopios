@@ -16,8 +16,9 @@ class Coupon:NSObject,Printable{
     let exp: String
     let logo: String
     let branch_id:Int
+    let company_id: Int
     
-    init(id: Int!, name: String!, description: String!, limit: String!, exp: String!, logo: String! ,branch_id:Int!) {
+    init(id: Int!, name: String!, description: String!, limit: String!, exp: String!, logo: String! ,branch_id:Int!, company_id: Int!) {
         self.id = id
         self.name = name ?? ""
         self.couponDescription = description ?? ""
@@ -25,5 +26,6 @@ class Coupon:NSObject,Printable{
         self.exp = exp ?? ""
         self.logo = logo ?? ""
         self.branch_id = branch_id
+        self.company_id = company_id
     }
 }

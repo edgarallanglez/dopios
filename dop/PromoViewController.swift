@@ -42,7 +42,7 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
         
         cell.loadItem(model, viewController: self)
         
-        let imageUrl = NSURL(string: "http://45.55.7.118/branches/images/\(model.branch_id)/\(model.logo)")
+        let imageUrl = NSURL(string: "\(Utilities.dopImagesURL)\(model.company_id)/\(model.logo)")
         let identifier = "Cell\(indexPath.row)"
         
         cell.backgroundColor = UIColor.whiteColor()
@@ -121,8 +121,9 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
                 let coupon_exp = "2015-09-30"
                 let coupon_logo = subJson["logo"].string!
                 let branch_id = subJson["branch_id"].int!
+                let company_id = subJson["company_id"].int!
                 
-                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id)
+                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id)
                 
                 self.coupons.append(model)
                 
