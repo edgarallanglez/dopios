@@ -20,8 +20,7 @@ class PromoCollectionCell: UICollectionViewCell {
     func loadItem(coupon:Coupon, viewController: UIViewController) {
 //        nameLbl.text = coupon.name
         coupon_description.text = coupon.couponDescription
-        //        branchImage.setBackgroundImage(UIImage(named: coupon.logo), forState: UIControlState.Normal)
+//        branchImage.setBackgroundImage(UIImage(named: coupon.logo), forState: UIControlState.Normal)
         self.viewController = viewController
-        
     }
 }

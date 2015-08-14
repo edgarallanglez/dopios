@@ -30,10 +30,10 @@ class CouponDetailViewController: UIViewController, UITableViewDelegate, UITable
         customView.layer.borderWidth = 0;
         
         
-        customView.branch_name.layer.shadowOffset = CGSize(width: 1, height: 3)
-        customView.branch_name.layer.shadowOpacity = 1
-        customView.branch_name.layer.shadowRadius = 3
-        customView.branch_name.layer.shadowColor = UIColor.blackColor().CGColor
+        customView.branchName.layer.shadowOffset = CGSize(width: 1, height: 3)
+        customView.branchName.layer.shadowOpacity = 1
+        customView.branchName.layer.shadowRadius = 3
+        customView.branchName.layer.shadowColor = UIColor.blackColor().CGColor
         
         customView.branch_category.layer.shadowOffset = CGSize(width: 1, height: 3)
         customView.branch_category.layer.shadowOpacity = 1
@@ -86,22 +86,15 @@ class CouponDetailViewController: UIViewController, UITableViewDelegate, UITable
 
         Utilities.getDataFromUrl(imageUrl!) { data in
             dispatch_async(dispatch_get_main_queue()) {
-                
                 println("Finished downloading \"\(imageUrl!.lastPathComponent!.stringByDeletingPathExtension)\".")
-                
+
                     var cell_image : UIImage = UIImage()
                     cell_image = UIImage ( data: data!)!
-                
-                
                     cell.user_image.image = cell_image
-                    
                     UIView.animateWithDuration(0.5, animations: {
                         cell.user_image.alpha = 1
                     })
-                    
                 }
-                
-                
             }
 
         
@@ -118,6 +111,23 @@ class CouponDetailViewController: UIViewController, UITableViewDelegate, UITable
         
         return customView
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let cell = sender as? CouponCell {
+            
+//            let i = couponsTableView.indexPathForCell(cell)!.section
+//            let model = self.coupons[i]
+            if segue.identifier == "branchProfile" {
+                let view = segue.destinationViewController as! BranchProfileViewController
+//                view.branchId = model.branch_id
+                view.logo = cell.branchImage.currentBackgroundImage
+//                view.logoString = model.logo
+                
+            }
+        }
+        
+    }
+
     
     
 

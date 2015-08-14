@@ -178,7 +178,6 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
                         UIView.animateWithDuration(0.5, animations: {
                             cell.branchImage.alpha = 1
                         })
-                   
                     }
                 }
             }

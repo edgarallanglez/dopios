@@ -32,32 +32,32 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     override func viewDidAppear(animated: Bool) {
-//        getBranchProfile()
-//        getBranchCouponTimeline()
+        getBranchProfile()
+        getBranchCouponTimeline()
    }
     
 
     
-//    func getBranchProfile() {
-//        BranchProfileController.getBranchProfileWithSuccess(branchId, success: { (branchData) -> Void in
-//            let data = JSON(data: branchData)
-//            var json = data["data"]
-//            json = json[0]
-//            var latitude = json["latitude"].double
-//            var longitude = json["longitude"].double
-//            
-//            let branchPin = CLLocation(latitude: latitude!, longitude: longitude!)
-//            var newLocation = CLLocationCoordinate2DMake(latitude!, longitude!)
-//            
-//            dispatch_async(dispatch_get_main_queue(), {
+    func getBranchProfile() {
+        BranchProfileController.getBranchProfileWithSuccess(branchId, success: { (branchData) -> Void in
+            let data = JSON(data: branchData)
+            var json = data["data"]
+            json = json[0]
+            var latitude = json["latitude"].double
+            var longitude = json["longitude"].double
+            
+            let branchPin = CLLocation(latitude: latitude!, longitude: longitude!)
+            var newLocation = CLLocationCoordinate2DMake(latitude!, longitude!)
+            
+            dispatch_async(dispatch_get_main_queue(), {
 //                self.branchName.text = json["name"].string
 //                var dropPin = MKPointAnnotation()
 //                dropPin.coordinate = newLocation
 //                self.branchLocationMap.addAnnotation(dropPin)
 //                self.centerMapOnLocation(branchPin)
-//            })
-//        })
-//    }
+            })
+        })
+    }
     
     func getBranchCouponTimeline() {
         coupons = [Coupon]()
