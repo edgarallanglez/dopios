@@ -104,6 +104,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
         var signIn = GPPSignIn.sharedInstance();
         signIn.authenticate();
     }
+    
     func finishedWithAuth(auth: GTMOAuth2Authentication!, error: NSError!) {
        if (GPPSignIn.sharedInstance().googlePlusUser != nil){
             println("Sign in")
@@ -125,12 +126,9 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
                 "main_image":userImage]
             
             self.socialLogin("google", params: params)
-
-            
         } else {
            println("Signed out.");
         }
-    
     }
     
     //Twitter login

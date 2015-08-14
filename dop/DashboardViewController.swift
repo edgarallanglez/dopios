@@ -109,31 +109,31 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         return view
     }
     
-//    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-//        cell.contentView.backgroundColor = UIColor.clearColor()
-//        
-//        var whiteRoundedCornerView:UIView!
-//        whiteRoundedCornerView = UIView(frame: CGRectMake(5, 10, self.view.bounds.width-10, 100))
-//        whiteRoundedCornerView.backgroundColor = UIColor(red: 174/255.0, green: 174/255.0, blue: 174/255.0, alpha: 1.0)
-//        whiteRoundedCornerView.layer.masksToBounds = false
-//        
-//        whiteRoundedCornerView.layer.shadowOpacity = 1.55;
-//        
-//        
-//        
-//        whiteRoundedCornerView.layer.shadowOffset = CGSizeMake(1, 0);
-//        whiteRoundedCornerView.layer.shadowColor=UIColor(red: 53/255.0, green: 143/255.0, blue: 185/255.0, alpha: 1.0).CGColor
-//        
-//        
-//        
-//        whiteRoundedCornerView.layer.cornerRadius=3.0
-//        whiteRoundedCornerView.layer.shadowOffset=CGSizeMake(-1, -1)
-//        whiteRoundedCornerView.layer.shadowOpacity=0.5
-//        cell.contentView.addSubview(whiteRoundedCornerView)
-//        cell.contentView.sendSubviewToBack(whiteRoundedCornerView)
-//        
-//        
-//    }
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        cell.contentView.backgroundColor = UIColor.clearColor()
+        
+        var whiteRoundedCornerView:UIView!
+        whiteRoundedCornerView = UIView(frame: CGRectMake(5, 10, self.view.bounds.width-10, 100))
+        whiteRoundedCornerView.backgroundColor = UIColor(red: 174/255.0, green: 174/255.0, blue: 174/255.0, alpha: 1.0)
+        whiteRoundedCornerView.layer.masksToBounds = false
+        
+        whiteRoundedCornerView.layer.shadowOpacity = 1.55;
+        
+        
+        
+        whiteRoundedCornerView.layer.shadowOffset = CGSizeMake(1, 0);
+        whiteRoundedCornerView.layer.shadowColor=UIColor(red: 53/255.0, green: 143/255.0, blue: 185/255.0, alpha: 1.0).CGColor
+        
+        
+        
+        whiteRoundedCornerView.layer.cornerRadius=3.0
+        whiteRoundedCornerView.layer.shadowOffset=CGSizeMake(-1, -1)
+        whiteRoundedCornerView.layer.shadowOpacity=0.5
+        cell.contentView.addSubview(whiteRoundedCornerView)
+        cell.contentView.sendSubviewToBack(whiteRoundedCornerView)
+        
+        
+    }
 
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -145,6 +145,8 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         
         cell.loadItem(model, viewController: self)
         
+        
+        
         let imageUrl = NSURL(string: "\(Utilities.dopURL)\(model.branch_id)/\(model.logo)")
         
         
@@ -155,7 +157,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
             let cell_image_saved : UIImage = self.cachedImages[identifier]!
 
             cell.branchImage.setBackgroundImage(cell_image_saved, forState: UIControlState.Normal)
-        } else{
+        } else {
             cell.branchImage.alpha = 0
 
             Utilities.getDataFromUrl(imageUrl!) { data in
@@ -178,8 +180,6 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
                         })
                    
                     }
-               
-                    
                 }
             }
         }
