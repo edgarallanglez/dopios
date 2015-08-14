@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="wsr-0B-cyM">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -7,10 +7,95 @@
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
+        <!--Loading View Controller-->
+        <scene sceneID="T4L-de-rRm">
+            <objects>
+                <viewController id="wsr-0B-cyM" customClass="LoadingViewController" customModule="dop" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="tPL-ib-44X"/>
+                        <viewControllerLayoutGuide type="bottom" id="stb-ja-ps4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="vqL-fy-uZe">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="transparentLogo" translatesAutoresizingMaskIntoConstraints="NO" id="17t-ND-Fy0">
+                                <rect key="frame" x="150" y="170" width="180" height="140"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="180" id="AZO-aR-cuQ"/>
+                                    <constraint firstAttribute="height" constant="140" id="djw-dr-y5w"/>
+                                </constraints>
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="80" y="211" width="180" height="140"/>
+                                </variation>
+                            </imageView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="g5c-vP-1JZ">
+                                <rect key="frame" x="-10" y="-10" width="20" height="20"/>
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="160" y="408" width="20" height="20"/>
+                                </variation>
+                            </activityIndicatorView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bTk-lf-RsN" customClass="FBLoginView">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="8" y="14" width="164" height="31"/>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="16" y="459" width="100" height="100"/>
+                                </variation>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.78823529410000004" green="0.0" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="17t-ND-Fy0" secondAttribute="centerX" id="2Gt-Ir-qOc"/>
+                            <constraint firstItem="g5c-vP-1JZ" firstAttribute="top" secondItem="17t-ND-Fy0" secondAttribute="bottom" constant="83" id="4rE-HZ-UNO"/>
+                            <constraint firstItem="g5c-vP-1JZ" firstAttribute="top" secondItem="17t-ND-Fy0" secondAttribute="bottom" constant="57" id="4s3-pQ-5Dk"/>
+                            <constraint firstAttribute="centerY" secondItem="17t-ND-Fy0" secondAttribute="centerY" id="XAa-8Z-qsN"/>
+                            <constraint firstAttribute="centerX" secondItem="g5c-vP-1JZ" secondAttribute="centerX" id="ncK-3L-rcn"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="17t-ND-Fy0"/>
+                                <exclude reference="g5c-vP-1JZ"/>
+                                <exclude reference="bTk-lf-RsN"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="2Gt-Ir-qOc"/>
+                                <exclude reference="XAa-8Z-qsN"/>
+                                <exclude reference="4rE-HZ-UNO"/>
+                                <exclude reference="4s3-pQ-5Dk"/>
+                                <exclude reference="ncK-3L-rcn"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="17t-ND-Fy0"/>
+                                <include reference="g5c-vP-1JZ"/>
+                                <include reference="bTk-lf-RsN"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="2Gt-Ir-qOc"/>
+                                <include reference="XAa-8Z-qsN"/>
+                                <exclude reference="4rE-HZ-UNO"/>
+                                <include reference="4s3-pQ-5Dk"/>
+                                <include reference="ncK-3L-rcn"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="fbLoginView" destination="bTk-lf-RsN" id="uTE-dY-2YL"/>
+                        <segue destination="NXt-XB-PrX" kind="show" identifier="showDashboard" id="njR-gH-Wm2"/>
+                        <segue destination="vXZ-lx-hvc" kind="show" identifier="showLogin" id="Y2I-Nl-h09"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="T45-2p-IVe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1632" y="1003"/>
+        </scene>
         <!--Login View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" userLabel="Login View Controller" customClass="LoginViewController" customModule="dop" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalTransitionStyle="crossDissolve" id="vXZ-lx-hvc" userLabel="Login View Controller" customClass="LoginViewController" customModule="dop" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -199,7 +284,7 @@
         <!--Reveal View Controller-->
         <scene sceneID="3nY-1O-UVn">
             <objects>
-                <viewController id="NXt-XB-PrX" customClass="SWRevealViewController" sceneMemberID="viewController">
+                <viewController modalTransitionStyle="crossDissolve" id="NXt-XB-PrX" customClass="SWRevealViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="CeQ-2n-NWJ"/>
                         <viewControllerLayoutGuide type="bottom" id="3sh-nD-zsr"/>
@@ -216,7 +301,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V2t-zC-qlW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-283.5" y="1635"/>
+            <point key="canvasLocation" x="-237" y="1867"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="R0S-ly-4WO">
@@ -1058,6 +1143,11 @@
     <resources>
         <image name="heart.png" width="128" height="128"/>
         <image name="menu" width="22" height="22"/>
+        <image name="starbucks_banner.jpg" width="628" height="353"/>
+        <image name="transparentLogo" width="618" height="482"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="NZR-gR-mOn"/>
+    </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

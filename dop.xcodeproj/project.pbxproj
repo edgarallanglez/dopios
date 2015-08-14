@@ -81,6 +81,7 @@
 		A0EC05991B7D1C69003CADB2 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0EC05981B7D1C69003CADB2 /* SWRevealViewController.m */; };
 		A0EC059B1B7D1ED1003CADB2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EC059A1B7D1ED1003CADB2 /* CoreGraphics.framework */; };
 		A0EC059D1B7D1FD5003CADB2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EC059C1B7D1FD5003CADB2 /* UIKit.framework */; };
+		A0EC05B41B7D622A003CADB2 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EC05B31B7D622A003CADB2 /* LoadingViewController.swift */; };
 		A0F7E9201AFAE48500A4F0F2 /* CouponCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F7E91E1AFAE48500A4F0F2 /* CouponCell.swift */; };
 		A0F7E9211AFAE48500A4F0F2 /* CouponCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0F7E91F1AFAE48500A4F0F2 /* CouponCell.xib */; };
 /* End PBXBuildFile section */
@@ -179,6 +180,7 @@
 		A0EC05981B7D1C69003CADB2 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		A0EC059A1B7D1ED1003CADB2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		A0EC059C1B7D1FD5003CADB2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		A0EC05B31B7D622A003CADB2 /* LoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		A0F7E91E1AFAE48500A4F0F2 /* CouponCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CouponCell.swift; sourceTree = "<group>"; };
 		A0F7E91F1AFAE48500A4F0F2 /* CouponCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CouponCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -324,6 +326,7 @@
 				A060F7851B702FAC009D6ADB /* CouponDetailViewController.swift */,
 				A060F78B1B72A307009D6ADB /* CouponDetailView.xib */,
 				A060F78D1B72B475009D6ADB /* CouponDetailView.swift */,
+				A0EC05B31B7D622A003CADB2 /* LoadingViewController.swift */,
 				A060F78A1B717FD2009D6ADB /* Blur */,
 				A082F4811B18CEC7001C8C52 /* Newsfeed */,
 				9D0DB46F1B17D2A50009FE6C /* Nearby */,
@@ -588,6 +591,7 @@
 				A0DF72911B13A66C006EE8F4 /* FriendsViewController.swift in Sources */,
 				A0365FE01AF95518000A325D /* MenuController.swift in Sources */,
 				9DB3DABF1B740070004AC0F1 /* BranchProfileAboutView.swift in Sources */,
+				A0EC05B41B7D622A003CADB2 /* LoadingViewController.swift in Sources */,
 				A0578C651B0E7D2B0033B5BD /* UserProfileViewController.swift in Sources */,
 				9DB6121A1B192FCC004B8DB8 /* NearbyMapController.swift in Sources */,
 				A082F4871B18E4FF001C8C52 /* NewsfeedNote.swift in Sources */,
