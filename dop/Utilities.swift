@@ -14,6 +14,9 @@ class Utilities {
     class var dopURL: String {
         return "http://45.55.7.118:5000/"
     }
+    class var dopImagesURL : String {
+        return "http://45.55.7.118/branches/images/"
+    }
     class var dopColor: UIColor {
         return UIColor( red: 201.0/255.0 , green: 0.0/255.0 , blue: 112/255.0, alpha:1.0)
     }
