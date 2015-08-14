@@ -41,41 +41,12 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
         let model = self.coupons[indexPath.row]
         
         cell.loadItem(model, viewController: self)
-        let imageUrl = NSURL(string: "\(Utilities.dopURL)branches/\(model.branch_id)/\(model.logo)")
         
-        
+        let imageUrl = NSURL(string: "http://45.55.7.118/branches/images/\(model.branch_id)/\(model.logo)")
         let identifier = "Cell\(indexPath.row)"
-        
-        println(identifier)
-        if(self.cachedImages[identifier] != nil){
-            let cell_image_saved : UIImage = self.cachedImages[identifier]!
-            
-            cell.branch_banner.image = cell_image_saved
-        } else {
-            cell.branch_banner.alpha = 0
-            
-            Utilities.getDataFromUrl(imageUrl!) { photo in
-                dispatch_async(dispatch_get_main_queue()) {
-                    
-                    println("Finished downloading \"\(imageUrl!.lastPathComponent!.stringByDeletingPathExtension)\".")
-                    var imageData: NSData = photo!
-                    if self.CouponsCollectionView.indexPathForCell(cell)?.row == indexPath.row {
-                        self.cachedImages[identifier] = UIImage(data: imageData)
-                        cell.branch_banner?.image = UIImage(data: imageData)
-                        UIView.animateWithDuration(0.5, animations: {
-                            cell.branch_banner.alpha = 1
-                        })
-                        
-                    }
-                }
-            }
-        }
-
         
         cell.backgroundColor = UIColor.whiteColor()
         cell.viewForBaselineLayout()?.sizeThatFits(CGSizeMake(1000, 50))
-        
-        
         
         cell.layer.shadowColor = UIColor.grayColor().CGColor
         cell.layer.shadowOffset = CGSizeMake(0, 2.0)
@@ -84,12 +55,28 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
         cell.layer.masksToBounds = false
         cell.layer.shadowPath = UIBezierPath(rect:CGRectMake(0, 0, cell.bounds.size.width, cell.bounds.size.height)).CGPath
         
-       cell.heart.image = cell.heart.image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-       cell.heart.tintColor = UIColor.lightGrayColor()
+        cell.heart.image = cell.heart.image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        cell.heart.tintColor = UIColor.lightGrayColor()
         
         cell.viewForBaselineLayout()?.alpha = 0
         
-        
+        if (self.cachedImages[identifier] != nil){
+            cell.branch_banner.image = self.cachedImages[identifier]!
+        } else {
+            cell.branch_banner.alpha = 0
+            Utilities.getDataFromUrl(imageUrl!) { photo in
+                dispatch_async(dispatch_get_main_queue()) {
+                    var imageData: NSData = NSData(data: photo!)
+                    if self.CouponsCollectionView.indexPathForCell(cell)?.row == indexPath.row {
+                        self.cachedImages[identifier] = UIImage(data: imageData)
+                        cell.branch_banner.image = self.cachedImages[identifier]
+                        UIView.animateWithDuration(0.5, animations: {
+                            cell.branch_banner.alpha = 1
+                        })
+                    }
+                }
+            }
+        }
         
         UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseInOut, animations: {
             cell.viewForBaselineLayout()?.alpha = 1
