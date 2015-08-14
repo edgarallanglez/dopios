@@ -19,7 +19,8 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "Cupones"
+        self.title = ""
+        //self.navigationItem.title = "Promociones";
         self.navigationController?.navigationBar.topItem!.title = "Hoy tenemos"
         getCoupons()
     }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="wsr-0B-cyM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="wsr-0B-cyM">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -400,6 +400,7 @@
                                     <constraint firstAttribute="width" constant="35" id="nv2-bt-NG2"/>
                                 </constraints>
                                 <state key="normal" title="Button">
+                                    <color key="titleColor" red="0.78823529410000004" green="0.0" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -415,6 +416,7 @@
                                 <rect key="frame" x="551" y="402" width="33" height="30"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="Near">
+                                    <color key="titleColor" red="0.78823529410000004" green="0.0" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -578,7 +580,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" systemItem="topRated" id="GGq-MD-JNo"/>
+                    <tabBarItem key="tabBarItem" badgeValue="4" systemItem="history" id="GGq-MD-JNo"/>
                     <connections>
                         <outlet property="tableView" destination="OZc-ML-bCf" id="b7Y-Ms-gf2"/>
                         <segue destination="OTe-uN-tYr" kind="show" identifier="userProfile" id="Xpw-UC-3s2"/>
@@ -587,7 +589,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o4o-23-0wi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3079.5" y="2202"/>
+            <point key="canvasLocation" x="3001.5" y="2186"/>
         </scene>
         <!--Branch Profile View Controller-->
         <scene sceneID="y5z-13-09x">
@@ -712,10 +714,10 @@
             </objects>
             <point key="canvasLocation" x="3762" y="2949"/>
         </scene>
-        <!--View Controller-->
+        <!--More-->
         <scene sceneID="VC5-SY-xD9">
             <objects>
-                <viewController id="Ahl-DB-2Wx" sceneMemberID="viewController">
+                <viewController title="More" id="Ahl-DB-2Wx" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="vg7-NH-1vo"/>
                         <viewControllerLayoutGuide type="bottom" id="PkT-w1-rPw"/>
@@ -729,9 +731,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jzj-Xc-TLv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="550.5" y="3231"/>
+            <point key="canvasLocation" x="982.5" y="3091"/>
         </scene>
-        <!--Item-->
+        <!--Promo View Controller-->
         <scene sceneID="NHY-2r-0nr">
             <objects>
                 <viewController id="Oc2-QP-LbR" customClass="PromoViewController" customModule="dop" customModuleProvider="target" sceneMemberID="viewController">
@@ -989,7 +991,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="1OK-gg-UUm"/>
+                    <tabBarItem key="tabBarItem" title="" id="1OK-gg-UUm"/>
                     <connections>
                         <outlet property="CouponsCollectionView" destination="S6V-kp-QsR" id="4id-Ck-mko"/>
                     </connections>
@@ -998,10 +1000,10 @@
             </objects>
             <point key="canvasLocation" x="1689" y="3091"/>
         </scene>
-        <!--View-->
+        <!--Dashboard-->
         <scene sceneID="RLG-2o-LsD">
             <objects>
-                <viewController title="View" id="LnE-pO-m5e" customClass="DashboardViewController" customModule="dop" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Dashboard" id="LnE-pO-m5e" customClass="DashboardViewController" customModule="dop" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="q4c-hL-qxp"/>
                         <viewControllerLayoutGuide type="bottom" id="OCC-Xu-geL"/>
@@ -1068,11 +1070,11 @@
                         <color key="selectedImageTintColor" red="0.78823529410000004" green="0.0" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="LnE-pO-m5e" kind="relationship" relationship="viewControllers" id="uDW-C9-Db6"/>
-                        <segue destination="TTn-gh-Dpv" kind="relationship" relationship="viewControllers" id="9az-13-jEW"/>
-                        <segue destination="N9P-Ri-FBS" kind="relationship" relationship="viewControllers" id="Vcf-e7-spF"/>
-                        <segue destination="Oc2-QP-LbR" kind="relationship" relationship="viewControllers" id="H1d-6n-CAa"/>
-                        <segue destination="Ahl-DB-2Wx" kind="relationship" relationship="viewControllers" id="yWE-H4-69C"/>
+                        <segue destination="LnE-pO-m5e" kind="relationship" relationship="viewControllers" id="rxe-RR-cCA"/>
+                        <segue destination="N9P-Ri-FBS" kind="relationship" relationship="viewControllers" id="PzC-xE-unR"/>
+                        <segue destination="Oc2-QP-LbR" kind="relationship" relationship="viewControllers" id="Ueu-Tp-ucq"/>
+                        <segue destination="TTn-gh-Dpv" kind="relationship" relationship="viewControllers" id="vmc-eb-Wu8"/>
+                        <segue destination="Ahl-DB-2Wx" kind="relationship" relationship="viewControllers" id="Wq8-yb-aM8"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZQr-qy-Vjj" userLabel="First Responder" sceneMemberID="firstResponder"/>
