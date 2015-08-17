@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="wsr-0B-cyM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="wsr-0B-cyM">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -464,7 +464,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dAQ-xg-ixN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2406" y="2993"/>
+            <point key="canvasLocation" x="2634" y="3057"/>
         </scene>
         <!--Coupon Detail-->
         <scene sceneID="FTa-HT-MOz">
@@ -524,6 +524,7 @@
                     <size key="freeformSize" width="400" height="600"/>
                     <connections>
                         <outlet property="tableView" destination="txi-HI-fr9" id="MdI-2K-arA"/>
+                        <segue destination="Dg5-nB-AdV" kind="show" identifier="branchProfile" id="UiV-ht-QT3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WDY-aO-Q10" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -599,11 +600,11 @@
                         <viewControllerLayoutGuide type="bottom" id="DUa-Tw-UWu"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="pGt-4P-aCb">
-                        <rect key="frame" x="0.0" y="0.0" width="400" height="800"/>
+                        <rect key="frame" x="0.0" y="0.0" width="400" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="500" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="oED-Y3-jzq">
-                                <rect key="frame" x="0.0" y="0.0" width="400" height="800"/>
+                                <rect key="frame" x="0.0" y="0.0" width="400" height="736"/>
                                 <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <outlet property="dataSource" destination="Dg5-nB-AdV" id="f2E-RA-lny"/>
@@ -627,25 +628,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="alT-c0-6jc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3772" y="1333"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="uk4-7B-aBj">
-            <objects>
-                <viewController id="vFK-or-gsb" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="G6c-Zn-vi7"/>
-                        <viewControllerLayoutGuide type="bottom" id="2sQ-KM-XMH"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="PXH-cC-NPb">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ZRP-TQ-jcu" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4548" y="1333"/>
+            <point key="canvasLocation" x="4122" y="3921"/>
         </scene>
         <!--User Profile View Controller-->
         <scene sceneID="ejZ-Wu-Mma">
@@ -689,7 +672,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tyD-zm-42m" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3811.5" y="2211"/>
+            <point key="canvasLocation" x="3823.5" y="2202"/>
         </scene>
         <!--Friends View Controller-->
         <scene sceneID="g67-F1-aZg">
@@ -729,7 +712,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j5Z-Km-6dS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3756" y="2939"/>
+            <point key="canvasLocation" x="3762" y="2949"/>
         </scene>
         <!--More-->
         <scene sceneID="VC5-SY-xD9">
@@ -1063,7 +1046,6 @@
                     <connections>
                         <outlet property="couponsTableView" destination="8GJ-8r-L3Y" id="zs9-9l-XCA"/>
                         <outlet property="menuButton" destination="eDn-09-xhg" id="wrM-WA-YKd"/>
-                        <segue destination="Dg5-nB-AdV" kind="show" identifier="branchProfile" id="Pp4-g8-lvG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xE7-5S-XVQ" userLabel="First Responder" sceneMemberID="firstResponder"/>

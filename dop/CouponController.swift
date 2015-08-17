@@ -10,7 +10,7 @@ class CouponController {
     
   
     class func getAllCouponsWithSuccess(success: ((couponsData: NSData!) -> Void)) {
-        let url = "\(Utilities.dopURL)api/coupon/all/get"
+        let url = "\(Utilities.dopURL)coupon/all/get"
         Utilities.loadDataFromURL(NSURL(string: url)!, completion:{(data, error) -> Void in
             if let urlData = data {
                 success(couponsData: urlData)
@@ -19,7 +19,7 @@ class CouponController {
     }
     
     class func takeCouponWithSuccess(params:[String:AnyObject], success: ((couponsData: NSData!) -> Void)) {
-        let url = "\(Utilities.dopURL)api/coupon/user/take"
+        let url = "\(Utilities.dopURL)coupon/user/take"
         Utilities.sendDataToURL(NSURL(string: url)!, method:"POST", params: params, completion:{(data, error) -> Void in
             if let urlData = data {
                 success(couponsData: urlData)
@@ -27,7 +27,7 @@ class CouponController {
         })
     }
     class func likeCouponWithSuccess(params:[String:AnyObject], success: ((couponsData: NSData!) -> Void)) {
-        let url = "\(Utilities.dopURL)api/coupon/like"
+        let url = "\(Utilities.dopURL)coupon/like"
         Utilities.sendDataToURL(NSURL(string: url)!, method:"POST", params: params, completion:{(data, error) -> Void in
             if let urlData = data {
                 success(couponsData: urlData)

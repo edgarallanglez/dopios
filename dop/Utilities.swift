@@ -12,7 +12,7 @@ import Foundation
 class Utilities {
     
     class var dopURL: String {
-        return "http://45.55.7.118:5000/"
+        return "http://45.55.7.118:5000/api/"
     }
     class var dopImagesURL : String {
         return "http://45.55.7.118/branches/images/"

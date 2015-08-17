@@ -32,7 +32,6 @@ class PromoCollectionCell: UICollectionViewCell {
         
         
         self.viewController = viewController
-        
     }
     func likeCoupon(sender:UITapGestureRecognizer){
         let params:[String: AnyObject] = [
