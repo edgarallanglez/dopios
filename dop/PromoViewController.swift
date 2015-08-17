@@ -57,7 +57,6 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
         cell.layer.shadowPath = UIBezierPath(rect:CGRectMake(0, 0, cell.bounds.size.width, cell.bounds.size.height)).CGPath
         
         cell.heart.image = cell.heart.image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-        cell.heart.tintColor = UIColor.lightGrayColor()
         
         cell.viewForBaselineLayout()?.alpha = 0
         
@@ -135,8 +134,10 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
                 let coupon_logo = subJson["logo"].string!
                 let branch_id = subJson["branch_id"].int!
                 let company_id = subJson["company_id"].int!
-                
-                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id)
+                let total_likes = subJson["total_likes"].int!
+                let user_like = subJson["user_like"].int!
+
+                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes:total_likes,user_like:user_like)
                 
                 self.coupons.append(model)
                 

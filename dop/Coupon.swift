@@ -17,8 +17,10 @@ class Coupon:NSObject,Printable{
     let logo: String
     let branch_id:Int
     let company_id: Int
-    
-    init(id: Int!, name: String!, description: String!, limit: String!, exp: String!, logo: String! ,branch_id:Int!, company_id: Int!) {
+    let total_likes: Int
+    let user_like: Int
+
+    init(id: Int!, name: String!, description: String!, limit: String!, exp: String!, logo: String! ,branch_id:Int!, company_id: Int!, total_likes: Int!, user_like:Int!) {
         self.id = id
         self.name = name ?? ""
         self.couponDescription = description ?? ""
@@ -27,5 +29,7 @@ class Coupon:NSObject,Printable{
         self.logo = logo ?? ""
         self.branch_id = branch_id
         self.company_id = company_id
+        self.total_likes = total_likes
+        self.user_like = user_like
     }
 }
