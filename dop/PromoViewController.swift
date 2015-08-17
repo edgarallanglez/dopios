@@ -79,6 +79,10 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
             }
         }
         
+        /*let gesture = UITapGestureRecognizer(target: self, action: "likeCoupon:")
+        cell.heartView.addGestureRecognizer(gesture)*/
+
+        
         UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseInOut, animations: {
             cell.viewForBaselineLayout()?.alpha = 1
             }, completion: { finished in
@@ -98,36 +102,14 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
     }
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         
-        let params:[String: String] = [
-            "coupon_id" : "4"]
         
-        CouponController.likeCouponWithSuccess(params){ (couponsData) -> Void in
-            dispatch_async(dispatch_get_main_queue(), {
-                println(couponsData)
-            });
-        }
-        CouponController.getAllCouponsWithSuccess { (couponsData) -> Void in
-            let json = JSON(data: couponsData)
-            
-            for (index: String, subJson: JSON) in json["data"]{
-                var coupon_id = subJson["coupon_id"].int!
-                let coupon_name = subJson["name"].string!
-                let coupon_description = subJson["description"].string!
-                let coupon_limit = subJson["limit"].string
-                let coupon_exp = "2015-09-30"
-                let coupon_logo = subJson["logo"].string!
-                let branch_id = subJson["branch_id"].int!
-                let company_id = subJson["company_id"].int!
-                
-                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id)
-                
-                self.coupons.append(model)
-                
-                println(subJson)
-            }
-        }
+        
+        
+    
 
     }
+    
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
