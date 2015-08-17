@@ -10,7 +10,8 @@ class CouponController {
     
   
     class func getAllCouponsWithSuccess(success: ((couponsData: NSData!) -> Void)) {
-        let url = "\(Utilities.dopURL)coupon/all/get"
+        
+        let url = "\(Utilities.dopURL)coupon/all/get/user"
         Utilities.loadDataFromURL(NSURL(string: url)!, completion:{(data, error) -> Void in
             if let urlData = data {
                 success(couponsData: urlData)
