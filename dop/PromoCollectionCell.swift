@@ -21,17 +21,22 @@ class PromoCollectionCell: UICollectionViewCell {
     var couponId:Int!
     
     func loadItem(coupon:Coupon, viewController: UIViewController) {
-//        nameLbl.text = coupon.name
         coupon_description.text = coupon.couponDescription
-        //        branchImage.setBackgroundImage(UIImage(named: coupon.logo), forState: UIControlState.Normal)
         
         let gesture = UITapGestureRecognizer(target: self, action: "likeCoupon:")
         heartView.addGestureRecognizer(gesture)
         
         self.couponId = coupon.id
         
+        self.likes.text = String(coupon.total_likes)
         
         self.viewController = viewController
+        
+        if(coupon.user_like == 1){
+            self.heart.tintColor = Utilities.dopColor
+        }else{
+            self.heart.tintColor = UIColor.lightGrayColor()
+        }
     }
     func likeCoupon(sender:UITapGestureRecognizer){
         let params:[String: AnyObject] = [
@@ -43,8 +48,12 @@ class PromoCollectionCell: UICollectionViewCell {
                 let json = JSON(data: couponsData)
                 if(self.heart.tintColor == UIColor.lightGrayColor()){
                     self.heart.tintColor = Utilities.dopColor
+                    let totalLikes = (self.likes.text!.toInt())!+1
+                    self.likes.text = String(stringInterpolationSegment: totalLikes)
                 }else{
                     self.heart.tintColor = UIColor.lightGrayColor()
+                    let totalLikes = (self.likes.text!.toInt())!-1
+                    self.likes.text = String(stringInterpolationSegment: totalLikes)
                 }
 
                 println(json)
