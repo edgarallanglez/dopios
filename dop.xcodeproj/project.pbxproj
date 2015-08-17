@@ -19,6 +19,8 @@
 		9D4C04811B18EB0200D5DCEE /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9D4C04801B18EAF600D5DCEE /* FontAwesome.ttf */; };
 		9D697C7A1B5EF13000D786AA /* iconfonts-fontawesome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D697C791B5EF13000D786AA /* iconfonts-fontawesome.swift */; };
 		9DA7AA9F1B50309400297690 /* BranchProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA7AA9E1B50309400297690 /* BranchProfileController.swift */; };
+		9DA85CFB1B825057009DA186 /* BranchProfileLastCampaign.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DA85CFA1B825057009DA186 /* BranchProfileLastCampaign.xib */; };
+		9DA85CFD1B82587E009DA186 /* BranchProfileLastCampaign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA85CFC1B82587E009DA186 /* BranchProfileLastCampaign.swift */; };
 		9DAAE7B71B0E810B00209588 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DAAE7B51B0E810B00209588 /* Main.storyboard */; };
 		9DB3DABB1B73C28A004AC0F1 /* BranchProfileTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB3DABA1B73C28A004AC0F1 /* BranchProfileTopView.swift */; };
 		9DB3DABD1B73ED96004AC0F1 /* BranchProfileAboutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DB3DABC1B73ED96004AC0F1 /* BranchProfileAboutView.xib */; };
@@ -113,6 +115,8 @@
 		9D4C04801B18EAF600D5DCEE /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
 		9D697C791B5EF13000D786AA /* iconfonts-fontawesome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "iconfonts-fontawesome.swift"; sourceTree = "<group>"; };
 		9DA7AA9E1B50309400297690 /* BranchProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BranchProfileController.swift; sourceTree = "<group>"; };
+		9DA85CFA1B825057009DA186 /* BranchProfileLastCampaign.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BranchProfileLastCampaign.xib; sourceTree = "<group>"; };
+		9DA85CFC1B82587E009DA186 /* BranchProfileLastCampaign.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BranchProfileLastCampaign.swift; sourceTree = "<group>"; };
 		9DAAE7B61B0E810B00209588 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9DB3DABA1B73C28A004AC0F1 /* BranchProfileTopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BranchProfileTopView.swift; sourceTree = "<group>"; };
 		9DB3DABC1B73ED96004AC0F1 /* BranchProfileAboutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BranchProfileAboutView.xib; sourceTree = "<group>"; };
@@ -270,6 +274,8 @@
 				9DB3DABA1B73C28A004AC0F1 /* BranchProfileTopView.swift */,
 				9DB3DABC1B73ED96004AC0F1 /* BranchProfileAboutView.xib */,
 				9DB3DABE1B740070004AC0F1 /* BranchProfileAboutView.swift */,
+				9DA85CFA1B825057009DA186 /* BranchProfileLastCampaign.xib */,
+				9DA85CFC1B82587E009DA186 /* BranchProfileLastCampaign.swift */,
 			);
 			name = BranchProfile;
 			sourceTree = "<group>";
@@ -545,6 +551,7 @@
 				A060F78C1B72A307009D6ADB /* CouponDetailView.xib in Resources */,
 				A0578C601B0E40D30033B5BD /* GooglePlus.bundle in Resources */,
 				A0F7E9211AFAE48500A4F0F2 /* CouponCell.xib in Resources */,
+				9DA85CFB1B825057009DA186 /* BranchProfileLastCampaign.xib in Resources */,
 				9DB6BB2A1B72A6A000FF2659 /* BranchProfileTopView.xib in Resources */,
 				A0BB9BBA1B13E4F1000BA261 /* FriendCell.xib in Resources */,
 			);
@@ -610,6 +617,7 @@
 				A0DF72951B13E262006EE8F4 /* Friend.swift in Sources */,
 				A082F4831B18CEE6001C8C52 /* NewsfeedViewController.swift in Sources */,
 				A0F7E9201AFAE48500A4F0F2 /* CouponCell.swift in Sources */,
+				9DA85CFD1B82587E009DA186 /* BranchProfileLastCampaign.swift in Sources */,
 				A060F7891B717DB9009D6ADB /* UIImage+ImageEffects.m in Sources */,
 				A060F77A1B6C4CA3009D6ADB /* TabbarController.swift in Sources */,
 				9DB3DABB1B73C28A004AC0F1 /* BranchProfileTopView.swift in Sources */,

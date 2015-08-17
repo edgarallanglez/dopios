@@ -10,11 +10,11 @@
             <rect key="frame" x="0.0" y="0.0" width="430" height="574"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="djO-9i-eqX">
-                    <rect key="frame" x="0.0" y="0.0" width="430" height="568"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="djO-9i-eqX">
+                    <rect key="frame" x="0.0" y="0.0" width="430" height="574"/>
                     <subviews>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="starbucks_banner.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Utr-Xn-PBU">
-                            <rect key="frame" x="0.0" y="0.0" width="400" height="170"/>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="starbucks_banner.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Utr-Xn-PBU">
+                            <rect key="frame" x="0.0" y="0.0" width="430" height="170"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="170" id="cQd-xA-1a1"/>
                             </constraints>
@@ -22,8 +22,8 @@
                                 <rect key="frame" x="20" y="0.0" width="400" height="225"/>
                             </variation>
                         </imageView>
-                        <mapView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" mapType="standard" zoomEnabled="NO" scrollEnabled="NO" rotateEnabled="NO" pitchEnabled="NO" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9jo-1c-SY2">
-                            <rect key="frame" x="0.0" y="225" width="400" height="150"/>
+                        <mapView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" mapType="standard" zoomEnabled="NO" scrollEnabled="NO" rotateEnabled="NO" pitchEnabled="NO" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9jo-1c-SY2">
+                            <rect key="frame" x="0.0" y="170" width="430" height="150"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="150" id="hlv-Jf-qTY"/>
                             </constraints>
@@ -31,27 +31,8 @@
                                 <rect key="frame" x="20" y="225" width="400" height="150"/>
                             </variation>
                         </mapView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="starbucks.gif" translatesAutoresizingMaskIntoConstraints="NO" id="tRJ-aA-Ugk">
-                            <rect key="frame" x="25" y="64" width="84" height="84"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="84" id="E9Z-pG-2fc"/>
-                                <constraint firstAttribute="width" constant="84" id="hAy-yK-ti9"/>
-                            </constraints>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                    <integer key="value" value="42"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                    <integer key="value" value="2"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
-                            <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
-                                <rect key="frame" x="46" y="112" width="84" height="84"/>
-                            </variation>
-                        </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ym8-s7-Cb9">
-                            <rect key="frame" x="149" y="119" width="87" height="30"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ym8-s7-Cb9">
+                            <rect key="frame" x="323" y="133" width="87" height="28"/>
                             <color key="backgroundColor" red="0.85098039219999999" green="0.015686274510000001" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="87" id="emT-wQ-rIP"/>
@@ -71,9 +52,9 @@
                                 <rect key="frame" x="170" y="175" width="87" height="30"/>
                             </variation>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Cafetería" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A5Q-L7-2xa">
-                            <rect key="frame" x="149" y="96" width="243" height="22"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cafetería" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A5Q-L7-2xa">
+                            <rect key="frame" x="0.0" y="91" width="430" height="27"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                             <size key="shadowOffset" width="0.0" height="-2"/>
@@ -81,11 +62,11 @@
                                 <rect key="frame" x="170" y="149" width="243" height="21"/>
                             </variation>
                         </label>
-                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AEZ-2G-r4r">
-                            <rect key="frame" x="-8" y="381" width="409" height="187"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AEZ-2G-r4r">
+                            <rect key="frame" x="-8" y="326" width="409" height="187"/>
                             <subviews>
-                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" scrollEnabled="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uh7-Ku-twV">
-                                    <rect key="frame" x="20" y="39" width="368" height="128"/>
+                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uh7-Ku-twV">
+                                    <rect key="frame" x="20" y="39" width="368" height="133"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="368" id="xh2-9K-7ka"/>
@@ -123,10 +104,10 @@
                                 <constraint firstItem="Xgb-ei-hMP" firstAttribute="leading" secondItem="AEZ-2G-r4r" secondAttribute="leading" constant="21" id="ogo-Nl-rFN"/>
                             </constraints>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="abc-kx-fvl">
-                            <rect key="frame" x="141" y="64" width="110" height="30"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                            <state key="normal" title="Starbucks">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="abc-kx-fvl">
+                            <rect key="frame" x="0.0" y="25" width="430" height="66"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="45"/>
+                            <state key="normal" title="2x1 Té chai">
                                 <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -137,29 +118,23 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="ym8-s7-Cb9" firstAttribute="top" secondItem="A5Q-L7-2xa" secondAttribute="bottom" constant="5" id="2jX-Pd-7rG"/>
-                        <constraint firstItem="A5Q-L7-2xa" firstAttribute="top" secondItem="abc-kx-fvl" secondAttribute="bottom" constant="2" id="4Ib-6d-kG4"/>
+                        <constraint firstAttribute="trailing" secondItem="abc-kx-fvl" secondAttribute="trailing" id="0Hm-BO-OZR"/>
+                        <constraint firstItem="A5Q-L7-2xa" firstAttribute="top" secondItem="abc-kx-fvl" secondAttribute="bottom" id="4Ib-6d-kG4"/>
                         <constraint firstItem="Utr-Xn-PBU" firstAttribute="top" secondItem="djO-9i-eqX" secondAttribute="top" id="4Sc-DV-xBb"/>
+                        <constraint firstAttribute="trailing" secondItem="A5Q-L7-2xa" secondAttribute="trailing" id="5bx-0d-1vo"/>
                         <constraint firstAttribute="trailing" secondItem="Utr-Xn-PBU" secondAttribute="trailing" id="6wL-pf-otq"/>
                         <constraint firstItem="Utr-Xn-PBU" firstAttribute="leading" secondItem="djO-9i-eqX" secondAttribute="leading" id="8er-cp-0bq"/>
-                        <constraint firstItem="tRJ-aA-Ugk" firstAttribute="top" secondItem="djO-9i-eqX" secondAttribute="top" constant="112" id="9xD-0z-AAh"/>
                         <constraint firstAttribute="trailing" secondItem="9jo-1c-SY2" secondAttribute="trailing" id="EPK-8X-lIl"/>
-                        <constraint firstItem="abc-kx-fvl" firstAttribute="leading" secondItem="tRJ-aA-Ugk" secondAttribute="trailing" constant="32" id="GVA-K5-s3F"/>
-                        <constraint firstItem="ym8-s7-Cb9" firstAttribute="top" secondItem="A5Q-L7-2xa" secondAttribute="bottom" constant="7" id="IKy-vX-kkg"/>
-                        <constraint firstItem="A5Q-L7-2xa" firstAttribute="leading" secondItem="tRJ-aA-Ugk" secondAttribute="trailing" constant="40" id="J4w-PM-IZt"/>
-                        <constraint firstItem="abc-kx-fvl" firstAttribute="top" secondItem="djO-9i-eqX" secondAttribute="top" constant="64" id="MCY-cO-TtJ"/>
-                        <constraint firstItem="ym8-s7-Cb9" firstAttribute="leading" secondItem="tRJ-aA-Ugk" secondAttribute="trailing" constant="40" id="T51-y1-cGa"/>
-                        <constraint firstItem="tRJ-aA-Ugk" firstAttribute="leading" secondItem="djO-9i-eqX" secondAttribute="leading" constant="25" id="ajg-hF-dbU"/>
+                        <constraint firstItem="A5Q-L7-2xa" firstAttribute="leading" secondItem="djO-9i-eqX" secondAttribute="leading" id="Fpe-PI-ueJ"/>
+                        <constraint firstItem="ym8-s7-Cb9" firstAttribute="top" secondItem="A5Q-L7-2xa" secondAttribute="bottom" constant="15" id="IKy-vX-kkg"/>
+                        <constraint firstItem="abc-kx-fvl" firstAttribute="top" secondItem="djO-9i-eqX" secondAttribute="top" constant="25" id="MCY-cO-TtJ"/>
                         <constraint firstItem="9jo-1c-SY2" firstAttribute="top" secondItem="Utr-Xn-PBU" secondAttribute="bottom" id="jKd-3d-Jhx"/>
                         <constraint firstItem="AEZ-2G-r4r" firstAttribute="top" secondItem="9jo-1c-SY2" secondAttribute="bottom" constant="6" id="mP5-QB-79m"/>
+                        <constraint firstItem="abc-kx-fvl" firstAttribute="leading" secondItem="djO-9i-eqX" secondAttribute="leading" id="n6o-AU-U3d"/>
                         <constraint firstItem="AEZ-2G-r4r" firstAttribute="leading" secondItem="djO-9i-eqX" secondAttribute="leading" constant="-8" id="oRy-eh-t7P"/>
                         <constraint firstItem="9jo-1c-SY2" firstAttribute="leading" secondItem="djO-9i-eqX" secondAttribute="leading" id="u8f-tm-AeN"/>
+                        <constraint firstAttribute="trailing" secondItem="ym8-s7-Cb9" secondAttribute="trailing" constant="20" id="yyr-qa-JEU"/>
                     </constraints>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="2jX-Pd-7rG"/>
-                        </mask>
-                    </variation>
                     <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
                         <rect key="frame" x="-20" y="-64" width="440" height="568"/>
                     </variation>
@@ -177,14 +152,12 @@
                 <outlet property="branchName" destination="abc-kx-fvl" id="GiE-PD-Uge"/>
                 <outlet property="branch_category" destination="A5Q-L7-2xa" id="p2N-MM-P6F"/>
                 <outlet property="branch_cover" destination="Utr-Xn-PBU" id="pFf-ou-qK0"/>
-                <outlet property="branch_logo" destination="tRJ-aA-Ugk" id="UsS-AC-czw"/>
                 <outlet property="location" destination="9jo-1c-SY2" id="c5I-it-PXY"/>
             </connections>
             <point key="canvasLocation" x="-141" y="-12"/>
         </view>
     </objects>
     <resources>
-        <image name="starbucks.gif" width="300" height="300"/>
         <image name="starbucks_banner.jpg" width="628" height="353"/>
     </resources>
 </document>

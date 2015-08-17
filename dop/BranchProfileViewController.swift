@@ -13,7 +13,7 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
 
     
     @IBOutlet weak var tableView: UITableView!
-    var branchId: Int!
+    var branchId: Int = 2
     var logo: UIImage!
     var logoString: String!
     var coupons = [Coupon]()
@@ -27,13 +27,15 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
         tableView.registerNib(couponNib, forCellReuseIdentifier: "CouponCell")
         var aboutNib = UINib(nibName: "BranchProfileAboutView", bundle: nil)
         tableView.registerNib(aboutNib, forCellReuseIdentifier: "BranchProfileAboutView")
+        var campaignNib = UINib(nibName: "BranchProfileLastCampaign", bundle: nil)
+        tableView.registerNib(campaignNib, forCellReuseIdentifier: "BranchProfileLastCampaign")
+        headerTopView = (NSBundle.mainBundle().loadNibNamed("BranchProfileTopView", owner: self, options: nil)[0] as? BranchProfileTopView)!
         
 //      branchLogo.image = self.logo
     }
     
     override func viewDidAppear(animated: Bool) {
 //        getBranchProfile()
-//        getBranchCouponTimeline()
    }
     
 
@@ -61,7 +63,7 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
     
     func getBranchCouponTimeline() {
         coupons = [Coupon]()
-        BranchProfileController.getBranchCouponTimeline(branchId, success: { (couponsData) -> Void in
+        BranchProfileController.getBranchCouponTimeline(1, success: { (couponsData) -> Void in
             let json = JSON(data: couponsData)
             
             var namex = "";
@@ -70,7 +72,7 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
                 let coupon_name = subJson["name"].string!
                 let coupon_description = subJson["description"].string!
                 let coupon_limit = "hoy"
-                let coupon_exp = subJson["end_date"].string!
+                let coupon_exp = subJson["end_date"].string ?? ""
                 
                 let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: self.logoString, branch_id: self.branchId, company_id: 1)
                 println(subJson)
@@ -127,7 +129,7 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
             }
             
             dispatch_async(dispatch_get_main_queue(), {
-//                self.couponTimeline.reloadData()
+                self.tableView.reloadData()
             })
 
         })
@@ -135,7 +137,14 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
     
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        switch self.selectedIndex {
+        case 0:
+            return 1
+        case 1:
+            return self.coupons.count
+        default:
+            return 1
+        }
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -143,28 +152,53 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        var defaultCell: UITableViewCell = UITableViewCell()
+        switch self.selectedIndex {
+        case 0:
+            
+            var cell: BranchProfileAboutView = tableView.dequeueReusableCellWithIdentifier("BranchProfileAboutView", forIndexPath: indexPath) as! BranchProfileAboutView
         
+            var initialLocation = CLLocation(latitude: 24.815471, longitude: -107.397844)
+            cell.loadAbout("Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. ", branchLocation: initialLocation)
+            cell.selectionStyle = UITableViewCellSelectionStyle.None
+            return cell
+            
+        case 1:
+            var cellCampaign: BranchProfileLastCampaign = tableView.dequeueReusableCellWithIdentifier("BranchProfileLastCampaign", forIndexPath: indexPath) as! BranchProfileLastCampaign
+            var initialLocation = CLLocation(latitude: 24.815471, longitude: -107.397844)
+            
+            return cellCampaign
         
-        var cell: BranchProfileAboutView = tableView.dequeueReusableCellWithIdentifier("BranchProfileAboutView", forIndexPath: indexPath) as! BranchProfileAboutView
-        
-//        let model = Coupon(id: 2, name: "Edgar Allan", description: "Todo Gratis", limit: "20", exp: "1000 pts", logo: "cinepolis.jpeg", branch_id: 2)
-        
-//        cell.loadItem(model, viewController: self)
-//        cell.branchImage.setBackgroundImage(self.logo, forState: UIControlState.Normal)
-        var initialLocation = CLLocation(latitude: 24.815471, longitude: -107.397844)
-        cell.loadAbout("Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. ", branchLocation: initialLocation)
-        return cell
+        case 2:
+            var cell: BranchProfileAboutView = tableView.dequeueReusableCellWithIdentifier("BranchProfileAboutView", forIndexPath: indexPath) as! BranchProfileAboutView
+            
+            var initialLocation = CLLocation(latitude: 24.815471, longitude: -107.397844)
+        default:
+            return defaultCell
+        }
+        return defaultCell
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        headerTopView = (NSBundle.mainBundle().loadNibNamed("BranchProfileTopView", owner: self, options: nil)[0] as? BranchProfileTopView)!
+        
+        
         headerTopView.branchProfileSegmented?.addTarget(self, action: "setTableViewAtIndex", forControlEvents: .ValueChanged)
         return headerTopView
     }
     
     func setTableViewAtIndex() {
-        selectedIndex = headerTopView.branchProfileSegmented.selectedIndex
-        println(selectedIndex)
+        self.selectedIndex = headerTopView.branchProfileSegmented.selectedIndex
+        switch headerTopView.branchProfileSegmented.selectedIndex {
+        case 0:
+            tableView.reloadData()
+        case 1:
+            getBranchCouponTimeline()
+//        case 2:
+//            tableView.reloadData()
+        default:
+            tableView.reloadData()
+        }
+//        tableView.reloadData()
     }
     
 }
