@@ -42,7 +42,7 @@ class PromoCollectionCell: UICollectionViewCell {
         let params:[String: AnyObject] = [
             "coupon_id" : String(stringInterpolationSegment: couponId),
             "date" : "2015-01-01"]
-        
+
         CouponController.likeCouponWithSuccess(params){ (couponsData) -> Void in
             dispatch_async(dispatch_get_main_queue(), {
                 let json = JSON(data: couponsData)
