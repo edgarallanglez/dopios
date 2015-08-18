@@ -7,7 +7,8 @@ import Foundation
 
 
 class CouponController {
-    
+    typealias ServiceResponse = (NSDictionary?, NSError?) -> Void
+
   
     class func getAllCouponsWithSuccess(success: ((couponsData: NSData!) -> Void)) {
         
@@ -27,13 +28,16 @@ class CouponController {
             }
         })
     }
-    class func likeCouponWithSuccess(params:[String:AnyObject], success: ((couponsData: NSData!) -> Void)) {
+    class func likeCouponWithSuccess(params:[String:AnyObject],success succeed: ((couponsData: NSData!) -> Void),failure errorFound: ((couponsData: NSError?) -> Void)) {
         let url = "\(Utilities.dopURL)coupon/like"
         Utilities.sendDataToURL(NSURL(string: url)!, method:"POST", params: params, completion:{(data, error) -> Void in
             if let urlData = data {
-                success(couponsData: urlData)
+                succeed(couponsData: urlData)
+            }else{
+                errorFound(couponsData: error)
             }
         })
     }
+    
     
 }

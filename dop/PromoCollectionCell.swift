@@ -20,14 +20,16 @@ class PromoCollectionCell: UICollectionViewCell {
     
     var couponId:Int!
     
+    var coupon:Coupon!
+    
     func loadItem(coupon:Coupon, viewController: UIViewController) {
         coupon_description.text = coupon.couponDescription
         
         let gesture = UITapGestureRecognizer(target: self, action: "likeCoupon:")
         heartView.addGestureRecognizer(gesture)
         
-        self.couponId = coupon.id
-        
+        self.coupon = coupon
+                
         self.likes.text = String(coupon.total_likes)
         
         self.viewController = viewController
@@ -38,27 +40,61 @@ class PromoCollectionCell: UICollectionViewCell {
             self.heart.tintColor = UIColor.lightGrayColor()
         }
     }
+    
+    
+    func fetchImage(retry : Bool = true, failure fail : (NSError -> ())? = nil, success succeed: (UIImage -> ())? = nil) {
+    
+    
+    }
+    
+    
+    
     func likeCoupon(sender:UITapGestureRecognizer){
         let params:[String: AnyObject] = [
-            "coupon_id" : String(stringInterpolationSegment: couponId),
+            "coupon_id" : String(stringInterpolationSegment: coupon.id),
             "date" : "2015-01-01"]
-
-        CouponController.likeCouponWithSuccess(params){ (couponsData) -> Void in
-            dispatch_async(dispatch_get_main_queue(), {
-                let json = JSON(data: couponsData)
-                if(self.heart.tintColor == UIColor.lightGrayColor()){
-                    self.heart.tintColor = Utilities.dopColor
-                    let totalLikes = (self.likes.text!.toInt())!+1
-                    self.likes.text = String(stringInterpolationSegment: totalLikes)
-                }else{
-                    self.heart.tintColor = UIColor.lightGrayColor()
-                    let totalLikes = (self.likes.text!.toInt())!-1
-                    self.likes.text = String(stringInterpolationSegment: totalLikes)
-                }
-
-                println(json)
-            });
+        
+        var liked:Bool;
+        
+        if(self.heart.tintColor == UIColor.lightGrayColor()){
+            setCouponLike()
+            liked = true
+        }else{
+            removeCouponLike()
+            liked = false
         }
+    
+        CouponController.likeCouponWithSuccess(params,
+            success: { (couponsData) -> Void in
+                dispatch_async(dispatch_get_main_queue(), {
+                    let json = JSON(data: couponsData)
+                    println(json)
+                })
+            },
+            failure: { (error) -> Void in
+                dispatch_async(dispatch_get_main_queue(), {
+                    if(liked == true){
+                        self.removeCouponLike()
+                    }else{
+                        self.setCouponLike()
+                    }
+                })
+            })
+    }
+    
+    
+    func setCouponLike(){
+        self.heart.tintColor = Utilities.dopColor
+        let totalLikes = (self.likes.text!.toInt())!+1
+        self.likes.text = String(stringInterpolationSegment: totalLikes)
+        self.coupon.setUserLike(1,total_likes: totalLikes)
+
+    }
+    func removeCouponLike(){
+        self.heart.tintColor = UIColor.lightGrayColor()
+        let totalLikes = (self.likes.text!.toInt())!-1
+        self.likes.text = String(stringInterpolationSegment: totalLikes)
+        self.coupon.setUserLike(0,total_likes: totalLikes)
     }
     
 }
