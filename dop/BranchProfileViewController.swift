@@ -155,7 +155,9 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
         var defaultCell: UITableViewCell = UITableViewCell()
         switch self.selectedIndex {
         case 0:
-            
+            tableView.estimatedRowHeight = 500
+            tableView.rowHeight = UITableViewAutomaticDimension
+
             var cell: BranchProfileAboutView = tableView.dequeueReusableCellWithIdentifier("BranchProfileAboutView", forIndexPath: indexPath) as! BranchProfileAboutView
         
             var initialLocation = CLLocation(latitude: 24.815471, longitude: -107.397844)
@@ -166,7 +168,8 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
         case 1:
             var cellCampaign: BranchProfileLastCampaign = tableView.dequeueReusableCellWithIdentifier("BranchProfileLastCampaign", forIndexPath: indexPath) as! BranchProfileLastCampaign
             var initialLocation = CLLocation(latitude: 24.815471, longitude: -107.397844)
-            
+            tableView.estimatedRowHeight = 150
+            tableView.rowHeight = UITableViewAutomaticDimension
             return cellCampaign
         
         case 2:
@@ -180,8 +183,6 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
-        
         headerTopView.branchProfileSegmented?.addTarget(self, action: "setTableViewAtIndex", forControlEvents: .ValueChanged)
         return headerTopView
     }

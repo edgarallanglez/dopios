@@ -13,6 +13,8 @@
 #endif
 
 #import <FacebookSDK/FacebookSDK.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKShareKit/FBSDKShareKit.h>
 #import "A0JWTDecoder.h"
 #import "SWRevealViewController.h"
 #import "UIImage+ImageEffects.h"
