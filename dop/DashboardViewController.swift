@@ -241,14 +241,18 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
             "latitude" : latitude,
             "longitude" : longitude]
         
+        
 
-
-        CouponController.takeCouponWithSuccess(params){(couponsData) -> Void in
+        CouponController.takeCouponWithSuccess(params,
+        success:{(couponsData) -> Void in
             let json = JSON(data: couponsData)
 
             println(json)
-        }
-        
+        },
+        failure: { (error) -> Void in
+            
+        })
+    
     }
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {

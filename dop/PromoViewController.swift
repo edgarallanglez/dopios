@@ -122,37 +122,41 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
     func getCoupons() {
         coupons = [Coupon]()
         
-      
-        
-        CouponController.getAllCouponsWithSuccess { (couponsData) -> Void in
-            let json = JSON(data: couponsData)
+  
+        CouponController.getAllCouponsWithSuccess(
+            success: { (couponsData) -> Void in
+                let json = JSON(data: couponsData)
             
-            for (index: String, subJson: JSON) in json["data"]{
-                var coupon_id = subJson["coupon_id"].int!
-                let coupon_name = subJson["name"].string!
-                let coupon_description = subJson["description"].string!
-                let coupon_limit = subJson["limit"].string
-                let coupon_exp = "2015-09-30"
-                let coupon_logo = subJson["logo"].string!
-                let branch_id = subJson["branch_id"].int!
-                let company_id = subJson["company_id"].int!
-                let total_likes = subJson["total_likes"].int!
-                let user_like = subJson["user_like"].int!
+                for (index: String, subJson: JSON) in json["data"]{
+                    var coupon_id = subJson["coupon_id"].int!
+                    let coupon_name = subJson["name"].string!
+                    let coupon_description = subJson["description"].string!
+                    let coupon_limit = subJson["limit"].string
+                    let coupon_exp = "2015-09-30"
+                    let coupon_logo = subJson["logo"].string!
+                    let branch_id = subJson["branch_id"].int!
+                    let company_id = subJson["company_id"].int!
+                    let total_likes = subJson["total_likes"].int!
+                    let user_like = subJson["user_like"].int!
 
-                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes:total_likes,user_like:user_like)
+                    let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes:total_likes,user_like:user_like)
                 
-                self.coupons.append(model)
+                    self.coupons.append(model)
                 
-                println(subJson)
-            }
+                    println(subJson)
+                }
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.CouponsCollectionView.reloadData()
+                });
+            },
             
-            dispatch_async(dispatch_get_main_queue(), {
-                self.CouponsCollectionView.reloadData()
-            });
-            
-            
+            failure: { (error) -> Void in
+                dispatch_async(dispatch_get_main_queue(), {
+                        
+                })
+            })
         }
-    }
+    
 
     
 

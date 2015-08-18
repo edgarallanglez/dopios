@@ -228,28 +228,34 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
     
     // Social login Call
     func socialLogin(type: String, params: [String:String]!){
-        LoginController.loginWithSocial("\(Utilities.dopURL)user/login/" + type, params: params){ (couponsData) -> Void in
-            User.loginType = type
-            let json = JSON(data: couponsData)
-
-            let jwt = String(stringInterpolationSegment: json["token"])
-            var error:NSError?
-            
-            User.userToken = String(stringInterpolationSegment: jwt)
-            
-            
-            User.userImageUrl = String(stringInterpolationSegment: params["main_image"]!)
-           
-            User.userName = String(stringInterpolationSegment: params["names"]!)
-            User.userSurnames = String(stringInterpolationSegment: params["surnames"]!)
-            
-            dispatch_async(dispatch_get_main_queue(), {
-                if (!User.activeSession) {
-                    self.performSegueWithIdentifier("showDashboard", sender: self)
-                    User.activeSession = true
-                }
-            });
-        }
+        println("\(Utilities.dopURL)api/user/login/"+type)
+        
+        LoginController.loginWithSocial("\(Utilities.dopURL)user/login/" + type, params: params,
+            success:{ (couponsData) -> Void in
+                User.loginType = type
+                let json = JSON(data: couponsData)
+                
+                let jwt = String(stringInterpolationSegment: json["token"])
+                var error:NSError?
+                
+                User.userToken = String(stringInterpolationSegment: jwt)
+                
+                
+                User.userImageUrl = String(stringInterpolationSegment: params["main_image"]!)
+                
+                User.userName = String(stringInterpolationSegment: params["names"]!)
+                User.userSurnames = String(stringInterpolationSegment: params["surnames"]!)
+                
+                dispatch_async(dispatch_get_main_queue(), {
+                    if (!User.activeSession) {
+                        self.performSegueWithIdentifier("showDashboard", sender: self)
+                        User.activeSession = true
+                    }
+                })
+            },
+            failure:{ (error) -> Void in
+                
+        })
     }
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
