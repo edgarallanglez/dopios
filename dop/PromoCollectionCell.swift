@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Social
+import FBSDKShareKit
 
 class PromoCollectionCell: UICollectionViewCell {
     
@@ -15,15 +17,24 @@ class PromoCollectionCell: UICollectionViewCell {
     @IBOutlet var heart: UIImageView!
     @IBOutlet var likes: UILabel!
     @IBOutlet var heartView: UIView!
+    @IBOutlet weak var shareButton: UIButton!
     
     var viewController: UIViewController?
     
-    var couponId:Int!
+    var couponId: Int!
     
     var coupon:Coupon!
     
     func loadItem(coupon:Coupon, viewController: UIViewController) {
         coupon_description.text = coupon.couponDescription
+        
+        var rawString = String.fontAwesomeString("fa-facebook")
+        var stringAttributed = NSMutableAttributedString(string: rawString, attributes: [NSFontAttributeName:UIFont(name: "HelveticaNeue", size: 1)!])
+        stringAttributed.addAttribute(NSFontAttributeName, value: UIFont.iconFontOfSize("FontAwesome", fontSize: 15), range: NSRange(location: 0,length: 1))
+        
+        self.shareButton.titleLabel?.textAlignment = .Center
+        self.shareButton.titleLabel?.numberOfLines = 1
+        self.shareButton.setAttributedTitle(stringAttributed, forState: UIControlState.Normal)
         
         let gesture = UITapGestureRecognizer(target: self, action: "likeCoupon:")
         heartView.addGestureRecognizer(gesture)
@@ -36,18 +47,10 @@ class PromoCollectionCell: UICollectionViewCell {
         
         if(coupon.user_like == 1){
             self.heart.tintColor = Utilities.dopColor
-        }else{
+        } else {
             self.heart.tintColor = UIColor.lightGrayColor()
         }
     }
-    
-    
-    func fetchImage(retry : Bool = true, failure fail : (NSError -> ())? = nil, success succeed: (UIImage -> ())? = nil) {
-    
-    
-    }
-    
-    
     
     func likeCoupon(sender:UITapGestureRecognizer){
         let params:[String: AnyObject] = [
@@ -57,10 +60,10 @@ class PromoCollectionCell: UICollectionViewCell {
         var liked:Bool;
         
         if(self.heart.tintColor == UIColor.lightGrayColor()){
-            setCouponLike()
+            self.setCouponLike()
             liked = true
         }else{
-            removeCouponLike()
+            self.removeCouponLike()
             liked = false
         }
     
@@ -83,18 +86,31 @@ class PromoCollectionCell: UICollectionViewCell {
     }
     
     
-    func setCouponLike(){
+    @IBAction func shareCoupon(sender: UIButton) {
+//        FBSDKShareButton *button = [[FBSDKShareButton alloc] init];
+//        button.shareContent = content;
+//        [self.view addSubview:button];
+        let content : FBSDKShareLinkContent = FBSDKShareLinkContent()
+        content.contentURL = NSURL(string: "http://www.allan-glez.com/")
+        content.contentTitle = "Mira comparto desde DOP para el mundo"
+        content.contentDescription = "Luego va a estar InMoon aquí"
+        content.imageURL = NSURL(string: "http://45.55.7.118//branches/images/local/dop_logo.png")
+        
+        FBSDKShareDialog.showFromViewController(self.viewController, withContent: content, delegate: nil)
+    }
+
+    func setCouponLike() {
         self.heart.tintColor = Utilities.dopColor
         let totalLikes = (self.likes.text!.toInt())!+1
         self.likes.text = String(stringInterpolationSegment: totalLikes)
         self.coupon.setUserLike(1,total_likes: totalLikes)
-
     }
-    func removeCouponLike(){
+
+    func removeCouponLike() {
         self.heart.tintColor = UIColor.lightGrayColor()
         let totalLikes = (self.likes.text!.toInt())!-1
         self.likes.text = String(stringInterpolationSegment: totalLikes)
         self.coupon.setUserLike(0,total_likes: totalLikes)
     }
-    
+
 }

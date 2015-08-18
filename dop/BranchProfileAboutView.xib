@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
@@ -133,7 +133,7 @@
                     <rect key="frame" x="0.0" y="207" width="600" height="393"/>
                     <subviews>
                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2H6-zo-9dy">
-                            <rect key="frame" x="20" y="5" width="560" height="100"/>
+                            <rect key="frame" x="20" y="5" width="560" height="388"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </string>
                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -146,6 +146,7 @@
                         <constraint firstItem="2H6-zo-9dy" firstAttribute="leading" secondItem="3Pg-Yt-PyS" secondAttribute="leading" constant="20" id="Ebv-hS-M9c"/>
                         <constraint firstAttribute="trailing" secondItem="2H6-zo-9dy" secondAttribute="trailing" constant="20" id="PVx-NS-5It"/>
                         <constraint firstItem="2H6-zo-9dy" firstAttribute="top" secondItem="3Pg-Yt-PyS" secondAttribute="top" constant="5" id="oDf-sk-p7w"/>
+                        <constraint firstAttribute="bottom" secondItem="2H6-zo-9dy" secondAttribute="bottom" id="sBT-Nu-oG9"/>
                     </constraints>
                 </view>
             </subviews>

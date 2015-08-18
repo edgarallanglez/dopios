@@ -23,7 +23,7 @@ class CouponDetailViewController: UIViewController, UITableViewDelegate, UITable
         
         customView = (NSBundle.mainBundle().loadNibNamed("CouponDetailView", owner: self, options: nil)[0] as? CouponDetailView)!
         
-        customView.branch_logo.layer.borderColor = UIColor.whiteColor().CGColor
+//        customView.branch_logo.layer.borderColor = UIColor.whiteColor().CGColor
         
         customView.alpha = 0
         
@@ -45,13 +45,7 @@ class CouponDetailViewController: UIViewController, UITableViewDelegate, UITable
         
         
         customView.branch_cover.image = customView.branch_cover.image?.applyLightEffect()
-
-        customView.branch_logo.alpha = 0
-        
         //self.navigationController?.navigationBar.topItem?.backBarButtonItem?.tintColor = UIColor.yellowColor()
-        
-        
-        
         //visualEffectView.setTranslatesAutoresizingMaskIntoConstraints(false)
         
         

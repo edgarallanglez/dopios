@@ -73,7 +73,7 @@ class MenuController: UIViewController, FBLoginViewDelegate, GPPSignInDelegate {
         if (GPPSignIn.sharedInstance().googlePlusUser != nil){
             println("Sign in")
             var user = GPPSignIn.sharedInstance().googlePlusUser
-            var userId=GPPSignIn.sharedInstance().googlePlusUser.identifier
+            var userId = GPPSignIn.sharedInstance().googlePlusUser.identifier
             
             var userEmail = user.emails.first?.value ?? ""
             println(user.name.JSONString());

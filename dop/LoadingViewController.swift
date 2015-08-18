@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoadingViewController: UIViewController,FBLoginViewDelegate,CLLocationManagerDelegate {
+class LoadingViewController: UIViewController, FBLoginViewDelegate, CLLocationManagerDelegate {
     @IBOutlet var fbLoginView: FBLoginView!
 
     override func viewDidLoad() {
@@ -24,7 +24,7 @@ class LoadingViewController: UIViewController,FBLoginViewDelegate,CLLocationMana
     }
     
 
-    // Facebook Delegate Methods
+    //  book Delegate Methods
     func loginViewShowingLoggedInUser(loginView : FBLoginView!) {
         println("User Logged In")
     }
