@@ -122,6 +122,8 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
     func getCoupons() {
         coupons = [Coupon]()
         
+      
+        
         CouponController.getAllCouponsWithSuccess { (couponsData) -> Void in
             let json = JSON(data: couponsData)
             
@@ -150,7 +152,6 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
             
             
         }
-        
     }
 
     

@@ -80,6 +80,8 @@ class CouponDetailViewController: UIViewController, UITableViewDelegate, UITable
         
         let imageUrl = NSURL(string: model.user_image)
 
+        
+        
         Utilities.getDataFromUrl(imageUrl!) { data in
             dispatch_async(dispatch_get_main_queue()) {
                 println("Finished downloading \"\(imageUrl!.lastPathComponent!.stringByDeletingPathExtension)\".")
