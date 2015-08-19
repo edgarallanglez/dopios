@@ -14,8 +14,9 @@ class CouponDetailView: UIView {
     @IBOutlet var branch_logo: UIImageView!
     @IBOutlet var branch_category: UILabel!
     @IBOutlet var location: MKMapView!
-    
-    @IBOutlet weak var branchName: UIButton!
+    @IBOutlet weak var couponsName: UIButton!
+    @IBOutlet weak var couponsDescription: UITextView!
+
     var viewController: UIViewController?
     
     @IBAction func triggerSegue(sender: UIButton) {

@@ -45,24 +45,24 @@ class PromoCollectionCell: UICollectionViewCell {
         
         self.viewController = viewController
         
-        if(coupon.user_like == 1){
+        if(coupon.user_like == 1) {
             self.heart.tintColor = Utilities.dopColor
         } else {
             self.heart.tintColor = UIColor.lightGrayColor()
         }
     }
     
-    func likeCoupon(sender:UITapGestureRecognizer){
+    func likeCoupon(sender: UITapGestureRecognizer){
         let params:[String: AnyObject] = [
             "coupon_id" : String(stringInterpolationSegment: coupon.id),
             "date" : "2015-01-01"]
         
-        var liked:Bool;
+        var liked: Bool
         
-        if(self.heart.tintColor == UIColor.lightGrayColor()){
+        if (self.heart.tintColor == UIColor.lightGrayColor()) {
             self.setCouponLike()
             liked = true
-        }else{
+        } else {
             self.removeCouponLike()
             liked = false
         }
@@ -87,13 +87,10 @@ class PromoCollectionCell: UICollectionViewCell {
     
     
     @IBAction func shareCoupon(sender: UIButton) {
-//        FBSDKShareButton *button = [[FBSDKShareButton alloc] init];
-//        button.shareContent = content;
-//        [self.view addSubview:button];
         let content : FBSDKShareLinkContent = FBSDKShareLinkContent()
         content.contentURL = NSURL(string: "http://www.allan-glez.com/")
-        content.contentTitle = "Mira comparto desde DOP para el mundo"
-        content.contentDescription = "Luego va a estar InMoon aquí"
+        content.contentTitle = "Mira comparto desde dop para el mundo"
+        content.contentDescription = self.coupon_description?.text
         content.imageURL = NSURL(string: "http://45.55.7.118//branches/images/local/dop_logo.png")
         
         FBSDKShareDialog.showFromViewController(self.viewController, withContent: content, delegate: nil)
@@ -101,16 +98,16 @@ class PromoCollectionCell: UICollectionViewCell {
 
     func setCouponLike() {
         self.heart.tintColor = Utilities.dopColor
-        let totalLikes = (self.likes.text!.toInt())!+1
+        let totalLikes = (self.likes.text!.toInt())! + 1
         self.likes.text = String(stringInterpolationSegment: totalLikes)
-        self.coupon.setUserLike(1,total_likes: totalLikes)
+        self.coupon.setUserLike(1, total_likes: totalLikes)
     }
 
     func removeCouponLike() {
         self.heart.tintColor = UIColor.lightGrayColor()
-        let totalLikes = (self.likes.text!.toInt())!-1
+        let totalLikes = (self.likes.text!.toInt())! - 1
         self.likes.text = String(stringInterpolationSegment: totalLikes)
-        self.coupon.setUserLike(0,total_likes: totalLikes)
+        self.coupon.setUserLike(0, total_likes: totalLikes)
     }
 
 }

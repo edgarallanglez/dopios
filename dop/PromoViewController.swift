@@ -100,12 +100,8 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
         return size
     }
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        
-        
-        
-        
-    
-
+        let cell = self.CouponsCollectionView.cellForItemAtIndexPath(indexPath)
+        self.performSegueWithIdentifier("couponDetail", sender: cell)
     }
     
 
@@ -139,11 +135,9 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
                     let total_likes = subJson["total_likes"].int!
                     let user_like = subJson["user_like"].int!
 
-                    let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes:total_likes,user_like:user_like)
+                    let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like)
                 
                     self.coupons.append(model)
-                
-                    println(subJson)
                 }
                 dispatch_async(dispatch_get_main_queue(), {
                     self.CouponsCollectionView.reloadData()
@@ -156,6 +150,21 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
                 })
             })
         }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let cell = sender as? UICollectionViewCell {
+            
+            let i = self.CouponsCollectionView.indexPathForCell(cell)!.row
+
+            let model = self.coupons[i]
+            if segue.identifier == "couponDetail" {
+                let view = segue.destinationViewController as! CouponDetailViewController
+                view.couponsName = model.name
+                view.couponsDescription = model.couponDescription
+            }
+        }
+    }
+
     
 
     

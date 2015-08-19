@@ -388,9 +388,6 @@
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mwc-a1-OhP">
                                 <rect key="frame" x="0.0" y="64" width="600" height="492"/>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="64" width="400" height="492"/>
-                                </variation>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zk2-7x-9XQ">
                                 <rect key="frame" x="549" y="442" width="35" height="35"/>
@@ -454,7 +451,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Map" id="h8c-Nj-m1S"/>
+                    <tabBarItem key="tabBarItem" tag="1" title="Map" image="pin" id="h8c-Nj-m1S"/>
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -727,7 +724,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" systemItem="more" id="c4G-9N-rUu"/>
+                    <tabBarItem key="tabBarItem" title="Más" image="menu" id="c4G-9N-rUu"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jzj-Xc-TLv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -913,24 +910,24 @@
                                                 <exclude reference="9eS-ph-zYt"/>
                                             </mask>
                                             <mask key="constraints">
-                                                <exclude reference="5aR-7P-tPz"/>
-                                                <exclude reference="FOr-pK-ldC"/>
-                                                <exclude reference="Lzr-JU-NYj"/>
                                                 <exclude reference="EEc-If-cyd"/>
                                                 <exclude reference="YuY-W0-pdh"/>
                                                 <exclude reference="ozf-Oi-rfV"/>
-                                                <exclude reference="EVo-W1-zwD"/>
-                                                <exclude reference="I4H-Yh-wlq"/>
-                                                <exclude reference="jJM-WS-HXD"/>
-                                                <exclude reference="lp8-d3-hQ1"/>
+                                                <exclude reference="NCT-cR-0B1"/>
+                                                <exclude reference="YSt-fL-W5J"/>
+                                                <exclude reference="Zr7-Mn-toM"/>
                                                 <exclude reference="7IL-bP-SMd"/>
                                                 <exclude reference="KhV-m0-qSh"/>
                                                 <exclude reference="d32-pq-leK"/>
                                                 <exclude reference="fQn-m4-EIc"/>
                                                 <exclude reference="fRL-A3-hID"/>
-                                                <exclude reference="NCT-cR-0B1"/>
-                                                <exclude reference="YSt-fL-W5J"/>
-                                                <exclude reference="Zr7-Mn-toM"/>
+                                                <exclude reference="5aR-7P-tPz"/>
+                                                <exclude reference="FOr-pK-ldC"/>
+                                                <exclude reference="Lzr-JU-NYj"/>
+                                                <exclude reference="EVo-W1-zwD"/>
+                                                <exclude reference="I4H-Yh-wlq"/>
+                                                <exclude reference="jJM-WS-HXD"/>
+                                                <exclude reference="lp8-d3-hQ1"/>
                                             </mask>
                                         </variation>
                                         <variation key="widthClass=compact">
@@ -941,24 +938,24 @@
                                                 <include reference="9eS-ph-zYt"/>
                                             </mask>
                                             <mask key="constraints">
-                                                <include reference="5aR-7P-tPz"/>
-                                                <include reference="FOr-pK-ldC"/>
-                                                <include reference="Lzr-JU-NYj"/>
                                                 <include reference="EEc-If-cyd"/>
                                                 <include reference="YuY-W0-pdh"/>
                                                 <include reference="ozf-Oi-rfV"/>
-                                                <include reference="EVo-W1-zwD"/>
-                                                <include reference="I4H-Yh-wlq"/>
-                                                <include reference="jJM-WS-HXD"/>
-                                                <include reference="lp8-d3-hQ1"/>
+                                                <include reference="NCT-cR-0B1"/>
+                                                <include reference="YSt-fL-W5J"/>
+                                                <include reference="Zr7-Mn-toM"/>
                                                 <exclude reference="7IL-bP-SMd"/>
                                                 <include reference="KhV-m0-qSh"/>
                                                 <include reference="d32-pq-leK"/>
                                                 <include reference="fQn-m4-EIc"/>
                                                 <exclude reference="fRL-A3-hID"/>
-                                                <include reference="NCT-cR-0B1"/>
-                                                <include reference="YSt-fL-W5J"/>
-                                                <include reference="Zr7-Mn-toM"/>
+                                                <include reference="5aR-7P-tPz"/>
+                                                <include reference="FOr-pK-ldC"/>
+                                                <include reference="Lzr-JU-NYj"/>
+                                                <include reference="EVo-W1-zwD"/>
+                                                <include reference="I4H-Yh-wlq"/>
+                                                <include reference="jJM-WS-HXD"/>
+                                                <include reference="lp8-d3-hQ1"/>
                                             </mask>
                                         </variation>
                                         <connections>
@@ -968,7 +965,6 @@
                                             <outlet property="heartView" destination="Tve-5L-DT6" id="3uC-i6-c5T"/>
                                             <outlet property="likes" destination="oGK-7c-3LV" id="NNm-LB-0AR"/>
                                             <outlet property="shareButton" destination="9eS-ph-zYt" id="JbU-i5-gao"/>
-                                            <segue destination="Hpm-OJ-mEW" kind="show" id="Ftz-mf-dsT"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -1011,6 +1007,7 @@
                     <tabBarItem key="tabBarItem" title="" id="1OK-gg-UUm"/>
                     <connections>
                         <outlet property="CouponsCollectionView" destination="S6V-kp-QsR" id="4id-Ck-mko"/>
+                        <segue destination="Hpm-OJ-mEW" kind="show" identifier="couponDetail" id="TKt-eX-Ulp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4dy-aA-Gm0" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1050,7 +1047,7 @@
                             <constraint firstItem="8GJ-8r-L3Y" firstAttribute="leading" secondItem="BBH-0V-Xi6" secondAttribute="leading" constant="10" id="vMQ-2s-sRw"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" id="IOe-D5-SgW"/>
+                    <tabBarItem key="tabBarItem" title="Dashboard" image="dashboard" id="IOe-D5-SgW"/>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="View" id="nsM-lF-9Hu">
                         <barButtonItem key="leftBarButtonItem" image="menu" id="eDn-09-xhg">
@@ -1066,7 +1063,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xE7-5S-XVQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3002" y="1453"/>
+            <point key="canvasLocation" x="3001.5" y="1453"/>
         </scene>
         <!--Tabbar Controller-->
         <scene sceneID="9dx-Dy-kRz">
@@ -1121,8 +1118,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="dashboard" width="64" height="64"/>
         <image name="heart.png" width="128" height="128"/>
         <image name="menu" width="22" height="22"/>
+        <image name="pin" width="32" height="32"/>
         <image name="transparentLogo" width="618" height="482"/>
     </resources>
     <inferredMetricsTieBreakers>

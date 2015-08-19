@@ -26,8 +26,8 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         super.viewDidLoad()
         
         
-        self.title = "Dashboard"
-        self.navigationController?.navigationBar.topItem!.title = "Dashboard"
+//        self.title = "Dashboard"
+//        self.navigationController?.navigationBar.topItem!.title = "Dashboard"
 
 
         if self.revealViewController() != nil {
