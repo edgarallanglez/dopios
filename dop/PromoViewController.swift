@@ -134,8 +134,11 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
                     let company_id = subJson["company_id"].int!
                     let total_likes = subJson["total_likes"].int!
                     let user_like = subJson["user_like"].int!
+                    let latitude = subJson["latitude"].double!
+                    let longitude = subJson["longitude"].double!
+                    
 
-                    let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like)
+                    let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude)
                 
                     self.coupons.append(model)
                 }
@@ -161,6 +164,7 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
                 let view = segue.destinationViewController as! CouponDetailViewController
                 view.couponsName = model.name
                 view.couponsDescription = model.couponDescription
+                view.location = model.location
             }
         }
     }
