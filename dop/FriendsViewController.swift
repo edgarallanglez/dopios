@@ -42,7 +42,8 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         tableView.registerNib(nib, forCellReuseIdentifier: "FriendCell")
         
         
-        FriendsController.getAllFriendsWithSuccess { (friendsData) -> Void in
+        FriendsController.getAllFriendsWithSuccess(
+        success:{ (friendsData) -> Void in
             let json = JSON(data: friendsData)
             
             var namex = "";
@@ -63,7 +64,10 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
             dispatch_async(dispatch_get_main_queue(), {
                 self.tableView.reloadData()
             });
-        }
+        },
+        failure:{(friendsData)->Void in
+        
+        })
     }
 
 }

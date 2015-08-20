@@ -14,7 +14,13 @@ class NewsfeedCell: UITableViewCell {
     @IBOutlet var user_image: UIImageView!
     @IBOutlet var newsfeed_description: UILabel!
     
+    @IBOutlet var heart: UIImageView!
+    @IBOutlet var likes: UILabel!
+    @IBOutlet var heartView: UIView!
+    
     var viewController:NewsfeedViewController?
+    
+    var newsfeedNote:NewsfeedNote?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -30,25 +36,77 @@ class NewsfeedCell: UITableViewCell {
         self.username_button.addTarget(self, action: "goToUserProfile:", forControlEvents: UIControlEvents.TouchUpInside)
         self.viewController=viewController
         
-        /*let imageUrl = NSURL(string: newsfeed_note.user_image)
+        
+        self.newsfeedNote = newsfeed_note
+        
+        let gesture = UITapGestureRecognizer(target: self, action: "likeActivity:")
+        heartView.addGestureRecognizer(gesture)
         
         
-        Utilities.getDataFromUrl(imageUrl!) { data in
-            dispatch_async(dispatch_get_main_queue()) {
-                println("Finished downloading \"\(imageUrl!.lastPathComponent!.stringByDeletingPathExtension)\".")
-                self.user_image.image = UIImage(data: data!)
-                
-                UIView.animateWithDuration(0.5, animations: {
-                    self.user_image.alpha = 1
-                })
-            }
-        }*/
+        self.likes.text = String(newsfeed_note.total_likes)
+        
+        self.heart.image = self.heart.image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        
+        if(newsfeed_note.user_like == 1){
+            self.heart.tintColor = Utilities.dopColor
+        } else {
+            self.heart.tintColor = UIColor.lightGrayColor()
+        }
         
     }
+    
+    func likeActivity(sender:UITapGestureRecognizer){
+        let params:[String: AnyObject] = [
+            "clients_coupon_id" : String(stringInterpolationSegment: newsfeedNote!.client_coupon_id),
+            "date" : "2015-01-01"]
+        
+        var liked:Bool;
+        
+        if(self.heart.tintColor == UIColor.lightGrayColor()){
+            self.setCouponLike()
+            liked = true
+        }else{
+            self.removeCouponLike()
+            liked = false
+        }
+        
+        println(params)
+        NewsfeedController.likeFriendsActivityWithSuccess(params,
+            success: { (couponsData) -> Void in
+                dispatch_async(dispatch_get_main_queue(), {
+                    let json = JSON(data: couponsData)
+                    println(json)
+                })
+            },
+            failure: { (error) -> Void in
+                dispatch_async(dispatch_get_main_queue(), {
+                    if(liked == true){
+                        self.removeCouponLike()
+                    }else{
+                        self.setCouponLike()
+                    }
+                })
+        })
+    }
+    
     
     
     func goToUserProfile(UIButton!){
         self.viewController!.performSegueWithIdentifier("userProfile", sender: self)
+    }
+    
+    func setCouponLike() {
+        self.heart.tintColor = Utilities.dopColor
+        let totalLikes = (self.likes.text!.toInt())!+1
+        self.likes.text = String(stringInterpolationSegment: totalLikes)
+        self.newsfeedNote!.setUserLike(1,total_likes: totalLikes)
+    }
+    
+    func removeCouponLike() {
+        self.heart.tintColor = UIColor.lightGrayColor()
+        let totalLikes = (self.likes.text!.toInt())!-1
+        self.likes.text = String(stringInterpolationSegment: totalLikes)
+        self.newsfeedNote!.setUserLike(0,total_likes: totalLikes)
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

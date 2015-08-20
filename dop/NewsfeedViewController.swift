@@ -83,13 +83,11 @@ class NewsfeedViewController: UIViewController, UITableViewDataSource, UITableVi
         var nib = UINib(nibName: "NewsfeedCell", bundle: nil)
         tableView.registerNib(nib, forCellReuseIdentifier: "NewsfeedCell")
         
-        
         NewsfeedController.getAllFriendsTakingCouponsWithSuccess { (friendsData) -> Void in
             let json = JSON(data: friendsData)
             
-            println(json)
-            
             for (index: String, subJson: JSON) in json["data"]{
+                var client_coupon_id = String(stringInterpolationSegment:subJson["clients_coupon_id"]).toInt()
                 var friend_id = String(stringInterpolationSegment:subJson["friends_id"])
                 var exchange_date = String(stringInterpolationSegment:subJson["exchange_date"])
                 var main_image = String(stringInterpolationSegment:subJson["main_image"])
@@ -104,12 +102,12 @@ class NewsfeedViewController: UIViewController, UITableViewDataSource, UITableVi
                 let user_id = String(stringInterpolationSegment: subJson["user_id"]).toInt()
                 let name = String(stringInterpolationSegment: subJson["name"])
                 let branch_name = String(stringInterpolationSegment: subJson["branch_name"])
+                let total_likes = String(stringInterpolationSegment: subJson["total_likes"]).toInt()
+                let user_like = String(stringInterpolationSegment: subJson["user_like"]).toInt()
 
-                let model = NewsfeedNote(friend_id: friend_id, user_id: user_id, branch_id: branch_id, coupon_name: name, branch_name: branch_name, names: names, surnames: surnames, user_image: main_image, branch_image: logo)
+                let model = NewsfeedNote(client_coupon_id:client_coupon_id,friend_id: friend_id, user_id: user_id, branch_id: branch_id, coupon_name: name, branch_name: branch_name, names: names, surnames: surnames, user_image: main_image, branch_image: logo, total_likes:total_likes,user_like: user_like)
                 
                 self.newsfeed.append(model)
-
-                println(json)
                 
             }
             println(json)

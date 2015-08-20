@@ -79,7 +79,7 @@ class CouponDetailViewController: UIViewController, UITableViewDelegate, UITable
         
         var cell:NewsfeedCell = tableView.dequeueReusableCellWithIdentifier("NewsfeedCell", forIndexPath: indexPath) as! NewsfeedCell
       
-        let model = NewsfeedNote(friend_id: "1", user_id: 1, branch_id: 1, coupon_name: "Cupon prueba", branch_name: "Starbax", names: "Jose Eduardo", surnames: "Quintero Gutierrez", user_image: "http://jsequeiros.com/sites/default/files/imagen-cachorro-comprimir.jpg?1399003306" , branch_image: "http://jsequeiros.com/sites/default/files/imagen-cachorro-comprimir.jpg?1399003306")
+        let model = NewsfeedNote(client_coupon_id:0,friend_id: "1", user_id: 1, branch_id: 1, coupon_name: "Cupon prueba", branch_name: "Starbax", names: "Jose Eduardo", surnames: "Quintero Gutierrez", user_image: "http://jsequeiros.com/sites/default/files/imagen-cachorro-comprimir.jpg?1399003306" , branch_image: "http://jsequeiros.com/sites/default/files/imagen-cachorro-comprimir.jpg?1399003306",total_likes:0,user_like:0)
         
         
         
