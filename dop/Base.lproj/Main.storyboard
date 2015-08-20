@@ -714,7 +714,7 @@
         <!--More-->
         <scene sceneID="VC5-SY-xD9">
             <objects>
-                <viewController title="More" id="Ahl-DB-2Wx" sceneMemberID="viewController">
+                <viewController title="More" id="Ahl-DB-2Wx" customClass="MoreMenuViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="vg7-NH-1vo"/>
                         <viewControllerLayoutGuide type="bottom" id="PkT-w1-rPw"/>
@@ -722,7 +722,125 @@
                     <view key="view" contentMode="scaleToFill" id="Ltq-JO-Nfs">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dopLogo" translatesAutoresizingMaskIntoConstraints="NO" id="iNf-Fy-P3p">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="iNf-Fy-P3p" secondAttribute="height" multiplier="1:1" id="24B-Ki-SVu"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="24B-Ki-SVu"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="24B-Ki-SVu"/>
+                                    </mask>
+                                </variation>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fx9-3a-bDW">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="Favoritos">
+                                    <color key="titleColor" red="0.78823529410000004" green="0.0" blue="0.4377000492" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JKW-OJ-4cR">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="Mis Promociones">
+                                    <color key="titleColor" red="0.78823529410000004" green="0.0" blue="0.4377000492" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZH6-I0-bJt">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="Amigos">
+                                    <color key="titleColor" red="0.78823529410000004" green="0.0" blue="0.4377000492" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qDd-dk-xWe">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="Trofeos">
+                                    <color key="titleColor" red="0.78823529410000004" green="0.0" blue="0.4377000492" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YfI-OW-2Sc">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="Cerrar Sesion">
+                                    <color key="titleColor" red="0.78823529410000004" green="0.0" blue="0.4377000492" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="iNf-Fy-P3p" secondAttribute="centerX" id="0nI-ej-IY3"/>
+                            <constraint firstAttribute="centerX" secondItem="ZH6-I0-bJt" secondAttribute="centerX" id="1yo-M1-2Md"/>
+                            <constraint firstItem="iNf-Fy-P3p" firstAttribute="width" secondItem="Ltq-JO-Nfs" secondAttribute="width" multiplier="0.3" id="Jq0-bw-QWJ"/>
+                            <constraint firstAttribute="centerX" secondItem="JKW-OJ-4cR" secondAttribute="centerX" id="LIL-WK-LpN"/>
+                            <constraint firstAttribute="centerX" secondItem="YfI-OW-2Sc" secondAttribute="centerX" id="VKs-Oy-IMB"/>
+                            <constraint firstItem="ZH6-I0-bJt" firstAttribute="top" secondItem="JKW-OJ-4cR" secondAttribute="bottom" constant="15" id="YUx-2X-NX3"/>
+                            <constraint firstItem="qDd-dk-xWe" firstAttribute="top" secondItem="ZH6-I0-bJt" secondAttribute="bottom" constant="15" id="eR9-U8-nWi"/>
+                            <constraint firstItem="PkT-w1-rPw" firstAttribute="top" secondItem="YfI-OW-2Sc" secondAttribute="bottom" constant="20" id="fBT-qi-Um3"/>
+                            <constraint firstItem="JKW-OJ-4cR" firstAttribute="top" secondItem="Fx9-3a-bDW" secondAttribute="bottom" constant="15" id="fgm-qc-sb3"/>
+                            <constraint firstAttribute="centerX" secondItem="Fx9-3a-bDW" secondAttribute="centerX" id="lK8-aD-IlT"/>
+                            <constraint firstItem="Fx9-3a-bDW" firstAttribute="top" secondItem="iNf-Fy-P3p" secondAttribute="bottom" constant="20" id="tNW-hY-iZz"/>
+                            <constraint firstAttribute="centerX" secondItem="qDd-dk-xWe" secondAttribute="centerX" id="wZ7-Nn-q0S"/>
+                            <constraint firstItem="iNf-Fy-P3p" firstAttribute="top" secondItem="Ltq-JO-Nfs" secondAttribute="topMargin" constant="20" id="zqQ-H0-mha"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="iNf-Fy-P3p"/>
+                                <exclude reference="Fx9-3a-bDW"/>
+                                <exclude reference="JKW-OJ-4cR"/>
+                                <exclude reference="ZH6-I0-bJt"/>
+                                <exclude reference="qDd-dk-xWe"/>
+                                <exclude reference="YfI-OW-2Sc"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="0nI-ej-IY3"/>
+                                <exclude reference="Jq0-bw-QWJ"/>
+                                <exclude reference="zqQ-H0-mha"/>
+                                <exclude reference="lK8-aD-IlT"/>
+                                <exclude reference="tNW-hY-iZz"/>
+                                <exclude reference="LIL-WK-LpN"/>
+                                <exclude reference="fgm-qc-sb3"/>
+                                <exclude reference="1yo-M1-2Md"/>
+                                <exclude reference="YUx-2X-NX3"/>
+                                <exclude reference="eR9-U8-nWi"/>
+                                <exclude reference="wZ7-Nn-q0S"/>
+                                <exclude reference="VKs-Oy-IMB"/>
+                                <exclude reference="fBT-qi-Um3"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="iNf-Fy-P3p"/>
+                                <include reference="Fx9-3a-bDW"/>
+                                <include reference="JKW-OJ-4cR"/>
+                                <include reference="ZH6-I0-bJt"/>
+                                <include reference="qDd-dk-xWe"/>
+                                <include reference="YfI-OW-2Sc"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="0nI-ej-IY3"/>
+                                <include reference="Jq0-bw-QWJ"/>
+                                <include reference="zqQ-H0-mha"/>
+                                <include reference="lK8-aD-IlT"/>
+                                <include reference="tNW-hY-iZz"/>
+                                <include reference="LIL-WK-LpN"/>
+                                <include reference="fgm-qc-sb3"/>
+                                <include reference="1yo-M1-2Md"/>
+                                <include reference="YUx-2X-NX3"/>
+                                <include reference="eR9-U8-nWi"/>
+                                <include reference="wZ7-Nn-q0S"/>
+                                <include reference="VKs-Oy-IMB"/>
+                                <include reference="fBT-qi-Um3"/>
+                            </mask>
+                        </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="Más" image="menu" id="c4G-9N-rUu"/>
                 </viewController>
@@ -1119,6 +1237,7 @@
     </scenes>
     <resources>
         <image name="dashboard" width="64" height="64"/>
+        <image name="dopLogo" width="2083" height="2083"/>
         <image name="heart.png" width="128" height="128"/>
         <image name="menu" width="22" height="22"/>
         <image name="pin" width="32" height="32"/>
