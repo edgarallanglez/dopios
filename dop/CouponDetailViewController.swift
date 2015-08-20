@@ -8,11 +8,17 @@
 
 import UIKit
 
-class CouponDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class CouponDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate {
 
     @IBOutlet var tableView: UITableView!
     
     var customView :CouponDetailView = CouponDetailView()
+    var branchCover: UIImage!
+    var branchCategory: String!
+    var location: CLLocationCoordinate2D!
+    var couponsName: String!
+    var couponsDescription: String!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,10 +36,13 @@ class CouponDetailViewController: UIViewController, UITableViewDelegate, UITable
         customView.layer.borderWidth = 0;
         
         
-        customView.branchName.layer.shadowOffset = CGSize(width: 1, height: 3)
-        customView.branchName.layer.shadowOpacity = 1
-        customView.branchName.layer.shadowRadius = 3
-        customView.branchName.layer.shadowColor = UIColor.blackColor().CGColor
+        customView.couponsName.layer.shadowOffset = CGSize(width: 1, height: 3)
+        customView.couponsName.layer.shadowOpacity = 1
+        customView.couponsName.layer.shadowRadius = 3
+        customView.couponsName.layer.shadowColor = UIColor.blackColor().CGColor
+        customView.couponsName.setTitle(self.couponsName, forState: UIControlState.Normal)
+        customView.couponsDescription.text = self.couponsDescription
+        customView.centerMapOnLocation(self.location)
         
         customView.loadView(self)
         

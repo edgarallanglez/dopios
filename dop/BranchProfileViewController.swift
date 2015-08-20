@@ -65,52 +65,48 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
         coupons = [Coupon]()
         BranchProfileController.getBranchCouponTimeline(1, success: { (couponsData) -> Void in
             let json = JSON(data: couponsData)
-            
-            var namex = "";
+        
             for (index: String, subJson: JSON) in json["bond"]{
                 var coupon_id = subJson["coupon_id"].int!
                 let coupon_name = subJson["name"].string!
                 let coupon_description = subJson["description"].string!
                 let coupon_limit = "hoy"
                 let coupon_exp = subJson["end_date"].string ?? ""
+                let latitude = subJson["latitude"].double!
+                let longitude = subJson["longitude"].double!
                 
-                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: self.logoString, branch_id: self.branchId, company_id: 1, total_likes: 0 ,user_like: 0)
-                println(subJson)
+                
+                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: self.logoString, branch_id: self.branchId, company_id: 1, total_likes: 0 ,user_like: 0, latitude: latitude, longitude: longitude)
                 
                 self.coupons.append(model)
-                
-                println(coupon_name)
-                namex = coupon_name
             }
             
             for (index: String, subJson: JSON) in json["nxn"] {
-                                var coupon_id = subJson["coupon_id"].int!
-                                let coupon_name = subJson["name"].string ?? ""
-                                let coupon_description = subJson["description"].string ?? ""
-                                let coupon_limit = "Mañana"
-                                let coupon_exp = subJson["end_date"].string ?? ""
-                                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: self.logoString, branch_id: self.branchId,company_id: 1, total_likes: 0 ,user_like: 0)
-                println(subJson)
+                var coupon_id = subJson["coupon_id"].int!
+                let coupon_name = subJson["name"].string ?? ""
+                let coupon_description = subJson["description"].string ?? ""
+                let coupon_limit = "Mañana"
+                let coupon_exp = subJson["end_date"].string ?? ""
+                let latitude = subJson["latitude"].double!
+                let longitude = subJson["longitude"].double!
                 
-                                self.coupons.append(model)
+                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: self.logoString, branch_id: self.branchId,company_id: 1, total_likes: 0 ,user_like: 0, latitude: latitude, longitude: longitude)
                 
-                                println(coupon_name)
-                                namex = coupon_name
+                self.coupons.append(model)
             }
             
             for (index: String, subJson: JSON) in json["discount"]{
-                                var coupon_id = subJson["coupon_id"].int!
-                                let coupon_name = subJson["name"].string ?? ""
-                                let coupon_description = subJson["description"].string ?? ""
-                                let coupon_limit = "pasado mañana"
-                                let coupon_exp = subJson["end_date"].string ?? ""
-                                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: self.logoString, branch_id: self.branchId,company_id: 1,total_likes: 0 ,user_like: 0)
-                println(subJson)
+                var coupon_id = subJson["coupon_id"].int!
+                let coupon_name = subJson["name"].string ?? ""
+                let coupon_description = subJson["description"].string ?? ""
+                let coupon_limit = "pasado mañana"
+                let coupon_exp = subJson["end_date"].string ?? ""
+                let latitude = subJson["latitude"].double!
+                let longitude = subJson["longitude"].double!
                 
-                                self.coupons.append(model)
+                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: self.logoString, branch_id: self.branchId,company_id: 1,total_likes: 0 ,user_like: 0, latitude: latitude, longitude: longitude)
                 
-                                println(coupon_name)
-                                namex = coupon_name
+                self.coupons.append(model)
             }
             
             for (index: String, subJson: JSON) in json["new_promo"]{
@@ -119,13 +115,12 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
                 let coupon_description = subJson["description"].string ?? ""
                 let coupon_limit = "pasado mañana"
                 let coupon_exp = subJson["end_date"].string ?? ""
-                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: self.logoString, branch_id: self.branchId, company_id: 1, total_likes: 0 ,user_like: 0)
-                println(subJson)
+                let latitude = subJson["latitude"].double!
+                let longitude = subJson["longitude"].double!
+                
+                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: self.logoString, branch_id: self.branchId, company_id: 1, total_likes: 0 ,user_like: 0, latitude: latitude, longitude: longitude)
                 
                 self.coupons.append(model)
-                
-                println(coupon_name)
-                namex = coupon_name
             }
             
             dispatch_async(dispatch_get_main_queue(), {

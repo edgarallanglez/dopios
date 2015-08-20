@@ -19,8 +19,9 @@ class Coupon:NSObject,Printable{
     let company_id: Int
     var total_likes: Int
     var user_like: Int
+    let location: CLLocationCoordinate2D
 
-    init(id: Int!, name: String!, description: String!, limit: String!, exp: String!, logo: String! ,branch_id:Int!, company_id: Int!, total_likes: Int!, user_like:Int!) {
+    init(id: Int!, name: String!, description: String!, limit: String!, exp: String!, logo: String! ,branch_id:Int!, company_id: Int!, total_likes: Int!, user_like: Int!, latitude: Double, longitude: Double) {
         self.id = id
         self.name = name ?? ""
         self.couponDescription = description ?? ""
@@ -31,6 +32,7 @@ class Coupon:NSObject,Printable{
         self.company_id = company_id
         self.total_likes = total_likes
         self.user_like = user_like
+        self.location = CLLocationCoordinate2DMake(latitude, longitude)
     }
     
     func setUserLike(user_like: Int!,total_likes: Int!){
