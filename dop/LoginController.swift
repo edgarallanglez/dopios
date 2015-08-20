@@ -10,13 +10,13 @@ import Foundation
 
 class LoginController {
     
-    class func loginWithSocial(url: String, params: [String:AnyObject], success succeed: ((couponsData: NSData!) -> Void),failure errorFound: ((couponsData: NSError?) -> Void)) {
+    class func loginWithSocial(url: String, params: [String:AnyObject], success succeed: ((loginData: NSData!) -> Void),failure errorFound: ((loginData: NSError?) -> Void)) {
 
         Utilities.sendDataToURL(NSURL(string: url)!, method:"POST", params: params, completion: {(data, error) -> Void in
             if let urlData = data {
-                succeed(couponsData: urlData)
+                succeed(loginData: urlData)
             }else{
-                errorFound(couponsData: error)
+                errorFound(loginData: error)
             }
         })
     }

@@ -48,20 +48,21 @@ class FriendCell: UITableViewCell {
     func buttonAction(sender:UIButton!){
         let params:[String: String] = [
             "friends_id": friend_id]
-        FriendsController.deleteFriend(params){(couponsData) -> Void in
-            let json = JSON(data: couponsData)
+        
+        FriendsController.deleteFriend(params,
+            success:{(friendsData) -> Void in
+                let json = JSON(data: friendsData)
             
-            println(json)
-        }
+                println(json)
+            },
+            failure:{(error) -> Void in
+                
+            })
     }
-    
-    
-  
     
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
     }
     
 }

@@ -66,7 +66,7 @@ class NearbyMapViewController: UIViewController, CLLocationManagerDelegate {
             "radio": 10
         ]
         
-        NearbyMapController.getNearestBranches(params) {(branchesData) -> Void in
+        NearbyMapController.getNearestBranches(params, success: {(branchesData) -> Void in
             let json = JSON(data: branchesData)
             for (index, location) in json["data"] {
                 var latitude = location["latitude"].double
@@ -81,7 +81,9 @@ class NearbyMapViewController: UIViewController, CLLocationManagerDelegate {
                     self.nearbyMap.addAnnotation(dropPin)
                 }
             }
-        }
+        },
+            failure:{(branchesData)-> Void in
+        })
     }
     
 

@@ -10,11 +10,22 @@ import UIKit
 
 class NewsfeedController: NSObject {
     class func getAllFriendsTakingCouponsWithSuccess(success: ((friendsData: NSData!) -> Void)) {
-        let url = "\(Utilities.dopURL)api/coupon/used/get"
+        let url = "\(Utilities.dopURL)coupon/used/get/user"
         Utilities.loadDataFromURL(NSURL(string: url)!, completion:{(data, error) -> Void in
             if let urlData = data {
  
                 success(friendsData: urlData)
+            }
+        })
+    }
+    class func likeFriendsActivityWithSuccess(params:[String:AnyObject],success succeed: ((friendsData: NSData!) -> Void),failure errorFound: ((friendsData: NSError?) -> Void)) {
+        let url = "\(Utilities.dopURL)coupon/used/like"
+        println(url)
+        Utilities.sendDataToURL(NSURL(string: url)!, method:"POST", params: params, completion:{(data, error) -> Void in
+            if let urlData = data {
+                succeed(friendsData: urlData)
+            }else{
+                errorFound(friendsData: error)
             }
         })
     }

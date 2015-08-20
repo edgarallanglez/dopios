@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -17,10 +17,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hEa-8D-NiC">
                         <rect key="frame" x="-5" y="8" width="330" height="158"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gER-ff-IW6">
-                                <rect key="frame" x="8" y="8" width="50" height="50"/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PDX-4C-OXZ">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PDX-4C-OXZ">
                                 <rect key="frame" x="66" y="8" width="236" height="30"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                 <state key="normal" title="Button">
@@ -28,14 +25,105 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ifi-iL-sC3">
-                                <rect key="frame" x="8" y="61" width="294" height="72"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ifi-iL-sC3">
+                                <rect key="frame" x="8" y="61" width="294" height="59"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="59" id="TGM-nL-B9b"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OtS-VL-PUS" userLabel="heartView">
+                                <rect key="frame" x="8" y="121" width="100" height="35"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="13" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YrH-em-Gbl">
+                                        <rect key="frame" x="29" y="9" width="39" height="17"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="39" id="0Rb-Dx-JOY"/>
+                                            <constraint firstAttribute="height" constant="17" id="jNQ-zy-D2v"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart.png" translatesAutoresizingMaskIntoConstraints="NO" id="AFV-nS-l3u">
+                                        <rect key="frame" x="5" y="8" width="19" height="19"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="19" id="bTg-PI-62r"/>
+                                            <constraint firstAttribute="height" constant="19" id="mpL-8g-GAf"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="AFV-nS-l3u" firstAttribute="top" secondItem="OtS-VL-PUS" secondAttribute="top" constant="8" id="0U6-2h-2ba"/>
+                                    <constraint firstAttribute="bottom" secondItem="AFV-nS-l3u" secondAttribute="bottom" constant="8" id="1qS-hq-IbV"/>
+                                    <constraint firstAttribute="bottom" secondItem="YrH-em-Gbl" secondAttribute="bottom" constant="9" id="2fp-m2-7HV"/>
+                                    <constraint firstItem="AFV-nS-l3u" firstAttribute="top" secondItem="OtS-VL-PUS" secondAttribute="top" constant="8" id="8ts-fZ-DiU"/>
+                                    <constraint firstItem="AFV-nS-l3u" firstAttribute="leading" secondItem="OtS-VL-PUS" secondAttribute="leading" constant="5" id="Eim-DR-E51"/>
+                                    <constraint firstItem="YrH-em-Gbl" firstAttribute="leading" secondItem="AFV-nS-l3u" secondAttribute="trailing" constant="5" id="Fb0-vm-s5D"/>
+                                    <constraint firstAttribute="trailing" secondItem="YrH-em-Gbl" secondAttribute="trailing" constant="32" id="H0E-ea-YLI"/>
+                                    <constraint firstItem="AFV-nS-l3u" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="OtS-VL-PUS" secondAttribute="leading" constant="5" id="Nvx-Hw-CyC"/>
+                                    <constraint firstItem="YrH-em-Gbl" firstAttribute="leading" secondItem="AFV-nS-l3u" secondAttribute="trailing" constant="5" id="OKC-yP-G4J"/>
+                                    <constraint firstItem="YrH-em-Gbl" firstAttribute="top" secondItem="OtS-VL-PUS" secondAttribute="top" constant="9" id="QvZ-8R-ObD"/>
+                                    <constraint firstAttribute="trailing" secondItem="YrH-em-Gbl" secondAttribute="trailing" constant="17" id="XgY-Nj-bZK"/>
+                                    <constraint firstItem="YrH-em-Gbl" firstAttribute="leading" secondItem="AFV-nS-l3u" secondAttribute="trailing" constant="5" id="dv9-dy-V3G"/>
+                                    <constraint firstItem="YrH-em-Gbl" firstAttribute="top" secondItem="OtS-VL-PUS" secondAttribute="top" constant="9" id="fST-PK-FuW"/>
+                                    <constraint firstItem="YrH-em-Gbl" firstAttribute="leading" secondItem="AFV-nS-l3u" secondAttribute="trailing" constant="5" id="hkS-Yo-sgV"/>
+                                    <constraint firstItem="YrH-em-Gbl" firstAttribute="leading" secondItem="AFV-nS-l3u" secondAttribute="trailing" constant="5" id="m6y-uA-vmM"/>
+                                    <constraint firstItem="AFV-nS-l3u" firstAttribute="leading" secondItem="OtS-VL-PUS" secondAttribute="leading" constant="20" id="nyB-q9-YpZ"/>
+                                    <constraint firstAttribute="bottom" secondItem="YrH-em-Gbl" secondAttribute="bottom" constant="9" id="yv0-9i-Cje"/>
+                                    <constraint firstAttribute="bottom" secondItem="AFV-nS-l3u" secondAttribute="bottom" constant="8" id="zLz-xa-QZp"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="0U6-2h-2ba"/>
+                                        <exclude reference="1qS-hq-IbV"/>
+                                        <exclude reference="Nvx-Hw-CyC"/>
+                                        <exclude reference="nyB-q9-YpZ"/>
+                                        <exclude reference="OKC-yP-G4J"/>
+                                        <exclude reference="XgY-Nj-bZK"/>
+                                        <exclude reference="dv9-dy-V3G"/>
+                                        <exclude reference="fST-PK-FuW"/>
+                                        <exclude reference="hkS-Yo-sgV"/>
+                                        <exclude reference="m6y-uA-vmM"/>
+                                        <exclude reference="yv0-9i-Cje"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="subviews">
+                                        <include reference="AFV-nS-l3u"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gER-ff-IW6">
+                                <rect key="frame" x="8" y="8" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="daN-A9-KLg"/>
+                                    <constraint firstAttribute="height" constant="50" id="kM1-xY-O9X"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Ifi-iL-sC3" firstAttribute="leading" secondItem="hEa-8D-NiC" secondAttribute="leading" constant="8" id="0KG-nG-ZSu"/>
+                            <constraint firstItem="OtS-VL-PUS" firstAttribute="top" secondItem="Ifi-iL-sC3" secondAttribute="bottom" constant="1" id="2o2-7v-yd5"/>
+                            <constraint firstAttribute="trailing" secondItem="Ifi-iL-sC3" secondAttribute="trailing" constant="28" id="4ye-GV-aUR"/>
+                            <constraint firstItem="PDX-4C-OXZ" firstAttribute="leading" secondItem="gER-ff-IW6" secondAttribute="trailing" constant="8" id="6Ej-nt-mDn"/>
+                            <constraint firstAttribute="trailing" secondItem="PDX-4C-OXZ" secondAttribute="trailing" constant="28" id="CxA-DF-179"/>
+                            <constraint firstAttribute="bottom" secondItem="OtS-VL-PUS" secondAttribute="bottom" constant="2" id="Mls-Gp-Tcd"/>
+                            <constraint firstItem="OtS-VL-PUS" firstAttribute="leading" secondItem="hEa-8D-NiC" secondAttribute="leading" constant="8" id="g0N-X1-OEf"/>
+                            <constraint firstAttribute="trailing" secondItem="OtS-VL-PUS" secondAttribute="trailing" constant="222" id="lJv-Vl-M2f"/>
+                            <constraint firstItem="gER-ff-IW6" firstAttribute="leading" secondItem="hEa-8D-NiC" secondAttribute="leading" constant="8" id="o4O-DP-I2w"/>
+                            <constraint firstItem="gER-ff-IW6" firstAttribute="top" secondItem="hEa-8D-NiC" secondAttribute="top" constant="8" id="tUn-HD-GSy"/>
+                            <constraint firstItem="Ifi-iL-sC3" firstAttribute="top" secondItem="gER-ff-IW6" secondAttribute="bottom" constant="3" id="vHh-ec-3dX"/>
+                            <constraint firstItem="PDX-4C-OXZ" firstAttribute="top" secondItem="hEa-8D-NiC" secondAttribute="top" constant="8" id="wSj-Dh-9Jj"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="lJv-Vl-M2f"/>
+                            </mask>
+                        </variation>
                     </view>
                 </subviews>
                 <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -56,6 +144,9 @@
                 </variation>
             </tableViewCellContentView>
             <connections>
+                <outlet property="heart" destination="AFV-nS-l3u" id="ILQ-eJ-zZU"/>
+                <outlet property="heartView" destination="OtS-VL-PUS" id="WPh-IZ-lIU"/>
+                <outlet property="likes" destination="YrH-em-Gbl" id="oPZ-a3-pEi"/>
                 <outlet property="newsfeed_description" destination="Ifi-iL-sC3" id="8Jv-Vr-ZFs"/>
                 <outlet property="user_image" destination="gER-ff-IW6" id="ZeC-7r-Tbn"/>
                 <outlet property="username_button" destination="PDX-4C-OXZ" id="LAg-zn-AJz"/>
@@ -63,4 +154,7 @@
             <point key="canvasLocation" x="211" y="175"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="heart.png" width="128" height="128"/>
+    </resources>
 </document>

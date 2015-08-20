@@ -231,9 +231,9 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
         println("\(Utilities.dopURL)api/user/login/"+type)
         
         LoginController.loginWithSocial("\(Utilities.dopURL)user/login/" + type, params: params,
-            success:{ (couponsData) -> Void in
+            success:{ (loginData) -> Void in
                 User.loginType = type
-                let json = JSON(data: couponsData)
+                let json = JSON(data: loginData)
                 
                 let jwt = String(stringInterpolationSegment: json["token"])
                 var error:NSError?

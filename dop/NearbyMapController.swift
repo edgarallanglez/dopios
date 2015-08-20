@@ -20,7 +20,7 @@ class NearbyMapController {
 //        })
 //    }
     
-    class func getNearestBranches(params:[String:AnyObject], success: ((branchesData: NSData!) -> Void)) {
+    class func getNearestBranches(params:[String:AnyObject], success succeed: ((branchesData: NSData!) -> Void),failure errorFound: ((branchesData: NSError?) -> Void)) {
         let latitude: AnyObject! = params["latitude"]
         let longitude: AnyObject! = params["longitude"]
         let radio: AnyObject! = params["radio"]
@@ -28,8 +28,9 @@ class NearbyMapController {
         let url = "\(Utilities.dopURL)api/company/branch/nearest/?latitude=\(latitude)&longitude=\(longitude)&radio=\(radio)"
         Utilities.sendDataToURL(NSURL(string: url)!, method:"POST", params: params, completion:{(data, error) -> Void in
             if let urlData = data {
-                success(branchesData: urlData)
-                
+                succeed(branchesData: urlData)
+            }else{
+                errorFound(branchesData: error)
             }
         })
     }
