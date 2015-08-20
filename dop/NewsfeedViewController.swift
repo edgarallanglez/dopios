@@ -83,7 +83,6 @@ class NewsfeedViewController: UIViewController, UITableViewDataSource, UITableVi
         var nib = UINib(nibName: "NewsfeedCell", bundle: nil)
         tableView.registerNib(nib, forCellReuseIdentifier: "NewsfeedCell")
         
-        
         NewsfeedController.getAllFriendsTakingCouponsWithSuccess { (friendsData) -> Void in
             let json = JSON(data: friendsData)
             
