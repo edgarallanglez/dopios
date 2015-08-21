@@ -235,10 +235,10 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
                 User.loginType = type
                 let json = JSON(data: loginData)
                 
-                let jwt = String(stringInterpolationSegment: json["token"])
+                let jwt = json["token"].string!
                 var error:NSError?
                 
-                User.userToken = String(stringInterpolationSegment: jwt)
+                User.userToken = jwt
                 
                 
                 User.userImageUrl = String(stringInterpolationSegment: params["main_image"]!)

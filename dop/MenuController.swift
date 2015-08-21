@@ -39,36 +39,6 @@ class MenuController: UIViewController, FBLoginViewDelegate, GPPSignInDelegate {
         println(User.userName)
     }
 
-    @IBAction func logoutSession(sender: UIButton) {
-        
-        switch(User.loginType) {
-            case("google"):
-                //G+ logout
-                GPPSignIn.sharedInstance().signOut();
-                //GPPSignIn.sharedInstance().disconnect();
-                if (GPPSignIn.sharedInstance().googlePlusUser == nil) {
-                    self.dismissViewControllerAnimated(true, completion: nil)
-                    User.activeSession = false
-                }
-            case("facebook"):
-                // Facebook logout
-                if (FBSession.activeSession().state.value == FBSessionStateOpen.value || FBSession.activeSession().state.value == FBSessionStateOpenTokenExtended.value) {
-                    // Close the session and remove the access token from the cache
-                    // The session state handler (in the app delegate) will be called automatically
-                    FBSession.activeSession().closeAndClearTokenInformation()
-                    self.dismissViewControllerAnimated(true, completion: nil)
-                    User.activeSession = false
-                }
-            case("twitter"):
-                // Twitter logout
-                Twitter.sharedInstance().logOut()
-                self.dismissViewControllerAnimated(true, completion: nil)
-                User.activeSession = false
-        default:
-            println("no hay sesion activa")
-        }
-    }
-
     func finishedWithAuth(auth: GTMOAuth2Authentication!, error: NSError!) {
         if (GPPSignIn.sharedInstance().googlePlusUser != nil){
             println("Sign in")
