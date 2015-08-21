@@ -10,6 +10,8 @@ import UIKit
 
 class LoadingViewController: UIViewController, FBLoginViewDelegate, CLLocationManagerDelegate {
     @IBOutlet var fbLoginView: FBLoginView!
+    
+    var firstTime:Bool = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,19 +19,29 @@ class LoadingViewController: UIViewController, FBLoginViewDelegate, CLLocationMa
         self.fbLoginView.delegate = self
         self.fbLoginView.readPermissions = ["public_profile", "email", "user_friends", "user_birthday"]
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+    func didDismissed(){
+        
+    }
 
     //  book Delegate Methods
     func loginViewShowingLoggedInUser(loginView : FBLoginView!) {
         println("User Logged In")
-        self.performSegueWithIdentifier("showDashboard", sender: self)
     }
     
+    override func viewDidAppear(animated: Bool) {
+        //loginViewShowingLoggedOutUser(fbLoginView)
+        if(!firstTime){
+            self.performSegueWithIdentifier("showLogin", sender: self)
+        }
+        
+    }
     func loginViewFetchedUserInfo(loginView : FBLoginView!, user: FBGraphUser) {
         
         var userEmail = user.objectForKey("email") as? String ?? ""
@@ -80,14 +92,15 @@ class LoadingViewController: UIViewController, FBLoginViewDelegate, CLLocationMa
             User.userSurnames = String(stringInterpolationSegment: params["surnames"]!)
             
             dispatch_async(dispatch_get_main_queue(), {
-                if (!User.activeSession) {
+                //if (!User.activeSession) {
                     self.performSegueWithIdentifier("showDashboard", sender: self)
                     User.activeSession = true
-                }
+                    self.firstTime=false
+                //}
             })
         },
         failure:{ (error) -> Void in
-            
+
         })
     }
     

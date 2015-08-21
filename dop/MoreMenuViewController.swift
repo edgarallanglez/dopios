@@ -27,7 +27,7 @@ class MoreMenuViewController: UIViewController {
             }
         }
     }
-    
+
     @IBAction func logoutSession(sender: UIButton) {
         switch(User.loginType) {
         case("facebook"):
@@ -36,8 +36,10 @@ class MoreMenuViewController: UIViewController {
                 // Close the session and remove the access token from the cache
                 // The session state handler (in the app delegate) will be called automatically
                 FBSession.activeSession().closeAndClearTokenInformation()
-                self.dismissViewControllerAnimated(true, completion: nil)
+                self.dismissViewControllerAnimated(true, completion:nil)
+                    
                 User.activeSession = false
+                
             }
 
         default:
@@ -45,5 +47,7 @@ class MoreMenuViewController: UIViewController {
         }
 
     }
+    
+
     
 }
