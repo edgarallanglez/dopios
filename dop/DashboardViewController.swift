@@ -58,7 +58,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         
        /* CouponController.getAllCouponsWithSuccess { (couponsData) -> Void in
             let json = JSON(data: couponsData)
-            
+
             var namex = "";
             for (index: String, subJson: JSON) in json["data"]{
                 var coupon_id = String(stringInterpolationSegment:subJson["coupon_id"]).toInt()
@@ -80,8 +80,6 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
             dispatch_async(dispatch_get_main_queue(), {
                 self.couponsTableView.reloadData()
             });
-            
-
         }
         */
     }
