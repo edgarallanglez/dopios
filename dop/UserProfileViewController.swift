@@ -42,7 +42,7 @@ class UserProfileViewController: UIViewController {
         
     }
     
-    func downloadImage(url:NSURL){
+    func downloadImage(url:NSURL) {
         println("Started downloading \"\(url.lastPathComponent!.stringByDeletingPathExtension)\".")
         Utilities.getDataFromUrl(url) { data in
             dispatch_async(dispatch_get_main_queue()) {

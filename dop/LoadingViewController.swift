@@ -27,6 +27,7 @@ class LoadingViewController: UIViewController, FBLoginViewDelegate, CLLocationMa
     //  book Delegate Methods
     func loginViewShowingLoggedInUser(loginView : FBLoginView!) {
         println("User Logged In")
+        self.performSegueWithIdentifier("showDashboard", sender: self)
     }
     
     func loginViewFetchedUserInfo(loginView : FBLoginView!, user: FBGraphUser) {

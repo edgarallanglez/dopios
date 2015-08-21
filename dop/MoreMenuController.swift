@@ -7,3 +7,21 @@
 //
 
 import Foundation
+
+class MoreMenuController {
+    class func getImage(url:String, success: ((imageData: NSData!) -> Void)) {
+        Utilities.loadDataFromURL(NSURL(string: url)!, completion:{(data, error) -> Void in
+            if let urlData = data {
+                success(imageData: urlData)
+            }
+        })
+    }
+    
+    class func getUserProfile(url:String, success: ((profileData: NSData!) -> Void)) {
+        Utilities.loadDataFromURL(NSURL(string: url)!, completion:{(data, error) -> Void in
+            if let urlData = data {
+                success(profileData: urlData)
+            }
+        })
+    }
+}

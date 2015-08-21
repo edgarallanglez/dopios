@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="wsr-0B-cyM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="wsr-0B-cyM">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -328,15 +329,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="paV-lh-hGE">
-                                <rect key="frame" x="31" y="285" width="92" height="30"/>
-                                <state key="normal" title="Cerrar sesión">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="logoutSession:" destination="9Oh-FU-a9K" eventType="touchUpInside" id="f45-gb-0Iu"/>
-                                </connections>
-                            </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="A9n-eI-zlZ">
                                 <rect key="frame" x="26" y="50" width="50" height="50"/>
                                 <constraints>
@@ -358,9 +350,7 @@
                         <constraints>
                             <constraint firstItem="f3b-KE-9yH" firstAttribute="leading" secondItem="A9n-eI-zlZ" secondAttribute="trailing" constant="18" id="Ofw-nj-4cA"/>
                             <constraint firstItem="A9n-eI-zlZ" firstAttribute="top" secondItem="f3b-KE-9yH" secondAttribute="top" id="QjC-4J-3Sf"/>
-                            <constraint firstAttribute="centerY" secondItem="paV-lh-hGE" secondAttribute="centerY" id="Rae-oS-ZHS"/>
                             <constraint firstItem="A9n-eI-zlZ" firstAttribute="top" secondItem="nKg-cG-Rgd" secondAttribute="bottom" constant="30" id="UTE-5q-RXk"/>
-                            <constraint firstItem="paV-lh-hGE" firstAttribute="leading" secondItem="Qun-0k-xUm" secondAttribute="leadingMargin" constant="15" id="eLp-SS-CmR"/>
                             <constraint firstItem="A9n-eI-zlZ" firstAttribute="height" secondItem="f3b-KE-9yH" secondAttribute="height" id="tve-RT-gqP"/>
                             <constraint firstItem="A9n-eI-zlZ" firstAttribute="leading" secondItem="Qun-0k-xUm" secondAttribute="leadingMargin" constant="10" id="ul6-aN-mJA"/>
                         </constraints>
@@ -714,7 +704,7 @@
         <!--More-->
         <scene sceneID="VC5-SY-xD9">
             <objects>
-                <viewController title="More" id="Ahl-DB-2Wx" customClass="MoreMenuViewController" sceneMemberID="viewController">
+                <viewController title="More" id="Ahl-DB-2Wx" customClass="MoreMenuViewController" customModule="dop" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="vg7-NH-1vo"/>
                         <viewControllerLayoutGuide type="bottom" id="PkT-w1-rPw"/>
@@ -773,6 +763,10 @@
                                     <color key="titleColor" red="0.78823529410000004" green="0.0" blue="0.4377000492" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="logoutSession:" destination="Ahl-DB-2Wx" eventType="touchUpInside" id="l4L-8W-SZg"/>
+                                    <segue destination="wsr-0B-cyM" kind="show" id="bZe-Gr-EJ6"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -801,19 +795,19 @@
                                 <exclude reference="YfI-OW-2Sc"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="0nI-ej-IY3"/>
-                                <exclude reference="Jq0-bw-QWJ"/>
-                                <exclude reference="zqQ-H0-mha"/>
+                                <exclude reference="fBT-qi-Um3"/>
                                 <exclude reference="lK8-aD-IlT"/>
                                 <exclude reference="tNW-hY-iZz"/>
                                 <exclude reference="LIL-WK-LpN"/>
                                 <exclude reference="fgm-qc-sb3"/>
+                                <exclude reference="VKs-Oy-IMB"/>
                                 <exclude reference="1yo-M1-2Md"/>
                                 <exclude reference="YUx-2X-NX3"/>
                                 <exclude reference="eR9-U8-nWi"/>
                                 <exclude reference="wZ7-Nn-q0S"/>
-                                <exclude reference="VKs-Oy-IMB"/>
-                                <exclude reference="fBT-qi-Um3"/>
+                                <exclude reference="0nI-ej-IY3"/>
+                                <exclude reference="Jq0-bw-QWJ"/>
+                                <exclude reference="zqQ-H0-mha"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -826,23 +820,26 @@
                                 <include reference="YfI-OW-2Sc"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="0nI-ej-IY3"/>
-                                <include reference="Jq0-bw-QWJ"/>
-                                <include reference="zqQ-H0-mha"/>
+                                <include reference="fBT-qi-Um3"/>
                                 <include reference="lK8-aD-IlT"/>
                                 <include reference="tNW-hY-iZz"/>
                                 <include reference="LIL-WK-LpN"/>
                                 <include reference="fgm-qc-sb3"/>
+                                <include reference="VKs-Oy-IMB"/>
                                 <include reference="1yo-M1-2Md"/>
                                 <include reference="YUx-2X-NX3"/>
                                 <include reference="eR9-U8-nWi"/>
                                 <include reference="wZ7-Nn-q0S"/>
-                                <include reference="VKs-Oy-IMB"/>
-                                <include reference="fBT-qi-Um3"/>
+                                <include reference="0nI-ej-IY3"/>
+                                <include reference="Jq0-bw-QWJ"/>
+                                <include reference="zqQ-H0-mha"/>
                             </mask>
                         </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="Más" image="menu" id="c4G-9N-rUu"/>
+                    <connections>
+                        <outlet property="userImage" destination="iNf-Fy-P3p" id="jac-Ut-DHf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jzj-Xc-TLv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1244,7 +1241,7 @@
         <image name="transparentLogo" width="618" height="482"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="NZR-gR-mOn"/>
+        <segue reference="njR-gH-Wm2"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>
