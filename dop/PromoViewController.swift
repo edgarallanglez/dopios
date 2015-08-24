@@ -15,6 +15,7 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
     private let reuseIdentifier = "PromoCell"
     var coupons = [Coupon]()
     var cachedImages: [String: UIImage] = [:]
+    var refreshControl: UIRefreshControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,10 +23,18 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
         self.title = ""
         //self.navigationItem.title = "Promociones";
         self.navigationController?.navigationBar.topItem!.title = "Hoy tenemos"
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl.attributedTitle = NSAttributedString(string: "Mapache, roba mas cupones :D!")
+        self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        self.CouponsCollectionView.addSubview(refreshControl)
         getCoupons()
     }
     
     override func viewDidAppear(animated: Bool) {
+    }
+    
+    func refresh(sender:AnyObject) {
+        getCoupons()
     }
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -140,12 +149,13 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
                 }
                 dispatch_async(dispatch_get_main_queue(), {
                     self.CouponsCollectionView.reloadData()
+                    self.refreshControl.endRefreshing()
                 });
             },
             
             failure: { (error) -> Void in
                 dispatch_async(dispatch_get_main_queue(), {
-                        
+                    self.refreshControl.endRefreshing()
                 })
             })
         }
