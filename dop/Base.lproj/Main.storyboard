@@ -17,7 +17,7 @@
                         <viewControllerLayoutGuide type="bottom" id="stb-ja-ps4"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="vqL-fy-uZe">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="transparentLogo" translatesAutoresizingMaskIntoConstraints="NO" id="17t-ND-Fy0">
@@ -286,7 +286,7 @@
                         <viewControllerLayoutGuide type="bottom" id="3sh-nD-zsr"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="VVe-3J-fIZ">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="800"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -701,6 +701,23 @@
             </objects>
             <point key="canvasLocation" x="3762" y="2949"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="RfR-7j-HkT">
+            <objects>
+                <viewController id="qEh-Kq-WbW" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7eo-Ht-ubk"/>
+                        <viewControllerLayoutGuide type="bottom" id="dGc-e1-qsu"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="jcW-wQ-0MF">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fyA-l2-IuB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2244" y="2361"/>
+        </scene>
         <!--More-->
         <scene sceneID="VC5-SY-xD9">
             <objects>
@@ -749,6 +766,9 @@
                                     <color key="titleColor" red="0.78823529410000004" green="0.0" blue="0.4377000492" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="qEh-Kq-WbW" kind="show" id="Cz1-5c-XBD"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qDd-dk-xWe">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -843,7 +863,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jzj-Xc-TLv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="982.5" y="3091"/>
+            <point key="canvasLocation" x="-55.5" y="3091"/>
         </scene>
         <!--Promo View Controller-->
         <scene sceneID="NHY-2r-0nr">

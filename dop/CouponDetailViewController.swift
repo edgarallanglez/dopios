@@ -16,23 +16,28 @@ class CouponDetailViewController: UIViewController, UITableViewDelegate, UITable
     var branchCover: UIImage!
     var branchCategory: String!
     var location: CLLocationCoordinate2D!
+    var coordinate: CLLocationCoordinate2D!
     var couponsName: String!
     var couponsDescription: String!
+    var branchId: Int = 0
+    var couponId: Int = 0
+    var locationManager = CLLocationManager()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         //var CouponDetailNib = UINib(nibName: "CouponDetailView", bundle: nil)
+        
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestAlwaysAuthorization()
+        locationManager.startUpdatingLocation()
 
         var nib = UINib(nibName: "NewsfeedCell", bundle: nil)
         tableView.registerNib(nib, forCellReuseIdentifier: "NewsfeedCell")
         
         customView = (NSBundle.mainBundle().loadNibNamed("CouponDetailView", owner: self, options: nil)[0] as? CouponDetailView)!
-        
-//        customView.branch_logo.layer.borderColor = UIColor.whiteColor().CGColor
-        
         customView.alpha = 0
-        
         customView.layer.borderWidth = 0;
         
         
@@ -43,6 +48,8 @@ class CouponDetailViewController: UIViewController, UITableViewDelegate, UITable
         customView.couponsName.setTitle(self.couponsName, forState: UIControlState.Normal)
         customView.couponsDescription.text = self.couponsDescription
         customView.centerMapOnLocation(self.location)
+        customView.branchId = self.branchId
+        customView.couponId = self.couponId
         
         customView.loadView(self)
         
@@ -54,13 +61,14 @@ class CouponDetailViewController: UIViewController, UITableViewDelegate, UITable
         
         
         customView.branch_cover.image = customView.branch_cover.image?.applyLightEffect()
-        //self.navigationController?.navigationBar.topItem?.backBarButtonItem?.tintColor = UIColor.yellowColor()
-        //visualEffectView.setTranslatesAutoresizingMaskIntoConstraints(false)
         
-        
-        
-        
-            }
+    }
+    
+    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+        coordinate = manager.location.coordinate
+        customView.coordinate = coordinate
+        locationManager.stopUpdatingLocation()
+    }
     
     override func viewDidAppear(animated: Bool) {
         UIView.animateWithDuration(0.7, delay: 0, options: .CurveEaseInOut, animations: {
@@ -93,16 +101,14 @@ class CouponDetailViewController: UIViewController, UITableViewDelegate, UITable
         
         Utilities.getDataFromUrl(imageUrl!) { data in
             dispatch_async(dispatch_get_main_queue()) {
-                println("Finished downloading \"\(imageUrl!.lastPathComponent!.stringByDeletingPathExtension)\".")
-
-                    var cell_image : UIImage = UIImage()
-                    cell_image = UIImage ( data: data!)!
-                    cell.user_image.image = cell_image
-                    UIView.animateWithDuration(0.5, animations: {
-                        cell.user_image.alpha = 1
-                    })
-                }
+                var cell_image : UIImage = UIImage()
+                cell_image = UIImage ( data: data!)!
+                cell.user_image.image = cell_image
+                UIView.animateWithDuration(0.5, animations: {
+                    cell.user_image.alpha = 1
+                })
             }
+        }
 
         
         return cell
@@ -121,14 +127,9 @@ class CouponDetailViewController: UIViewController, UITableViewDelegate, UITable
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let cell = sender as? CouponCell {
-            
-//            let i = couponsTableView.indexPathForCell(cell)!.section
-//            let model = self.coupons[i]
             if segue.identifier == "branchProfile" {
                 let view = segue.destinationViewController as! BranchProfileViewController
-//                view.branchId = model.branch_id
                 view.logo = cell.branchImage.currentBackgroundImage
-//                view.logoString = model.logo
                 
             }
         }

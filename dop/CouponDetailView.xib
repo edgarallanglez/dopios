@@ -38,7 +38,7 @@
                                 <constraint firstAttribute="width" constant="87" id="emT-wQ-rIP"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                            <state key="normal" title="Seguir">
+                            <state key="normal" title="dopix">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -51,6 +51,9 @@
                             <variation key="widthClass=compact" fixedFrame="YES">
                                 <rect key="frame" x="170" y="175" width="87" height="30"/>
                             </variation>
+                            <connections>
+                                <action selector="dopixCoupon:" destination="iN0-l3-epB" eventType="touchUpInside" id="dCW-Vk-ytW"/>
+                            </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cafetería" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A5Q-L7-2xa">
                             <rect key="frame" x="0.0" y="91" width="430" height="27"/>

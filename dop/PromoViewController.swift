@@ -78,10 +78,6 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
             }
         }
         
-        /*let gesture = UITapGestureRecognizer(target: self, action: "likeCoupon:")
-        cell.heartView.addGestureRecognizer(gesture)*/
-
-        
         UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseInOut, animations: {
             cell.viewForBaselineLayout()?.alpha = 1
             }, completion: { finished in
@@ -165,6 +161,8 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
                 view.couponsName = model.name
                 view.couponsDescription = model.couponDescription
                 view.location = model.location
+                view.branchId = model.branch_id
+                view.couponId = model.id
             }
         }
     }
