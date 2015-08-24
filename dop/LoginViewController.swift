@@ -36,6 +36,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         UIApplication.sharedApplication().statusBarStyle = .Default
         
         var signIn = GPPSignIn.sharedInstance();
@@ -247,10 +248,10 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
                 User.userSurnames = String(stringInterpolationSegment: params["surnames"]!)
                 
                 dispatch_async(dispatch_get_main_queue(), {
-                    if (!User.activeSession) {
+                    //if (!User.activeSession) {
                         self.performSegueWithIdentifier("showDashboard", sender: self)
                         User.activeSession = true
-                    }
+                    //}
                 })
             },
             failure:{ (error) -> Void in

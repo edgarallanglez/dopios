@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
@@ -41,13 +41,41 @@
                         <constraint firstAttribute="height" constant="55" id="Qjf-Nu-Pd5"/>
                     </constraints>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vnf-zr-owF">
+                    <rect key="frame" x="500" y="189" width="87" height="28"/>
+                    <color key="backgroundColor" red="0.85098039219999999" green="0.015686274510000001" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="87" id="wuu-jp-C9X"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <state key="normal" title="Seguir">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="3"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                    <variation key="widthClass=compact" fixedFrame="YES">
+                        <rect key="frame" x="170" y="175" width="87" height="30"/>
+                    </variation>
+                    <connections>
+                        <action selector="followBranch:" destination="iN0-l3-epB" eventType="touchUpInside" id="D1E-uO-B8g"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="O7C-iJ-66i" secondAttribute="trailing" id="4dJ-mI-Ol7"/>
                 <constraint firstItem="x9r-hb-NOG" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="4pP-XN-JvK"/>
+                <constraint firstItem="vnf-zr-owF" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="189" id="6JV-lv-tJ4"/>
+                <constraint firstItem="vnf-zr-owF" firstAttribute="leading" secondItem="ph0-mH-WMX" secondAttribute="trailing" constant="405" id="D0k-kK-RSx"/>
                 <constraint firstItem="O7C-iJ-66i" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="E0D-fk-pJH"/>
                 <constraint firstItem="ph0-mH-WMX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="Lkt-T3-c0b"/>
+                <constraint firstAttribute="trailing" secondItem="vnf-zr-owF" secondAttribute="trailing" constant="13" id="QoB-WZ-Lbi"/>
+                <constraint firstItem="O7C-iJ-66i" firstAttribute="top" secondItem="vnf-zr-owF" secondAttribute="bottom" constant="13" id="UGj-Rz-obN"/>
                 <constraint firstItem="ph0-mH-WMX" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="130" id="dbd-NR-eWg"/>
                 <constraint firstItem="x9r-hb-NOG" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="eda-bk-Dna"/>
                 <constraint firstItem="O7C-iJ-66i" firstAttribute="top" secondItem="x9r-hb-NOG" secondAttribute="bottom" id="iu8-Fa-YKp"/>
@@ -60,7 +88,7 @@
                 <outlet property="branchLogo" destination="ph0-mH-WMX" id="ypX-gR-mxr"/>
                 <outlet property="branchProfileSegmented" destination="O7C-iJ-66i" id="xGG-ge-O59"/>
             </connections>
-            <point key="canvasLocation" x="215" y="5.5"/>
+            <point key="canvasLocation" x="230" y="33.5"/>
         </view>
     </objects>
     <resources>

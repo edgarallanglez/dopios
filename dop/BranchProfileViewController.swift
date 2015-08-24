@@ -13,7 +13,7 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
 
     
     @IBOutlet weak var tableView: UITableView!
-    var branchId: Int = 2
+    var branchId: Int = 0
     var logo: UIImage!
     var logoString: String!
     var coupons = [Coupon]()
