@@ -13,15 +13,15 @@ class BranchProfileTopView: UIView {
     @IBOutlet weak var branchCover: UIImageView!
     @IBOutlet weak var branchLogo: UIImageView!
     @IBOutlet weak var branchProfileSegmented: SegmentedControl!
-
+    var branchId:Int!
     @IBAction func followBranch(sender: AnyObject) {
         
         let params:[String: AnyObject] = [
-            "branch_id" : String(stringInterpolationSegment: 1),
+            "branch_id" : String(stringInterpolationSegment: branchId),
             "date" : "2015-01-01"]
         
         println(params)
-        BranchProfileController.likeBranchWithSuccess(params,
+        BranchProfileController.followBranchWithSuccess(params,
             success: { (couponsData) -> Void in
                 dispatch_async(dispatch_get_main_queue(), {
                     let json = JSON(data: couponsData)

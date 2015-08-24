@@ -28,8 +28,8 @@ class BranchProfileController {
         })
     }
     
-    class func likeBranchWithSuccess(params: [String:AnyObject], success succeed: ((branchData: NSData!) -> Void),failure errorFound: ((branchData: NSError?) -> Void)) {
-        let url = "\(Utilities.dopURL)company/branch/like"
+    class func followBranchWithSuccess(params: [String:AnyObject], success succeed: ((branchData: NSData!) -> Void),failure errorFound: ((branchData: NSError?) -> Void)) {
+        let url = "\(Utilities.dopURL)company/branch/follow"
         Utilities.sendDataToURL(NSURL(string: url)!, method:"POST", params: params, completion: {(data, error) -> Void in
             if let urlData = data {
                 succeed(branchData: urlData)

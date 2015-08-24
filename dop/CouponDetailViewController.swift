@@ -18,6 +18,7 @@ class CouponDetailViewController: UIViewController, UITableViewDelegate, UITable
     var location: CLLocationCoordinate2D!
     var couponsName: String!
     var couponsDescription: String!
+    var branchId:Int!
     
     
     override func viewDidLoad() {
@@ -120,19 +121,20 @@ class CouponDetailViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let cell = sender as? CouponCell {
-            
+        
 //            let i = couponsTableView.indexPathForCell(cell)!.section
 //            let model = self.coupons[i]
             if segue.identifier == "branchProfile" {
                 let view = segue.destinationViewController as! BranchProfileViewController
 //                view.branchId = model.branch_id
-                view.logo = cell.branchImage.currentBackgroundImage
-                view.branchId = cell.b
-//                view.logoString = model.logo
+                //view.logo = cell.branchImage.currentBackgroundImage
+                view.branchId = branchId
+                
+                println("Coupon detail view controller \(branchId)")
+
                 
             }
-        }
+        
         
     }
 

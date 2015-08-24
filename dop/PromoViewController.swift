@@ -165,6 +165,10 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
                 view.couponsName = model.name
                 view.couponsDescription = model.couponDescription
                 view.location = model.location
+                view.branchId = model.branch_id
+                
+                println("Promo view controller \(model.branch_id)")
+                
             }
         }
     }
