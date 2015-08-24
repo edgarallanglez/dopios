@@ -128,6 +128,7 @@ class CouponDetailViewController: UIViewController, UITableViewDelegate, UITable
                 let view = segue.destinationViewController as! BranchProfileViewController
 //                view.branchId = model.branch_id
                 view.logo = cell.branchImage.currentBackgroundImage
+                view.branchId = cell.b
 //                view.logoString = model.logo
                 
             }

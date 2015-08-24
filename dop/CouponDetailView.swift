@@ -39,5 +39,8 @@ class CouponDetailView: UIView {
             regionRadius * 2.0, regionRadius * 2.0)
         self.location.setRegion(coordinateRegion, animated: true)
     }
+    @IBAction func followBranch(sender: AnyObject) {
+        
+    }
   
 }
