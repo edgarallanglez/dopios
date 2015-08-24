@@ -39,8 +39,8 @@ class NewsfeedViewController: UIViewController, UITableViewDataSource, UITableVi
             Utilities.getDataFromUrl(imageUrl!) { data in
                 dispatch_async(dispatch_get_main_queue()) {
                     var cell_image : UIImage = UIImage()
-                    cell_image = UIImage ( data: data!)!
-                    
+                    cell_image = UIImage (data: data!)!
+            
                     if tableView.indexPathForCell(cell)?.row == indexPath.row {
                         self.cachedImages[identifier] = cell_image
                         let cell_image_saved : UIImage = self.cachedImages[identifier]!
@@ -52,6 +52,7 @@ class NewsfeedViewController: UIViewController, UITableViewDataSource, UITableVi
                 }
             }
         }
+        
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         
         return cell
@@ -79,13 +80,14 @@ class NewsfeedViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func refresh(sender: AnyObject) {
         getNewsfeedActivity()
+        newsfeed.removeAll()
     }
     
     func getNewsfeedActivity() {
         NewsfeedController.getAllFriendsTakingCouponsWithSuccess { (friendsData) -> Void in
             let json = JSON(data: friendsData)
             
-            for (index: String, subJson: JSON) in json["data"]{
+            for (index: String, subJson: JSON) in json["data"] {
                 var client_coupon_id = subJson["clients_coupon_id"].int
                 var friend_id = subJson["friends_id"].string
                 var exchange_date = subJson["exchange_date"].string
@@ -128,7 +130,6 @@ class NewsfeedViewController: UIViewController, UITableViewDataSource, UITableVi
                 vc.userImage = model.user_image
             }
         }
-        
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
