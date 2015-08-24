@@ -16,6 +16,12 @@ class CouponDetailView: UIView {
     @IBOutlet var location: MKMapView!
     @IBOutlet weak var couponsName: UIButton!
     @IBOutlet weak var couponsDescription: UITextView!
+    
+    
+    var couponId: Int!
+    var branchId: Int!
+    
+    var coordinate: CLLocationCoordinate2D?
 
     var viewController: UIViewController?
     let regionRadius: CLLocationDistance = 1000
@@ -39,8 +45,40 @@ class CouponDetailView: UIView {
             regionRadius * 2.0, regionRadius * 2.0)
         self.location.setRegion(coordinateRegion, animated: true)
     }
-    @IBAction func followBranch(sender: AnyObject) {
+    
+    @IBAction func dopixCoupon(sender: UIButton) {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyyMMdd"
+        let folioDate = dateFormatter.stringFromDate(NSDate())
+        dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
+        let date = dateFormatter.stringFromDate(NSDate())
+        
+        let params:[String: AnyObject] = [
+            "coupon_id" : self.couponId,
+            "branch_id": self.branchId,
+            "taken_date" : date,
+            "folio_date": folioDate,
+            "latitude": coordinate!.latitude,
+            "longitude": coordinate!.longitude ]
+        
+        
+        CouponController.takeCouponWithSuccess(params,
+            success: { (couponsData) -> Void in
+                dispatch_async(dispatch_get_main_queue(), {
+                    let json = JSON(data: couponsData)
+                    println(json)
+                })
+            },
+            failure: { (error) -> Void in
+                dispatch_async(dispatch_get_main_queue(), {
+                    println(error)
+                })
+            }
+        )
+
+        println(date)
         
     }
+    
   
 }
