@@ -22,7 +22,7 @@ class BranchProfileAboutView: UITableViewCell, CLLocationManagerDelegate {
         pinIcon.text =  String.fontAwesomeString("fa-map-marker")
         clockIcon.text = String.fontAwesomeString("fa-clock-o")
         centerMapOnLocation(branchLocation)
-        
+
     }
     
     func centerMapOnLocation(location: CLLocation) {
@@ -30,4 +30,5 @@ class BranchProfileAboutView: UITableViewCell, CLLocationManagerDelegate {
                 regionRadius * 2.0, regionRadius * 2.0)
         branchLocationMap.setRegion(coordinateRegion, animated: true)
     }
+
 }

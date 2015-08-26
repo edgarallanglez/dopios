@@ -89,9 +89,9 @@ class PromoCollectionCell: UICollectionViewCell {
     @IBAction func shareCoupon(sender: UIButton) {
         let content : FBSDKShareLinkContent = FBSDKShareLinkContent()
         content.contentURL = NSURL(string: "http://www.allan-glez.com/")
-        content.contentTitle = "Mira comparto desde dop para el mundo"
+        content.contentTitle = coupon.name
         content.contentDescription = self.coupon_description?.text
-        content.imageURL = NSURL(string: "http://45.55.7.118//branches/images/local/dop_logo.png")
+        content.imageURL = NSURL(string: "\(Utilities.dopImagesURL)\(coupon.company_id)/\(coupon.logo)")
         
         FBSDKShareDialog.showFromViewController(self.viewController, withContent: content, delegate: nil)
     }

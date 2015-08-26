@@ -33,6 +33,7 @@ class NewsfeedViewController: UIViewController, UITableViewDataSource, UITableVi
         if (self.cachedImages[identifier] != nil){
             let cell_image_saved : UIImage = self.cachedImages[identifier]!
             cell.user_image.image = cell_image_saved
+            cell.user_image.alpha = 1
             
         } else {
             cell.user_image.alpha = 0
