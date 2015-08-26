@@ -17,6 +17,7 @@ class NearbyMapViewController: UIViewController, CLLocationManagerDelegate {
     var coordinate: CLLocationCoordinate2D?
     var locationManager: CLLocationManager!
     var current: CLLocation!
+    @IBOutlet weak var filterSidebarButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +28,14 @@ class NearbyMapViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
         
+        if (self.revealViewController() != nil) {
+            self.filterSidebarButton.addTarget(self.revealViewController(), action: "revealToggle:", forControlEvents: UIControlEvents.TouchUpInside)
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
+        
+       
+        
+        
         var gpsIcon = String.fontAwesomeString("fa-location-arrow")
         var buttonStringAttributed = NSMutableAttributedString(string: gpsIcon, attributes: [NSFontAttributeName:UIFont(name: "HelveticaNeue", size: 11.00)!])
         buttonStringAttributed.addAttribute(NSFontAttributeName, value: UIFont.iconFontOfSize("FontAwesome", fontSize: 25), range: NSRange(location: 0,length: 1))
@@ -34,6 +43,7 @@ class NearbyMapViewController: UIViewController, CLLocationManagerDelegate {
         currentLocationLbl.titleLabel?.textAlignment = .Center
         currentLocationLbl.titleLabel?.numberOfLines = 2
         currentLocationLbl.setAttributedTitle(buttonStringAttributed, forState: .Normal)
+        
 
     }
     
@@ -85,6 +95,18 @@ class NearbyMapViewController: UIViewController, CLLocationManagerDelegate {
             failure:{(branchesData)-> Void in
         })
     }
+    
+    @IBAction func getFilterSidebar(sender: UIButton) {
+//        sender.addTarget(self.revealViewController(), action: "revealToggle:", forControlEvents: UIControlEvents.TouchUpInside)
+//        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer());
+//        self.revealViewController()
+        
+//        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+//        sender.targetForAction("revealToggle:", withSender: sender)
+//        sender.actionsForTarget(revealController, forControlEvent: UIControlEvents.TouchUpInside)
+        
+    }
+    
     
 
 }
