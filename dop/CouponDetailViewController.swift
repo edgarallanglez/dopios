@@ -11,6 +11,8 @@ import UIKit
 class CouponDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate {
 
     @IBOutlet var tableView: UITableView!
+    var newsfeed = [NewsfeedNote]()
+    var cachedImages: [String: UIImage] = [:]
     
     var customView :CouponDetailView = CouponDetailView()
     var branchCover: UIImage!
@@ -19,7 +21,9 @@ class CouponDetailViewController: UIViewController, UITableViewDelegate, UITable
     var coordinate: CLLocationCoordinate2D!
     var couponsName: String!
     var couponsDescription: String!
-    var branchId:Int!
+    var branchId: Int = 0
+    var couponId: Int = 0
+    var locationManager = CLLocationManager()
     
     
     override func viewDidLoad() {
@@ -60,6 +64,8 @@ class CouponDetailViewController: UIViewController, UITableViewDelegate, UITable
         
         customView.branch_cover.image = customView.branch_cover.image?.applyLightEffect()
         
+        getNewsfeedActivity()
+        
     }
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
@@ -84,36 +90,50 @@ class CouponDetailViewController: UIViewController, UITableViewDelegate, UITable
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         var cell:NewsfeedCell = tableView.dequeueReusableCellWithIdentifier("NewsfeedCell", forIndexPath: indexPath) as! NewsfeedCell
-      
-        let model = NewsfeedNote(client_coupon_id:0,friend_id: "1", user_id: 1, branch_id: 1, coupon_name: "Cupon prueba", branch_name: "Starbax", names: "Jose Eduardo", surnames: "Quintero Gutierrez", user_image: "http://jsequeiros.com/sites/default/files/imagen-cachorro-comprimir.jpg?1399003306" , branch_image: "http://jsequeiros.com/sites/default/files/imagen-cachorro-comprimir.jpg?1399003306",total_likes:0,user_like:0)
-        
-        
-        
-        cell.loadItem(model, viewController: NewsfeedViewController())
-        
-        cell.user_image.alpha = 0
-        
+        let model = self.newsfeed[indexPath.row]
+        cell.loadItem(model,viewController:self)
         let imageUrl = NSURL(string: model.user_image)
-
+        let identifier = "Cell\(indexPath.row)"
         
-        
-        Utilities.getDataFromUrl(imageUrl!) { data in
-            dispatch_async(dispatch_get_main_queue()) {
-                var cell_image : UIImage = UIImage()
-                cell_image = UIImage ( data: data!)!
-                cell.user_image.image = cell_image
-                UIView.animateWithDuration(0.5, animations: {
-                    cell.user_image.alpha = 1
-                })
+        if(self.cachedImages[identifier] != nil){
+            let cell_image_saved : UIImage = self.cachedImages[identifier]!
+            cell.user_image.image = cell_image_saved
+            cell.user_image.alpha = 1
+        } else {
+            cell.user_image.alpha = 0
+            println("Entro al segundo")
+            Utilities.getDataFromUrl(imageUrl!) { data in
+                dispatch_async(dispatch_get_main_queue()) {
+                    
+                    println("Finished downloading \"\(imageUrl!.lastPathComponent!.stringByDeletingPathExtension)\".")
+                    
+                    var cell_image : UIImage = UIImage()
+                    cell_image = UIImage ( data: data!)!
+                    
+                    if tableView.indexPathForCell(cell)?.section == indexPath.section{
+                        self.cachedImages[identifier] = cell_image
+                        
+                        let cell_image_saved : UIImage = self.cachedImages[identifier]!
+                        
+                        cell.user_image.image = cell_image_saved
+                        
+                        UIView.animateWithDuration(0.5, animations: {
+                            cell.user_image.alpha = 1
+                        })
+                    }
+                }
             }
         }
+
+        
+        cell.selectionStyle = UITableViewCellSelectionStyle.None
 
         
         return cell
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 100
+        return newsfeed.count
     }
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 568
@@ -125,19 +145,57 @@ class CouponDetailViewController: UIViewController, UITableViewDelegate, UITable
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-//            let i = couponsTableView.indexPathForCell(cell)!.section
-//            let model = self.coupons[i]
-            if segue.identifier == "branchProfile" {
-                let view = segue.destinationViewController as! BranchProfileViewController
-//                view.branchId = model.branch_id
-                //view.logo = cell.branchImage.currentBackgroundImage
-                view.branchId = branchId
-                
-                println("Coupon detail view controller \(branchId)")
-
-                
-            }
+             //let i = couponsTableView.indexPathForCell(cell)!.section
         
+        if segue.identifier == "branchProfile" {
+            let view = segue.destinationViewController as! BranchProfileViewController
+            view.branchId = branchId
+        }
+        
+        
+    }
+    
+    func getNewsfeedActivity() {
+        let params:[String: AnyObject] = [
+            "coupon_id" : couponId]
+        
+        CouponController.getPeopleTakingSpecificCouponWithSuccess(params,
+            success: { (peopleData) -> Void in
+                let json = JSON(data: peopleData)
+            
+                for (index: String, subJson: JSON) in json["data"] {
+                    var client_coupon_id = subJson["clients_coupon_id"].int
+                    var friend_id = subJson["friends_id"].string
+                    var exchange_date = subJson["exchange_date"].string
+                    var main_image = subJson["main_image"].string
+                    var names = subJson["names"].string
+                
+                    var longitude = subJson["longitude"].string
+                    let latitude = subJson["latitude"].string
+                    let branch_id =  subJson["branch_id" ].int
+                    let coupon_id =  subJson["coupon_id"].string
+                    let logo =  subJson["logo"].string
+                    let surnames =  subJson["surnames"].string
+                    let user_id =  subJson["user_id"].int
+                    let name =  subJson["name"].string
+                    let branch_name =  subJson["branch_name"].string
+                    let total_likes =  subJson["total_likes"].int
+                    let user_like =  subJson["user_like"].int
+                
+                    let model = NewsfeedNote(client_coupon_id:client_coupon_id,friend_id: friend_id, user_id: user_id, branch_id: branch_id, coupon_name: name, branch_name: branch_name, names: names, surnames: surnames, user_image: main_image, branch_image: logo, total_likes:total_likes,user_like: user_like)
+                
+                    self.newsfeed.append(model)
+                }
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.tableView.reloadData()
+                //self.refreshControl.endRefreshing()
+                });
+            },
+            failure: { (error) -> Void in
+                dispatch_async(dispatch_get_main_queue(), {
+                   
+            })
+        })
         
     }
 
