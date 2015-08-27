@@ -416,7 +416,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" tag="1" title="Map" image="pin" id="h8c-Nj-m1S"/>
+                    <tabBarItem key="tabBarItem" tag="1" title="Map" image="list-categories-inactive" id="h8c-Nj-m1S"/>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="sb6-yg-ao7"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
@@ -495,7 +495,7 @@
             </objects>
             <point key="canvasLocation" x="-501" y="3789"/>
         </scene>
-        <!--Newsfeed View Controller-->
+        <!--Newsfeed-->
         <scene sceneID="fwB-7u-O1r">
             <objects>
                 <viewController id="TTn-gh-Dpv" customClass="NewsfeedViewController" customModule="dop" customModuleProvider="target" sceneMemberID="viewController">
@@ -544,7 +544,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" systemItem="history" id="GGq-MD-JNo"/>
+                    <tabBarItem key="tabBarItem" title="Newsfeed" image="coupons-fav-inactive" id="GGq-MD-JNo"/>
                     <connections>
                         <outlet property="tableView" destination="OZc-ML-bCf" id="b7Y-Ms-gf2"/>
                         <segue destination="OTe-uN-tYr" kind="show" identifier="userProfile" id="Xpw-UC-3s2"/>
@@ -830,7 +830,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Más" image="menu" id="c4G-9N-rUu"/>
+                    <tabBarItem key="tabBarItem" title="Más" image="settings-inactive" id="c4G-9N-rUu"/>
                     <connections>
                         <outlet property="userImage" destination="iNf-Fy-P3p" id="jac-Ut-DHf"/>
                         <segue destination="vXZ-lx-hvc" kind="show" identifier="showLogin" id="Kep-cO-mBG"/>
@@ -1157,7 +1157,7 @@
                             <constraint firstItem="8GJ-8r-L3Y" firstAttribute="leading" secondItem="BBH-0V-Xi6" secondAttribute="leading" constant="10" id="vMQ-2s-sRw"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Dashboard" image="dashboard" id="IOe-D5-SgW"/>
+                    <tabBarItem key="tabBarItem" title="Dashboard" image="dash-icon-active" id="IOe-D5-SgW"/>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="View" id="nsM-lF-9Hu">
                         <barButtonItem key="leftBarButtonItem" image="menu" id="eDn-09-xhg">
@@ -1228,11 +1228,13 @@
         </scene>
     </scenes>
     <resources>
-        <image name="dashboard" width="64" height="64"/>
+        <image name="coupons-fav-inactive" width="23" height="33"/>
+        <image name="dash-icon-active" width="32" height="32"/>
         <image name="dopLogo" width="2083" height="2083"/>
         <image name="heart.png" width="128" height="128"/>
+        <image name="list-categories-inactive" width="33" height="29"/>
         <image name="menu" width="22" height="22"/>
-        <image name="pin" width="32" height="32"/>
+        <image name="settings-inactive" width="33" height="21"/>
         <image name="transparentLogo" width="618" height="482"/>
     </resources>
     <inferredMetricsTieBreakers>
