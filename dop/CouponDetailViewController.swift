@@ -198,9 +198,4 @@ class CouponDetailViewController: UIViewController, UITableViewDelegate, UITable
         })
         
     }
-
-    
-    
-
-    
 }

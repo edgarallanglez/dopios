@@ -22,6 +22,7 @@ class UserProfileViewController: UIViewController {
         super.viewDidLoad()
         
         
+        
         profile_image.layer.cornerRadius=60
         profile_image.layer.masksToBounds=true
         
