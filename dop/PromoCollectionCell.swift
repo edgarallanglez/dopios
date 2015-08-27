@@ -32,9 +32,10 @@ class PromoCollectionCell: UICollectionViewCell {
         var stringAttributed = NSMutableAttributedString(string: rawString, attributes: [NSFontAttributeName:UIFont(name: "HelveticaNeue", size: 1)!])
         stringAttributed.addAttribute(NSFontAttributeName, value: UIFont.iconFontOfSize("FontAwesome", fontSize: 15), range: NSRange(location: 0,length: 1))
         
-        self.shareButton.titleLabel?.textAlignment = .Center
-        self.shareButton.titleLabel?.numberOfLines = 1
-        self.shareButton.setAttributedTitle(stringAttributed, forState: UIControlState.Normal)
+//        self.shareButton.titleLabel?.textAlignment = .Center
+//        self.shareButton.titleLabel?.numberOfLines = 1
+//        self.shareButton.setAttributedTitle(stringAttributed, forState: UIControlState.Normal)
+        self.shareButton.setBackgroundImage(UIImage(named: "share-icon"), forState: UIControlState.Normal)
         
         let gesture = UITapGestureRecognizer(target: self, action: "likeCoupon:")
         heartView.addGestureRecognizer(gesture)

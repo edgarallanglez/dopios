@@ -966,7 +966,7 @@
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart.png" translatesAutoresizingMaskIntoConstraints="NO" id="qKx-kF-X6K">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fav-counter" translatesAutoresizingMaskIntoConstraints="NO" id="qKx-kF-X6K">
                                                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="19" id="7LP-yE-6du"/>
@@ -1020,11 +1020,27 @@
                                                 </view>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9eS-ph-zYt">
                                                     <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <state key="normal" title="-&gt;">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="25" id="nqx-TL-9kL"/>
+                                                        <constraint firstAttribute="height" constant="25" id="xkx-vE-rEi"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                    <state key="normal">
                                                         <color key="titleColor" red="0.23137254900000001" green="0.34901960780000002" blue="0.59607843140000005" alpha="1" colorSpace="calibratedRGB"/>
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="nqx-TL-9kL"/>
+                                                            <exclude reference="xkx-vE-rEi"/>
+                                                        </mask>
+                                                    </variation>
+                                                    <variation key="widthClass=compact">
+                                                        <mask key="constraints">
+                                                            <include reference="nqx-TL-9kL"/>
+                                                            <include reference="xkx-vE-rEi"/>
+                                                        </mask>
+                                                    </variation>
                                                     <connections>
                                                         <action selector="shareCoupon:" destination="HMm-I9-k2N" eventType="touchUpInside" id="ZgT-kO-bUz"/>
                                                     </connections>
@@ -1279,7 +1295,7 @@
         <image name="coupons-fav-inactive" width="23" height="33"/>
         <image name="dash-icon-active" width="32" height="32"/>
         <image name="dopLogo" width="2083" height="2083"/>
-        <image name="heart.png" width="128" height="128"/>
+        <image name="fav-counter" width="33" height="32"/>
         <image name="list-categories-inactive" width="33" height="29"/>
         <image name="menu" width="22" height="22"/>
         <image name="settings-inactive" width="33" height="21"/>
