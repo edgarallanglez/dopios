@@ -25,15 +25,17 @@ class TabbarController: UITabBarController {
         
         self.tabBar.opaque = false
         self.tabBar.translucent = false
-        self.tabBar.alpha = 0.90
+        self.tabBar.alpha = 0.97
         
-        self.tabBar.backgroundColor = UIColor(red: 201.0/255.0 , green: 0.0/255.0 , blue: 112/255.0, alpha:0)
+        self.tabBar.backgroundColor = UIColor.whiteColor()
         self.tabBar.tintColor = Utilities.dopColor
         
         self.tabBar.backgroundImage = UIImage(named: "")
         
         self.navigationController?.navigationBar.barTintColor = Utilities.dopColor
         
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(named:"topbarBackground"), forBarMetrics: .Default)
+            
         self.navigationController?.navigationBar.titleTextAttributes = [
             NSForegroundColorAttributeName: UIColor.whiteColor()
         ]
