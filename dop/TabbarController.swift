@@ -13,8 +13,24 @@ class TabbarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       
+      /*  var DynamicView=UIView(frame: CGRectMake(0, 0, self.view.bounds.size.width, 49))
+        DynamicView.backgroundColor=UIColor.greenColor()
+        DynamicView.alpha = 0.5
+        
+        
+        self.tabBar.viewForBaselineLayout()?.addSubview(DynamicView)
+        self.tabBar.viewForBaselineLayout()?.sendSubviewToBack(DynamicView)
+        
+        */
+        
+        self.tabBar.opaque = false
+        self.tabBar.translucent = false
+        self.tabBar.alpha = 0.90
+        
+        self.tabBar.backgroundColor = UIColor(red: 201.0/255.0 , green: 0.0/255.0 , blue: 112/255.0, alpha:0)
         self.tabBar.tintColor = Utilities.dopColor
+        
+        self.tabBar.backgroundImage = UIImage(named: "")
         
         self.navigationController?.navigationBar.barTintColor = Utilities.dopColor
         
@@ -22,6 +38,10 @@ class TabbarController: UITabBarController {
             NSForegroundColorAttributeName: UIColor.whiteColor()
         ]
         
+        
+        
+    
+        self.navigationController?.navigationBar.translucent = false
         
         self.navigationItem.backBarButtonItem?.setTitleTextAttributes( [NSForegroundColorAttributeName: UIColor.whiteColor()], forState: UIControlState.Normal)
        

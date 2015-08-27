@@ -21,12 +21,18 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
         super.viewDidLoad()
         
         self.title = ""
+        
+        
+        
         //self.navigationItem.title = "Promociones";
         self.navigationController?.navigationBar.topItem!.title = "Hoy tenemos"
         self.refreshControl = UIRefreshControl()
         self.refreshControl.attributedTitle = NSAttributedString(string: "Mapache, roba mas cupones :D!")
         self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         self.CouponsCollectionView.addSubview(refreshControl)
+        
+        self.CouponsCollectionView.contentInset = UIEdgeInsetsMake(0,0,49,0)
+        
         getCoupons()
     }
     
