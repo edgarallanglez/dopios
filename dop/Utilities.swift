@@ -20,6 +20,21 @@ class Utilities {
     class var dopColor: UIColor {
         return UIColor( red: 222.0/255.0 , green: 0.0/255.0 , blue: 120/255.0, alpha:1.0)
     }
+    class var Colors:CAGradientLayer {
+        let colorBottom = UIColor(red: 217.0/255.0, green: 4.0/255.0, blue: 121.0/255.0, alpha: 1.0).CGColor
+        let colorTop = UIColor(red: 248.0/255.0, green: 20.0/255.0, blue: 90.0/255.0, alpha: 1.0).CGColor
+        
+        let gl: CAGradientLayer
+        
+        gl = CAGradientLayer()
+        gl.colors = [ colorTop, colorBottom]
+        gl.locations = [ 0.0, 1.0]
+        
+        return gl
+    }
+    
+    
+    
     class func loadDataFromURL(url: NSURL, completion: (data: NSData?, error: NSError?) -> Void) {
         var session = NSURLSession.sharedSession()
         let request = NSMutableURLRequest(URL: url)

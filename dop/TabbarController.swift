@@ -32,10 +32,14 @@ class TabbarController: UITabBarController {
         
         self.tabBar.backgroundImage = UIImage(named: "")
         
-        self.navigationController?.navigationBar.barTintColor = Utilities.dopColor
         
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(named:"topbarBackground"), forBarMetrics: .Default)
-            
+        
+        var backgroundLayer = Utilities.Colors
+        
+        //self.navigationController?.navigationBar.layer.insertSublayer(backgroundLayer,atIndex:5)
+
+        
         self.navigationController?.navigationBar.titleTextAttributes = [
             NSForegroundColorAttributeName: UIColor.whiteColor()
         ]
@@ -48,11 +52,12 @@ class TabbarController: UITabBarController {
         self.navigationItem.backBarButtonItem?.setTitleTextAttributes( [NSForegroundColorAttributeName: UIColor.whiteColor()], forState: UIControlState.Normal)
        
         
-        var imagen:UIImage = UIImage(named: "tabButton")!
+        var imagen:UIImage = UIImage(named: "main-icon-dop")!
         addCenterButtonWithImage(imagen)
         
         UIApplication.sharedApplication().statusBarStyle = .LightContent
-
+        
+        
     
         
     }
@@ -65,27 +70,31 @@ class TabbarController: UITabBarController {
     func addCenterButtonWithImage(buttonImage:UIImage){
         var button : UIButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
         
-        button.frame = CGRectMake(0,0, 65,65)
         
-        button.setBackgroundImage(buttonImage, forState: .Normal)
+        button.frame = CGRectMake(0,0, 57,49)
+        button.backgroundColor = UIColor.clearColor()
+        //button.setBackgroundImage(buttonImage, forState: .Normal)
         
-        var heightDiference = 65 - self.tabBar.frame.size.height / 2
+        button.setImage(buttonImage, forState: .Normal)
         
-            var center:CGPoint = self.tabBar.center
-            center.y = center.y - 71
-            button.center = center
+        var heightDiference = 49 - self.tabBar.frame.size.height
+        
+        var center:CGPoint = self.tabBar.center
+        var navBarHeight = self.navigationController?.navigationBar.frame.size.height
+
+        let staturBarHeight = UIApplication.sharedApplication().statusBarFrame.size.height
+        
+        center.y = center.y - (navBarHeight!)-staturBarHeight
+
+        
+        button.center = center
         
         
         self.view.addSubview(button)
         button.addTarget(self, action: "pressed:", forControlEvents: UIControlEvents.TouchUpInside)
 
         self.view.bringSubviewToFront(button)
-       
-        /*button.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin;
-        
-        [button setBackgroundImage:highlightImage forState:UIControlStateHighlighted];
-        */
-        
+ 
         
     }
     func pressed(sender: UIButton!) {
