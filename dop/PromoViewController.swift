@@ -26,8 +26,9 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
         
         //self.navigationItem.title = "Promociones";
         self.navigationController?.navigationBar.topItem!.title = "Hoy tenemos"
+        
         self.refreshControl = UIRefreshControl()
-        self.refreshControl.attributedTitle = NSAttributedString(string: "Mapache, roba mas cupones :D!")
+        //self.refreshControl.attributedTitle = NSAttributedString(string: "Mapache, roba mas cupones :D!")
         self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         self.CouponsCollectionView.addSubview(refreshControl)
         
@@ -123,7 +124,7 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-        return UIEdgeInsetsMake(20, 20, 20, 20)
+        return UIEdgeInsetsMake(10, 20, 20, 10)
     }
 
     func getCoupons() {
@@ -155,6 +156,9 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
                 }
                 dispatch_async(dispatch_get_main_queue(), {
                     self.CouponsCollectionView.reloadData()
+                    
+                    
+                    self.CouponsCollectionView.alwaysBounceVertical = true
                     self.refreshControl.endRefreshing()
                 });
             },
