@@ -48,7 +48,7 @@ class PromoCollectionCell: UICollectionViewCell {
         
         self.viewController = viewController
         
-        if(coupon.user_like == 1) {
+        if coupon.user_like == 1 {
             self.heart.tintColor = Utilities.dopColor
         } else {
             self.heart.tintColor = UIColor.lightGrayColor()
