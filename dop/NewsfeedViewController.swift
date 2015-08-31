@@ -71,6 +71,8 @@ class NewsfeedViewController: UIViewController, UITableViewDataSource, UITableVi
         var nib = UINib(nibName: "NewsfeedCell", bundle: nil)
         tableView.registerNib(nib, forCellReuseIdentifier: "NewsfeedCell")
         
+        
+        
         getNewsfeedActivity()
     }
     
@@ -85,7 +87,7 @@ class NewsfeedViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func getNewsfeedActivity() {
-        NewsfeedController.getAllFriendsTakingCouponsWithSuccess { (friendsData) -> Void in
+        NewsfeedController.getAllFriendsTakingCouponsWithSuccess( success: { (friendsData) -> Void in
             let json = JSON(data: friendsData)
             
             for (index: String, subJson: JSON) in json["data"] {
@@ -115,7 +117,13 @@ class NewsfeedViewController: UIViewController, UITableViewDataSource, UITableVi
                 self.tableView.reloadData()
                 self.refreshControl.endRefreshing()
             });
-        }
+        },
+            
+        failure: { (error) -> Void in
+            dispatch_async(dispatch_get_main_queue(), {
+                self.refreshControl.endRefreshing()
+            })
+        })
 
     }
     
@@ -136,17 +144,5 @@ class NewsfeedViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
     }
-    
- 
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

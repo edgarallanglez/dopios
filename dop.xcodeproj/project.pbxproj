@@ -64,6 +64,8 @@
 		A09AB4E51AFA880E004287F7 /* Coupon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09AB4E41AFA880E004287F7 /* Coupon.swift */; };
 		A0BB9BB91B13E4F1000BA261 /* FriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BB9BB71B13E4F1000BA261 /* FriendCell.swift */; };
 		A0BB9BBA1B13E4F1000BA261 /* FriendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0BB9BB81B13E4F1000BA261 /* FriendCell.xib */; };
+		A0D6FBFD1B9105DD00C8E87F /* UIScrollView+InfiniteScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = A0D6FBFC1B9105DD00C8E87F /* UIScrollView+InfiniteScroll.m */; };
+		A0D6FC001B91077300C8E87F /* CustomInfiniteIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D6FBFF1B91077300C8E87F /* CustomInfiniteIndicator.swift */; };
 		A0DF72911B13A66C006EE8F4 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DF72901B13A66C006EE8F4 /* FriendsViewController.swift */; };
 		A0DF72931B13AEBF006EE8F4 /* FriendsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DF72921B13AEBF006EE8F4 /* FriendsController.swift */; };
 		A0DF72951B13E262006EE8F4 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DF72941B13E262006EE8F4 /* Friend.swift */; };
@@ -116,7 +118,7 @@
 		9D33261E1AF7ED1C00498801 /* dopTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = dopTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D3326231AF7ED1C00498801 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9D3326241AF7ED1C00498801 /* dopTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dopTests.swift; sourceTree = "<group>"; };
-		9D3904F91B6FFC9E00FA380A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		9D3904F91B6FFC9E00FA380A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = dop/Images.xcassets; sourceTree = "<group>"; };
 		9D4C04801B18EAF600D5DCEE /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
 		9D697C791B5EF13000D786AA /* iconfonts-fontawesome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "iconfonts-fontawesome.swift"; sourceTree = "<group>"; };
 		9D9C1B2A1B83B0D900F7895B /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = dop/FBSDKShareKit.framework; sourceTree = "<group>"; };
@@ -168,6 +170,9 @@
 		A0AE939A1AF8041A00D02315 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		A0BB9BB71B13E4F1000BA261 /* FriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendCell.swift; sourceTree = "<group>"; };
 		A0BB9BB81B13E4F1000BA261 /* FriendCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendCell.xib; sourceTree = "<group>"; };
+		A0D6FBFB1B9105DD00C8E87F /* UIScrollView+InfiniteScroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIScrollView+InfiniteScroll.h"; path = "../../../Downloads/UIScrollView-InfiniteScroll-master/Classes/UIScrollView+InfiniteScroll.h"; sourceTree = "<group>"; };
+		A0D6FBFC1B9105DD00C8E87F /* UIScrollView+InfiniteScroll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIScrollView+InfiniteScroll.m"; path = "../../../Downloads/UIScrollView-InfiniteScroll-master/Classes/UIScrollView+InfiniteScroll.m"; sourceTree = "<group>"; };
+		A0D6FBFF1B91077300C8E87F /* CustomInfiniteIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomInfiniteIndicator.swift; path = "../../../Downloads/UIScrollView-InfiniteScroll-master/InfiniteScrollViewDemoSwift/CustomInfiniteIndicator.swift"; sourceTree = "<group>"; };
 		A0DF72901B13A66C006EE8F4 /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
 		A0DF72921B13AEBF006EE8F4 /* FriendsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsController.swift; sourceTree = "<group>"; };
 		A0DF72941B13E262006EE8F4 /* Friend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
@@ -305,6 +310,7 @@
 		9D3326001AF7ED1C00498801 = {
 			isa = PBXGroup;
 			children = (
+				9D3904F91B6FFC9E00FA380A /* Images.xcassets */,
 				9D33260B1AF7ED1C00498801 /* dop */,
 				9D3326211AF7ED1C00498801 /* dopTests */,
 				9D33260A1AF7ED1C00498801 /* Products */,
@@ -328,6 +334,7 @@
 				9D1FCED61B79295700F42F6D /* SegmentedControl.swift */,
 				9D4C04801B18EAF600D5DCEE /* FontAwesome.ttf */,
 				9D697C791B5EF13000D786AA /* iconfonts-fontawesome.swift */,
+				A0D6FBFE1B9105E200C8E87F /* InfiniteScroll */,
 				9D0C16821B4DC6AE0088DE2F /* BranchProfile */,
 				A04860901B0D4D3B009FEF1F /* JWTDecode */,
 				A0365FDB1AF9463B000A325D /* SWRevealViewController */,
@@ -346,13 +353,13 @@
 				A060F78B1B72A307009D6ADB /* CouponDetailView.xib */,
 				A060F78D1B72B475009D6ADB /* CouponDetailView.swift */,
 				A0EC05B31B7D622A003CADB2 /* LoadingViewController.swift */,
+				A0D6FBFF1B91077300C8E87F /* CustomInfiniteIndicator.swift */,
 				A060F78A1B717FD2009D6ADB /* Blur */,
 				A082F4811B18CEC7001C8C52 /* Newsfeed */,
 				9D0DB46F1B17D2A50009FE6C /* Nearby */,
 				A0BB9BB61B13E4CA000BA261 /* Friend */,
 				A0EB97B31B052074005112EF /* Login */,
 				A0EB97AE1B03E198005112EF /* User */,
-				9D3904F91B6FFC9E00FA380A /* Images.xcassets */,
 				A09AB4E61AFA9609004287F7 /* Coupon */,
 				9D3326171AF7ED1C00498801 /* LaunchScreen.xib */,
 				9D33260C1AF7ED1C00498801 /* Supporting Files */,
@@ -457,6 +464,15 @@
 				A0DF72921B13AEBF006EE8F4 /* FriendsController.swift */,
 			);
 			name = Friend;
+			sourceTree = "<group>";
+		};
+		A0D6FBFE1B9105E200C8E87F /* InfiniteScroll */ = {
+			isa = PBXGroup;
+			children = (
+				A0D6FBFB1B9105DD00C8E87F /* UIScrollView+InfiniteScroll.h */,
+				A0D6FBFC1B9105DD00C8E87F /* UIScrollView+InfiniteScroll.m */,
+			);
+			name = InfiniteScroll;
 			sourceTree = "<group>";
 		};
 		A0EB97AE1B03E198005112EF /* User */ = {
@@ -613,6 +629,7 @@
 				A0EC05991B7D1C69003CADB2 /* SWRevealViewController.m in Sources */,
 				9D0C16841B4DC6EB0088DE2F /* BranchProfileViewController.swift in Sources */,
 				A060F7861B702FAC009D6ADB /* CouponDetailViewController.swift in Sources */,
+				A0D6FC001B91077300C8E87F /* CustomInfiniteIndicator.swift in Sources */,
 				A0DF72931B13AEBF006EE8F4 /* FriendsController.swift in Sources */,
 				9D1FCED71B79295700F42F6D /* SegmentedControl.swift in Sources */,
 				A082F4851B18CF01001C8C52 /* NewsfeedController.swift in Sources */,
@@ -623,6 +640,7 @@
 				9DB907DE1B8E25A000A40FE0 /* FilterSideViewController.swift in Sources */,
 				A0578C651B0E7D2B0033B5BD /* UserProfileViewController.swift in Sources */,
 				9DB6121A1B192FCC004B8DB8 /* NearbyMapController.swift in Sources */,
+				A0D6FBFD1B9105DD00C8E87F /* UIScrollView+InfiniteScroll.m in Sources */,
 				A082F4871B18E4FF001C8C52 /* NewsfeedNote.swift in Sources */,
 				9DB327CC1B863C77006BF882 /* MoreMenuController.swift in Sources */,
 				A0EB97B21B051F02005112EF /* LoginController.swift in Sources */,

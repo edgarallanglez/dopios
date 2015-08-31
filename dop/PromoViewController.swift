@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PromoViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
+class PromoViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIAlertViewDelegate {
     
     @IBOutlet weak var CouponsCollectionView: UICollectionView!
     
@@ -16,6 +16,17 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
     var coupons = [Coupon]()
     var cachedImages: [String: UIImage] = [:]
     var refreshControl: UIRefreshControl!
+    
+    //
+    
+    
+    private let downloadQueue = dispatch_queue_create("ru.codeispoetry.downloadQueue", nil)
+
+    private let apiURL = "https://api.flickr.com/services/feeds/photos_public.gne?nojsoncallback=1&format=json"
+    private var photos = [NSURL]()
+    private var modifiedAt = NSDate.distantPast() as! NSDate
+    private var cache = NSCache()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,13 +39,40 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
         self.navigationController?.navigationBar.topItem!.title = "Hoy tenemos"
         
         self.refreshControl = UIRefreshControl()
-        //self.refreshControl.attributedTitle = NSAttributedString(string: "Mapache, roba mas cupones :D!")
+        
         self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         self.CouponsCollectionView.addSubview(refreshControl)
         
         self.CouponsCollectionView.contentInset = UIEdgeInsetsMake(0,0,49,0)
         
         getCoupons()
+        
+        
+        
+        
+        
+        // Set custom indicator
+        self.CouponsCollectionView.infiniteScrollIndicatorView = CustomInfiniteIndicator(frame: CGRectMake(0, 0, 24, 24))
+        
+        // Set custom indicator margin
+        CouponsCollectionView.infiniteScrollIndicatorMargin = 40
+        
+        // Add infinite scroll handler
+        CouponsCollectionView.addInfiniteScrollWithHandler { [weak self] (scrollView) -> Void in
+            let collectionView = scrollView as! UICollectionView
+            
+            /*self?.fetchData() {
+                scrollView.finishInfiniteScroll()
+            }*/
+            
+            self?.getCoupons()
+            
+            //scrollView.finishInfiniteScroll()
+            
+            
+        }
+        
+        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -128,7 +166,7 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
     }
 
     func getCoupons() {
-        coupons = [Coupon]()
+        //coupons = [Coupon]()
         
   
         CouponController.getAllCouponsWithSuccess(
@@ -153,6 +191,9 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
                     let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude)
                 
                     self.coupons.append(model)
+                    
+                    
+                    
                 }
                 dispatch_async(dispatch_get_main_queue(), {
                     self.CouponsCollectionView.reloadData()
@@ -160,14 +201,20 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
                     
                     self.CouponsCollectionView.alwaysBounceVertical = true
                     self.refreshControl.endRefreshing()
+                    
+                    
+                    self.CouponsCollectionView.finishInfiniteScroll()
                 });
             },
             
             failure: { (error) -> Void in
                 dispatch_async(dispatch_get_main_queue(), {
                     self.refreshControl.endRefreshing()
+                    self.CouponsCollectionView.finishInfiniteScroll()
                 })
             })
+        
+
         }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -186,19 +233,100 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
             }
         }
     }
-
     
-
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    private func fetchData(handler: (Void -> Void)?) {
+        let requestURL = NSURL(string: apiURL)!
+        
+        let task = NSURLSession.sharedSession().dataTaskWithURL(requestURL, completionHandler: {
+            (data: NSData!, response: NSURLResponse!, error: NSError!) -> Void in
+            
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.handleResponse(data, response: response, error: error, completion: handler)
+                //UIApplication.sharedApplication().stopNetworkActivity()
+            });
+        })
+        
+        //UIApplication.sharedApplication().startNetworkActivity()
+        
+        // I run task.resume() with delay because my network is too fast
+        let delay = (photos.count == 0 ? 0 : 5) * Double(NSEC_PER_SEC)
+        var time = dispatch_time(DISPATCH_TIME_NOW, Int64(0))
+        dispatch_after(time, dispatch_get_main_queue(), {
+            task.resume()
+        })
     }
-    */
+    
+    private func handleResponse(data: NSData!, response: NSURLResponse!, error: NSError!, completion: (Void -> Void)?) {
+        if error != nil {
+            showAlertWithError(error)
+            completion?()
+            return;
+        }
+        
+        var jsonError: NSError?
+        var jsonString = NSString(data: data, encoding: NSUTF8StringEncoding)
+        
+        // Fix broken Flickr JSON
+        jsonString = jsonString?.stringByReplacingOccurrencesOfString("\\'", withString: "'")
+        let fixedData = jsonString?.dataUsingEncoding(NSUTF8StringEncoding)
+        
+        let responseDict = NSJSONSerialization.JSONObjectWithData(fixedData!, options: NSJSONReadingOptions.allZeros, error: &jsonError) as? Dictionary<String, AnyObject>
+        
+        if jsonError != nil {
+            showAlertWithError(jsonError)
+            completion?()
+            return
+        }
+        
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+        
+        let modifiedAt_ = dateFormatter.dateFromString(responseDict?["modified"] as! String)
+        
+        if modifiedAt_?.compare(modifiedAt) != NSComparisonResult.OrderedDescending {
+            completion?()
+            return
+        }
+        
+        var indexPaths = [NSIndexPath]()
+        let firstIndex = photos.count
+        
+        if let items = responseDict?["items"] as? NSArray {
+            if let urls = items.valueForKeyPath("media.m") as? [String] {
+                for (i, url) in enumerate(urls) {
+                    let indexPath = NSIndexPath(forItem: firstIndex + i, inSection: 0)
+                    
+                    photos.append(NSURL(string: url)!)
+                    indexPaths.append(indexPath)
+                }
+            }
+        }
+        
+        modifiedAt = modifiedAt_!
+        
+        CouponsCollectionView.reloadData()
+        //completion!()
+        CouponsCollectionView.finishInfiniteScroll()
+       /* CouponsCollectionView?.performBatchUpdates({ () -> Void in
+            CouponsCollectionView?.insertItemsAtIndexPaths(indexPaths)
+            }, completion: { (finished) -> Void in
+                completion?()
+        });*/
+    }
+    
+    private func showAlertWithError(error: NSError!) {
+        let alert = UIAlertView(
+            title: NSLocalizedString("Error fetching data", comment: ""),
+            message: error.localizedDescription,
+            delegate: self,
+            cancelButtonTitle: NSLocalizedString("Dismiss", comment: ""),
+            otherButtonTitles: NSLocalizedString("Retry", comment: "")
+        )
+        alert.show()
+    }
+    
+
 
 }

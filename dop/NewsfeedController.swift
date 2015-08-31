@@ -9,12 +9,13 @@
 import UIKit
 
 class NewsfeedController: NSObject {
-    class func getAllFriendsTakingCouponsWithSuccess(success: ((friendsData: NSData!) -> Void)) {
+    class func getAllFriendsTakingCouponsWithSuccess(success succeed: ((friendsData: NSData!) -> Void),failure errorFound: ((friendsData: NSError?) -> Void)) {
         let url = "\(Utilities.dopURL)coupon/used/get/user"
         Utilities.loadDataFromURL(NSURL(string: url)!, completion:{(data, error) -> Void in
             if let urlData = data {
- 
-                success(friendsData: urlData)
+                succeed(friendsData: urlData)
+            }else{
+                errorFound(friendsData: error)
             }
         })
     }
