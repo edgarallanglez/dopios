@@ -10,6 +10,7 @@
 import Foundation
 
 class Utilities {
+    static var filterArray: [Int] = []
     
     class var dopURL: String {
         return "http://45.55.7.118:5000/api/"
@@ -32,8 +33,6 @@ class Utilities {
         
         return gl
     }
-    
-    
     
     class func loadDataFromURL(url: NSURL, completion: (data: NSData?, error: NSError?) -> Void) {
         var session = NSURLSession.sharedSession()

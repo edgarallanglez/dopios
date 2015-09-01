@@ -8,7 +8,7 @@
 
 import UIKit
 
-class User: NSObject {
+class User: NSObject, CLLocationManagerDelegate {
     static var userToken:String = ""
     static var userEmail:String = ""
     static var userName:String = ""
@@ -16,4 +16,5 @@ class User: NSObject {
     static var loginType = ""
     static var activeSession = false
     static var userSurnames = ""
+    static var coordinate: CLLocationCoordinate2D = CLLocationCoordinate2D()
 }
