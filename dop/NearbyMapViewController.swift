@@ -17,24 +17,24 @@ class NearbyMapViewController: UIViewController, CLLocationManagerDelegate {
     var coordinate: CLLocationCoordinate2D?
     var locationManager: CLLocationManager!
     var current: CLLocation!
+    var filterArray: [Int] = []
+    var annotationArray: [AnyObject] = []
     @IBOutlet weak var filterSidebarButton: UIButton!
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-  
+        Utilities.filterArray.removeAll()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "getNearestBranches", name: "filtersChanged", object: nil)
+        
         locationManager = CLLocationManager()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
-        
+        User.coordinate = locationManager.location.coordinate
         if (self.revealViewController() != nil) {
             self.filterSidebarButton.addTarget(self.revealViewController(), action: "revealToggle:", forControlEvents: UIControlEvents.TouchUpInside)
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
-        
-       
-        
         
         var gpsIcon = String.fontAwesomeString("fa-location-arrow")
         var buttonStringAttributed = NSMutableAttributedString(string: gpsIcon, attributes: [NSFontAttributeName:UIFont(name: "HelveticaNeue", size: 11.00)!])
@@ -44,7 +44,13 @@ class NearbyMapViewController: UIViewController, CLLocationManagerDelegate {
         currentLocationLbl.titleLabel?.numberOfLines = 2
         currentLocationLbl.setAttributedTitle(buttonStringAttributed, forState: .Normal)
         
+        //getNearestBranches()
+        super.viewDidLoad()
 
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        setMapAtCurrent()
     }
     
     let regionRadius: CLLocationDistance = 1000
@@ -61,52 +67,52 @@ class NearbyMapViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     @IBAction func currentLocation(sender: UIButton) {
-        var currentUserLocation = CLLocation(latitude: coordinate!.latitude, longitude: coordinate!.longitude)
+        setMapAtCurrent()
+    }
+    
+    @IBAction func searchNearest(sender: UIButton) {
+        //getNearestBranches()
+    }
+    
+    func setMapAtCurrent() {
+        var currentUserLocation = CLLocation(latitude: User.coordinate.latitude, longitude: User.coordinate.longitude)
         self.current = currentUserLocation
         centerMapOnLocation(currentUserLocation)
     }
     
-    @IBAction func getNearestBranches(sender: UIButton) {
-        var latitude = String(stringInterpolationSegment: coordinate!.latitude)
-        var longitude = String(stringInterpolationSegment: coordinate!.longitude)
-        
+    func getNearestBranches() {
+        var latitude = User.coordinate.latitude
+        var longitude = User.coordinate.longitude
+        filterArray = Utilities.filterArray
+        if self.nearbyMap != nil {
+            self.nearbyMap.removeAnnotations(self.annotationArray)
+        }
         let params:[String:AnyObject] = [
             "latitude": latitude,
             "longitude": longitude,
-            "radio": 10
+            "radio": 10,
+            "filterArray": filterArray
         ]
-        
+        print(params)
         NearbyMapController.getNearestBranches(params, success: {(branchesData) -> Void in
             let json = JSON(data: branchesData)
             for (index, location) in json["data"] {
                 var latitude = location["latitude"].double
                 var longitude = location["longitude"].double
-
+                
                 var newLocation = CLLocationCoordinate2DMake(latitude!, longitude!)
                 dispatch_async(dispatch_get_main_queue()) {
-                // Drop a pin
+                    // Drop a pin
                     var dropPin = MKPointAnnotation()
                     dropPin.coordinate = newLocation
                     dropPin.title = location["name"].string
+                    self.annotationArray.append(dropPin)
                     self.nearbyMap.addAnnotation(dropPin)
                 }
             }
-        },
+            },
             failure:{(branchesData)-> Void in
         })
     }
-    
-    @IBAction func getFilterSidebar(sender: UIButton) {
-//        sender.addTarget(self.revealViewController(), action: "revealToggle:", forControlEvents: UIControlEvents.TouchUpInside)
-//        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer());
-//        self.revealViewController()
-        
-//        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-//        sender.targetForAction("revealToggle:", withSender: sender)
-//        sender.actionsForTarget(revealController, forControlEvent: UIControlEvents.TouchUpInside)
-        
-    }
-    
-    
 
 }
