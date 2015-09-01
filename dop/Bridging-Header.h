@@ -18,5 +18,7 @@
 #import "A0JWTDecoder.h"
 #import "SWRevealViewController.h"
 #import "UIImage+ImageEffects.h"
+#import "UIScrollView+InfiniteScroll.h"
+
 
 

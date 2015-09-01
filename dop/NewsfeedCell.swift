@@ -96,6 +96,16 @@ class NewsfeedCell: UITableViewCell {
     }
     
     func setCouponLike() {
+        heart.transform = CGAffineTransformMakeScale(0.1, 0.1)
+        UIView.animateWithDuration(0.8,
+            delay: 0,
+            usingSpringWithDamping: 0.2,
+            initialSpringVelocity: 6.0,
+            options: UIViewAnimationOptions.AllowUserInteraction,
+            animations: {
+                self.heart.transform = CGAffineTransformIdentity
+            }, completion: nil)
+        
         self.heart.tintColor = Utilities.dopColor
         let totalLikes = (self.likes.text!.toInt())!+1
         self.likes.text = String(stringInterpolationSegment: totalLikes)
