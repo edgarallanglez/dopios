@@ -64,8 +64,8 @@
 		A09AB4E51AFA880E004287F7 /* Coupon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09AB4E41AFA880E004287F7 /* Coupon.swift */; };
 		A0BB9BB91B13E4F1000BA261 /* FriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BB9BB71B13E4F1000BA261 /* FriendCell.swift */; };
 		A0BB9BBA1B13E4F1000BA261 /* FriendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0BB9BB81B13E4F1000BA261 /* FriendCell.xib */; };
+		A0C3AC2E1B9525D5005636E7 /* CustomInfiniteIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C3AC2D1B9525D5005636E7 /* CustomInfiniteIndicator.swift */; };
 		A0D6FBFD1B9105DD00C8E87F /* UIScrollView+InfiniteScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = A0D6FBFC1B9105DD00C8E87F /* UIScrollView+InfiniteScroll.m */; };
-		A0D6FC001B91077300C8E87F /* CustomInfiniteIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D6FBFF1B91077300C8E87F /* CustomInfiniteIndicator.swift */; };
 		A0DF72911B13A66C006EE8F4 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DF72901B13A66C006EE8F4 /* FriendsViewController.swift */; };
 		A0DF72931B13AEBF006EE8F4 /* FriendsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DF72921B13AEBF006EE8F4 /* FriendsController.swift */; };
 		A0DF72951B13E262006EE8F4 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DF72941B13E262006EE8F4 /* Friend.swift */; };
@@ -170,9 +170,9 @@
 		A0AE939A1AF8041A00D02315 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		A0BB9BB71B13E4F1000BA261 /* FriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendCell.swift; sourceTree = "<group>"; };
 		A0BB9BB81B13E4F1000BA261 /* FriendCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendCell.xib; sourceTree = "<group>"; };
+		A0C3AC2D1B9525D5005636E7 /* CustomInfiniteIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomInfiniteIndicator.swift; sourceTree = "<group>"; };
 		A0D6FBFB1B9105DD00C8E87F /* UIScrollView+InfiniteScroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIScrollView+InfiniteScroll.h"; path = "../../../Downloads/UIScrollView-InfiniteScroll-master/Classes/UIScrollView+InfiniteScroll.h"; sourceTree = "<group>"; };
 		A0D6FBFC1B9105DD00C8E87F /* UIScrollView+InfiniteScroll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIScrollView+InfiniteScroll.m"; path = "../../../Downloads/UIScrollView-InfiniteScroll-master/Classes/UIScrollView+InfiniteScroll.m"; sourceTree = "<group>"; };
-		A0D6FBFF1B91077300C8E87F /* CustomInfiniteIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomInfiniteIndicator.swift; path = "../../../Downloads/UIScrollView-InfiniteScroll-master/InfiniteScrollViewDemoSwift/CustomInfiniteIndicator.swift"; sourceTree = "<group>"; };
 		A0DF72901B13A66C006EE8F4 /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
 		A0DF72921B13AEBF006EE8F4 /* FriendsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsController.swift; sourceTree = "<group>"; };
 		A0DF72941B13E262006EE8F4 /* Friend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
@@ -353,7 +353,7 @@
 				A060F78B1B72A307009D6ADB /* CouponDetailView.xib */,
 				A060F78D1B72B475009D6ADB /* CouponDetailView.swift */,
 				A0EC05B31B7D622A003CADB2 /* LoadingViewController.swift */,
-				A0D6FBFF1B91077300C8E87F /* CustomInfiniteIndicator.swift */,
+				A0C3AC2D1B9525D5005636E7 /* CustomInfiniteIndicator.swift */,
 				A060F78A1B717FD2009D6ADB /* Blur */,
 				A082F4811B18CEC7001C8C52 /* Newsfeed */,
 				9D0DB46F1B17D2A50009FE6C /* Nearby */,
@@ -630,7 +630,7 @@
 				A0EC05991B7D1C69003CADB2 /* SWRevealViewController.m in Sources */,
 				9D0C16841B4DC6EB0088DE2F /* BranchProfileViewController.swift in Sources */,
 				A060F7861B702FAC009D6ADB /* CouponDetailViewController.swift in Sources */,
-				A0D6FC001B91077300C8E87F /* CustomInfiniteIndicator.swift in Sources */,
+				A0C3AC2E1B9525D5005636E7 /* CustomInfiniteIndicator.swift in Sources */,
 				A0DF72931B13AEBF006EE8F4 /* FriendsController.swift in Sources */,
 				9D1FCED71B79295700F42F6D /* SegmentedControl.swift in Sources */,
 				A082F4851B18CF01001C8C52 /* NewsfeedController.swift in Sources */,

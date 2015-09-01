@@ -49,17 +49,7 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
         
         // Add infinite scroll handler
         CouponsCollectionView.addInfiniteScrollWithHandler { [weak self] (scrollView) -> Void in
-            let collectionView = scrollView as! UICollectionView
-            
-            /*self?.fetchData() {
-                scrollView.finishInfiniteScroll()
-            }*/
-            
             self?.getCouponsWithOffset()
-            
-            //scrollView.finishInfiniteScroll()
-            
-            
         }
         
         
@@ -251,21 +241,15 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
                     if(newData){
                         self.offset+=addedValues
                     }
-                    
                     println("Offset \(self.offset)")
-
-                    
                 });
             },
-            
             failure: { (error) -> Void in
                 dispatch_async(dispatch_get_main_queue(), {
                     self.refreshControl.endRefreshing()
                     self.CouponsCollectionView.finishInfiniteScroll()
                 })
         })
-        
-        
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
