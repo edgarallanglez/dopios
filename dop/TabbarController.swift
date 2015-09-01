@@ -58,7 +58,23 @@ class TabbarController: UITabBarController {
         UIApplication.sharedApplication().statusBarStyle = .LightContent
         
         
-    
+        
+        //SEARCH BAR
+      /*  var searchBar:UISearchBar = UISearchBar(frame: CGRectMake(0, 0, 200, 20))
+        searchBar.tintColor = UIColor.whiteColor()
+        
+        
+        var textFieldInsideSearchBar = searchBar.valueForKey("searchField") as? UITextField
+        textFieldInsideSearchBar?.textColor = UIColor.whiteColor()
+        
+        
+        
+        searchBar.searchBarStyle = UISearchBarStyle.Minimal
+        searchBar.placeholder = "Buscar"
+        var leftNavBarButton = UIBarButtonItem(customView:searchBar)
+        self.navigationItem.leftBarButtonItem = leftNavBarButton
+        */
+        //
         
     }
 
