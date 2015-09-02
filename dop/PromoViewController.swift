@@ -21,6 +21,7 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
     let limit:Int = 6
     var offset:Int = 0
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -47,11 +48,14 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
         
         // Add infinite scroll handler
         CouponsCollectionView.addInfiniteScrollWithHandler { [weak self] (scrollView) -> Void in
-            self?.getCouponsWithOffset()
+                if(!self!.coupons.isEmpty){
+                    self!.getCouponsWithOffset()
+                }
         }
     }
     
     override func viewDidAppear(animated: Bool) {
+        self.refreshControl.endRefreshing()
     }
     
     func refresh(sender:AnyObject) {
@@ -61,14 +65,15 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
     }
-    
+
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return coupons.count
     }
-    
+
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! PromoCollectionCell
         
+        if (!coupons.isEmpty) {
         let model = self.coupons[indexPath.row]
         
         cell.loadItem(model, viewController: self)
@@ -106,6 +111,7 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
                     }
                 }
             }
+    
         }
         
         UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseInOut, animations: {
@@ -113,6 +119,7 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
             }, completion: { finished in
                 
         })
+        }
         
         
 
@@ -121,7 +128,7 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
   
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        let size = CGSizeMake(180, 200)
+        let size = CGSizeMake(185, 200)
         
         return size
     }
@@ -129,8 +136,6 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
         let cell = self.CouponsCollectionView.cellForItemAtIndexPath(indexPath)
         self.performSegueWithIdentifier("couponDetail", sender: cell)
     }
-    
-
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -138,27 +143,30 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-        return UIEdgeInsetsMake(10, 20, 20, 10)
+        return UIEdgeInsetsMake(15, 15, 20, 15)
     }
 
     func getCoupons() {
         coupons.removeAll(keepCapacity: false)
+    
+        cachedImages.removeAll(keepCapacity: false)
+        
         
         CouponController.getAllCouponsWithSuccess(limit,
             success: { (couponsData) -> Void in
                 let json = JSON(data: couponsData)
             
                 for (index: String, subJson: JSON) in json["data"]{
-                    var coupon_id = subJson["coupon_id"].int!
-                    let coupon_name = subJson["name"].string!
-                    let coupon_description = subJson["description"].string!
+                    var coupon_id = subJson["coupon_id"].int
+                    let coupon_name = subJson["name"].string
+                    let coupon_description = subJson["description"].string
                     let coupon_limit = subJson["limit"].string
                     let coupon_exp = "2015-09-30"
-                    let coupon_logo = subJson["logo"].string!
-                    let branch_id = subJson["branch_id"].int!
-                    let company_id = subJson["company_id"].int!
-                    let total_likes = subJson["total_likes"].int!
-                    let user_like = subJson["user_like"].int!
+                    let coupon_logo = subJson["logo"].string
+                    let branch_id = subJson["branch_id"].int
+                    let company_id = subJson["company_id"].int
+                    let total_likes = subJson["total_likes"].int
+                    let user_like = subJson["user_like"].int
                     let latitude = subJson["latitude"].double!
                     let longitude = subJson["longitude"].double!
                     
@@ -193,10 +201,11 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
     
     func getCouponsWithOffset() {
         
-        var firstCoupon = coupons.first as Coupon!
-        
         var newData:Bool = false
         var addedValues:Int = 0
+        
+        var firstCoupon = self.coupons.first as Coupon!
+        
         CouponController.getAllCouponsOffsetWithSuccess(firstCoupon.id,offset: offset,
             success: { (couponsData) -> Void in
                 let json = JSON(data: couponsData)
