@@ -71,7 +71,7 @@ class NearbyMapViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     @IBAction func searchNearest(sender: UIButton) {
-        //getNearestBranches()
+        getNearestBranches()
     }
     
     func setMapAtCurrent() {
@@ -90,12 +90,13 @@ class NearbyMapViewController: UIViewController, CLLocationManagerDelegate {
         let params:[String:AnyObject] = [
             "latitude": latitude,
             "longitude": longitude,
-            "radio": 10,
+            "radio": 15,
             "filterArray": filterArray
         ]
         print(params)
         NearbyMapController.getNearestBranches(params, success: {(branchesData) -> Void in
             let json = JSON(data: branchesData)
+            print(json["data"].count)
             for (index, location) in json["data"] {
                 var latitude = location["latitude"].double
                 var longitude = location["longitude"].double
