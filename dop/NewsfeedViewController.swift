@@ -25,6 +25,8 @@ class NewsfeedViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell:NewsfeedCell = tableView.dequeueReusableCellWithIdentifier("NewsfeedCell", forIndexPath: indexPath) as! NewsfeedCell
+        
+        if(!newsfeed.isEmpty){
         let model = self.newsfeed[indexPath.row]
         cell.loadItem(model, viewController: self)
         let imageUrl = NSURL(string: model.user_image)
@@ -52,6 +54,7 @@ class NewsfeedViewController: UIViewController, UITableViewDataSource, UITableVi
                     }
                 }
             }
+        }
         }
         
         cell.selectionStyle = UITableViewCellSelectionStyle.None
@@ -83,10 +86,12 @@ class NewsfeedViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func refresh(sender: AnyObject) {
         getNewsfeedActivity()
-        newsfeed.removeAll()
     }
     
     func getNewsfeedActivity() {
+        newsfeed.removeAll(keepCapacity: false)
+        cachedImages.removeAll(keepCapacity: false)
+        
         NewsfeedController.getAllFriendsTakingCouponsWithSuccess( success: { (friendsData) -> Void in
             let json = JSON(data: friendsData)
             
