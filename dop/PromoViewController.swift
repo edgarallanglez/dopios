@@ -26,7 +26,6 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
         
         self.title = ""
         
-        
         offset = limit - 1
 
         self.navigationController?.navigationBar.topItem!.title = "Hoy tenemos"
@@ -40,7 +39,6 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
         
         getCoupons()
         
-        
         // Set custom indicator
         self.CouponsCollectionView.infiniteScrollIndicatorView = CustomInfiniteIndicator(frame: CGRectMake(0, 0, 24, 24))
         
@@ -51,8 +49,6 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
         CouponsCollectionView.addInfiniteScrollWithHandler { [weak self] (scrollView) -> Void in
             self?.getCouponsWithOffset()
         }
-        
-        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -147,6 +143,7 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
 
     func getCoupons() {
         coupons.removeAll(keepCapacity: false)
+        
         CouponController.getAllCouponsWithSuccess(limit,
             success: { (couponsData) -> Void in
                 let json = JSON(data: couponsData)
@@ -178,10 +175,8 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
                 dispatch_async(dispatch_get_main_queue(), {
                     self.CouponsCollectionView.reloadData()
                     
-                    
                     self.CouponsCollectionView.alwaysBounceVertical = true
                     self.refreshControl.endRefreshing()
-                    
                     
                     
                 });
@@ -232,7 +227,6 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
                 dispatch_async(dispatch_get_main_queue(), {
                     self.CouponsCollectionView.reloadData()
                     
-                    
                     self.CouponsCollectionView.alwaysBounceVertical = true
                     self.refreshControl.endRefreshing()
                     
@@ -241,7 +235,9 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
                     if(newData){
                         self.offset+=addedValues
                     }
-                    println("Offset \(self.offset)")
+                    /*if(addedValues<6 || !newData){
+                        self.CouponsCollectionView.removeInfiniteScroll()
+                    }*/
                 });
             },
             failure: { (error) -> Void in
