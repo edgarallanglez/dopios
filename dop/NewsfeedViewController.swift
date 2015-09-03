@@ -13,6 +13,12 @@ class NewsfeedViewController: UIViewController, UITableViewDataSource, UITableVi
     var newsfeed = [NewsfeedNote]()
     var cachedImages: [String: UIImage] = [:]
     var refreshControl: UIRefreshControl!
+    
+    var newsfeedTemporary = [NewsfeedNote]()
+    
+    let limit:Int = 6
+    var offset:Int = 0
+    
     @IBOutlet var tableView: UITableView!
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -27,34 +33,37 @@ class NewsfeedViewController: UIViewController, UITableViewDataSource, UITableVi
         var cell:NewsfeedCell = tableView.dequeueReusableCellWithIdentifier("NewsfeedCell", forIndexPath: indexPath) as! NewsfeedCell
         
         if(!newsfeed.isEmpty){
-        let model = self.newsfeed[indexPath.row]
-        cell.loadItem(model, viewController: self)
-        let imageUrl = NSURL(string: model.user_image)
-        let identifier = "Cell\(indexPath.row)"
+            let model = self.newsfeed[indexPath.row]
+            cell.loadItem(model, viewController: self)
+            let imageUrl = NSURL(string: model.user_image)
+            let identifier = "Cell\(indexPath.row)"
         
-        if (self.cachedImages[identifier] != nil){
-            let cell_image_saved : UIImage = self.cachedImages[identifier]!
-            cell.user_image.image = cell_image_saved
-            cell.user_image.alpha = 1
+            if (self.cachedImages[identifier] != nil){
+                let cell_image_saved : UIImage = self.cachedImages[identifier]!
+                cell.user_image.image = cell_image_saved
+                cell.user_image.alpha = 1
+                cell.username_button.alpha = 1
             
-        } else {
-            cell.user_image.alpha = 0
-            Utilities.getDataFromUrl(imageUrl!) { data in
-                dispatch_async(dispatch_get_main_queue()) {
-                    var cell_image : UIImage = UIImage()
-                    cell_image = UIImage (data: data!)!
+            } else {
+                cell.user_image.alpha = 0
+                cell.username_button.alpha = 0
+                Utilities.getDataFromUrl(imageUrl!) { data in
+                    dispatch_async(dispatch_get_main_queue()) {
+                        var cell_image : UIImage = UIImage()
+                        cell_image = UIImage (data: data!)!
             
-                    if tableView.indexPathForCell(cell)?.row == indexPath.row {
-                        self.cachedImages[identifier] = cell_image
-                        let cell_image_saved : UIImage = self.cachedImages[identifier]!
-                        cell.user_image.image = cell_image_saved
-                        UIView.animateWithDuration(0.5, animations: {
-                            cell.user_image.alpha = 1
-                        })
+                        if tableView.indexPathForCell(cell)?.row == indexPath.row {
+                            self.cachedImages[identifier] = cell_image
+                            let cell_image_saved : UIImage = self.cachedImages[identifier]!
+                            cell.user_image.image = cell_image_saved
+                            UIView.animateWithDuration(0.5, animations: {
+                                cell.user_image.alpha = 1
+                                cell.username_button.alpha = 1
+                            })
+                        }
                     }
                 }
             }
-        }
         }
         
         cell.selectionStyle = UITableViewCellSelectionStyle.None
@@ -67,7 +76,6 @@ class NewsfeedViewController: UIViewController, UITableViewDataSource, UITableVi
         super.viewDidLoad()
         
         self.refreshControl = UIRefreshControl()
-        self.refreshControl.attributedTitle = NSAttributedString(string: "Que han hecho los perrazos de tus amigos :D!")
         self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         self.tableView.addSubview(refreshControl)
         
@@ -75,8 +83,23 @@ class NewsfeedViewController: UIViewController, UITableViewDataSource, UITableVi
         tableView.registerNib(nib, forCellReuseIdentifier: "NewsfeedCell")
         
         
-        
         getNewsfeedActivity()
+        
+        self.offset = self.limit - 1
+
+        
+        // Set custom indicator
+        self.tableView.infiniteScrollIndicatorView = CustomInfiniteIndicator(frame: CGRectMake(0, 0, 24, 24))
+        
+        // Set custom indicator margin
+        tableView.infiniteScrollIndicatorMargin = 40
+        
+        // Add infinite scroll handler
+        tableView.addInfiniteScrollWithHandler { [weak self] (scrollView) -> Void in
+            if(!self!.newsfeed.isEmpty){
+                self!.getNewsfeedActivityWithOffset()
+            }
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -89,10 +112,10 @@ class NewsfeedViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func getNewsfeedActivity() {
-        newsfeed.removeAll(keepCapacity: false)
+        newsfeedTemporary.removeAll(keepCapacity: false)
         cachedImages.removeAll(keepCapacity: false)
         
-        NewsfeedController.getAllFriendsTakingCouponsWithSuccess( success: { (friendsData) -> Void in
+        NewsfeedController.getAllFriendsTakingCouponsOffsetWithSuccess(200,offset:0, success: { (friendsData) -> Void in
             let json = JSON(data: friendsData)
             
             for (index: String, subJson: JSON) in json["data"] {
@@ -116,11 +139,18 @@ class NewsfeedViewController: UIViewController, UITableViewDataSource, UITableVi
                 
                 let model = NewsfeedNote(client_coupon_id:client_coupon_id,friend_id: friend_id, user_id: user_id, branch_id: branch_id, coupon_name: name, branch_name: branch_name, names: names, surnames: surnames, user_image: main_image, branch_image: logo, total_likes:total_likes,user_like: user_like)
                 
-                self.newsfeed.append(model)
+                self.newsfeedTemporary.append(model)
+                
+
             }
             dispatch_async(dispatch_get_main_queue(), {
+                self.newsfeed.removeAll()
+                self.newsfeed = self.newsfeedTemporary
+                
                 self.tableView.reloadData()
                 self.refreshControl.endRefreshing()
+                
+                self.offset = self.limit - 1
             });
         },
             
@@ -130,6 +160,66 @@ class NewsfeedViewController: UIViewController, UITableViewDataSource, UITableVi
             })
         })
 
+    }
+    
+    
+    func getNewsfeedActivityWithOffset() {
+        
+        var newData:Bool = false
+        var addedValues:Int = 0
+        
+        var firstNewsfeed = self.newsfeed.first as NewsfeedNote!
+        
+        NewsfeedController.getAllFriendsTakingCouponsOffsetWithSuccess(firstNewsfeed.client_coupon_id,offset:offset, success: { (friendsData) -> Void in
+            let json = JSON(data: friendsData)
+            
+            for (index: String, subJson: JSON) in json["data"] {
+                var client_coupon_id = subJson["clients_coupon_id"].int
+                var friend_id = subJson["friends_id"].string
+                var exchange_date = subJson["exchange_date"].string
+                var main_image = subJson["main_image"].string
+                var names = subJson["names"].string
+                
+                var longitude = subJson["longitude"].string
+                let latitude = subJson["latitude"].string
+                let branch_id =  subJson["branch_id" ].int
+                let coupon_id =  subJson["coupon_id"].string
+                let logo =  subJson["logo"].string
+                let surnames =  subJson["surnames"].string
+                let user_id =  subJson["user_id"].int
+                let name =  subJson["name"].string
+                let branch_name =  subJson["branch_name"].string
+                let total_likes =  subJson["total_likes"].int
+                let user_like =  subJson["user_like"].int
+                
+                let model = NewsfeedNote(client_coupon_id:client_coupon_id,friend_id: friend_id, user_id: user_id, branch_id: branch_id, coupon_name: name, branch_name: branch_name, names: names, surnames: surnames, user_image: main_image, branch_image: logo, total_likes:total_likes,user_like: user_like)
+                
+                self.newsfeedTemporary.append(model)
+                
+                newData = true
+                addedValues++
+            }
+            dispatch_async(dispatch_get_main_queue(), {
+                self.newsfeed.removeAll()
+                self.newsfeed = self.newsfeedTemporary
+                
+                self.tableView.reloadData()
+                
+                self.tableView.finishInfiniteScroll()
+                
+                if(newData){
+                    self.offset+=addedValues
+                }
+
+            });
+            },
+            
+            failure: { (error) -> Void in
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.tableView.finishInfiniteScroll()
+                })
+        })
+        
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
