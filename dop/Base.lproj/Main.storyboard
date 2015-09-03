@@ -2884,6 +2884,23 @@
             </objects>
             <point key="canvasLocation" x="-501" y="3083"/>
         </scene>
+        <!--Search View Controller-->
+        <scene sceneID="g0n-mi-VV4">
+            <objects>
+                <viewController id="4b9-BF-vCA" customClass="SearchViewController" customModule="dop" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Liq-bx-c6h"/>
+                        <viewControllerLayoutGuide type="bottom" id="GXe-oG-X2i"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="dC9-04-Tl8">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cBm-gO-Jjf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4450.5" y="3029"/>
+        </scene>
         <!--Dashboard-->
         <scene sceneID="RLG-2o-LsD">
             <objects>
@@ -2933,7 +2950,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xE7-5S-XVQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3430.5" y="3005"/>
+            <point key="canvasLocation" x="-3358.5" y="3037"/>
         </scene>
         <!--Tabbar Controller-->
         <scene sceneID="9dx-Dy-kRz">
@@ -2960,6 +2977,7 @@
                         <segue destination="Oc2-QP-LbR" kind="relationship" relationship="viewControllers" id="Ueu-Tp-ucq"/>
                         <segue destination="TTn-gh-Dpv" kind="relationship" relationship="viewControllers" id="vmc-eb-Wu8"/>
                         <segue destination="Ahl-DB-2Wx" kind="relationship" relationship="viewControllers" id="Wq8-yb-aM8"/>
+                        <segue destination="4b9-BF-vCA" kind="show" identifier="searchView" id="dSr-XB-e87"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZQr-qy-Vjj" userLabel="First Responder" sceneMemberID="firstResponder"/>
