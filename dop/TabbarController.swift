@@ -60,7 +60,7 @@ class TabbarController: UITabBarController {
         
         
         //SEARCH BAR
-      /*  var searchBar:UISearchBar = UISearchBar(frame: CGRectMake(0, 0, 200, 20))
+        var searchBar:UISearchBar = UISearchBar(frame: CGRectMake(0, 0, 200, 20))
         searchBar.tintColor = UIColor.whiteColor()
         
         
@@ -73,8 +73,13 @@ class TabbarController: UITabBarController {
         searchBar.placeholder = "Buscar"
         var leftNavBarButton = UIBarButtonItem(customView:searchBar)
         self.navigationItem.leftBarButtonItem = leftNavBarButton
-        */
+
         //
+        
+        
+        var logButton : UIBarButtonItem = UIBarButtonItem(title: "RigthButtonTitle", style: UIBarButtonItemStyle.Plain, target: self, action: "")
+        
+        self.navigationItem.rightBarButtonItem = logButton
         
     }
 
@@ -116,6 +121,19 @@ class TabbarController: UITabBarController {
     func pressed(sender: UIButton!) {
         
         self.selectedIndex = 2
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        self.performSegueWithIdentifier("searchView", sender: self)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let barViewControllers = segue.destinationViewController as! UIViewController
+        barViewControllers.hidesBottomBarWhenPushed = false
+        
+        /*let nav = barViewControllers.viewControllers![2] as! UINavigationController
+        let destinationViewController = nav.topViewController as! SearchViewController*/
+        
     }
 
   
