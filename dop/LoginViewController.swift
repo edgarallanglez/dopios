@@ -215,7 +215,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
         else {
             // Open a session showing the user the login UI
             // You must ALWAYS ask for public_profile permissions when opening a session
-            FBSession.openActiveSessionWithReadPermissions(["public_profile"], allowLoginUI: true, completionHandler: {
+            FBSession.openActiveSessionWithReadPermissions(["public_profile", "email", "user_friends", "user_birthday"], allowLoginUI: true, completionHandler: {
                 (session: FBSession!, state: FBSessionState, error: NSError!) in
                 
                 let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate

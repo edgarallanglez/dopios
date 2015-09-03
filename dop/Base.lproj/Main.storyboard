@@ -2350,7 +2350,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tyD-zm-42m" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="439.5" y="3806"/>
+            <point key="canvasLocation" x="904.5" y="4530"/>
         </scene>
         <!--Friends View Controller-->
         <scene sceneID="RfR-7j-HkT">
@@ -2364,9 +2364,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="170" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="FLU-Kf-evd">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="100" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="FLU-Kf-evd">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="qEh-Kq-WbW" id="oLA-85-usr"/>
                                     <outlet property="delegate" destination="qEh-Kq-WbW" id="mnW-ev-87T"/>
@@ -2385,10 +2386,10 @@
                                 <exclude reference="FLU-Kf-evd"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="Xup-HA-5rm"/>
                                 <exclude reference="Cx6-4F-Cg1"/>
                                 <exclude reference="M0B-cm-HyU"/>
                                 <exclude reference="exd-Mr-Tba"/>
-                                <exclude reference="Xup-HA-5rm"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -2396,15 +2397,24 @@
                                 <include reference="FLU-Kf-evd"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="Xup-HA-5rm"/>
                                 <include reference="Cx6-4F-Cg1"/>
                                 <include reference="M0B-cm-HyU"/>
                                 <include reference="exd-Mr-Tba"/>
-                                <include reference="Xup-HA-5rm"/>
                             </mask>
                         </variation>
                     </view>
+                    <navigationItem key="navigationItem" id="gDE-x7-FdO">
+                        <barButtonItem key="rightBarButtonItem" image="add-person" id="WVk-1U-P1q">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="getFriends:" destination="qEh-Kq-WbW" id="4Gx-aO-Du0"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="FLU-Kf-evd" id="zWp-7s-eR5"/>
+                        <segue destination="OTe-uN-tYr" kind="show" identifier="friendUserProfile" id="Wez-S7-xBn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fyA-l2-IuB" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2460,7 +2470,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="qEh-Kq-WbW" kind="show" id="Cz1-5c-XBD"/>
+                                    <action selector="getFriends:" destination="Ahl-DB-2Wx" eventType="touchUpInside" id="J29-fI-9e6"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qDd-dk-xWe">
@@ -2552,6 +2562,7 @@
                     <connections>
                         <outlet property="userImage" destination="iNf-Fy-P3p" id="jac-Ut-DHf"/>
                         <segue destination="vXZ-lx-hvc" kind="show" identifier="showLogin" id="Kep-cO-mBG"/>
+                        <segue destination="qEh-Kq-WbW" kind="show" identifier="friendsList" id="Ywh-Eu-HdH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jzj-Xc-TLv" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2990,6 +3001,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="add-person" width="32" height="32"/>
         <image name="coupons-fav" width="30" height="30"/>
         <image name="dash-icon" width="30" height="30"/>
         <image name="dopLogo" width="2083" height="2083"/>
@@ -3004,9 +3016,10 @@
         <image name="transparentLogo" width="618" height="482"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="jqZ-Ew-h2B"/>
         <segue reference="njR-gH-Wm2"/>
+        <segue reference="jqZ-Ew-h2B"/>
         <segue reference="Kep-cO-mBG"/>
+        <segue reference="Wez-S7-xBn"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

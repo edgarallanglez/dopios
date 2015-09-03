@@ -19,6 +19,10 @@ class MoreMenuViewController: UIViewController {
         getUserImage()
     }
     
+    @IBAction func getFriends(sender: UIButton) {
+        self.performSegueWithIdentifier("friendsList", sender: self)
+    }
+    
     func getUserImage() {
         let url: NSURL = NSURL(string: User.userImageUrl)!
         Utilities.getDataFromUrl(url) { data in
@@ -47,6 +51,9 @@ class MoreMenuViewController: UIViewController {
         }
 
     }
+    
+//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+//    }
     
 
     

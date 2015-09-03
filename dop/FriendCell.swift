@@ -12,14 +12,15 @@ class FriendCell: UITableViewCell {
 
     @IBOutlet var name: UILabel!
     @IBOutlet var user_image: UIImageView!
+    @IBOutlet weak var getProfileButton: UIButton!
     
-    var friend_id:String = ""
+    var friend_id: Int = 0
     override func awakeFromNib() {
         super.awakeFromNib()
         
     }
     
-    func loadItem(#title: String, image: NSURL, friend_id: String) {
+    func loadItem(#title: String, image: NSURL, friend_id: Int) {
         name.text = title
         self.friend_id = friend_id
 
@@ -33,20 +34,15 @@ class FriendCell: UITableViewCell {
             }
         }
         
-        let button   = UIButton.buttonWithType(UIButtonType.System) as! UIButton
-        button.frame = CGRectMake(290, 20, 90, 30)
-        button.backgroundColor = UIColor.greenColor()
-        button.setTitle("Amigo", forState: UIControlState.Normal)
-        button.addTarget(self, action: "buttonAction:", forControlEvents: UIControlEvents.TouchUpInside)
-        
-        self.viewForBaselineLayout()!.addSubview(button)
-        
-        println("Id es \(friend_id)")
+        getProfileButton.setTitle(String.fontAwesomeString("fa-chevron-right"), forState: .Normal)
         
     }
     
-    func buttonAction(sender:UIButton!){
-        let params:[String: String] = [
+    @IBAction func getProfile(sender: UIButton) {
+    }
+    
+    func deleteFriend(sender: UIButton!){
+        let params:[String: Int] = [
             "friends_id": friend_id]
         
         FriendsController.deleteFriend(params,
