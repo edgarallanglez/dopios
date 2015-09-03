@@ -10,11 +10,13 @@ import UIKit
 
 class SearchViewController: UIViewController, UISearchBarDelegate {
 
+    var searchBar:UISearchBar!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         //SEARCH BAR
-        var searchBar:UISearchBar = UISearchBar(frame: CGRectMake(0, 0, 200, 20))
+        searchBar = UISearchBar(frame: CGRectMake(0, 0, 200, 20))
         searchBar.tintColor = UIColor.whiteColor()
         
         
@@ -33,25 +35,25 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         
         searchBar.becomeFirstResponder()
         
-        let horizonalContraints = NSLayoutConstraint(item: searchBar, attribute:
-            .LeadingMargin, relatedBy: .Equal, toItem: view,
+       /* let horizonalContraints = NSLayoutConstraint(item: searchBar, attribute:
+            .LeadingMargin, relatedBy: .Equal, toItem: self.navigationController?.navigationBar,
             attribute: .LeadingMargin, multiplier: 1.0,
             constant: 20)
         
-        //self.view.addConstraint(horizonalContraints)
         
         let horizonal2Contraints = NSLayoutConstraint(item: searchBar, attribute:
-            .TrailingMargin, relatedBy: .Equal, toItem: view,
+            .TrailingMargin, relatedBy: .Equal, toItem: self.navigationController?.navigationBar,
             attribute: .TrailingMargin, multiplier: 1.0, constant: -20)
         
-        //self.view.addConstraint(horizonal2Contraints)
         
         let pinTop = NSLayoutConstraint(item: searchBar, attribute: .Top, relatedBy: .Equal,
-            toItem: view, attribute: .Top, multiplier: 1.0, constant: 100)
+            toItem: self.navigationController?.navigationBar, attribute: .Top, multiplier: 1.0, constant: 100)*/
         
-        searchBar.setTranslatesAutoresizingMaskIntoConstraints(false)
+        //buttonsItem.titleView setAutoresizingMask:UIViewAutoresizingFlexibleWidth
         
-        NSLayoutConstraint.activateConstraints([horizonalContraints, horizonal2Contraints, pinTop])
+        
+        
+        //NSLayoutConstraint.activateConstraints([horizonalContraints, horizonal2Contraints, pinTop])
 
         //
     }
@@ -61,6 +63,10 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewDidAppear(animated: Bool) {
+    
+
+    }
 
     /*
     // MARK: - Navigation
