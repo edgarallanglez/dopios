@@ -105,7 +105,6 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
                         }
                     }
                 }
-    
             }
         
             UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseInOut, animations: {
