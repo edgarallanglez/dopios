@@ -75,7 +75,6 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
         
         if (!coupons.isEmpty) {
             let model = self.coupons[indexPath.row]
-        
             cell.loadItem(model, viewController: self)
         
             let imageUrl = NSURL(string: "\(Utilities.dopImagesURL)\(model.company_id)/\(model.logo)")
@@ -83,16 +82,10 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
         
             cell.backgroundColor = UIColor.whiteColor()
             cell.viewForBaselineLayout()?.sizeThatFits(CGSizeMake(1000, 50))
-        
-            cell.layer.shadowColor = UIColor.grayColor().CGColor
-            cell.layer.shadowOffset = CGSizeMake(0, 2.0)
-            cell.layer.shadowRadius = 2.0
-            cell.layer.shadowOpacity = 0.5
             cell.layer.masksToBounds = false
             cell.layer.shadowPath = UIBezierPath(rect:CGRectMake(0, 0, cell.bounds.size.width, cell.bounds.size.height)).CGPath
         
             cell.heart.image = cell.heart.image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-        
             cell.viewForBaselineLayout()?.alpha = 0
         
             if (self.cachedImages[identifier] != nil){
@@ -126,7 +119,7 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
   
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        let size = CGSizeMake(185, 200)
+        let size = CGSizeMake(185, 230)
         
         return size
     }
@@ -146,9 +139,7 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
 
     func getCoupons() {
         coupons.removeAll(keepCapacity: false)
-    
         cachedImages.removeAll(keepCapacity: false)
-        
         
         CouponController.getAllCouponsWithSuccess(limit,
             success: { (couponsData) -> Void in
@@ -167,20 +158,16 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
                     let user_like = subJson["user_like"].int
                     let latitude = subJson["latitude"].double!
                     let longitude = subJson["longitude"].double!
-                    
-
+                
                     let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude)
                 
                     self.coupons.append(model)
-                    
-                    
                 }
+                
                 dispatch_async(dispatch_get_main_queue(), {
                     self.CouponsCollectionView.reloadData()
-                    
                     self.CouponsCollectionView.alwaysBounceVertical = true
                     self.refreshControl.endRefreshing()
-                    
                     self.offset = self.limit - 1
 
                 });
@@ -231,10 +218,7 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
                 }
                 dispatch_async(dispatch_get_main_queue(), {
                     self.CouponsCollectionView.reloadData()
-                    
                     self.CouponsCollectionView.alwaysBounceVertical = true
-
-                    
                     self.CouponsCollectionView.finishInfiniteScroll()
                     
                     if(newData){

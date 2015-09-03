@@ -19,42 +19,24 @@ class PromoCollectionCell: UICollectionViewCell {
     @IBOutlet var heartView: UIView!
     @IBOutlet weak var shareButton: UIButton!
     
-    
-    
     var viewController: UIViewController?
-    
     var couponId: Int!
-    
     var coupon:Coupon!
     
     func loadItem(coupon:Coupon, viewController: UIViewController) {
         coupon_description.text = coupon.couponDescription
         
-        var rawString = String.fontAwesomeString("fa-facebook")
-        var stringAttributed = NSMutableAttributedString(string: rawString, attributes: [NSFontAttributeName:UIFont(name: "HelveticaNeue", size: 1)!])
-        stringAttributed.addAttribute(NSFontAttributeName, value: UIFont.iconFontOfSize("FontAwesome", fontSize: 15), range: NSRange(location: 0,length: 1))
-        
-//        self.shareButton.titleLabel?.textAlignment = .Center
-//        self.shareButton.titleLabel?.numberOfLines = 1
-//        self.shareButton.setAttributedTitle(stringAttributed, forState: UIControlState.Normal)
         self.shareButton.setBackgroundImage(UIImage(named: "share-icon"), forState: UIControlState.Normal)
-        
         let gesture = UITapGestureRecognizer(target: self, action: "likeCoupon:")
         heartView.addGestureRecognizer(gesture)
-        
         self.coupon = coupon
-                
         self.likes.text = String(coupon.total_likes)
-        
         self.viewController = viewController
-        
         if coupon.user_like == 1 {
             self.heart.tintColor = Utilities.dopColor
         } else {
             self.heart.tintColor = UIColor.lightGrayColor()
         }
-        
-       
     }
     
     func likeCoupon(sender: UITapGestureRecognizer){
