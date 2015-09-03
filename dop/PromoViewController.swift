@@ -74,55 +74,53 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! PromoCollectionCell
         
         if (!coupons.isEmpty) {
-        let model = self.coupons[indexPath.row]
+            let model = self.coupons[indexPath.row]
         
-        cell.loadItem(model, viewController: self)
+            cell.loadItem(model, viewController: self)
         
-        let imageUrl = NSURL(string: "\(Utilities.dopImagesURL)\(model.company_id)/\(model.logo)")
-        let identifier = "Cell\(indexPath.row)"
+            let imageUrl = NSURL(string: "\(Utilities.dopImagesURL)\(model.company_id)/\(model.logo)")
+            let identifier = "Cell\(indexPath.row)"
         
-        cell.backgroundColor = UIColor.whiteColor()
-        cell.viewForBaselineLayout()?.sizeThatFits(CGSizeMake(1000, 50))
+            cell.backgroundColor = UIColor.whiteColor()
+            cell.viewForBaselineLayout()?.sizeThatFits(CGSizeMake(1000, 50))
         
-        cell.layer.shadowColor = UIColor.grayColor().CGColor
-        cell.layer.shadowOffset = CGSizeMake(0, 2.0)
-        cell.layer.shadowRadius = 2.0
-        cell.layer.shadowOpacity = 0.5
-        cell.layer.masksToBounds = false
-        cell.layer.shadowPath = UIBezierPath(rect:CGRectMake(0, 0, cell.bounds.size.width, cell.bounds.size.height)).CGPath
+            cell.layer.shadowColor = UIColor.grayColor().CGColor
+            cell.layer.shadowOffset = CGSizeMake(0, 2.0)
+            cell.layer.shadowRadius = 2.0
+            cell.layer.shadowOpacity = 0.5
+            cell.layer.masksToBounds = false
+            cell.layer.shadowPath = UIBezierPath(rect:CGRectMake(0, 0, cell.bounds.size.width, cell.bounds.size.height)).CGPath
         
-        cell.heart.image = cell.heart.image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+            cell.heart.image = cell.heart.image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
         
-        cell.viewForBaselineLayout()?.alpha = 0
+            cell.viewForBaselineLayout()?.alpha = 0
         
-        if (self.cachedImages[identifier] != nil){
-            cell.branch_banner.image = self.cachedImages[identifier]!
-        } else {
-            cell.branch_banner.alpha = 0
-            Utilities.getDataFromUrl(imageUrl!) { photo in
-                dispatch_async(dispatch_get_main_queue()) {
-                    var imageData: NSData = NSData(data: photo!)
-                    if self.CouponsCollectionView.indexPathForCell(cell)?.row == indexPath.row {
-                        self.cachedImages[identifier] = UIImage(data: imageData)
-                        cell.branch_banner.image = self.cachedImages[identifier]
-                        UIView.animateWithDuration(0.5, animations: {
-                            cell.branch_banner.alpha = 1
-                        })
+            if (self.cachedImages[identifier] != nil){
+                cell.branch_banner.image = self.cachedImages[identifier]!
+            } else {
+                cell.branch_banner.alpha = 0
+                Utilities.getDataFromUrl(imageUrl!) { photo in
+                    dispatch_async(dispatch_get_main_queue()) {
+                        var imageData: NSData = NSData(data: photo!)
+                        if self.CouponsCollectionView.indexPathForCell(cell)?.row == indexPath.row {
+                            self.cachedImages[identifier] = UIImage(data: imageData)
+                            cell.branch_banner.image = self.cachedImages[identifier]
+        
+                            UIView.animateWithDuration(0.5, animations: {
+                                cell.branch_banner.alpha = 1
+                            })
+                        }
                     }
                 }
-            }
     
-        }
+            }
         
-        UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseInOut, animations: {
-            cell.viewForBaselineLayout()?.alpha = 1
-            }, completion: { finished in
+            UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseInOut, animations: {
+                cell.viewForBaselineLayout()?.alpha = 1
+                }, completion: { finished in
                 
-        })
+            })
         }
-        
-        
-
         return cell
     }
   
@@ -175,9 +173,6 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
                 
                     self.coupons.append(model)
                     
-                   
-                    self.offset = self.limit - 1
-                    
                     
                 }
                 dispatch_async(dispatch_get_main_queue(), {
@@ -186,7 +181,8 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
                     self.CouponsCollectionView.alwaysBounceVertical = true
                     self.refreshControl.endRefreshing()
                     
-                    
+                    self.offset = self.limit - 1
+
                 });
             },
             
@@ -237,7 +233,7 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
                     self.CouponsCollectionView.reloadData()
                     
                     self.CouponsCollectionView.alwaysBounceVertical = true
-                    self.refreshControl.endRefreshing()
+
                     
                     self.CouponsCollectionView.finishInfiniteScroll()
                     
@@ -251,7 +247,6 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
             },
             failure: { (error) -> Void in
                 dispatch_async(dispatch_get_main_queue(), {
-                    self.refreshControl.endRefreshing()
                     self.CouponsCollectionView.finishInfiniteScroll()
                 })
         })
