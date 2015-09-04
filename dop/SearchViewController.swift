@@ -8,15 +8,25 @@
 
 import UIKit
 
-class SearchViewController: UIViewController, UISearchBarDelegate {
+class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate {
 
     var searchBar:UISearchBar!
     
+    var searchActive : Bool = false
+    var data:[String] = []
+    var filtered:[String] = []
+    
+    var searching:Bool = false
+    var timer : NSTimer? = nil
+    
+    
+    
+    @IBOutlet var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         //SEARCH BAR
-        searchBar = UISearchBar(frame: CGRectMake(0, 0, 200, 20))
+        searchBar = UISearchBar(frame: CGRectMake(0, 0, 100, 20))
         searchBar.tintColor = UIColor.whiteColor()
         
         
@@ -27,35 +37,35 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         
         searchBar.searchBarStyle = UISearchBarStyle.Minimal
         searchBar.placeholder = "Buscar"
-        var rightNavBarButton = UIBarButtonItem(customView:searchBar)
-        self.navigationItem.rightBarButtonItem = rightNavBarButton
+        //var rightNavBarButton = UIBarButtonItem(customView:searchBar)
+        //self.navigationItem.rightBarButtonItem = rightNavBarButton
         
+        
+        self.navigationController?.navigationBar.addSubview(searchBar)
+        //self.view.addSubview(searchBar)
+        
+        tableView.delegate = self
+        tableView.dataSource = self
         searchBar.delegate = self
         
         
         searchBar.becomeFirstResponder()
         
-       /* let horizonalContraints = NSLayoutConstraint(item: searchBar, attribute:
-            .LeadingMargin, relatedBy: .Equal, toItem: self.navigationController?.navigationBar,
-            attribute: .LeadingMargin, multiplier: 1.0,
-            constant: 20)
-        
-        
-        let horizonal2Contraints = NSLayoutConstraint(item: searchBar, attribute:
-            .TrailingMargin, relatedBy: .Equal, toItem: self.navigationController?.navigationBar,
-            attribute: .TrailingMargin, multiplier: 1.0, constant: -20)
-        
-        
-        let pinTop = NSLayoutConstraint(item: searchBar, attribute: .Top, relatedBy: .Equal,
-            toItem: self.navigationController?.navigationBar, attribute: .Top, multiplier: 1.0, constant: 100)*/
-        
-        //buttonsItem.titleView setAutoresizingMask:UIViewAutoresizingFlexibleWidth
         
         
         
-        //NSLayoutConstraint.activateConstraints([horizonalContraints, horizonal2Contraints, pinTop])
+        searchBar.setTranslatesAutoresizingMaskIntoConstraints(false)
+        
+        searchBar.alpha = 0
+
 
         //
+        
+        data = ["San Francisco","New York","San Jose","Chicago","Los Angeles","Austin","Seattle"]
+        
+        tableView.reloadData()
+        
+        search()
     }
 
     override func didReceiveMemoryWarning() {
@@ -64,18 +74,124 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     }
     
     override func viewDidAppear(animated: Bool) {
+        
+        let horizonalContraints = NSLayoutConstraint(item: searchBar, attribute:
+            .LeadingMargin, relatedBy: .Equal, toItem: self.view,
+            attribute: .LeadingMargin, multiplier: 1.0,
+            constant: 30)
+        
+        
+        let horizonal2Contraints = NSLayoutConstraint(item: searchBar, attribute:
+            .TrailingMargin, relatedBy: .Equal, toItem: self.view,
+            attribute: .TrailingMargin, multiplier: 1.0, constant: 0)
+        
+        
+        let pinTop = NSLayoutConstraint(item: searchBar, attribute: .Top, relatedBy: .Equal,
+            toItem: self.navigationController?.navigationBar, attribute: .Top, multiplier: 1.0, constant: 0)
+        
+        
+        NSLayoutConstraint.activateConstraints([horizonalContraints, horizonal2Contraints, pinTop])
+        
+        UIView.animateWithDuration(0.3, animations: {
+            self.searchBar.alpha = 1
+        })
+        
+        
+    }
+    override func viewDidDisappear(animated: Bool) {
+        searchBar.resignFirstResponder()
+    }
     
+    
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        //searchActive = true;
+    }
+    
+    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+        searchActive = false;
+        
+        
+        
 
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        searchActive = false;
     }
-    */
+    
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        searchActive = false;
+        searchBar.resignFirstResponder()
+    }
+    func searchBar(searchBar: UISearchBar, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+
+        
+        timer?.invalidate()
+        timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: "onFlip", userInfo: nil, repeats: false)
+        
+        return true
+    }
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        filtered = data.filter({ (text) -> Bool in
+            let tmp: NSString = text
+            let range = tmp.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
+            return range.location != NSNotFound
+        })
+        if(filtered.isEmpty){
+            searchActive = false;
+        } else {
+            searchActive = true;
+        }
+        self.tableView.reloadData()
+    }
+    func onFlip(){
+        print("HolA")
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if(searchActive) {
+            return filtered.count
+        }
+        return data.count;
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as! UITableViewCell;
+        if(searchActive){
+            cell.textLabel?.text = filtered[indexPath.row]
+        } else {
+            cell.textLabel?.text = data[indexPath.row];
+        }
+        
+        return cell;
+    }
+    
+    
+    func search(){
+        let params:[String: AnyObject] = [
+            "text" : "Co",
+            "offset" : "",
+            "coupon_id" : ""]
+        
+        println(params)
+        SearchController.searchWithSuccess(params,
+            success: { (couponsData) -> Void in
+                dispatch_async(dispatch_get_main_queue(), {
+                    let json = JSON(data: couponsData)
+                    println(json)
+                })
+            },
+            failure: { (error) -> Void in
+                dispatch_async(dispatch_get_main_queue(), {
+                    
+                })
+        })
+    }
+
 
 }
