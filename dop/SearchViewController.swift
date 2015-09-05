@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate {
+class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate,UIScrollViewDelegate {
 
     var searchBar:UISearchBar!
     
@@ -61,11 +61,11 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
 
         //
         
-        data = ["San Francisco","New York","San Jose","Chicago","Los Angeles","Austin","Seattle"]
+        data = []
         
         tableView.reloadData()
         
-        search()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -121,32 +121,34 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         searchActive = false;
+        timer?.invalidate()
+        search()
         searchBar.resignFirstResponder()
     }
     func searchBar(searchBar: UISearchBar, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
 
         
         timer?.invalidate()
-        timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: "onFlip", userInfo: nil, repeats: false)
+        timer = NSTimer.scheduledTimerWithTimeInterval(1.5, target: self, selector: "onFlip", userInfo: nil, repeats: false)
         
         return true
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        filtered = data.filter({ (text) -> Bool in
+        /*filtered = data.filter({ (text) -> Bool in
             let tmp: NSString = text
             let range = tmp.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
             return range.location != NSNotFound
-        })
-        if(filtered.isEmpty){
+        })*/
+        /*if(filtered.isEmpty){
             searchActive = false;
         } else {
             searchActive = true;
-        }
-        self.tableView.reloadData()
+        }*/
+        //self.tableView.reloadData()
     }
     func onFlip(){
-        print("HolA")
+        search()
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -154,9 +156,9 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if(searchActive) {
+        /*if(searchActive) {
             return filtered.count
-        }
+        }*/
         return data.count;
     }
     
@@ -173,17 +175,32 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
     
     
     func search(){
+        filtered.removeAll()
+        
         let params:[String: AnyObject] = [
-            "text" : "Co",
+            "text" : searchBar.text,
             "offset" : "",
             "coupon_id" : ""]
         
         println(params)
         SearchController.searchWithSuccess(params,
             success: { (couponsData) -> Void in
+                
+                let json = JSON(data: couponsData)
+                for (index: String, subJson: JSON) in json["data"] {
+                    var name = subJson["name"].string!
+                    
+                    self.filtered.append(name)
+                    
+                }
+
+                
                 dispatch_async(dispatch_get_main_queue(), {
-                    let json = JSON(data: couponsData)
-                    println(json)
+                    self.data.removeAll()
+                    self.data = self.filtered
+                    
+                    self.tableView.reloadData()
+
                 })
             },
             failure: { (error) -> Void in
@@ -191,6 +208,10 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
                     
                 })
         })
+    }
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        searchBar.resignFirstResponder()
     }
 
 
