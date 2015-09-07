@@ -10,8 +10,8 @@ import UIKit
 
 class PromoViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIAlertViewDelegate {
     
-    @IBOutlet weak var CouponsCollectionView: UICollectionView!
-    
+    @IBOutlet weak var CouponsCollectionView: UICollectionView!    
+
     private let reuseIdentifier = "PromoCell"
     var coupons = [Coupon]()
     var cachedImages: [String: UIImage] = [:]
@@ -26,7 +26,6 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
         super.viewDidLoad()
         
         self.title = ""
-        
         offset = limit - 1
 
         self.navigationController?.navigationBar.topItem!.title = "Hoy tenemos"
@@ -36,7 +35,7 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
         self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         self.CouponsCollectionView.addSubview(refreshControl)
         
-        self.CouponsCollectionView.contentInset = UIEdgeInsetsMake(0,0,49,0)
+//        self.CouponsCollectionView.contentInset = UIEdgeInsetsMake(0,0,49,0)
         
         getCoupons()
         
@@ -81,10 +80,6 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
             let identifier = "Cell\(indexPath.row)"
         
             cell.backgroundColor = UIColor.whiteColor()
-            cell.viewForBaselineLayout()?.sizeThatFits(CGSizeMake(1000, 50))
-            cell.layer.masksToBounds = false
-            cell.layer.shadowPath = UIBezierPath(rect:CGRectMake(0, 0, cell.bounds.size.width, cell.bounds.size.height)).CGPath
-        
             cell.heart.image = cell.heart.image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
             cell.viewForBaselineLayout()?.alpha = 0
         

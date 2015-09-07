@@ -22,7 +22,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
     var kClientId = "517644806961-ocmqel4aloa86mtsn5jsmmuvi3fcdpln.apps.googleusercontent.com";
     var locationManager: CLLocationManager!
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewWillAppear(animated: Bool) {
         var cornerRound:CGFloat
         
         if signInButton.frame.height > 70 {
