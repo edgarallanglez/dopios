@@ -2920,7 +2920,67 @@
         <!--Search View Controller-->
         <scene sceneID="g0n-mi-VV4">
             <objects>
-                <viewController id="4b9-BF-vCA" customClass="SearchViewController" customModule="dop" customModuleProvider="target" sceneMemberID="viewController"/>
+                <viewController id="4b9-BF-vCA" customClass="SearchViewController" customModule="dop" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="QZD-3b-ts8"/>
+                        <viewControllerLayoutGuide type="bottom" id="G6z-mo-hye"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ewc-kq-n3e">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="dh8-ki-l7S">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="xoZ-Ut-c2Y">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xoZ-Ut-c2Y" id="Jdr-sf-Gld">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="4b9-BF-vCA" id="IMB-5m-d08"/>
+                                    <outlet property="delegate" destination="4b9-BF-vCA" id="cWv-rh-Fky"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="dh8-ki-l7S" secondAttribute="trailing" id="GAf-yb-qZY"/>
+                            <constraint firstItem="dh8-ki-l7S" firstAttribute="top" secondItem="QZD-3b-ts8" secondAttribute="bottom" id="Gld-wm-6kN"/>
+                            <constraint firstItem="dh8-ki-l7S" firstAttribute="leading" secondItem="ewc-kq-n3e" secondAttribute="leading" id="TXZ-vb-QZW"/>
+                            <constraint firstAttribute="bottom" secondItem="dh8-ki-l7S" secondAttribute="bottom" id="YG4-Ao-dAt"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="dh8-ki-l7S"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="GAf-yb-qZY"/>
+                                <exclude reference="Gld-wm-6kN"/>
+                                <exclude reference="TXZ-vb-QZW"/>
+                                <exclude reference="YG4-Ao-dAt"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="dh8-ki-l7S"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="GAf-yb-qZY"/>
+                                <include reference="Gld-wm-6kN"/>
+                                <include reference="TXZ-vb-QZW"/>
+                                <include reference="YG4-Ao-dAt"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="dh8-ki-l7S" id="qgG-Xm-7XL"/>
+                    </connections>
+                </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cBm-gO-Jjf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-4450.5" y="3029"/>
