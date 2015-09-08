@@ -13,8 +13,8 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
     var searchBar:UISearchBar!
     
     var searchActive : Bool = false
-    var data:[String] = []
-    var filtered:[String] = []
+    var data:[NearbyBranch] = []
+    var filtered:[NearbyBranch] = []
     
     var searching:Bool = false
     var timer : NSTimer? = nil
@@ -129,7 +129,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
 
         
         timer?.invalidate()
-        timer = NSTimer.scheduledTimerWithTimeInterval(1.5, target: self, selector: "onFlip", userInfo: nil, repeats: false)
+        timer = NSTimer.scheduledTimerWithTimeInterval(1.5, target: self, selector: "timeOut", userInfo: nil, repeats: false)
         
         return true
     }
@@ -147,7 +147,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         }*/
         //self.tableView.reloadData()
     }
-    func onFlip(){
+    func timeOut(){
         search()
     }
     
@@ -163,11 +163,16 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as! UITableViewCell;
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as! SearchCell;
         if(searchActive){
-            cell.textLabel?.text = filtered[indexPath.row]
+            let model = self.filtered[indexPath.row]
+            
+            cell.loadItem(model, viewController: self)
+            
         } else {
-            cell.textLabel?.text = data[indexPath.row];
+            let model = self.data[indexPath.row]
+            
+            cell.loadItem(model, viewController: self)
         }
         
         return cell;
@@ -177,21 +182,30 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
     func search(){
         filtered.removeAll()
         
+        var searchText = searchBar.text.stringByReplacingOccurrencesOfString("\"", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+       
+        searchBar.text = searchText
+        
         let params:[String: AnyObject] = [
-            "text" : searchBar.text,
-            "offset" : "",
-            "coupon_id" : ""]
+            "text" : searchText,
+            "latitude" : "24.766499",
+            "longitude" : "-107.469864"]
         
         println(params)
         SearchController.searchWithSuccess(params,
             success: { (couponsData) -> Void in
                 
                 let json = JSON(data: couponsData)
+                println(json)
                 for (index: String, subJson: JSON) in json["data"] {
-                    var name = subJson["name"].string!
                     
-                    self.filtered.append(name)
+                    let distance = subJson["distance"].double!
+                    let name = subJson["name"].string!
+                    let branch_id = subJson["branch_id"].int
                     
+                    let model = NearbyBranch(id: branch_id, name: name, distance:distance)
+                    
+                    self.filtered.append(model)
                 }
 
                 

@@ -53,6 +53,8 @@
 		A060F7891B717DB9009D6ADB /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = A060F7881B717DB9009D6ADB /* UIImage+ImageEffects.m */; };
 		A060F78C1B72A307009D6ADB /* CouponDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A060F78B1B72A307009D6ADB /* CouponDetailView.xib */; };
 		A060F78E1B72B475009D6ADB /* CouponDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A060F78D1B72B475009D6ADB /* CouponDetailView.swift */; };
+		A06B35791B9F5D9F003C90EF /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06B35781B9F5D9F003C90EF /* SearchCell.swift */; };
+		A06B357C1B9F667D003C90EF /* NearbyBranch.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06B357B1B9F667D003C90EF /* NearbyBranch.swift */; };
 		A082F4831B18CEE6001C8C52 /* NewsfeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A082F4821B18CEE6001C8C52 /* NewsfeedViewController.swift */; };
 		A082F4851B18CF01001C8C52 /* NewsfeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A082F4841B18CF01001C8C52 /* NewsfeedController.swift */; };
 		A082F4871B18E4FF001C8C52 /* NewsfeedNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A082F4861B18E4FF001C8C52 /* NewsfeedNote.swift */; };
@@ -161,6 +163,8 @@
 		A060F7881B717DB9009D6ADB /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		A060F78B1B72A307009D6ADB /* CouponDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CouponDetailView.xib; sourceTree = "<group>"; };
 		A060F78D1B72B475009D6ADB /* CouponDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CouponDetailView.swift; sourceTree = "<group>"; };
+		A06B35781B9F5D9F003C90EF /* SearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
+		A06B357B1B9F667D003C90EF /* NearbyBranch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyBranch.swift; sourceTree = "<group>"; };
 		A082F4821B18CEE6001C8C52 /* NewsfeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsfeedViewController.swift; sourceTree = "<group>"; };
 		A082F4841B18CF01001C8C52 /* NewsfeedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsfeedController.swift; sourceTree = "<group>"; };
 		A082F4861B18E4FF001C8C52 /* NewsfeedNote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsfeedNote.swift; sourceTree = "<group>"; };
@@ -354,13 +358,8 @@
 				A060F7791B6C4CA3009D6ADB /* TabbarController.swift */,
 				A060F77B1B6FE4BA009D6ADB /* PromoViewController.swift */,
 				A060F7811B70184F009D6ADB /* PromoCollectionCell.swift */,
-				A060F7851B702FAC009D6ADB /* CouponDetailViewController.swift */,
-				A060F78B1B72A307009D6ADB /* CouponDetailView.xib */,
-				A060F78D1B72B475009D6ADB /* CouponDetailView.swift */,
 				A0EC05B31B7D622A003CADB2 /* LoadingViewController.swift */,
-				A0C3AC2D1B9525D5005636E7 /* CustomInfiniteIndicator.swift */,
-				A0FCF9D71B98D59200BB4537 /* SearchViewController.swift */,
-				A0FE26D01B9A4D12004EB402 /* SearchController.swift */,
+				A06B357A1B9F5DBD003C90EF /* Search */,
 				A060F78A1B717FD2009D6ADB /* Blur */,
 				A082F4811B18CEC7001C8C52 /* Newsfeed */,
 				9D0DB46F1B17D2A50009FE6C /* Nearby */,
@@ -440,6 +439,17 @@
 			name = Blur;
 			sourceTree = "<group>";
 		};
+		A06B357A1B9F5DBD003C90EF /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				A0FCF9D71B98D59200BB4537 /* SearchViewController.swift */,
+				A06B357B1B9F667D003C90EF /* NearbyBranch.swift */,
+				A0FE26D01B9A4D12004EB402 /* SearchController.swift */,
+				A06B35781B9F5D9F003C90EF /* SearchCell.swift */,
+			);
+			name = Search;
+			sourceTree = "<group>";
+		};
 		A082F4811B18CEC7001C8C52 /* Newsfeed */ = {
 			isa = PBXGroup;
 			children = (
@@ -455,6 +465,9 @@
 		A09AB4E61AFA9609004287F7 /* Coupon */ = {
 			isa = PBXGroup;
 			children = (
+				A060F7851B702FAC009D6ADB /* CouponDetailViewController.swift */,
+				A060F78B1B72A307009D6ADB /* CouponDetailView.xib */,
+				A060F78D1B72B475009D6ADB /* CouponDetailView.swift */,
 				A09AB4E01AF99136004287F7 /* CouponController.swift */,
 				A09AB4E41AFA880E004287F7 /* Coupon.swift */,
 				A0F7E91E1AFAE48500A4F0F2 /* CouponCell.swift */,
@@ -478,6 +491,7 @@
 		A0D6FBFE1B9105E200C8E87F /* InfiniteScroll */ = {
 			isa = PBXGroup;
 			children = (
+				A0C3AC2D1B9525D5005636E7 /* CustomInfiniteIndicator.swift */,
 				A0D6FBFB1B9105DD00C8E87F /* UIScrollView+InfiniteScroll.h */,
 				A0D6FBFC1B9105DD00C8E87F /* UIScrollView+InfiniteScroll.m */,
 			);
@@ -645,6 +659,7 @@
 				A082F4851B18CF01001C8C52 /* NewsfeedController.swift in Sources */,
 				A0BB9BB91B13E4F1000BA261 /* FriendCell.swift in Sources */,
 				A0DF72911B13A66C006EE8F4 /* FriendsViewController.swift in Sources */,
+				A06B357C1B9F667D003C90EF /* NearbyBranch.swift in Sources */,
 				9DB3DABF1B740070004AC0F1 /* BranchProfileAboutView.swift in Sources */,
 				A0EC05B41B7D622A003CADB2 /* LoadingViewController.swift in Sources */,
 				9DB907DE1B8E25A000A40FE0 /* FilterSideViewController.swift in Sources */,
@@ -680,6 +695,7 @@
 				A0EB97AD1B03E16A005112EF /* User.swift in Sources */,
 				9DB327CE1B863C84006BF882 /* MoreMenuViewController.swift in Sources */,
 				A09AB4DB1AF95A26004287F7 /* DashboardViewController.swift in Sources */,
+				A06B35791B9F5D9F003C90EF /* SearchCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
