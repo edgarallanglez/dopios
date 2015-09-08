@@ -121,5 +121,6 @@ class NearbyMapViewController: UIViewController, CLLocationManagerDelegate {
             failure:{(branchesData)-> Void in
         })
     }
+    
 
 }

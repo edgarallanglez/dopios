@@ -47,6 +47,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         locationManager.startUpdatingLocation()
         
         
+        
     }
     
     override func didReceiveMemoryWarning() {
