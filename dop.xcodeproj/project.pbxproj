@@ -18,9 +18,14 @@
 		9D3326191AF7ED1C00498801 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D3326171AF7ED1C00498801 /* LaunchScreen.xib */; };
 		9D3326251AF7ED1C00498801 /* dopTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3326241AF7ED1C00498801 /* dopTests.swift */; };
 		9D4C04811B18EB0200D5DCEE /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9D4C04801B18EAF600D5DCEE /* FontAwesome.ttf */; };
+		9D4D298C1B9F50A100CE58A9 /* Montserrat-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9D4D298A1B9F50A100CE58A9 /* Montserrat-Light.otf */; };
+		9D4D298D1B9F50A100CE58A9 /* Montserrat-UltraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9D4D298B1B9F50A100CE58A9 /* Montserrat-UltraLight.otf */; };
+		9D5DA89B1B9E55DB00954B30 /* Montserrat-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9D5DA8991B9E55DB00954B30 /* Montserrat-Bold.otf */; };
+		9D5DA89C1B9E55DB00954B30 /* Montserrat-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9D5DA89A1B9E55DB00954B30 /* Montserrat-Regular.otf */; };
 		9D697C7A1B5EF13000D786AA /* iconfonts-fontawesome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D697C791B5EF13000D786AA /* iconfonts-fontawesome.swift */; };
 		9D9C1B2B1B83B0D900F7895B /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D9C1B2A1B83B0D900F7895B /* FBSDKShareKit.framework */; };
 		9D9C1B2D1B83B3DB00F7895B /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D9C1B2C1B83B3DB00F7895B /* FBSDKCoreKit.framework */; };
+		9D9D1FF11B9F4BE3000C1299 /* starbucks_banner.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A060F77D1B700355009D6ADB /* starbucks_banner.jpg */; };
 		9DA3C8961B90C117000D40F2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9DA3C8951B90C117000D40F2 /* Images.xcassets */; };
 		9DA7AA9F1B50309400297690 /* BranchProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA7AA9E1B50309400297690 /* BranchProfileController.swift */; };
 		9DA85CFD1B82587E009DA186 /* BranchProfileLastCampaign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA85CFC1B82587E009DA186 /* BranchProfileLastCampaign.swift */; };
@@ -124,6 +129,10 @@
 		9D3326231AF7ED1C00498801 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9D3326241AF7ED1C00498801 /* dopTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dopTests.swift; sourceTree = "<group>"; };
 		9D4C04801B18EAF600D5DCEE /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
+		9D4D298A1B9F50A100CE58A9 /* Montserrat-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Light.otf"; path = "dop/Montserrat-Light.otf"; sourceTree = "<group>"; };
+		9D4D298B1B9F50A100CE58A9 /* Montserrat-UltraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-UltraLight.otf"; path = "dop/Montserrat-UltraLight.otf"; sourceTree = "<group>"; };
+		9D5DA8991B9E55DB00954B30 /* Montserrat-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Bold.otf"; path = "dop/Montserrat-Bold.otf"; sourceTree = "<group>"; };
+		9D5DA89A1B9E55DB00954B30 /* Montserrat-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Regular.otf"; path = "dop/Montserrat-Regular.otf"; sourceTree = "<group>"; };
 		9D697C791B5EF13000D786AA /* iconfonts-fontawesome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "iconfonts-fontawesome.swift"; sourceTree = "<group>"; };
 		9D9C1B2A1B83B0D900F7895B /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = dop/FBSDKShareKit.framework; sourceTree = "<group>"; };
 		9D9C1B2C1B83B3DB00F7895B /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = dop/FBSDKCoreKit.framework; sourceTree = "<group>"; };
@@ -318,6 +327,10 @@
 		9D3326001AF7ED1C00498801 = {
 			isa = PBXGroup;
 			children = (
+				9D4D298A1B9F50A100CE58A9 /* Montserrat-Light.otf */,
+				9D4D298B1B9F50A100CE58A9 /* Montserrat-UltraLight.otf */,
+				9D5DA8991B9E55DB00954B30 /* Montserrat-Bold.otf */,
+				9D5DA89A1B9E55DB00954B30 /* Montserrat-Regular.otf */,
 				9D33260B1AF7ED1C00498801 /* dop */,
 				9D3326211AF7ED1C00498801 /* dopTests */,
 				9D33260A1AF7ED1C00498801 /* Products */,
@@ -337,42 +350,42 @@
 		9D33260B1AF7ED1C00498801 /* dop */ = {
 			isa = PBXGroup;
 			children = (
-				9DB327CA1B862EF6006BF882 /* MoreMenu */,
-				9D1FCED61B79295700F42F6D /* SegmentedControl.swift */,
-				9D4C04801B18EAF600D5DCEE /* FontAwesome.ttf */,
-				9D697C791B5EF13000D786AA /* iconfonts-fontawesome.swift */,
-				A0D6FBFE1B9105E200C8E87F /* InfiniteScroll */,
-				9D0C16821B4DC6AE0088DE2F /* BranchProfile */,
-				A04860901B0D4D3B009FEF1F /* JWTDecode */,
-				A0365FDB1AF9463B000A325D /* SWRevealViewController */,
 				9D33260E1AF7ED1C00498801 /* AppDelegate.swift */,
+				A060F78A1B717FD2009D6ADB /* Blur */,
+				9D0C16821B4DC6AE0088DE2F /* BranchProfile */,
 				A0AE939A1AF8041A00D02315 /* Bridging-Header.h */,
-				9DAAE7B51B0E810B00209588 /* Main.storyboard */,
-				A09AB4E11AF99136004287F7 /* SwiftyJSON.swift */,
+				A09AB4E61AFA9609004287F7 /* Coupon */,
+				A060F78D1B72B475009D6ADB /* CouponDetailView.swift */,
+				A060F78B1B72A307009D6ADB /* CouponDetailView.xib */,
+				A060F7851B702FAC009D6ADB /* CouponDetailViewController.swift */,
+				A0C3AC2D1B9525D5005636E7 /* CustomInfiniteIndicator.swift */,
 				A09AB4DA1AF95A26004287F7 /* DashboardViewController.swift */,
-				A0EB97AF1B05131E005112EF /* Utilities.swift */,
+				9D4C04801B18EAF600D5DCEE /* FontAwesome.ttf */,
+				A0BB9BB61B13E4CA000BA261 /* Friend */,
+				9D697C791B5EF13000D786AA /* iconfonts-fontawesome.swift */,
+				9DA3C8951B90C117000D40F2 /* Images.xcassets */,
+				A0D6FBFE1B9105E200C8E87F /* InfiniteScroll */,
+				A04860901B0D4D3B009FEF1F /* JWTDecode */,
+				9D3326171AF7ED1C00498801 /* LaunchScreen.xib */,
+				A0EC05B31B7D622A003CADB2 /* LoadingViewController.swift */,
+				A0EB97B31B052074005112EF /* Login */,
+				9DAAE7B51B0E810B00209588 /* Main.storyboard */,
+				9DB327CA1B862EF6006BF882 /* MoreMenu */,
+				9D0DB46F1B17D2A50009FE6C /* Nearby */,
+				A082F4811B18CEC7001C8C52 /* Newsfeed */,
+				A060F7811B70184F009D6ADB /* PromoCollectionCell.swift */,
+				A060F77B1B6FE4BA009D6ADB /* PromoViewController.swift */,
+				A0FE26D01B9A4D12004EB402 /* SearchController.swift */,
+				A0FCF9D71B98D59200BB4537 /* SearchViewController.swift */,
+				9D1FCED61B79295700F42F6D /* SegmentedControl.swift */,
+				9D33260C1AF7ED1C00498801 /* Supporting Files */,
+				A09AB4E11AF99136004287F7 /* SwiftyJSON.swift */,
+				A0365FDB1AF9463B000A325D /* SWRevealViewController */,
+				A060F7791B6C4CA3009D6ADB /* TabbarController.swift */,
+				A0EB97AE1B03E198005112EF /* User */,
 				A0578C621B0E7D2B0033B5BD /* UserProfileController.swift */,
 				A0578C631B0E7D2B0033B5BD /* UserProfileViewController.swift */,
-				A060F7791B6C4CA3009D6ADB /* TabbarController.swift */,
-				A060F77B1B6FE4BA009D6ADB /* PromoViewController.swift */,
-				A060F7811B70184F009D6ADB /* PromoCollectionCell.swift */,
-				A060F7851B702FAC009D6ADB /* CouponDetailViewController.swift */,
-				A060F78B1B72A307009D6ADB /* CouponDetailView.xib */,
-				A060F78D1B72B475009D6ADB /* CouponDetailView.swift */,
-				A0EC05B31B7D622A003CADB2 /* LoadingViewController.swift */,
-				A0C3AC2D1B9525D5005636E7 /* CustomInfiniteIndicator.swift */,
-				A0FCF9D71B98D59200BB4537 /* SearchViewController.swift */,
-				A0FE26D01B9A4D12004EB402 /* SearchController.swift */,
-				A060F78A1B717FD2009D6ADB /* Blur */,
-				A082F4811B18CEC7001C8C52 /* Newsfeed */,
-				9D0DB46F1B17D2A50009FE6C /* Nearby */,
-				A0BB9BB61B13E4CA000BA261 /* Friend */,
-				A0EB97B31B052074005112EF /* Login */,
-				A0EB97AE1B03E198005112EF /* User */,
-				A09AB4E61AFA9609004287F7 /* Coupon */,
-				9D3326171AF7ED1C00498801 /* LaunchScreen.xib */,
-				9DA3C8951B90C117000D40F2 /* Images.xcassets */,
-				9D33260C1AF7ED1C00498801 /* Supporting Files */,
+				A0EB97AF1B05131E005112EF /* Utilities.swift */,
 			);
 			path = dop;
 			sourceTree = "<group>";
@@ -589,6 +602,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D4D298C1B9F50A100CE58A9 /* Montserrat-Light.otf in Resources */,
+				9D4D298D1B9F50A100CE58A9 /* Montserrat-UltraLight.otf in Resources */,
+				9D5DA89B1B9E55DB00954B30 /* Montserrat-Bold.otf in Resources */,
+				9D5DA89C1B9E55DB00954B30 /* Montserrat-Regular.otf in Resources */,
 				9D4C04811B18EB0200D5DCEE /* FontAwesome.ttf in Resources */,
 				A060F7841B701EFE009D6ADB /* heart.png in Resources */,
 				9DB3DABD1B73ED96004AC0F1 /* BranchProfileAboutView.xib in Resources */,
@@ -597,6 +614,7 @@
 				9D3326191AF7ED1C00498801 /* LaunchScreen.xib in Resources */,
 				A082F48B1B1920F8001C8C52 /* NewsfeedCell.xib in Resources */,
 				A060F78C1B72A307009D6ADB /* CouponDetailView.xib in Resources */,
+				9D9D1FF11B9F4BE3000C1299 /* starbucks_banner.jpg in Resources */,
 				A0578C601B0E40D30033B5BD /* GooglePlus.bundle in Resources */,
 				9DA3C8961B90C117000D40F2 /* Images.xcassets in Resources */,
 				A0FE26D31B9AB5EB004EB402 /* search@x3.png in Resources */,

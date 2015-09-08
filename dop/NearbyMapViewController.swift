@@ -14,6 +14,9 @@ class NearbyMapViewController: UIViewController, CLLocationManagerDelegate {
  
     @IBOutlet weak var currentLocationLbl: UIButton!
     @IBOutlet weak var nearbyMap: MKMapView!
+    @IBOutlet weak var toolView: UIView!
+    @IBOutlet weak var topBorder: UIView!
+    
     var coordinate: CLLocationCoordinate2D?
     var locationManager: CLLocationManager!
     var current: CLLocation!
@@ -23,6 +26,9 @@ class NearbyMapViewController: UIViewController, CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         Utilities.filterArray.removeAll()
+        
+//        topBorder.layer.borderWidth = (1.0 / UIScreen.mainScreen.scale) / 2
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "getNearestBranches", name: "filtersChanged", object: nil)
         
         locationManager = CLLocationManager()
