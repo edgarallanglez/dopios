@@ -39,8 +39,8 @@
 		9DB6BB2A1B72A6A000FF2659 /* BranchProfileTopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DB6BB291B72A6A000FF2659 /* BranchProfileTopView.xib */; };
 		9DB907DE1B8E25A000A40FE0 /* FilterSideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB907DD1B8E25A000A40FE0 /* FilterSideViewController.swift */; };
 		9DBB7A401B968437005700B9 /* UIImage+ImageEffects.h in Sources */ = {isa = PBXBuildFile; fileRef = A060F7871B717DB9009D6ADB /* UIImage+ImageEffects.h */; };
-		9DFCCAF41B96005C00FC5334 /* UIScrollView+InfiniteScroll.h in Sources */ = {isa = PBXBuildFile; fileRef = 9DFCCAF21B96005C00FC5334 /* UIScrollView+InfiniteScroll.h */; };
-		9DFCCAF51B96005C00FC5334 /* UIScrollView+InfiniteScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DFCCAF31B96005C00FC5334 /* UIScrollView+InfiniteScroll.m */; };
+		9DC9218A1B9F8D4900241FFD /* UIScrollView+InfiniteScroll.h in Sources */ = {isa = PBXBuildFile; fileRef = 9DC921881B9F8D4900241FFD /* UIScrollView+InfiniteScroll.h */; };
+		9DC9218B1B9F8D4900241FFD /* UIScrollView+InfiniteScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DC921891B9F8D4900241FFD /* UIScrollView+InfiniteScroll.m */; };
 		A04860961B0D5355009FEF1F /* A0JWTDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = A04860951B0D5355009FEF1F /* A0JWTDecoder.m */; };
 		A04860981B0D5658009FEF1F /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A04860971B0D5658009FEF1F /* FacebookSDK.framework */; };
 		A04E388A1AFC3549007C7B69 /* starbucks.gif in Resources */ = {isa = PBXBuildFile; fileRef = A04E38891AFC3549007C7B69 /* starbucks.gif */; };
@@ -150,8 +150,8 @@
 		9DB612191B192FCC004B8DB8 /* NearbyMapController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyMapController.swift; sourceTree = "<group>"; };
 		9DB6BB291B72A6A000FF2659 /* BranchProfileTopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BranchProfileTopView.xib; sourceTree = "<group>"; };
 		9DB907DD1B8E25A000A40FE0 /* FilterSideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterSideViewController.swift; sourceTree = "<group>"; };
-		9DFCCAF21B96005C00FC5334 /* UIScrollView+InfiniteScroll.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+InfiniteScroll.h"; sourceTree = "<group>"; };
-		9DFCCAF31B96005C00FC5334 /* UIScrollView+InfiniteScroll.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+InfiniteScroll.m"; sourceTree = "<group>"; };
+		9DC921881B9F8D4900241FFD /* UIScrollView+InfiniteScroll.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UIScrollView+InfiniteScroll.h"; path = "dop/UIScrollView+InfiniteScroll.h"; sourceTree = "<group>"; };
+		9DC921891B9F8D4900241FFD /* UIScrollView+InfiniteScroll.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "UIScrollView+InfiniteScroll.m"; path = "dop/UIScrollView+InfiniteScroll.m"; sourceTree = "<group>"; };
 		A04860941B0D5355009FEF1F /* A0JWTDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = A0JWTDecoder.h; sourceTree = "<group>"; };
 		A04860951B0D5355009FEF1F /* A0JWTDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = A0JWTDecoder.m; sourceTree = "<group>"; };
 		A04860971B0D5658009FEF1F /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = dop/FacebookSDK.framework; sourceTree = "<group>"; };
@@ -332,6 +332,8 @@
 		9D3326001AF7ED1C00498801 = {
 			isa = PBXGroup;
 			children = (
+				9DC921881B9F8D4900241FFD /* UIScrollView+InfiniteScroll.h */,
+				9DC921891B9F8D4900241FFD /* UIScrollView+InfiniteScroll.m */,
 				9D4D298A1B9F50A100CE58A9 /* Montserrat-Light.otf */,
 				9D4D298B1B9F50A100CE58A9 /* Montserrat-UltraLight.otf */,
 				9D5DA8991B9E55DB00954B30 /* Montserrat-Bold.otf */,
@@ -667,10 +669,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9DC9218A1B9F8D4900241FFD /* UIScrollView+InfiniteScroll.h in Sources */,
+				9DC9218B1B9F8D4900241FFD /* UIScrollView+InfiniteScroll.m in Sources */,
 				9D2BDFE41B9DF524003F1260 /* SearchController.swift in Sources */,
 				9DBB7A401B968437005700B9 /* UIImage+ImageEffects.h in Sources */,
-				9DFCCAF41B96005C00FC5334 /* UIScrollView+InfiniteScroll.h in Sources */,
-				9DFCCAF51B96005C00FC5334 /* UIScrollView+InfiniteScroll.m in Sources */,
 				9D697C7A1B5EF13000D786AA /* iconfonts-fontawesome.swift in Sources */,
 				A0EC05991B7D1C69003CADB2 /* SWRevealViewController.m in Sources */,
 				9D0C16841B4DC6EB0088DE2F /* BranchProfileViewController.swift in Sources */,
