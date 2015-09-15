@@ -4,10 +4,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="FontAwesome.ttf">
-            <string>FontAwesome</string>
-            <string>FontAwesome</string>
-        </mutableArray>
         <mutableArray key="Montserrat-Light.otf">
             <string>Montserrat-Light</string>
             <string>Montserrat-Light</string>
@@ -34,17 +30,16 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cc7-uQ-DtC" userLabel="Address">
                     <rect key="frame" x="0.0" y="130" width="300" height="56"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="pin" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="eYo-0r-hfl">
-                            <rect key="frame" x="15" y="15" width="15" height="19"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pin" translatesAutoresizingMaskIntoConstraints="NO" id="Eld-TT-YxB">
+                            <rect key="frame" x="15" y="15" width="16" height="16"/>
+                            <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="15" id="1PX-nW-yox"/>
+                                <constraint firstAttribute="height" constant="16" id="8BU-5d-UUn"/>
+                                <constraint firstAttribute="width" constant="16" id="TdR-8V-GCh"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="18"/>
-                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            <nil key="highlightedColor"/>
-                        </label>
+                        </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Blvd. Pedro Infante 403 Desarrollo Urbano 3 ríos" lineBreakMode="tailTruncation" numberOfLines="2" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="d2o-0I-4d6">
-                            <rect key="frame" x="35" y="10" width="260" height="39"/>
+                            <rect key="frame" x="36" y="10" width="259" height="39"/>
                             <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="15"/>
                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
@@ -53,11 +48,11 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="56" id="5PI-na-eb1"/>
-                        <constraint firstItem="eYo-0r-hfl" firstAttribute="top" secondItem="Cc7-uQ-DtC" secondAttribute="top" constant="15" id="68P-ke-afS"/>
-                        <constraint firstItem="eYo-0r-hfl" firstAttribute="leading" secondItem="Cc7-uQ-DtC" secondAttribute="leading" constant="15" id="LXF-pq-bwY"/>
-                        <constraint firstItem="d2o-0I-4d6" firstAttribute="leading" secondItem="eYo-0r-hfl" secondAttribute="trailing" constant="5" id="UCC-Bq-JwK"/>
+                        <constraint firstItem="d2o-0I-4d6" firstAttribute="leading" secondItem="Eld-TT-YxB" secondAttribute="trailing" constant="5" id="SQf-6Z-J8X"/>
                         <constraint firstItem="d2o-0I-4d6" firstAttribute="top" secondItem="Cc7-uQ-DtC" secondAttribute="top" constant="10" id="ZIV-bv-x3D"/>
                         <constraint firstAttribute="trailing" secondItem="d2o-0I-4d6" secondAttribute="trailing" constant="5" id="cwu-TH-nXZ"/>
+                        <constraint firstItem="Eld-TT-YxB" firstAttribute="leading" secondItem="Cc7-uQ-DtC" secondAttribute="leading" constant="15" id="d7W-9k-DAq"/>
+                        <constraint firstItem="Eld-TT-YxB" firstAttribute="top" secondItem="Cc7-uQ-DtC" secondAttribute="top" constant="15" id="p6f-wc-9Rx"/>
                         <constraint firstAttribute="bottom" secondItem="d2o-0I-4d6" secondAttribute="bottom" constant="7" id="ugh-ap-eeQ"/>
                     </constraints>
                 </view>
@@ -71,17 +66,15 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9wp-xm-Ysz" userLabel="Schedule">
                     <rect key="frame" x="301" y="130" width="299" height="56"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="clock" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="vgO-dw-0kX">
-                            <rect key="frame" x="5" y="15" width="15" height="19"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clock-icon" translatesAutoresizingMaskIntoConstraints="NO" id="XpY-km-UOb">
+                            <rect key="frame" x="5" y="15" width="16" height="16"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="15" id="cT8-t0-ScI"/>
+                                <constraint firstAttribute="width" constant="16" id="Og9-6V-0Ao"/>
+                                <constraint firstAttribute="height" constant="16" id="u4g-US-2i0"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="18"/>
-                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            <nil key="highlightedColor"/>
-                        </label>
+                        </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Lunes a Domingo de 9:00am a 9:00pm" lineBreakMode="tailTruncation" numberOfLines="2" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="WYI-uU-Yu4">
-                            <rect key="frame" x="27" y="10" width="257" height="39"/>
+                            <rect key="frame" x="28" y="10" width="256" height="39"/>
                             <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="15"/>
                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
@@ -89,11 +82,11 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="WYI-uU-Yu4" firstAttribute="leading" secondItem="vgO-dw-0kX" secondAttribute="trailing" constant="7" id="GtA-oc-O8Y"/>
-                        <constraint firstItem="vgO-dw-0kX" firstAttribute="top" secondItem="9wp-xm-Ysz" secondAttribute="top" constant="15" id="JyL-eo-dYk"/>
                         <constraint firstAttribute="trailing" secondItem="WYI-uU-Yu4" secondAttribute="trailing" constant="15" id="NHo-Hi-TaD"/>
-                        <constraint firstItem="vgO-dw-0kX" firstAttribute="leading" secondItem="9wp-xm-Ysz" secondAttribute="leading" constant="5" id="WYj-d6-ISk"/>
+                        <constraint firstItem="WYI-uU-Yu4" firstAttribute="leading" secondItem="XpY-km-UOb" secondAttribute="trailing" constant="7" id="S7x-6a-a2j"/>
+                        <constraint firstItem="XpY-km-UOb" firstAttribute="top" secondItem="9wp-xm-Ysz" secondAttribute="top" constant="15" id="TRP-SP-5eG"/>
                         <constraint firstAttribute="bottom" secondItem="WYI-uU-Yu4" secondAttribute="bottom" constant="7" id="Wu8-tU-6cN"/>
+                        <constraint firstItem="XpY-km-UOb" firstAttribute="leading" secondItem="9wp-xm-Ysz" secondAttribute="leading" constant="5" id="aQo-xb-ixt"/>
                         <constraint firstItem="WYI-uU-Yu4" firstAttribute="top" secondItem="9wp-xm-Ysz" secondAttribute="top" constant="10" id="wvp-Vi-y72"/>
                     </constraints>
                 </view>
@@ -164,10 +157,14 @@
             <connections>
                 <outlet property="branchDescription" destination="2H6-zo-9dy" id="YuH-tA-BbX"/>
                 <outlet property="branchLocationMap" destination="air-0F-GqA" id="sy4-MV-AS6"/>
-                <outlet property="clockIcon" destination="vgO-dw-0kX" id="ALq-ub-p6y"/>
-                <outlet property="pinIcon" destination="eYo-0r-hfl" id="8xa-yv-ca9"/>
+                <outlet property="clockIcon" destination="XpY-km-UOb" id="8aR-Mw-yxV"/>
+                <outlet property="pinIcon" destination="Eld-TT-YxB" id="azb-aS-Def"/>
             </connections>
             <point key="canvasLocation" x="238" y="234"/>
         </view>
     </objects>
+    <resources>
+        <image name="clock-icon" width="30" height="30"/>
+        <image name="pin" width="85" height="85"/>
+    </resources>
 </document>
