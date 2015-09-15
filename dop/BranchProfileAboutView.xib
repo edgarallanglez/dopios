@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
@@ -7,6 +7,11 @@
         <mutableArray key="FontAwesome.ttf">
             <string>FontAwesome</string>
             <string>FontAwesome</string>
+        </mutableArray>
+        <mutableArray key="Montserrat-Light.otf">
+            <string>Montserrat-Light</string>
+            <string>Montserrat-Light</string>
+            <string>Montserrat-Light</string>
         </mutableArray>
     </customFonts>
     <objects>
@@ -17,17 +22,17 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" scrollEnabled="NO" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="air-0F-GqA">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="150"/>
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="130"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="150" id="Nb9-uh-eEw"/>
+                        <constraint firstAttribute="height" constant="130" id="Nb9-uh-eEw"/>
                     </constraints>
                     <variation key="widthClass=compact" misplaced="YES">
                         <rect key="frame" x="20" y="225" width="400" height="150"/>
                     </variation>
                 </mapView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cc7-uQ-DtC" userLabel="Address">
-                    <rect key="frame" x="0.0" y="150" width="300" height="56"/>
+                    <rect key="frame" x="0.0" y="130" width="300" height="56"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="pin" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="eYo-0r-hfl">
                             <rect key="frame" x="15" y="15" width="15" height="19"/>
@@ -39,37 +44,22 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Blvd. Pedro Infante 403 Desarrollo Urbano 3 ríos" lineBreakMode="tailTruncation" numberOfLines="2" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="d2o-0I-4d6">
-                            <rect key="frame" x="35" y="10" width="260" height="36"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="40" id="8cH-bc-goS"/>
-                                <constraint firstAttribute="width" relation="lessThanOrEqual" constant="140" id="Ryr-Xr-T7U"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <rect key="frame" x="35" y="10" width="260" height="39"/>
+                            <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="15"/>
                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
-                            <variation key="default">
-                                <mask key="constraints">
-                                    <exclude reference="8cH-bc-goS"/>
-                                    <exclude reference="Ryr-Xr-T7U"/>
-                                </mask>
-                            </variation>
                         </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="56" id="5PI-na-eb1"/>
                         <constraint firstItem="eYo-0r-hfl" firstAttribute="top" secondItem="Cc7-uQ-DtC" secondAttribute="top" constant="15" id="68P-ke-afS"/>
-                        <constraint firstItem="d2o-0I-4d6" firstAttribute="width" secondItem="Cc7-uQ-DtC" secondAttribute="width" id="JZ6-60-BWe"/>
                         <constraint firstItem="eYo-0r-hfl" firstAttribute="leading" secondItem="Cc7-uQ-DtC" secondAttribute="leading" constant="15" id="LXF-pq-bwY"/>
                         <constraint firstItem="d2o-0I-4d6" firstAttribute="leading" secondItem="eYo-0r-hfl" secondAttribute="trailing" constant="5" id="UCC-Bq-JwK"/>
                         <constraint firstItem="d2o-0I-4d6" firstAttribute="top" secondItem="Cc7-uQ-DtC" secondAttribute="top" constant="10" id="ZIV-bv-x3D"/>
                         <constraint firstAttribute="trailing" secondItem="d2o-0I-4d6" secondAttribute="trailing" constant="5" id="cwu-TH-nXZ"/>
+                        <constraint firstAttribute="bottom" secondItem="d2o-0I-4d6" secondAttribute="bottom" constant="7" id="ugh-ap-eeQ"/>
                     </constraints>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="JZ6-60-BWe"/>
-                        </mask>
-                    </variation>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BeO-XI-MzN" userLabel="Guide">
                     <rect key="frame" x="300" y="50" width="1" height="500"/>
@@ -79,7 +69,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9wp-xm-Ysz" userLabel="Schedule">
-                    <rect key="frame" x="301" y="150" width="299" height="56"/>
+                    <rect key="frame" x="301" y="130" width="299" height="56"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="clock" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="vgO-dw-0kX">
                             <rect key="frame" x="5" y="15" width="15" height="19"/>
@@ -91,20 +81,10 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Lunes a Domingo de 9:00am a 9:00pm" lineBreakMode="tailTruncation" numberOfLines="2" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="WYI-uU-Yu4">
-                            <rect key="frame" x="27" y="10" width="257" height="36"/>
-                            <constraints>
-                                <constraint firstAttribute="width" relation="lessThanOrEqual" constant="120" id="C1s-y1-iNj"/>
-                                <constraint firstAttribute="height" constant="40" id="fOt-v1-lki"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <rect key="frame" x="27" y="10" width="257" height="39"/>
+                            <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="15"/>
                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
-                            <variation key="default">
-                                <mask key="constraints">
-                                    <exclude reference="C1s-y1-iNj"/>
-                                    <exclude reference="fOt-v1-lki"/>
-                                </mask>
-                            </variation>
                         </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -113,31 +93,26 @@
                         <constraint firstItem="vgO-dw-0kX" firstAttribute="top" secondItem="9wp-xm-Ysz" secondAttribute="top" constant="15" id="JyL-eo-dYk"/>
                         <constraint firstAttribute="trailing" secondItem="WYI-uU-Yu4" secondAttribute="trailing" constant="15" id="NHo-Hi-TaD"/>
                         <constraint firstItem="vgO-dw-0kX" firstAttribute="leading" secondItem="9wp-xm-Ysz" secondAttribute="leading" constant="5" id="WYj-d6-ISk"/>
-                        <constraint firstAttribute="width" secondItem="WYI-uU-Yu4" secondAttribute="width" id="utU-77-ElX"/>
+                        <constraint firstAttribute="bottom" secondItem="WYI-uU-Yu4" secondAttribute="bottom" constant="7" id="Wu8-tU-6cN"/>
                         <constraint firstItem="WYI-uU-Yu4" firstAttribute="top" secondItem="9wp-xm-Ysz" secondAttribute="top" constant="10" id="wvp-Vi-y72"/>
                     </constraints>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="utU-77-ElX"/>
-                        </mask>
-                    </variation>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Il-wc-1rD" userLabel="Separator">
-                    <rect key="frame" x="0.0" y="206" width="600" height="1"/>
+                    <rect key="frame" x="0.0" y="186" width="600" height="1"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="0.5" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="0Ym-Cr-1Lf"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Pg-Yt-PyS" userLabel="About">
-                    <rect key="frame" x="0.0" y="207" width="600" height="393"/>
+                    <rect key="frame" x="0.0" y="187" width="600" height="413"/>
                     <subviews>
                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2H6-zo-9dy">
-                            <rect key="frame" x="20" y="5" width="560" height="388"/>
+                            <rect key="frame" x="20" y="5" width="560" height="408"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </string>
-                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </string>
+                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="16"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                         </textView>
                     </subviews>

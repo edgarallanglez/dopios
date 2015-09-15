@@ -37,7 +37,7 @@ import UIKit
         }
     }
     
-    @IBInspectable var thumbColor : UIColor = Utilities.dopColor {
+    @IBInspectable var thumbColor : CAGradientLayer = Utilities.Colors {
         didSet {
             setSelectedColors()
         }
@@ -93,7 +93,7 @@ import UIKit
             label.text = items[index - 1]
             label.backgroundColor = UIColor.clearColor()
             label.textAlignment = .Center
-            label.font = UIFont(name: "Avenir", size: 15)
+            label.font = UIFont(name: "Montserrat-Light", size: 15)
             label.textColor = index == 1 ? selectedLabelColor : unselectedLabelColor
             label.setTranslatesAutoresizingMaskIntoConstraints(false)
             self.addSubview(label)
@@ -110,7 +110,9 @@ import UIKit
         let newWidth = CGRectGetWidth(selectFrame) / CGFloat(items.count)
         selectFrame.size.width = newWidth
         thumbView.frame = selectFrame
-        thumbView.backgroundColor = thumbColor
+        let background = thumbColor
+        background.frame = thumbView.bounds
+        thumbView.layer.insertSublayer(background, atIndex: 0)
 //        thumbView.layer.cornerRadius = thumbView.frame.height / 2
         
         displayNewSelectedIndex()
@@ -127,7 +129,6 @@ import UIKit
                 calculatedIndex = index
             }
         }
-        
         
         if calculatedIndex != nil {
             selectedIndex = calculatedIndex!
@@ -206,7 +207,7 @@ import UIKit
             labels[0].textColor = selectedLabelColor
         }
         
-        thumbView.backgroundColor = thumbColor
+        thumbView.layer.insertSublayer(thumbColor, atIndex: 0)
     }
     
     func setFont(){

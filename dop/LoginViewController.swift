@@ -22,7 +22,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
     var kClientId = "517644806961-ocmqel4aloa86mtsn5jsmmuvi3fcdpln.apps.googleusercontent.com";
     var locationManager: CLLocationManager!
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewWillAppear(animated: Bool) {
         var cornerRound:CGFloat
         
         if signInButton.frame.height > 70 {
@@ -215,7 +215,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
         else {
             // Open a session showing the user the login UI
             // You must ALWAYS ask for public_profile permissions when opening a session
-            FBSession.openActiveSessionWithReadPermissions(["public_profile"], allowLoginUI: true, completionHandler: {
+            FBSession.openActiveSessionWithReadPermissions(["public_profile", "email", "user_friends", "user_birthday"], allowLoginUI: true, completionHandler: {
                 (session: FBSession!, state: FBSessionState, error: NSError!) in
                 
                 let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate

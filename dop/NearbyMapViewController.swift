@@ -14,6 +14,9 @@ class NearbyMapViewController: UIViewController, CLLocationManagerDelegate {
  
     @IBOutlet weak var currentLocationLbl: UIButton!
     @IBOutlet weak var nearbyMap: MKMapView!
+    @IBOutlet weak var toolView: UIView!
+    @IBOutlet weak var topBorder: UIView!
+    
     var coordinate: CLLocationCoordinate2D?
     var locationManager: CLLocationManager!
     var current: CLLocation!
@@ -23,6 +26,9 @@ class NearbyMapViewController: UIViewController, CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         Utilities.filterArray.removeAll()
+        
+//        topBorder.layer.borderWidth = (1.0 / UIScreen.mainScreen.scale) / 2
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "getNearestBranches", name: "filtersChanged", object: nil)
         
         locationManager = CLLocationManager()
@@ -71,7 +77,7 @@ class NearbyMapViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     @IBAction func searchNearest(sender: UIButton) {
-        //getNearestBranches()
+        getNearestBranches()
     }
     
     func setMapAtCurrent() {
@@ -90,12 +96,13 @@ class NearbyMapViewController: UIViewController, CLLocationManagerDelegate {
         let params:[String:AnyObject] = [
             "latitude": latitude,
             "longitude": longitude,
-            "radio": 10,
+            "radio": 15,
             "filterArray": filterArray
         ]
         print(params)
         NearbyMapController.getNearestBranches(params, success: {(branchesData) -> Void in
             let json = JSON(data: branchesData)
+            print(json["data"].count)
             for (index, location) in json["data"] {
                 var latitude = location["latitude"].double
                 var longitude = location["longitude"].double

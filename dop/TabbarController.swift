@@ -60,7 +60,7 @@ class TabbarController: UITabBarController {
         
         
         
-        var searchButton : UIBarButtonItem = UIBarButtonItem(image: UIImage(named:"search"), style: UIBarButtonItemStyle.Plain, target: self, action: "search")
+        var searchButton : UIBarButtonItem = UIBarButtonItem(image: UIImage(named:"search-icon"), style: UIBarButtonItemStyle.Plain, target: self, action: "search")
         
        /* var logButton : UIBarButtonItem = UIBarButtonItem(title: "Search", style: UIBarButtonItemStyle.Plain, target: self, action: "search")*/
         

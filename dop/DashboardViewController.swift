@@ -8,11 +8,13 @@
 
 import UIKit
 
-class DashboardViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate {
+class DashboardViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBOutlet weak var menuButton:UIBarButtonItem!
-    @IBOutlet var couponsTableView: UITableView!
+
+    @IBOutlet var mainScroll: UIScrollView!
     
+    @IBOutlet var branchesScroll: UIScrollView!
     var locValue:CLLocationCoordinate2D?
 
     var coupons = [Coupon]()
@@ -29,7 +31,10 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 //        self.title = "Dashboard"
 //        self.navigationController?.navigationBar.topItem!.title = "Dashboard"
 
-
+        
+        mainScroll.contentSize = CGSizeMake(320, 2000)
+        branchesScroll.contentSize = CGSizeMake(1000, branchesScroll.frame.size.height)
+        
         if self.revealViewController() != nil {
             menuButton.target = self.revealViewController()
             menuButton.action = "revealToggle:"
@@ -37,8 +42,8 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         }
         
         
-        var nib = UINib(nibName: "CouponCell", bundle: nil)
-        couponsTableView.registerNib(nib, forCellReuseIdentifier: "CouponCell")
+      //  var nib = UINib(nibName: "CouponCell", bundle: nil)
+     // couponsTableView.registerNib(nib, forCellReuseIdentifier: "CouponCell")
         
         locationManager = CLLocationManager()
         locationManager.delegate = self
@@ -89,7 +94,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         getCoupons()
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+  /*func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return coupons.count
     }
     
@@ -100,7 +105,6 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 15
     }
-//
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         var view:UIView = UIView()
         view.backgroundColor = UIColor.clearColor()
@@ -133,9 +137,9 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         
         
     }
+*/
 
-
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+   /* func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
      
         var cell: CouponCell = tableView.dequeueReusableCellWithIdentifier("CouponCell", forIndexPath: indexPath) as! CouponCell
         
@@ -184,13 +188,14 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         }
 
         return cell
-    }
+    }*/
     
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    
+ /*   func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         
-    }
+    }*/
     
-    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]?  {
+  /*  func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]?  {
         
         let currentCoupon = self.coupons[indexPath.row]
         
@@ -228,7 +233,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         useAction.backgroundColor = UIColor(red: 203/255, green: 76/255, blue: 76/255, alpha: 1)
 
         return [useAction,shareAction]
-    }
+    }*/
     
     func takeCoupon(coupon_id:Int) {
         
@@ -265,7 +270,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let cell = sender as? CouponCell {
             
-            let i = couponsTableView.indexPathForCell(cell)!.section
+            /*let i = couponsTableView.indexPathForCell(cell)!.section
             let model = self.coupons[i]
             
             if segue.identifier == "branchProfile" {
@@ -274,7 +279,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
                 view.logo = cell.branchImage.currentBackgroundImage
                 view.logoString = model.logo
                 
-            }
+            }*/
         }
         
     }

@@ -10,7 +10,8 @@ import UIKit
 
 class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    @IBOutlet var tableView: UITableView!
+
+    @IBOutlet weak var tableView: UITableView!
   
     var friends = [Friend]()
 
@@ -22,52 +23,86 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        
-        var cell:FriendCell = tableView.dequeueReusableCellWithIdentifier("FriendCell", forIndexPath: indexPath) as! FriendCell
-        
-        
+        var cell: FriendCell = tableView.dequeueReusableCellWithIdentifier("FriendCell", forIndexPath: indexPath) as! FriendCell
         let model = self.friends[indexPath.row]
-        
         var (title) = model.names
         let imageUrl = NSURL(string: model.main_image)
-        
         cell.loadItem(title: title, image: imageUrl!, friend_id: model.friend_id)
         
         return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let cell: FriendCell = tableView.cellForRowAtIndexPath(indexPath) as! FriendCell
+        self.performSegueWithIdentifier("friendUserProfile", sender: cell)
     }
     
     override func viewDidLoad() {
         var nib = UINib(nibName: "FriendCell", bundle: nil)
         tableView.registerNib(nib, forCellReuseIdentifier: "FriendCell")
         
-        
         FriendsController.getAllFriendsWithSuccess(
         success:{ (friendsData) -> Void in
             let json = JSON(data: friendsData)
             
-            var namex = "";
-            for (index: String, subJson: JSON) in json["data"]{
-                var friend_id = String(stringInterpolationSegment:subJson["friends_id"])
-                var user_id = String(stringInterpolationSegment:subJson["user_id"]).toInt()
-                let user_name = String(stringInterpolationSegment: subJson["names"])
-                let user_surnames = String(stringInterpolationSegment: subJson["surnames"])
-                let main_image = String(stringInterpolationSegment: subJson["main_image"])
-                let model = Friend(friend_id: friend_id,user_id: user_id, names: user_name, surnames: user_surnames, main_image: main_image)
+            for (index, subJson: JSON) in json["data"] {
+                var friend_id = subJson["friends_id"].int
+                var user_id = subJson["user_id"].int
+                let user_name = subJson["names"].string
+                let user_surnames = subJson["surnames"].string
+                let main_image = subJson["main_image"].string
+                let model = Friend(friend_id: friend_id, user_id: user_id, names: user_name, surnames: user_surnames, main_image: main_image)
                 
                 self.friends.append(model)
-                
-                println(json)
-                
             }
             
             dispatch_async(dispatch_get_main_queue(), {
                 self.tableView.reloadData()
             });
         },
-        failure:{(friendsData)->Void in
+        failure: {(friendsData) -> Void in
         
         })
     }
+    
+    @IBAction func getFriends(sender: UIBarButtonItem) {
+        var content: FBSDKAppInviteContent = FBSDKAppInviteContent()
+        content.previewImageURL = NSURL(string: "http://45.55.7.118/branches/images/local/dop_logo.png")
+        content.appLinkURL = NSURL(string: "https://fb.me/995895390462783")
+        FBSDKAppInviteDialog.showWithContent(content, delegate: nil)
+
+//        var friendsRequest: FBRequest = FBRequest.requestForMyFriends()
+//        friendsRequest.startWithCompletionHandler {
+//            (connection: FBRequestConnection!, result:AnyObject!, error: NSError!) -> Void in
+//                var resultdict = result as! NSDictionary
+//                println("Result Dict: \(resultdict)")
+//                var data: NSArray = resultdict.objectForKey("data") as! NSArray
+//                
+//                for i in 0 ..< data.count {
+//                    let valueDict : NSDictionary = data[i] as! NSDictionary
+//                    let id = valueDict.objectForKey("id") as! String
+//                    println("the id value is \(id)")
+//                }
+//            
+//                var friends = resultdict.objectForKey("data") as! NSArray
+//                println("Found \(friends.count) friends")
+//        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let cell = sender as? FriendCell {
+            
+            let i = tableView.indexPathForCell(cell)!.row
+            let model = self.friends[i]
+            
+            if segue.identifier == "friendUserProfile" {
+                let view = segue.destinationViewController as! UserProfileViewController
+                view.userId = model.user_id
+                view.userImage = model.main_image
+            }
+        }
+    }
+
+    
 
 }

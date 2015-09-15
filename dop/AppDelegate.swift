@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FBProfilePictureView.self
         
         if FBSession.activeSession().state.value == FBSessionStateCreatedTokenLoaded.value {
-            FBSession.openActiveSessionWithReadPermissions(["public_profile"], allowLoginUI: false, completionHandler: {
+            FBSession.openActiveSessionWithReadPermissions(["public_profile", "user_friends"], allowLoginUI: false, completionHandler: {
                 (session, state, error) -> Void in
                 self.sessionStateChanged(session, state: state, error: error)
             })

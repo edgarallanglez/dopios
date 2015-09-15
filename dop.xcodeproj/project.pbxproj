@@ -12,14 +12,20 @@
 		9D0DB4731B17DE5A0009FE6C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D0DB4721B17DE5A0009FE6C /* MapKit.framework */; };
 		9D1021371B82A019005BED0C /* BranchProfileLastCampaign.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D1021361B82A019005BED0C /* BranchProfileLastCampaign.xib */; };
 		9D1FCED71B79295700F42F6D /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1FCED61B79295700F42F6D /* SegmentedControl.swift */; };
+		9D2BDFE41B9DF524003F1260 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0FE26D01B9A4D12004EB402 /* SearchController.swift */; };
 		9D33260F1AF7ED1C00498801 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D33260E1AF7ED1C00498801 /* AppDelegate.swift */; };
 		9D3326111AF7ED1C00498801 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3326101AF7ED1C00498801 /* LoginViewController.swift */; };
 		9D3326191AF7ED1C00498801 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D3326171AF7ED1C00498801 /* LaunchScreen.xib */; };
 		9D3326251AF7ED1C00498801 /* dopTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3326241AF7ED1C00498801 /* dopTests.swift */; };
 		9D4C04811B18EB0200D5DCEE /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9D4C04801B18EAF600D5DCEE /* FontAwesome.ttf */; };
+		9D4D298C1B9F50A100CE58A9 /* Montserrat-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9D4D298A1B9F50A100CE58A9 /* Montserrat-Light.otf */; };
+		9D4D298D1B9F50A100CE58A9 /* Montserrat-UltraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9D4D298B1B9F50A100CE58A9 /* Montserrat-UltraLight.otf */; };
+		9D5DA89B1B9E55DB00954B30 /* Montserrat-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9D5DA8991B9E55DB00954B30 /* Montserrat-Bold.otf */; };
+		9D5DA89C1B9E55DB00954B30 /* Montserrat-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9D5DA89A1B9E55DB00954B30 /* Montserrat-Regular.otf */; };
 		9D697C7A1B5EF13000D786AA /* iconfonts-fontawesome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D697C791B5EF13000D786AA /* iconfonts-fontawesome.swift */; };
 		9D9C1B2B1B83B0D900F7895B /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D9C1B2A1B83B0D900F7895B /* FBSDKShareKit.framework */; };
 		9D9C1B2D1B83B3DB00F7895B /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D9C1B2C1B83B3DB00F7895B /* FBSDKCoreKit.framework */; };
+		9D9D1FF11B9F4BE3000C1299 /* starbucks_banner.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A060F77D1B700355009D6ADB /* starbucks_banner.jpg */; };
 		9DA3C8961B90C117000D40F2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9DA3C8951B90C117000D40F2 /* Images.xcassets */; };
 		9DA7AA9F1B50309400297690 /* BranchProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA7AA9E1B50309400297690 /* BranchProfileController.swift */; };
 		9DA85CFD1B82587E009DA186 /* BranchProfileLastCampaign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA85CFC1B82587E009DA186 /* BranchProfileLastCampaign.swift */; };
@@ -32,6 +38,9 @@
 		9DB6121A1B192FCC004B8DB8 /* NearbyMapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB612191B192FCC004B8DB8 /* NearbyMapController.swift */; };
 		9DB6BB2A1B72A6A000FF2659 /* BranchProfileTopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DB6BB291B72A6A000FF2659 /* BranchProfileTopView.xib */; };
 		9DB907DE1B8E25A000A40FE0 /* FilterSideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB907DD1B8E25A000A40FE0 /* FilterSideViewController.swift */; };
+		9DBB7A401B968437005700B9 /* UIImage+ImageEffects.h in Sources */ = {isa = PBXBuildFile; fileRef = A060F7871B717DB9009D6ADB /* UIImage+ImageEffects.h */; };
+		9DC9218A1B9F8D4900241FFD /* UIScrollView+InfiniteScroll.h in Sources */ = {isa = PBXBuildFile; fileRef = 9DC921881B9F8D4900241FFD /* UIScrollView+InfiniteScroll.h */; };
+		9DC9218B1B9F8D4900241FFD /* UIScrollView+InfiniteScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DC921891B9F8D4900241FFD /* UIScrollView+InfiniteScroll.m */; };
 		A04860961B0D5355009FEF1F /* A0JWTDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = A04860951B0D5355009FEF1F /* A0JWTDecoder.m */; };
 		A04860981B0D5658009FEF1F /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A04860971B0D5658009FEF1F /* FacebookSDK.framework */; };
 		A04E388A1AFC3549007C7B69 /* starbucks.gif in Resources */ = {isa = PBXBuildFile; fileRef = A04E38891AFC3549007C7B69 /* starbucks.gif */; };
@@ -53,6 +62,7 @@
 		A060F7891B717DB9009D6ADB /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = A060F7881B717DB9009D6ADB /* UIImage+ImageEffects.m */; };
 		A060F78C1B72A307009D6ADB /* CouponDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A060F78B1B72A307009D6ADB /* CouponDetailView.xib */; };
 		A060F78E1B72B475009D6ADB /* CouponDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A060F78D1B72B475009D6ADB /* CouponDetailView.swift */; };
+		A0662A361BA0CEF5006D6278 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0662A351BA0CEF5006D6278 /* LoadingCell.swift */; };
 		A06B35791B9F5D9F003C90EF /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06B35781B9F5D9F003C90EF /* SearchCell.swift */; };
 		A06B357C1B9F667D003C90EF /* NearbyBranch.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06B357B1B9F667D003C90EF /* NearbyBranch.swift */; };
 		A082F4831B18CEE6001C8C52 /* NewsfeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A082F4821B18CEE6001C8C52 /* NewsfeedViewController.swift */; };
@@ -94,7 +104,6 @@
 		A0F7E9201AFAE48500A4F0F2 /* CouponCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F7E91E1AFAE48500A4F0F2 /* CouponCell.swift */; };
 		A0F7E9211AFAE48500A4F0F2 /* CouponCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0F7E91F1AFAE48500A4F0F2 /* CouponCell.xib */; };
 		A0FCF9D81B98D59200BB4537 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0FCF9D71B98D59200BB4537 /* SearchViewController.swift */; };
-		A0FE26D11B9A4D12004EB402 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0FE26D01B9A4D12004EB402 /* SearchController.swift */; };
 		A0FE26D31B9AB5EB004EB402 /* search@x3.png in Resources */ = {isa = PBXBuildFile; fileRef = A0FE26D21B9AB5EB004EB402 /* search@x3.png */; };
 /* End PBXBuildFile section */
 
@@ -123,6 +132,10 @@
 		9D3326231AF7ED1C00498801 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9D3326241AF7ED1C00498801 /* dopTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dopTests.swift; sourceTree = "<group>"; };
 		9D4C04801B18EAF600D5DCEE /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
+		9D4D298A1B9F50A100CE58A9 /* Montserrat-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Light.otf"; path = "dop/Montserrat-Light.otf"; sourceTree = "<group>"; };
+		9D4D298B1B9F50A100CE58A9 /* Montserrat-UltraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-UltraLight.otf"; path = "dop/Montserrat-UltraLight.otf"; sourceTree = "<group>"; };
+		9D5DA8991B9E55DB00954B30 /* Montserrat-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Bold.otf"; path = "dop/Montserrat-Bold.otf"; sourceTree = "<group>"; };
+		9D5DA89A1B9E55DB00954B30 /* Montserrat-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Regular.otf"; path = "dop/Montserrat-Regular.otf"; sourceTree = "<group>"; };
 		9D697C791B5EF13000D786AA /* iconfonts-fontawesome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "iconfonts-fontawesome.swift"; sourceTree = "<group>"; };
 		9D9C1B2A1B83B0D900F7895B /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = dop/FBSDKShareKit.framework; sourceTree = "<group>"; };
 		9D9C1B2C1B83B3DB00F7895B /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = dop/FBSDKCoreKit.framework; sourceTree = "<group>"; };
@@ -138,6 +151,8 @@
 		9DB612191B192FCC004B8DB8 /* NearbyMapController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyMapController.swift; sourceTree = "<group>"; };
 		9DB6BB291B72A6A000FF2659 /* BranchProfileTopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BranchProfileTopView.xib; sourceTree = "<group>"; };
 		9DB907DD1B8E25A000A40FE0 /* FilterSideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterSideViewController.swift; sourceTree = "<group>"; };
+		9DC921881B9F8D4900241FFD /* UIScrollView+InfiniteScroll.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+InfiniteScroll.h"; sourceTree = "<group>"; };
+		9DC921891B9F8D4900241FFD /* UIScrollView+InfiniteScroll.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+InfiniteScroll.m"; sourceTree = "<group>"; };
 		A04860941B0D5355009FEF1F /* A0JWTDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = A0JWTDecoder.h; sourceTree = "<group>"; };
 		A04860951B0D5355009FEF1F /* A0JWTDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = A0JWTDecoder.m; sourceTree = "<group>"; };
 		A04860971B0D5658009FEF1F /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = dop/FacebookSDK.framework; sourceTree = "<group>"; };
@@ -162,6 +177,7 @@
 		A060F7881B717DB9009D6ADB /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		A060F78B1B72A307009D6ADB /* CouponDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CouponDetailView.xib; sourceTree = "<group>"; };
 		A060F78D1B72B475009D6ADB /* CouponDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CouponDetailView.swift; sourceTree = "<group>"; };
+		A0662A351BA0CEF5006D6278 /* LoadingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
 		A06B35781B9F5D9F003C90EF /* SearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
 		A06B357B1B9F667D003C90EF /* NearbyBranch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyBranch.swift; sourceTree = "<group>"; };
 		A082F4821B18CEE6001C8C52 /* NewsfeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsfeedViewController.swift; sourceTree = "<group>"; };
@@ -177,8 +193,6 @@
 		A0BB9BB71B13E4F1000BA261 /* FriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendCell.swift; sourceTree = "<group>"; };
 		A0BB9BB81B13E4F1000BA261 /* FriendCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendCell.xib; sourceTree = "<group>"; };
 		A0C3AC2D1B9525D5005636E7 /* CustomInfiniteIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomInfiniteIndicator.swift; sourceTree = "<group>"; };
-		A0D6FBFB1B9105DD00C8E87F /* UIScrollView+InfiniteScroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIScrollView+InfiniteScroll.h"; path = "../../../Downloads/UIScrollView-InfiniteScroll-master/Classes/UIScrollView+InfiniteScroll.h"; sourceTree = "<group>"; };
-		A0D6FBFC1B9105DD00C8E87F /* UIScrollView+InfiniteScroll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIScrollView+InfiniteScroll.m"; path = "../../../Downloads/UIScrollView-InfiniteScroll-master/Classes/UIScrollView+InfiniteScroll.m"; sourceTree = "<group>"; };
 		A0DF72901B13A66C006EE8F4 /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
 		A0DF72921B13AEBF006EE8F4 /* FriendsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsController.swift; sourceTree = "<group>"; };
 		A0DF72941B13E262006EE8F4 /* Friend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
@@ -309,6 +323,7 @@
 		9D0DB46F1B17D2A50009FE6C /* Nearby */ = {
 			isa = PBXGroup;
 			children = (
+				A06B357B1B9F667D003C90EF /* NearbyBranch.swift */,
 				9DB907DD1B8E25A000A40FE0 /* FilterSideViewController.swift */,
 				9D0DB4701B17D2DB0009FE6C /* NearbyMapViewController.swift */,
 				9DB612191B192FCC004B8DB8 /* NearbyMapController.swift */,
@@ -319,6 +334,10 @@
 		9D3326001AF7ED1C00498801 = {
 			isa = PBXGroup;
 			children = (
+				9D4D298A1B9F50A100CE58A9 /* Montserrat-Light.otf */,
+				9D4D298B1B9F50A100CE58A9 /* Montserrat-UltraLight.otf */,
+				9D5DA8991B9E55DB00954B30 /* Montserrat-Bold.otf */,
+				9D5DA89A1B9E55DB00954B30 /* Montserrat-Regular.otf */,
 				9D33260B1AF7ED1C00498801 /* dop */,
 				9D3326211AF7ED1C00498801 /* dopTests */,
 				9D33260A1AF7ED1C00498801 /* Products */,
@@ -338,37 +357,40 @@
 		9D33260B1AF7ED1C00498801 /* dop */ = {
 			isa = PBXGroup;
 			children = (
-				9DB327CA1B862EF6006BF882 /* MoreMenu */,
-				9D1FCED61B79295700F42F6D /* SegmentedControl.swift */,
-				9D4C04801B18EAF600D5DCEE /* FontAwesome.ttf */,
-				9D697C791B5EF13000D786AA /* iconfonts-fontawesome.swift */,
-				A0D6FBFE1B9105E200C8E87F /* InfiniteScroll */,
-				9D0C16821B4DC6AE0088DE2F /* BranchProfile */,
-				A04860901B0D4D3B009FEF1F /* JWTDecode */,
-				A0365FDB1AF9463B000A325D /* SWRevealViewController */,
-				9D33260E1AF7ED1C00498801 /* AppDelegate.swift */,
 				A0AE939A1AF8041A00D02315 /* Bridging-Header.h */,
-				9DAAE7B51B0E810B00209588 /* Main.storyboard */,
-				A09AB4E11AF99136004287F7 /* SwiftyJSON.swift */,
+				9D33260E1AF7ED1C00498801 /* AppDelegate.swift */,
+				A060F78D1B72B475009D6ADB /* CouponDetailView.swift */,
+				A060F7851B702FAC009D6ADB /* CouponDetailViewController.swift */,
 				A09AB4DA1AF95A26004287F7 /* DashboardViewController.swift */,
-				A0EB97AF1B05131E005112EF /* Utilities.swift */,
+				9D697C791B5EF13000D786AA /* iconfonts-fontawesome.swift */,
+				9D1FCED61B79295700F42F6D /* SegmentedControl.swift */,
+				A09AB4E11AF99136004287F7 /* SwiftyJSON.swift */,
 				A0578C621B0E7D2B0033B5BD /* UserProfileController.swift */,
 				A0578C631B0E7D2B0033B5BD /* UserProfileViewController.swift */,
+				A0EB97AF1B05131E005112EF /* Utilities.swift */,
+				9D4C04801B18EAF600D5DCEE /* FontAwesome.ttf */,
+				9DA3C8951B90C117000D40F2 /* Images.xcassets */,
+				A060F78B1B72A307009D6ADB /* CouponDetailView.xib */,
 				A060F7791B6C4CA3009D6ADB /* TabbarController.swift */,
 				A060F77B1B6FE4BA009D6ADB /* PromoViewController.swift */,
 				A060F7811B70184F009D6ADB /* PromoCollectionCell.swift */,
 				A0EC05B31B7D622A003CADB2 /* LoadingViewController.swift */,
 				A06B357A1B9F5DBD003C90EF /* Search */,
 				A060F78A1B717FD2009D6ADB /* Blur */,
-				A082F4811B18CEC7001C8C52 /* Newsfeed */,
-				9D0DB46F1B17D2A50009FE6C /* Nearby */,
-				A0BB9BB61B13E4CA000BA261 /* Friend */,
-				A0EB97B31B052074005112EF /* Login */,
-				A0EB97AE1B03E198005112EF /* User */,
+				9D0C16821B4DC6AE0088DE2F /* BranchProfile */,
 				A09AB4E61AFA9609004287F7 /* Coupon */,
+				A0BB9BB61B13E4CA000BA261 /* Friend */,
+				A0D6FBFE1B9105E200C8E87F /* InfiniteScroll */,
+				A04860901B0D4D3B009FEF1F /* JWTDecode */,
 				9D3326171AF7ED1C00498801 /* LaunchScreen.xib */,
-				9DA3C8951B90C117000D40F2 /* Images.xcassets */,
+				A0EB97B31B052074005112EF /* Login */,
+				9DAAE7B51B0E810B00209588 /* Main.storyboard */,
+				9DB327CA1B862EF6006BF882 /* MoreMenu */,
+				9D0DB46F1B17D2A50009FE6C /* Nearby */,
+				A082F4811B18CEC7001C8C52 /* Newsfeed */,
 				9D33260C1AF7ED1C00498801 /* Supporting Files */,
+				A0365FDB1AF9463B000A325D /* SWRevealViewController */,
+				A0EB97AE1B03E198005112EF /* User */,
 			);
 			path = dop;
 			sourceTree = "<group>";
@@ -441,9 +463,9 @@
 		A06B357A1B9F5DBD003C90EF /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				A0FCF9D71B98D59200BB4537 /* SearchViewController.swift */,
-				A06B357B1B9F667D003C90EF /* NearbyBranch.swift */,
 				A0FE26D01B9A4D12004EB402 /* SearchController.swift */,
+				A0662A351BA0CEF5006D6278 /* LoadingCell.swift */,
+				A0FCF9D71B98D59200BB4537 /* SearchViewController.swift */,
 				A06B35781B9F5D9F003C90EF /* SearchCell.swift */,
 			);
 			name = Search;
@@ -464,9 +486,6 @@
 		A09AB4E61AFA9609004287F7 /* Coupon */ = {
 			isa = PBXGroup;
 			children = (
-				A060F7851B702FAC009D6ADB /* CouponDetailViewController.swift */,
-				A060F78B1B72A307009D6ADB /* CouponDetailView.xib */,
-				A060F78D1B72B475009D6ADB /* CouponDetailView.swift */,
 				A09AB4E01AF99136004287F7 /* CouponController.swift */,
 				A09AB4E41AFA880E004287F7 /* Coupon.swift */,
 				A0F7E91E1AFAE48500A4F0F2 /* CouponCell.swift */,
@@ -491,8 +510,8 @@
 			isa = PBXGroup;
 			children = (
 				A0C3AC2D1B9525D5005636E7 /* CustomInfiniteIndicator.swift */,
-				A0D6FBFB1B9105DD00C8E87F /* UIScrollView+InfiniteScroll.h */,
-				A0D6FBFC1B9105DD00C8E87F /* UIScrollView+InfiniteScroll.m */,
+				9DC921881B9F8D4900241FFD /* UIScrollView+InfiniteScroll.h */,
+				9DC921891B9F8D4900241FFD /* UIScrollView+InfiniteScroll.m */,
 			);
 			name = InfiniteScroll;
 			sourceTree = "<group>";
@@ -600,6 +619,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D4D298C1B9F50A100CE58A9 /* Montserrat-Light.otf in Resources */,
+				9D4D298D1B9F50A100CE58A9 /* Montserrat-UltraLight.otf in Resources */,
+				9D5DA89B1B9E55DB00954B30 /* Montserrat-Bold.otf in Resources */,
+				9D5DA89C1B9E55DB00954B30 /* Montserrat-Regular.otf in Resources */,
 				9D4C04811B18EB0200D5DCEE /* FontAwesome.ttf in Resources */,
 				A060F7841B701EFE009D6ADB /* heart.png in Resources */,
 				9DB3DABD1B73ED96004AC0F1 /* BranchProfileAboutView.xib in Resources */,
@@ -608,6 +631,7 @@
 				9D3326191AF7ED1C00498801 /* LaunchScreen.xib in Resources */,
 				A082F48B1B1920F8001C8C52 /* NewsfeedCell.xib in Resources */,
 				A060F78C1B72A307009D6ADB /* CouponDetailView.xib in Resources */,
+				9D9D1FF11B9F4BE3000C1299 /* starbucks_banner.jpg in Resources */,
 				A0578C601B0E40D30033B5BD /* GooglePlus.bundle in Resources */,
 				9DA3C8961B90C117000D40F2 /* Images.xcassets in Resources */,
 				A0FE26D31B9AB5EB004EB402 /* search@x3.png in Resources */,
@@ -648,6 +672,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9DC9218A1B9F8D4900241FFD /* UIScrollView+InfiniteScroll.h in Sources */,
+				9DC9218B1B9F8D4900241FFD /* UIScrollView+InfiniteScroll.m in Sources */,
+				9D2BDFE41B9DF524003F1260 /* SearchController.swift in Sources */,
+				9DBB7A401B968437005700B9 /* UIImage+ImageEffects.h in Sources */,
 				9D697C7A1B5EF13000D786AA /* iconfonts-fontawesome.swift in Sources */,
 				A0EC05991B7D1C69003CADB2 /* SWRevealViewController.m in Sources */,
 				9D0C16841B4DC6EB0088DE2F /* BranchProfileViewController.swift in Sources */,
@@ -658,13 +686,13 @@
 				A082F4851B18CF01001C8C52 /* NewsfeedController.swift in Sources */,
 				A0BB9BB91B13E4F1000BA261 /* FriendCell.swift in Sources */,
 				A0DF72911B13A66C006EE8F4 /* FriendsViewController.swift in Sources */,
+				A0662A361BA0CEF5006D6278 /* LoadingCell.swift in Sources */,
 				A06B357C1B9F667D003C90EF /* NearbyBranch.swift in Sources */,
 				9DB3DABF1B740070004AC0F1 /* BranchProfileAboutView.swift in Sources */,
 				A0EC05B41B7D622A003CADB2 /* LoadingViewController.swift in Sources */,
 				9DB907DE1B8E25A000A40FE0 /* FilterSideViewController.swift in Sources */,
 				A0578C651B0E7D2B0033B5BD /* UserProfileViewController.swift in Sources */,
 				9DB6121A1B192FCC004B8DB8 /* NearbyMapController.swift in Sources */,
-				A0FE26D11B9A4D12004EB402 /* SearchController.swift in Sources */,
 				A082F4871B18E4FF001C8C52 /* NewsfeedNote.swift in Sources */,
 				9DB327CC1B863C77006BF882 /* MoreMenuController.swift in Sources */,
 				A0EB97B21B051F02005112EF /* LoginController.swift in Sources */,
