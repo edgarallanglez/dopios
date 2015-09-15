@@ -13,14 +13,18 @@ class BranchProfileAboutView: UITableViewCell, CLLocationManagerDelegate {
     
     @IBOutlet weak var branchLocationMap: MKMapView!
     @IBOutlet weak var branchDescription: UITextView!
-    @IBOutlet weak var pinIcon: UILabel!
-    @IBOutlet weak var clockIcon: UILabel!
+    @IBOutlet weak var pinIcon: UIImageView!
+    @IBOutlet weak var clockIcon: UIImageView!
+
     let regionRadius: CLLocationDistance = 500
     
     func loadAbout(description: String, branchLocation: CLLocation ) {
         branchDescription.text = description
-        pinIcon.text =  String.fontAwesomeString("fa-map-marker")
-        clockIcon.text = String.fontAwesomeString("fa-clock-o")
+        pinIcon.image = pinIcon.image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        pinIcon.tintColor = UIColor.lightGrayColor()
+        clockIcon.image = clockIcon.image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        clockIcon.tintColor = UIColor.lightGrayColor()
+        
         centerMapOnLocation(branchLocation)
 
     }

@@ -9,6 +9,7 @@
 import UIKit
 
 class FilterSideViewController: UIViewController {
+    @IBOutlet weak var filterSegmented: FilterSegmentedControl!
     
     //food outlets
     @IBOutlet weak var alitasAndBoneless: UISwitch!
@@ -49,6 +50,13 @@ class FilterSideViewController: UIViewController {
     
     var activeFilters: [Int] = []
     
+    override func viewWillAppear(animated: Bool) {
+        UIApplication.sharedApplication().statusBarStyle = .Default
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        UIApplication.sharedApplication().statusBarStyle = .LightContent
+    }
     override func viewDidLoad() {
         self.foodCategoriesArray = [alitasAndBoneless,
                                     bistro,
@@ -117,28 +125,24 @@ class FilterSideViewController: UIViewController {
         NSNotificationCenter.defaultCenter().postNotificationName("filtersChanged", object: nil)
 
     }
-
     
-    
-    
-    @IBAction func setFilterCategory(sender: UISegmentedControl) {
-        
-        switch sender.selectedSegmentIndex {
-        case 0:
-            foodView.hidden = false
-            servicesView.hidden = true
-            entertainmentView.hidden = true
-        case 1:
-            foodView.hidden = true
-            servicesView.hidden = false
-            entertainmentView.hidden = true
-        case 2:
-            foodView.hidden = true
-            servicesView.hidden = true
-            entertainmentView.hidden = false
-        default:
-            break
-        }
+    @IBAction func setViewController(sender: FilterSegmentedControl) {
+        switch filterSegmented.selectedIndex {
+            case 0:
+                foodView.hidden = false
+                servicesView.hidden = true
+                entertainmentView.hidden = true
+            case 1:
+                foodView.hidden = true
+                servicesView.hidden = false
+                entertainmentView.hidden = true
+            case 2:
+                foodView.hidden = true
+                servicesView.hidden = true
+                entertainmentView.hidden = false
+            default:
+                break
+            }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

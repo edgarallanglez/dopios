@@ -42,13 +42,9 @@ class NearbyMapViewController: UIViewController, CLLocationManagerDelegate {
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
         
-        var gpsIcon = String.fontAwesomeString("fa-location-arrow")
-        var buttonStringAttributed = NSMutableAttributedString(string: gpsIcon, attributes: [NSFontAttributeName:UIFont(name: "HelveticaNeue", size: 11.00)!])
-        buttonStringAttributed.addAttribute(NSFontAttributeName, value: UIFont.iconFontOfSize("FontAwesome", fontSize: 25), range: NSRange(location: 0,length: 1))
-        
-        currentLocationLbl.titleLabel?.textAlignment = .Center
-        currentLocationLbl.titleLabel?.numberOfLines = 2
-        currentLocationLbl.setAttributedTitle(buttonStringAttributed, forState: .Normal)
+        var locationArrow:UIImageView = UIImageView(image: UIImage(named: "locationArrow")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate))
+        currentLocationLbl.setBackgroundImage(locationArrow.image, forState: UIControlState.Normal)
+        currentLocationLbl.tintColor = Utilities.dopColor
         
         //getNearestBranches()
         super.viewDidLoad()
@@ -57,6 +53,7 @@ class NearbyMapViewController: UIViewController, CLLocationManagerDelegate {
     
     override func viewDidAppear(animated: Bool) {
         setMapAtCurrent()
+        
     }
     
     let regionRadius: CLLocationDistance = 1000
