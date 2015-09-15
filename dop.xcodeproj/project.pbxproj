@@ -364,7 +364,6 @@
 				9D33260E1AF7ED1C00498801 /* AppDelegate.swift */,
 				A060F78D1B72B475009D6ADB /* CouponDetailView.swift */,
 				A060F7851B702FAC009D6ADB /* CouponDetailViewController.swift */,
-				A09AB4DA1AF95A26004287F7 /* DashboardViewController.swift */,
 				9D697C791B5EF13000D786AA /* iconfonts-fontawesome.swift */,
 				9D1FCED61B79295700F42F6D /* SegmentedControl.swift */,
 				A09AB4E11AF99136004287F7 /* SwiftyJSON.swift */,
@@ -378,6 +377,7 @@
 				A060F77B1B6FE4BA009D6ADB /* PromoViewController.swift */,
 				A060F7811B70184F009D6ADB /* PromoCollectionCell.swift */,
 				A0EC05B31B7D622A003CADB2 /* LoadingViewController.swift */,
+				A065EB301BA8E413003B7390 /* Dashboard */,
 				A06B357A1B9F5DBD003C90EF /* Search */,
 				A060F78A1B717FD2009D6ADB /* Blur */,
 				9D0C16821B4DC6AE0088DE2F /* BranchProfile */,
@@ -461,6 +461,14 @@
 				A060F7881B717DB9009D6ADB /* UIImage+ImageEffects.m */,
 			);
 			name = Blur;
+			sourceTree = "<group>";
+		};
+		A065EB301BA8E413003B7390 /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				A09AB4DA1AF95A26004287F7 /* DashboardViewController.swift */,
+			);
+			name = Dashboard;
 			sourceTree = "<group>";
 		};
 		A06B357A1B9F5DBD003C90EF /* Search */ = {
