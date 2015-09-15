@@ -35,7 +35,7 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
         self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         self.CouponsCollectionView.addSubview(refreshControl)
         
-//        self.CouponsCollectionView.contentInset = UIEdgeInsetsMake(0,0,49,0)
+        self.CouponsCollectionView.contentInset = UIEdgeInsetsMake(0,0,49,0)
         
         getCoupons()
         
@@ -43,7 +43,7 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
         self.CouponsCollectionView.infiniteScrollIndicatorView = CustomInfiniteIndicator(frame: CGRectMake(0, 0, 24, 24))
         
         // Set custom indicator margin
-        CouponsCollectionView.infiniteScrollIndicatorMargin = 40
+        CouponsCollectionView.infiniteScrollIndicatorMargin = 10
         
         // Add infinite scroll handler
         CouponsCollectionView.addInfiniteScrollWithHandler { [weak self] (scrollView) -> Void in
@@ -81,12 +81,12 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
         
             cell.backgroundColor = UIColor.whiteColor()
             cell.heart.image = cell.heart.image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-            cell.viewForBaselineLayout()?.alpha = 0
-        
+            //cell.viewForBaselineLayout()?.alpha = 0
+            //cell.branch_banner.alpha=1
             if (self.cachedImages[identifier] != nil){
                 cell.branch_banner.image = self.cachedImages[identifier]!
             } else {
-                cell.branch_banner.alpha = 0
+                //cell.branch_banner.alpha = 0
                 Utilities.getDataFromUrl(imageUrl!) { photo in
                     dispatch_async(dispatch_get_main_queue()) {
                         var imageData: NSData = NSData(data: photo!)
@@ -95,18 +95,18 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
                             cell.branch_banner.image = self.cachedImages[identifier]
         
                             UIView.animateWithDuration(0.5, animations: {
-                                cell.branch_banner.alpha = 1
+                                //cell.branch_banner.alpha = 1
                             })
                         }
                     }
                 }
             }
         
-            UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseInOut, animations: {
-                cell.viewForBaselineLayout()?.alpha = 1
+         /*   UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseInOut, animations: {
+                //cell.viewForBaselineLayout()?.alpha = 1
                 }, completion: { finished in
                 
-            })
+            })*/
         }
         return cell
     }

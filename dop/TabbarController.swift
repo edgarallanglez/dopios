@@ -107,7 +107,6 @@ class TabbarController: UITabBarController {
         self.performSegueWithIdentifier("searchView", sender: self)
     }
     func pressed(sender: UIButton!) {
-        
         self.selectedIndex = 2
     }
     

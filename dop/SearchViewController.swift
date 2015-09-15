@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate {
+class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, CLLocationManagerDelegate {
 
     var searchBar:UISearchBar!
     
@@ -20,6 +20,9 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
     var timer : NSTimer? = nil
     
     
+    var coordinate: CLLocationCoordinate2D?
+    var locationManager: CLLocationManager!
+    var current: CLLocation!
     
     @IBOutlet var tableView: UITableView!
     override func viewDidLoad() {
@@ -66,8 +69,17 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         tableView.reloadData()
         
         
+        
+        
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestAlwaysAuthorization()
+        locationManager.startUpdatingLocation()
+        User.coordinate = locationManager.location.coordinate
+        
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -95,11 +107,13 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         UIView.animateWithDuration(0.3, animations: {
             self.searchBar.alpha = 1
         })
-        
-        
     }
     override func viewDidDisappear(animated: Bool) {
         searchBar.resignFirstResponder()
+        
+        UIView.animateWithDuration(0.3, animations: {
+            self.searchBar.alpha = 0
+        })
     }
     
     
@@ -109,10 +123,6 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
     
     func searchBarTextDidEndEditing(searchBar: UISearchBar) {
         searchActive = false;
-        
-        
-        
-
     }
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
@@ -129,7 +139,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
 
         
         timer?.invalidate()
-        timer = NSTimer.scheduledTimerWithTimeInterval(1.5, target: self, selector: "timeOut", userInfo: nil, repeats: false)
+        timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "timeOut", userInfo: nil, repeats: false)
         
         return true
     }
@@ -156,52 +166,72 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        /*if(searchActive) {
+        if(!searching) {
             return filtered.count
-        }*/
-        return data.count;
+        }else{
+            return 1;
+        }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as! SearchCell;
-        if(searchActive){
+        //var cell:UITableViewCell
+        if(!searching){
+            let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as! SearchCell;
+            
             let model = self.filtered[indexPath.row]
             
             cell.loadItem(model, viewController: self)
             
-        } else {
-            let model = self.data[indexPath.row]
+            cell.selectionStyle = UITableViewCellSelectionStyle.None
+
+            return (cell)
             
-            cell.loadItem(model, viewController: self)
+        } else {
+            let cell = tableView.dequeueReusableCellWithIdentifier("loadingCell") as! LoadingCell;
+            
+            cell.selectionStyle = UITableViewCellSelectionStyle.None
+
+            cell.loading_indicator.startAnimating()
+            
+            return (cell)
         }
         
-        return cell;
     }
     
     
     func search(){
         filtered.removeAll()
         
-        var searchText = searchBar.text.stringByReplacingOccurrencesOfString("\"", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-       
-        searchBar.text = searchText
+        var searchText = searchBar.text
+        
+        var latitude = User.coordinate.latitude
+        var longitude = User.coordinate.longitude
+        
         
         let params:[String: AnyObject] = [
             "text" : searchText,
-            "latitude" : "24.766499",
-            "longitude" : "-107.469864"]
+            "latitude" : latitude,
+            "longitude" :longitude]
         
-        println(params)
+        searching = true
+        tableView.reloadData()
+
         SearchController.searchWithSuccess(params,
             success: { (couponsData) -> Void in
                 
                 let json = JSON(data: couponsData)
                 println(json)
                 for (index: String, subJson: JSON) in json["data"] {
+                    var distance:Double = 0.0
                     
-                    let distance = subJson["distance"].double!
+                    if(subJson["distance"]){
+                         distance = Utilities.roundValue(subJson["distance"].double!,numberOfPlaces: 1.0)
+                    }
                     let name = subJson["name"].string!
                     let branch_id = subJson["branch_id"].int
+                    
+                   
+                    
                     
                     let model = NearbyBranch(id: branch_id, name: name, distance:distance)
                     
@@ -213,13 +243,18 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
                     self.data.removeAll()
                     self.data = self.filtered
                     
+                    self.searching = false
+                    
                     self.tableView.reloadData()
 
                 })
             },
             failure: { (error) -> Void in
                 dispatch_async(dispatch_get_main_queue(), {
+
+                    self.searching = false
                     
+                    self.tableView.reloadData()
                 })
         })
     }
@@ -227,6 +262,27 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
     func scrollViewDidScroll(scrollView: UIScrollView) {
         searchBar.resignFirstResponder()
     }
-
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if(!searching){
+            let cell: SearchCell = tableView.cellForRowAtIndexPath(indexPath) as! SearchCell
+            self.performSegueWithIdentifier("branchProfile", sender: cell)
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let cell = sender as? SearchCell {
+            
+            let i = tableView.indexPathForCell(cell)!.row
+            let model = self.filtered[i]
+            
+            if segue.identifier == "branchProfile" {
+                let view = segue.destinationViewController as! BranchProfileViewController
+                view.branchId = model.id
+                
+                           }
+        }
+    }
+    
 
 }

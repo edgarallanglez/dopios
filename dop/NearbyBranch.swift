@@ -14,10 +14,14 @@ class NearbyBranch: NSObject {
     let distance:String
     
     
-    init(id: Int?, name: String?, distance: Double?) {
+    init(id: Int?, name: String?, distance: Double!) {
         self.id = id ?? 0
         self.name = name ?? ""
-        self.distance = String(stringInterpolationSegment: distance) ?? ""
+        if(distance==0.0){
+            self.distance = String(stringInterpolationSegment: "")
+        }else{
+            self.distance = String(stringInterpolationSegment: "A \(distance) Km")
+        }
     }
     
 }

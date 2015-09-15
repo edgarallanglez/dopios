@@ -33,6 +33,12 @@ class Utilities {
         
         return gl
     }
+    class func roundValue(value:Double,numberOfPlaces:Double)->Double{
+        let multiplier = pow(10.0, numberOfPlaces)
+        let rounded = round(value * multiplier) / multiplier
+        
+        return rounded
+    }
     
     class func loadDataFromURL(url: NSURL, completion: (data: NSData?, error: NSError?) -> Void) {
         var session = NSURLSession.sharedSession()
