@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="LnE-pO-m5e">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="wsr-0B-cyM">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -390,8 +390,7 @@
                                         <exclude reference="jUo-gg-HjI"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="20" width="265" height="50"/>
+                                <variation key="widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="U5Z-RO-ToK"/>
                                         <include reference="jUo-gg-HjI"/>
@@ -932,9 +931,6 @@
                                             <color key="titleColor" red="0.14901960780000001" green="0.65098039220000004" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
-                                        <variation key="widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="93" y="442" width="40" height="30"/>
-                                        </variation>
                                         <connections>
                                             <action selector="setEntertainmentSubcategories:" destination="tia-h6-j09" eventType="touchUpInside" id="L6M-jW-8lV"/>
                                         </connections>
@@ -985,8 +981,7 @@
                                         <exclude reference="yaM-u7-r8D"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="10" y="78" width="574" height="522"/>
+                                <variation key="widthClass=compact">
                                     <mask key="subviews">
                                         <include reference="Xed-eJ-Kku"/>
                                         <include reference="CbM-Dw-tWt"/>
@@ -1633,9 +1628,6 @@
                                             <color key="titleColor" red="0.4823529412" green="0.73333333329999995" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
-                                        <variation key="widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="93" y="442" width="40" height="30"/>
-                                        </variation>
                                         <connections>
                                             <action selector="setServicesSubcategories:" destination="tia-h6-j09" eventType="touchUpInside" id="6Xy-Se-mz7"/>
                                         </connections>
@@ -1691,8 +1683,7 @@
                                         <exclude reference="l54-7e-bRd"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="10" y="78" width="574" height="522"/>
+                                <variation key="widthClass=compact">
                                     <mask key="subviews">
                                         <include reference="wgK-fn-5sT"/>
                                         <include reference="kUL-9X-uiZ"/>
@@ -2639,9 +2630,6 @@
                                             <color key="titleColor" red="0.98431372549999996" green="0.1333333333" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
-                                        <variation key="widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="93" y="442" width="40" height="30"/>
-                                        </variation>
                                         <connections>
                                             <action selector="setFoodSubcategories:" destination="tia-h6-j09" eventType="touchUpInside" id="6vU-ZF-te9"/>
                                         </connections>
@@ -2712,8 +2700,7 @@
                                         <exclude reference="xWQ-4z-p7l"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="10" y="78" width="574" height="522"/>
+                                <variation key="widthClass=compact">
                                     <mask key="subviews">
                                         <include reference="wU3-XZ-5Ok"/>
                                         <include reference="1Kz-Nb-BaG"/>
@@ -2782,10 +2769,9 @@
                                 <exclude reference="FOq-Mm-68q"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="2Go-MT-bBv"/>
-                                <exclude reference="5lz-UI-b8U"/>
-                                <exclude reference="Sle-TI-33d"/>
-                                <exclude reference="dYs-Jc-BuD"/>
+                                <exclude reference="NCj-y2-blU"/>
+                                <exclude reference="k44-QD-2OQ"/>
+                                <exclude reference="vZU-xs-NgD"/>
                                 <exclude reference="fTk-Tb-tr8"/>
                                 <exclude reference="kc2-sp-EEd"/>
                                 <exclude reference="oME-Xk-Rdm"/>
@@ -2795,9 +2781,10 @@
                                 <exclude reference="3cy-22-IOz"/>
                                 <exclude reference="dQq-DT-CFb"/>
                                 <exclude reference="dX8-o6-cys"/>
-                                <exclude reference="NCj-y2-blU"/>
-                                <exclude reference="k44-QD-2OQ"/>
-                                <exclude reference="vZU-xs-NgD"/>
+                                <exclude reference="2Go-MT-bBv"/>
+                                <exclude reference="5lz-UI-b8U"/>
+                                <exclude reference="Sle-TI-33d"/>
+                                <exclude reference="dYs-Jc-BuD"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -2808,10 +2795,9 @@
                                 <include reference="FOq-Mm-68q"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="2Go-MT-bBv"/>
-                                <exclude reference="5lz-UI-b8U"/>
-                                <include reference="Sle-TI-33d"/>
-                                <exclude reference="dYs-Jc-BuD"/>
+                                <include reference="NCj-y2-blU"/>
+                                <include reference="k44-QD-2OQ"/>
+                                <include reference="vZU-xs-NgD"/>
                                 <include reference="fTk-Tb-tr8"/>
                                 <include reference="kc2-sp-EEd"/>
                                 <include reference="oME-Xk-Rdm"/>
@@ -2821,9 +2807,10 @@
                                 <include reference="3cy-22-IOz"/>
                                 <include reference="dQq-DT-CFb"/>
                                 <include reference="dX8-o6-cys"/>
-                                <include reference="NCj-y2-blU"/>
-                                <include reference="k44-QD-2OQ"/>
-                                <include reference="vZU-xs-NgD"/>
+                                <include reference="2Go-MT-bBv"/>
+                                <exclude reference="5lz-UI-b8U"/>
+                                <include reference="Sle-TI-33d"/>
+                                <exclude reference="dYs-Jc-BuD"/>
                             </mask>
                         </variation>
                     </view>
@@ -2890,9 +2877,6 @@
                                             <color key="titleColor" red="0.78823529410000004" green="0.0" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
-                                        <variation key="widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="507" y="5" width="33" height="30"/>
-                                        </variation>
                                         <connections>
                                             <action selector="searchNearest:" destination="N9P-Ri-FBS" eventType="touchUpInside" id="Dpw-7s-Ufm"/>
                                         </connections>
@@ -2943,8 +2927,7 @@
                                                 <exclude reference="KSU-Le-DY3"/>
                                             </mask>
                                         </variation>
-                                        <variation key="widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="560" y="10" width="20" height="20"/>
+                                        <variation key="widthClass=compact">
                                             <mask key="constraints">
                                                 <include reference="0Gi-r7-ky4"/>
                                                 <include reference="KSU-Le-DY3"/>
@@ -3924,8 +3907,8 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xt0-Qv-b5K">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="17"/>
+                                                    <color key="textColor" red="0.17498273480000001" green="0.17498273480000001" blue="0.17498273480000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="widthClass=compact" fixedFrame="YES">
                                                         <rect key="frame" x="19" y="19" width="284" height="21"/>
@@ -3933,8 +3916,8 @@
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.5" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RwV-ec-izC">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="16"/>
+                                                    <color key="textColor" red="0.76000661832412519" green="0.76000661832412519" blue="0.76000661832412519" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="widthClass=compact" fixedFrame="YES">
                                                         <rect key="frame" x="310" y="19" width="90" height="21"/>
