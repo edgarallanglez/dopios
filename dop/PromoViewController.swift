@@ -139,7 +139,7 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
             success: { (couponsData) -> Void in
                 let json = JSON(data: couponsData)
             
-                for (index, subJson): (String, JSON) in json["data"]{
+                for (_, subJson): (String, JSON) in json["data"]{
                     var coupon_id = subJson["coupon_id"].int
                     let coupon_name = subJson["name"].string
                     let coupon_description = subJson["description"].string

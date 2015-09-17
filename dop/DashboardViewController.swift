@@ -60,14 +60,13 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate {
         super.didReceiveMemoryWarning()
     }
     
-    func getTopBranches(){
+    func getTopBranches() {
         DashboardController.getDashboardBranchesWithSuccess { (branchesData) -> Void in
             let json = JSON(data: branchesData)
             
-            var namex = "";
-            for (index: String, subJson: JSON) in json["data"]{
-                var branch_id = String(stringInterpolationSegment:subJson["branch_id"]).toInt()
-                let branch_name = String(stringInterpolationSegment: subJson["name"])
+            for (_, subJson): (String, JSON) in json["data"] {
+                var branch_id = subJson["branch_id"].int
+                let branch_name = subJson["name"].string
  
                 
                /* let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id:branch_id)
@@ -80,7 +79,7 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate {
             
             dispatch_async(dispatch_get_main_queue(), {
                 //self.couponsTableView.reloadData()
-                println(json)
+                print(json)
             });
         }
     }
