@@ -132,8 +132,13 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         searchActive = false;
         timer?.invalidate()
-        search()
-        searchBar.resignFirstResponder()
+        
+        var searchText = searchBar.text
+        
+        if(searchText != ""){
+            search()
+            searchBar.resignFirstResponder()
+        }
     }
     func searchBar(searchBar: UISearchBar, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
 
@@ -158,7 +163,11 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         //self.tableView.reloadData()
     }
     func timeOut(){
-        search()
+        var searchText = searchBar.text
+        
+        if(searchText != ""){
+            search()
+        }
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -216,7 +225,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         
         searching = true
         tableView.reloadData()
-
+        
         SearchController.searchWithSuccess(params,
             success: { (couponsData) -> Void in
                 

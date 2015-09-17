@@ -63,6 +63,7 @@
 		A060F7891B717DB9009D6ADB /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = A060F7881B717DB9009D6ADB /* UIImage+ImageEffects.m */; };
 		A060F78C1B72A307009D6ADB /* CouponDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A060F78B1B72A307009D6ADB /* CouponDetailView.xib */; };
 		A060F78E1B72B475009D6ADB /* CouponDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A060F78D1B72B475009D6ADB /* CouponDetailView.swift */; };
+		A065EB321BA8E60A003B7390 /* DashboardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A065EB311BA8E60A003B7390 /* DashboardController.swift */; };
 		A0662A361BA0CEF5006D6278 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0662A351BA0CEF5006D6278 /* LoadingCell.swift */; };
 		A06B35791B9F5D9F003C90EF /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06B35781B9F5D9F003C90EF /* SearchCell.swift */; };
 		A06B357C1B9F667D003C90EF /* NearbyBranch.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06B357B1B9F667D003C90EF /* NearbyBranch.swift */; };
@@ -179,6 +180,7 @@
 		A060F7881B717DB9009D6ADB /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		A060F78B1B72A307009D6ADB /* CouponDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CouponDetailView.xib; sourceTree = "<group>"; };
 		A060F78D1B72B475009D6ADB /* CouponDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CouponDetailView.swift; sourceTree = "<group>"; };
+		A065EB311BA8E60A003B7390 /* DashboardController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardController.swift; sourceTree = "<group>"; };
 		A0662A351BA0CEF5006D6278 /* LoadingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
 		A06B35781B9F5D9F003C90EF /* SearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
 		A06B357B1B9F667D003C90EF /* NearbyBranch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyBranch.swift; sourceTree = "<group>"; };
@@ -466,6 +468,7 @@
 		A065EB301BA8E413003B7390 /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
+				A065EB311BA8E60A003B7390 /* DashboardController.swift */,
 				A09AB4DA1AF95A26004287F7 /* DashboardViewController.swift */,
 			);
 			name = Dashboard;
@@ -692,6 +695,7 @@
 				9D697C7A1B5EF13000D786AA /* iconfonts-fontawesome.swift in Sources */,
 				A0EC05991B7D1C69003CADB2 /* SWRevealViewController.m in Sources */,
 				9D0C16841B4DC6EB0088DE2F /* BranchProfileViewController.swift in Sources */,
+				A065EB321BA8E60A003B7390 /* DashboardController.swift in Sources */,
 				A060F7861B702FAC009D6ADB /* CouponDetailViewController.swift in Sources */,
 				A0C3AC2E1B9525D5005636E7 /* CustomInfiniteIndicator.swift in Sources */,
 				A0DF72931B13AEBF006EE8F4 /* FriendsController.swift in Sources */,

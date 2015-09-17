@@ -52,6 +52,7 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.startUpdatingLocation()
         
         
+        getTopBranches()
         
     }
     
@@ -59,6 +60,30 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate {
         super.didReceiveMemoryWarning()
     }
     
+    func getTopBranches(){
+        DashboardController.getDashboardBranchesWithSuccess { (branchesData) -> Void in
+            let json = JSON(data: branchesData)
+            
+            var namex = "";
+            for (index: String, subJson: JSON) in json["data"]{
+                var branch_id = String(stringInterpolationSegment:subJson["branch_id"]).toInt()
+                let branch_name = String(stringInterpolationSegment: subJson["name"])
+ 
+                
+               /* let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id:branch_id)
+                
+                self.coupons.append(model)
+                
+                println(coupon_name)
+                namex = String(coupon_name)*/
+            }
+            
+            dispatch_async(dispatch_get_main_queue(), {
+                //self.couponsTableView.reloadData()
+                println(json)
+            });
+        }
+    }
     func getCoupons() {
         coupons = [Coupon]()
         
