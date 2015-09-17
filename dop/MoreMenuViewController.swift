@@ -36,7 +36,7 @@ class MoreMenuViewController: UIViewController {
         switch(User.loginType) {
         case("facebook"):
             // Facebook logout
-            if (FBSession.activeSession().state.value == FBSessionStateOpen.value || FBSession.activeSession().state.value == FBSessionStateOpenTokenExtended.value) {
+            if (FBSession.activeSession().state.rawValue == FBSessionStateOpen.rawValue || FBSession.activeSession().state.rawValue == FBSessionStateOpenTokenExtended.rawValue) {
                 // Close the session and remove the access token from the cache
                 // The session state handler (in the app delegate) will be called automatically
                 FBSession.activeSession().closeAndClearTokenInformation()
@@ -47,7 +47,7 @@ class MoreMenuViewController: UIViewController {
             }
 
         default:
-            println("no hay sesion activa")
+            print("no hay sesion activa")
         }
 
     }

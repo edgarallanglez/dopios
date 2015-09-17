@@ -237,8 +237,8 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate {
     
     func takeCoupon(coupon_id:Int) {
         
-        var latitude = String(stringInterpolationSegment:locValue!.latitude)
-        var longitude = String(stringInterpolationSegment: locValue!.longitude)
+        let latitude = String(stringInterpolationSegment:locValue!.latitude)
+        let longitude = String(stringInterpolationSegment: locValue!.longitude)
 
         let params:[String: AnyObject] = [
             "coupon_id" : coupon_id,
@@ -252,7 +252,7 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate {
         success:{(couponsData) -> Void in
             let json = JSON(data: couponsData)
 
-            println(json)
+            print(json)
         },
         failure: { (error) -> Void in
             
@@ -260,10 +260,10 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate {
     
     }
     
-    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-        locValue = manager.location.coordinate
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        locValue = manager.location!.coordinate
 
-        println("locations = \(locValue!.latitude)")
+        print("locations = \(locValue!.latitude)")
         locationManager.stopUpdatingLocation()
     }
     

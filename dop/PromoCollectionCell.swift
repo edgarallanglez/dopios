@@ -58,7 +58,7 @@ class PromoCollectionCell: UICollectionViewCell {
             success: { (couponsData) -> Void in
                 dispatch_async(dispatch_get_main_queue(), {
                     let json = JSON(data: couponsData)
-                    println(json)
+                    print(json)
                 })
             },
             failure: { (error) -> Void in
@@ -95,14 +95,14 @@ class PromoCollectionCell: UICollectionViewCell {
         }, completion: nil)
         
         self.heart.tintColor = Utilities.dopColor
-        let totalLikes = (self.likes.text!.toInt())! + 1
+        let totalLikes = (Int(self.likes.text!))! + 1
         self.likes.text = String(stringInterpolationSegment: totalLikes)
         self.coupon.setUserLike(1, total_likes: totalLikes)
     }
 
     func removeCouponLike() {
         self.heart.tintColor = UIColor.lightGrayColor()
-        let totalLikes = (self.likes.text!.toInt())! - 1
+        let totalLikes = (Int(self.likes.text!))! - 1
         self.likes.text = String(stringInterpolationSegment: totalLikes)
         self.coupon.setUserLike(0, total_likes: totalLikes)
     }

@@ -35,7 +35,7 @@ class CouponDetailView: UIView {
     }
     
     func centerMapOnLocation(location: CLLocationCoordinate2D) {
-        var dropPin = MKPointAnnotation()
+        let dropPin = MKPointAnnotation()
         dropPin.coordinate = location
         dropPin.title = self.couponsName.titleLabel?.text
         self.location.addAnnotation(dropPin)
@@ -66,17 +66,17 @@ class CouponDetailView: UIView {
             success: { (couponsData) -> Void in
                 dispatch_async(dispatch_get_main_queue(), {
                     let json = JSON(data: couponsData)
-                    println(json)
+                    print(json)
                 })
             },
             failure: { (error) -> Void in
                 dispatch_async(dispatch_get_main_queue(), {
-                    println(error)
+                    print(error)
                 })
             }
         )
 
-        println(date)
+        print(date)
         
     }
     

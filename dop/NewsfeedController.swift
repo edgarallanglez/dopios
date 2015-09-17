@@ -31,7 +31,7 @@ class NewsfeedController: NSObject {
     }
     class func likeFriendsActivityWithSuccess(params:[String:AnyObject],success succeed: ((friendsData: NSData!) -> Void),failure errorFound: ((friendsData: NSError?) -> Void)) {
         let url = "\(Utilities.dopURL)coupon/used/like"
-        println(url)
+        print(url)
         Utilities.sendDataToURL(NSURL(string: url)!, method:"POST", params: params, completion:{(data, error) -> Void in
             if let urlData = data {
                 succeed(friendsData: urlData)

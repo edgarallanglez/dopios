@@ -33,7 +33,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         searchBar.tintColor = UIColor.whiteColor()
         
         
-        var textFieldInsideSearchBar = searchBar.valueForKey("searchField") as? UITextField
+        let textFieldInsideSearchBar = searchBar.valueForKey("searchField") as? UITextField
         textFieldInsideSearchBar?.textColor = UIColor.whiteColor()
         
         
@@ -57,7 +57,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         
         
         
-        searchBar.setTranslatesAutoresizingMaskIntoConstraints(false)
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
         
         searchBar.alpha = 0
 
@@ -76,7 +76,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
-        User.coordinate = locationManager.location.coordinate
+        User.coordinate = locationManager.location!.coordinate
         
     }
     
@@ -202,16 +202,17 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
     func search(){
         filtered.removeAll()
         
-        var searchText = searchBar.text
+        let searchText: String = searchBar.text!
         
-        var latitude = User.coordinate.latitude
-        var longitude = User.coordinate.longitude
+        let latitude = User.coordinate.latitude
+        let longitude = User.coordinate.longitude
         
         
-        let params:[String: AnyObject] = [
-            "text" : searchText,
-            "latitude" : latitude,
-            "longitude" :longitude]
+        let params: [String:AnyObject] = [
+            "text": searchText,
+            "latitude": latitude,
+            "longitude":longitude
+        ]
         
         searching = true
         tableView.reloadData()
@@ -220,8 +221,8 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
             success: { (couponsData) -> Void in
                 
                 let json = JSON(data: couponsData)
-                println(json)
-                for (index: String, subJson: JSON) in json["data"] {
+                print(json)
+                for (_, subJson): (String, JSON) in json["data"] {
                     var distance:Double = 0.0
                     
                     if(subJson["distance"]){

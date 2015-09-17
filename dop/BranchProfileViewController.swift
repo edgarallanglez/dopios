@@ -24,13 +24,13 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         
-        println("Branch profile view controller \(branchId)")
+        print("Branch profile view controller \(branchId)")
 
-        var couponNib = UINib(nibName: "CouponCell", bundle: nil)
+        let couponNib = UINib(nibName: "CouponCell", bundle: nil)
         tableView.registerNib(couponNib, forCellReuseIdentifier: "CouponCell")
-        var aboutNib = UINib(nibName: "BranchProfileAboutView", bundle: nil)
+        let aboutNib = UINib(nibName: "BranchProfileAboutView", bundle: nil)
         tableView.registerNib(aboutNib, forCellReuseIdentifier: "BranchProfileAboutView")
-        var campaignNib = UINib(nibName: "BranchProfileLastCampaign", bundle: nil)
+        let campaignNib = UINib(nibName: "BranchProfileLastCampaign", bundle: nil)
         tableView.registerNib(campaignNib, forCellReuseIdentifier: "BranchProfileLastCampaign")
         headerTopView = (NSBundle.mainBundle().loadNibNamed("BranchProfileTopView", owner: self, options: nil)[0] as? BranchProfileTopView)!
         headerTopView.branchId = branchId
@@ -49,8 +49,8 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
             let data = JSON(data: branchData)
             var json = data["data"]
             json = json[0]
-            var latitude = json["latitude"].double
-            var longitude = json["longitude"].double
+            let latitude = json["latitude"].double
+            let longitude = json["longitude"].double
             
             let branchPin = CLLocation(latitude: latitude!, longitude: longitude!)
             var newLocation = CLLocationCoordinate2DMake(latitude!, longitude!)
@@ -70,9 +70,9 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
         BranchProfileController.getBranchCouponTimeline(1, success: { (couponsData) -> Void in
             let json = JSON(data: couponsData)
             
-            println(json)
+            print(json)
         
-            for (index: String, subJson: JSON) in json["bond"]{
+            for (index, subJson): (String, JSON) in json["bond"]{
                 var coupon_id = subJson["coupon_id"].int!
                 let coupon_name = subJson["name"].string!
                 let coupon_description = subJson["description"].string!
@@ -89,7 +89,7 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
                 self.coupons.append(model)
             }
             
-            for (index: String, subJson: JSON) in json["nxn"] {
+            for (index, subJson): (String, JSON) in json["nxn"] {
                 var coupon_id = subJson["coupon_id"].int!
                 let coupon_name = subJson["name"].string ?? ""
                 let coupon_description = subJson["description"].string ?? ""
@@ -103,7 +103,7 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
                 self.coupons.append(model)
             }
             
-            for (index: String, subJson: JSON) in json["discount"]{
+            for (index, subJson): (String, JSON) in json["discount"]{
                 var coupon_id = subJson["coupon_id"].int!
                 let coupon_name = subJson["name"].string ?? ""
                 let coupon_description = subJson["description"].string ?? ""
@@ -117,7 +117,7 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
                 self.coupons.append(model)
             }
             
-            for (index: String, subJson: JSON) in json["new_promo"]{
+            for (index, subJson): (String, JSON) in json["new_promo"]{
                 var coupon_id = subJson["coupon_id"].int!
                 let coupon_name = subJson["name"].string ?? ""
                 let coupon_description = subJson["description"].string ?? ""
@@ -155,21 +155,21 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var defaultCell: UITableViewCell = UITableViewCell()
+        let defaultCell: UITableViewCell = UITableViewCell()
         switch self.selectedIndex {
         case 0:
             tableView.estimatedRowHeight = 500
             tableView.rowHeight = UITableViewAutomaticDimension
 
-            var cell: BranchProfileAboutView = tableView.dequeueReusableCellWithIdentifier("BranchProfileAboutView", forIndexPath: indexPath) as! BranchProfileAboutView
+            let cell: BranchProfileAboutView = tableView.dequeueReusableCellWithIdentifier("BranchProfileAboutView", forIndexPath: indexPath) as! BranchProfileAboutView
         
-            var initialLocation = CLLocation(latitude: 24.815471, longitude: -107.397844)
+            let initialLocation = CLLocation(latitude: 24.815471, longitude: -107.397844)
             cell.loadAbout("Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. ", branchLocation: initialLocation)
             cell.selectionStyle = UITableViewCellSelectionStyle.None
             return cell
             
         case 1:
-            var cellCampaign: BranchProfileLastCampaign = tableView.dequeueReusableCellWithIdentifier("BranchProfileLastCampaign", forIndexPath: indexPath) as! BranchProfileLastCampaign
+            let cellCampaign: BranchProfileLastCampaign = tableView.dequeueReusableCellWithIdentifier("BranchProfileLastCampaign", forIndexPath: indexPath) as! BranchProfileLastCampaign
             var initialLocation = CLLocation(latitude: 24.815471, longitude: -107.397844)
             tableView.estimatedRowHeight = 150
             tableView.rowHeight = UITableViewAutomaticDimension

@@ -43,7 +43,7 @@
 		9DC9218A1B9F8D4900241FFD /* UIScrollView+InfiniteScroll.h in Sources */ = {isa = PBXBuildFile; fileRef = 9DC921881B9F8D4900241FFD /* UIScrollView+InfiniteScroll.h */; };
 		9DC9218B1B9F8D4900241FFD /* UIScrollView+InfiniteScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DC921891B9F8D4900241FFD /* UIScrollView+InfiniteScroll.m */; };
 		A04860961B0D5355009FEF1F /* A0JWTDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = A04860951B0D5355009FEF1F /* A0JWTDecoder.m */; };
-		A04860981B0D5658009FEF1F /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A04860971B0D5658009FEF1F /* FacebookSDK.framework */; };
+		A04860981B0D5658009FEF1F /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A04860971B0D5658009FEF1F /* FacebookSDK.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		A04E388A1AFC3549007C7B69 /* starbucks.gif in Resources */ = {isa = PBXBuildFile; fileRef = A04E38891AFC3549007C7B69 /* starbucks.gif */; };
 		A0578C521B0D64AD0033B5BD /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0578C4E1B0D64AD0033B5BD /* Fabric.framework */; };
 		A0578C551B0D64AD0033B5BD /* TwitterCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0578C511B0D64AD0033B5BD /* TwitterCore.framework */; };
@@ -589,6 +589,8 @@
 		9D3326011AF7ED1C00498801 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = "Edgar Allan Glez";
 				TargetAttributes = {
@@ -861,11 +863,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/dop",
 					"$(PROJECT_DIR)",
-					/Users/Eduardo/Downloads,
 				);
 				INFOPLIST_FILE = dop/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -880,11 +882,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/dop",
 					"$(PROJECT_DIR)",
-					/Users/Eduardo/Downloads,
 				);
 				INFOPLIST_FILE = dop/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

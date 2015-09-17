@@ -32,7 +32,7 @@ class LoadingViewController: UIViewController, FBLoginViewDelegate, CLLocationMa
 
     //  book Delegate Methods
     func loginViewShowingLoggedInUser(loginView : FBLoginView!) {
-        println("User Logged In")
+        print("User Logged In")
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -44,9 +44,9 @@ class LoadingViewController: UIViewController, FBLoginViewDelegate, CLLocationMa
     }
     func loginViewFetchedUserInfo(loginView : FBLoginView!, user: FBGraphUser) {
         
-        var userEmail = user.objectForKey("email") as? String ?? ""
-        var birthday = user.birthday ?? "2015-01-01"
-        println("\(birthday )")
+        let userEmail = user.objectForKey("email") as? String ?? ""
+        let birthday = user.birthday ?? "2015-01-01"
+        print("\(birthday )")
         
         
         let params:[String: String] = [
@@ -66,14 +66,14 @@ class LoadingViewController: UIViewController, FBLoginViewDelegate, CLLocationMa
     }
     
     func loginView(loginView : FBLoginView!, handleError:NSError) {
-        println("Error: \(handleError.localizedDescription)")
+        print("Error: \(handleError.localizedDescription)")
     }
     
     
 
     // Social login Call
     func socialLogin(type: String, params: [String:String]!){
-        println("\(Utilities.dopURL)api/user/login/"+type)
+        print("\(Utilities.dopURL)api/user/login/"+type)
         
         LoginController.loginWithSocial("\(Utilities.dopURL)user/login/" + type, params: params,
         success:{ (loginData) -> Void in

@@ -20,17 +20,17 @@ class BranchProfileTopView: UIView {
             "branch_id" : String(stringInterpolationSegment: branchId),
             "date" : "2015-01-01"]
         
-        println(params)
+        print(params)
         BranchProfileController.followBranchWithSuccess(params,
             success: { (couponsData) -> Void in
                 dispatch_async(dispatch_get_main_queue(), {
                     let json = JSON(data: couponsData)
-                    println(json)
+                    print(json)
                 })
             },
             failure: { (error) -> Void in
                 dispatch_async(dispatch_get_main_queue(), {
-                    println(error)
+                    print(error)
                 })
         })
 

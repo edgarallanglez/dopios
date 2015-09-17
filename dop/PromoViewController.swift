@@ -89,7 +89,7 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
                 //cell.branch_banner.alpha = 0
                 Utilities.getDataFromUrl(imageUrl!) { photo in
                     dispatch_async(dispatch_get_main_queue()) {
-                        var imageData: NSData = NSData(data: photo!)
+                        let imageData: NSData = NSData(data: photo!)
                         if self.CouponsCollectionView.indexPathForCell(cell)?.row == indexPath.row {
                             self.cachedImages[identifier] = UIImage(data: imageData)
                             cell.branch_banner.image = self.cachedImages[identifier]
@@ -139,7 +139,7 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
             success: { (couponsData) -> Void in
                 let json = JSON(data: couponsData)
             
-                for (index: String, subJson: JSON) in json["data"]{
+                for (index, subJson): (String, JSON) in json["data"]{
                     var coupon_id = subJson["coupon_id"].int
                     let coupon_name = subJson["name"].string
                     let coupon_description = subJson["description"].string
@@ -187,7 +187,7 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
             success: { (couponsData) -> Void in
                 let json = JSON(data: couponsData)
                 
-                for (index: String, subJson: JSON) in json["data"]{
+                for (index, subJson): (String, JSON) in json["data"]{
                     var coupon_id = subJson["coupon_id"].int!
                     let coupon_name = subJson["name"].string!
                     let coupon_description = subJson["description"].string!

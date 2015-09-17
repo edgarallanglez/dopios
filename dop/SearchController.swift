@@ -17,7 +17,7 @@ class SearchController: NSObject {
         
 
         let url = "\(Utilities.dopURL)company/branch/search/?latitude=\(latitude)&longitude=\(longitude)&text=\(text)".stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
-        println(url)
+        print(url)
         Utilities.sendDataToURL(NSURL(string: url)!, method:"POST", params: params, completion:{(data, error) -> Void in
             if let urlData = data {
                 succeed(friendsData: urlData)

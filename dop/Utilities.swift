@@ -41,17 +41,17 @@ class Utilities {
     }
     
     class func loadDataFromURL(url: NSURL, completion: (data: NSData?, error: NSError?) -> Void) {
-        var session = NSURLSession.sharedSession()
+        let session = NSURLSession.sharedSession()
         let request = NSMutableURLRequest(URL: url)
         request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
         request.addValue(User.userToken, forHTTPHeaderField: "Authorization")
 
-        let loadDataTask = session.dataTaskWithRequest(request, completionHandler: { (data: NSData!, response: NSURLResponse!, error: NSError!) -> Void in
+        let loadDataTask = session.dataTaskWithRequest(request, completionHandler: { (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
             if let responseError = error {
                 completion(data: nil, error: responseError)
             } else if let httpResponse = response as? NSHTTPURLResponse {
                 if httpResponse.statusCode != 200 {
-                    var statusError = NSError(domain: "com.dop", code:httpResponse.statusCode, userInfo:[NSLocalizedDescriptionKey: "HTTP status code has unexpected value."])
+                    let statusError = NSError(domain: "com.dop", code:httpResponse.statusCode, userInfo:[NSLocalizedDescriptionKey: "HTTP status code has unexpected value."])
                     completion(data: nil, error: statusError)
                 } else {
                     completion(data: data, error: nil)
@@ -65,22 +65,27 @@ class Utilities {
     
     class func sendDataToURL(url: NSURL, method: String,params: [String:AnyObject], completion: (data:NSData?,error:NSError?)->Void) {
         
-        var session = NSURLSession.sharedSession()
+        let session = NSURLSession.sharedSession()
         let request = NSMutableURLRequest(URL: url)
         request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
         request.addValue(User.userToken, forHTTPHeaderField: "Authorization")
         request.HTTPMethod = method
         var err: NSError?
-        request.HTTPBody = NSJSONSerialization.dataWithJSONObject(params, options: NSJSONWritingOptions.allZeros, error: &err)
+        do {
+            request.HTTPBody = try NSJSONSerialization.dataWithJSONObject(params, options: NSJSONWritingOptions())
+        } catch let error as NSError {
+            err = error
+            request.HTTPBody = nil
+        }
         
         let task = session.dataTaskWithRequest(request, completionHandler: {
-            (data: NSData!, response: NSURLResponse!, error: NSError!) -> Void in
+            (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
             
             if let responseError = error {
                 completion(data: nil, error: responseError)
             } else if let httpResponse = response as? NSHTTPURLResponse {
                 if httpResponse.statusCode != 200 {
-                    var statusError = NSError(domain: "com.dop", code: httpResponse.statusCode, userInfo:[NSLocalizedDescriptionKey: "HTTP status code has unexpected value."])
+                    let statusError = NSError(domain: "com.dop", code: httpResponse.statusCode, userInfo:[NSLocalizedDescriptionKey: "HTTP status code has unexpected value."])
                     completion(data: nil, error: statusError)
                 } else {
                     completion(data: data, error: nil)
@@ -91,7 +96,7 @@ class Utilities {
     }
     class func getDataFromUrl(urL:NSURL, completion: ((data: NSData?) -> Void)) {
         NSURLSession.sharedSession().dataTaskWithURL(urL) { (data, response, error) in
-            completion(data: NSData(data: data))
+            completion(data: NSData(data: data!))
             }.resume()
     }
     

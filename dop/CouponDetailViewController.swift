@@ -35,7 +35,7 @@ class CouponDetailViewController: UIViewController, UITableViewDelegate, UITable
         locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
 
-        var nib = UINib(nibName: "NewsfeedCell", bundle: nil)
+        let nib = UINib(nibName: "NewsfeedCell", bundle: nil)
         tableView.registerNib(nib, forCellReuseIdentifier: "NewsfeedCell")
         
         customView = (NSBundle.mainBundle().loadNibNamed("CouponDetailView", owner: self, options: nil)[0] as? CouponDetailView)!
@@ -68,8 +68,8 @@ class CouponDetailViewController: UIViewController, UITableViewDelegate, UITable
         
     }
     
-    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-        coordinate = manager.location.coordinate
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        coordinate = manager.location!.coordinate
         customView.coordinate = coordinate
         locationManager.stopUpdatingLocation()
     }
@@ -89,7 +89,7 @@ class CouponDetailViewController: UIViewController, UITableViewDelegate, UITable
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        var cell:NewsfeedCell = tableView.dequeueReusableCellWithIdentifier("NewsfeedCell", forIndexPath: indexPath) as! NewsfeedCell
+        let cell:NewsfeedCell = tableView.dequeueReusableCellWithIdentifier("NewsfeedCell", forIndexPath: indexPath) as! NewsfeedCell
         let model = self.newsfeed[indexPath.row]
         cell.loadItem(model,viewController:self)
         let imageUrl = NSURL(string: model.user_image)
@@ -101,11 +101,11 @@ class CouponDetailViewController: UIViewController, UITableViewDelegate, UITable
             cell.user_image.alpha = 1
         } else {
             cell.user_image.alpha = 0
-            println("Entro al segundo")
+            print("Entro al segundo")
             Utilities.getDataFromUrl(imageUrl!) { data in
                 dispatch_async(dispatch_get_main_queue()) {
                     
-                    println("Finished downloading \"\(imageUrl!.lastPathComponent!.stringByDeletingPathExtension)\".")
+//                    print("Finished downloading \"\(imageUrl!.lastPathComponent!.stringByDeletingPathExtension)\".")
                     
                     var cell_image : UIImage = UIImage()
                     cell_image = UIImage ( data: data!)!
@@ -163,7 +163,7 @@ class CouponDetailViewController: UIViewController, UITableViewDelegate, UITable
             success: { (peopleData) -> Void in
                 let json = JSON(data: peopleData)
             
-                for (index: String, subJson: JSON) in json["data"] {
+                for (index, subJson): (String, JSON) in json["data"] {
                     var client_coupon_id = subJson["clients_coupon_id"].int
                     var friend_id = subJson["friends_id"].string
                     var exchange_date = subJson["exchange_date"].string
