@@ -70,12 +70,12 @@ class NewsfeedCell: UITableViewCell {
             liked = false
         }
         
-        println(params)
+        print(params)
         NewsfeedController.likeFriendsActivityWithSuccess(params,
             success: { (couponsData) -> Void in
                 dispatch_async(dispatch_get_main_queue(), {
                     let json = JSON(data: couponsData)
-                    println(json)
+                    print(json)
                 })
             },
             failure: { (error) -> Void in
@@ -91,7 +91,7 @@ class NewsfeedCell: UITableViewCell {
     
     
     
-    func goToUserProfile(UIButton!){
+    func goToUserProfile(_: UIButton!){
         self.viewController!.performSegueWithIdentifier("userProfile", sender: self)
     }
     
@@ -107,14 +107,14 @@ class NewsfeedCell: UITableViewCell {
             }, completion: nil)
         
         self.heart.tintColor = Utilities.dopColor
-        let totalLikes = (self.likes.text!.toInt())!+1
+        let totalLikes = (Int(self.likes.text!))!+1
         self.likes.text = String(stringInterpolationSegment: totalLikes)
         self.newsfeedNote!.setUserLike(1,total_likes: totalLikes)
     }
     
     func removeCouponLike() {
         self.heart.tintColor = UIColor.lightGrayColor()
-        let totalLikes = (self.likes.text!.toInt())!-1
+        let totalLikes = (Int(self.likes.text!))!-1
         self.likes.text = String(stringInterpolationSegment: totalLikes)
         self.newsfeedNote!.setUserLike(0,total_likes: totalLikes)
     }

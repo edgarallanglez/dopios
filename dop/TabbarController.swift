@@ -52,7 +52,7 @@ class TabbarController: UITabBarController {
         self.navigationItem.backBarButtonItem?.setTitleTextAttributes( [NSForegroundColorAttributeName: UIColor.whiteColor()], forState: UIControlState.Normal)
        
         
-        var imagen:UIImage = UIImage(named: "main-icon-dop")!
+        let imagen:UIImage = UIImage(named: "main-icon-dop")!
         addCenterButtonWithImage(imagen)
         
         UIApplication.sharedApplication().statusBarStyle = .LightContent
@@ -60,7 +60,7 @@ class TabbarController: UITabBarController {
         
         
         
-        var searchButton : UIBarButtonItem = UIBarButtonItem(image: UIImage(named:"search-icon"), style: UIBarButtonItemStyle.Plain, target: self, action: "search")
+        let searchButton : UIBarButtonItem = UIBarButtonItem(image: UIImage(named:"search-icon"), style: UIBarButtonItemStyle.Plain, target: self, action: "search")
         
        /* var logButton : UIBarButtonItem = UIBarButtonItem(title: "Search", style: UIBarButtonItemStyle.Plain, target: self, action: "search")*/
         
@@ -74,7 +74,7 @@ class TabbarController: UITabBarController {
     }
     
     func addCenterButtonWithImage(buttonImage:UIImage){
-        var button : UIButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
+        let button : UIButton = UIButton(type: UIButtonType.Custom)
         
         
         button.frame = CGRectMake(0,0, 57,49)
@@ -86,7 +86,7 @@ class TabbarController: UITabBarController {
         var heightDiference = 49 - self.tabBar.frame.size.height
         
         var center:CGPoint = self.tabBar.center
-        var navBarHeight = self.navigationController?.navigationBar.frame.size.height
+        let navBarHeight = self.navigationController?.navigationBar.frame.size.height
 
         let staturBarHeight = UIApplication.sharedApplication().statusBarFrame.size.height
         
@@ -115,7 +115,7 @@ class TabbarController: UITabBarController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let barViewControllers = segue.destinationViewController as! UIViewController
+        let barViewControllers = segue.destinationViewController 
         barViewControllers.hidesBottomBarWhenPushed = false
         
         /*let nav = barViewControllers.viewControllers![2] as! UINavigationController

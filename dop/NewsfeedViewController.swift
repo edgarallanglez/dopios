@@ -30,7 +30,7 @@ class NewsfeedViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell:NewsfeedCell = tableView.dequeueReusableCellWithIdentifier("NewsfeedCell", forIndexPath: indexPath) as! NewsfeedCell
+        let cell:NewsfeedCell = tableView.dequeueReusableCellWithIdentifier("NewsfeedCell", forIndexPath: indexPath) as! NewsfeedCell
         
         if(!newsfeed.isEmpty){
             let model = self.newsfeed[indexPath.row]
@@ -79,7 +79,7 @@ class NewsfeedViewController: UIViewController, UITableViewDataSource, UITableVi
         self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         self.tableView.addSubview(refreshControl)
         
-        var nib = UINib(nibName: "NewsfeedCell", bundle: nil)
+        let nib = UINib(nibName: "NewsfeedCell", bundle: nil)
         tableView.registerNib(nib, forCellReuseIdentifier: "NewsfeedCell")
         
         
@@ -118,7 +118,7 @@ class NewsfeedViewController: UIViewController, UITableViewDataSource, UITableVi
         NewsfeedController.getAllFriendsTakingCouponsOffsetWithSuccess(200,offset:0, success: { (friendsData) -> Void in
             let json = JSON(data: friendsData)
             
-            for (index: String, subJson: JSON) in json["data"] {
+            for (index, subJson): (String, JSON) in json["data"] {
                 var client_coupon_id = subJson["clients_coupon_id"].int
                 var friend_id = subJson["friends_id"].string
                 var exchange_date = subJson["exchange_date"].string
@@ -173,7 +173,7 @@ class NewsfeedViewController: UIViewController, UITableViewDataSource, UITableVi
         NewsfeedController.getAllFriendsTakingCouponsOffsetWithSuccess(firstNewsfeed.client_coupon_id,offset:offset, success: { (friendsData) -> Void in
             let json = JSON(data: friendsData)
             
-            for (index: String, subJson: JSON) in json["data"] {
+            for (index, subJson): (String, JSON) in json["data"] {
                 var client_coupon_id = subJson["clients_coupon_id"].int
                 var friend_id = subJson["friends_id"].string
                 var exchange_date = subJson["exchange_date"].string

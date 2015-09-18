@@ -39,7 +39,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
 
         UIApplication.sharedApplication().statusBarStyle = .Default
         
-        var signIn = GPPSignIn.sharedInstance();
+        let signIn = GPPSignIn.sharedInstance();
         signIn.shouldFetchGooglePlusUser = true;
         signIn.clientID = kClientId;
         signIn.scopes = [kGTLAuthScopePlusLogin,kGTLAuthScopePlusUserinfoEmail];
@@ -68,7 +68,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
         border2.frame = CGRect(x: 0, y: userNameField.frame.size.height - width, width:  userNameField.frame.size.width, height: userNameField.frame.size.height)
         border2.borderWidth = width
         
-        var profileIcon = UIImageView(image: UIImage(named: "profileIcon.png"))
+        let profileIcon = UIImageView(image: UIImage(named: "profileIcon.png"))
         profileIcon.image = profileIcon.image?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
         profileIcon.tintColor = UIColor.lightGrayColor()
         userNameField.layer.addSublayer(border)
@@ -80,7 +80,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
         
         view.addSubview(profileIcon)
         
-        var lockIcon = UIImageView(image: UIImage(named: "lockIcon.png"))
+        let lockIcon = UIImageView(image: UIImage(named: "lockIcon.png"))
         lockIcon.image = lockIcon.image?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
         lockIcon.tintColor = UIColor.lightGrayColor()
         passField.layer.addSublayer(border2)
@@ -102,33 +102,33 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
     
     //Google + login
     @IBAction func signInWithGoogle(sender: AnyObject) {
-        var signIn = GPPSignIn.sharedInstance();
+        let signIn = GPPSignIn.sharedInstance();
         signIn.authenticate();
     }
     
     func finishedWithAuth(auth: GTMOAuth2Authentication!, error: NSError!) {
        if (GPPSignIn.sharedInstance().googlePlusUser != nil){
-            println("Sign in")
+            print("Sign in")
             var user = GPPSignIn.sharedInstance().googlePlusUser
             var userId = GPPSignIn.sharedInstance().googlePlusUser.identifier
             
             var userEmail = user.emails.first?.value ?? ""
-            println(user.name.JSONString());
+            print(user.name.JSONString());
         
             var userImage = String(stringInterpolationSegment: user.image.url)+"&sz=320"
         
-        println(userImage)
+        print(userImage)
             let params:[String: String] = [
                 "google_key" : userId,
                 "names" : user.name.givenName,
                 "surnames":user.name.familyName,
                 "birth_date" : "2015-01-01",
-                "email": userEmail!,
+                "email": userEmail,
                 "main_image":userImage]
             
             self.socialLogin("google", params: params)
         } else {
-           println("Signed out.");
+           print("Signed out.");
         }
     }
     
@@ -141,10 +141,10 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
                         Twitter.sharedInstance().APIClient.loadUserWithID(session.userID) { twtrUser,
                             NSError -> Void in
                             
-                            var fullNameArr = split(twtrUser!.name) {$0 == " "}
-                            var firstName: String = fullNameArr[0]
-                            var lastName: String! = fullNameArr.count > 1 ? fullNameArr[1] : nil
-                            var userImage = twtrUser!.profileImageLargeURL
+                            var fullNameArr = twtrUser!.name.characters.split {$0 == " "}.map { String($0) }
+                            let firstName: String = fullNameArr[0]
+                            let lastName: String! = fullNameArr.count > 1 ? fullNameArr[1] : nil
+                            let userImage = twtrUser!.profileImageLargeURL
                             
                             let params:[String: String] = [
                                 "twitter_key" : twtrUser!.userID,
@@ -160,12 +160,12 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
                         }
                         
                     } else {
-                        println("error: \(error.localizedDescription)");
+                        print("error: \(error.localizedDescription)");
                     }
                     
                 }
             } else {
-                println("error: \(error.localizedDescription)");
+                print("error: \(error.localizedDescription)");
             }
 
         }
@@ -175,14 +175,14 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
     
     // Facebook Delegate Methods
     func loginViewShowingLoggedInUser(loginView : FBLoginView!) {
-        println("User Logged In")
+        print("User Logged In")
     }
     
     func loginViewFetchedUserInfo(loginView : FBLoginView!, user: FBGraphUser) {
         
-        var userEmail = user.objectForKey("email") as? String ?? ""
-        var birthday = user.birthday ?? "2015-01-01"
-        println("\(birthday )")
+        let userEmail = user.objectForKey("email") as? String ?? ""
+        let birthday = user.birthday ?? "2015-01-01"
+        print("\(birthday )")
         
     
         let params:[String: String] = [
@@ -197,17 +197,17 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
     }
     
     func loginViewShowingLoggedOutUser(loginView : FBLoginView!) {
-        println("User Logged Out")
+        print("User Logged Out")
     }
     
     func loginView(loginView : FBLoginView!, handleError:NSError) {
-        println("Error: \(handleError.localizedDescription)")
+        print("Error: \(handleError.localizedDescription)")
     }
     
 
     
     @IBAction func FBlogin(sender: UIButton) {
-        if (FBSession.activeSession().state.value == FBSessionStateOpen.value || FBSession.activeSession().state.value == FBSessionStateOpenTokenExtended.value) {
+        if (FBSession.activeSession().state.rawValue == FBSessionStateOpen.rawValue || FBSession.activeSession().state.rawValue == FBSessionStateOpenTokenExtended.rawValue) {
             // Close the session and remove the access token from the cache
             // The session state handler (in the app delegate) will be called automatically
             FBSession.activeSession().closeAndClearTokenInformation()
@@ -229,7 +229,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
     
     // Social login Call
     func socialLogin(type: String, params: [String:String]!){
-        println("\(Utilities.dopURL)api/user/login/"+type)
+        print("\(Utilities.dopURL)api/user/login/"+type)
         
         LoginController.loginWithSocial("\(Utilities.dopURL)user/login/" + type, params: params,
             success:{ (loginData) -> Void in
@@ -259,7 +259,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
         })
     }
     
-    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         locationManager.stopUpdatingLocation()
     }
         

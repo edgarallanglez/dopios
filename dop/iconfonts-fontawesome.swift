@@ -43,7 +43,7 @@ public extension NSMutableAttributedString {
 		}
 		
 		// Build the initial string - using the suffix specifics
-		var iconAttributed = NSMutableAttributedString(string: iconString, attributes: [NSFontAttributeName:UIFont(name: "HelveticaNeue", size: suffixFontSize)!])
+		let iconAttributed = NSMutableAttributedString(string: iconString, attributes: [NSFontAttributeName:UIFont(name: "HelveticaNeue", size: suffixFontSize)!])
 		
 		// Role font awesome over the icon and size according to parameter
 		iconAttributed.addAttribute(NSFontAttributeName, value: UIFont.iconFontOfSize("FontAwesome", fontSize: iconSize), range: NSRange(location: 0,length: 1))
@@ -57,7 +57,7 @@ public extension NSMutableAttributedString {
 func fetchIconFontAwesome(name: String) -> String {
 	
 	var returnValue = "\u{f059}"
-	let start = name[advance(name.startIndex, 3)]
+	let start = name[name.startIndex.advancedBy(3)]
 	
 	switch start {
 	case "a":

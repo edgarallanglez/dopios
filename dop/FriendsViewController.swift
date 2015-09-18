@@ -23,9 +23,9 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell: FriendCell = tableView.dequeueReusableCellWithIdentifier("FriendCell", forIndexPath: indexPath) as! FriendCell
+        let cell: FriendCell = tableView.dequeueReusableCellWithIdentifier("FriendCell", forIndexPath: indexPath) as! FriendCell
         let model = self.friends[indexPath.row]
-        var (title) = model.names
+        let (title) = model.names
         let imageUrl = NSURL(string: model.main_image)
         cell.loadItem(title: title, image: imageUrl!, friend_id: model.friend_id)
         
@@ -45,7 +45,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         success:{ (friendsData) -> Void in
             let json = JSON(data: friendsData)
             
-            for (index, subJson: JSON) in json["data"] {
+            for (index, subJson): (String, JSON) in json["data"] {
                 var friend_id = subJson["friends_id"].int
                 var user_id = subJson["user_id"].int
                 let user_name = subJson["names"].string
@@ -66,7 +66,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     @IBAction func getFriends(sender: UIBarButtonItem) {
-        var content: FBSDKAppInviteContent = FBSDKAppInviteContent()
+        let content: FBSDKAppInviteContent = FBSDKAppInviteContent()
         content.previewImageURL = NSURL(string: "http://45.55.7.118/branches/images/local/dop_logo.png")
         content.appLinkURL = NSURL(string: "https://fb.me/995895390462783")
         FBSDKAppInviteDialog.showWithContent(content, delegate: nil)

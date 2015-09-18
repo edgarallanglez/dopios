@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Coupon:NSObject,Printable{
+class Coupon:NSObject {
     let id:Int
     let name:String
     let couponDescription:String

@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FBLoginView.self
         FBProfilePictureView.self
         
-        if FBSession.activeSession().state.value == FBSessionStateCreatedTokenLoaded.value {
+        if FBSession.activeSession().state.rawValue == FBSessionStateCreatedTokenLoaded.rawValue {
             FBSession.openActiveSessionWithReadPermissions(["public_profile", "user_friends"], allowLoginUI: false, completionHandler: {
                 (session, state, error) -> Void in
                 self.sessionStateChanged(session, state: state, error: error)
@@ -40,13 +40,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func sessionStateChanged(session : FBSession, state : FBSessionState, error : NSError?) {
-        println("el estado cambio")
+        print("el estado cambio")
     }
     
-    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
-        var wasHandledFB:Bool = FBAppCall.handleOpenURL(url, sourceApplication: sourceApplication)
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+        let wasHandledFB:Bool = FBAppCall.handleOpenURL(url, sourceApplication: sourceApplication)
         
-        var wasHandledGG:Bool = GPPURLHandler.handleURL(url, sourceApplication: sourceApplication, annotation: annotation)
+        let wasHandledGG:Bool = GPPURLHandler.handleURL(url, sourceApplication: sourceApplication, annotation: annotation)
         
         return  wasHandledGG || wasHandledFB
 

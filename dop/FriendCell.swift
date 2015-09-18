@@ -49,7 +49,7 @@ class FriendCell: UITableViewCell {
             success:{(friendsData) -> Void in
                 let json = JSON(data: friendsData)
             
-                println(json)
+                print(json)
             },
             failure:{(error) -> Void in
                 

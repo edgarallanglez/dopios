@@ -24,7 +24,7 @@ class NearbyMapController {
         let latitude: AnyObject! = params["latitude"]
         let longitude: AnyObject! = params["longitude"]
         let radio: AnyObject! = params["radio"]
-        println(latitude, longitude, radio)
+        print(latitude, longitude, radio)
         let url = "\(Utilities.dopURL)company/branch/nearest/?latitude=\(latitude)&longitude=\(longitude)&radio=\(radio)"
         Utilities.sendDataToURL(NSURL(string: url)!, method:"POST", params: params, completion:{(data, error) -> Void in
             if let urlData = data {

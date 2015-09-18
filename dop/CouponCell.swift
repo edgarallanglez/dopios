@@ -49,7 +49,7 @@ class CouponCell: UITableViewCell {
         layer.shadowPath = shadowPath.CGPath
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     

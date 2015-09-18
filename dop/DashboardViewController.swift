@@ -60,14 +60,13 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate {
         super.didReceiveMemoryWarning()
     }
     
-    func getTopBranches(){
+    func getTopBranches() {
         DashboardController.getDashboardBranchesWithSuccess { (branchesData) -> Void in
             let json = JSON(data: branchesData)
             
-            var namex = "";
-            for (index: String, subJson: JSON) in json["data"]{
-                var branch_id = String(stringInterpolationSegment:subJson["branch_id"]).toInt()
-                let branch_name = String(stringInterpolationSegment: subJson["name"])
+            for (_, subJson): (String, JSON) in json["data"] {
+                var branch_id = subJson["branch_id"].int
+                let branch_name = subJson["name"].string
  
                 
                /* let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id:branch_id)
@@ -80,7 +79,7 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate {
             
             dispatch_async(dispatch_get_main_queue(), {
                 //self.couponsTableView.reloadData()
-                println(json)
+                print(json)
             });
         }
     }
@@ -262,8 +261,8 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate {
     
     func takeCoupon(coupon_id:Int) {
         
-        var latitude = String(stringInterpolationSegment:locValue!.latitude)
-        var longitude = String(stringInterpolationSegment: locValue!.longitude)
+        let latitude = String(stringInterpolationSegment:locValue!.latitude)
+        let longitude = String(stringInterpolationSegment: locValue!.longitude)
 
         let params:[String: AnyObject] = [
             "coupon_id" : coupon_id,
@@ -277,7 +276,7 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate {
         success:{(couponsData) -> Void in
             let json = JSON(data: couponsData)
 
-            println(json)
+            print(json)
         },
         failure: { (error) -> Void in
             
@@ -285,10 +284,10 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate {
     
     }
     
-    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-        locValue = manager.location.coordinate
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        locValue = manager.location!.coordinate
 
-        println("locations = \(locValue!.latitude)")
+        print("locations = \(locValue!.latitude)")
         locationManager.stopUpdatingLocation()
     }
     

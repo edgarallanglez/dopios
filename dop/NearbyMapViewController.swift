@@ -21,7 +21,7 @@ class NearbyMapViewController: UIViewController, CLLocationManagerDelegate {
     var locationManager: CLLocationManager!
     var current: CLLocation!
     var filterArray: [Int] = []
-    var annotationArray: [AnyObject] = []
+    var annotationArray: [MKAnnotation] = []
     @IBOutlet weak var filterSidebarButton: UIButton!
     
     override func viewDidLoad() {
@@ -36,13 +36,13 @@ class NearbyMapViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
-        User.coordinate = locationManager.location.coordinate
+        User.coordinate = locationManager.location!.coordinate
         if (self.revealViewController() != nil) {
             self.filterSidebarButton.addTarget(self.revealViewController(), action: "revealToggle:", forControlEvents: UIControlEvents.TouchUpInside)
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
         
-        var locationArrow:UIImageView = UIImageView(image: UIImage(named: "locationArrow")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate))
+        let locationArrow:UIImageView = UIImageView(image: UIImage(named: "locationArrow")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate))
         currentLocationLbl.setBackgroundImage(locationArrow.image, forState: UIControlState.Normal)
         currentLocationLbl.tintColor = Utilities.dopColor
         
@@ -64,8 +64,8 @@ class NearbyMapViewController: UIViewController, CLLocationManagerDelegate {
         nearbyMap.setRegion(coordinateRegion, animated: true)
     }
     
-    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-        coordinate = manager.location.coordinate
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        coordinate = manager.location!.coordinate
         locationManager.stopUpdatingLocation()
     }
     
@@ -78,14 +78,14 @@ class NearbyMapViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func setMapAtCurrent() {
-        var currentUserLocation = CLLocation(latitude: User.coordinate.latitude, longitude: User.coordinate.longitude)
+        let currentUserLocation = CLLocation(latitude: User.coordinate.latitude, longitude: User.coordinate.longitude)
         self.current = currentUserLocation
         centerMapOnLocation(currentUserLocation)
     }
     
     func getNearestBranches() {
-        var latitude = User.coordinate.latitude
-        var longitude = User.coordinate.longitude
+        let latitude = User.coordinate.latitude
+        let longitude = User.coordinate.longitude
         filterArray = Utilities.filterArray
         if self.nearbyMap != nil {
             self.nearbyMap.removeAnnotations(self.annotationArray)
@@ -96,18 +96,18 @@ class NearbyMapViewController: UIViewController, CLLocationManagerDelegate {
             "radio": 15,
             "filterArray": filterArray
         ]
-        print(params)
+        print(params, terminator: "")
         NearbyMapController.getNearestBranches(params, success: {(branchesData) -> Void in
             let json = JSON(data: branchesData)
-            print(json["data"].count)
-            for (index, location) in json["data"] {
-                var latitude = location["latitude"].double
-                var longitude = location["longitude"].double
+            print(json["data"].count, terminator: "")
+            for (_, location) in json["data"] {
+                let latitude = location["latitude"].double
+                let longitude = location["longitude"].double
                 
-                var newLocation = CLLocationCoordinate2DMake(latitude!, longitude!)
+                let newLocation = CLLocationCoordinate2DMake(latitude!, longitude!)
                 dispatch_async(dispatch_get_main_queue()) {
                     // Drop a pin
-                    var dropPin = MKPointAnnotation()
+                    let dropPin = MKPointAnnotation()
                     dropPin.coordinate = newLocation
                     dropPin.title = location["name"].string
                     self.annotationArray.append(dropPin)
