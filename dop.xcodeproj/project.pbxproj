@@ -42,6 +42,7 @@
 		9DBB7A401B968437005700B9 /* UIImage+ImageEffects.h in Sources */ = {isa = PBXBuildFile; fileRef = A060F7871B717DB9009D6ADB /* UIImage+ImageEffects.h */; };
 		9DC9218A1B9F8D4900241FFD /* UIScrollView+InfiniteScroll.h in Sources */ = {isa = PBXBuildFile; fileRef = 9DC921881B9F8D4900241FFD /* UIScrollView+InfiniteScroll.h */; };
 		9DC9218B1B9F8D4900241FFD /* UIScrollView+InfiniteScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DC921891B9F8D4900241FFD /* UIScrollView+InfiniteScroll.m */; };
+		9DE55C441BB07C0A005F9776 /* PromoSegmentedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE55C431BB07C0A005F9776 /* PromoSegmentedController.swift */; settings = {ASSET_TAGS = (); }; };
 		A04860961B0D5355009FEF1F /* A0JWTDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = A04860951B0D5355009FEF1F /* A0JWTDecoder.m */; };
 		A04860981B0D5658009FEF1F /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A04860971B0D5658009FEF1F /* FacebookSDK.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		A04E388A1AFC3549007C7B69 /* starbucks.gif in Resources */ = {isa = PBXBuildFile; fileRef = A04E38891AFC3549007C7B69 /* starbucks.gif */; };
@@ -156,6 +157,7 @@
 		9DB907DD1B8E25A000A40FE0 /* FilterSideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterSideViewController.swift; sourceTree = "<group>"; };
 		9DC921881B9F8D4900241FFD /* UIScrollView+InfiniteScroll.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+InfiniteScroll.h"; sourceTree = "<group>"; };
 		9DC921891B9F8D4900241FFD /* UIScrollView+InfiniteScroll.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+InfiniteScroll.m"; sourceTree = "<group>"; };
+		9DE55C431BB07C0A005F9776 /* PromoSegmentedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromoSegmentedController.swift; sourceTree = "<group>"; };
 		A04860941B0D5355009FEF1F /* A0JWTDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = A0JWTDecoder.h; sourceTree = "<group>"; };
 		A04860951B0D5355009FEF1F /* A0JWTDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = A0JWTDecoder.m; sourceTree = "<group>"; };
 		A04860971B0D5658009FEF1F /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = dop/FacebookSDK.framework; sourceTree = "<group>"; };
@@ -376,8 +378,6 @@
 				A0EB97AF1B05131E005112EF /* Utilities.swift */,
 				A060F78B1B72A307009D6ADB /* CouponDetailView.xib */,
 				A060F7791B6C4CA3009D6ADB /* TabbarController.swift */,
-				A060F77B1B6FE4BA009D6ADB /* PromoViewController.swift */,
-				A060F7811B70184F009D6ADB /* PromoCollectionCell.swift */,
 				A0EC05B31B7D622A003CADB2 /* LoadingViewController.swift */,
 				A065EB301BA8E413003B7390 /* Dashboard */,
 				A06B357A1B9F5DBD003C90EF /* Search */,
@@ -393,6 +393,7 @@
 				9DB327CA1B862EF6006BF882 /* MoreMenu */,
 				9D0DB46F1B17D2A50009FE6C /* Nearby */,
 				A082F4811B18CEC7001C8C52 /* Newsfeed */,
+				9DE55C421BB07BB5005F9776 /* Promotions */,
 				9D33260C1AF7ED1C00498801 /* Supporting Files */,
 				A0365FDB1AF9463B000A325D /* SWRevealViewController */,
 				A0EB97AE1B03E198005112EF /* User */,
@@ -436,6 +437,16 @@
 				9DB327CB1B863C77006BF882 /* MoreMenuController.swift */,
 			);
 			name = MoreMenu;
+			sourceTree = "<group>";
+		};
+		9DE55C421BB07BB5005F9776 /* Promotions */ = {
+			isa = PBXGroup;
+			children = (
+				A060F7811B70184F009D6ADB /* PromoCollectionCell.swift */,
+				A060F77B1B6FE4BA009D6ADB /* PromoViewController.swift */,
+				9DE55C431BB07C0A005F9776 /* PromoSegmentedController.swift */,
+			);
+			name = Promotions;
 			sourceTree = "<group>";
 		};
 		A0365FDB1AF9463B000A325D /* SWRevealViewController */ = {
@@ -726,6 +737,7 @@
 				A0DF72951B13E262006EE8F4 /* Friend.swift in Sources */,
 				A082F4831B18CEE6001C8C52 /* NewsfeedViewController.swift in Sources */,
 				9DACBBF91BA8CE0200CAEECB /* FilterSegmentedControl.swift in Sources */,
+				9DE55C441BB07C0A005F9776 /* PromoSegmentedController.swift in Sources */,
 				A0F7E9201AFAE48500A4F0F2 /* CouponCell.swift in Sources */,
 				9DA85CFD1B82587E009DA186 /* BranchProfileLastCampaign.swift in Sources */,
 				A0FCF9D81B98D59200BB4537 /* SearchViewController.swift in Sources */,
