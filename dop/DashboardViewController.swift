@@ -47,6 +47,11 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate {
         }
         
         
+    
+        var image_:UIImage = UIImage(named: "")!
+        
+        
+        
       //  var nib = UINib(nibName: "CouponCell", bundle: nil)
      // couponsTableView.registerNib(nib, forCellReuseIdentifier: "CouponCell")
         
