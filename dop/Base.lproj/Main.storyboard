@@ -3089,9 +3089,6 @@
                                 <rect key="frame" x="0.0" y="0.0" width="400" height="487"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="20" width="400" height="516"/>
-                                </variation>
                                 <connections>
                                     <outlet property="dataSource" destination="Hpm-OJ-mEW" id="YkU-fc-Ynh"/>
                                     <outlet property="delegate" destination="Hpm-OJ-mEW" id="ULc-VK-t3W"/>
@@ -3539,6 +3536,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="487"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Rc-5J-I71">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="S4q-Rc-1o5"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="S4q-Rc-1o5"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="S4q-Rc-1o5"/>
+                                    </mask>
+                                </variation>
+                            </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="S6V-kp-QsR">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -3839,36 +3853,50 @@
                         </subviews>
                         <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="1Rc-5J-I71" secondAttribute="trailing" id="1L5-Tf-Hm4"/>
                             <constraint firstAttribute="trailing" secondItem="S6V-kp-QsR" secondAttribute="trailing" id="35G-M2-1Tp"/>
                             <constraint firstItem="S6V-kp-QsR" firstAttribute="leading" secondItem="sgE-PX-xd1" secondAttribute="leading" id="5hy-jF-kwO"/>
                             <constraint firstItem="aDA-EY-rA8" firstAttribute="top" secondItem="S6V-kp-QsR" secondAttribute="bottom" id="8u5-LV-oNE">
                                 <variation key="widthClass=compact" constant="-49"/>
                             </constraint>
+                            <constraint firstItem="1Rc-5J-I71" firstAttribute="leading" secondItem="sgE-PX-xd1" secondAttribute="leading" id="HuT-cu-VV6"/>
                             <constraint firstItem="S6V-kp-QsR" firstAttribute="top" secondItem="1vz-t4-S0t" secondAttribute="bottom" id="Nk3-xk-mQB"/>
+                            <constraint firstItem="S6V-kp-QsR" firstAttribute="top" secondItem="1Rc-5J-I71" secondAttribute="bottom" constant="10" id="fGA-PZ-obH"/>
+                            <constraint firstItem="1Rc-5J-I71" firstAttribute="top" secondItem="1vz-t4-S0t" secondAttribute="bottom" id="hPL-ni-j66"/>
                             <constraint firstItem="S6V-kp-QsR" firstAttribute="top" secondItem="1vz-t4-S0t" secondAttribute="bottom" constant="20" id="q2a-cf-87g"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
+                                <exclude reference="1Rc-5J-I71"/>
                                 <exclude reference="S6V-kp-QsR"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="8u5-LV-oNE"/>
+                                <exclude reference="1L5-Tf-Hm4"/>
+                                <exclude reference="HuT-cu-VV6"/>
+                                <exclude reference="hPL-ni-j66"/>
                                 <exclude reference="35G-M2-1Tp"/>
                                 <exclude reference="5hy-jF-kwO"/>
                                 <exclude reference="Nk3-xk-mQB"/>
+                                <exclude reference="fGA-PZ-obH"/>
                                 <exclude reference="q2a-cf-87g"/>
+                                <exclude reference="8u5-LV-oNE"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
+                                <include reference="1Rc-5J-I71"/>
                                 <include reference="S6V-kp-QsR"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="8u5-LV-oNE"/>
+                                <include reference="1L5-Tf-Hm4"/>
+                                <include reference="HuT-cu-VV6"/>
+                                <include reference="hPL-ni-j66"/>
                                 <include reference="35G-M2-1Tp"/>
                                 <include reference="5hy-jF-kwO"/>
-                                <include reference="Nk3-xk-mQB"/>
+                                <exclude reference="Nk3-xk-mQB"/>
+                                <include reference="fGA-PZ-obH"/>
                                 <exclude reference="q2a-cf-87g"/>
+                                <include reference="8u5-LV-oNE"/>
                             </mask>
                         </variation>
                     </view>
@@ -4263,8 +4291,8 @@
         <segue reference="jqZ-Ew-h2B"/>
         <segue reference="njR-gH-Wm2"/>
         <segue reference="Y2I-Nl-h09"/>
+        <segue reference="UiV-ht-QT3"/>
         <segue reference="Xpw-UC-3s2"/>
-        <segue reference="1op-zI-bbm"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>
