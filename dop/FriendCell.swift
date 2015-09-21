@@ -20,7 +20,7 @@ class FriendCell: UITableViewCell {
         
     }
     
-    func loadItem(title: String, image: NSURL, friend_id: Int) {
+    func loadItem(title title: String, image: NSURL, friend_id: Int) {
         name.text = title
         self.friend_id = friend_id
 
@@ -29,7 +29,7 @@ class FriendCell: UITableViewCell {
         
         Utilities.getDataFromUrl(image) { data in
             dispatch_async(dispatch_get_main_queue()) {
-                //println("Finished downloading \"\(image.lastPathComponent!.stringByDeletingPathExtension)\".")
+//                print("Finished downloading \"\(image.lastPathComponent!.URLByDeletingPathExtension)\".")
                 self.user_image.image = UIImage(data: data!)
             }
         }
