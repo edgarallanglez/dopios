@@ -30,9 +30,14 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate {
         
 //        self.title = "Dashboard"
 //        self.navigationController?.navigationBar.topItem!.title = "Dashboard"
-
         
-        mainScroll.contentSize = CGSizeMake(320, 2000)
+        mainScroll.frame.size = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height)
+        
+        mainScroll.contentSize = CGSizeMake(320, 3000)
+       
+        branchesScroll.frame = CGRectMake(100, 0, mainScroll.frame.size.width, 500)
+    
+        
         branchesScroll.contentSize = CGSizeMake(1000, branchesScroll.frame.size.height)
         
         if self.revealViewController() != nil {
