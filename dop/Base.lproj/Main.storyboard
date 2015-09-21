@@ -1924,40 +1924,24 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DSg-Zx-h98">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
-                                    <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8U5-Xl-KD3">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="544"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8U5-Xl-KD3">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="836"/>
                                         <subviews>
-                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TLJ-Ft-8Jx">
+                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TLJ-Ft-8Jx">
                                                 <rect key="frame" x="-6" y="52" width="414" height="204"/>
-                                                <subviews>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="starbucks_banner.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="0N1-rm-UsG">
-                                                        <rect key="frame" x="67" y="76" width="240" height="128"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="128" id="WrZ-XJ-8AA"/>
-                                                            <constraint firstAttribute="width" constant="240" id="sx1-yF-fOC"/>
-                                                        </constraints>
-                                                    </imageView>
-                                                </subviews>
                                                 <color key="backgroundColor" red="0.78823529410000004" green="0.0" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
-                                                    <constraint firstItem="0N1-rm-UsG" firstAttribute="top" secondItem="TLJ-Ft-8Jx" secondAttribute="top" constant="76" id="FTG-OR-lD5"/>
                                                     <constraint firstAttribute="width" constant="414" id="Mmv-rP-F3d"/>
-                                                    <constraint firstItem="0N1-rm-UsG" firstAttribute="leading" secondItem="TLJ-Ft-8Jx" secondAttribute="leading" constant="68" id="dVB-oW-mR4"/>
-                                                    <constraint firstAttribute="bottom" secondItem="0N1-rm-UsG" secondAttribute="bottom" id="gSm-Ou-VAy"/>
-                                                    <constraint firstAttribute="trailing" secondItem="0N1-rm-UsG" secondAttribute="trailing" constant="106" id="ofI-4c-wZI"/>
                                                     <constraint firstAttribute="height" constant="204" id="s6Z-AZ-H7Z"/>
                                                 </constraints>
                                             </scrollView>
-                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k0x-KH-h2d">
-                                                <rect key="frame" x="21" y="574" width="240" height="128"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" red="0.0" green="0.46902045609999998" blue="0.85242575970000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="544" id="90W-fa-ljB"/>
-                                            <constraint firstItem="TLJ-Ft-8Jx" firstAttribute="leading" secondItem="8U5-Xl-KD3" secondAttribute="leading" constant="-6" id="Qpi-Be-tbu"/>
-                                            <constraint firstItem="TLJ-Ft-8Jx" firstAttribute="top" secondItem="8U5-Xl-KD3" secondAttribute="top" constant="52" id="lyC-g4-NON"/>
+                                            <constraint firstAttribute="height" constant="836" id="0vh-p2-9dE"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="836" id="OkK-cZ-8c3"/>
+                                            <constraint firstItem="TLJ-Ft-8Jx" firstAttribute="leading" secondItem="8U5-Xl-KD3" secondAttribute="leading" id="Qpi-Be-tbu"/>
+                                            <constraint firstItem="TLJ-Ft-8Jx" firstAttribute="top" secondItem="8U5-Xl-KD3" secondAttribute="top" id="lyC-g4-NON"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -2087,7 +2071,6 @@
         <image name="menu" width="22" height="22"/>
         <image name="settings" width="30" height="30"/>
         <image name="star-fav" width="30" height="30"/>
-        <image name="starbucks_banner.jpg" width="628" height="353"/>
         <image name="transparentLogo" width="618" height="482"/>
     </resources>
     <inferredMetricsTieBreakers>
