@@ -48,7 +48,6 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate {
         
         
     
-        var image_:UIImage = UIImage(named: "")!
         
         
         
