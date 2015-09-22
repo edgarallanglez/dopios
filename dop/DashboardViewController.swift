@@ -111,6 +111,7 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
             dispatch_async(dispatch_get_main_queue(), {
                 print(json)
                 self.reloadBranchCarousel()
+                self.pageControl.numberOfPages = self.branches.count
             });
         }
     }
