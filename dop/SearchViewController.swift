@@ -133,7 +133,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         searchActive = false;
         timer?.invalidate()
         
-        var searchText = searchBar.text
+        let searchText = searchBar.text
         
         if(searchText != ""){
             search()
