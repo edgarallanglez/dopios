@@ -111,6 +111,7 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
             dispatch_async(dispatch_get_main_queue(), {
                 print(json)
                 self.reloadBranchCarousel()
+                self.pageControl.numberOfPages = self.branches.count
             });
         }
     }
@@ -407,6 +408,15 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
                 
             }*/
         }
+        
+    }
+    @IBAction func goToPage(sender: AnyObject) {
+    
+        let page = branchesScroll.frame.size.width * CGFloat(pageControl.currentPage)
+
+
+        branchesScroll.setContentOffset(CGPointMake(page, 0), animated: true)
+            
         
     }
 
