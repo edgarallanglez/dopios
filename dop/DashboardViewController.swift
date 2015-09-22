@@ -8,21 +8,26 @@
 
 import UIKit
 
-class DashboardViewController: UIViewController, CLLocationManagerDelegate {
+class DashboardViewController: UIViewController, CLLocationManagerDelegate, UIScrollViewDelegate {
     
     @IBOutlet weak var menuButton:UIBarButtonItem!
 
     @IBOutlet var mainScroll: UIScrollView!
     
+    @IBOutlet var pageControlContainer: UIView!
+    @IBOutlet var pageControl: UIPageControl!
     @IBOutlet var branchesScroll: UIScrollView!
     var locValue:CLLocationCoordinate2D?
 
     var coupons = [Coupon]()
     
+    var branches = [Branch]()
+
     var cachedImages: [String: UIImage] = [:]
 
     var locationManager: CLLocationManager!
-
+    
+    var timer:NSTimer? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,10 +40,8 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate {
         
         mainScroll.contentSize = CGSizeMake(320, 3000)
        
-        branchesScroll.frame = CGRectMake(100, 0, mainScroll.frame.size.width, 500)
     
         
-        branchesScroll.contentSize = CGSizeMake(1000, branchesScroll.frame.size.height)
         
         if self.revealViewController() != nil {
             menuButton.target = self.revealViewController()
@@ -47,9 +50,9 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate {
         }
         
         
-    
         
         
+
         
       //  var nib = UINib(nibName: "CouponCell", bundle: nil)
      // couponsTableView.registerNib(nib, forCellReuseIdentifier: "CouponCell")
@@ -63,34 +66,124 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate {
         
         getTopBranches()
         
+        branchesScroll.delegate = self
+        
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
+
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        let pagenumber=Int(branchesScroll.contentOffset.x / branchesScroll.frame.size.width)
+        pageControl.currentPage = pagenumber
+
+    }
+    func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {
+        let pagenumber=Int(branchesScroll.contentOffset.x / branchesScroll.frame.size.width)
+        pageControl.currentPage = pagenumber
+    }
+    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+        timer?.invalidate()
+    }
+    func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        timer = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "changePage", userInfo: nil, repeats: true)
+    }
     func getTopBranches() {
         DashboardController.getDashboardBranchesWithSuccess { (branchesData) -> Void in
             let json = JSON(data: branchesData)
             
             for (_, subJson): (String, JSON) in json["data"] {
-                var branch_id = subJson["branch_id"].int
+                let branch_id = subJson["branch_id"].int
                 let branch_name = subJson["name"].string
- 
+                let company_id = subJson["company_id"].int
+                let banner = subJson["banner"].string
                 
-               /* let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id:branch_id)
                 
-                self.coupons.append(model)
+                let model = Branch(id: branch_id, name: branch_name, logo: "", banner: banner,company_id: company_id, total_likes: 0, user_like: 0, latitude: 0.0, longitude: 0.0)
+
                 
-                println(coupon_name)
-                namex = String(coupon_name)*/
+                self.branches.append(model)
+                
             }
             
             dispatch_async(dispatch_get_main_queue(), {
-                //self.couponsTableView.reloadData()
                 print(json)
+                self.reloadBranchCarousel()
             });
         }
+    }
+    func reloadBranchCarousel(){
+        timer = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "changePage", userInfo: nil, repeats: true)
+
+        
+        
+        for (index, branch) in branches.enumerate() {
+            let scrollWidth = branchesScroll.frame.size.width
+            let scrollHeight = branchesScroll.frame.size.height
+            let actualX = branchesScroll.frame.size.width * CGFloat(index)
+            let margin:CGFloat = 20.0
+            
+            let branchNameLbl:UILabel = UILabel(frame: CGRectMake(margin+actualX, 80, scrollWidth/2, 75))
+            branchNameLbl.textColor = UIColor.whiteColor()
+            branchNameLbl.font = UIFont(name: "Montserrat-Regular", size: 26)
+            branchNameLbl.text = branch.name.uppercaseString
+            branchNameLbl.numberOfLines = 2
+            branchNameLbl.layer.shadowOffset = CGSize(width: 3, height: 3)
+            branchNameLbl.layer.shadowOpacity = 0.6
+            branchNameLbl.layer.shadowRadius = 1
+
+            
+            
+            let imageView:UIImageView = UIImageView(frame: CGRectMake(actualX, 0, scrollWidth, scrollHeight))
+            
+            
+            
+            let imageUrl = NSURL(string: "\(Utilities.dopImagesURL)\(branch.company_id)/\(branch.banner)")
+            
+            Utilities.getDataFromUrl(imageUrl!) { photo in
+                dispatch_async(dispatch_get_main_queue()) {
+                    let imageData: NSData = NSData(data: photo!)
+                    imageView.image = UIImage(data: imageData)
+                    UIView.animateWithDuration(0.5, animations: {
+                        //cell.branch_banner.alpha = 1
+                    })
+                    
+                }
+            }
+            
+            imageView.contentMode = UIViewContentMode.ScaleAspectFill
+            branchesScroll.addSubview(imageView)
+            
+        
+            branchesScroll.addSubview(branchNameLbl)
+
+            print("Item \(index): \(branch.id)")
+        }
+        
+        branchesScroll.contentSize = CGSizeMake(branchesScroll.frame.size.width*CGFloat(branches.count), branchesScroll.frame.size.height)
+        
+        pageControlContainer.layer.cornerRadius = 4
+        pageControlContainer.layer.masksToBounds = true
+        
+    }
+    func changePage(){
+        let width = branchesScroll.frame.size.width
+        let page = branchesScroll.contentOffset.x + width
+        
+        
+
+        /*let pagenumber=Int(branchesScroll.bounds.size.width / branchesScroll.contentOffset.x)
+        pageControl.currentPage = pagenumber*/
+        
+        if(branchesScroll.contentSize.width<=page){
+            branchesScroll.setContentOffset(CGPointMake(0, 0), animated: true)
+        }else{
+            branchesScroll.setContentOffset(CGPointMake(page, 0), animated: true)
+            
+        }
+
     }
     func getCoupons() {
         coupons = [Coupon]()
