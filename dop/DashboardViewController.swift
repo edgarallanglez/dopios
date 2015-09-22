@@ -409,5 +409,14 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
         }
         
     }
+    @IBAction func goToPage(sender: AnyObject) {
+    
+        let page = branchesScroll.frame.size.width * CGFloat(pageControl.currentPage)
+
+
+        branchesScroll.setContentOffset(CGPointMake(page, 0), animated: true)
+            
+        
+    }
 
 }
