@@ -11,6 +11,8 @@ import UIKit
 class PromoViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIAlertViewDelegate {
     
     @IBOutlet weak var CouponsCollectionView: UICollectionView!    
+    @IBOutlet weak var emptyMessage: UILabel!
+    @IBOutlet weak var promoSegmentedController: PromoSegmentedController!
 
     private let reuseIdentifier = "PromoCell"
     var coupons = [Coupon]()
@@ -48,7 +50,11 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
         // Add infinite scroll handler
         CouponsCollectionView.addInfiniteScrollWithHandler { [weak self] (scrollView) -> Void in
                 if(!self!.coupons.isEmpty){
-                    self!.getCouponsWithOffset()
+                    if self!.promoSegmentedController.selectedIndex == 1 {
+                        self!.getTakenCouponsWithOffset()
+                    } else {
+                        self!.getCouponsWithOffset()
+                    }
                 }
         }
     }
@@ -58,7 +64,11 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
     }
     
     func refresh(sender:AnyObject) {
-        getCoupons()
+        if promoSegmentedController.selectedIndex == 1 {
+            getTakenCoupons()
+        } else {
+            getCoupons()
+        }
     }
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -140,7 +150,7 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
                 let json = JSON(data: couponsData)
             
                 for (_, subJson): (String, JSON) in json["data"]{
-                    var coupon_id = subJson["coupon_id"].int
+                    let coupon_id = subJson["coupon_id"].int
                     let coupon_name = subJson["name"].string
                     let coupon_description = subJson["description"].string
                     let coupon_limit = subJson["limit"].string
@@ -160,6 +170,7 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
                 
                 dispatch_async(dispatch_get_main_queue(), {
                     self.CouponsCollectionView.reloadData()
+                    self.emptyMessage.hidden = true
                     self.CouponsCollectionView.alwaysBounceVertical = true
                     self.refreshControl.endRefreshing()
                     self.offset = self.limit - 1
@@ -181,14 +192,117 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
         var newData:Bool = false
         var addedValues:Int = 0
         
-        var firstCoupon = self.coupons.first as Coupon!
+        let firstCoupon = self.coupons.first as Coupon!
         
         CouponController.getAllCouponsOffsetWithSuccess(firstCoupon.id,offset: offset,
             success: { (couponsData) -> Void in
                 let json = JSON(data: couponsData)
                 
-                for (index, subJson): (String, JSON) in json["data"]{
-                    var coupon_id = subJson["coupon_id"].int!
+                for (_, subJson): (String, JSON) in json["data"]{
+                    let coupon_id = subJson["coupon_id"].int!
+                    let coupon_name = subJson["name"].string!
+                    let coupon_description = subJson["description"].string!
+                    let coupon_limit = subJson["limit"].string
+                    let coupon_exp = "2015-09-30"
+                    let coupon_logo = subJson["logo"].string!
+                    let branch_id = subJson["branch_id"].int!
+                    let company_id = subJson["company_id"].int!
+                    let total_likes = subJson["total_likes"].int!
+                    let user_like = subJson["user_like"].int!
+                    let latitude = subJson["latitude"].double!
+                    let longitude = subJson["longitude"].double!
+                    
+                    
+                    let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude)
+                    
+                    self.coupons.append(model)
+                    
+                    newData = true
+                    addedValues++
+                    
+                }
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.CouponsCollectionView.reloadData()
+                    self.emptyMessage.hidden = true
+                    self.CouponsCollectionView.alwaysBounceVertical = true
+                    self.CouponsCollectionView.finishInfiniteScroll()
+                    
+                    if(newData){
+                        self.offset+=addedValues
+                    }
+                    /*if(addedValues<6 || !newData){
+                        self.CouponsCollectionView.removeInfiniteScroll()
+                    }*/
+                });
+            },
+            failure: { (error) -> Void in
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.CouponsCollectionView.finishInfiniteScroll()
+                })
+        })
+    }
+    
+    func getTakenCoupons() {
+        coupons.removeAll()
+        cachedImages.removeAll()
+        
+        CouponController.getAllTakenCouponsWithSuccess(limit,
+            success: { (couponsData) -> Void in
+                let json = JSON(data: couponsData)
+                
+                for (_, subJson): (String, JSON) in json["data"]{
+                    let coupon_id = subJson["coupon_id"].int
+                    let coupon_name = subJson["name"].string
+                    let coupon_description = subJson["description"].string
+                    let coupon_limit = subJson["limit"].string
+                    let coupon_exp = "2015-09-30"
+                    let coupon_logo = subJson["logo"].string
+                    let branch_id = subJson["branch_id"].int
+                    let company_id = subJson["company_id"].int
+                    let total_likes = subJson["total_likes"].int
+                    let user_like = subJson["user_like"].int
+                    let latitude = subJson["latitude"].double!
+                    let longitude = subJson["longitude"].double!
+                    
+                    let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude)
+                    
+                    self.coupons.append(model)
+                }
+                
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.CouponsCollectionView.reloadData()
+                    self.emptyMessage.hidden = true
+                    self.CouponsCollectionView.alwaysBounceVertical = true
+                    self.refreshControl.endRefreshing()
+                    self.offset = self.limit - 1
+                    
+                });
+            },
+            
+            failure: { (error) -> Void in
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.CouponsCollectionView.reloadData()
+                    self.emptyMessage.hidden = false
+                    self.refreshControl.endRefreshing()
+                })
+        })
+        
+        
+    }
+    
+    func getTakenCouponsWithOffset() {
+        
+        var newData:Bool = false
+        var addedValues:Int = 0
+        
+        let firstCoupon = self.coupons.first as Coupon!
+        
+        CouponController.getAllTakenCouponsOffsetWithSuccess(firstCoupon.id,offset: offset,
+            success: { (couponsData) -> Void in
+                let json = JSON(data: couponsData)
+                
+                for (_, subJson): (String, JSON) in json["data"]{
+                    let coupon_id = subJson["coupon_id"].int!
                     let coupon_name = subJson["name"].string!
                     let coupon_description = subJson["description"].string!
                     let coupon_limit = subJson["limit"].string
@@ -219,7 +333,7 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
                         self.offset+=addedValues
                     }
                     /*if(addedValues<6 || !newData){
-                        self.CouponsCollectionView.removeInfiniteScroll()
+                    self.CouponsCollectionView.removeInfiniteScroll()
                     }*/
                 });
             },
@@ -246,6 +360,18 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
             }
         }
     }
+    
+    @IBAction func setPromoCollectionView(sender: PromoSegmentedController) {
+        switch promoSegmentedController.selectedIndex {
+        case 0:
+            getCoupons()
+        case 1:
+            getTakenCoupons()
+        default:
+            print("default")
+        }
+    }
+    
  
     
 

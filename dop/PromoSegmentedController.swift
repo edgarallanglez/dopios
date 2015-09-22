@@ -25,13 +25,13 @@ import UIKit
         }
     }
     
-    @IBInspectable var selectedLabelColor : UIColor = UIColor.whiteColor() {
+    @IBInspectable var selectedLabelColor : UIColor = UIColor.darkGrayColor() {
         didSet {
             setSelectedColors()
         }
     }
     
-    @IBInspectable var unselectedLabelColor : UIColor = Utilities.dopColor {
+    @IBInspectable var unselectedLabelColor : UIColor = UIColor.lightGrayColor() {
         didSet {
             setSelectedColors()
         }
@@ -70,7 +70,7 @@ import UIKit
         
         //        layer.cornerRadius = frame.height / 2
         //        layer.borderColor = Utilities.dopColor.CGColor //UIColor(white: 1.0, alpha: 0.5).CGColor
-        backgroundColor = UIColor.clearColor()
+        backgroundColor = UIColor.whiteColor()
         
         setupLabels()
         
@@ -111,7 +111,7 @@ import UIKit
         selectFrame.size.width = newWidth
         thumbView.frame = selectFrame
         let background = thumbColor
-        background.frame = thumbView.bounds
+        background.frame = CGRectMake(0, 47, newWidth, 3)
         thumbView.layer.insertSublayer(background, atIndex: 0)
         //        thumbView.layer.cornerRadius = thumbView.frame.height / 2
         
@@ -139,7 +139,7 @@ import UIKit
     }
     
     func displayNewSelectedIndex(){
-        for (index, item) in labels.enumerate() {
+        for (_, item) in labels.enumerate() {
             item.textColor = unselectedLabelColor
         }
         
@@ -155,7 +155,7 @@ import UIKit
     
     func addIndividualItemConstraints(items: [UIView], mainView: UIView, padding: CGFloat) {
         
-        let constraints = mainView.constraints
+        let _ = mainView.constraints
         
         for (index, button) in items.enumerate() {
             
