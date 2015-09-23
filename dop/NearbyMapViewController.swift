@@ -9,7 +9,7 @@
 import Foundation
 import MapKit
 
-class NearbyMapViewController: UIViewController, CLLocationManagerDelegate {
+class NearbyMapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
  
     @IBOutlet weak var currentLocationLbl: UIButton!
@@ -26,7 +26,7 @@ class NearbyMapViewController: UIViewController, CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         Utilities.filterArray.removeAll()
-        
+        nearbyMap.delegate = self
 //        topBorder.layer.borderWidth = (1.0 / UIScreen.mainScreen.scale) / 2
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "getNearestBranches", name: "filtersChanged", object: nil)
@@ -99,17 +99,21 @@ class NearbyMapViewController: UIViewController, CLLocationManagerDelegate {
         print(params, terminator: "")
         NearbyMapController.getNearestBranches(params, success: {(branchesData) -> Void in
             let json = JSON(data: branchesData)
-            print(json["data"].count, terminator: "")
-            for (_, location) in json["data"] {
-                let latitude = location["latitude"].double
-                let longitude = location["longitude"].double
+            for (_, branch) in json["data"] {
+                let latitude = branch["latitude"].double
+                let longitude = branch["longitude"].double
                 
                 let newLocation = CLLocationCoordinate2DMake(latitude!, longitude!)
                 dispatch_async(dispatch_get_main_queue()) {
                     // Drop a pin
-                    let dropPin = MKPointAnnotation()
-                    dropPin.coordinate = newLocation
-                    dropPin.title = location["name"].string
+                    let dropPin : Annotation = Annotation(coordinate: newLocation, title: branch["name"].string!, subTitle: "Los mejores")
+                    if branch["category_id"].int! == 1 {
+                        dropPin.typeOfAnnotation = "marker-food-icon"
+                    } else if branch["category_id"].int! == 2 {
+                        dropPin.typeOfAnnotation = "marker-services-icon"
+                    } else if branch["category_id"].int! == 3 {
+                        dropPin.typeOfAnnotation = "marker-entertainment-icon"
+                    }
                     self.annotationArray.append(dropPin)
                     self.nearbyMap.addAnnotation(dropPin)
                 }
@@ -117,6 +121,24 @@ class NearbyMapViewController: UIViewController, CLLocationManagerDelegate {
             },
             failure:{(branchesData)-> Void in
         })
+    }
+    
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView?{
+        let reuseId = "custom"
+        var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId)
+        if mapView.userLocation == annotation as! NSObject { return nil }
+        if (annotationView == nil) {
+            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            annotationView!.canShowCallout = true
+            
+        } else {
+            annotationView?.annotation = annotation
+        }
+        
+        let customAnnotation = annotation as! Annotation
+        annotationView!.image = UIImage(named: customAnnotation.typeOfAnnotation)
+        
+        return annotationView
     }
     
 
