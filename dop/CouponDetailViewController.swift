@@ -163,14 +163,14 @@ class CouponDetailViewController: UIViewController, UITableViewDelegate, UITable
             success: { (peopleData) -> Void in
                 let json = JSON(data: peopleData)
             
-                for (index, subJson): (String, JSON) in json["data"] {
-                    var client_coupon_id = subJson["clients_coupon_id"].int
-                    var friend_id = subJson["friends_id"].string
-                    var exchange_date = subJson["exchange_date"].string
-                    var main_image = subJson["main_image"].string
-                    var names = subJson["names"].string
+                for (_, subJson): (String, JSON) in json["data"] {
+                    let client_coupon_id = subJson["clients_coupon_id"].int
+                    let friend_id = subJson["friends_id"].string
+                    let exchange_date = subJson["exchange_date"].string
+                    let main_image = subJson["main_image"].string
+                    let names = subJson["names"].string
                 
-                    var longitude = subJson["longitude"].string
+                    let longitude = subJson["longitude"].string
                     let latitude = subJson["latitude"].string
                     let branch_id =  subJson["branch_id" ].int
                     let coupon_id =  subJson["coupon_id"].string

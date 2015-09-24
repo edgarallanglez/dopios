@@ -19,7 +19,10 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
     var coupons = [Coupon]()
     var json: JSON!
     var headerTopView: BranchProfileTopView = BranchProfileTopView()
+    var aboutView: BranchProfileAboutView = BranchProfileAboutView()
     var selectedIndex: Int = 0
+    var dropPin: Annotation!
+    var branchPin: CLLocation!
 
     
     override func viewDidLoad() {
@@ -33,13 +36,17 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
         let campaignNib = UINib(nibName: "BranchProfileLastCampaign", bundle: nil)
         tableView.registerNib(campaignNib, forCellReuseIdentifier: "BranchProfileLastCampaign")
         headerTopView = (NSBundle.mainBundle().loadNibNamed("BranchProfileTopView", owner: self, options: nil)[0] as? BranchProfileTopView)!
+        
+        aboutView = (NSBundle.mainBundle().loadNibNamed("BranchProfileAboutView", owner: self, options: nil)[0] as? BranchProfileAboutView)!
+
         headerTopView.branchId = branchId
+        getBranchProfile()
         
 //      branchLogo.image = self.logo
     }
     
     override func viewDidAppear(animated: Bool) {
-//        getBranchProfile()
+//        self.aboutView.centerMapOnLocation(self.branchPin)
    }
     
 
@@ -52,22 +59,29 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
             let latitude = json["latitude"].double
             let longitude = json["longitude"].double
             
-            let branchPin = CLLocation(latitude: latitude!, longitude: longitude!)
-            var newLocation = CLLocationCoordinate2DMake(latitude!, longitude!)
+            self.branchPin = CLLocation(latitude: latitude!, longitude: longitude!)
+            let newLocation = CLLocationCoordinate2DMake(latitude!, longitude!)
+            self.aboutView.branchPin = self.branchPin
             
             dispatch_async(dispatch_get_main_queue(), {
-//                self.branchName.text = json["name"].string
-//                var dropPin = MKPointAnnotation()
-//                dropPin.coordinate = newLocation
-//                self.branchLocationMap.addAnnotation(dropPin)
-//                self.centerMapOnLocation(branchPin)
+                self.headerTopView.branchName.text = json["name"].string
+                self.dropPin = Annotation(coordinate: newLocation, title: json["name"].string!, subTitle: "nada")
+                if json["category_id"].int! == 1 {
+                    self.dropPin.typeOfAnnotation = "marker-food-icon"
+                } else if json["category_id"].int! == 2 {
+                    self.dropPin.typeOfAnnotation = "marker-services-icon"
+                } else if json["category_id"].int! == 3 {
+                    self.dropPin.typeOfAnnotation = "marker-entertainment-icon"
+                }
+                self.tableView.reloadData()
+                
             })
         })
     }
     
     func getBranchCouponTimeline() {
         coupons = [Coupon]()
-        BranchProfileController.getBranchCouponTimeline(1, success: { (couponsData) -> Void in
+        BranchProfileController.getBranchCouponTimeline(branchId, success: { (couponsData) -> Void in
             let json = JSON(data: couponsData)
             
             print(json)
@@ -163,14 +177,16 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
 
             let cell: BranchProfileAboutView = tableView.dequeueReusableCellWithIdentifier("BranchProfileAboutView", forIndexPath: indexPath) as! BranchProfileAboutView
         
-            let initialLocation = CLLocation(latitude: 24.815471, longitude: -107.397844)
-            cell.loadAbout("Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. ", branchLocation: initialLocation)
+            cell.loadAbout("Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. ")
             cell.selectionStyle = UITableViewCellSelectionStyle.None
+            if self.branchPin != nil {
+                cell.branchLocationMap.addAnnotation(dropPin)
+                cell.centerMapOnLocation(self.branchPin)
+            }
             return cell
             
         case 1:
             let cellCampaign: BranchProfileLastCampaign = tableView.dequeueReusableCellWithIdentifier("BranchProfileLastCampaign", forIndexPath: indexPath) as! BranchProfileLastCampaign
-            var initialLocation = CLLocation(latitude: 24.815471, longitude: -107.397844)
             tableView.estimatedRowHeight = 150
             tableView.rowHeight = UITableViewAutomaticDimension
             return cellCampaign
@@ -178,7 +194,6 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
         case 2:
             var cell: BranchProfileAboutView = tableView.dequeueReusableCellWithIdentifier("BranchProfileAboutView", forIndexPath: indexPath) as! BranchProfileAboutView
             
-            var initialLocation = CLLocation(latitude: 24.815471, longitude: -107.397844)
         default:
             return defaultCell
         }

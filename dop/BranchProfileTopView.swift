@@ -11,6 +11,7 @@ import UIKit
 class BranchProfileTopView: UIView {
     
     @IBOutlet weak var branchCover: UIImageView!
+    @IBOutlet weak var branchName: UILabel!
     @IBOutlet weak var branchLogo: UIImageView!
     @IBOutlet weak var branchProfileSegmented: SegmentedControl!
     var branchId:Int!

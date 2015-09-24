@@ -229,7 +229,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
     
     // Social login Call
     func socialLogin(type: String, params: [String:String]!){
-        print("\(Utilities.dopURL)api/user/login/"+type)
+        print("\(Utilities.dopURL)user/login/"+type)
         
         LoginController.loginWithSocial("\(Utilities.dopURL)user/login/" + type, params: params,
             success:{ (loginData) -> Void in

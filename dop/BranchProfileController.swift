@@ -33,7 +33,7 @@ class BranchProfileController {
         Utilities.sendDataToURL(NSURL(string: url)!, method:"POST", params: params, completion: {(data, error) -> Void in
             if let urlData = data {
                 succeed(branchData: urlData)
-            }else{
+            } else {
                 errorFound(branchData: error)
             }
         })

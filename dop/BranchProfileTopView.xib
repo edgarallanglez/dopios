@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Montserrat-Light.otf">
+            <string>Montserrat-Light</string>
             <string>Montserrat-Light</string>
         </mutableArray>
     </customFonts>
@@ -15,7 +17,7 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="285"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="starbucks_banner.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="x9r-hb-NOG" userLabel="backgroundImage">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="starbucks_banner.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="x9r-hb-NOG" userLabel="backgroundImage">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="230"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="230" id="W2w-57-Wzt"/>
@@ -28,10 +30,10 @@
                     </variation>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="starbucks.gif" translatesAutoresizingMaskIntoConstraints="NO" id="ph0-mH-WMX">
-                    <rect key="frame" x="15" y="130" width="80" height="80"/>
+                    <rect key="frame" x="250" y="30" width="100" height="100"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="80" id="e63-80-gLe"/>
-                        <constraint firstAttribute="width" constant="80" id="mNB-p1-Qd3"/>
+                        <constraint firstAttribute="height" constant="100" id="e63-80-gLe"/>
+                        <constraint firstAttribute="width" constant="100" id="mNB-p1-Qd3"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -70,27 +72,44 @@
                         <action selector="followBranch:" destination="iN0-l3-epB" eventType="touchUpInside" id="D1E-uO-B8g"/>
                     </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Starbucks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j1t-e9-jfI">
+                    <rect key="frame" x="227" y="140" width="146" height="37"/>
+                    <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="30"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                    <color key="shadowColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="O7C-iJ-66i" secondAttribute="trailing" id="4dJ-mI-Ol7"/>
                 <constraint firstItem="x9r-hb-NOG" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="4pP-XN-JvK"/>
                 <constraint firstItem="vnf-zr-owF" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="189" id="6JV-lv-tJ4"/>
-                <constraint firstItem="vnf-zr-owF" firstAttribute="leading" secondItem="ph0-mH-WMX" secondAttribute="trailing" constant="405" id="D0k-kK-RSx"/>
+                <constraint firstItem="j1t-e9-jfI" firstAttribute="top" secondItem="ph0-mH-WMX" secondAttribute="bottom" constant="10" id="D40-Me-u7M"/>
                 <constraint firstItem="O7C-iJ-66i" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="E0D-fk-pJH"/>
-                <constraint firstItem="ph0-mH-WMX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="Lkt-T3-c0b"/>
+                <constraint firstItem="j1t-e9-jfI" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="OLq-vQ-aJW"/>
                 <constraint firstAttribute="trailing" secondItem="vnf-zr-owF" secondAttribute="trailing" constant="13" id="QoB-WZ-Lbi"/>
+                <constraint firstItem="ph0-mH-WMX" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Rwh-DV-in3"/>
                 <constraint firstItem="O7C-iJ-66i" firstAttribute="top" secondItem="vnf-zr-owF" secondAttribute="bottom" constant="13" id="UGj-Rz-obN"/>
-                <constraint firstItem="ph0-mH-WMX" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="130" id="dbd-NR-eWg"/>
                 <constraint firstItem="x9r-hb-NOG" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="eda-bk-Dna"/>
+                <constraint firstItem="ph0-mH-WMX" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="f8Z-cS-lgm"/>
                 <constraint firstItem="O7C-iJ-66i" firstAttribute="top" secondItem="x9r-hb-NOG" secondAttribute="bottom" id="iu8-Fa-YKp"/>
+                <constraint firstItem="ph0-mH-WMX" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="30" id="muR-hO-rIb"/>
                 <constraint firstAttribute="trailing" secondItem="x9r-hb-NOG" secondAttribute="trailing" id="orZ-am-iW0"/>
                 <constraint firstAttribute="centerX" secondItem="x9r-hb-NOG" secondAttribute="centerX" id="vbp-hG-tVN"/>
+                <constraint firstItem="ph0-mH-WMX" firstAttribute="centerY" secondItem="x9r-hb-NOG" secondAttribute="centerY" id="wGP-T3-5kQ"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="f8Z-cS-lgm"/>
+                    <exclude reference="wGP-T3-5kQ"/>
+                </mask>
+            </variation>
             <connections>
                 <outlet property="branchCover" destination="x9r-hb-NOG" id="PpQ-ss-qd6"/>
                 <outlet property="branchLogo" destination="ph0-mH-WMX" id="ypX-gR-mxr"/>
+                <outlet property="branchName" destination="j1t-e9-jfI" id="wF6-hp-wYu"/>
                 <outlet property="branchProfileSegmented" destination="O7C-iJ-66i" id="xGG-ge-O59"/>
             </connections>
             <point key="canvasLocation" x="230" y="33.5"/>
