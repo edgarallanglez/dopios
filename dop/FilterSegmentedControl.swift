@@ -25,13 +25,13 @@ import UIKit
         }
     }
     
-    @IBInspectable var selectedLabelColor : UIColor = UIColor.whiteColor() {
+    @IBInspectable var selectedLabelColor : UIColor = UIColor.darkGrayColor() {
         didSet {
             setSelectedColors()
         }
     }
     
-    @IBInspectable var unselectedLabelColor : UIColor = Utilities.dopColor {
+    @IBInspectable var unselectedLabelColor : UIColor = UIColor.lightGrayColor() {
         didSet {
             setSelectedColors()
         }
@@ -111,7 +111,7 @@ import UIKit
         selectFrame.size.width = newWidth
         thumbView.frame = selectFrame
         let background = thumbColor
-        background.frame = thumbView.bounds
+        background.frame = CGRectMake(0, 47, newWidth, 3)
         thumbView.layer.insertSublayer(background, atIndex: 0)
         //        thumbView.layer.cornerRadius = thumbView.frame.height / 2
         
@@ -146,10 +146,10 @@ import UIKit
         let label = labels[selectedIndex]
         label.textColor = selectedLabelColor
         
-        UIView.animateWithDuration(0.5, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.8, options: [], animations: {
-            
+        UIView.animateWithDuration(0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 0.8, options: [], animations: {
+        
             self.thumbView.frame = label.frame
-            
+        
             }, completion: nil)
     }
     
