@@ -25,6 +25,7 @@
 		9D697C7A1B5EF13000D786AA /* iconfonts-fontawesome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D697C791B5EF13000D786AA /* iconfonts-fontawesome.swift */; };
 		9D9C1B2B1B83B0D900F7895B /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D9C1B2A1B83B0D900F7895B /* FBSDKShareKit.framework */; };
 		9D9C1B2D1B83B3DB00F7895B /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D9C1B2C1B83B3DB00F7895B /* FBSDKCoreKit.framework */; };
+		9D9C9C911BB2155B00D9F986 /* Annotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9C9C901BB2155B00D9F986 /* Annotation.swift */; settings = {ASSET_TAGS = (); }; };
 		9D9D1FF11B9F4BE3000C1299 /* starbucks_banner.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A060F77D1B700355009D6ADB /* starbucks_banner.jpg */; };
 		9DA3C8961B90C117000D40F2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9DA3C8951B90C117000D40F2 /* Images.xcassets */; };
 		9DA7AA9F1B50309400297690 /* BranchProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA7AA9E1B50309400297690 /* BranchProfileController.swift */; };
@@ -144,6 +145,7 @@
 		9D697C791B5EF13000D786AA /* iconfonts-fontawesome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "iconfonts-fontawesome.swift"; sourceTree = "<group>"; };
 		9D9C1B2A1B83B0D900F7895B /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = dop/FBSDKShareKit.framework; sourceTree = "<group>"; };
 		9D9C1B2C1B83B3DB00F7895B /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = dop/FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		9D9C9C901BB2155B00D9F986 /* Annotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Annotation.swift; sourceTree = "<group>"; };
 		9DA3C8951B90C117000D40F2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		9DA7AA9E1B50309400297690 /* BranchProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BranchProfileController.swift; sourceTree = "<group>"; };
 		9DA85CFC1B82587E009DA186 /* BranchProfileLastCampaign.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BranchProfileLastCampaign.swift; sourceTree = "<group>"; };
@@ -318,6 +320,7 @@
 		9D0C16821B4DC6AE0088DE2F /* BranchProfile */ = {
 			isa = PBXGroup;
 			children = (
+				9D1FCED61B79295700F42F6D /* SegmentedControl.swift */,
 				9D0C16831B4DC6EB0088DE2F /* BranchProfileViewController.swift */,
 				A086ACDE1BB09496003133BA /* Branch.swift */,
 				9DA7AA9E1B50309400297690 /* BranchProfileController.swift */,
@@ -339,6 +342,7 @@
 				9D0DB4701B17D2DB0009FE6C /* NearbyMapViewController.swift */,
 				9DB612191B192FCC004B8DB8 /* NearbyMapController.swift */,
 				9DACBBF81BA8CE0200CAEECB /* FilterSegmentedControl.swift */,
+				9D9C9C901BB2155B00D9F986 /* Annotation.swift */,
 			);
 			name = Nearby;
 			sourceTree = "<group>";
@@ -374,7 +378,6 @@
 				A060F78D1B72B475009D6ADB /* CouponDetailView.swift */,
 				A060F7851B702FAC009D6ADB /* CouponDetailViewController.swift */,
 				9D697C791B5EF13000D786AA /* iconfonts-fontawesome.swift */,
-				9D1FCED61B79295700F42F6D /* SegmentedControl.swift */,
 				A09AB4E11AF99136004287F7 /* SwiftyJSON.swift */,
 				A0578C621B0E7D2B0033B5BD /* UserProfileController.swift */,
 				A0578C631B0E7D2B0033B5BD /* UserProfileViewController.swift */,
@@ -746,6 +749,7 @@
 				A082F4831B18CEE6001C8C52 /* NewsfeedViewController.swift in Sources */,
 				9DACBBF91BA8CE0200CAEECB /* FilterSegmentedControl.swift in Sources */,
 				9DE55C441BB07C0A005F9776 /* PromoSegmentedController.swift in Sources */,
+				9D9C9C911BB2155B00D9F986 /* Annotation.swift in Sources */,
 				A0F7E9201AFAE48500A4F0F2 /* CouponCell.swift in Sources */,
 				9DA85CFD1B82587E009DA186 /* BranchProfileLastCampaign.swift in Sources */,
 				A0FCF9D81B98D59200BB4537 /* SearchViewController.swift in Sources */,
