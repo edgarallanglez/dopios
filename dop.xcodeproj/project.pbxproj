@@ -74,6 +74,7 @@
 		A082F48A1B1920F8001C8C52 /* NewsfeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A082F4881B1920F8001C8C52 /* NewsfeedCell.swift */; };
 		A082F48B1B1920F8001C8C52 /* NewsfeedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A082F4891B1920F8001C8C52 /* NewsfeedCell.xib */; };
 		A086ACDF1BB09496003133BA /* Branch.swift in Sources */ = {isa = PBXBuildFile; fileRef = A086ACDE1BB09496003133BA /* Branch.swift */; settings = {ASSET_TAGS = (); }; };
+		A086ACE11BB2157A003133BA /* TrendingCoupon.xib in Resources */ = {isa = PBXBuildFile; fileRef = A086ACE01BB2157A003133BA /* TrendingCoupon.xib */; settings = {ASSET_TAGS = (); }; };
 		A09AB4DB1AF95A26004287F7 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09AB4DA1AF95A26004287F7 /* DashboardViewController.swift */; };
 		A09AB4E21AF99136004287F7 /* CouponController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09AB4E01AF99136004287F7 /* CouponController.swift */; };
 		A09AB4E31AF99136004287F7 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09AB4E11AF99136004287F7 /* SwiftyJSON.swift */; };
@@ -193,6 +194,7 @@
 		A082F4881B1920F8001C8C52 /* NewsfeedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsfeedCell.swift; sourceTree = "<group>"; };
 		A082F4891B1920F8001C8C52 /* NewsfeedCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsfeedCell.xib; sourceTree = "<group>"; };
 		A086ACDE1BB09496003133BA /* Branch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Branch.swift; sourceTree = "<group>"; };
+		A086ACE01BB2157A003133BA /* TrendingCoupon.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TrendingCoupon.xib; sourceTree = "<group>"; };
 		A09AB4DA1AF95A26004287F7 /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		A09AB4E01AF99136004287F7 /* CouponController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CouponController.swift; sourceTree = "<group>"; };
 		A09AB4E11AF99136004287F7 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
@@ -482,6 +484,7 @@
 		A065EB301BA8E413003B7390 /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
+				A086ACE01BB2157A003133BA /* TrendingCoupon.xib */,
 				A065EB311BA8E60A003B7390 /* DashboardController.swift */,
 				A09AB4DA1AF95A26004287F7 /* DashboardViewController.swift */,
 			);
@@ -660,6 +663,7 @@
 				9D3326191AF7ED1C00498801 /* LaunchScreen.xib in Resources */,
 				A082F48B1B1920F8001C8C52 /* NewsfeedCell.xib in Resources */,
 				A060F78C1B72A307009D6ADB /* CouponDetailView.xib in Resources */,
+				A086ACE11BB2157A003133BA /* TrendingCoupon.xib in Resources */,
 				9D9D1FF11B9F4BE3000C1299 /* starbucks_banner.jpg in Resources */,
 				A0578C601B0E40D30033B5BD /* GooglePlus.bundle in Resources */,
 				9DA3C8961B90C117000D40F2 /* Images.xcassets in Resources */,

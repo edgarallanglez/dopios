@@ -13,6 +13,7 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
     @IBOutlet weak var menuButton:UIBarButtonItem!
 
     @IBOutlet var mainScroll: UIScrollView!
+    @IBOutlet var trendingContainer: UIView!
     
     @IBOutlet var pageControlContainer: UIView!
     @IBOutlet var pageControl: UIPageControl!
@@ -38,9 +39,9 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
         
         mainScroll.frame.size = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height)
         
-        mainScroll.contentSize = CGSizeMake(320, 3000)
+        mainScroll.contentSize = CGSizeMake(mainScroll.frame.size.width, 3000)
        
-    
+
         
         
         if self.revealViewController() != nil {
@@ -50,8 +51,14 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
         }
         
         
+        //let couponNib = UINib(nibName: "TrendingCoupon", bundle: nil)
+        var coupon_t = (NSBundle.mainBundle().loadNibNamed("TrendingCoupon", owner: self, options: nil)[0] as? UIView)!
+        coupon_t.layer.masksToBounds = true
+    
+        coupon_t.frame = CGRectMake(0, 0, 100, 110)
         
-        
+        coupon_t.backgroundColor = UIColor.redColor()
+        trendingContainer.addSubview(coupon_t);
 
         
       //  var nib = UINib(nibName: "CouponCell", bundle: nil)
@@ -413,7 +420,6 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
     @IBAction func goToPage(sender: AnyObject) {
     
         let page = branchesScroll.frame.size.width * CGFloat(pageControl.currentPage)
-
 
         branchesScroll.setContentOffset(CGPointMake(page, 0), animated: true)
             
