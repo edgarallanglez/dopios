@@ -15,6 +15,8 @@ class BranchProfileTopView: UIView {
     @IBOutlet weak var branchLogo: UIImageView!
     @IBOutlet weak var branchProfileSegmented: SegmentedControl!
     var branchId:Int!
+    
+    
     @IBAction func followBranch(sender: AnyObject) {
         
         let params:[String: AnyObject] = [

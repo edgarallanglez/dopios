@@ -17,7 +17,7 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="285"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="starbucks_banner.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="x9r-hb-NOG" userLabel="backgroundImage">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="starbucks_banner.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="x9r-hb-NOG" userLabel="backgroundImage">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="230"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="230" id="W2w-57-Wzt"/>
@@ -29,15 +29,15 @@
                         </mask>
                     </variation>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="starbucks.gif" translatesAutoresizingMaskIntoConstraints="NO" id="ph0-mH-WMX">
-                    <rect key="frame" x="250" y="30" width="100" height="100"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="starbucks.gif" translatesAutoresizingMaskIntoConstraints="NO" id="ph0-mH-WMX">
+                    <rect key="frame" x="240" y="25" width="120" height="120"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="100" id="e63-80-gLe"/>
-                        <constraint firstAttribute="width" constant="100" id="mNB-p1-Qd3"/>
+                        <constraint firstAttribute="height" constant="120" id="e63-80-gLe"/>
+                        <constraint firstAttribute="width" constant="120" id="mNB-p1-Qd3"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                            <integer key="value" value="40"/>
+                            <integer key="value" value="60"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                     </userDefinedRuntimeAttributes>
@@ -72,8 +72,8 @@
                         <action selector="followBranch:" destination="iN0-l3-epB" eventType="touchUpInside" id="D1E-uO-B8g"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Starbucks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j1t-e9-jfI">
-                    <rect key="frame" x="227" y="140" width="146" height="37"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j1t-e9-jfI">
+                    <rect key="frame" x="291" y="150" width="18" height="37"/>
                     <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="30"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
@@ -85,7 +85,7 @@
                 <constraint firstAttribute="trailing" secondItem="O7C-iJ-66i" secondAttribute="trailing" id="4dJ-mI-Ol7"/>
                 <constraint firstItem="x9r-hb-NOG" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="4pP-XN-JvK"/>
                 <constraint firstItem="vnf-zr-owF" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="189" id="6JV-lv-tJ4"/>
-                <constraint firstItem="j1t-e9-jfI" firstAttribute="top" secondItem="ph0-mH-WMX" secondAttribute="bottom" constant="10" id="D40-Me-u7M"/>
+                <constraint firstItem="j1t-e9-jfI" firstAttribute="top" secondItem="ph0-mH-WMX" secondAttribute="bottom" constant="5" id="D40-Me-u7M"/>
                 <constraint firstItem="O7C-iJ-66i" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="E0D-fk-pJH"/>
                 <constraint firstItem="j1t-e9-jfI" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="OLq-vQ-aJW"/>
                 <constraint firstAttribute="trailing" secondItem="vnf-zr-owF" secondAttribute="trailing" constant="13" id="QoB-WZ-Lbi"/>
@@ -94,7 +94,7 @@
                 <constraint firstItem="x9r-hb-NOG" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="eda-bk-Dna"/>
                 <constraint firstItem="ph0-mH-WMX" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="f8Z-cS-lgm"/>
                 <constraint firstItem="O7C-iJ-66i" firstAttribute="top" secondItem="x9r-hb-NOG" secondAttribute="bottom" id="iu8-Fa-YKp"/>
-                <constraint firstItem="ph0-mH-WMX" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="30" id="muR-hO-rIb"/>
+                <constraint firstItem="ph0-mH-WMX" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="25" id="muR-hO-rIb"/>
                 <constraint firstAttribute="trailing" secondItem="x9r-hb-NOG" secondAttribute="trailing" id="orZ-am-iW0"/>
                 <constraint firstAttribute="centerX" secondItem="x9r-hb-NOG" secondAttribute="centerX" id="vbp-hG-tVN"/>
                 <constraint firstItem="ph0-mH-WMX" firstAttribute="centerY" secondItem="x9r-hb-NOG" secondAttribute="centerY" id="wGP-T3-5kQ"/>

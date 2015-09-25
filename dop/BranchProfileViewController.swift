@@ -40,6 +40,8 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
         aboutView = (NSBundle.mainBundle().loadNibNamed("BranchProfileAboutView", owner: self, options: nil)[0] as? BranchProfileAboutView)!
 
         headerTopView.branchId = branchId
+        headerTopView.branchLogo.image = self.logo
+        self.headerTopView.branchCover.image = self.headerTopView.branchCover.image?.applyLightEffect()
         getBranchProfile()
         
 //      branchLogo.image = self.logo
@@ -73,6 +75,7 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
                 } else if json["category_id"].int! == 3 {
                     self.dropPin.typeOfAnnotation = "marker-entertainment-icon"
                 }
+//                self.headerTopView.setImages(self.logo, company_id: json["company_id"].int!)
                 self.tableView.reloadData()
                 
             })
@@ -86,7 +89,7 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
             
             print(json)
         
-            for (index, subJson): (String, JSON) in json["bond"]{
+            for (_, subJson): (String, JSON) in json["bond"]{
                 var coupon_id = subJson["coupon_id"].int!
                 let coupon_name = subJson["name"].string!
                 let coupon_description = subJson["description"].string!
@@ -98,12 +101,12 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
                 //let longitude = subJson["longitude"].double!
                 
                 
-                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: self.logoString, branch_id: self.branchId, company_id: 1, total_likes: 0 ,user_like: 0, latitude: latitude, longitude: longitude)
+                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: self.logoString, branch_id: self.branchId, company_id: 1, total_likes: 0 ,user_like: 0, latitude: latitude, longitude: longitude, banner: "")
                 
                 self.coupons.append(model)
             }
             
-            for (index, subJson): (String, JSON) in json["nxn"] {
+            for (_, subJson): (String, JSON) in json["nxn"] {
                 var coupon_id = subJson["coupon_id"].int!
                 let coupon_name = subJson["name"].string ?? ""
                 let coupon_description = subJson["description"].string ?? ""
@@ -112,12 +115,12 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
                 let latitude = 0.0//subJson["latitude"].double!
                 let longitude = 0.0//subJson["longitude"].double!
                 
-                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: self.logoString, branch_id: self.branchId,company_id: 1, total_likes: 0 ,user_like: 0, latitude: latitude, longitude: longitude)
+                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: self.logoString, branch_id: self.branchId,company_id: 1, total_likes: 0 ,user_like: 0, latitude: latitude, longitude: longitude, banner: "")
                 
                 self.coupons.append(model)
             }
             
-            for (index, subJson): (String, JSON) in json["discount"]{
+            for (_, subJson): (String, JSON) in json["discount"]{
                 var coupon_id = subJson["coupon_id"].int!
                 let coupon_name = subJson["name"].string ?? ""
                 let coupon_description = subJson["description"].string ?? ""
@@ -126,12 +129,12 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
                 let latitude = 0.0//subJson["latitude"].double!
                 let longitude = 0.0//subJson["longitude"].double!
                 
-                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: self.logoString, branch_id: self.branchId,company_id: 1,total_likes: 0 ,user_like: 0, latitude: latitude, longitude: longitude)
+                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: self.logoString, branch_id: self.branchId,company_id: 1,total_likes: 0 ,user_like: 0, latitude: latitude, longitude: longitude, banner: "")
                 
                 self.coupons.append(model)
             }
             
-            for (index, subJson): (String, JSON) in json["new_promo"]{
+            for (_, subJson): (String, JSON) in json["new_promo"]{
                 var coupon_id = subJson["coupon_id"].int!
                 let coupon_name = subJson["name"].string ?? ""
                 let coupon_description = subJson["description"].string ?? ""
@@ -140,7 +143,7 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
                 let latitude = 0.0//subJson["latitude"].double!
                 let longitude = 0.0//subJson["longitude"].double!
                 
-                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: self.logoString, branch_id: self.branchId, company_id: 1, total_likes: 0 ,user_like: 0, latitude: latitude, longitude: longitude)
+                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: self.logoString, branch_id: self.branchId, company_id: 1, total_likes: 0 ,user_like: 0, latitude: latitude, longitude: longitude, banner: "")
                 
                 self.coupons.append(model)
             }

@@ -162,8 +162,9 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
                     let user_like = subJson["user_like"].int
                     let latitude = subJson["latitude"].double!
                     let longitude = subJson["longitude"].double!
-                
-                    let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude)
+                    let banner = subJson["banner"].string ?? ""
+                    
+                    let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner)
                 
                     self.coupons.append(model)
                 }
@@ -211,9 +212,9 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
                     let user_like = subJson["user_like"].int!
                     let latitude = subJson["latitude"].double!
                     let longitude = subJson["longitude"].double!
+                    let banner = subJson["banner"].string ?? ""
                     
-                    
-                    let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude)
+                    let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner)
                     
                     self.coupons.append(model)
                     
@@ -263,8 +264,9 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
                     let user_like = subJson["user_like"].int
                     let latitude = subJson["latitude"].double!
                     let longitude = subJson["longitude"].double!
+                    let banner = subJson["banner"].string ?? ""
                     
-                    let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude)
+                    let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner)
                     
                     self.coupons.append(model)
                 }
@@ -314,9 +316,10 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
                     let user_like = subJson["user_like"].int!
                     let latitude = subJson["latitude"].double!
                     let longitude = subJson["longitude"].double!
+                    let banner = subJson["banner"].string!
                     
                     
-                    let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude)
+                    let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner)
                     
                     self.coupons.append(model)
                     
@@ -357,6 +360,9 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
                 view.location = model.location
                 view.branchId = model.branch_id
                 view.couponId = model.id
+                view.logo = cachedImages["Cell\(i)"]
+                view.banner = coupons[i].banner
+                view.companyId = coupons[i].company_id
             }
         }
     }

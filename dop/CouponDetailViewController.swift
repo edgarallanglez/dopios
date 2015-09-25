@@ -15,15 +15,18 @@ class CouponDetailViewController: UIViewController, UITableViewDelegate, UITable
     var cachedImages: [String: UIImage] = [:]
     
     var customView :CouponDetailView = CouponDetailView()
-    var branchCover: UIImage!
     var branchCategory: String!
     var location: CLLocationCoordinate2D!
     var coordinate: CLLocationCoordinate2D!
     var couponsName: String!
     var couponsDescription: String!
     var branchId: Int = 0
+    var companyId: Int!
     var couponId: Int = 0
     var locationManager = CLLocationManager()
+    var logo: UIImage!
+    var banner: String!
+    var imageUrl: NSURL!
     
     
     override func viewDidLoad() {
@@ -63,7 +66,7 @@ class CouponDetailViewController: UIViewController, UITableViewDelegate, UITable
         
         
         customView.branch_cover.image = customView.branch_cover.image?.applyLightEffect()
-        
+        getBannerImage(customView)
         getNewsfeedActivity()
         
     }
@@ -81,7 +84,21 @@ class CouponDetailViewController: UIViewController, UITableViewDelegate, UITable
                 
         })
     }
+    
+    func getBannerImage(customView: CouponDetailView) {
+        if self.banner == "" {
+            imageUrl = NSURL(string: "\(Utilities.dopImagesURL)local/default_banner.png")
+        } else {
+            imageUrl = NSURL(string: "\(Utilities.dopImagesURL)\(companyId)/\(self.banner)")
+        }
+        Utilities.getDataFromUrl(imageUrl!) { photo in
+            dispatch_async(dispatch_get_main_queue()) {
+                let imageData: NSData = NSData(data: photo!)
+                customView.branch_cover.image = UIImage(data: imageData)!
+            }
+        }
 
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -150,6 +167,7 @@ class CouponDetailViewController: UIViewController, UITableViewDelegate, UITable
         if segue.identifier == "branchProfile" {
             let view = segue.destinationViewController as! BranchProfileViewController
             view.branchId = branchId
+            view.logo = self.logo
         }
         
         
