@@ -14,7 +14,7 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
 
     @IBOutlet var mainScroll: UIScrollView!
     @IBOutlet var trendingContainer: UIView!
-    
+    @IBOutlet var trendingScroll: UIScrollView!
     @IBOutlet var pageControlContainer: UIView!
     @IBOutlet var pageControl: UIPageControl!
     @IBOutlet var branchesScroll: UIScrollView!
@@ -23,6 +23,9 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
     var coupons = [Coupon]()
     
     var branches = [Branch]()
+    
+    var trending = [Coupon]()
+    
 
     var cachedImages: [String: UIImage] = [:]
 
@@ -40,26 +43,8 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
         mainScroll.frame.size = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height)
         
         mainScroll.contentSize = CGSizeMake(mainScroll.frame.size.width, 3000)
-       
 
         
-        
-        if self.revealViewController() != nil {
-            menuButton.target = self.revealViewController()
-            menuButton.action = "revealToggle:"
-            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-        }
-        
-        
-        //let couponNib = UINib(nibName: "TrendingCoupon", bundle: nil)
-        var coupon_t = (NSBundle.mainBundle().loadNibNamed("TrendingCoupon", owner: self, options: nil)[0] as? UIView)!
-        coupon_t.layer.masksToBounds = true
-    
-        coupon_t.frame = CGRectMake(0, 0, 100, 110)
-        
-        coupon_t.backgroundColor = UIColor.redColor()
-        trendingContainer.addSubview(coupon_t);
-
         
       //  var nib = UINib(nibName: "CouponCell", bundle: nil)
      // couponsTableView.registerNib(nib, forCellReuseIdentifier: "CouponCell")
@@ -74,6 +59,34 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
         getTopBranches()
         
         branchesScroll.delegate = self
+        
+        
+        getCoupons()
+    }
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let margin = 18
+        
+        let coupon_t = NSBundle.mainBundle().loadNibNamed("TrendingCoupon", owner: self, options:
+            nil)[0] as! TrendingCoupon
+        
+        coupon_t.move(CGFloat(margin))
+
+        //trendingScroll.addSubview(coupon_t);
+    
+        
+         let coupon_t2 = NSBundle.mainBundle().loadNibNamed("TrendingCoupon", owner: self, options:
+            nil)[0] as! TrendingCoupon
+        
+        coupon_t2.move(CGFloat(margin + 180 + margin))
+        //trendingScroll.addSubview(coupon_t2);
+        
+        
+        //trendingScroll.contentSize = CGSizeMake(700, trendingScroll.frame.size.height)
+        
+        
+       // coupon_t2 = NSBundle.mainBundle().loadNibNamed("TrendingCoupon", owner: self, options: nil)[0] as! TrendingCoupon
         
     }
     
@@ -194,180 +207,85 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
 
     }
     func getCoupons() {
-        coupons = [Coupon]()
+        trending = [Coupon]()
         
-       /* CouponController.getAllCouponsWithSuccess { (couponsData) -> Void in
+        DashboardController.getTrendingCouponsWithSuccess(success: { (couponsData) -> Void in
             let json = JSON(data: couponsData)
-
-            var namex = "";
-            for (index: String, subJson: JSON) in json["data"]{
-                var coupon_id = String(stringInterpolationSegment:subJson["coupon_id"]).toInt()
-                let coupon_name = String(stringInterpolationSegment: subJson["name"])
-                let coupon_description = String(stringInterpolationSegment: subJson["description"])
-                let coupon_limit = String(stringInterpolationSegment: subJson["limit"])
-                let coupon_exp = String(stringInterpolationSegment: subJson["end_date"])
-                let coupon_logo = String(stringInterpolationSegment: subJson["logo"])
-                let branch_id = String(stringInterpolationSegment: subJson["branch_id"]).toInt()
-
-                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id:branch_id)
-
-                self.coupons.append(model)
-
-                println(coupon_name)
-                namex = String(coupon_name)
-            }
             
-            dispatch_async(dispatch_get_main_queue(), {
-                self.couponsTableView.reloadData()
-            });
-        }
-        */
+                for (_, subJson): (String, JSON) in json["data"]{
+                    let coupon_id = subJson["coupon_id"].int
+                    let coupon_name = subJson["name"].string
+                    let coupon_description = subJson["description"].string
+                    let coupon_limit = subJson["limit"].string
+                    let coupon_exp = "2015-09-30"
+                    let coupon_logo = subJson["logo"].string
+                    let branch_id = subJson["branch_id"].int
+                    let company_id = subJson["company_id"].int
+                    let total_likes = subJson["total_likes"].int
+                    let user_like = subJson["user_like"].int
+                    let latitude = subJson["latitude"].double!
+                    let longitude = subJson["longitude"].double!
+                
+                    let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude)
+                
+                    self.trending.append(model)
+                }
+            
+                dispatch_async(dispatch_get_main_queue(), {
+                    let margin = 18
+                    var positionX = 18
+                    
+                    for (index, coupon) in self.trending.enumerate() {
+                        
+                        let coupon_t:TrendingCoupon = NSBundle.mainBundle().loadNibNamed("TrendingCoupon", owner: self, options:
+                        nil)[0] as! TrendingCoupon
+                        var position = positionX+((margin+180)*index) // 180 es el ancho de los cupones
+
+
+                        coupon_t.move(CGFloat(position))
+
+                        if(index == 1){
+                            positionX += 18
+                        }
+                        
+                        let imageUrl = NSURL(string: "\(Utilities.dopImagesURL)\(coupon.company_id)/\(coupon.logo)")
+                        
+                        Utilities.getDataFromUrl(imageUrl!) { photo in
+                            dispatch_async(dispatch_get_main_queue()) {
+                                let imageData: NSData = NSData(data: photo!)
+                                coupon_t.logo.image = UIImage(data: imageData)
+                                UIView.animateWithDuration(0.5, animations: {
+                                    //cell.branch_banner.alpha = 1
+                                })
+                                
+                            }
+                        }
+                    
+                        
+                        coupon_t.descriptionLbl.text = coupon.couponDescription
+                        
+                        self.trendingScroll.addSubview(coupon_t);
+                    }
+                    let trendingScroll_size = (margin+180)*self.trending.count
+
+                    self.trendingScroll.contentSize = CGSizeMake(CGFloat(trendingScroll_size), self.trendingScroll.frame.size.height)
+
+                
+                });
+            },
+            
+            failure: { (error) -> Void in
+                dispatch_async(dispatch_get_main_queue(), {
+                    
+                })
+        })
+        
     }
     
     override func viewDidAppear(animated: Bool) {
-        getCoupons()
+        //getCoupons()
     }
     
-  /*func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return coupons.count
-    }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-    
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 15
-    }
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        var view:UIView = UIView()
-        view.backgroundColor = UIColor.clearColor()
-        
-        return view
-    }
-    
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        cell.contentView.backgroundColor = UIColor.clearColor()
-        
-        var whiteRoundedCornerView:UIView!
-        whiteRoundedCornerView = UIView(frame: CGRectMake(5, 10, self.view.bounds.width-10, 100))
-        whiteRoundedCornerView.backgroundColor = UIColor(red: 174/255.0, green: 174/255.0, blue: 174/255.0, alpha: 1.0)
-        whiteRoundedCornerView.layer.masksToBounds = false
-        
-        whiteRoundedCornerView.layer.shadowOpacity = 1.55;
-        
-        
-        
-        whiteRoundedCornerView.layer.shadowOffset = CGSizeMake(1, 0);
-        whiteRoundedCornerView.layer.shadowColor=UIColor(red: 53/255.0, green: 143/255.0, blue: 185/255.0, alpha: 1.0).CGColor
-        
-        
-        
-        whiteRoundedCornerView.layer.cornerRadius=3.0
-        whiteRoundedCornerView.layer.shadowOffset=CGSizeMake(-1, -1)
-        whiteRoundedCornerView.layer.shadowOpacity=0.5
-        cell.contentView.addSubview(whiteRoundedCornerView)
-        cell.contentView.sendSubviewToBack(whiteRoundedCornerView)
-        
-        
-    }
-*/
-
-   /* func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-     
-        var cell: CouponCell = tableView.dequeueReusableCellWithIdentifier("CouponCell", forIndexPath: indexPath) as! CouponCell
-        
-        let model = self.coupons[indexPath.section]
-        
-        
-        cell.loadItem(model, viewController: self)
-        
-        
-        
-        let imageUrl = NSURL(string: "\(Utilities.dopURL)\(model.branch_id)/\(model.logo)")
-        
-        
-        let identifier = "Cell\(indexPath.section)"
-        
-        println(identifier)
-        if(self.cachedImages[identifier] != nil){
-            let cell_image_saved : UIImage = self.cachedImages[identifier]!
-
-            cell.branchImage.setBackgroundImage(cell_image_saved, forState: UIControlState.Normal)
-        } else {
-
-            cell.branchImage.alpha = 0
-
-            Utilities.getDataFromUrl(imageUrl!) { data in
-                dispatch_async(dispatch_get_main_queue()) {
-                    
-                    println("Finished downloading \"\(imageUrl!.lastPathComponent!.stringByDeletingPathExtension)\".")
-                
-                    var cell_image : UIImage = UIImage()
-                    cell_image = UIImage ( data: data!)!
-
-                    if tableView.indexPathForCell(cell)?.section == indexPath.section{
-                        self.cachedImages[identifier] = cell_image
-                        
-                        let cell_image_saved : UIImage = self.cachedImages[identifier]!
-
-                        cell.branchImage.setBackgroundImage(cell_image_saved, forState: UIControlState.Normal)
-                        
-                        UIView.animateWithDuration(0.5, animations: {
-                            cell.branchImage.alpha = 1
-                        })
-                    }
-                }
-            }
-        }
-
-        return cell
-    }*/
-    
-    
- /*   func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        
-    }*/
-    
-  /*  func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]?  {
-        
-        let currentCoupon = self.coupons[indexPath.row]
-        
-        var useAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Usar" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
-            let useMenu = UIAlertController(title: nil, message: "Usar cupón", preferredStyle: .ActionSheet)
-            
-            let acceptAction = UIAlertAction(title: "Usar", style: UIAlertActionStyle.Default, handler: {
-                    UIAlertAction in
-                    self.takeCoupon(currentCoupon.id)
-                })
-            let cancelAction = UIAlertAction(title: "Cancelar", style: UIAlertActionStyle.Cancel, handler: nil)
-            
-            useMenu.addAction(acceptAction)
-            useMenu.addAction(cancelAction)
-            
-            
-            self.presentViewController(useMenu, animated: true, completion: nil)
-        })
-        var shareAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Compartir" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
-            let shareMenu = UIAlertController(title: nil, message: "Compartir cupón", preferredStyle: .ActionSheet)
-            
-            let acceptAction = UIAlertAction(title: "Compartir", style: UIAlertActionStyle.Default, handler: {
-                    UIAlertAction in
-                    //self.takeCoupon(currentCoupon.id)
-                })
-            let cancelAction = UIAlertAction(title: "Cancelar", style: UIAlertActionStyle.Cancel, handler: nil)
-            
-            shareMenu.addAction(acceptAction)
-            shareMenu.addAction(cancelAction)
-            
-            
-            self.presentViewController(shareMenu, animated: true, completion: nil)
-        })
-        
-        useAction.backgroundColor = UIColor(red: 203/255, green: 76/255, blue: 76/255, alpha: 1)
-
-        return [useAction,shareAction]
-    }*/
     
     func takeCoupon(coupon_id:Int) {
         
@@ -385,7 +303,7 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
         CouponController.takeCouponWithSuccess(params,
         success:{(couponsData) -> Void in
             let json = JSON(data: couponsData)
-
+            
             print(json)
         },
         failure: { (error) -> Void in
