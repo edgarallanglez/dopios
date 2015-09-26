@@ -206,6 +206,7 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
                     
                     UIView.animateWithDuration(0.3, animations: {
                         self.CouponsCollectionView.alpha = 1
+                        
                     })
 
                 });
@@ -269,6 +270,7 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
                     }
                     UIView.animateWithDuration(0.3, animations: {
                         self.CouponsCollectionView.alpha = 1
+                        
                     })
                 });
             },
@@ -318,6 +320,7 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
                     
                     UIView.animateWithDuration(0.3, animations: {
                         self.CouponsCollectionView.alpha = 1
+                        
                     })
                     
                 });
@@ -409,8 +412,14 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
         switch promoSegmentedController.selectedIndex {
         case 0:
             getCoupons()
+            UIView.animateWithDuration(0.3, animations: {
+                //self.CouponsCollectionView.frame.origin = CGPointMake(self.CouponsCollectionView.frame.origin.x+20, self.CouponsCollectionView.frame.origin.y)
+            })
         case 1:
             getTakenCoupons()
+            UIView.animateWithDuration(0.3, animations: {
+                //self.CouponsCollectionView.frame.origin = CGPointMake(self.CouponsCollectionView.frame.origin.x-20, self.CouponsCollectionView.frame.origin.y)
+            })
         default:
             print("default")
         }
