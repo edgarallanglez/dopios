@@ -57,6 +57,30 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
                     }
                 }
         }
+        
+        
+        
+        let rightSwipe = UISwipeGestureRecognizer(target: self, action: Selector("swipe:"))
+        rightSwipe.direction = .Right
+        
+        let leftSwipe = UISwipeGestureRecognizer(target: self, action: Selector("swipe:"))
+        leftSwipe.direction = .Left
+        
+        
+        CouponsCollectionView.addGestureRecognizer(rightSwipe)
+        CouponsCollectionView.addGestureRecognizer(leftSwipe)
+
+    }
+    func swipe(sender: UISwipeGestureRecognizer){
+        if(sender.direction == .Right){
+            promoSegmentedController.selectedIndex = 0
+            
+        }
+        if(sender.direction == .Left){
+            promoSegmentedController.selectedIndex = 1
+            
+        }
+        setPromoCollectionView(promoSegmentedController)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -145,6 +169,11 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
         coupons.removeAll(keepCapacity: false)
         cachedImages.removeAll(keepCapacity: false)
         
+        
+        UIView.animateWithDuration(0.3, animations: {
+            self.CouponsCollectionView.alpha = 0
+        })
+        
         CouponController.getAllCouponsWithSuccess(limit,
             success: { (couponsData) -> Void in
                 let json = JSON(data: couponsData)
@@ -177,6 +206,11 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
                     self.CouponsCollectionView.alwaysBounceVertical = true
                     self.refreshControl.endRefreshing()
                     self.offset = self.limit - 1
+                    
+                    UIView.animateWithDuration(0.3, animations: {
+                        self.CouponsCollectionView.alpha = 1
+                        
+                    })
 
                 });
             },
@@ -196,6 +230,10 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
         var addedValues:Int = 0
         
         let firstCoupon = self.coupons.first as Coupon!
+        
+        UIView.animateWithDuration(0.3, animations: {
+            self.CouponsCollectionView.alpha = 0
+        })
         
         CouponController.getAllCouponsOffsetWithSuccess(firstCoupon.id,offset: offset,
             success: { (couponsData) -> Void in
@@ -235,9 +273,10 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
                     if(newData){
                         self.offset+=addedValues
                     }
-                    /*if(addedValues<6 || !newData){
-                        self.CouponsCollectionView.removeInfiniteScroll()
-                    }*/
+                    UIView.animateWithDuration(0.3, animations: {
+                        self.CouponsCollectionView.alpha = 1
+                        
+                    })
                 });
             },
             failure: { (error) -> Void in
@@ -248,6 +287,9 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
     }
     
     func getTakenCoupons() {
+        UIView.animateWithDuration(0.3, animations: {
+            self.CouponsCollectionView.alpha = 0
+        })
         coupons.removeAll()
         cachedImages.removeAll()
         
@@ -283,6 +325,11 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
                     self.CouponsCollectionView.alwaysBounceVertical = true
                     self.refreshControl.endRefreshing()
                     self.offset = self.limit - 1
+                    
+                    UIView.animateWithDuration(0.3, animations: {
+                        self.CouponsCollectionView.alpha = 1
+                        
+                    })
                     
                 });
             },
@@ -380,8 +427,14 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
         switch promoSegmentedController.selectedIndex {
         case 0:
             getCoupons()
+            UIView.animateWithDuration(0.3, animations: {
+                //self.CouponsCollectionView.frame.origin = CGPointMake(self.CouponsCollectionView.frame.origin.x+20, self.CouponsCollectionView.frame.origin.y)
+            })
         case 1:
             getTakenCoupons()
+            UIView.animateWithDuration(0.3, animations: {
+                //self.CouponsCollectionView.frame.origin = CGPointMake(self.CouponsCollectionView.frame.origin.x-20, self.CouponsCollectionView.frame.origin.y)
+            })
         default:
             print("default")
         }
