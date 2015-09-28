@@ -22,7 +22,7 @@ class Utilities {
         return UIColor( red: 222.0/255.0 , green: 0.0/255.0 , blue: 120/255.0, alpha:1.0)
     }
     class var lightGrayColor: UIColor {
-        return UIColor( red: 238.0/255.0 , green: 238.0/255.0 , blue: 238/255.0, alpha:1.0)
+        return UIColor( red: 250.0/255.0 , green: 250.0/255.0 , blue: 250.0/255.0, alpha:1.0)
     }
     class var Colors:CAGradientLayer {
         let colorBottom = UIColor(red: 217.0/255.0, green: 4.0/255.0, blue: 121.0/255.0, alpha: 1.0).CGColor
