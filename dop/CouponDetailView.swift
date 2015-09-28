@@ -37,17 +37,6 @@ class CouponDetailView: UIView, MKMapViewDelegate {
     }
     
     func centerMapOnLocation(location: CLLocationCoordinate2D) {
-        let dropPin : Annotation = Annotation(coordinate: location, title: (self.couponsName.titleLabel?.text)!, subTitle: "Los mejores")
-        if categoryId == 1 {
-            dropPin.typeOfAnnotation = "marker-food-icon"
-        } else if categoryId == 2 {
-            dropPin.typeOfAnnotation = "marker-services-icon"
-        } else if categoryId == 3 {
-            dropPin.typeOfAnnotation = "marker-entertainment-icon"
-        }
-
-        self.location.addAnnotation(dropPin)
-        
         let centerPin = CLLocation(latitude: location.latitude, longitude: location.longitude)
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(centerPin.coordinate,
             regionRadius * 2.0, regionRadius * 2.0)

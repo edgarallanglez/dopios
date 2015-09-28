@@ -34,7 +34,7 @@ class CouponDetailViewController: UIViewController, UITableViewDelegate, UITable
         super.viewDidLoad()
         //var CouponDetailNib = UINib(nibName: "CouponDetailView", bundle: nil)
         
-        locationManager.delegate = self
+        //locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
@@ -69,6 +69,7 @@ class CouponDetailViewController: UIViewController, UITableViewDelegate, UITable
         
         customView.branch_cover.image = customView.branch_cover.image?.applyLightEffect()
         getBannerImage(customView)
+        setBranchAnnotation()
         getNewsfeedActivity()
         
     }
@@ -100,6 +101,19 @@ class CouponDetailViewController: UIViewController, UITableViewDelegate, UITable
             }
         }
 
+    }
+    
+    func setBranchAnnotation () {
+        let dropPin : Annotation = Annotation(coordinate: location, title: self.couponsName, subTitle: "Los mejores")
+        if categoryId == 1 {
+            dropPin.typeOfAnnotation = "marker-food-icon"
+        } else if categoryId == 2 {
+            dropPin.typeOfAnnotation = "marker-services-icon"
+        } else if categoryId == 3 {
+            dropPin.typeOfAnnotation = "marker-entertainment-icon"
+        }
+        
+        customView.location.addAnnotation(dropPin)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
