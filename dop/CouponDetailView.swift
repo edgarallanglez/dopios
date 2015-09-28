@@ -8,7 +8,7 @@
 
 import UIKit
 import MapKit
-class CouponDetailView: UIView {
+class CouponDetailView: UIView, MKMapViewDelegate {
 
     @IBOutlet var branch_cover: UIImageView!
     @IBOutlet var branch_logo: UIImageView!
@@ -20,6 +20,7 @@ class CouponDetailView: UIView {
     
     var couponId: Int!
     var branchId: Int!
+    var categoryId: Int!
     
     var coordinate: CLLocationCoordinate2D?
 
@@ -32,12 +33,19 @@ class CouponDetailView: UIView {
     
     func loadView(viewController: UIViewController) {
         self.viewController = viewController
+        self.location.delegate = self
     }
     
     func centerMapOnLocation(location: CLLocationCoordinate2D) {
-        let dropPin = MKPointAnnotation()
-        dropPin.coordinate = location
-        dropPin.title = self.couponsName.titleLabel?.text
+        let dropPin : Annotation = Annotation(coordinate: location, title: (self.couponsName.titleLabel?.text)!, subTitle: "Los mejores")
+        if categoryId == 1 {
+            dropPin.typeOfAnnotation = "marker-food-icon"
+        } else if categoryId == 2 {
+            dropPin.typeOfAnnotation = "marker-services-icon"
+        } else if categoryId == 3 {
+            dropPin.typeOfAnnotation = "marker-entertainment-icon"
+        }
+
         self.location.addAnnotation(dropPin)
         
         let centerPin = CLLocation(latitude: location.latitude, longitude: location.longitude)
@@ -78,6 +86,24 @@ class CouponDetailView: UIView {
 
         print(date)
         
+    }
+    
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView?{
+        let reuseId = "custom"
+        var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId)
+        if mapView.userLocation == annotation as! NSObject { return nil }
+        if (annotationView == nil) {
+            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            annotationView!.canShowCallout = true
+            
+        } else {
+            annotationView?.annotation = annotation
+        }
+        
+        let customAnnotation = annotation as! Annotation
+        annotationView!.image = UIImage(named: customAnnotation.typeOfAnnotation)
+        
+        return annotationView
     }
     
   

@@ -39,6 +39,9 @@
                             <variation key="widthClass=compact" misplaced="YES">
                                 <rect key="frame" x="20" y="225" width="400" height="150"/>
                             </variation>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="49r-7P-EkC"/>
+                            </connections>
                         </mapView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ym8-s7-Cb9">
                             <rect key="frame" x="323" y="132" width="87" height="28"/>

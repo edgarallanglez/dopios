@@ -27,6 +27,7 @@ class CouponDetailViewController: UIViewController, UITableViewDelegate, UITable
     var logo: UIImage!
     var banner: String!
     var imageUrl: NSURL!
+    var categoryId: Int!
     
     
     override func viewDidLoad() {
@@ -52,6 +53,7 @@ class CouponDetailViewController: UIViewController, UITableViewDelegate, UITable
         customView.couponsName.layer.shadowColor = UIColor.blackColor().CGColor
         customView.couponsName.setTitle(self.couponsName, forState: UIControlState.Normal)
         customView.couponsDescription.text = self.couponsDescription
+        customView.categoryId = self.categoryId
         customView.centerMapOnLocation(self.location)
         customView.branchId = self.branchId
         customView.couponId = self.couponId

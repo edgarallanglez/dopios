@@ -101,7 +101,7 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
                 //let longitude = subJson["longitude"].double!
                 
                 
-                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: self.logoString, branch_id: self.branchId, company_id: 1, total_likes: 0 ,user_like: 0, latitude: latitude, longitude: longitude, banner: "")
+                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: self.logoString, branch_id: self.branchId, company_id: 1, total_likes: 0 ,user_like: 0, latitude: latitude, longitude: longitude, banner: "", category_id: 1)
                 
                 self.coupons.append(model)
             }
@@ -115,7 +115,7 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
                 let latitude = 0.0//subJson["latitude"].double!
                 let longitude = 0.0//subJson["longitude"].double!
                 
-                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: self.logoString, branch_id: self.branchId,company_id: 1, total_likes: 0 ,user_like: 0, latitude: latitude, longitude: longitude, banner: "")
+                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: self.logoString, branch_id: self.branchId,company_id: 1, total_likes: 0 ,user_like: 0, latitude: latitude, longitude: longitude, banner: "", category_id: 1)
                 
                 self.coupons.append(model)
             }
@@ -129,7 +129,7 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
                 let latitude = 0.0//subJson["latitude"].double!
                 let longitude = 0.0//subJson["longitude"].double!
                 
-                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: self.logoString, branch_id: self.branchId,company_id: 1,total_likes: 0 ,user_like: 0, latitude: latitude, longitude: longitude, banner: "")
+                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: self.logoString, branch_id: self.branchId,company_id: 1,total_likes: 0 ,user_like: 0, latitude: latitude, longitude: longitude, banner: "", category_id: 1)
                 
                 self.coupons.append(model)
             }
@@ -143,7 +143,7 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
                 let latitude = 0.0//subJson["latitude"].double!
                 let longitude = 0.0//subJson["longitude"].double!
                 
-                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: self.logoString, branch_id: self.branchId, company_id: 1, total_likes: 0 ,user_like: 0, latitude: latitude, longitude: longitude, banner: "")
+                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: self.logoString, branch_id: self.branchId, company_id: 1, total_likes: 0 ,user_like: 0, latitude: latitude, longitude: longitude, banner: "", category_id: 1)
                 
                 self.coupons.append(model)
             }
