@@ -96,16 +96,21 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
     
 
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-        let pagenumber=Int(branchesScroll.contentOffset.x / branchesScroll.frame.size.width)
-        pageControl.currentPage = pagenumber
-
+        
     }
     func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {
-        let pagenumber=Int(branchesScroll.contentOffset.x / branchesScroll.frame.size.width)
-        pageControl.currentPage = pagenumber
+        /*let pagenumber=Int(branchesScroll.contentOffset.x / branchesScroll.frame.size.width)
+        pageControl.currentPage = pagenumber*/
     }
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+        let pagenumber=Int(branchesScroll.contentOffset.x / branchesScroll.frame.size.width)
+        pageControl.currentPage = pagenumber
+        
         timer?.invalidate()
+    }
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        let pagenumber=Int(branchesScroll.contentOffset.x / branchesScroll.frame.size.width)
+        pageControl.currentPage = pagenumber
     }
     func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         timer = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "changePage", userInfo: nil, repeats: true)
@@ -233,21 +238,19 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
             
                 dispatch_async(dispatch_get_main_queue(), {
                     let margin = 18
-                    var positionX = 18
+                    let positionX = 18
+                    let couponWidth = 180
                     
                     for (index, coupon) in self.trending.enumerate() {
-                        
                         let coupon_t:TrendingCoupon = NSBundle.mainBundle().loadNibNamed("TrendingCoupon", owner: self, options:
                         nil)[0] as! TrendingCoupon
-                        var position = positionX+((margin+180)*index) // 180 es el ancho de los cupones
+                        var position = 0
 
-
+                        
+                        position = positionX+((margin+couponWidth)*index)
+                        
                         coupon_t.move(CGFloat(position))
 
-                        if(index == 1){
-                            positionX += 18
-                        }
-                        
                         let imageUrl = NSURL(string: "\(Utilities.dopImagesURL)\(coupon.company_id)/\(coupon.logo)")
                         
                         Utilities.getDataFromUrl(imageUrl!) { photo in
@@ -266,7 +269,7 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
                         
                         self.trendingScroll.addSubview(coupon_t);
                     }
-                    let trendingScroll_size = (margin+180)*self.trending.count
+                    let trendingScroll_size = ((margin+couponWidth)*self.trending.count)+margin
 
                     self.trendingScroll.contentSize = CGSizeMake(CGFloat(trendingScroll_size), self.trendingScroll.frame.size.height)
 

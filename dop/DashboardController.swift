@@ -19,7 +19,6 @@ class DashboardController {
         })
     }
     
-    
     class func getTrendingCouponsWithSuccess(success succeed: ((couponsData: NSData!) -> Void), failure errorFound:((couponsData: NSError?) -> Void )) {
         let url = "\(Utilities.dopURL)coupon/trending/get/"
         print(url)
