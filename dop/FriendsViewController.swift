@@ -45,7 +45,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         success:{ (friendsData) -> Void in
             let json = JSON(data: friendsData)
             
-            for (index, subJson): (String, JSON) in json["data"] {
+            for (_, subJson): (String, JSON) in json["data"] {
                 var friend_id = subJson["friends_id"].int
                 var user_id = subJson["user_id"].int
                 let user_name = subJson["names"].string
@@ -98,7 +98,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
             if segue.identifier == "friendUserProfile" {
                 let view = segue.destinationViewController as! UserProfileViewController
                 view.userId = model.user_id
-                view.userImage = model.main_image
+                view.userImagePath = model.main_image
             }
         }
     }

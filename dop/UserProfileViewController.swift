@@ -13,8 +13,9 @@ class UserProfileViewController: UIViewController {
 
     @IBOutlet weak var fontCalis: UIButton!
     @IBOutlet var profile_image: UIImageView!
+    var userImage: UIImage!
     
-    var userImage:String=""
+    var userImagePath:String=""
     
     var userId:Int!
     
@@ -22,7 +23,7 @@ class UserProfileViewController: UIViewController {
         super.viewDidLoad()
         
         
-        
+        profile_image.image = userImage
         profile_image.layer.cornerRadius=60
         profile_image.layer.masksToBounds=true
         
@@ -58,13 +59,11 @@ class UserProfileViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    override func viewDidAppear(animated: Bool) {
-        if let checkedUrl = NSURL(string:userImage) {
-            downloadImage(checkedUrl)
-        }
-        
-        print("El id es \(userImage)")
-    }
+//    override func viewDidAppear() {
+////        if let checkedUrl = NSURL(string:userImagePath) {
+////            downloadImage(checkedUrl)
+////        }
+//    }
 
 
 }

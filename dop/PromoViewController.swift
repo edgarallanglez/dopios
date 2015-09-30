@@ -71,6 +71,7 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
         CouponsCollectionView.addGestureRecognizer(leftSwipe)
 
     }
+    
     func swipe(sender: UISwipeGestureRecognizer){
         if(sender.direction == .Right){
             promoSegmentedController.selectedIndex = 0
