@@ -51,8 +51,8 @@ class TrendingCoupon: UIView {
         super.init(coder: aDecoder)!
     }
     
-    func move(x: CGFloat){
-        self.frame.origin = CGPointMake(x, 0)
+    func move(x: CGFloat, y: CGFloat){
+        self.frame.origin = CGPointMake(x, y)
     }
     
 }

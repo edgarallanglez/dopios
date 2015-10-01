@@ -78,21 +78,23 @@ class UserProfileViewController: UIViewController {
     
             dispatch_async(dispatch_get_main_queue(), {
                 let margin = 18
-                let positionX = 18
                 let couponWidth = 180
-                let couponHeight = 205
-                var position = 18
-                
+                let couponHeight = 245
+                var height = 15
+                var i: Int = 0
+
                 for (index, coupon) in self.historyCoupon.enumerate() {
-                    let coupon_box:TrendingCoupon = NSBundle.mainBundle().loadNibNamed("TrendingCoupon", owner: self, options:
+                    let coupon_box: TrendingCoupon = NSBundle.mainBundle().loadNibNamed("TrendingCoupon", owner: self, options:
                         nil)[0] as! TrendingCoupon
                     
-                    if (index % 2 == 0) && (index != 0) {
-                        position = positionX + ((margin + couponWidth))
+                    
+                    if (index % 2 == 0) {
+                        coupon_box.move(CGFloat(margin), y: CGFloat(height + (couponHeight * i)))
                     } else {
-                        position = positionX + ((margin + couponWidth) * index)
+                        coupon_box.move(CGFloat(margin + (margin + couponWidth)), y: CGFloat(height + (couponHeight * i)))
+                        ++i
                     }
-                    coupon_box.move(CGFloat(position))
+                    
                     let imageUrl = NSURL(string: "\(Utilities.dopImagesURL)\(coupon.company_id)/\(coupon.logo)")
                     
                     Utilities.getDataFromUrl(imageUrl!) { photo in
@@ -107,12 +109,10 @@ class UserProfileViewController: UIViewController {
                     
                     coupon_box.descriptionLbl.text = coupon.couponDescription
                     //coupon_box.likes = trending[index].likes
-                    coupon_box.layer.borderWidth = 0.5
-                    coupon_box.layer.borderColor = UIColor.lightGrayColor().CGColor
                     self.scrollViewBox.addSubview(coupon_box);
                 }
                 
-                let trendingScroll_size = ((margin + couponHeight) * self.historyCoupon.count) + margin
+                let trendingScroll_size = (((margin + couponHeight) * self.historyCoupon.count) + margin) / 2
                 self.scrollViewBox.contentSize = CGSizeMake(self.scrollViewBox.frame.size.width, CGFloat(trendingScroll_size))
             });
             },
