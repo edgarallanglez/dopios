@@ -244,38 +244,42 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
                     let couponWidth = 180
                     
                     for (index, coupon) in self.trending.enumerate() {
-                        let coupon_t:TrendingCoupon = NSBundle.mainBundle().loadNibNamed("TrendingCoupon", owner: self, options:
+                        let coupon_box:TrendingCoupon = NSBundle.mainBundle().loadNibNamed("TrendingCoupon", owner: self, options:
                         nil)[0] as! TrendingCoupon
+                        
+                        
                         var position = 0
 
                         
                         position = positionX+((margin+couponWidth)*index)
                         
-                        coupon_t.move(CGFloat(position))
+                        coupon_box.move(CGFloat(position))
 
                         let imageUrl = NSURL(string: "\(Utilities.dopImagesURL)\(coupon.company_id)/\(coupon.logo)")
                         
                         Utilities.getDataFromUrl(imageUrl!) { photo in
                             dispatch_async(dispatch_get_main_queue()) {
                                 let imageData: NSData = NSData(data: photo!)
-                                coupon_t.logo.image = UIImage(data: imageData)
+                                coupon_box.logo.image = UIImage(data: imageData)
                                 UIView.animateWithDuration(0.5, animations: {
                                     //cell.branch_banner.alpha = 1
                                 })
                                 
                             }
                         }
-                    
                         
-                        coupon_t.descriptionLbl.text = coupon.couponDescription
                         
-                        self.trendingScroll.addSubview(coupon_t);
+                        coupon_box.descriptionLbl.text = coupon.couponDescription
+                        //coupon_box.likes = trending[index].likes
+                        
+                        coupon_box.layer.borderWidth = 0.5
+                        coupon_box.layer.borderColor = UIColor.lightGrayColor().CGColor
+                        
+                        self.trendingScroll.addSubview(coupon_box);
                     }
                     let trendingScroll_size = ((margin+couponWidth)*self.trending.count)+margin
 
                     self.trendingScroll.contentSize = CGSizeMake(CGFloat(trendingScroll_size), self.trendingScroll.frame.size.height)
-
-                
                 });
             },
             
