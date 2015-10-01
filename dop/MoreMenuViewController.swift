@@ -8,15 +8,39 @@
 
 import UIKit
 
-class MoreMenuViewController: UIViewController {
+class MoreMenuViewController: UITableViewController {
+    @IBOutlet var menuTableView: UITableView!
     @IBOutlet weak var userImage: UIImageView!
+    @IBOutlet weak var userName: UILabel!
+
+    @IBOutlet weak var friendsIcon: UIImageView!
+    @IBOutlet weak var trophyIcon: UIImageView!
+    @IBOutlet weak var configIcon: UIImageView!
+
     
     
     override func viewDidLoad() {
-        self.userImage.layer.cornerRadius = self.userImage.frame.height / 2
-        self.userImage.layer.masksToBounds = true
-        
+//        self.userImage.layer.cornerRadius = self.userImage.frame.height / 2
+//        self.userImage.layer.masksToBounds = true
+//        
+        userName.text = User.userName
         getUserImage()
+        
+        friendsIcon.image = friendsIcon.image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        friendsIcon.tintColor = UIColor.grayColor()
+        
+        trophyIcon.image = trophyIcon.image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        trophyIcon.tintColor = UIColor.grayColor()
+        
+        configIcon.image = configIcon.image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        configIcon.tintColor = UIColor.grayColor()
+    }
+    
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if (indexPath.section == 2) {
+            setActionSheet()
+        }
     }
     
     @IBAction func getFriends(sender: UIButton) {
@@ -31,8 +55,29 @@ class MoreMenuViewController: UIViewController {
             }
         }
     }
+    
+    func setActionSheet() {
+        let actionSheet: UIAlertController = UIAlertController(title: nil, message: "¿Seguro que deseas cerrar sesión?", preferredStyle: .ActionSheet)
+        
+        let logoutAction = UIAlertAction(title: "Cerra Sesión", style: .Destructive, handler: {
+            (alert: UIAlertAction!) -> Void in
+            self.logoutSession()
+        })
+        
+        //
+        let cancelAction = UIAlertAction(title: "Cancelar", style: .Cancel, handler: {
+            (alert: UIAlertAction!) -> Void in
+            print("Cancelled")
+        })
+        
+        actionSheet.addAction(logoutAction)
+        actionSheet.addAction(cancelAction)
+        
+        self.presentViewController(actionSheet, animated: true, completion: nil)
+    }
+    
 
-    @IBAction func logoutSession(sender: UIButton) {
+    func logoutSession() {
         switch(User.loginType) {
         case("facebook"):
             // Facebook logout
@@ -41,9 +86,8 @@ class MoreMenuViewController: UIViewController {
                 // The session state handler (in the app delegate) will be called automatically
                 FBSession.activeSession().closeAndClearTokenInformation()
                 self.dismissViewControllerAnimated(true, completion:nil)
-                    
                 User.activeSession = false
-                
+                performSegueWithIdentifier("loginController", sender: self)
             }
 
         default:
@@ -52,8 +96,14 @@ class MoreMenuViewController: UIViewController {
 
     }
     
-//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "userProfile" {
+            let destination_view = segue.destinationViewController as! UserProfileViewController
+            destination_view.userImage = userImage.image
+            
+        }
+    }
     
 
     

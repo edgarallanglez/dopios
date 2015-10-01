@@ -23,6 +23,8 @@
 		9D5DA89B1B9E55DB00954B30 /* Montserrat-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9D5DA8991B9E55DB00954B30 /* Montserrat-Bold.otf */; };
 		9D5DA89C1B9E55DB00954B30 /* Montserrat-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9D5DA89A1B9E55DB00954B30 /* Montserrat-Regular.otf */; };
 		9D697C7A1B5EF13000D786AA /* iconfonts-fontawesome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D697C791B5EF13000D786AA /* iconfonts-fontawesome.swift */; };
+		9D7FA0781BBC4FF000EAEC36 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7FA0771BBC4FF000EAEC36 /* SettingsViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		9D7FA07B1BBC516100EAEC36 /* TrophyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7FA07A1BBC516100EAEC36 /* TrophyViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		9D9C1B2B1B83B0D900F7895B /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D9C1B2A1B83B0D900F7895B /* FBSDKShareKit.framework */; };
 		9D9C1B2D1B83B3DB00F7895B /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D9C1B2C1B83B3DB00F7895B /* FBSDKCoreKit.framework */; };
 		9D9C9C911BB2155B00D9F986 /* Annotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9C9C901BB2155B00D9F986 /* Annotation.swift */; settings = {ASSET_TAGS = (); }; };
@@ -145,6 +147,8 @@
 		9D5DA8991B9E55DB00954B30 /* Montserrat-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Bold.otf"; path = "dop/Montserrat-Bold.otf"; sourceTree = "<group>"; };
 		9D5DA89A1B9E55DB00954B30 /* Montserrat-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Regular.otf"; path = "dop/Montserrat-Regular.otf"; sourceTree = "<group>"; };
 		9D697C791B5EF13000D786AA /* iconfonts-fontawesome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "iconfonts-fontawesome.swift"; sourceTree = "<group>"; };
+		9D7FA0771BBC4FF000EAEC36 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		9D7FA07A1BBC516100EAEC36 /* TrophyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrophyViewController.swift; sourceTree = "<group>"; };
 		9D9C1B2A1B83B0D900F7895B /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = dop/FBSDKShareKit.framework; sourceTree = "<group>"; };
 		9D9C1B2C1B83B3DB00F7895B /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = dop/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		9D9C9C901BB2155B00D9F986 /* Annotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Annotation.swift; sourceTree = "<group>"; };
@@ -377,6 +381,8 @@
 		9D33260B1AF7ED1C00498801 /* dop */ = {
 			isa = PBXGroup;
 			children = (
+				9D7FA0791BBC513000EAEC36 /* Trophy */,
+				9D7FA0761BBC4FDB00EAEC36 /* Settings */,
 				A0AE939A1AF8041A00D02315 /* Bridging-Header.h */,
 				9D33260E1AF7ED1C00498801 /* AppDelegate.swift */,
 				A060F78D1B72B475009D6ADB /* CouponDetailView.swift */,
@@ -440,6 +446,22 @@
 				9D3326231AF7ED1C00498801 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9D7FA0761BBC4FDB00EAEC36 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				9D7FA0771BBC4FF000EAEC36 /* SettingsViewController.swift */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
+		9D7FA0791BBC513000EAEC36 /* Trophy */ = {
+			isa = PBXGroup;
+			children = (
+				9D7FA07A1BBC516100EAEC36 /* TrophyViewController.swift */,
+			);
+			name = Trophy;
 			sourceTree = "<group>";
 		};
 		9DB327CA1B862EF6006BF882 /* MoreMenu */ = {
@@ -720,6 +742,7 @@
 				9D2BDFE41B9DF524003F1260 /* SearchController.swift in Sources */,
 				9DBB7A401B968437005700B9 /* UIImage+ImageEffects.h in Sources */,
 				9D697C7A1B5EF13000D786AA /* iconfonts-fontawesome.swift in Sources */,
+				9D7FA0781BBC4FF000EAEC36 /* SettingsViewController.swift in Sources */,
 				A0EC05991B7D1C69003CADB2 /* SWRevealViewController.m in Sources */,
 				9D0C16841B4DC6EB0088DE2F /* BranchProfileViewController.swift in Sources */,
 				A065EB321BA8E60A003B7390 /* DashboardController.swift in Sources */,
@@ -766,6 +789,7 @@
 				9DB3DABB1B73C28A004AC0F1 /* BranchProfileTopView.swift in Sources */,
 				9DA7AA9F1B50309400297690 /* BranchProfileController.swift in Sources */,
 				A060F77C1B6FE4BA009D6ADB /* PromoViewController.swift in Sources */,
+				9D7FA07B1BBC516100EAEC36 /* TrophyViewController.swift in Sources */,
 				A09AB4E31AF99136004287F7 /* SwiftyJSON.swift in Sources */,
 				A0EB97AD1B03E16A005112EF /* User.swift in Sources */,
 				9DB327CE1B863C84006BF882 /* MoreMenuViewController.swift in Sources */,
