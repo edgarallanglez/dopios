@@ -13,6 +13,9 @@ class MoreMenuViewController: UITableViewController {
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var userName: UILabel!
 
+    @IBOutlet weak var friendsIcon: UIImageView!
+    @IBOutlet weak var trophyIcon: UIImageView!
+    @IBOutlet weak var configIcon: UIImageView!
 
     
     
@@ -22,7 +25,17 @@ class MoreMenuViewController: UITableViewController {
 //        
         userName.text = User.userName
         getUserImage()
+        
+        friendsIcon.image = friendsIcon.image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        friendsIcon.tintColor = UIColor.grayColor()
+        
+        trophyIcon.image = trophyIcon.image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        trophyIcon.tintColor = UIColor.grayColor()
+        
+        configIcon.image = configIcon.image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        configIcon.tintColor = UIColor.grayColor()
     }
+    
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if (indexPath.section == 2) {
