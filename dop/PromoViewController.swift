@@ -116,20 +116,29 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
             cell.backgroundColor = UIColor.whiteColor()
             cell.heart.image = cell.heart.image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
             //cell.viewForBaselineLayout()?.alpha = 0
-            //cell.branch_banner.alpha=1
+            cell.branch_banner.alpha=0
+            
+            
             if (self.cachedImages[identifier] != nil){
-                cell.branch_banner.image = self.cachedImages[identifier]!
+                let cell_image_saved : UIImage = self.cachedImages[identifier]!
+                cell.branch_banner.image = cell_image_saved
+                UIView.animateWithDuration(0.5, animations: {
+                    cell.branch_banner.alpha = 1
+                })
+                
             } else {
                 //cell.branch_banner.alpha = 0
                 Utilities.getDataFromUrl(imageUrl!) { photo in
                     dispatch_async(dispatch_get_main_queue()) {
-                        let imageData: NSData = NSData(data: photo!)
+                        var imageData : UIImage = UIImage()
+                        imageData = UIImage(data: photo!)!
                         if self.CouponsCollectionView.indexPathForCell(cell)?.row == indexPath.row {
-                            self.cachedImages[identifier] = UIImage(data: imageData)
-                            cell.branch_banner.image = self.cachedImages[identifier]
+                            self.cachedImages[identifier] = imageData
+                            let image_saved : UIImage = self.cachedImages[identifier]!
+                            cell.branch_banner.image = image_saved
         
                             UIView.animateWithDuration(0.5, animations: {
-                                //cell.branch_banner.alpha = 1
+                                cell.branch_banner.alpha = 1
                             })
                         }
                     }
@@ -171,7 +180,7 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
         
         
         UIView.animateWithDuration(0.3, animations: {
-            self.CouponsCollectionView.alpha = 0
+            //self.CouponsCollectionView.alpha = 0
         })
         
         CouponController.getAllCouponsWithSuccess(limit,
@@ -208,7 +217,7 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
                     self.offset = self.limit - 1
                     
                     UIView.animateWithDuration(0.3, animations: {
-                        self.CouponsCollectionView.alpha = 1
+                        //self.CouponsCollectionView.alpha = 1
                         
                     })
 
@@ -232,7 +241,7 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
         let firstCoupon = self.coupons.first as Coupon!
         
         UIView.animateWithDuration(0.3, animations: {
-            self.CouponsCollectionView.alpha = 0
+            //self.CouponsCollectionView.alpha = 0
         })
         
         CouponController.getAllCouponsOffsetWithSuccess(firstCoupon.id,offset: offset,
@@ -274,7 +283,7 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
                         self.offset+=addedValues
                     }
                     UIView.animateWithDuration(0.3, animations: {
-                        self.CouponsCollectionView.alpha = 1
+                        //self.CouponsCollectionView.alpha = 1
                         
                     })
                 });
@@ -288,10 +297,10 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
     
     func getTakenCoupons() {
         UIView.animateWithDuration(0.3, animations: {
-            self.CouponsCollectionView.alpha = 0
+            //self.CouponsCollectionView.alpha = 0
         })
         coupons.removeAll()
-        cachedImages.removeAll()
+        cachedImages.removeAll(keepCapacity: false)
         
         CouponController.getAllTakenCouponsWithSuccess(limit,
             success: { (couponsData) -> Void in
@@ -327,7 +336,7 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
                     self.offset = self.limit - 1
                     
                     UIView.animateWithDuration(0.3, animations: {
-                        self.CouponsCollectionView.alpha = 1
+                        //self.CouponsCollectionView.alpha = 1
                         
                     })
                     
