@@ -34,7 +34,7 @@ class TrendingCoupon: UIView {
         }*/
     }
     
-    init(height:Int) {
+    init(height: Int) {
         print("AHLO")
         
         
@@ -51,7 +51,7 @@ class TrendingCoupon: UIView {
         super.init(coder: aDecoder)!
     }
     
-    func move(x:CGFloat){
+    func move(x: CGFloat){
         self.frame.origin = CGPointMake(x, 0)
     }
     

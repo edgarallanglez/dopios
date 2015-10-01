@@ -23,4 +23,28 @@ class UserProfileController: NSObject {
             }
         })
     }
+    
+    class func getAllUsedCouponsWithSuccess(limit: Int, success succeed: ((couponsData: NSData!) -> Void),failure errorFound: ((couponsData: NSError?) -> Void)) {
+        let url = "\(Utilities.dopURL)coupon/all/used/for/user/get/?limit=\(limit)"
+        Utilities.loadDataFromURL(NSURL(string: url)!, completion:{(data, error) -> Void in
+            if let urlData = data {
+                succeed(couponsData: urlData)
+            }else{
+                errorFound(couponsData: error)
+            }
+        })
+    }
+    
+    class func getAllUsedCouponsOffsetWithSuccess(coupon_id: Int, offset: Int, success succeed: ((couponsData: NSData!) -> Void),failure errorFound: ((couponsData: NSError?) -> Void)) {
+        let url = "\(Utilities.dopURL)coupon/all/used/for/user/offset/get/?offset=\(offset)&coupon_id=\(coupon_id)"
+        Utilities.loadDataFromURL(NSURL(string: url)!, completion:{(data, error) -> Void in
+            if let urlData = data {
+                succeed(couponsData: urlData)
+            }else{
+                errorFound(couponsData: error)
+            }
+        })
+    }
 }
+
+

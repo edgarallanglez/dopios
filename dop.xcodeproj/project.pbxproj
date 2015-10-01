@@ -11,6 +11,7 @@
 		9D0DB4711B17D2DB0009FE6C /* NearbyMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0DB4701B17D2DB0009FE6C /* NearbyMapViewController.swift */; };
 		9D0DB4731B17DE5A0009FE6C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D0DB4721B17DE5A0009FE6C /* MapKit.framework */; };
 		9D1021371B82A019005BED0C /* BranchProfileLastCampaign.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D1021361B82A019005BED0C /* BranchProfileLastCampaign.xib */; };
+		9D13DB3C1BBDA9400014F5BC /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9D13DB3B1BBDA9400014F5BC /* TwitterKitResources.bundle */; settings = {ASSET_TAGS = (); }; };
 		9D1FCED71B79295700F42F6D /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1FCED61B79295700F42F6D /* SegmentedControl.swift */; };
 		9D2BDFE41B9DF524003F1260 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0FE26D01B9A4D12004EB402 /* SearchController.swift */; };
 		9D33260F1AF7ED1C00498801 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D33260E1AF7ED1C00498801 /* AppDelegate.swift */; };
@@ -132,6 +133,7 @@
 		9D0DB4701B17D2DB0009FE6C /* NearbyMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyMapViewController.swift; sourceTree = "<group>"; };
 		9D0DB4721B17DE5A0009FE6C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		9D1021361B82A019005BED0C /* BranchProfileLastCampaign.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BranchProfileLastCampaign.xib; sourceTree = "<group>"; };
+		9D13DB3B1BBDA9400014F5BC /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TwitterKitResources.bundle; path = dop/TwitterKitResources.bundle; sourceTree = "<group>"; };
 		9D1FCED61B79295700F42F6D /* SegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
 		9D3326091AF7ED1C00498801 /* dop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D33260D1AF7ED1C00498801 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -293,6 +295,7 @@
 		079462BCCDF3FAF530C45E4E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9D13DB3B1BBDA9400014F5BC /* TwitterKitResources.bundle */,
 				9D9C1B2C1B83B3DB00F7895B /* FBSDKCoreKit.framework */,
 				9D9C1B2A1B83B0D900F7895B /* FBSDKShareKit.framework */,
 				A0EC059C1B7D1FD5003CADB2 /* UIKit.framework */,
@@ -389,8 +392,6 @@
 				A060F7851B702FAC009D6ADB /* CouponDetailViewController.swift */,
 				9D697C791B5EF13000D786AA /* iconfonts-fontawesome.swift */,
 				A09AB4E11AF99136004287F7 /* SwiftyJSON.swift */,
-				A0578C621B0E7D2B0033B5BD /* UserProfileController.swift */,
-				A0578C631B0E7D2B0033B5BD /* UserProfileViewController.swift */,
 				9D4C04801B18EAF600D5DCEE /* FontAwesome.ttf */,
 				9DA3C8951B90C117000D40F2 /* Images.xcassets */,
 				A0EB97AF1B05131E005112EF /* Utilities.swift */,
@@ -581,6 +582,8 @@
 		A0EB97AE1B03E198005112EF /* User */ = {
 			isa = PBXGroup;
 			children = (
+				A0578C631B0E7D2B0033B5BD /* UserProfileViewController.swift */,
+				A0578C621B0E7D2B0033B5BD /* UserProfileController.swift */,
 				A0EB97AC1B03E16A005112EF /* User.swift */,
 			);
 			name = User;
@@ -686,6 +689,7 @@
 				A04CC2101BBD968E001AF7E0 /* ToExpireCoupon.xib in Resources */,
 				9D4D298D1B9F50A100CE58A9 /* Montserrat-UltraLight.otf in Resources */,
 				9D5DA89B1B9E55DB00954B30 /* Montserrat-Bold.otf in Resources */,
+				9D13DB3C1BBDA9400014F5BC /* TwitterKitResources.bundle in Resources */,
 				9D5DA89C1B9E55DB00954B30 /* Montserrat-Regular.otf in Resources */,
 				9D4C04811B18EB0200D5DCEE /* FontAwesome.ttf in Resources */,
 				A060F7841B701EFE009D6ADB /* heart.png in Resources */,
