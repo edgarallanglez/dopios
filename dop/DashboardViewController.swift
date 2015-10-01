@@ -71,7 +71,7 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
         let coupon_t = NSBundle.mainBundle().loadNibNamed("TrendingCoupon", owner: self, options:
             nil)[0] as! TrendingCoupon
         
-        coupon_t.move(CGFloat(margin))
+        coupon_t.move(CGFloat(margin),y:0.0)
 
         //trendingScroll.addSubview(coupon_t);
     
@@ -79,7 +79,7 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
          let coupon_t2 = NSBundle.mainBundle().loadNibNamed("TrendingCoupon", owner: self, options:
             nil)[0] as! TrendingCoupon
         
-        coupon_t2.move(CGFloat(margin + 180 + margin))
+        coupon_t2.move(CGFloat(margin + 180 + margin ),y:0.0)
         //trendingScroll.addSubview(coupon_t2);
         
         
@@ -253,7 +253,7 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
                         
                         position = positionX+((margin+couponWidth)*index)
                         
-                        coupon_box.move(CGFloat(position))
+                        coupon_box.move(CGFloat(position),y: 0)
 
                         let imageUrl = NSURL(string: "\(Utilities.dopImagesURL)\(coupon.company_id)/\(coupon.logo)")
                         
