@@ -30,6 +30,17 @@ class DashboardController {
             }
         })
     }
+    class func getAlmostExpiredCouponsWithSuccess(success succeed: ((couponsData: NSData!) -> Void), failure errorFound:((couponsData: NSError?) -> Void )) {
+        let url = "\(Utilities.dopURL)coupon/almost/expired/get/"
+        print(url)
+        Utilities.loadDataFromURL(NSURL(string: url)!, completion: {(data, error) -> Void in
+            if let urlData = data {
+                succeed(couponsData: urlData)
+            }else{
+                errorFound(couponsData: error)
+            }
+        })
+    }
     
 /*    class func getTrendingCouponsWithSuccess(success succeed: ((couponsData: NSData!) -> Void),failure errorFound: ((couponsData: NSError?) -> Void)) {
         let url = "\(Utilities.dopURL)coupon/trending/get"

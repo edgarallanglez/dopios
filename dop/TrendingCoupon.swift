@@ -41,10 +41,18 @@ class TrendingCoupon: UIView {
         super.init(frame: CGRect(x: 0, y: 0, width: 180, height: height))
         
         
-        //self.addSubview(self.view)
+        logo.userInteractionEnabled = true
         
-
+        let gesture = UITapGestureRecognizer(target: self, action: "tapCoupon:")
         
+        self.addGestureRecognizer(gesture)
+        
+        
+        self.userInteractionEnabled = true
+        
+    }
+    func tapCoupon(sender:UITapGestureRecognizer){
+        print("TOCADO")
     }
     
     required init(coder aDecoder: NSCoder) {
