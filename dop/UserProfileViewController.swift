@@ -12,6 +12,8 @@ class UserProfileViewController: UIViewController {
 
     @IBOutlet weak var scrollViewBox: UIScrollView!
     @IBOutlet var profile_image: UIImageView!
+    
+    var secondPage: UIView = UIView()
     var userImage: UIImage!
     var userImagePath:String=""
     var userId:Int!
@@ -26,13 +28,11 @@ class UserProfileViewController: UIViewController {
         profile_image.layer.masksToBounds = true
         
         UserProfileController.getUserProfile("\(Utilities.dopURL)\(userId)/profile"){ profileData in
-            
             let json = JSON(data: profileData)
             print(json)
         }
         
         getCoupons()
-        
     }
     
     func downloadImage(url:NSURL) {
@@ -80,7 +80,7 @@ class UserProfileViewController: UIViewController {
                 let margin = 18
                 let couponWidth = 180
                 let couponHeight = 245
-                var height = 15
+                let height = 15
                 var i: Int = 0
 
                 for (index, coupon) in self.historyCoupon.enumerate() {
@@ -112,8 +112,13 @@ class UserProfileViewController: UIViewController {
                     self.scrollViewBox.addSubview(coupon_box);
                 }
                 
+                self.secondPage.frame.size = CGSizeMake(self.scrollViewBox.frame.size.width, CGFloat(500))
+                self.secondPage.backgroundColor = UIColor.grayColor()
+                self.scrollViewBox.pagingEnabled = true
                 let trendingScroll_size = (((margin + couponHeight) * self.historyCoupon.count) + margin) / 2
-                self.scrollViewBox.contentSize = CGSizeMake(self.scrollViewBox.frame.size.width, CGFloat(trendingScroll_size))
+                self.scrollViewBox.contentSize = CGSizeMake(self.scrollViewBox.frame.size.width * 2, CGFloat(trendingScroll_size))
+                self.secondPage.frame.origin.x = self.scrollViewBox.frame.width
+                self.scrollViewBox.addSubview(self.secondPage)
             });
             },
             
