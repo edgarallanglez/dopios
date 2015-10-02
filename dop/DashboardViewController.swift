@@ -12,6 +12,7 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
     
     @IBOutlet weak var menuButton:UIBarButtonItem!
 
+    @IBOutlet var toExpireScroll: UIScrollView!
     @IBOutlet var mainScroll: UIScrollView!
     @IBOutlet var trendingContainer: UIView!
     @IBOutlet var trendingScroll: UIScrollView!
@@ -25,7 +26,8 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
     var branches = [Branch]()
     
     var trending = [Coupon]()
-    
+    var almost_expired = [Coupon]()
+
 
     var cachedImages: [String: UIImage] = [:]
 
@@ -60,7 +62,7 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
         
         branchesScroll.delegate = self
         
-        
+        getToExpireCoupons()
         getCoupons()
     }
     override func viewWillAppear(animated: Bool) {
@@ -281,6 +283,75 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
 
                     self.trendingScroll.contentSize = CGSizeMake(CGFloat(trendingScroll_size), self.trendingScroll.frame.size.height)
                 });
+            },
+            
+            failure: { (error) -> Void in
+                dispatch_async(dispatch_get_main_queue(), {
+                    
+                })
+        })
+        
+    }
+    
+    func getToExpireCoupons() {
+        almost_expired = [Coupon]()
+        
+        DashboardController.getAlmostExpiredCouponsWithSuccess(success: { (couponsData) -> Void in
+            let json = JSON(data: couponsData)
+            
+            for (_, subJson): (String, JSON) in json["data"]{
+                let coupon_id = subJson["coupon_id"].int
+                let coupon_name = subJson["name"].string
+                let coupon_description = subJson["description"].string
+                let coupon_limit = subJson["limit"].string
+                let coupon_exp = "2015-09-30"
+                let coupon_logo = subJson["logo"].string
+                let branch_id = subJson["branch_id"].int
+                let company_id = subJson["company_id"].int
+                let total_likes = subJson["total_likes"].int
+                let user_like = subJson["user_like"].int
+                let latitude = subJson["latitude"].double!
+                let longitude = subJson["longitude"].double!
+                let banner = subJson["banner"].string ?? ""
+                //                    let categoryId = subJson["category_id"].int!
+                
+                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: 1)
+                
+                self.almost_expired.append(model)
+            }
+            
+            dispatch_async(dispatch_get_main_queue(), {
+                let margin = 18
+                let positionX = 18
+                let couponWidth = 180
+                
+                for (index, coupon) in self.almost_expired.enumerate() {
+                    let coupon_box:ToExpireCoupon = NSBundle.mainBundle().loadNibNamed("ToExpireCoupon", owner: self, options:
+                        nil)[0] as! ToExpireCoupon
+                    
+                    
+                    var position = 0
+                    
+                    
+                    position = positionX+((margin+couponWidth)*index)
+                    
+                    coupon_box.move(CGFloat(position),y: 0)
+                    
+                    
+                    coupon_box.descriptionLbl.text = coupon.couponDescription
+                    coupon_box.branchNameLbl.text = coupon.name
+                    
+                    coupon_box.branchNameLbl.sizeToFit()
+                    
+                    //coupon_box.likes = trending[index].likes
+                    
+                                        
+                    self.toExpireScroll.addSubview(coupon_box);
+                }
+                let trendingScroll_size = ((margin+couponWidth)*self.almost_expired.count)+margin
+                
+                self.toExpireScroll.contentSize = CGSizeMake(CGFloat(trendingScroll_size), self.toExpireScroll.frame.size.height)
+            });
             },
             
             failure: { (error) -> Void in

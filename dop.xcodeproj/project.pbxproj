@@ -50,6 +50,7 @@
 		A04860961B0D5355009FEF1F /* A0JWTDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = A04860951B0D5355009FEF1F /* A0JWTDecoder.m */; };
 		A04860981B0D5658009FEF1F /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A04860971B0D5658009FEF1F /* FacebookSDK.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		A04CC2101BBD968E001AF7E0 /* ToExpireCoupon.xib in Resources */ = {isa = PBXBuildFile; fileRef = A04CC20F1BBD968E001AF7E0 /* ToExpireCoupon.xib */; settings = {ASSET_TAGS = (); }; };
+		A04CC2121BBDBB16001AF7E0 /* ToExpireCoupon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04CC2111BBDBB16001AF7E0 /* ToExpireCoupon.swift */; settings = {ASSET_TAGS = (); }; };
 		A04E388A1AFC3549007C7B69 /* starbucks.gif in Resources */ = {isa = PBXBuildFile; fileRef = A04E38891AFC3549007C7B69 /* starbucks.gif */; };
 		A0578C521B0D64AD0033B5BD /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0578C4E1B0D64AD0033B5BD /* Fabric.framework */; };
 		A0578C551B0D64AD0033B5BD /* TwitterCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0578C511B0D64AD0033B5BD /* TwitterCore.framework */; };
@@ -174,6 +175,7 @@
 		A04860951B0D5355009FEF1F /* A0JWTDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = A0JWTDecoder.m; sourceTree = "<group>"; };
 		A04860971B0D5658009FEF1F /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = dop/FacebookSDK.framework; sourceTree = "<group>"; };
 		A04CC20F1BBD968E001AF7E0 /* ToExpireCoupon.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ToExpireCoupon.xib; sourceTree = "<group>"; };
+		A04CC2111BBDBB16001AF7E0 /* ToExpireCoupon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToExpireCoupon.swift; sourceTree = "<group>"; };
 		A04E38891AFC3549007C7B69 /* starbucks.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = starbucks.gif; sourceTree = "<group>"; };
 		A0578C4E1B0D64AD0033B5BD /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		A0578C511B0D64AD0033B5BD /* TwitterCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterCore.framework; sourceTree = "<group>"; };
@@ -516,6 +518,7 @@
 			children = (
 				A086ACE01BB2157A003133BA /* TrendingCoupon.xib */,
 				A04CC20F1BBD968E001AF7E0 /* ToExpireCoupon.xib */,
+				A04CC2111BBDBB16001AF7E0 /* ToExpireCoupon.swift */,
 				A086ACE21BB383A4003133BA /* TrendingCoupon.swift */,
 				A065EB311BA8E60A003B7390 /* DashboardController.swift */,
 				A09AB4DA1AF95A26004287F7 /* DashboardViewController.swift */,
@@ -746,6 +749,7 @@
 				9D2BDFE41B9DF524003F1260 /* SearchController.swift in Sources */,
 				9DBB7A401B968437005700B9 /* UIImage+ImageEffects.h in Sources */,
 				9D697C7A1B5EF13000D786AA /* iconfonts-fontawesome.swift in Sources */,
+				A04CC2121BBDBB16001AF7E0 /* ToExpireCoupon.swift in Sources */,
 				9D7FA0781BBC4FF000EAEC36 /* SettingsViewController.swift in Sources */,
 				A0EC05991B7D1C69003CADB2 /* SWRevealViewController.m in Sources */,
 				9D0C16841B4DC6EB0088DE2F /* BranchProfileViewController.swift in Sources */,
