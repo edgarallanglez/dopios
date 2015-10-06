@@ -68,28 +68,7 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        let margin = 18
-        
-        let coupon_t = NSBundle.mainBundle().loadNibNamed("TrendingCoupon", owner: self, options:
-            nil)[0] as! TrendingCoupon
-        
-        coupon_t.move(CGFloat(margin),y:0.0)
-
-        //trendingScroll.addSubview(coupon_t);
-    
-        
-         let coupon_t2 = NSBundle.mainBundle().loadNibNamed("TrendingCoupon", owner: self, options:
-            nil)[0] as! TrendingCoupon
-        
-        coupon_t2.move(CGFloat(margin + 180 + margin ),y:0.0)
-        //trendingScroll.addSubview(coupon_t2);
-        
-        
-        //trendingScroll.contentSize = CGSizeMake(700, trendingScroll.frame.size.height)
-        
-        
-       // coupon_t2 = NSBundle.mainBundle().loadNibNamed("TrendingCoupon", owner: self, options: nil)[0] as! TrendingCoupon
-        
+                
     }
     
     override func didReceiveMemoryWarning() {
@@ -255,7 +234,7 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
                         
                         position = positionX+((margin+couponWidth)*index)
                         
-                        coupon_box.move(CGFloat(position),y: 0)
+                        coupon_box.setCoupon(coupon, view:self,x: CGFloat(position),y: 0)
 
                         let imageUrl = NSURL(string: "\(Utilities.dopImagesURL)\(coupon.company_id)/\(coupon.logo)")
                         
@@ -277,7 +256,15 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
                         coupon_box.layer.borderWidth = 0.5
                         coupon_box.layer.borderColor = UIColor.lightGrayColor().CGColor
                         
-                        self.trendingScroll.addSubview(coupon_box);
+                        self.trendingScroll.addSubview(coupon_box)
+                        
+                        let gesture = UITapGestureRecognizer(target: self, action: "tapCoupon:")
+                        
+                        coupon_box.addGestureRecognizer(gesture)
+                        
+                        coupon_box.tag = index
+                        
+                        print("sd \(coupon_box.tag)")
                     }
                     let trendingScroll_size = ((margin+couponWidth)*self.trending.count)+margin
 
@@ -291,6 +278,9 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
                 })
         })
         
+    }
+    func tapCoupon(sender:UITapGestureRecognizer){
+        self.performSegueWithIdentifier("couponDetail", sender: sender.view)
     }
     
     func getToExpireCoupons() {
@@ -400,19 +390,24 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let cell = sender as? CouponCell {
+            let i = sender!.tag
+        
+            print("Tag \(i)")
             
-            /*let i = couponsTableView.indexPathForCell(cell)!.section
-            let model = self.coupons[i]
-            
-            if segue.identifier == "branchProfile" {
-                let view = segue.destinationViewController as! BranchProfileViewController
+            let model = self.trending[i]
+            if segue.identifier == "couponDetail" {
+                let coupon_box:TrendingCoupon = sender as! TrendingCoupon
+                let view = segue.destinationViewController as! CouponDetailViewController
+                view.couponsName = model.name
+                view.couponsDescription = model.couponDescription
+                view.location = model.location
                 view.branchId = model.branch_id
-                view.logo = cell.branchImage.currentBackgroundImage
-                view.logoString = model.logo
-                
-            }*/
-        }
+                view.couponId = model.id
+                view.logo = coupon_box.logo.image
+                view.banner = model.banner
+                view.companyId = model.company_id
+                view.categoryId = model.categoryId
+            }
         
     }
     @IBAction func goToPage(sender: AnyObject) {

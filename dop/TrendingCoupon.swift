@@ -15,7 +15,6 @@ class TrendingCoupon: UIView {
     @IBOutlet var likes: UILabel!
     
     var viewController: UIViewController?
-    var couponId: Int!
     var coupon:Coupon!
     
     func loadItem(coupon:Coupon, viewController: UIViewController) {
@@ -34,32 +33,24 @@ class TrendingCoupon: UIView {
         }*/
     }
     
-    init(height:Int) {
-        print("AHLO")
-        
-        
-        super.init(frame: CGRect(x: 0, y: 0, width: 180, height: height))
-        
-        
-        logo.userInteractionEnabled = true
-        
-        let gesture = UITapGestureRecognizer(target: self, action: "tapCoupon:")
-        
-        self.addGestureRecognizer(gesture)
-        
-        
-        self.userInteractionEnabled = true
-        
+    init() {
+        super.init(frame: CGRect(x: 0, y: 0, width: 180, height: 230))
     }
+    
+    
     func tapCoupon(sender:UITapGestureRecognizer){
-        print("TOCADO")
+        self.viewController!.performSegueWithIdentifier("couponDetail", sender: self)
+        
+        
     }
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
     }
     
-    func move(x:CGFloat,y:CGFloat){
+    func setCoupon(coupon:Coupon, view:UIViewController, x:CGFloat, y:CGFloat){
+        self.coupon = coupon
+        self.viewController = view
         self.frame.origin = CGPointMake(x,y)
     }
     

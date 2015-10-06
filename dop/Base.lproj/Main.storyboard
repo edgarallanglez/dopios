@@ -3429,6 +3429,7 @@
                         <outlet property="toExpireScroll" destination="3rI-gy-Pno" id="3Se-AH-jsb"/>
                         <outlet property="trendingContainer" destination="rJo-EE-XIQ" id="wog-hB-pGO"/>
                         <outlet property="trendingScroll" destination="QHo-Qo-OIH" id="ufr-8q-5RG"/>
+                        <segue destination="Hpm-OJ-mEW" kind="show" identifier="couponDetail" id="AaG-PG-nLf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xE7-5S-XVQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3529,6 +3530,7 @@
         <image name="trophy" width="42" height="42"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="AaG-PG-nLf"/>
         <segue reference="jqZ-Ew-h2B"/>
         <segue reference="NZR-gR-mOn"/>
         <segue reference="H7K-TF-KnO"/>
