@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RewardsActivityCell" rowHeight="140" id="J8E-s9-4zJ" customClass="RewardsActivityCell" customModule="dop" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="350" height="140"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="J8E-s9-4zJ" id="bbz-b2-924">
+                <rect key="frame" x="0.0" y="0.0" width="350" height="139"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="add-person" translatesAutoresizingMaskIntoConstraints="NO" id="CYE-lj-7iP">
+                        <rect key="frame" x="8" y="11" width="70" height="70"/>
+                        <animations/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Edgar Allan Glez" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7dz-jc-RVd">
+                        <rect key="frame" x="80" y="11" width="126" height="21"/>
+                        <animations/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Asistió a cinepolis en" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ogd-Zp-d4A">
+                        <rect key="frame" x="86" y="31" width="144" height="21"/>
+                        <animations/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ayer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rQA-zC-hn6">
+                        <rect key="frame" x="307" y="11" width="34" height="21"/>
+                        <animations/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cuF-3T-O70">
+                        <rect key="frame" x="80" y="65" width="262" height="70"/>
+                        <animations/>
+                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="262" id="SKV-Yf-pdd"/>
+                        </constraints>
+                    </view>
+                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="79D-Xb-JfI">
+                        <rect key="frame" x="232" y="27" width="110" height="30"/>
+                        <animations/>
+                        <state key="normal" title="Plaza Cinepolis">
+                            <color key="titleColor" red="0.87058823529999996" green="0.0" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                    </button>
+                </subviews>
+                <animations/>
+                <constraints>
+                    <constraint firstItem="79D-Xb-JfI" firstAttribute="top" secondItem="bbz-b2-924" secondAttribute="topMargin" constant="19" id="C1H-qZ-A7d"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="rQA-zC-hn6" secondAttribute="trailing" constant="1" id="CPq-6U-KI1"/>
+                    <constraint firstItem="cuF-3T-O70" firstAttribute="top" secondItem="Ogd-Zp-d4A" secondAttribute="bottom" constant="13" id="Cfu-2k-FaR"/>
+                    <constraint firstItem="Ogd-Zp-d4A" firstAttribute="leading" secondItem="CYE-lj-7iP" secondAttribute="trailing" constant="8" id="E3Q-60-SSX"/>
+                    <constraint firstItem="CYE-lj-7iP" firstAttribute="top" secondItem="bbz-b2-924" secondAttribute="topMargin" constant="3" id="PPb-e1-qng"/>
+                    <constraint firstItem="7dz-jc-RVd" firstAttribute="top" secondItem="bbz-b2-924" secondAttribute="topMargin" constant="3" id="S4q-o0-rU8"/>
+                    <constraint firstItem="7dz-jc-RVd" firstAttribute="leading" secondItem="CYE-lj-7iP" secondAttribute="trailing" constant="2" id="dXu-HN-PDC"/>
+                    <constraint firstItem="Ogd-Zp-d4A" firstAttribute="top" secondItem="bbz-b2-924" secondAttribute="topMargin" constant="23" id="e4t-Ik-gve"/>
+                    <constraint firstItem="cuF-3T-O70" firstAttribute="top" secondItem="79D-Xb-JfI" secondAttribute="bottom" constant="8" id="gGh-QP-QUo"/>
+                    <constraint firstAttribute="bottom" secondItem="cuF-3T-O70" secondAttribute="bottom" constant="4" id="hUD-Dn-ZYN"/>
+                    <constraint firstAttribute="trailing" secondItem="cuF-3T-O70" secondAttribute="trailing" constant="8" id="oBN-WJ-uSW"/>
+                    <constraint firstItem="rQA-zC-hn6" firstAttribute="top" secondItem="bbz-b2-924" secondAttribute="topMargin" constant="3" id="roW-tc-XCT"/>
+                    <constraint firstItem="79D-Xb-JfI" firstAttribute="trailing" secondItem="bbz-b2-924" secondAttribute="trailingMargin" id="toU-gP-gLI"/>
+                    <constraint firstItem="CYE-lj-7iP" firstAttribute="leading" secondItem="bbz-b2-924" secondAttribute="leadingMargin" id="wf9-uq-ecW"/>
+                </constraints>
+            </tableViewCellContentView>
+            <animations/>
+            <point key="canvasLocation" x="324" y="98.5"/>
+        </tableViewCell>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+    </objects>
+    <resources>
+        <image name="add-person" width="32" height="32"/>
+    </resources>
+</document>

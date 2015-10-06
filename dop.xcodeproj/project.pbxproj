@@ -18,6 +18,10 @@
 		9D3326111AF7ED1C00498801 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3326101AF7ED1C00498801 /* LoginViewController.swift */; };
 		9D3326191AF7ED1C00498801 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D3326171AF7ED1C00498801 /* LaunchScreen.xib */; };
 		9D3326251AF7ED1C00498801 /* dopTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3326241AF7ED1C00498801 /* dopTests.swift */; };
+		9D42966D1BBEFE17000B4A21 /* RewardsActivityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D42966C1BBEFE17000B4A21 /* RewardsActivityCell.xib */; settings = {ASSET_TAGS = (); }; };
+		9D42966F1BBEFE37000B4A21 /* RewardsActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D42966E1BBEFE37000B4A21 /* RewardsActivityCell.swift */; settings = {ASSET_TAGS = (); }; };
+		9D4296711BBF038D000B4A21 /* RewardsActivityHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4296701BBF038D000B4A21 /* RewardsActivityHeader.swift */; settings = {ASSET_TAGS = (); }; };
+		9D4296731BBF03D1000B4A21 /* RewardsActivityHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D4296721BBF03D1000B4A21 /* RewardsActivityHeader.xib */; settings = {ASSET_TAGS = (); }; };
 		9D4C04811B18EB0200D5DCEE /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9D4C04801B18EAF600D5DCEE /* FontAwesome.ttf */; };
 		9D4D298C1B9F50A100CE58A9 /* Montserrat-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9D4D298A1B9F50A100CE58A9 /* Montserrat-Light.otf */; };
 		9D4D298D1B9F50A100CE58A9 /* Montserrat-UltraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9D4D298B1B9F50A100CE58A9 /* Montserrat-UltraLight.otf */; };
@@ -144,6 +148,10 @@
 		9D33261E1AF7ED1C00498801 /* dopTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = dopTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D3326231AF7ED1C00498801 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9D3326241AF7ED1C00498801 /* dopTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dopTests.swift; sourceTree = "<group>"; };
+		9D42966C1BBEFE17000B4A21 /* RewardsActivityCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RewardsActivityCell.xib; sourceTree = "<group>"; };
+		9D42966E1BBEFE37000B4A21 /* RewardsActivityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewardsActivityCell.swift; sourceTree = "<group>"; };
+		9D4296701BBF038D000B4A21 /* RewardsActivityHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewardsActivityHeader.swift; sourceTree = "<group>"; };
+		9D4296721BBF03D1000B4A21 /* RewardsActivityHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RewardsActivityHeader.xib; sourceTree = "<group>"; };
 		9D4C04801B18EAF600D5DCEE /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
 		9D4D298A1B9F50A100CE58A9 /* Montserrat-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Light.otf"; path = "dop/Montserrat-Light.otf"; sourceTree = "<group>"; };
 		9D4D298B1B9F50A100CE58A9 /* Montserrat-UltraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-UltraLight.otf"; path = "dop/Montserrat-UltraLight.otf"; sourceTree = "<group>"; };
@@ -588,6 +596,10 @@
 				A0578C631B0E7D2B0033B5BD /* UserProfileViewController.swift */,
 				A0578C621B0E7D2B0033B5BD /* UserProfileController.swift */,
 				A0EB97AC1B03E16A005112EF /* User.swift */,
+				9D42966C1BBEFE17000B4A21 /* RewardsActivityCell.xib */,
+				9D42966E1BBEFE37000B4A21 /* RewardsActivityCell.swift */,
+				9D4296701BBF038D000B4A21 /* RewardsActivityHeader.swift */,
+				9D4296721BBF03D1000B4A21 /* RewardsActivityHeader.xib */,
 			);
 			name = User;
 			sourceTree = "<group>";
@@ -694,6 +706,7 @@
 				9D5DA89B1B9E55DB00954B30 /* Montserrat-Bold.otf in Resources */,
 				9D13DB3C1BBDA9400014F5BC /* TwitterKitResources.bundle in Resources */,
 				9D5DA89C1B9E55DB00954B30 /* Montserrat-Regular.otf in Resources */,
+				9D4296731BBF03D1000B4A21 /* RewardsActivityHeader.xib in Resources */,
 				9D4C04811B18EB0200D5DCEE /* FontAwesome.ttf in Resources */,
 				A060F7841B701EFE009D6ADB /* heart.png in Resources */,
 				9DB3DABD1B73ED96004AC0F1 /* BranchProfileAboutView.xib in Resources */,
@@ -705,6 +718,7 @@
 				A086ACE11BB2157A003133BA /* TrendingCoupon.xib in Resources */,
 				9D9D1FF11B9F4BE3000C1299 /* starbucks_banner.jpg in Resources */,
 				A0578C601B0E40D30033B5BD /* GooglePlus.bundle in Resources */,
+				9D42966D1BBEFE17000B4A21 /* RewardsActivityCell.xib in Resources */,
 				9DA3C8961B90C117000D40F2 /* Images.xcassets in Resources */,
 				A0FE26D31B9AB5EB004EB402 /* search@x3.png in Resources */,
 				A0F7E9211AFAE48500A4F0F2 /* CouponCell.xib in Resources */,
@@ -786,6 +800,7 @@
 				A060F7821B70184F009D6ADB /* PromoCollectionCell.swift in Sources */,
 				A0DF72951B13E262006EE8F4 /* Friend.swift in Sources */,
 				A082F4831B18CEE6001C8C52 /* NewsfeedViewController.swift in Sources */,
+				9D4296711BBF038D000B4A21 /* RewardsActivityHeader.swift in Sources */,
 				9DACBBF91BA8CE0200CAEECB /* FilterSegmentedControl.swift in Sources */,
 				9DE55C441BB07C0A005F9776 /* PromoSegmentedController.swift in Sources */,
 				9D9C9C911BB2155B00D9F986 /* Annotation.swift in Sources */,
@@ -793,6 +808,7 @@
 				9DA85CFD1B82587E009DA186 /* BranchProfileLastCampaign.swift in Sources */,
 				A0FCF9D81B98D59200BB4537 /* SearchViewController.swift in Sources */,
 				A060F7891B717DB9009D6ADB /* UIImage+ImageEffects.m in Sources */,
+				9D42966F1BBEFE37000B4A21 /* RewardsActivityCell.swift in Sources */,
 				A060F77A1B6C4CA3009D6ADB /* TabbarController.swift in Sources */,
 				9DB3DABB1B73C28A004AC0F1 /* BranchProfileTopView.swift in Sources */,
 				9DA7AA9F1B50309400297690 /* BranchProfileController.swift in Sources */,
