@@ -15,7 +15,6 @@ class TrendingCoupon: UIView {
     @IBOutlet var likes: UILabel!
     
     var viewController: UIViewController?
-    var couponId: Int!
     var coupon:Coupon!
     
     func loadItem(coupon:Coupon, viewController: UIViewController) {
@@ -51,8 +50,12 @@ class TrendingCoupon: UIView {
         self.userInteractionEnabled = true
         
     }
+    
+    
     func tapCoupon(sender:UITapGestureRecognizer){
-        print("TOCADO")
+        self.viewController!.performSegueWithIdentifier("couponDetail", sender: self)
+        
+        
     }
     
     required init(coder aDecoder: NSCoder) {
