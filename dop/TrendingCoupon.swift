@@ -33,22 +33,8 @@ class TrendingCoupon: UIView {
         }*/
     }
     
-    init(height: Int) {
-        print("AHLO")
-        
-        
-        super.init(frame: CGRect(x: 0, y: 0, width: 180, height: height))
-        
-        
-        logo.userInteractionEnabled = true
-        
-        let gesture = UITapGestureRecognizer(target: self, action: "tapCoupon:")
-        
-        self.addGestureRecognizer(gesture)
-        
-        
-        self.userInteractionEnabled = true
-        
+    init() {
+        super.init(frame: CGRect(x: 0, y: 0, width: 180, height: 230))
     }
     
     
@@ -62,8 +48,10 @@ class TrendingCoupon: UIView {
         super.init(coder: aDecoder)!
     }
     
-    func move(x: CGFloat, y: CGFloat){
-        self.frame.origin = CGPointMake(x, y)
+    func setCoupon(coupon:Coupon, view:UIViewController, x:CGFloat, y:CGFloat){
+        self.coupon = coupon
+        self.viewController = view
+        self.frame.origin = CGPointMake(x,y)
     }
     
 }
