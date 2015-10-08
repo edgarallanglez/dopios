@@ -64,6 +64,7 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
         
         getToExpireCoupons()
         getCoupons()
+        getNearestCoupons()
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -115,7 +116,6 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
             }
             
             dispatch_async(dispatch_get_main_queue(), {
-                print(json)
                 self.reloadBranchCarousel()
                 self.pageControl.numberOfPages = self.branches.count
             });
@@ -166,7 +166,6 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
         
             branchesScroll.addSubview(branchNameLbl)
 
-            print("Item \(index): \(branch.id)")
         }
         
         branchesScroll.contentSize = CGSizeMake(branchesScroll.frame.size.width*CGFloat(branches.count), branchesScroll.frame.size.height)
@@ -264,7 +263,6 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
                         
                         coupon_box.tag = index
                         
-                        print("sd \(coupon_box.tag)")
                     }
                     let trendingScroll_size = ((margin+couponWidth)*self.trending.count)+margin
 
@@ -374,7 +372,6 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
         success:{(couponsData) -> Void in
             let json = JSON(data: couponsData)
             
-            print(json)
         },
         failure: { (error) -> Void in
             
@@ -392,8 +389,7 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
             let i = sender!.tag
         
-            print("Tag \(i)")
-            
+        
             let model = self.trending[i]
             if segue.identifier == "couponDetail" {
                 let coupon_box:TrendingCoupon = sender as! TrendingCoupon
@@ -417,6 +413,35 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
         branchesScroll.setContentOffset(CGPointMake(page, 0), animated: true)
             
         
+    }
+    
+    func getNearestCoupons() {
+        let latitude = User.coordinate.latitude
+        let longitude = User.coordinate.longitude
+        
+        let params:[String:AnyObject] = [
+            "latitude": latitude,
+            "longitude": longitude,
+            "radio": 15
+        ]
+        print(params, terminator: "")
+        DashboardController.getNearestCoupons(params, success: {(branchesData) -> Void in
+            let json = JSON(data: branchesData)
+            for (_, branch) in json["data"] {
+                let latitude = branch["latitude"].double
+                let longitude = branch["longitude"].double
+                
+                let newLocation = CLLocationCoordinate2DMake(latitude!, longitude!)
+                
+            }
+            dispatch_async(dispatch_get_main_queue()) {
+                
+                print(json)
+                
+            }
+            },
+            failure:{(branchesData)-> Void in
+        })
     }
 
 }

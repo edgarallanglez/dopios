@@ -42,17 +42,19 @@ class DashboardController {
         })
     }
     
-/*    class func getTrendingCouponsWithSuccess(success succeed: ((couponsData: NSData!) -> Void),failure errorFound: ((couponsData: NSError?) -> Void)) {
-        let url = "\(Utilities.dopURL)coupon/trending/get"
-
-        Utilities.getDataFromUrl(NSURL(string: url)!, completion:{(data, error) -> Void in
+    class func getNearestCoupons(params:[String:AnyObject], success succeed: ((branchesData: NSData!) -> Void),failure errorFound: ((branchesData: NSError?) -> Void)) {
+        let latitude: AnyObject! = params["latitude"]
+        let longitude: AnyObject! = params["longitude"]
+        let radio: AnyObject! = params["radio"]
+        print(latitude, longitude, radio)
+        let url = "\(Utilities.dopURL)coupon/nearest/get/?latitude=\(latitude)&longitude=\(longitude)&radio=\(radio)"
+        Utilities.sendDataToURL(NSURL(string: url)!, method:"POST", params: params, completion:{(data, error) -> Void in
             if let urlData = data {
-                succeed(friendsData: urlData)
+                succeed(branchesData: urlData)
             }else{
-                errorFound(friendsData: error)
+                errorFound(branchesData: error)
             }
         })
     }
-*/
     
 }
