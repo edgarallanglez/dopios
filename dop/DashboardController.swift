@@ -10,11 +10,13 @@ import Foundation
 
 class DashboardController {
     
-    class func getDashboardBranchesWithSuccess(success: ((branchData: NSData!) -> Void)) {
+    class func getDashboardBranchesWithSuccess(success succeed: ((branchData: NSData!) -> Void), failure errorFound:((branchData: NSError?) -> Void )) {
         let url = "\(Utilities.dopURL)company/branch/dashboard"
         Utilities.loadDataFromURL(NSURL(string: url)!, completion: {(data, error) -> Void in
             if let urlData = data {
-                success(branchData: urlData)
+                succeed(branchData: urlData)
+            }else{
+                errorFound(branchData: error)
             }
         })
     }

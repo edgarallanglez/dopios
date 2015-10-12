@@ -7,12 +7,19 @@
 //
 
 import UIKit
+import QuartzCore
 
 class DashboardViewController: UIViewController, CLLocationManagerDelegate, UIScrollViewDelegate {
     
     @IBOutlet weak var menuButton:UIBarButtonItem!
 
+    @IBOutlet var trendingPageControl: UIPageControl!
+    @IBOutlet var nearestPageControl: UIPageControl!
+    @IBOutlet var toExpirePageControl: UIPageControl!
+    @IBOutlet var nearestContainer: UIView!
+    @IBOutlet var nearestScroll: UIScrollView!
     @IBOutlet var toExpireScroll: UIScrollView!
+    @IBOutlet var toExpireContainer: UIView!
     @IBOutlet var mainScroll: UIScrollView!
     @IBOutlet var trendingContainer: UIView!
     @IBOutlet var trendingScroll: UIScrollView!
@@ -20,6 +27,10 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
     @IBOutlet var pageControl: UIPageControl!
     @IBOutlet var branchesScroll: UIScrollView!
     var locValue:CLLocationCoordinate2D?
+    
+
+
+    
 
     var coupons = [Coupon]()
     
@@ -27,13 +38,16 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
     
     var trending = [Coupon]()
     var almost_expired = [Coupon]()
+    var nearest = [Coupon]()
 
 
     var cachedImages: [String: UIImage] = [:]
 
     var locationManager: CLLocationManager!
+    var obtained_location:Bool = false
     
-    var timer:NSTimer? = nil
+    var updater:CADisplayLink? = nil
+    var firstCallToUpdater:Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +58,7 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
         
         mainScroll.frame.size = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height)
         
-        mainScroll.contentSize = CGSizeMake(mainScroll.frame.size.width, 3000)
+        mainScroll.contentSize = CGSizeMake(mainScroll.frame.size.width, 4000)
 
         
         
@@ -58,47 +72,94 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
         locationManager.startUpdatingLocation()
         
         
-        getTopBranches()
         
+        mainScroll.delegate = self
         branchesScroll.delegate = self
+        trendingScroll.delegate = self
+        toExpireScroll.delegate = self
+        nearestScroll.delegate = self
+        
+        branchesScroll.alpha = 0
+        pageControlContainer.alpha = 0
+        trendingContainer.alpha = 0
+        toExpireContainer.alpha = 0
+        nearestContainer.alpha = 0
+        
+        
         
         getToExpireCoupons()
-        getCoupons()
-        getNearestCoupons()
+        getTrendingCoupons()
+        
+        
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestAlwaysAuthorization()
+        locationManager.startUpdatingLocation()
+        User.coordinate = locationManager.location!.coordinate
+        
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
-                
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+        getTopBranches()
+
     }
     
 
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        if(scrollView == branchesScroll){
+            updater!.paused = false
+        }
         
     }
     func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {
-        /*let pagenumber=Int(branchesScroll.contentOffset.x / branchesScroll.frame.size.width)
-        pageControl.currentPage = pagenumber*/
+        
     }
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {
-        let pagenumber=Int(branchesScroll.contentOffset.x / branchesScroll.frame.size.width)
-        pageControl.currentPage = pagenumber
+        if(scrollView == branchesScroll){
+           /* let pagenumber=Int(branchesScroll.contentOffset.x / branchesScroll.frame.size.width)
+            pageControl.currentPage = pagenumber*/
+            updater!.paused = true
+        }
         
-        timer?.invalidate()
     }
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        let pagenumber=Int(branchesScroll.contentOffset.x / branchesScroll.frame.size.width)
-        pageControl.currentPage = pagenumber
+        print(mainScroll.contentOffset.y)
+        if(scrollView == mainScroll){
+            if(mainScroll.contentOffset.y<=0){
+                branchesScroll.frame.origin.y = (mainScroll.contentOffset.y)
+            }
+        }
+        if(scrollView == branchesScroll){
+            let pagenumber=Int(branchesScroll.contentOffset.x / branchesScroll.frame.size.width)
+            pageControl.currentPage = pagenumber
+        }
+        if(scrollView == trendingScroll){
+            //54 es la suma de los margenes izq y derecho de cada cupon
+            let pagenumber=Int((trendingScroll.contentOffset.x + 54) / trendingScroll.frame.size.width)
+            trendingPageControl.currentPage = pagenumber
+        }
+        if(scrollView == nearestScroll){
+            //54 es la suma de los margenes izq y derecho de cada cupon
+            let pagenumber=Int((nearestScroll.contentOffset.x + 54) / nearestScroll.frame.size.width)
+            nearestPageControl.currentPage = pagenumber
+        }
+        if(scrollView == toExpireScroll){
+            //54 es la suma de los margenes izq y derecho de cada cupon
+            let pagenumber=Int((toExpireScroll.contentOffset.x + 54) / toExpireScroll.frame.size.width)
+            toExpirePageControl.currentPage = pagenumber
+        }
     }
     func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        timer = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "changePage", userInfo: nil, repeats: true)
+     
+        
     }
     func getTopBranches() {
-        DashboardController.getDashboardBranchesWithSuccess { (branchesData) -> Void in
+        DashboardController.getDashboardBranchesWithSuccess(success:{(branchesData) -> Void in
             let json = JSON(data: branchesData)
             
             for (_, subJson): (String, JSON) in json["data"] {
@@ -118,21 +179,40 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
             dispatch_async(dispatch_get_main_queue(), {
                 self.reloadBranchCarousel()
                 self.pageControl.numberOfPages = self.branches.count
+                
+                self.showViewAnimation(self.branchesScroll, delay: 0, duration:0.3)
+                self.showViewAnimation(self.pageControlContainer, delay:0, duration:0.3)
             });
-        }
+        },
+        failure: { (error) -> Void in
+            dispatch_async(dispatch_get_main_queue(), {
+                    
+            })
+        })
+
     }
     func reloadBranchCarousel(){
-        timer = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "changePage", userInfo: nil, repeats: true)
+        updater = CADisplayLink(target: self, selector: Selector("changePage"))
+        
+        
+        updater!.frameInterval = 200
+        updater!.addToRunLoop(NSRunLoop.currentRunLoop(), forMode: NSRunLoopCommonModes)
+        
 
         
         
         for (index, branch) in branches.enumerate() {
+            
+            
+            
+            
             let scrollWidth = branchesScroll.frame.size.width
             let scrollHeight = branchesScroll.frame.size.height
             let actualX = branchesScroll.frame.size.width * CGFloat(index)
             let margin:CGFloat = 20.0
             
             let branchNameLbl:UILabel = UILabel(frame: CGRectMake(margin+actualX, 80, scrollWidth/2, 75))
+            branchNameLbl.alpha = 0
             branchNameLbl.textColor = UIColor.whiteColor()
             branchNameLbl.font = UIFont(name: "Montserrat-Regular", size: 26)
             branchNameLbl.text = branch.name.uppercaseString
@@ -140,31 +220,48 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
             branchNameLbl.layer.shadowOffset = CGSize(width: 3, height: 3)
             branchNameLbl.layer.shadowOpacity = 0.6
             branchNameLbl.layer.shadowRadius = 1
+            
+            
+            let progressIcon = UIActivityIndicatorView(frame: CGRectMake(actualX+((branchesScroll.frame.size.width/2)-(30/2)), (branchesScroll.frame.size.height/2) - (30/2), 30, 30))
+            progressIcon.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.WhiteLarge
+            progressIcon.startAnimating()
+            
 
             
             
             let imageView:UIImageView = UIImageView(frame: CGRectMake(actualX, 0, scrollWidth, scrollHeight))
-            
+            imageView.alpha = 0
             
             
             let imageUrl = NSURL(string: "\(Utilities.dopImagesURL)\(branch.company_id)/\(branch.banner)")
             
+            print("\(Utilities.dopImagesURL)\(branch.company_id)/\(branch.banner)")
+            //let imageUrl = NSURL(string: "https://www.apple.com/v/imac-with-retina/a/images/overview/5k_image.jpg")
+            
             Utilities.getDataFromUrl(imageUrl!) { photo in
                 dispatch_async(dispatch_get_main_queue()) {
+                    
                     let imageData: NSData = NSData(data: photo!)
                     imageView.image = UIImage(data: imageData)
-                    UIView.animateWithDuration(0.5, animations: {
-                        //cell.branch_banner.alpha = 1
-                    })
+                    
+                    if(imageView.image == nil){
+                        imageView.backgroundColor = Utilities.dopColor
+                    }
+                    
+                    
+                    self.showViewAnimation(imageView, delay: 0, duration: 0.4)
+                    self.showViewAnimation(branchNameLbl, delay: 0.4, duration: 0.4)
+                    progressIcon.removeFromSuperview()
                     
                 }
             }
             
             imageView.contentMode = UIViewContentMode.ScaleAspectFill
             branchesScroll.addSubview(imageView)
-            
-        
             branchesScroll.addSubview(branchNameLbl)
+            branchesScroll.addSubview(progressIcon)
+            
+
 
         }
         
@@ -175,23 +272,25 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
         
     }
     func changePage(){
+    
         let width = branchesScroll.frame.size.width
         let page = branchesScroll.contentOffset.x + width
-        
         
 
         /*let pagenumber=Int(branchesScroll.bounds.size.width / branchesScroll.contentOffset.x)
         pageControl.currentPage = pagenumber*/
         
-        if(branchesScroll.contentSize.width<=page){
+        if(branchesScroll.contentSize.width<=page || firstCallToUpdater == true){
             branchesScroll.setContentOffset(CGPointMake(0, 0), animated: true)
         }else{
             branchesScroll.setContentOffset(CGPointMake(page, 0), animated: true)
             
         }
-
+        if(firstCallToUpdater){
+            firstCallToUpdater = false
+        }
     }
-    func getCoupons() {
+    func getTrendingCoupons() {
         trending = [Coupon]()
         
         DashboardController.getTrendingCouponsWithSuccess(success: { (couponsData) -> Void in
@@ -236,15 +335,12 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
                         coupon_box.setCoupon(coupon, view:self,x: CGFloat(position),y: 0)
 
                         let imageUrl = NSURL(string: "\(Utilities.dopImagesURL)\(coupon.company_id)/\(coupon.logo)")
-                        
+                        coupon_box.logo.alpha = 0
                         Utilities.getDataFromUrl(imageUrl!) { photo in
                             dispatch_async(dispatch_get_main_queue()) {
                                 let imageData: NSData = NSData(data: photo!)
                                 coupon_box.logo.image = UIImage(data: imageData)
-                                UIView.animateWithDuration(0.5, animations: {
-                                    //cell.branch_banner.alpha = 1
-                                })
-                                
+                                self.showViewAnimation(coupon_box.logo, delay:0, duration:0.3)
                             }
                         }
                         
@@ -263,10 +359,18 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
                         
                         coupon_box.tag = index
                         
+                        
+
+                        
                     }
                     let trendingScroll_size = ((margin+couponWidth)*self.trending.count)+margin
 
+                    self.trendingPageControl.numberOfPages = self.trending.count/2
+
                     self.trendingScroll.contentSize = CGSizeMake(CGFloat(trendingScroll_size), self.trendingScroll.frame.size.height)
+                    
+                    self.showViewAnimation(self.trendingContainer, delay:0, duration:0.4)
+                    
                 });
             },
             
@@ -331,14 +435,20 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
                     
                     coupon_box.branchNameLbl.sizeToFit()
                     
-                    //coupon_box.likes = trending[index].likes
                     
                                         
-                    self.toExpireScroll.addSubview(coupon_box);
+                    self.toExpireScroll.addSubview(coupon_box)
+                    
+
                 }
                 let trendingScroll_size = ((margin+couponWidth)*self.almost_expired.count)+margin
                 
+                self.toExpirePageControl.numberOfPages = self.almost_expired.count/2
+
                 self.toExpireScroll.contentSize = CGSizeMake(CGFloat(trendingScroll_size), self.toExpireScroll.frame.size.height)
+                
+                self.showViewAnimation(self.toExpireContainer, delay:0, duration:0.4)
+
             });
             },
             
@@ -350,8 +460,85 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
         
     }
     
+    func getNearestCoupons() {
+        nearest = [Coupon]()
+        
+        let latitude = User.coordinate.latitude
+        let longitude = User.coordinate.longitude
+        
+        let params:[String:AnyObject] = [
+            "latitude": latitude,
+            "longitude": longitude,
+            "radio": 15
+        ]
+        
+        DashboardController.getNearestCoupons(params, success: {(branchesData) -> Void in
+            let json = JSON(data: branchesData)
+            for (_, subJson): (String, JSON) in json["data"]{
+                let coupon_id = subJson["coupon_id"].int
+                let coupon_name = subJson["name"].string
+                let coupon_description = subJson["description"].string
+                let coupon_limit = subJson["limit"].string
+                let coupon_exp = "2015-09-30"
+                let coupon_logo = subJson["logo"].string
+                let branch_id = subJson["branch_id"].int
+                let company_id = subJson["company_id"].int
+                let total_likes = subJson["total_likes"].int
+                let user_like = subJson["user_like"].int
+                let latitude = subJson["latitude"].double!
+                let longitude = subJson["longitude"].double!
+                let banner = subJson["banner"].string ?? ""
+                //                    let categoryId = subJson["category_id"].int!
+                
+                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: 1)
+                
+                self.nearest.append(model)
+            }
+            
+            dispatch_async(dispatch_get_main_queue(), {
+                let margin = 18
+                let positionX = 18
+                let couponWidth = 180
+                
+                for (index, coupon) in self.nearest.enumerate() {
+                    let coupon_box:NearestCoupon = NSBundle.mainBundle().loadNibNamed("NearestCoupon", owner: self, options:
+                        nil)[0] as! NearestCoupon
+                    
+                    
+                    var position = 0
+                    
+                    
+                    position = positionX+((margin+couponWidth)*index)
+                    
+                    coupon_box.move(CGFloat(position),y: 0)
+                    
+                    
+                    coupon_box.descriptionLbl.text = coupon.couponDescription
+                    coupon_box.branchNameLbl.text = coupon.name
+                    
+                    coupon_box.branchNameLbl.sizeToFit()
+                    
+                    //coupon_box.likes = trending[index].likes
+                    
+                    
+                    self.nearestScroll.addSubview(coupon_box);
+                }
+                let trendingScroll_size = ((margin+couponWidth)*self.nearest.count)+margin
+                
+                self.nearestPageControl.numberOfPages = self.nearest.count/2
+
+                self.nearestScroll.contentSize = CGSizeMake(CGFloat(trendingScroll_size), self.nearestScroll.frame.size.height)
+                
+                self.showViewAnimation(self.nearestContainer, delay:0, duration:0.4)
+
+            });
+
+            },
+            failure:{(branchesData)-> Void in
+        })
+    }
+    
     override func viewDidAppear(animated: Bool) {
-        //getCoupons()
     }
     
     
@@ -381,9 +568,14 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         locValue = manager.location!.coordinate
-
-        print("locations = \(locValue!.latitude)")
         locationManager.stopUpdatingLocation()
+        
+        if(!obtained_location){
+            getNearestCoupons()
+            obtained_location = true
+        }
+        
+
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -415,33 +607,15 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
         
     }
     
-    func getNearestCoupons() {
-        let latitude = User.coordinate.latitude
-        let longitude = User.coordinate.longitude
-        
-        let params:[String:AnyObject] = [
-            "latitude": latitude,
-            "longitude": longitude,
-            "radio": 15
-        ]
-        print(params, terminator: "")
-        DashboardController.getNearestCoupons(params, success: {(branchesData) -> Void in
-            let json = JSON(data: branchesData)
-            for (_, branch) in json["data"] {
-                let latitude = branch["latitude"].double
-                let longitude = branch["longitude"].double
+    func showViewAnimation(view:UIView, delay:NSTimeInterval, duration:NSTimeInterval){
+    
+        UIView.animateWithDuration(duration, delay: delay, options: .CurveEaseInOut,
+            animations: {
+                view.alpha = 1
                 
-                let newLocation = CLLocationCoordinate2DMake(latitude!, longitude!)
-                
-            }
-            dispatch_async(dispatch_get_main_queue()) {
-                
-                print(json)
-                
-            }
-            },
-            failure:{(branchesData)-> Void in
-        })
+            }, completion: nil)
+
     }
+    
 
 }
