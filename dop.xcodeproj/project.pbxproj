@@ -64,6 +64,8 @@
 		A04CC2311BC32FB3001AF7E0 /* TodayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04CC22F1BC32F67001AF7E0 /* TodayController.swift */; };
 		A04CC2321BC32FD5001AF7E0 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09AB4E11AF99136004287F7 /* SwiftyJSON.swift */; };
 		A04CC2361BC3314F001AF7E0 /* WidgetBranch.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04CC2341BC33143001AF7E0 /* WidgetBranch.swift */; };
+		A04D388D1BC7361900E578F0 /* NearestCoupon.xib in Resources */ = {isa = PBXBuildFile; fileRef = A04D388C1BC7361900E578F0 /* NearestCoupon.xib */; settings = {ASSET_TAGS = (); }; };
+		A04D388F1BC7366600E578F0 /* NearestCoupon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04D388E1BC7366600E578F0 /* NearestCoupon.swift */; settings = {ASSET_TAGS = (); }; };
 		A04E388A1AFC3549007C7B69 /* starbucks.gif in Resources */ = {isa = PBXBuildFile; fileRef = A04E38891AFC3549007C7B69 /* starbucks.gif */; };
 		A0578C521B0D64AD0033B5BD /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0578C4E1B0D64AD0033B5BD /* Fabric.framework */; };
 		A0578C551B0D64AD0033B5BD /* TwitterCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0578C511B0D64AD0033B5BD /* TwitterCore.framework */; };
@@ -222,6 +224,8 @@
 		A04CC22C1BC2F6DC001AF7E0 /* WidgetUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WidgetUtilities.swift; sourceTree = "<group>"; };
 		A04CC22F1BC32F67001AF7E0 /* TodayController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayController.swift; sourceTree = "<group>"; };
 		A04CC2341BC33143001AF7E0 /* WidgetBranch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WidgetBranch.swift; sourceTree = "<group>"; };
+		A04D388C1BC7361900E578F0 /* NearestCoupon.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NearestCoupon.xib; sourceTree = "<group>"; };
+		A04D388E1BC7366600E578F0 /* NearestCoupon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearestCoupon.swift; sourceTree = "<group>"; };
 		A04E38891AFC3549007C7B69 /* starbucks.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = starbucks.gif; sourceTree = "<group>"; };
 		A0578C4E1B0D64AD0033B5BD /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		A0578C511B0D64AD0033B5BD /* TwitterCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterCore.framework; sourceTree = "<group>"; };
@@ -588,7 +592,9 @@
 			children = (
 				A086ACE01BB2157A003133BA /* TrendingCoupon.xib */,
 				A04CC20F1BBD968E001AF7E0 /* ToExpireCoupon.xib */,
+				A04D388C1BC7361900E578F0 /* NearestCoupon.xib */,
 				A04CC2111BBDBB16001AF7E0 /* ToExpireCoupon.swift */,
+				A04D388E1BC7366600E578F0 /* NearestCoupon.swift */,
 				A086ACE21BB383A4003133BA /* TrendingCoupon.swift */,
 				A065EB311BA8E60A003B7390 /* DashboardController.swift */,
 				A09AB4DA1AF95A26004287F7 /* DashboardViewController.swift */,
@@ -788,6 +794,7 @@
 			files = (
 				9D4D298C1B9F50A100CE58A9 /* Montserrat-Light.otf in Resources */,
 				A04CC2101BBD968E001AF7E0 /* ToExpireCoupon.xib in Resources */,
+				A04D388D1BC7361900E578F0 /* NearestCoupon.xib in Resources */,
 				9D4D298D1B9F50A100CE58A9 /* Montserrat-UltraLight.otf in Resources */,
 				9D5DA89B1B9E55DB00954B30 /* Montserrat-Bold.otf in Resources */,
 				9D13DB3C1BBDA9400014F5BC /* TwitterKitResources.bundle in Resources */,
@@ -859,6 +866,7 @@
 				9DBB7A401B968437005700B9 /* UIImage+ImageEffects.h in Sources */,
 				9D697C7A1B5EF13000D786AA /* iconfonts-fontawesome.swift in Sources */,
 				A04CC2121BBDBB16001AF7E0 /* ToExpireCoupon.swift in Sources */,
+				A04D388F1BC7366600E578F0 /* NearestCoupon.swift in Sources */,
 				9D7FA0781BBC4FF000EAEC36 /* SettingsViewController.swift in Sources */,
 				A0EC05991B7D1C69003CADB2 /* SWRevealViewController.m in Sources */,
 				9D0C16841B4DC6EB0088DE2F /* BranchProfileViewController.swift in Sources */,

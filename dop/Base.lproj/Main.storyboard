@@ -3391,15 +3391,25 @@
                                                         <animations/>
                                                         <color key="pageIndicatorTintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                         <color key="currentPageIndicatorTintColor" red="0.85098039219999999" green="0.015686274510000001" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <variation key="default">
+                                                            <mask key="constraints">
+                                                                <exclude reference="tD0-0K-Z7c"/>
+                                                            </mask>
+                                                        </variation>
                                                         <variation key="widthClass=compact" misplaced="YES">
                                                             <rect key="frame" x="281" y="240" width="39" height="37"/>
+                                                            <mask key="constraints">
+                                                                <include reference="tD0-0K-Z7c"/>
+                                                            </mask>
                                                         </variation>
                                                     </pageControl>
                                                 </subviews>
                                                 <animations/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="280" id="1MM-Au-544"/>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="280" id="1MM-Au-544">
+                                                        <variation key="widthClass=compact" constant="280"/>
+                                                    </constraint>
                                                     <constraint firstAttribute="trailing" secondItem="3rI-gy-Pno" secondAttribute="trailing" id="8dm-RT-8Jo"/>
                                                     <constraint firstItem="z1e-eQ-VPI" firstAttribute="leading" secondItem="B9C-FW-jvL" secondAttribute="leading" id="CUv-YT-NMd"/>
                                                     <constraint firstAttribute="height" constant="180" id="CeC-xr-QAk">
@@ -3467,29 +3477,44 @@
                                         <animations/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="836" id="0vh-p2-9dE"/>
+                                            <constraint firstAttribute="height" constant="836" id="0vh-p2-9dE">
+                                                <variation key="widthClass=compact" constant="1100"/>
+                                            </constraint>
+                                            <constraint firstItem="Qhk-gN-oC3" firstAttribute="top" secondItem="rJo-EE-XIQ" secondAttribute="bottom" constant="3" id="3SM-kC-zTh"/>
                                             <constraint firstItem="hWf-Sw-J47" firstAttribute="centerX" secondItem="8U5-Xl-KD3" secondAttribute="centerX" id="3mq-Dw-PTL"/>
                                             <constraint firstItem="rJo-EE-XIQ" firstAttribute="top" secondItem="TLJ-Ft-8Jx" secondAttribute="bottom" id="3xN-Q3-S3v">
                                                 <variation key="widthClass=compact" constant="0.0"/>
                                             </constraint>
+                                            <constraint firstItem="Qhk-gN-oC3" firstAttribute="leading" secondItem="8U5-Xl-KD3" secondAttribute="leading" id="5Qc-GX-rJN"/>
                                             <constraint firstItem="hWf-Sw-J47" firstAttribute="top" secondItem="8U5-Xl-KD3" secondAttribute="top" constant="195" id="80F-cH-sfN">
                                                 <variation key="widthClass=compact" constant="176"/>
                                             </constraint>
+                                            <constraint firstAttribute="trailing" secondItem="Qhk-gN-oC3" secondAttribute="trailing" id="HFa-P3-ihg"/>
+                                            <constraint firstItem="Qhk-gN-oC3" firstAttribute="top" secondItem="B9C-FW-jvL" secondAttribute="bottom" constant="-14" id="M7D-Lj-rI6">
+                                                <variation key="widthClass=compact" constant="0.0"/>
+                                            </constraint>
                                             <constraint firstItem="B9C-FW-jvL" firstAttribute="leading" secondItem="8U5-Xl-KD3" secondAttribute="leading" id="NJA-3g-gNq"/>
+                                            <constraint firstItem="Qhk-gN-oC3" firstAttribute="top" secondItem="rJo-EE-XIQ" secondAttribute="bottom" constant="3" id="NT1-aT-APf"/>
                                             <constraint firstItem="rJo-EE-XIQ" firstAttribute="leading" secondItem="8U5-Xl-KD3" secondAttribute="leading" id="NYf-Lg-rIX"/>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="836" id="OkK-cZ-8c3"/>
                                             <constraint firstItem="TLJ-Ft-8Jx" firstAttribute="top" secondItem="8U5-Xl-KD3" secondAttribute="top" id="RA1-vJ-eh1"/>
                                             <constraint firstAttribute="trailing" secondItem="rJo-EE-XIQ" secondAttribute="trailing" id="Sh2-A5-LWH"/>
+                                            <constraint firstItem="Qhk-gN-oC3" firstAttribute="leading" secondItem="8U5-Xl-KD3" secondAttribute="leading" id="SvU-dc-JaX"/>
+                                            <constraint firstAttribute="trailing" secondItem="Qhk-gN-oC3" secondAttribute="trailing" id="V0O-Pr-ZPh"/>
                                             <constraint firstItem="B9C-FW-jvL" firstAttribute="top" secondItem="rJo-EE-XIQ" secondAttribute="bottom" id="aAW-kH-3k5">
                                                 <variation key="widthClass=compact" constant="3"/>
                                             </constraint>
                                             <constraint firstItem="TLJ-Ft-8Jx" firstAttribute="leading" secondItem="8U5-Xl-KD3" secondAttribute="leading" id="flN-RX-VPX"/>
                                             <constraint firstAttribute="trailing" secondItem="TLJ-Ft-8Jx" secondAttribute="trailing" id="hfs-vH-WHo"/>
+                                            <constraint firstItem="Qhk-gN-oC3" firstAttribute="top" secondItem="B9C-FW-jvL" secondAttribute="top" id="jc4-KQ-EPY">
+                                                <variation key="widthClass=compact" constant="0.0"/>
+                                            </constraint>
                                             <constraint firstAttribute="trailing" secondItem="B9C-FW-jvL" secondAttribute="trailing" id="vTa-nr-Jgi"/>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="subviews">
                                                 <exclude reference="B9C-FW-jvL"/>
+                                                <exclude reference="Qhk-gN-oC3"/>
                                             </mask>
                                             <mask key="constraints">
                                                 <exclude reference="NJA-3g-gNq"/>
@@ -3506,9 +3531,10 @@
                                             </mask>
                                         </variation>
                                         <variation key="widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="836"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="1112"/>
                                             <mask key="subviews">
                                                 <include reference="B9C-FW-jvL"/>
+                                                <include reference="Qhk-gN-oC3"/>
                                             </mask>
                                             <mask key="constraints">
                                                 <include reference="NJA-3g-gNq"/>
@@ -3537,7 +3563,7 @@
                                     <constraint firstAttribute="trailing" secondItem="8U5-Xl-KD3" secondAttribute="trailing" id="rx9-39-hS4"/>
                                 </constraints>
                                 <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="849"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="1249"/>
                                 </variation>
                             </scrollView>
                         </subviews>
@@ -3572,15 +3598,21 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="400" height="800"/>
+                    <size key="freeformSize" width="400" height="1200"/>
                     <connections>
                         <outlet property="branchesScroll" destination="TLJ-Ft-8Jx" id="woD-4d-Jtl"/>
                         <outlet property="mainScroll" destination="DSg-Zx-h98" id="Oi9-aJ-nlD"/>
                         <outlet property="menuButton" destination="eDn-09-xhg" id="wrM-WA-YKd"/>
+                        <outlet property="nearestContainer" destination="Qhk-gN-oC3" id="EIL-PH-hep"/>
+                        <outlet property="nearestPageControl" destination="ks7-cx-eSi" id="pqr-Kr-RCm"/>
+                        <outlet property="nearestScroll" destination="Rvs-e7-plr" id="du2-4x-fua"/>
                         <outlet property="pageControl" destination="tnv-cg-vfa" id="NAe-06-TLq"/>
                         <outlet property="pageControlContainer" destination="hWf-Sw-J47" id="rVX-gc-scY"/>
+                        <outlet property="toExpireContainer" destination="B9C-FW-jvL" id="vj1-ea-HyG"/>
+                        <outlet property="toExpirePageControl" destination="E3y-bO-DRC" id="zPB-f1-LDs"/>
                         <outlet property="toExpireScroll" destination="3rI-gy-Pno" id="3Se-AH-jsb"/>
                         <outlet property="trendingContainer" destination="rJo-EE-XIQ" id="wog-hB-pGO"/>
+                        <outlet property="trendingPageControl" destination="fzE-2R-MWK" id="rIa-mJ-Y3P"/>
                         <outlet property="trendingScroll" destination="QHo-Qo-OIH" id="ufr-8q-5RG"/>
                         <segue destination="Hpm-OJ-mEW" kind="show" identifier="couponDetail" id="AaG-PG-nLf"/>
                     </connections>
@@ -3683,12 +3715,12 @@
         <image name="trophy" width="42" height="42"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="AaG-PG-nLf"/>
         <segue reference="jqZ-Ew-h2B"/>
         <segue reference="NZR-gR-mOn"/>
         <segue reference="H7K-TF-KnO"/>
+        <segue reference="AaG-PG-nLf"/>
+        <segue reference="1op-zI-bbm"/>
         <segue reference="bs8-lv-cra"/>
-        <segue reference="UiV-ht-QT3"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>
