@@ -103,9 +103,9 @@ class UserProfileViewController: UIViewController, UIScrollViewDelegate, UITable
                     
                     
                     if (index % 2 == 0) {
-                        coupon_box.move(CGFloat(margin), y: CGFloat(height + (couponHeight * i)))
+                        coupon_box.setCoupon(coupon, view:self, x: CGFloat(margin), y: CGFloat(height + (couponHeight * i)))
                     } else {
-                        coupon_box.move(CGFloat(margin + (margin + couponWidth)), y: CGFloat(height + (couponHeight * i)))
+                        coupon_box.setCoupon(coupon, view:self, x: CGFloat(margin + (margin + couponWidth)), y: CGFloat(height + (couponHeight * i)))
                         ++i
                     }
                     
