@@ -35,6 +35,7 @@ class BranchProfileViewController: UIViewController, CLLocationManagerDelegate {
         tableView.registerNib(aboutNib, forCellReuseIdentifier: "BranchProfileAboutView")
         let campaignNib = UINib(nibName: "BranchProfileLastCampaign", bundle: nil)
         tableView.registerNib(campaignNib, forCellReuseIdentifier: "BranchProfileLastCampaign")
+        
         headerTopView = (NSBundle.mainBundle().loadNibNamed("BranchProfileTopView", owner: self, options: nil)[0] as? BranchProfileTopView)!
         
         aboutView = (NSBundle.mainBundle().loadNibNamed("BranchProfileAboutView", owner: self, options: nil)[0] as? BranchProfileAboutView)!

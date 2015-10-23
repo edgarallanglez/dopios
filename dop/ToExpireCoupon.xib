@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
@@ -33,6 +33,7 @@
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="13" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Td4-zA-2JI">
                             <rect key="frame" x="44" y="9" width="13" height="17"/>
+                            <animations/>
                             <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="14"/>
                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
@@ -42,12 +43,14 @@
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="20631141-E117-44FE-BF44-0141CEC949D2" translatesAutoresizingMaskIntoConstraints="NO" id="GZh-eQ-xPA">
                             <rect key="frame" x="20" y="8" width="19" height="19"/>
+                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="19" id="UdX-kK-NqI"/>
                                 <constraint firstAttribute="height" constant="19" id="ZPO-bY-iPu"/>
                             </constraints>
                         </imageView>
                     </subviews>
+                    <animations/>
                     <color key="backgroundColor" red="0.0" green="0.46902045609999998" blue="0.85242575970000001" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="centerY" secondItem="GZh-eQ-xPA" secondAttribute="centerY" id="35Z-WE-uEo"/>
@@ -69,6 +72,7 @@
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IE3-nj-zrW">
                     <rect key="frame" x="146" y="167" width="25" height="25"/>
+                    <animations/>
                     <color key="backgroundColor" red="0.31372549020000001" green="0.8980392157" blue="0.50588235290000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="25" id="KSU-Uh-uzR"/>
@@ -81,6 +85,7 @@
                     </state>
                 </button>
             </subviews>
+            <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="IE3-nj-zrW" firstAttribute="leading" secondItem="Sd8-c9-16x" secondAttribute="trailing" constant="30" id="d8M-C2-r5H"/>
@@ -96,8 +101,8 @@
     <resources>
         <image name="20631141-E117-44FE-BF44-0141CEC949D2" width="30" height="30">
             <mutableData key="keyedArchiveRepresentation">
-YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
-GxwgISksLzU4VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
+YnBsaXN0MDDUAQIDBAUGOjtYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
+GxwgISgrLjQ3VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
 DBIAwAAAgAKACtISCRMVWk5TLm9iamVjdHOhFIADgAnSEgkXGqIYGYAEgAWACBAA0h0JHh9fEBROU1RJ
 RkZSZXByZXNlbnRhdGlvboAGgAdPERseTU0AKgAADhgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOcqilXnKopVAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -215,13 +220,13 @@ v/XAcMDswWfB48JfwtvDWMPUxFHEzsVLxcjGRsbDx0HHv8g9yLzJOsm5yjjKt8s2y7bMNcy1zTXNtc42
 zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp22vvbgNwF3IrdEN2W
 3hzeot8p36/gNuC94UThzOJT4tvjY+Pr5HPk/OWE5g3mlucf56noMui86Ubp0Opb6uXrcOv77IbtEe2c
 7ijutO9A78zwWPDl8XLx//KM8xnzp/Q09ML1UPXe9m32+/eK+Bn4qPk4+cf6V/rn+3f8B/yY/Sn9uv5L
-/tz/bf//0iIjJCVaJGNsYXNzbmFtZVgkY2xhc3Nlc18QEE5TQml0bWFwSW1hZ2VSZXCjJicoXxAQTlNC
-aXRtYXBJbWFnZVJlcFpOU0ltYWdlUmVwWE5TT2JqZWN00iIjKitXTlNBcnJheaIqKNIiIy0uXk5TTXV0
-YWJsZUFycmF5oy0qKNMwMQkyMzRXTlNXaGl0ZVxOU0NvbG9yU3BhY2VEMCAwABADgAvSIiM2N1dOU0Nv
-bG9yojYo0iIjOTpXTlNJbWFnZaI5KF8QD05TS2V5ZWRBcmNoaXZlctE9PlRyb290gAEACAARABoAIwAt
-ADIANwBFAEsAVABbAGgAbwB3AHkAfgCAAIIAhwCSAJQAlgCYAJ0AoACiAKQApgCoAK0AxADGAMgb6hvv
-G/ocAxwWHBocLRw4HEEcRhxOHFEcVhxlHGkccBx4HIUcihyMHI4ckxybHJ4coxyrHK4cwBzDHMgAAAAA
-AAACAQAAAAAAAAA/AAAAAAAAAAAAAAAAAAAcyg
+/tz/bf//0iIjJCVaJGNsYXNzbmFtZVgkY2xhc3Nlc18QEE5TQml0bWFwSW1hZ2VSZXCjJCYnWk5TSW1h
+Z2VSZXBYTlNPYmplY3TSIiMpKldOU0FycmF5oikn0iIjLC1eTlNNdXRhYmxlQXJyYXmjLCkn0y8wCTEy
+M1dOU1doaXRlXE5TQ29sb3JTcGFjZUQwIDAAEAOAC9IiIzU2V05TQ29sb3KiNSfSIiM4OVdOU0ltYWdl
+ojgnXxAPTlNLZXllZEFyY2hpdmVy0Tw9VHJvb3SAAQAIABEAGgAjAC0AMgA3AEUASwBUAFsAaABvAHcA
+eQB+AIAAggCHAJIAlACWAJgAnQCgAKIApACmAKgArQDEAMYAyBvqG+8b+hwDHBYcGhwlHC4cMxw7HD4c
+QxxSHFYcXRxlHHIcdxx5HHscgByIHIsckByYHJscrRywHLUAAAAAAAACAQAAAAAAAAA+AAAAAAAAAAAA
+AAAAAAActw
 </mutableData>
         </image>
     </resources>

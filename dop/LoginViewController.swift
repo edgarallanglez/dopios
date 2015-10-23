@@ -133,43 +133,43 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
     }
     
     //Twitter login
-    @IBAction func signInWithTwitter(sender: UIButton) {
-        Twitter.sharedInstance().logInWithCompletion { (session: TWTRSession!, error: NSError!) -> Void in
-            if (session != nil) {
-                Twitter.sharedInstance().logInWithCompletion { (session: TWTRSession!, error: NSError!) -> Void in
-                    if (session != nil) {
-                        Twitter.sharedInstance().APIClient.loadUserWithID(session.userID) { twtrUser,
-                            NSError -> Void in
-                            
-                            var fullNameArr = twtrUser!.name.characters.split {$0 == " "}.map { String($0) }
-                            let firstName: String = fullNameArr[0]
-                            let lastName: String! = fullNameArr.count > 1 ? fullNameArr[1] : nil
-                            let userImage = twtrUser!.profileImageLargeURL
-                            
-                            let params:[String: String] = [
-                                "twitter_key" : twtrUser!.userID,
-                                "names" : firstName,
-                                "surnames": lastName,
-                                "birth_date" : "2015-01-01",
-                                "email" : "",
-                                "main_image" : userImage
-                            ]
-                            
-                            self.socialLogin("twitter", params: params)
-                            
-                        }
-                        
-                    } else {
-                        print("error: \(error.localizedDescription)");
-                    }
-                    
-                }
-            } else {
-                print("error: \(error.localizedDescription)");
-            }
-
-        }
-    }
+//    @IBAction func signInWithTwitter(sender: UIButton) {
+//        Twitter.sharedInstance().logInWithCompletion { (session: TWTRSession!, error: NSError!) -> Void in
+//            if (session != nil) {
+//                Twitter.sharedInstance().logInWithCompletion { (session: TWTRSession!, error: NSError!) -> Void in
+//                    if (session != nil) {
+//                        Twitter.sharedInstance().APIClient.loadUserWithID(session.userID) { twtrUser,
+//                            NSError -> Void in
+//                            
+//                            var fullNameArr = twtrUser!.name.characters.split {$0 == " "}.map { String($0) }
+//                            let firstName: String = fullNameArr[0]
+//                            let lastName: String! = fullNameArr.count > 1 ? fullNameArr[1] : nil
+//                            let userImage = twtrUser!.profileImageLargeURL
+//                            
+//                            let params:[String: String] = [
+//                                "twitter_key" : twtrUser!.userID,
+//                                "names" : firstName,
+//                                "surnames": lastName,
+//                                "birth_date" : "2015-01-01",
+//                                "email" : "",
+//                                "main_image" : userImage
+//                            ]
+//                            
+//                            self.socialLogin("twitter", params: params)
+//                            
+//                        }
+//                        
+//                    } else {
+//                        print("error: \(error.localizedDescription)");
+//                    }
+//                    
+//                }
+//            } else {
+//                print("error: \(error.localizedDescription)");
+//            }
+//
+//        }
+//    }
 
     
     
