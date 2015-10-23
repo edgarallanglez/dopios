@@ -52,7 +52,7 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        var socketIO : SocketIO;
 //        self.title = "Dashboard"
 //        self.navigationController?.navigationBar.topItem!.title = "Dashboard"
         

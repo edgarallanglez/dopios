@@ -23,11 +23,11 @@
 		9D5DA89B1B9E55DB00954B30 /* Montserrat-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9D5DA8991B9E55DB00954B30 /* Montserrat-Bold.otf */; };
 		9D5DA89C1B9E55DB00954B30 /* Montserrat-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9D5DA89A1B9E55DB00954B30 /* Montserrat-Regular.otf */; };
 		9D697C7A1B5EF13000D786AA /* iconfonts-fontawesome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D697C791B5EF13000D786AA /* iconfonts-fontawesome.swift */; };
-		9D7FA0781BBC4FF000EAEC36 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7FA0771BBC4FF000EAEC36 /* SettingsViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		9D7FA07B1BBC516100EAEC36 /* TrophyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7FA07A1BBC516100EAEC36 /* TrophyViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		9D7FA0781BBC4FF000EAEC36 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7FA0771BBC4FF000EAEC36 /* SettingsViewController.swift */; };
+		9D7FA07B1BBC516100EAEC36 /* TrophyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7FA07A1BBC516100EAEC36 /* TrophyViewController.swift */; };
 		9D9C1B2B1B83B0D900F7895B /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D9C1B2A1B83B0D900F7895B /* FBSDKShareKit.framework */; };
 		9D9C1B2D1B83B3DB00F7895B /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D9C1B2C1B83B3DB00F7895B /* FBSDKCoreKit.framework */; };
-		9D9C9C911BB2155B00D9F986 /* Annotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9C9C901BB2155B00D9F986 /* Annotation.swift */; settings = {ASSET_TAGS = (); }; };
+		9D9C9C911BB2155B00D9F986 /* Annotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9C9C901BB2155B00D9F986 /* Annotation.swift */; };
 		9D9D1FF11B9F4BE3000C1299 /* starbucks_banner.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A060F77D1B700355009D6ADB /* starbucks_banner.jpg */; };
 		9DA3C8961B90C117000D40F2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9DA3C8951B90C117000D40F2 /* Images.xcassets */; };
 		9DA7AA9F1B50309400297690 /* BranchProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA7AA9E1B50309400297690 /* BranchProfileController.swift */; };
@@ -45,13 +45,19 @@
 		9DBB7A401B968437005700B9 /* UIImage+ImageEffects.h in Sources */ = {isa = PBXBuildFile; fileRef = A060F7871B717DB9009D6ADB /* UIImage+ImageEffects.h */; };
 		9DC9218A1B9F8D4900241FFD /* UIScrollView+InfiniteScroll.h in Sources */ = {isa = PBXBuildFile; fileRef = 9DC921881B9F8D4900241FFD /* UIScrollView+InfiniteScroll.h */; };
 		9DC9218B1B9F8D4900241FFD /* UIScrollView+InfiniteScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DC921891B9F8D4900241FFD /* UIScrollView+InfiniteScroll.m */; };
-		9DE55C441BB07C0A005F9776 /* PromoSegmentedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE55C431BB07C0A005F9776 /* PromoSegmentedController.swift */; settings = {ASSET_TAGS = (); }; };
+		9DE55C441BB07C0A005F9776 /* PromoSegmentedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE55C431BB07C0A005F9776 /* PromoSegmentedController.swift */; };
+		A01D77CC1BDAB93D00AA8FE2 /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A01D77CB1BDAB93D00AA8FE2 /* SRWebSocket.m */; };
+		A01D77D81BDAB94C00AA8FE2 /* SocketIO.m in Sources */ = {isa = PBXBuildFile; fileRef = A01D77CE1BDAB94C00AA8FE2 /* SocketIO.m */; };
+		A01D77D91BDAB94C00AA8FE2 /* SocketIOPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = A01D77D01BDAB94C00AA8FE2 /* SocketIOPacket.m */; };
+		A01D77DA1BDAB94C00AA8FE2 /* SocketIOJSONSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = A01D77D21BDAB94C00AA8FE2 /* SocketIOJSONSerialization.m */; };
+		A01D77DB1BDAB94C00AA8FE2 /* SocketIOTransportWebsocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A01D77D51BDAB94C00AA8FE2 /* SocketIOTransportWebsocket.m */; };
+		A01D77DC1BDAB94C00AA8FE2 /* SocketIOTransportXHR.m in Sources */ = {isa = PBXBuildFile; fileRef = A01D77D71BDAB94C00AA8FE2 /* SocketIOTransportXHR.m */; };
 		A04860961B0D5355009FEF1F /* A0JWTDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = A04860951B0D5355009FEF1F /* A0JWTDecoder.m */; };
 		A04860981B0D5658009FEF1F /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A04860971B0D5658009FEF1F /* FacebookSDK.framework */; settings = {ATTRIBUTES = (Required, ); }; };
-		A04CC2101BBD968E001AF7E0 /* ToExpireCoupon.xib in Resources */ = {isa = PBXBuildFile; fileRef = A04CC20F1BBD968E001AF7E0 /* ToExpireCoupon.xib */; settings = {ASSET_TAGS = (); }; };
-		A04CC2121BBDBB16001AF7E0 /* ToExpireCoupon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04CC2111BBDBB16001AF7E0 /* ToExpireCoupon.swift */; settings = {ASSET_TAGS = (); }; };
-		A04D388D1BC7361900E578F0 /* NearestCoupon.xib in Resources */ = {isa = PBXBuildFile; fileRef = A04D388C1BC7361900E578F0 /* NearestCoupon.xib */; settings = {ASSET_TAGS = (); }; };
-		A04D388F1BC7366600E578F0 /* NearestCoupon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04D388E1BC7366600E578F0 /* NearestCoupon.swift */; settings = {ASSET_TAGS = (); }; };
+		A04CC2101BBD968E001AF7E0 /* ToExpireCoupon.xib in Resources */ = {isa = PBXBuildFile; fileRef = A04CC20F1BBD968E001AF7E0 /* ToExpireCoupon.xib */; };
+		A04CC2121BBDBB16001AF7E0 /* ToExpireCoupon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04CC2111BBDBB16001AF7E0 /* ToExpireCoupon.swift */; };
+		A04D388D1BC7361900E578F0 /* NearestCoupon.xib in Resources */ = {isa = PBXBuildFile; fileRef = A04D388C1BC7361900E578F0 /* NearestCoupon.xib */; };
+		A04D388F1BC7366600E578F0 /* NearestCoupon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04D388E1BC7366600E578F0 /* NearestCoupon.swift */; };
 		A04E388A1AFC3549007C7B69 /* starbucks.gif in Resources */ = {isa = PBXBuildFile; fileRef = A04E38891AFC3549007C7B69 /* starbucks.gif */; };
 		A0578C521B0D64AD0033B5BD /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0578C4E1B0D64AD0033B5BD /* Fabric.framework */; };
 		A0578C551B0D64AD0033B5BD /* TwitterCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0578C511B0D64AD0033B5BD /* TwitterCore.framework */; };
@@ -80,9 +86,9 @@
 		A082F4871B18E4FF001C8C52 /* NewsfeedNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A082F4861B18E4FF001C8C52 /* NewsfeedNote.swift */; };
 		A082F48A1B1920F8001C8C52 /* NewsfeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A082F4881B1920F8001C8C52 /* NewsfeedCell.swift */; };
 		A082F48B1B1920F8001C8C52 /* NewsfeedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A082F4891B1920F8001C8C52 /* NewsfeedCell.xib */; };
-		A086ACDF1BB09496003133BA /* Branch.swift in Sources */ = {isa = PBXBuildFile; fileRef = A086ACDE1BB09496003133BA /* Branch.swift */; settings = {ASSET_TAGS = (); }; };
-		A086ACE11BB2157A003133BA /* TrendingCoupon.xib in Resources */ = {isa = PBXBuildFile; fileRef = A086ACE01BB2157A003133BA /* TrendingCoupon.xib */; settings = {ASSET_TAGS = (); }; };
-		A086ACE31BB383A4003133BA /* TrendingCoupon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A086ACE21BB383A4003133BA /* TrendingCoupon.swift */; settings = {ASSET_TAGS = (); }; };
+		A086ACDF1BB09496003133BA /* Branch.swift in Sources */ = {isa = PBXBuildFile; fileRef = A086ACDE1BB09496003133BA /* Branch.swift */; };
+		A086ACE11BB2157A003133BA /* TrendingCoupon.xib in Resources */ = {isa = PBXBuildFile; fileRef = A086ACE01BB2157A003133BA /* TrendingCoupon.xib */; };
+		A086ACE31BB383A4003133BA /* TrendingCoupon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A086ACE21BB383A4003133BA /* TrendingCoupon.swift */; };
 		A09AB4DB1AF95A26004287F7 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09AB4DA1AF95A26004287F7 /* DashboardViewController.swift */; };
 		A09AB4E21AF99136004287F7 /* CouponController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09AB4E01AF99136004287F7 /* CouponController.swift */; };
 		A09AB4E31AF99136004287F7 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09AB4E11AF99136004287F7 /* SwiftyJSON.swift */; };
@@ -184,6 +190,20 @@
 		9DC921881B9F8D4900241FFD /* UIScrollView+InfiniteScroll.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+InfiniteScroll.h"; sourceTree = "<group>"; };
 		9DC921891B9F8D4900241FFD /* UIScrollView+InfiniteScroll.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+InfiniteScroll.m"; sourceTree = "<group>"; };
 		9DE55C431BB07C0A005F9776 /* PromoSegmentedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromoSegmentedController.swift; sourceTree = "<group>"; };
+		A01D77C91BDAB93D00AA8FE2 /* SocketRocket-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SocketRocket-Prefix.pch"; sourceTree = "<group>"; };
+		A01D77CA1BDAB93D00AA8FE2 /* SRWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRWebSocket.h; sourceTree = "<group>"; };
+		A01D77CB1BDAB93D00AA8FE2 /* SRWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRWebSocket.m; sourceTree = "<group>"; };
+		A01D77CD1BDAB94C00AA8FE2 /* SocketIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketIO.h; sourceTree = "<group>"; };
+		A01D77CE1BDAB94C00AA8FE2 /* SocketIO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketIO.m; sourceTree = "<group>"; };
+		A01D77CF1BDAB94C00AA8FE2 /* SocketIOPacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketIOPacket.h; sourceTree = "<group>"; };
+		A01D77D01BDAB94C00AA8FE2 /* SocketIOPacket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketIOPacket.m; sourceTree = "<group>"; };
+		A01D77D11BDAB94C00AA8FE2 /* SocketIOJSONSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketIOJSONSerialization.h; sourceTree = "<group>"; };
+		A01D77D21BDAB94C00AA8FE2 /* SocketIOJSONSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketIOJSONSerialization.m; sourceTree = "<group>"; };
+		A01D77D31BDAB94C00AA8FE2 /* SocketIOTransport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketIOTransport.h; sourceTree = "<group>"; };
+		A01D77D41BDAB94C00AA8FE2 /* SocketIOTransportWebsocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketIOTransportWebsocket.h; sourceTree = "<group>"; };
+		A01D77D51BDAB94C00AA8FE2 /* SocketIOTransportWebsocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketIOTransportWebsocket.m; sourceTree = "<group>"; };
+		A01D77D61BDAB94C00AA8FE2 /* SocketIOTransportXHR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketIOTransportXHR.h; sourceTree = "<group>"; };
+		A01D77D71BDAB94C00AA8FE2 /* SocketIOTransportXHR.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketIOTransportXHR.m; sourceTree = "<group>"; };
 		A04860941B0D5355009FEF1F /* A0JWTDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = A0JWTDecoder.h; sourceTree = "<group>"; };
 		A04860951B0D5355009FEF1F /* A0JWTDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = A0JWTDecoder.m; sourceTree = "<group>"; };
 		A04860971B0D5658009FEF1F /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = dop/FacebookSDK.framework; sourceTree = "<group>"; };
@@ -409,6 +429,7 @@
 		9D33260B1AF7ED1C00498801 /* dop */ = {
 			isa = PBXGroup;
 			children = (
+				A01D77C71BDAB92500AA8FE2 /* Socket */,
 				9D7FA0791BBC513000EAEC36 /* Trophy */,
 				9D7FA0761BBC4FDB00EAEC36 /* Settings */,
 				A0AE939A1AF8041A00D02315 /* Bridging-Header.h */,
@@ -509,6 +530,35 @@
 				9DE55C431BB07C0A005F9776 /* PromoSegmentedController.swift */,
 			);
 			name = Promotions;
+			sourceTree = "<group>";
+		};
+		A01D77C71BDAB92500AA8FE2 /* Socket */ = {
+			isa = PBXGroup;
+			children = (
+				A01D77CD1BDAB94C00AA8FE2 /* SocketIO.h */,
+				A01D77CE1BDAB94C00AA8FE2 /* SocketIO.m */,
+				A01D77CF1BDAB94C00AA8FE2 /* SocketIOPacket.h */,
+				A01D77D01BDAB94C00AA8FE2 /* SocketIOPacket.m */,
+				A01D77D11BDAB94C00AA8FE2 /* SocketIOJSONSerialization.h */,
+				A01D77D21BDAB94C00AA8FE2 /* SocketIOJSONSerialization.m */,
+				A01D77D31BDAB94C00AA8FE2 /* SocketIOTransport.h */,
+				A01D77D41BDAB94C00AA8FE2 /* SocketIOTransportWebsocket.h */,
+				A01D77D51BDAB94C00AA8FE2 /* SocketIOTransportWebsocket.m */,
+				A01D77D61BDAB94C00AA8FE2 /* SocketIOTransportXHR.h */,
+				A01D77D71BDAB94C00AA8FE2 /* SocketIOTransportXHR.m */,
+				A01D77C81BDAB92E00AA8FE2 /* SocketRocket */,
+			);
+			name = Socket;
+			sourceTree = "<group>";
+		};
+		A01D77C81BDAB92E00AA8FE2 /* SocketRocket */ = {
+			isa = PBXGroup;
+			children = (
+				A01D77C91BDAB93D00AA8FE2 /* SocketRocket-Prefix.pch */,
+				A01D77CA1BDAB93D00AA8FE2 /* SRWebSocket.h */,
+				A01D77CB1BDAB93D00AA8FE2 /* SRWebSocket.m */,
+			);
+			name = SocketRocket;
 			sourceTree = "<group>";
 		};
 		A0365FDB1AF9463B000A325D /* SWRevealViewController */ = {
@@ -693,6 +743,9 @@
 						CreatedOnToolsVersion = 6.3.1;
 						DevelopmentTeam = T6K9SC4685;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
 							com.apple.Maps.iOS = {
 								enabled = 1;
 							};
@@ -784,6 +837,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A01D77D81BDAB94C00AA8FE2 /* SocketIO.m in Sources */,
 				9DC9218A1B9F8D4900241FFD /* UIScrollView+InfiniteScroll.h in Sources */,
 				9DC9218B1B9F8D4900241FFD /* UIScrollView+InfiniteScroll.m in Sources */,
 				9D2BDFE41B9DF524003F1260 /* SearchController.swift in Sources */,
@@ -794,10 +848,12 @@
 				9D7FA0781BBC4FF000EAEC36 /* SettingsViewController.swift in Sources */,
 				A0EC05991B7D1C69003CADB2 /* SWRevealViewController.m in Sources */,
 				9D0C16841B4DC6EB0088DE2F /* BranchProfileViewController.swift in Sources */,
+				A01D77DC1BDAB94C00AA8FE2 /* SocketIOTransportXHR.m in Sources */,
 				A065EB321BA8E60A003B7390 /* DashboardController.swift in Sources */,
 				A060F7861B702FAC009D6ADB /* CouponDetailViewController.swift in Sources */,
 				A0C3AC2E1B9525D5005636E7 /* CustomInfiniteIndicator.swift in Sources */,
 				A0DF72931B13AEBF006EE8F4 /* FriendsController.swift in Sources */,
+				A01D77DA1BDAB94C00AA8FE2 /* SocketIOJSONSerialization.m in Sources */,
 				9D1FCED71B79295700F42F6D /* SegmentedControl.swift in Sources */,
 				A082F4851B18CF01001C8C52 /* NewsfeedController.swift in Sources */,
 				A0BB9BB91B13E4F1000BA261 /* FriendCell.swift in Sources */,
@@ -805,6 +861,7 @@
 				A0662A361BA0CEF5006D6278 /* LoadingCell.swift in Sources */,
 				A06B357C1B9F667D003C90EF /* NearbyBranch.swift in Sources */,
 				9DB3DABF1B740070004AC0F1 /* BranchProfileAboutView.swift in Sources */,
+				A01D77DB1BDAB94C00AA8FE2 /* SocketIOTransportWebsocket.m in Sources */,
 				A0EC05B41B7D622A003CADB2 /* LoadingViewController.swift in Sources */,
 				A086ACDF1BB09496003133BA /* Branch.swift in Sources */,
 				9DB907DE1B8E25A000A40FE0 /* FilterSideViewController.swift in Sources */,
@@ -827,6 +884,7 @@
 				A060F7821B70184F009D6ADB /* PromoCollectionCell.swift in Sources */,
 				A0DF72951B13E262006EE8F4 /* Friend.swift in Sources */,
 				A082F4831B18CEE6001C8C52 /* NewsfeedViewController.swift in Sources */,
+				A01D77D91BDAB94C00AA8FE2 /* SocketIOPacket.m in Sources */,
 				9DACBBF91BA8CE0200CAEECB /* FilterSegmentedControl.swift in Sources */,
 				9DE55C441BB07C0A005F9776 /* PromoSegmentedController.swift in Sources */,
 				9D9C9C911BB2155B00D9F986 /* Annotation.swift in Sources */,
@@ -841,6 +899,7 @@
 				9D7FA07B1BBC516100EAEC36 /* TrophyViewController.swift in Sources */,
 				A09AB4E31AF99136004287F7 /* SwiftyJSON.swift in Sources */,
 				A0EB97AD1B03E16A005112EF /* User.swift in Sources */,
+				A01D77CC1BDAB93D00AA8FE2 /* SRWebSocket.m in Sources */,
 				9DB327CE1B863C84006BF882 /* MoreMenuViewController.swift in Sources */,
 				A09AB4DB1AF95A26004287F7 /* DashboardViewController.swift in Sources */,
 				A06B35791B9F5D9F003C90EF /* SearchCell.swift in Sources */,
@@ -990,7 +1049,7 @@
 				INFOPLIST_FILE = dop/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.inmoon.dop;
+				PRODUCT_BUNDLE_IDENTIFIER = com.iminc.dop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "dop/Bridging-Header.h";
 			};
@@ -1012,7 +1071,7 @@
 				INFOPLIST_FILE = dop/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.inmoon.dop;
+				PRODUCT_BUNDLE_IDENTIFIER = com.iminc.dop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "dop/Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";

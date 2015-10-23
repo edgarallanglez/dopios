@@ -19,6 +19,6 @@
 #import "SWRevealViewController.h"
 #import "UIImage+ImageEffects.h"
 #import "UIScrollView+InfiniteScroll.h"
-
+#import "SocketIO.h"
 
 
