@@ -355,6 +355,10 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         
     }
     
+    func socketIO(socket: SocketIO, didReceiveResponse packet: SocketIOPacket) {
+        NSLog("didReceiveEvent >>> data: %@", packet.data)
+    }
+    
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let cell = sender as? SearchCell {

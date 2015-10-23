@@ -52,9 +52,8 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var socketIO : SocketIO;
-//        self.title = "Dashboard"
-//        self.navigationController?.navigationBar.topItem!.title = "Dashboard"
+        self.title = "Dashboard"
+        self.navigationController?.navigationBar.topItem!.title = "Dashboard"
         
         mainScroll.frame.size = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height)
         

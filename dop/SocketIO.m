@@ -703,6 +703,7 @@ NSString* const SocketIOException = @"SocketIOException";
  	NSString *responseString = [[NSString alloc] initWithData:_httpRequestData encoding:NSASCIIStringEncoding];
 
     DEBUGLOG(@"connectionDidFinishLoading() %@", responseString);
+//    [SocketIO sendEvent:@"my event" withData:@"hello"];
     NSArray *data = [responseString componentsSeparatedByString:@":"];
     // should be SID : heartbeat timeout : connection timeout : supported transports
     

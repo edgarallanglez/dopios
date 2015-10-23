@@ -3954,11 +3954,30 @@
                         <segue destination="TTn-gh-Dpv" kind="relationship" relationship="viewControllers" id="vmc-eb-Wu8"/>
                         <segue destination="4b9-BF-vCA" kind="show" identifier="searchView" id="dSr-XB-e87"/>
                         <segue destination="TJb-zf-pB7" kind="relationship" relationship="viewControllers" id="zsK-kW-Nk2"/>
+                        <segue destination="3Xa-r8-h36" kind="show" identifier="notificationView" id="dEU-g1-m64"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZQr-qy-Vjj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="450" y="2238"/>
+        </scene>
+        <!--Notificacion View Controller-->
+        <scene sceneID="IEy-1X-rJT">
+            <objects>
+                <viewController id="3Xa-r8-h36" customClass="NotificacionViewController" customModule="dop" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="NHT-Ra-8PJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="sDB-nV-JR4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="t7s-yY-NR2">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bSS-HV-QPt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1348.5" y="2238"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="QRr-jY-dzg">

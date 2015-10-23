@@ -58,12 +58,12 @@ class TabbarController: UITabBarController {
         UIApplication.sharedApplication().statusBarStyle = .LightContent
         
         
-        
+        let notificationButton: UIBarButtonItem = UIBarButtonItem(image: UIImage(named: "notification"), style: UIBarButtonItemStyle.Plain, target: self, action: "notification")
         
         let searchButton : UIBarButtonItem = UIBarButtonItem(image: UIImage(named:"search-icon"), style: UIBarButtonItemStyle.Plain, target: self, action: "search")
         
        /* var logButton : UIBarButtonItem = UIBarButtonItem(title: "Search", style: UIBarButtonItemStyle.Plain, target: self, action: "search")*/
-        
+        self.navigationItem.leftBarButtonItem = notificationButton
         self.navigationItem.rightBarButtonItem = searchButton
         
     }
@@ -103,9 +103,15 @@ class TabbarController: UITabBarController {
  
         
     }
+    
+    func notification() {
+        self.performSegueWithIdentifier("notificationView", sender: self)
+    }
+    
     func search(){
         self.performSegueWithIdentifier("searchView", sender: self)
     }
+    
     func pressed(sender: UIButton!) {
         self.selectedIndex = 2
     }

@@ -112,6 +112,7 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
             cell.loadItem(model, viewController: self)
         
             let imageUrl = NSURL(string: "\(Utilities.dopImagesURL)\(model.company_id)/\(model.logo)")
+            
             let identifier = "Cell\(indexPath.row)"
         
             cell.backgroundColor = UIColor.whiteColor()

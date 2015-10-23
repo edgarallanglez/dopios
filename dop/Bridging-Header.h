@@ -20,5 +20,7 @@
 #import "UIImage+ImageEffects.h"
 #import "UIScrollView+InfiniteScroll.h"
 #import "SocketIO.h"
-
-
+#import "SocketIOPacket.h"
+#import "SocketIOTransport.h"
+#import "SocketIOTransportWebsocket.h"
+#import "SocketIOTransportXHR.h"
