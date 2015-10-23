@@ -11,11 +11,16 @@ import UIKit
 class UserProfileViewController: UIViewController, UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var scrollViewBox: UIScrollView!
-    @IBOutlet var profile_image: UIImageView!
+    let pages: CGFloat = 3
+    var secondPageWidth: Int!
+    var thirdPageWidth: Int!
     
-    var secondPage: UITableView = UITableView()
+    @IBOutlet var profile_image: UIImageView!
+    @IBOutlet weak var userProfileSegmentedController: UserProfileSegmentedController!
+    
+    var activityPage: UITableView = UITableView()
     var userImage: UIImage!
-    var userImagePath:String=""
+    var userImagePath:String = ""
     var userId:Int!
     var historyCoupon = [Coupon]()
     var pageControl : UIPageControl = UIPageControl(frame: CGRectMake(50, 300, 200, 50))
@@ -26,8 +31,10 @@ class UserProfileViewController: UIViewController, UIScrollViewDelegate, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         scrollViewBox.delegate = self
-        secondPage.delegate = self
-        secondPage.dataSource = self
+        self.scrollViewBox.pagingEnabled = true
+        
+        activityPage.delegate = self
+        activityPage.dataSource = self
         
         pageControl.addTarget(self, action: Selector("changePage:"), forControlEvents: UIControlEvents.ValueChanged)
 
@@ -43,11 +50,25 @@ class UserProfileViewController: UIViewController, UIScrollViewDelegate, UITable
         headerTopView = (NSBundle.mainBundle().loadNibNamed("RewardsActivityHeader", owner: self, options: nil)[0] as? RewardsActivityHeader)!
         
         let nib = UINib(nibName: "RewardsActivityCell", bundle: nil)
-        secondPage.registerNib(nib, forCellReuseIdentifier: "RewardsActivityCell")
-        secondPage.rowHeight = UITableViewAutomaticDimension
-        secondPage.rowHeight = 140
+        activityPage.registerNib(nib, forCellReuseIdentifier: "RewardsActivityCell")
+        activityPage.rowHeight = UITableViewAutomaticDimension
+        activityPage.rowHeight = 140
         getCoupons()
     }
+    
+    @IBAction func setScrollViewBoxPage(sender: UserProfileSegmentedController) {
+        switch sender.selectedIndex {
+        case 0:
+            self.scrollViewBox.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+        case 1:
+            self.scrollViewBox.setContentOffset(CGPoint(x: self.secondPageWidth, y: 0), animated: true)
+        case 2:
+            self.scrollViewBox.setContentOffset(CGPoint(x: self.thirdPageWidth, y: 0), animated: true)
+        default:
+            self.scrollViewBox.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+        }
+    }
+    
     
     func downloadImage(url:NSURL) {
 //        print("Started downloading \"\(url.lastPathComponent!.stringByDeletingPathExtension)\".")
@@ -91,6 +112,9 @@ class UserProfileViewController: UIViewController, UIScrollViewDelegate, UITable
             }
     
             dispatch_async(dispatch_get_main_queue(), {
+                self.secondPageWidth = Int(self.scrollViewBox.frame.size.width)
+                self.thirdPageWidth = Int(self.scrollViewBox.frame.size.width * 2)
+                
                 let margin = 18
                 let couponWidth = 180
                 let couponHeight = 245
@@ -101,11 +125,10 @@ class UserProfileViewController: UIViewController, UIScrollViewDelegate, UITable
                     let coupon_box: TrendingCoupon = NSBundle.mainBundle().loadNibNamed("TrendingCoupon", owner: self, options:
                         nil)[0] as! TrendingCoupon
                     
-                    
                     if (index % 2 == 0) {
-                        coupon_box.setCoupon(coupon, view:self, x: CGFloat(margin), y: CGFloat(height + (couponHeight * i)))
+                        coupon_box.setCoupon(coupon, view: self, x: CGFloat(self.thirdPageWidth + margin), y: CGFloat(height + (couponHeight * i)))
                     } else {
-                        coupon_box.setCoupon(coupon, view:self, x: CGFloat(margin + (margin + couponWidth)), y: CGFloat(height + (couponHeight * i)))
+                        coupon_box.setCoupon(coupon, view: self, x: CGFloat((self.thirdPageWidth + margin) + (margin + couponWidth)), y: CGFloat(height + (couponHeight * i)))
                         ++i
                     }
                     
@@ -126,13 +149,15 @@ class UserProfileViewController: UIViewController, UIScrollViewDelegate, UITable
                     self.scrollViewBox.addSubview(coupon_box);
                 }
                 
-                self.secondPage.frame.size = CGSizeMake(self.scrollViewBox.frame.size.width, CGFloat(500))
-                self.secondPage.backgroundColor = UIColor.grayColor()
-                self.scrollViewBox.pagingEnabled = true
+                self.activityPage.frame.size = CGSizeMake(self.scrollViewBox.frame.size.width, CGFloat(500))
+                self.activityPage.backgroundColor = UIColor.grayColor()
+                
                 self.historyScroll_size = (((margin + couponHeight) * self.historyCoupon.count) + margin) / 2
-                self.scrollViewBox.contentSize = CGSizeMake(self.scrollViewBox.frame.size.width * 2, CGFloat(self.historyScroll_size))
-                self.secondPage.frame.origin.x = self.scrollViewBox.frame.width
-                self.scrollViewBox.addSubview(self.secondPage)
+                self.scrollViewBox.contentSize = CGSizeMake(self.scrollViewBox.frame.size.width * self.pages, CGFloat(self.historyScroll_size))
+                
+                self.activityPage.frame.origin.x = 0
+                
+                self.scrollViewBox.addSubview(self.activityPage)
             });
             },
             
@@ -168,10 +193,12 @@ class UserProfileViewController: UIViewController, UIScrollViewDelegate, UITable
         let pageNumber = round(scrollViewBox.contentOffset.x / scrollViewBox.frame.size.width)
         pageControl.currentPage = Int(pageNumber)
         
-        if pageNumber == 1 {
-            self.scrollViewBox.contentSize = CGSizeMake(self.scrollViewBox.frame.size.width * 2, CGFloat(50))
-        } else if pageNumber == 0 {
-            self.scrollViewBox.contentSize = CGSizeMake(self.scrollViewBox.frame.size.width * 2, CGFloat(self.historyScroll_size))
+        if pageNumber == 0 {
+            self.scrollViewBox.contentSize = CGSizeMake(self.scrollViewBox.frame.size.width * pages, CGFloat(50))
+        } else if pageNumber == 1 {
+            self.scrollViewBox.contentSize = CGSizeMake(self.scrollViewBox.frame.size.width * pages, CGFloat(self.historyScroll_size))
+        } else if pageNumber == 2 {
+            self.scrollViewBox.contentSize = CGSizeMake(self.scrollViewBox.frame.size.width * pages, CGFloat(self.historyScroll_size))
         }
     }
     
@@ -182,9 +209,10 @@ class UserProfileViewController: UIViewController, UIScrollViewDelegate, UITable
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         for index in 1...5 {
-            var trophy: UIImageView = UIImageView(image: UIImage(named: "trophy\(index)"))
-            var xPoint: Int = Int(trophy.frame.size.width) * (index - 1) + 15
-            trophy.frame.origin = CGPointMake(CGFloat(xPoint), CGFloat(5))
+            let trophy: UIImageView = UIImageView(image: UIImage(named: "trophy\(index)"))
+            trophy.frame = CGRectMake(0, 0, 50, 50)
+            let xPoint: Int = (Int(trophy.frame.size.width + 15) * (index - 1)) + 15
+            trophy.frame.origin = CGPointMake(CGFloat(xPoint), CGFloat(1))
             headerTopView.trophyScrollView.addSubview(trophy)
         }
         return headerTopView
@@ -196,23 +224,18 @@ class UserProfileViewController: UIViewController, UIScrollViewDelegate, UITable
 //        label.text = "\(self.i)"
 //        cell.addSubview(label)
 //        i++
+        cell.userImage.image = self.profile_image.image
         return cell
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 50
     }
-    //
-//    func scrollViewDidScroll(scrollView: UIScrollView) {
-//        let pagenumber=Int(scrollViewBox.contentOffset.x / scrollViewBox.frame.size.width)
-//        pageControl.currentPage = pagenumber
-//    }
-
-//    override func viewDidAppear() {
-////        if let checkedUrl = NSURL(string:userImagePath) {
-////            downloadImage(checkedUrl)
-////        }
-//    }
-
+    
+    func scrollViewWillBeginDecelerating(scrollView: UIScrollView) {
+        let pageNumber = Int(scrollViewBox.contentOffset.x / scrollViewBox.frame.size.width)
+        pageControl.currentPage = pageNumber
+        self.userProfileSegmentedController.selectedIndex = pageNumber
+    }
 
 }

@@ -10,15 +10,16 @@
 		9D0C16841B4DC6EB0088DE2F /* BranchProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0C16831B4DC6EB0088DE2F /* BranchProfileViewController.swift */; };
 		9D0DB4711B17D2DB0009FE6C /* NearbyMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0DB4701B17D2DB0009FE6C /* NearbyMapViewController.swift */; };
 		9D0DB4731B17DE5A0009FE6C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D0DB4721B17DE5A0009FE6C /* MapKit.framework */; };
-		9D0E72F91BC833E3003107D1 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A04CC2201BC2EF11001AF7E0 /* Info.plist */; settings = {ASSET_TAGS = (); }; };
 		9D1021371B82A019005BED0C /* BranchProfileLastCampaign.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D1021361B82A019005BED0C /* BranchProfileLastCampaign.xib */; };
 		9D13DB3C1BBDA9400014F5BC /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9D13DB3B1BBDA9400014F5BC /* TwitterKitResources.bundle */; settings = {ASSET_TAGS = (); }; };
 		9D1FCED71B79295700F42F6D /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1FCED61B79295700F42F6D /* SegmentedControl.swift */; };
 		9D2BDFE41B9DF524003F1260 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0FE26D01B9A4D12004EB402 /* SearchController.swift */; };
+		9D30F9071BD5B19600D225D5 /* SearchSegmentedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D30F9061BD5B19600D225D5 /* SearchSegmentedController.swift */; settings = {ASSET_TAGS = (); }; };
 		9D33260F1AF7ED1C00498801 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D33260E1AF7ED1C00498801 /* AppDelegate.swift */; };
 		9D3326111AF7ED1C00498801 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3326101AF7ED1C00498801 /* LoginViewController.swift */; };
 		9D3326191AF7ED1C00498801 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D3326171AF7ED1C00498801 /* LaunchScreen.xib */; };
 		9D3326251AF7ED1C00498801 /* dopTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3326241AF7ED1C00498801 /* dopTests.swift */; };
+		9D3756E11BCED51400796378 /* UserProfileSegmentedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3756E01BCED51400796378 /* UserProfileSegmentedController.swift */; settings = {ASSET_TAGS = (); }; };
 		9D42966D1BBEFE17000B4A21 /* RewardsActivityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D42966C1BBEFE17000B4A21 /* RewardsActivityCell.xib */; settings = {ASSET_TAGS = (); }; };
 		9D42966F1BBEFE37000B4A21 /* RewardsActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D42966E1BBEFE37000B4A21 /* RewardsActivityCell.swift */; settings = {ASSET_TAGS = (); }; };
 		9D4296711BBF038D000B4A21 /* RewardsActivityHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4296701BBF038D000B4A21 /* RewardsActivityHeader.swift */; settings = {ASSET_TAGS = (); }; };
@@ -35,6 +36,7 @@
 		9D9C1B2D1B83B3DB00F7895B /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D9C1B2C1B83B3DB00F7895B /* FBSDKCoreKit.framework */; };
 		9D9C9C911BB2155B00D9F986 /* Annotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9C9C901BB2155B00D9F986 /* Annotation.swift */; settings = {ASSET_TAGS = (); }; };
 		9D9D1FF11B9F4BE3000C1299 /* starbucks_banner.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A060F77D1B700355009D6ADB /* starbucks_banner.jpg */; };
+		9DA1C70C1BD712850029578D /* PeopleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA1C70B1BD712850029578D /* PeopleModel.swift */; settings = {ASSET_TAGS = (); }; };
 		9DA3C8961B90C117000D40F2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9DA3C8951B90C117000D40F2 /* Images.xcassets */; };
 		9DA7AA9F1B50309400297690 /* BranchProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA7AA9E1B50309400297690 /* BranchProfileController.swift */; };
 		9DA85CFD1B82587E009DA186 /* BranchProfileLastCampaign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA85CFC1B82587E009DA186 /* BranchProfileLastCampaign.swift */; };
@@ -52,6 +54,7 @@
 		9DC9218A1B9F8D4900241FFD /* UIScrollView+InfiniteScroll.h in Sources */ = {isa = PBXBuildFile; fileRef = 9DC921881B9F8D4900241FFD /* UIScrollView+InfiniteScroll.h */; };
 		9DC9218B1B9F8D4900241FFD /* UIScrollView+InfiniteScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DC921891B9F8D4900241FFD /* UIScrollView+InfiniteScroll.m */; };
 		9DE55C441BB07C0A005F9776 /* PromoSegmentedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE55C431BB07C0A005F9776 /* PromoSegmentedController.swift */; settings = {ASSET_TAGS = (); }; };
+		9DF8F0751BD7F37E009D80EB /* PeopleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF8F0741BD7F37E009D80EB /* PeopleCell.swift */; settings = {ASSET_TAGS = (); }; };
 		A04860961B0D5355009FEF1F /* A0JWTDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = A04860951B0D5355009FEF1F /* A0JWTDecoder.m */; };
 		A04860981B0D5658009FEF1F /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A04860971B0D5658009FEF1F /* FacebookSDK.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		A04CC2101BBD968E001AF7E0 /* ToExpireCoupon.xib in Resources */ = {isa = PBXBuildFile; fileRef = A04CC20F1BBD968E001AF7E0 /* ToExpireCoupon.xib */; settings = {ASSET_TAGS = (); }; };
@@ -156,6 +159,7 @@
 		9D1021361B82A019005BED0C /* BranchProfileLastCampaign.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BranchProfileLastCampaign.xib; sourceTree = "<group>"; };
 		9D13DB3B1BBDA9400014F5BC /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TwitterKitResources.bundle; path = dop/TwitterKitResources.bundle; sourceTree = "<group>"; };
 		9D1FCED61B79295700F42F6D /* SegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
+		9D30F9061BD5B19600D225D5 /* SearchSegmentedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchSegmentedController.swift; sourceTree = "<group>"; };
 		9D3326091AF7ED1C00498801 /* dop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D33260D1AF7ED1C00498801 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9D33260E1AF7ED1C00498801 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -164,6 +168,7 @@
 		9D33261E1AF7ED1C00498801 /* dopTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = dopTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D3326231AF7ED1C00498801 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9D3326241AF7ED1C00498801 /* dopTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dopTests.swift; sourceTree = "<group>"; };
+		9D3756E01BCED51400796378 /* UserProfileSegmentedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileSegmentedController.swift; sourceTree = "<group>"; };
 		9D42966C1BBEFE17000B4A21 /* RewardsActivityCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RewardsActivityCell.xib; sourceTree = "<group>"; };
 		9D42966E1BBEFE37000B4A21 /* RewardsActivityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewardsActivityCell.swift; sourceTree = "<group>"; };
 		9D4296701BBF038D000B4A21 /* RewardsActivityHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewardsActivityHeader.swift; sourceTree = "<group>"; };
@@ -179,6 +184,7 @@
 		9D9C1B2A1B83B0D900F7895B /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = dop/FBSDKShareKit.framework; sourceTree = "<group>"; };
 		9D9C1B2C1B83B3DB00F7895B /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = dop/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		9D9C9C901BB2155B00D9F986 /* Annotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Annotation.swift; sourceTree = "<group>"; };
+		9DA1C70B1BD712850029578D /* PeopleModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleModel.swift; sourceTree = "<group>"; };
 		9DA3C8951B90C117000D40F2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		9DA7AA9E1B50309400297690 /* BranchProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BranchProfileController.swift; sourceTree = "<group>"; };
 		9DA85CFC1B82587E009DA186 /* BranchProfileLastCampaign.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BranchProfileLastCampaign.swift; sourceTree = "<group>"; };
@@ -195,6 +201,7 @@
 		9DC921881B9F8D4900241FFD /* UIScrollView+InfiniteScroll.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+InfiniteScroll.h"; sourceTree = "<group>"; };
 		9DC921891B9F8D4900241FFD /* UIScrollView+InfiniteScroll.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+InfiniteScroll.m"; sourceTree = "<group>"; };
 		9DE55C431BB07C0A005F9776 /* PromoSegmentedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromoSegmentedController.swift; sourceTree = "<group>"; };
+		9DF8F0741BD7F37E009D80EB /* PeopleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleCell.swift; sourceTree = "<group>"; };
 		A04860941B0D5355009FEF1F /* A0JWTDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = A0JWTDecoder.h; sourceTree = "<group>"; };
 		A04860951B0D5355009FEF1F /* A0JWTDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = A0JWTDecoder.m; sourceTree = "<group>"; };
 		A04860971B0D5658009FEF1F /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = dop/FacebookSDK.framework; sourceTree = "<group>"; };
@@ -583,6 +590,8 @@
 				A0662A351BA0CEF5006D6278 /* LoadingCell.swift */,
 				A0FCF9D71B98D59200BB4537 /* SearchViewController.swift */,
 				A06B35781B9F5D9F003C90EF /* SearchCell.swift */,
+				9D30F9061BD5B19600D225D5 /* SearchSegmentedController.swift */,
+				9DF8F0741BD7F37E009D80EB /* PeopleCell.swift */,
 			);
 			name = Search;
 			sourceTree = "<group>";
@@ -642,6 +651,8 @@
 				9D42966E1BBEFE37000B4A21 /* RewardsActivityCell.swift */,
 				9D4296701BBF038D000B4A21 /* RewardsActivityHeader.swift */,
 				9D4296721BBF03D1000B4A21 /* RewardsActivityHeader.xib */,
+				9D3756E01BCED51400796378 /* UserProfileSegmentedController.swift */,
+				9DA1C70B1BD712850029578D /* PeopleModel.swift */,
 			);
 			name = User;
 			sourceTree = "<group>";
@@ -780,15 +791,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A04CC2151BC2EF10001AF7E0 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9D0E72F91BC833E3003107D1 /* Info.plist in Resources */,
-				A04CC21F1BC2EF11001AF7E0 /* MainInterface.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -817,18 +819,22 @@
 				9D2BDFE41B9DF524003F1260 /* SearchController.swift in Sources */,
 				9DBB7A401B968437005700B9 /* UIImage+ImageEffects.h in Sources */,
 				9D697C7A1B5EF13000D786AA /* iconfonts-fontawesome.swift in Sources */,
+				9DA1C70C1BD712850029578D /* PeopleModel.swift in Sources */,
 				A04CC2121BBDBB16001AF7E0 /* ToExpireCoupon.swift in Sources */,
 				A04D388F1BC7366600E578F0 /* NearestCoupon.swift in Sources */,
 				9D7FA0781BBC4FF000EAEC36 /* SettingsViewController.swift in Sources */,
 				A0EC05991B7D1C69003CADB2 /* SWRevealViewController.m in Sources */,
 				9D0C16841B4DC6EB0088DE2F /* BranchProfileViewController.swift in Sources */,
 				A065EB321BA8E60A003B7390 /* DashboardController.swift in Sources */,
+				9D3756E11BCED51400796378 /* UserProfileSegmentedController.swift in Sources */,
 				A060F7861B702FAC009D6ADB /* CouponDetailViewController.swift in Sources */,
 				A0C3AC2E1B9525D5005636E7 /* CustomInfiniteIndicator.swift in Sources */,
 				A0DF72931B13AEBF006EE8F4 /* FriendsController.swift in Sources */,
 				9D1FCED71B79295700F42F6D /* SegmentedControl.swift in Sources */,
+				9D30F9071BD5B19600D225D5 /* SearchSegmentedController.swift in Sources */,
 				A082F4851B18CF01001C8C52 /* NewsfeedController.swift in Sources */,
 				A0BB9BB91B13E4F1000BA261 /* FriendCell.swift in Sources */,
+				9DF8F0751BD7F37E009D80EB /* PeopleCell.swift in Sources */,
 				A0DF72911B13A66C006EE8F4 /* FriendsViewController.swift in Sources */,
 				A0662A361BA0CEF5006D6278 /* LoadingCell.swift in Sources */,
 				A06B357C1B9F667D003C90EF /* NearbyBranch.swift in Sources */,
@@ -1084,38 +1090,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/dop.app/dop";
-			};
-			name = Release;
-		};
-		A04CC2251BC2EF11001AF7E0 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_TESTABILITY = YES;
-				INFOPLIST_FILE = widget/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.im.dop.widget-dop";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		A04CC2261BC2EF11001AF7E0 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				INFOPLIST_FILE = widget/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.im.dop.widget-dop";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};

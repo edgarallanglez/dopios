@@ -17,7 +17,7 @@ class NearbyBranch: NSObject {
     init(id: Int?, name: String?, distance: Double!) {
         self.id = id ?? 0
         self.name = name ?? ""
-        if(distance==0.0){
+        if(distance == 0.0){
             self.distance = String(stringInterpolationSegment: "")
         }else{
             self.distance = String(stringInterpolationSegment: "A \(distance) Km")

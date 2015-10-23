@@ -1,19 +1,19 @@
 //
-//  ADVSegmentedControl.swift
-//  Mega
+//  UserProfileSegmentedController.swift
+//  dop
 //
-//  Created by Tope Abayomi on 01/12/2014.
-//  Copyright (c) 2014 App Design Vault. All rights reserved.
+//  Created by Edgar Allan Glez on 10/14/15.
+//  Copyright © 2015 Edgar Allan Glez. All rights reserved.
 //
 
 import UIKit
 
-@IBDesignable class FilterSegmentedControl: UIControl {
+@IBDesignable class UserProfileSegmentedController: UIControl {
     
     private var labels = [UILabel]()
     var thumbView = UIView()
     
-    var items: [String] = ["COMIDA", "SERVICIOS", "DIVERSION"] {
+    var items: [String] = ["ACTIVIDAD", "TROFEOS", "TIMELINE"] {
         didSet {
             setupLabels()
         }
@@ -70,7 +70,7 @@ import UIKit
         
         //        layer.cornerRadius = frame.height / 2
         //        layer.borderColor = Utilities.dopColor.CGColor //UIColor(white: 1.0, alpha: 0.5).CGColor
-        backgroundColor = UIColor.clearColor()
+        backgroundColor = UIColor.whiteColor()
         
         setupLabels()
         
@@ -139,7 +139,7 @@ import UIKit
     }
     
     func displayNewSelectedIndex(){
-        for (index, item) in labels.enumerate() {
+        for (_, item) in labels.enumerate() {
             item.textColor = unselectedLabelColor
         }
         
@@ -147,15 +147,15 @@ import UIKit
         label.textColor = selectedLabelColor
         
         UIView.animateWithDuration(0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 0.8, options: [], animations: {
-        
+            
             self.thumbView.frame = label.frame
-        
+            
             }, completion: nil)
     }
     
     func addIndividualItemConstraints(items: [UIView], mainView: UIView, padding: CGFloat) {
         
-        let constraints = mainView.constraints
+        let _ = mainView.constraints
         
         for (index, button) in items.enumerate() {
             
@@ -216,3 +216,4 @@ import UIKit
         }
     }
 }
+

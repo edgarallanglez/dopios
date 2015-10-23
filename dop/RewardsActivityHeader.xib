@@ -17,10 +17,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="twd-gH-Vr5">
-                    <rect key="frame" x="0.0" y="0.0" width="581" height="50"/>
+                    <rect key="frame" x="0.0" y="0.0" width="581" height="40"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trofeos" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sTq-6l-iwn">
-                            <rect key="frame" x="10" y="14" width="59" height="21"/>
+                            <rect key="frame" x="10" y="9" width="59" height="21"/>
                             <animations/>
                             <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="17"/>
                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -29,21 +29,15 @@
                     </subviews>
                     <animations/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="50" id="0c6-4t-7CF"/>
                         <constraint firstItem="sTq-6l-iwn" firstAttribute="centerY" secondItem="twd-gH-Vr5" secondAttribute="centerY" id="9Bf-xx-P4P"/>
-                        <constraint firstAttribute="height" constant="50" id="COp-Ms-qHj"/>
+                        <constraint firstAttribute="height" constant="40" id="COp-Ms-qHj"/>
                         <constraint firstItem="sTq-6l-iwn" firstAttribute="leading" secondItem="twd-gH-Vr5" secondAttribute="leading" constant="10" id="Fym-3a-R1q"/>
                     </constraints>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="0c6-4t-7CF"/>
-                        </mask>
-                    </variation>
                 </view>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ga6-29-3Tt">
-                    <rect key="frame" x="0.0" y="50" width="581" height="79"/>
+                    <rect key="frame" x="0.0" y="40" width="581" height="89"/>
                     <animations/>
-                    <color key="backgroundColor" red="0.87058823529999996" green="0.0" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </scrollView>
             </subviews>
             <animations/>

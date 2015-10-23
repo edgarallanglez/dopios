@@ -9,22 +9,24 @@
 import UIKit
 
 class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, CLLocationManagerDelegate {
-
-    var searchBar:UISearchBar!
     
-    var searchActive : Bool = false
-    var data:[NearbyBranch] = []
-    var filtered:[NearbyBranch] = []
+    @IBOutlet var tableView: UITableView!
+    @IBOutlet weak var peopleTableView: UITableView!
+    @IBOutlet weak var searchSegmentedController: SearchSegmentedController!
+    @IBOutlet weak var searchScrollView: UIScrollView!
     
-    var searching:Bool = false
-    var timer : NSTimer? = nil
+    var searchBar: UISearchBar!
+    var searchActive: Bool = false
+    var filtered: [NearbyBranch] = []
+    var peopleFiltered: [PeopleModel] = []
+    var cachedImages: [String: UIImage] = [:]
     
-    
+    var searching: Bool = false
+    var timer: NSTimer? = nil
     var coordinate: CLLocationCoordinate2D?
     var locationManager: CLLocationManager!
     var current: CLLocation!
     
-    @IBOutlet var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -32,45 +34,32 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         searchBar = UISearchBar(frame: CGRectMake(0, 0, 100, 20))
         searchBar.tintColor = UIColor.whiteColor()
         
-        
+        //searchScrollView.contentSize = CGSizeMake(searchScrollView.frame.size.width * 2, searchScrollView.frame.height)
         let textFieldInsideSearchBar = searchBar.valueForKey("searchField") as? UITextField
         textFieldInsideSearchBar?.textColor = UIColor.whiteColor()
-        
-        
         
         searchBar.searchBarStyle = UISearchBarStyle.Minimal
         searchBar.placeholder = "Buscar"
         //var rightNavBarButton = UIBarButtonItem(customView:searchBar)
         //self.navigationItem.rightBarButtonItem = rightNavBarButton
         
-        
         self.navigationController?.navigationBar.addSubview(searchBar)
         //self.view.addSubview(searchBar)
         
         tableView.delegate = self
         tableView.dataSource = self
+        
+        peopleTableView.delegate = self
+        peopleTableView.dataSource = self
+        
         searchBar.delegate = self
         
-        
         searchBar.becomeFirstResponder()
-        
-        
-        
-        
         searchBar.translatesAutoresizingMaskIntoConstraints = false
-        
         searchBar.alpha = 0
-
-
-        //
-        
-        data = []
         
         tableView.reloadData()
-        
-        
-        
-        
+
         locationManager = CLLocationManager()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -108,6 +97,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
             self.searchBar.alpha = 1
         })
     }
+    
     override func viewDidDisappear(animated: Bool) {
         searchBar.resignFirstResponder()
         
@@ -140,9 +130,8 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
             searchBar.resignFirstResponder()
         }
     }
+    
     func searchBar(searchBar: UISearchBar, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
-
-        
         timer?.invalidate()
         timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "timeOut", userInfo: nil, repeats: false)
         
@@ -162,8 +151,9 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         }*/
         //self.tableView.reloadData()
     }
+    
     func timeOut(){
-        var searchText = searchBar.text
+        let searchText = searchBar.text
         
         if(searchText != ""){
             search()
@@ -176,97 +166,168 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if(!searching) {
-            return filtered.count
-        }else{
+            if tableView == self.tableView {
+                return filtered.count
+            } else {
+                return peopleFiltered.count
+            }
+        } else {
             return 1;
         }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        //var cell:UITableViewCell
-        if(!searching){
-            let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as! SearchCell;
+        let default_cell: UITableViewCell = UITableViewCell()
+        if tableView == self.tableView {
+            if(!searching){
+                let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as! SearchCell;
+                let model = self.filtered[indexPath.row]
+                cell.loadItem(model, viewController: self)
+                cell.selectionStyle = UITableViewCellSelectionStyle.None
+                
+                return (cell)
+                
+            } else {
+                let cell = tableView.dequeueReusableCellWithIdentifier("loadingCell") as! LoadingCell;
+                cell.selectionStyle = UITableViewCellSelectionStyle.None
+                cell.loading_indicator.startAnimating()
+                
+                return (cell)
+            }
+        } else if tableView == self.peopleTableView {
+            if(!searching){
+                let cell = tableView.dequeueReusableCellWithIdentifier("PeopleCell") as! PeopleCell;
+                let model = self.peopleFiltered[indexPath.row]
+                cell.loadItem(model, viewController: self)
+                cell.selectionStyle = UITableViewCellSelectionStyle.None
+                ////////
+                let imageUrl = NSURL(string: model.main_image)
+                let identifier = "Cell\(indexPath.row)"
+                
+                if (self.cachedImages[identifier] != nil){
+                    let cell_image_saved : UIImage = self.cachedImages[identifier]!
+                    cell.user_image.image = cell_image_saved
+                    cell.user_image.alpha = 1
+                    cell.user_name.alpha = 1
+                    
+                } else {
+                    cell.user_image.alpha = 0
+                   // cell.user_name.alpha = 0
+                    Utilities.getDataFromUrl(imageUrl!) { data in
+                        dispatch_async(dispatch_get_main_queue()) {
+                            var cell_image : UIImage = UIImage()
+                            cell_image = UIImage (data: data!)!
+                            
+                            if tableView.indexPathForCell(cell)?.row == indexPath.row {
+                                self.cachedImages[identifier] = cell_image
+                                let cell_image_saved : UIImage = self.cachedImages[identifier]!
+                                cell.user_image.image = cell_image_saved
+                                UIView.animateWithDuration(0.5, animations: {
+                                    cell.user_image.alpha = 1
+                                    cell.user_name.alpha = 1
+                                })
+                            }
+                        }
+                    }
+                }
+                ////////
+                
+                return (cell)
+                
+            } else {
+                let cell = self.tableView.dequeueReusableCellWithIdentifier("loadingCell") as! LoadingCell;
+                cell.selectionStyle = UITableViewCellSelectionStyle.None
+                cell.loading_indicator.startAnimating()
+                
+                return (cell)
+            }
             
-            let model = self.filtered[indexPath.row]
-            
-            cell.loadItem(model, viewController: self)
-            
-            cell.selectionStyle = UITableViewCellSelectionStyle.None
-
-            return (cell)
-            
-        } else {
-            let cell = tableView.dequeueReusableCellWithIdentifier("loadingCell") as! LoadingCell;
-            
-            cell.selectionStyle = UITableViewCellSelectionStyle.None
-
-            cell.loading_indicator.startAnimating()
-            
-            return (cell)
         }
-        
+        return(default_cell)
     }
     
     
     func search(){
         filtered.removeAll()
+        peopleFiltered.removeAll()
         
         let searchText: String = searchBar.text!
-        
         let latitude = User.coordinate.latitude
         let longitude = User.coordinate.longitude
-        
-        
         let params: [String:AnyObject] = [
             "text": searchText,
             "latitude": latitude,
             "longitude":longitude
         ]
-        
         searching = true
-        tableView.reloadData()
         
-        SearchController.searchWithSuccess(params,
-            success: { (couponsData) -> Void in
-                
-                let json = JSON(data: couponsData)
-                print(json)
-                for (_, subJson): (String, JSON) in json["data"] {
-                    var distance:Double = 0.0
+        
+        if self.searchSegmentedController.selectedIndex == 0 {
+            tableView.reloadData()
+            SearchController.searchWithSuccess(params,
+                success: { (couponsData) -> Void in
                     
-                    if(subJson["distance"]){
-                         distance = Utilities.roundValue(subJson["distance"].double!,numberOfPlaces: 1.0)
+                    let json = JSON(data: couponsData)
+                    print(json)
+                    for (_, subJson): (String, JSON) in json["data"] {
+                        var distance:Double = 0.0
+                        
+                        if(subJson["distance"]){
+                             distance = Utilities.roundValue(subJson["distance"].double!,numberOfPlaces: 1.0)
+                        }
+                        let name = subJson["name"].string!
+                        let branch_id = subJson["branch_id"].int
+                        let model = NearbyBranch(id: branch_id, name: name, distance:distance)
+                        
+                        self.filtered.append(model)
                     }
-                    let name = subJson["name"].string!
-                    let branch_id = subJson["branch_id"].int
                     
-                   
-                    
-                    
-                    let model = NearbyBranch(id: branch_id, name: name, distance:distance)
-                    
-                    self.filtered.append(model)
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.searching = false
+                        self.tableView.reloadData()
+
+                    })
+                },
+                failure: { (error) -> Void in
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.searching = false
+                        self.tableView.reloadData()
+                    })
                 }
-
-                
-                dispatch_async(dispatch_get_main_queue(), {
-                    self.data.removeAll()
-                    self.data = self.filtered
-                    
-                    self.searching = false
-                    
-                    self.tableView.reloadData()
-
-                })
-            },
-            failure: { (error) -> Void in
-                dispatch_async(dispatch_get_main_queue(), {
-
-                    self.searching = false
-                    
-                    self.tableView.reloadData()
-                })
-        })
+            )
+        } else {
+            peopleTableView.reloadData()
+            SearchController.searchPeopleWithSuccess(params,
+                success: { (data) -> Void in
+                    let json = JSON(data: data)
+                    print(json)
+                    for (_, subJson): (String, JSON) in json["data"] {
+                        let names = subJson["names"].string!
+                        let surnames = subJson["surnames"].string!
+                        let user_id = subJson["user_id"].int!
+                        let birth_date = subJson["birth_date"].string!
+                        let facebook_key = subJson["facebok_key"].string ?? ""
+                        let privacy_status = subJson["privacy_status"].int!
+                        let main_image = subJson["main_image"].string!
+                        
+                        let model = PeopleModel(names: names, surnames: surnames, user_id: user_id, birth_date: birth_date, facebook_key: facebook_key, privacy_status: privacy_status, main_image: main_image)
+                        
+                        self.peopleFiltered.append(model)
+                    }
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.searching = false
+                        self.peopleTableView.reloadData()
+                        
+                    })
+                },
+                failure: { (error) -> Void in
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.searching = false
+                        self.peopleTableView.reloadData()
+                    })
+                }
+            )
+        }
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
@@ -280,6 +341,21 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         }
     }
     
+    @IBAction func setSearchTarget(sender: SearchSegmentedController) {
+        switch sender.selectedIndex {
+        case 0:
+            tableView.reloadData()
+        case 1:
+            peopleTableView.reloadData()
+        default:
+            print("Oops!")
+        }
+        let x = CGFloat(sender.selectedIndex) * self.searchScrollView.frame.size.width
+        self.searchScrollView.setContentOffset(CGPointMake(x, 0), animated: true)
+        
+    }
+    
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let cell = sender as? SearchCell {
             
@@ -289,8 +365,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
             if segue.identifier == "branchProfile" {
                 let view = segue.destinationViewController as! BranchProfileViewController
                 view.branchId = model.id
-                
-                           }
+            }
         }
     }
     

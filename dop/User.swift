@@ -12,6 +12,7 @@ class User: NSObject, CLLocationManagerDelegate {
     static var userToken:String = ""
     static var userEmail:String = ""
     static var userName:String = ""
+    static var privacy_status: Int = 0
     static var userImageUrl:String = ""
     static var loginType = ""
     static var activeSession = false

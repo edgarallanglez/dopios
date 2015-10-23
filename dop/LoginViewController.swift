@@ -109,13 +109,10 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
     func finishedWithAuth(auth: GTMOAuth2Authentication!, error: NSError!) {
        if (GPPSignIn.sharedInstance().googlePlusUser != nil){
             print("Sign in")
-            var user = GPPSignIn.sharedInstance().googlePlusUser
-            var userId = GPPSignIn.sharedInstance().googlePlusUser.identifier
-            
-            var userEmail = user.emails.first?.value ?? ""
-            print(user.name.JSONString());
-        
-            var userImage = String(stringInterpolationSegment: user.image.url)+"&sz=320"
+            let user = GPPSignIn.sharedInstance().googlePlusUser
+            let userId = GPPSignIn.sharedInstance().googlePlusUser.identifier
+            let userEmail = user.emails.first?.value ?? ""
+            let userImage =  user.image.url + "&sz=320"
         
         print(userImage)
             let params:[String: String] = [
@@ -182,8 +179,6 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
         
         let userEmail = user.objectForKey("email") as? String ?? ""
         let birthday = user.birthday ?? "2015-01-01"
-        print("\(birthday )")
-        
     
         let params:[String: String] = [
             "facebook_key" : user.objectID,
@@ -237,15 +232,15 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
                 let json = JSON(data: loginData)
                 
                 let jwt = json["token"].string!
-                var error:NSError?
+                var error: NSError?
                 
                 User.userToken = jwt
                 
                 
-                User.userImageUrl = String(stringInterpolationSegment: params["main_image"]!)
+                User.userImageUrl =  params["main_image"]!
                 
-                User.userName = String(stringInterpolationSegment: params["names"]!)
-                User.userSurnames = String(stringInterpolationSegment: params["surnames"]!)
+                User.userName =  params["names"]!
+                User.userSurnames =  params["surnames"]!
                 
                 dispatch_async(dispatch_get_main_queue(), {
                     //if (!User.activeSession) {

@@ -9,7 +9,7 @@
 import UIKit
 
 class FriendsController: NSObject {
-    class func getAllFriendsWithSuccess(success succeed: ((friendsData: NSData!) -> Void),failure errorFound: ((friendsData: NSError?) -> Void)) {
+    class func getAllFriendsWithSuccess(success succeed: ((friendsData: NSData!) -> Void), failure errorFound: ((friendsData: NSError?) -> Void)) {
         let url = "\(Utilities.dopURL)user/friends/get"
         Utilities.loadDataFromURL(NSURL(string: url)!, completion:{(data, error) -> Void in
             if let urlData = data {
@@ -20,7 +20,7 @@ class FriendsController: NSObject {
         })
     }
     
-    class func deleteFriend(params:[String:AnyObject], success: ((friendsData: NSData!) -> Void),failure errorFound: ((friendsData: NSError?) -> Void)) {
+    class func deleteFriend(params:[String:AnyObject], success: ((friendsData: NSData!) -> Void), failure errorFound: ((friendsData: NSError?) -> Void)) {
         let url = "\(Utilities.dopURL)user/friends/delete"
         Utilities.sendDataToURL(NSURL(string: url)!, method:"PUT",params: params, completion:{(data, error) -> Void in
             if let urlData = data {
@@ -30,4 +30,16 @@ class FriendsController: NSObject {
             }
         })
     }
+    
+    class func addFriendWithSuccess(params:[String:AnyObject], success: ((friendsData: NSData!) -> Void), failure errorFound: ((friendsData: NSError?) -> Void)) {
+        let url = "\(Utilities.dopURL)user/friends/add"
+        Utilities.sendDataToURL(NSURL(string: url)!, method:"POST", params: params, completion:{(data, error) -> Void in
+            if let urlData = data {
+                success(friendsData: urlData)
+            }else{
+                errorFound(friendsData: error)
+            }
+        })
+    }
+
 }

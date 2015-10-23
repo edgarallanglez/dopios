@@ -10,4 +10,7 @@ import UIKit
 
 class RewardsActivityCell: UITableViewCell {
     
+    @IBOutlet weak var userImage: UIImageView!
+    
+    
 }
