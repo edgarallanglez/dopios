@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import TwitterKit
+//import TwitterKit
 import Fabric
 
 @UIApplicationMain

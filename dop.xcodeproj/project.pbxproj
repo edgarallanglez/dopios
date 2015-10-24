@@ -11,7 +11,6 @@
 		9D0DB4711B17D2DB0009FE6C /* NearbyMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0DB4701B17D2DB0009FE6C /* NearbyMapViewController.swift */; };
 		9D0DB4731B17DE5A0009FE6C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D0DB4721B17DE5A0009FE6C /* MapKit.framework */; };
 		9D1021371B82A019005BED0C /* BranchProfileLastCampaign.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D1021361B82A019005BED0C /* BranchProfileLastCampaign.xib */; };
-		9D13DB3C1BBDA9400014F5BC /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9D13DB3B1BBDA9400014F5BC /* TwitterKitResources.bundle */; };
 		9D1FCED71B79295700F42F6D /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1FCED61B79295700F42F6D /* SegmentedControl.swift */; };
 		9D2BDFE41B9DF524003F1260 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0FE26D01B9A4D12004EB402 /* SearchController.swift */; };
 		9D30F9071BD5B19600D225D5 /* SearchSegmentedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D30F9061BD5B19600D225D5 /* SearchSegmentedController.swift */; };
@@ -69,6 +68,11 @@
 		A04D388D1BC7361900E578F0 /* NearestCoupon.xib in Resources */ = {isa = PBXBuildFile; fileRef = A04D388C1BC7361900E578F0 /* NearestCoupon.xib */; };
 		A04D388F1BC7366600E578F0 /* NearestCoupon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04D388E1BC7366600E578F0 /* NearestCoupon.swift */; };
 		A04E388A1AFC3549007C7B69 /* starbucks.gif in Resources */ = {isa = PBXBuildFile; fileRef = A04E38891AFC3549007C7B69 /* starbucks.gif */; };
+		A05592A61BDB19B70041E20D /* libc.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A05592A41BDB19B70041E20D /* libc.dylib */; };
+		A05592A71BDB19B70041E20D /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A05592A51BDB19B70041E20D /* libc++.dylib */; };
+		A05592A91BDB19C20041E20D /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A05592A81BDB19C20041E20D /* TwitterKitResources.bundle */; };
+		A05592AA1BDB1C5E0041E20D /* libc.dylib in Resources */ = {isa = PBXBuildFile; fileRef = A05592A41BDB19B70041E20D /* libc.dylib */; };
+		A05592AB1BDB1C5E0041E20D /* libc++.dylib in Resources */ = {isa = PBXBuildFile; fileRef = A05592A51BDB19B70041E20D /* libc++.dylib */; };
 		A0578C521B0D64AD0033B5BD /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0578C4E1B0D64AD0033B5BD /* Fabric.framework */; };
 		A0578C551B0D64AD0033B5BD /* TwitterCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0578C511B0D64AD0033B5BD /* TwitterCore.framework */; };
 		A0578C5F1B0E40D30033B5BD /* GoogleOpenSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0578C5C1B0E40D30033B5BD /* GoogleOpenSource.framework */; };
@@ -112,8 +116,6 @@
 		A0EB97AD1B03E16A005112EF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EB97AC1B03E16A005112EF /* User.swift */; };
 		A0EB97B01B05131E005112EF /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EB97AF1B05131E005112EF /* Utilities.swift */; };
 		A0EB97B21B051F02005112EF /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EB97B11B051F02005112EF /* LoginController.swift */; };
-		A0EB97C61B0B9F8D005112EF /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EB97C51B0B9F8D005112EF /* libz.dylib */; };
-		A0EB97C81B0B9F9B005112EF /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EB97C71B0B9F9B005112EF /* libc++.dylib */; };
 		A0EB97CE1B0BA77E005112EF /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EB97CD1B0BA77E005112EF /* SystemConfiguration.framework */; };
 		A0EB97D01B0BA78B005112EF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EB97CF1B0BA78B005112EF /* Security.framework */; };
 		A0EB97D21B0BA793005112EF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EB97D11B0BA793005112EF /* QuartzCore.framework */; };
@@ -164,7 +166,6 @@
 		9D0DB4701B17D2DB0009FE6C /* NearbyMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyMapViewController.swift; sourceTree = "<group>"; };
 		9D0DB4721B17DE5A0009FE6C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		9D1021361B82A019005BED0C /* BranchProfileLastCampaign.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BranchProfileLastCampaign.xib; sourceTree = "<group>"; };
-		9D13DB3B1BBDA9400014F5BC /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TwitterKitResources.bundle; path = dop/TwitterKitResources.bundle; sourceTree = "<group>"; };
 		9D1FCED61B79295700F42F6D /* SegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
 		9D30F9061BD5B19600D225D5 /* SearchSegmentedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchSegmentedController.swift; sourceTree = "<group>"; };
 		9D3326091AF7ED1C00498801 /* dop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dop.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -239,6 +240,9 @@
 		A04D388C1BC7361900E578F0 /* NearestCoupon.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NearestCoupon.xib; sourceTree = "<group>"; };
 		A04D388E1BC7366600E578F0 /* NearestCoupon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearestCoupon.swift; sourceTree = "<group>"; };
 		A04E38891AFC3549007C7B69 /* starbucks.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = starbucks.gif; sourceTree = "<group>"; };
+		A05592A41BDB19B70041E20D /* libc.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libc.dylib; sourceTree = "<group>"; };
+		A05592A51BDB19B70041E20D /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = "libc++.dylib"; sourceTree = "<group>"; };
+		A05592A81BDB19C20041E20D /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TwitterKitResources.bundle; sourceTree = "<group>"; };
 		A0578C4E1B0D64AD0033B5BD /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		A0578C511B0D64AD0033B5BD /* TwitterCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterCore.framework; sourceTree = "<group>"; };
 		A0578C5C1B0E40D30033B5BD /* GoogleOpenSource.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleOpenSource.framework; path = dop/GoogleOpenSource.framework; sourceTree = "<group>"; };
@@ -285,8 +289,6 @@
 		A0EB97AC1B03E16A005112EF /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A0EB97AF1B05131E005112EF /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		A0EB97B11B051F02005112EF /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
-		A0EB97C51B0B9F8D005112EF /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		A0EB97C71B0B9F9B005112EF /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		A0EB97CD1B0BA77E005112EF /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		A0EB97CF1B0BA78B005112EF /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		A0EB97D11B0BA793005112EF /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -328,6 +330,7 @@
 				9D0DB4731B17DE5A0009FE6C /* MapKit.framework in Frameworks */,
 				A0EB97E01B0BA7CE005112EF /* CoreData.framework in Frameworks */,
 				A0578C611B0E40D30033B5BD /* GooglePlus.framework in Frameworks */,
+				A05592A71BDB19B70041E20D /* libc++.dylib in Frameworks */,
 				A0578C551B0D64AD0033B5BD /* TwitterCore.framework in Frameworks */,
 				A0578C521B0D64AD0033B5BD /* Fabric.framework in Frameworks */,
 				A0EB97DE1B0BA7C5005112EF /* CoreLocation.framework in Frameworks */,
@@ -338,10 +341,9 @@
 				A0EB97D61B0BA7A5005112EF /* Foundation.framework in Frameworks */,
 				A0EB97D41B0BA79C005112EF /* MediaPlayer.framework in Frameworks */,
 				A0EB97D21B0BA793005112EF /* QuartzCore.framework in Frameworks */,
+				A05592A61BDB19B70041E20D /* libc.dylib in Frameworks */,
 				A0EB97D01B0BA78B005112EF /* Security.framework in Frameworks */,
 				A0EB97CE1B0BA77E005112EF /* SystemConfiguration.framework in Frameworks */,
-				A0EB97C81B0B9F9B005112EF /* libc++.dylib in Frameworks */,
-				A0EB97C61B0B9F8D005112EF /* libz.dylib in Frameworks */,
 				A05F782D1B5039FB00371708 /* TwitterKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -359,7 +361,7 @@
 		079462BCCDF3FAF530C45E4E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9D13DB3B1BBDA9400014F5BC /* TwitterKitResources.bundle */,
+				A05592A81BDB19C20041E20D /* TwitterKitResources.bundle */,
 				9D9C1B2C1B83B3DB00F7895B /* FBSDKCoreKit.framework */,
 				9D9C1B2A1B83B0D900F7895B /* FBSDKShareKit.framework */,
 				A0EC059C1B7D1FD5003CADB2 /* UIKit.framework */,
@@ -385,9 +387,9 @@
 				A0EB97D11B0BA793005112EF /* QuartzCore.framework */,
 				A0EB97CF1B0BA78B005112EF /* Security.framework */,
 				A0EB97CD1B0BA77E005112EF /* SystemConfiguration.framework */,
-				A0EB97C71B0B9F9B005112EF /* libc++.dylib */,
+				A05592A41BDB19B70041E20D /* libc.dylib */,
+				A05592A51BDB19B70041E20D /* libc++.dylib */,
 				A04860971B0D5658009FEF1F /* FacebookSDK.framework */,
-				A0EB97C51B0B9F8D005112EF /* libz.dylib */,
 				A04CC2181BC2EF10001AF7E0 /* NotificationCenter.framework */,
 			);
 			name = Frameworks;
@@ -737,7 +739,6 @@
 				9D3326051AF7ED1C00498801 /* Sources */,
 				9D3326061AF7ED1C00498801 /* Frameworks */,
 				9D3326071AF7ED1C00498801 /* Resources */,
-				9D4B063B1B0D5483008CD688 /* ShellScript */,
 				A04CC2271BC2EF11001AF7E0 /* Embed App Extensions */,
 			);
 			buildRules = (
@@ -774,12 +775,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0630;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "Edgar Allan Glez";
 				TargetAttributes = {
 					9D3326081AF7ED1C00498801 = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = T6K9SC4685;
+						DevelopmentTeam = QX6AA77Z42;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -819,12 +820,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A05592AA1BDB1C5E0041E20D /* libc.dylib in Resources */,
+				A05592AB1BDB1C5E0041E20D /* libc++.dylib in Resources */,
 				9D4D298C1B9F50A100CE58A9 /* Montserrat-Light.otf in Resources */,
 				A04CC2101BBD968E001AF7E0 /* ToExpireCoupon.xib in Resources */,
 				A04D388D1BC7361900E578F0 /* NearestCoupon.xib in Resources */,
 				9D4D298D1B9F50A100CE58A9 /* Montserrat-UltraLight.otf in Resources */,
 				9D5DA89B1B9E55DB00954B30 /* Montserrat-Bold.otf in Resources */,
-				9D13DB3C1BBDA9400014F5BC /* TwitterKitResources.bundle in Resources */,
 				9D5DA89C1B9E55DB00954B30 /* Montserrat-Regular.otf in Resources */,
 				9D4296731BBF03D1000B4A21 /* RewardsActivityHeader.xib in Resources */,
 				9D4C04811B18EB0200D5DCEE /* FontAwesome.ttf in Resources */,
@@ -844,6 +846,7 @@
 				A0F7E9211AFAE48500A4F0F2 /* CouponCell.xib in Resources */,
 				9D1021371B82A019005BED0C /* BranchProfileLastCampaign.xib in Resources */,
 				9DB6BB2A1B72A6A000FF2659 /* BranchProfileTopView.xib in Resources */,
+				A05592A91BDB19C20041E20D /* TwitterKitResources.bundle in Resources */,
 				A0BB9BBA1B13E4F1000BA261 /* FriendCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -856,22 +859,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		9D4B063B1B0D5483008CD688 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 58f24ea4f2c75c3732d54261fa160e9e90a36ff5 0981bc39ce888dc42fb4d09dabdc83aba202704ba150f4ade73b6992cdbc6228";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9D3326051AF7ED1C00498801 /* Sources */ = {
@@ -1021,6 +1008,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1096,7 +1084,12 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = dop/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-framework",
@@ -1105,7 +1098,7 @@
 					Security,
 					"-licucore",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.iminc.dop;
+				PRODUCT_BUNDLE_IDENTIFIER = com.imincxx.dop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "dop/Bridging-Header.h";
@@ -1127,7 +1120,12 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = dop/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-framework",
@@ -1136,7 +1134,7 @@
 					Security,
 					"-licucore",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.iminc.dop;
+				PRODUCT_BUNDLE_IDENTIFIER = com.imincxx.dop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "dop/Bridging-Header.h";
@@ -1158,6 +1156,7 @@
 				);
 				INFOPLIST_FILE = dopTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.inmoon.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/dop.app/dop";
 			};
@@ -1173,6 +1172,7 @@
 				);
 				INFOPLIST_FILE = dopTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.inmoon.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/dop.app/dop";
 			};
