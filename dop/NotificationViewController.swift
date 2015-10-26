@@ -8,14 +8,22 @@
 
 import UIKit
 
+
+
+
 class NotificacionViewController: UIViewController, SocketIODelegate {
+
+    
     let socketIO : SocketIO = SocketIO()
+    
+    
     
     override func viewDidLoad() {
         socketIO.delegate = self
         socketIO.useSecure = true
         socketIO.connectToHost("inmoon.com.mx", onPort: 443, withParams: nil, withNamespace: "/test")
-
+        
+        
     }
     
     func socketIODidConnect(socket: SocketIO) {

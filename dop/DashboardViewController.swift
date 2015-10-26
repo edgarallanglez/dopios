@@ -29,7 +29,7 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
     var locValue:CLLocationCoordinate2D?
     
 
-
+    
     
 
     var coupons = [Coupon]()
@@ -51,6 +51,10 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        
+        
         
         self.title = "Dashboard"
         self.navigationController?.navigationBar.topItem!.title = "Dashboard"
@@ -97,6 +101,11 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
         locationManager.startUpdatingLocation()
         User.coordinate = locationManager.location!.coordinate
         
+
+        
+    }
+    func getNotification(gameBoardUIView:UIView) {
+        print("DOT")
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
