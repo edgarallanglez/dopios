@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TabbarController: UITabBarController {
+class TabbarController: UITabBarController, NotificationDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,7 +58,8 @@ class TabbarController: UITabBarController {
         UIApplication.sharedApplication().statusBarStyle = .LightContent
         
         
-        let notificationButton: UIBarButtonItem = UIBarButtonItem(image: UIImage(named: "notification"), style: UIBarButtonItemStyle.Plain, target: self, action: "notification")
+        let notificationButton: NotificationButton = NotificationButton(image: UIImage(named: "trophy1"), style: UIBarButtonItemStyle.Plain, target: self, action: "notification")
+        
         
         let searchButton : UIBarButtonItem = UIBarButtonItem(image: UIImage(named:"search-icon"), style: UIBarButtonItemStyle.Plain, target: self, action: "search")
         
@@ -66,6 +67,8 @@ class TabbarController: UITabBarController {
         self.navigationItem.leftBarButtonItem = notificationButton
         self.navigationItem.rightBarButtonItem = searchButton
         
+        notificationButton.delegate = self
+        notificationButton.startListening()
     }
 
     override func didReceiveMemoryWarning() {
@@ -127,6 +130,15 @@ class TabbarController: UITabBarController {
         /*let nav = barViewControllers.viewControllers![2] as! UINavigationController
         let destinationViewController = nav.topViewController as! SearchViewController*/
         
+    }
+    
+    func getNotification(packet:SocketIOPacket) {
+        print("NOTIFICATION")
+        var alert = UIAlertController(title: "Alert", message: packet.data, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
+
+        self.presentViewController(alert, animated: true, completion: nil)
+
     }
 
   
