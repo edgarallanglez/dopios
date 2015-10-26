@@ -250,6 +250,8 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
     func search(){
         filtered.removeAll()
         peopleFiltered.removeAll()
+        cachedImages.removeAll()
+        
         
         let searchText: String = searchBar.text!
         let latitude = User.coordinate.latitude

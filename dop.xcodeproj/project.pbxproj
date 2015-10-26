@@ -11,6 +11,9 @@
 		9D0DB4711B17D2DB0009FE6C /* NearbyMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0DB4701B17D2DB0009FE6C /* NearbyMapViewController.swift */; };
 		9D0DB4731B17DE5A0009FE6C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D0DB4721B17DE5A0009FE6C /* MapKit.framework */; };
 		9D1021371B82A019005BED0C /* BranchProfileLastCampaign.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D1021361B82A019005BED0C /* BranchProfileLastCampaign.xib */; };
+		9D1205741BDEBF16009EEBAE /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D12056B1BDEBEF9009EEBAE /* CryptoSwift.framework */; };
+		9D1205751BDEBF60009EEBAE /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D12056B1BDEBEF9009EEBAE /* CryptoSwift.framework */; };
+		9D1205761BDEBF60009EEBAE /* CryptoSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9D12056B1BDEBEF9009EEBAE /* CryptoSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9D1FCED71B79295700F42F6D /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1FCED61B79295700F42F6D /* SegmentedControl.swift */; };
 		9D2BDFE41B9DF524003F1260 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0FE26D01B9A4D12004EB402 /* SearchController.swift */; };
 		9D30F9071BD5B19600D225D5 /* SearchSegmentedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D30F9061BD5B19600D225D5 /* SearchSegmentedController.swift */; };
@@ -41,6 +44,7 @@
 		9DA85CFD1B82587E009DA186 /* BranchProfileLastCampaign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA85CFC1B82587E009DA186 /* BranchProfileLastCampaign.swift */; };
 		9DAAE7B71B0E810B00209588 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DAAE7B51B0E810B00209588 /* Main.storyboard */; };
 		9DACBBF91BA8CE0200CAEECB /* FilterSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DACBBF81BA8CE0200CAEECB /* FilterSegmentedControl.swift */; };
+		9DB317001BDED21700D7FB88 /* JWT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DB316FD1BDED20E00D7FB88 /* JWT.framework */; };
 		9DB327CC1B863C77006BF882 /* MoreMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB327CB1B863C77006BF882 /* MoreMenuController.swift */; };
 		9DB327CE1B863C84006BF882 /* MoreMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB327CD1B863C84006BF882 /* MoreMenuViewController.swift */; };
 		9DB3DABB1B73C28A004AC0F1 /* BranchProfileTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB3DABA1B73C28A004AC0F1 /* BranchProfileTopView.swift */; };
@@ -61,7 +65,6 @@
 		A01D77DA1BDAB94C00AA8FE2 /* SocketIOJSONSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = A01D77D21BDAB94C00AA8FE2 /* SocketIOJSONSerialization.m */; };
 		A01D77DB1BDAB94C00AA8FE2 /* SocketIOTransportWebsocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A01D77D51BDAB94C00AA8FE2 /* SocketIOTransportWebsocket.m */; };
 		A01D77DC1BDAB94C00AA8FE2 /* SocketIOTransportXHR.m in Sources */ = {isa = PBXBuildFile; fileRef = A01D77D71BDAB94C00AA8FE2 /* SocketIOTransportXHR.m */; };
-		A04860961B0D5355009FEF1F /* A0JWTDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = A04860951B0D5355009FEF1F /* A0JWTDecoder.m */; };
 		A04860981B0D5658009FEF1F /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A04860971B0D5658009FEF1F /* FacebookSDK.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		A04CC2101BBD968E001AF7E0 /* ToExpireCoupon.xib in Resources */ = {isa = PBXBuildFile; fileRef = A04CC20F1BBD968E001AF7E0 /* ToExpireCoupon.xib */; };
 		A04CC2121BBDBB16001AF7E0 /* ToExpireCoupon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04CC2111BBDBB16001AF7E0 /* ToExpireCoupon.swift */; };
@@ -70,7 +73,6 @@
 		A04E388A1AFC3549007C7B69 /* starbucks.gif in Resources */ = {isa = PBXBuildFile; fileRef = A04E38891AFC3549007C7B69 /* starbucks.gif */; };
 		A05592A61BDB19B70041E20D /* libc.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A05592A41BDB19B70041E20D /* libc.dylib */; };
 		A05592A71BDB19B70041E20D /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A05592A51BDB19B70041E20D /* libc++.dylib */; };
-		A05592A91BDB19C20041E20D /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A05592A81BDB19C20041E20D /* TwitterKitResources.bundle */; };
 		A05592AA1BDB1C5E0041E20D /* libc.dylib in Resources */ = {isa = PBXBuildFile; fileRef = A05592A41BDB19B70041E20D /* libc.dylib */; };
 		A05592AB1BDB1C5E0041E20D /* libc++.dylib in Resources */ = {isa = PBXBuildFile; fileRef = A05592A51BDB19B70041E20D /* libc++.dylib */; };
 		A0578C521B0D64AD0033B5BD /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0578C4E1B0D64AD0033B5BD /* Fabric.framework */; };
@@ -80,7 +82,6 @@
 		A0578C611B0E40D30033B5BD /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0578C5E1B0E40D30033B5BD /* GooglePlus.framework */; };
 		A0578C641B0E7D2B0033B5BD /* UserProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0578C621B0E7D2B0033B5BD /* UserProfileController.swift */; };
 		A0578C651B0E7D2B0033B5BD /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0578C631B0E7D2B0033B5BD /* UserProfileViewController.swift */; };
-		A05F782D1B5039FB00371708 /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A05F782C1B5039FB00371708 /* TwitterKit.framework */; };
 		A05F782F1B503A4E00371708 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A05F782E1B503A4E00371708 /* Social.framework */; };
 		A05F78311B505DED00371708 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A05F78301B505DED00371708 /* Accounts.framework */; };
 		A060F77A1B6C4CA3009D6ADB /* TabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A060F7791B6C4CA3009D6ADB /* TabbarController.swift */; };
@@ -139,6 +140,48 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		9D12056A1BDEBEF9009EEBAE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9D1205621BDEBEF8009EEBAE /* CryptoSwift.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 754BE45519693E190098E6F3;
+			remoteInfo = "CryptoSwift iOS";
+		};
+		9D12056C1BDEBEF9009EEBAE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9D1205621BDEBEF8009EEBAE /* CryptoSwift.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5596BDBB1BC8F220007E38D5;
+			remoteInfo = "CryptoSwift watchOS";
+		};
+		9D12056E1BDEBEF9009EEBAE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9D1205621BDEBEF8009EEBAE /* CryptoSwift.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 75D614BF1BD844F2001358B2;
+			remoteInfo = "CryptoSwift tvOS";
+		};
+		9D1205701BDEBEF9009EEBAE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9D1205621BDEBEF8009EEBAE /* CryptoSwift.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 75DF77721BC8EB59006E9520;
+			remoteInfo = "CryptoSwift OSX";
+		};
+		9D1205721BDEBEF9009EEBAE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9D1205621BDEBEF8009EEBAE /* CryptoSwift.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 754BE46019693E190098E6F3;
+			remoteInfo = CryptoSwiftTests;
+		};
+		9D1205771BDEBF60009EEBAE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9D1205621BDEBEF8009EEBAE /* CryptoSwift.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 754BE45419693E190098E6F3;
+			remoteInfo = "CryptoSwift iOS";
+		};
 		9D33261F1AF7ED1C00498801 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9D3326011AF7ED1C00498801 /* Project object */;
@@ -146,9 +189,34 @@
 			remoteGlobalIDString = 9D3326081AF7ED1C00498801;
 			remoteInfo = dop;
 		};
+		9DB316FC1BDED20E00D7FB88 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9DB316F71BDED20E00D7FB88 /* JWT.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 279D639C1AD07FFF0024E2BC;
+			remoteInfo = JWT;
+		};
+		9DB316FE1BDED20E00D7FB88 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9DB316F71BDED20E00D7FB88 /* JWT.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 279D63A71AD07FFF0024E2BC;
+			remoteInfo = JWTTests;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		9D1205791BDEBF60009EEBAE /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				9D1205761BDEBF60009EEBAE /* CryptoSwift.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A04CC2271BC2EF11001AF7E0 /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -166,6 +234,7 @@
 		9D0DB4701B17D2DB0009FE6C /* NearbyMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyMapViewController.swift; sourceTree = "<group>"; };
 		9D0DB4721B17DE5A0009FE6C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		9D1021361B82A019005BED0C /* BranchProfileLastCampaign.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BranchProfileLastCampaign.xib; sourceTree = "<group>"; };
+		9D1205621BDEBEF8009EEBAE /* CryptoSwift.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CryptoSwift.xcodeproj; path = CryptoSwift/CryptoSwift.xcodeproj; sourceTree = "<group>"; };
 		9D1FCED61B79295700F42F6D /* SegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
 		9D30F9061BD5B19600D225D5 /* SearchSegmentedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchSegmentedController.swift; sourceTree = "<group>"; };
 		9D3326091AF7ED1C00498801 /* dop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dop.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -198,6 +267,7 @@
 		9DA85CFC1B82587E009DA186 /* BranchProfileLastCampaign.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BranchProfileLastCampaign.swift; sourceTree = "<group>"; };
 		9DAAE7B61B0E810B00209588 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9DACBBF81BA8CE0200CAEECB /* FilterSegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterSegmentedControl.swift; sourceTree = "<group>"; };
+		9DB316F71BDED20E00D7FB88 /* JWT.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JWT.xcodeproj; path = JSONWebToken.swift/JWT.xcodeproj; sourceTree = "<group>"; };
 		9DB327CB1B863C77006BF882 /* MoreMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreMenuController.swift; sourceTree = "<group>"; };
 		9DB327CD1B863C84006BF882 /* MoreMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreMenuViewController.swift; sourceTree = "<group>"; };
 		9DB3DABA1B73C28A004AC0F1 /* BranchProfileTopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BranchProfileTopView.swift; sourceTree = "<group>"; };
@@ -225,8 +295,6 @@
 		A01D77D51BDAB94C00AA8FE2 /* SocketIOTransportWebsocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketIOTransportWebsocket.m; sourceTree = "<group>"; };
 		A01D77D61BDAB94C00AA8FE2 /* SocketIOTransportXHR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketIOTransportXHR.h; sourceTree = "<group>"; };
 		A01D77D71BDAB94C00AA8FE2 /* SocketIOTransportXHR.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketIOTransportXHR.m; sourceTree = "<group>"; };
-		A04860941B0D5355009FEF1F /* A0JWTDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = A0JWTDecoder.h; sourceTree = "<group>"; };
-		A04860951B0D5355009FEF1F /* A0JWTDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = A0JWTDecoder.m; sourceTree = "<group>"; };
 		A04860971B0D5658009FEF1F /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = dop/FacebookSDK.framework; sourceTree = "<group>"; };
 		A04CC20F1BBD968E001AF7E0 /* ToExpireCoupon.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ToExpireCoupon.xib; sourceTree = "<group>"; };
 		A04CC2111BBDBB16001AF7E0 /* ToExpireCoupon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToExpireCoupon.swift; sourceTree = "<group>"; };
@@ -242,7 +310,6 @@
 		A04E38891AFC3549007C7B69 /* starbucks.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = starbucks.gif; sourceTree = "<group>"; };
 		A05592A41BDB19B70041E20D /* libc.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libc.dylib; sourceTree = "<group>"; };
 		A05592A51BDB19B70041E20D /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = "libc++.dylib"; sourceTree = "<group>"; };
-		A05592A81BDB19C20041E20D /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TwitterKitResources.bundle; sourceTree = "<group>"; };
 		A0578C4E1B0D64AD0033B5BD /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		A0578C511B0D64AD0033B5BD /* TwitterCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterCore.framework; sourceTree = "<group>"; };
 		A0578C5C1B0E40D30033B5BD /* GoogleOpenSource.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleOpenSource.framework; path = dop/GoogleOpenSource.framework; sourceTree = "<group>"; };
@@ -250,7 +317,6 @@
 		A0578C5E1B0E40D30033B5BD /* GooglePlus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GooglePlus.framework; path = dop/GooglePlus.framework; sourceTree = "<group>"; };
 		A0578C621B0E7D2B0033B5BD /* UserProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileController.swift; sourceTree = "<group>"; };
 		A0578C631B0E7D2B0033B5BD /* UserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
-		A05F782C1B5039FB00371708 /* TwitterKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TwitterKit.framework; path = ../../Downloads/TwitterKit.framework; sourceTree = "<group>"; };
 		A05F782E1B503A4E00371708 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		A05F78301B505DED00371708 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		A060F7791B6C4CA3009D6ADB /* TabbarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabbarController.swift; sourceTree = "<group>"; };
@@ -318,12 +384,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9DB317001BDED21700D7FB88 /* JWT.framework in Frameworks */,
+				9D1205741BDEBF16009EEBAE /* CryptoSwift.framework in Frameworks */,
 				A0EC059D1B7D1FD5003CADB2 /* UIKit.framework in Frameworks */,
 				A0EC059B1B7D1ED1003CADB2 /* CoreGraphics.framework in Frameworks */,
 				A05F78311B505DED00371708 /* Accounts.framework in Frameworks */,
 				A05F782F1B503A4E00371708 /* Social.framework in Frameworks */,
 				9D9C1B2B1B83B0D900F7895B /* FBSDKShareKit.framework in Frameworks */,
 				A04860981B0D5658009FEF1F /* FacebookSDK.framework in Frameworks */,
+				9D1205751BDEBF60009EEBAE /* CryptoSwift.framework in Frameworks */,
 				A0EB97E41B0BA7DD005112EF /* AddressBook.framework in Frameworks */,
 				A0578C5F1B0E40D30033B5BD /* GoogleOpenSource.framework in Frameworks */,
 				A0EB97E21B0BA7D5005112EF /* AssetsLibrary.framework in Frameworks */,
@@ -344,7 +413,6 @@
 				A05592A61BDB19B70041E20D /* libc.dylib in Frameworks */,
 				A0EB97D01B0BA78B005112EF /* Security.framework in Frameworks */,
 				A0EB97CE1B0BA77E005112EF /* SystemConfiguration.framework in Frameworks */,
-				A05F782D1B5039FB00371708 /* TwitterKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,14 +429,14 @@
 		079462BCCDF3FAF530C45E4E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				A05592A81BDB19C20041E20D /* TwitterKitResources.bundle */,
+				9D1205621BDEBEF8009EEBAE /* CryptoSwift.xcodeproj */,
+				9DB316F71BDED20E00D7FB88 /* JWT.xcodeproj */,
 				9D9C1B2C1B83B3DB00F7895B /* FBSDKCoreKit.framework */,
 				9D9C1B2A1B83B0D900F7895B /* FBSDKShareKit.framework */,
 				A0EC059C1B7D1FD5003CADB2 /* UIKit.framework */,
 				A0EC059A1B7D1ED1003CADB2 /* CoreGraphics.framework */,
 				A05F78301B505DED00371708 /* Accounts.framework */,
 				A05F782E1B503A4E00371708 /* Social.framework */,
-				A05F782C1B5039FB00371708 /* TwitterKit.framework */,
 				9D0DB4721B17DE5A0009FE6C /* MapKit.framework */,
 				A0578C5C1B0E40D30033B5BD /* GoogleOpenSource.framework */,
 				A0578C5D1B0E40D30033B5BD /* GooglePlus.bundle */,
@@ -425,6 +493,18 @@
 			name = Nearby;
 			sourceTree = "<group>";
 		};
+		9D1205631BDEBEF8009EEBAE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9D12056B1BDEBEF9009EEBAE /* CryptoSwift.framework */,
+				9D12056D1BDEBEF9009EEBAE /* CryptoSwift.framework */,
+				9D12056F1BDEBEF9009EEBAE /* CryptoSwift.framework */,
+				9D1205711BDEBEF9009EEBAE /* CryptoSwift.framework */,
+				9D1205731BDEBEF9009EEBAE /* CryptoSwiftTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		9D3326001AF7ED1C00498801 = {
 			isa = PBXGroup;
 			children = (
@@ -475,7 +555,6 @@
 				A09AB4E61AFA9609004287F7 /* Coupon */,
 				A0BB9BB61B13E4CA000BA261 /* Friend */,
 				A0D6FBFE1B9105E200C8E87F /* InfiniteScroll */,
-				A04860901B0D4D3B009FEF1F /* JWTDecode */,
 				9D3326171AF7ED1C00498801 /* LaunchScreen.xib */,
 				A0EB97B31B052074005112EF /* Login */,
 				9DAAE7B51B0E810B00209588 /* Main.storyboard */,
@@ -533,6 +612,15 @@
 				9D7FA07A1BBC516100EAEC36 /* TrophyViewController.swift */,
 			);
 			name = Trophy;
+			sourceTree = "<group>";
+		};
+		9DB316F81BDED20E00D7FB88 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9DB316FD1BDED20E00D7FB88 /* JWT.framework */,
+				9DB316FF1BDED20E00D7FB88 /* JWTTests.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		9DB327CA1B862EF6006BF882 /* MoreMenu */ = {
@@ -598,15 +686,6 @@
 				A0EC05981B7D1C69003CADB2 /* SWRevealViewController.m */,
 			);
 			name = SWRevealViewController;
-			sourceTree = "<group>";
-		};
-		A04860901B0D4D3B009FEF1F /* JWTDecode */ = {
-			isa = PBXGroup;
-			children = (
-				A04860941B0D5355009FEF1F /* A0JWTDecoder.h */,
-				A04860951B0D5355009FEF1F /* A0JWTDecoder.m */,
-			);
-			name = JWTDecode;
 			sourceTree = "<group>";
 		};
 		A04CC21A1BC2EF11001AF7E0 /* widget */ = {
@@ -740,10 +819,12 @@
 				9D3326061AF7ED1C00498801 /* Frameworks */,
 				9D3326071AF7ED1C00498801 /* Resources */,
 				A04CC2271BC2EF11001AF7E0 /* Embed App Extensions */,
+				9D1205791BDEBF60009EEBAE /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				9D1205781BDEBF60009EEBAE /* PBXTargetDependency */,
 			);
 			name = dop;
 			productName = dop;
@@ -780,7 +861,7 @@
 				TargetAttributes = {
 					9D3326081AF7ED1C00498801 = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = QX6AA77Z42;
+						DevelopmentTeam = WKZMSRYE62;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -807,6 +888,16 @@
 			mainGroup = 9D3326001AF7ED1C00498801;
 			productRefGroup = 9D33260A1AF7ED1C00498801 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 9D1205631BDEBEF8009EEBAE /* Products */;
+					ProjectRef = 9D1205621BDEBEF8009EEBAE /* CryptoSwift.xcodeproj */;
+				},
+				{
+					ProductGroup = 9DB316F81BDED20E00D7FB88 /* Products */;
+					ProjectRef = 9DB316F71BDED20E00D7FB88 /* JWT.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				9D3326081AF7ED1C00498801 /* dop */,
@@ -814,6 +905,58 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		9D12056B1BDEBEF9009EEBAE /* CryptoSwift.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = CryptoSwift.framework;
+			remoteRef = 9D12056A1BDEBEF9009EEBAE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9D12056D1BDEBEF9009EEBAE /* CryptoSwift.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = CryptoSwift.framework;
+			remoteRef = 9D12056C1BDEBEF9009EEBAE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9D12056F1BDEBEF9009EEBAE /* CryptoSwift.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = CryptoSwift.framework;
+			remoteRef = 9D12056E1BDEBEF9009EEBAE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9D1205711BDEBEF9009EEBAE /* CryptoSwift.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = CryptoSwift.framework;
+			remoteRef = 9D1205701BDEBEF9009EEBAE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9D1205731BDEBEF9009EEBAE /* CryptoSwiftTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = CryptoSwiftTests.xctest;
+			remoteRef = 9D1205721BDEBEF9009EEBAE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9DB316FD1BDED20E00D7FB88 /* JWT.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = JWT.framework;
+			remoteRef = 9DB316FC1BDED20E00D7FB88 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9DB316FF1BDED20E00D7FB88 /* JWTTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = JWTTests.xctest;
+			remoteRef = 9DB316FE1BDED20E00D7FB88 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		9D3326071AF7ED1C00498801 /* Resources */ = {
@@ -846,7 +989,6 @@
 				A0F7E9211AFAE48500A4F0F2 /* CouponCell.xib in Resources */,
 				9D1021371B82A019005BED0C /* BranchProfileLastCampaign.xib in Resources */,
 				9DB6BB2A1B72A6A000FF2659 /* BranchProfileTopView.xib in Resources */,
-				A05592A91BDB19C20041E20D /* TwitterKitResources.bundle in Resources */,
 				A0BB9BBA1B13E4F1000BA261 /* FriendCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -908,7 +1050,6 @@
 				A0578C641B0E7D2B0033B5BD /* UserProfileController.swift in Sources */,
 				9D3326111AF7ED1C00498801 /* LoginViewController.swift in Sources */,
 				A086ACE31BB383A4003133BA /* TrendingCoupon.swift in Sources */,
-				A04860961B0D5355009FEF1F /* A0JWTDecoder.m in Sources */,
 				A060F78E1B72B475009D6ADB /* CouponDetailView.swift in Sources */,
 				A082F48A1B1920F8001C8C52 /* NewsfeedCell.swift in Sources */,
 				A09AB4E51AFA880E004287F7 /* Coupon.swift in Sources */,
@@ -952,6 +1093,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		9D1205781BDEBF60009EEBAE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "CryptoSwift iOS";
+			targetProxy = 9D1205771BDEBF60009EEBAE /* PBXContainerItemProxy */;
+		};
 		9D3326201AF7ED1C00498801 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 9D3326081AF7ED1C00498801 /* dop */;
@@ -1007,6 +1153,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1052,6 +1199,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1077,6 +1225,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = YES;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1084,7 +1233,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = dop/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1098,7 +1247,7 @@
 					Security,
 					"-licucore",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.imincxx.dop;
+				PRODUCT_BUNDLE_IDENTIFIER = com.iminced.dop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "dop/Bridging-Header.h";
@@ -1113,6 +1262,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = YES;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1120,7 +1270,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = dop/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1134,7 +1284,7 @@
 					Security,
 					"-licucore",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.imincxx.dop;
+				PRODUCT_BUNDLE_IDENTIFIER = com.iminced.dop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "dop/Bridging-Header.h";

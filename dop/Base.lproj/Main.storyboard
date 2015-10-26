@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="wsr-0B-cyM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="wsr-0B-cyM">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -54,6 +53,9 @@
             <string>Montserrat-Light</string>
         </mutableArray>
         <mutableArray key="Montserrat-Regular.otf">
+            <string>Montserrat-Regular</string>
+            <string>Montserrat-Regular</string>
+            <string>Montserrat-Regular</string>
             <string>Montserrat-Regular</string>
             <string>Montserrat-Regular</string>
             <string>Montserrat-Regular</string>
@@ -588,10 +590,29 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dWA-J3-rmJ" userLabel="entertainmentTrigger">
                                         <rect key="frame" x="93" y="425" width="40" height="30"/>
                                         <animations/>
-                                        <state key="normal" title="Filtrar">
-                                            <color key="titleColor" red="0.14901960780000001" green="0.65098039220000004" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.98431372549999996" green="0.1333333333" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="6Im-va-ktJ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
+                                        <state key="normal" title="FILTRAR">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="6Im-va-ktJ"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="widthClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="6Im-va-ktJ"/>
+                                            </mask>
+                                        </variation>
                                         <connections>
                                             <action selector="setEntertainmentSubcategories:" destination="tia-h6-j09" eventType="touchUpInside" id="L6M-jW-8lV"/>
                                         </connections>
@@ -605,6 +626,7 @@
                                     <constraint firstItem="vBK-7j-bQt" firstAttribute="leading" secondItem="i4L-qb-wdp" secondAttribute="leading" id="HgN-kl-dtI"/>
                                     <constraint firstItem="0pl-NY-ty8" firstAttribute="top" secondItem="Dlz-Q6-t2c" secondAttribute="bottom" constant="8" id="MMc-Ns-a6b"/>
                                     <constraint firstItem="0pl-NY-ty8" firstAttribute="leading" secondItem="i4L-qb-wdp" secondAttribute="leading" id="Oze-iN-G06"/>
+                                    <constraint firstItem="dWA-J3-rmJ" firstAttribute="leading" secondItem="i4L-qb-wdp" secondAttribute="leading" constant="25" id="Vng-6f-ehb"/>
                                     <constraint firstItem="Xed-eJ-Kku" firstAttribute="leading" secondItem="i4L-qb-wdp" secondAttribute="leading" id="Zmo-qJ-b4W"/>
                                     <constraint firstItem="Dlz-Q6-t2c" firstAttribute="leading" secondItem="i4L-qb-wdp" secondAttribute="leading" id="ik1-f7-HZC"/>
                                     <constraint firstItem="dWA-J3-rmJ" firstAttribute="centerX" secondItem="dkH-oR-BKq" secondAttribute="centerX" id="nWp-Rx-vcW"/>
@@ -614,8 +636,16 @@
                                     <constraint firstItem="CbM-Dw-tWt" firstAttribute="top" secondItem="Xed-eJ-Kku" secondAttribute="bottom" constant="8" id="wE5-Rh-sHX"/>
                                     <constraint firstItem="vBK-7j-bQt" firstAttribute="top" secondItem="0pl-NY-ty8" secondAttribute="bottom" constant="8" id="yaM-u7-r8D"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Vng-6f-ehb"/>
+                                    </mask>
+                                </variation>
                                 <variation key="widthClass=compact" misplaced="YES">
                                     <rect key="frame" x="10" y="95" width="570" height="505"/>
+                                    <mask key="constraints">
+                                        <include reference="Vng-6f-ehb"/>
+                                    </mask>
                                 </variation>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="atB-UW-fkF" userLabel="servicesView">
@@ -911,10 +941,29 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IZA-mk-8Bx" userLabel="servicesTrigger">
                                         <rect key="frame" x="93" y="425" width="40" height="30"/>
                                         <animations/>
-                                        <state key="normal" title="Filtrar">
-                                            <color key="titleColor" red="0.4823529412" green="0.73333333329999995" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.98431372549999996" green="0.1333333333" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="Tch-mA-m70"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
+                                        <state key="normal" title="FILTRAR">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="Tch-mA-m70"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="widthClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="Tch-mA-m70"/>
+                                            </mask>
+                                        </variation>
                                         <connections>
                                             <action selector="setServicesSubcategories:" destination="tia-h6-j09" eventType="touchUpInside" id="6Xy-Se-mz7"/>
                                         </connections>
@@ -933,14 +982,23 @@
                                     <constraint firstItem="JGi-9L-C7I" firstAttribute="top" secondItem="a5t-T3-Clx" secondAttribute="bottom" constant="8" id="Ivs-kS-Y4v"/>
                                     <constraint firstItem="JGi-9L-C7I" firstAttribute="centerX" secondItem="IZA-mk-8Bx" secondAttribute="centerX" id="Ljb-gm-Z8b"/>
                                     <constraint firstItem="wgK-fn-5sT" firstAttribute="top" secondItem="atB-UW-fkF" secondAttribute="top" id="RMh-b5-qu2"/>
+                                    <constraint firstItem="IZA-mk-8Bx" firstAttribute="leading" secondItem="atB-UW-fkF" secondAttribute="leading" constant="25" id="ZJ1-KP-tpk"/>
                                     <constraint firstItem="kUL-9X-uiZ" firstAttribute="top" secondItem="wgK-fn-5sT" secondAttribute="bottom" constant="8" id="gFN-aE-N5Q"/>
                                     <constraint firstItem="wgK-fn-5sT" firstAttribute="leading" secondItem="atB-UW-fkF" secondAttribute="leading" id="l54-7e-bRd"/>
                                     <constraint firstItem="kUL-9X-uiZ" firstAttribute="leading" secondItem="atB-UW-fkF" secondAttribute="leading" id="mYO-kZ-JFD"/>
                                     <constraint firstItem="sFG-hl-ATN" firstAttribute="leading" secondItem="atB-UW-fkF" secondAttribute="leading" id="tab-jM-BuH"/>
                                     <constraint firstAttribute="bottom" secondItem="IZA-mk-8Bx" secondAttribute="bottom" constant="50" id="wkT-Om-8Mo"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="ZJ1-KP-tpk"/>
+                                    </mask>
+                                </variation>
                                 <variation key="widthClass=compact" misplaced="YES">
                                     <rect key="frame" x="10" y="95" width="570" height="505"/>
+                                    <mask key="constraints">
+                                        <include reference="ZJ1-KP-tpk"/>
+                                    </mask>
                                 </variation>
                             </view>
                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FOq-Mm-68q" userLabel="foodView">
@@ -1356,13 +1414,32 @@
                                             <constraint firstItem="bf1-ae-Xzj" firstAttribute="leading" secondItem="SZE-uB-ORQ" secondAttribute="trailing" constant="5" id="z4A-MB-dbI"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LWa-8x-1mk" userLabel="foodTrigger">
+                                    <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LWa-8x-1mk" userLabel="foodTrigger">
                                         <rect key="frame" x="93" y="425" width="40" height="30"/>
                                         <animations/>
-                                        <state key="normal" title="Filtrar">
-                                            <color key="titleColor" red="0.98431372549999996" green="0.1333333333" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.98431372549999996" green="0.1333333333" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="wju-FK-Df5"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
+                                        <state key="normal" title="FILTRAR">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="wju-FK-Df5"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="widthClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="wju-FK-Df5"/>
+                                            </mask>
+                                        </variation>
                                         <connections>
                                             <action selector="setFoodSubcategories:" destination="tia-h6-j09" eventType="touchUpInside" id="6vU-ZF-te9"/>
                                         </connections>
@@ -1383,6 +1460,7 @@
                                     <constraint firstItem="obF-zd-Ig0" firstAttribute="centerX" secondItem="LWa-8x-1mk" secondAttribute="centerX" id="W1L-bF-ibE"/>
                                     <constraint firstItem="k9f-gd-nVz" firstAttribute="leading" secondItem="FOq-Mm-68q" secondAttribute="leading" id="XR1-b4-1Z4"/>
                                     <constraint firstItem="1C8-NS-T6S" firstAttribute="top" secondItem="jRz-E3-rZg" secondAttribute="bottom" constant="8" id="h6l-Q6-THA"/>
+                                    <constraint firstItem="LWa-8x-1mk" firstAttribute="leading" secondItem="FOq-Mm-68q" secondAttribute="leading" constant="25" id="jka-LI-kDN"/>
                                     <constraint firstItem="1Kz-Nb-BaG" firstAttribute="leading" secondItem="FOq-Mm-68q" secondAttribute="leading" id="kUk-fZ-X6K"/>
                                     <constraint firstItem="jRz-E3-rZg" firstAttribute="leading" secondItem="FOq-Mm-68q" secondAttribute="leading" id="m95-Ou-FhL"/>
                                     <constraint firstItem="k9f-gd-nVz" firstAttribute="top" secondItem="f2S-gE-vg4" secondAttribute="bottom" constant="8" id="mKm-aA-40D"/>
@@ -1393,8 +1471,16 @@
                                     <constraint firstItem="wU3-XZ-5Ok" firstAttribute="top" secondItem="FOq-Mm-68q" secondAttribute="top" id="xWQ-4z-p7l"/>
                                     <constraint firstItem="1Kz-Nb-BaG" firstAttribute="top" secondItem="wU3-XZ-5Ok" secondAttribute="bottom" constant="8" id="yBH-2f-r26"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="jka-LI-kDN"/>
+                                    </mask>
+                                </variation>
                                 <variation key="widthClass=compact" misplaced="YES">
                                     <rect key="frame" x="10" y="95" width="570" height="505"/>
+                                    <mask key="constraints">
+                                        <include reference="jka-LI-kDN"/>
+                                    </mask>
                                 </variation>
                             </view>
                         </subviews>
@@ -2862,7 +2948,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xDE-rm-srF" userLabel="Content View">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                         <subviews>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="61" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="dh8-ki-l7S" userLabel="Branches Table">
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="dh8-ki-l7S" userLabel="Branches Table">
                                                 <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                                                 <animations/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -3011,7 +3097,8 @@
                                                         <exclude reference="OYI-1j-9rx"/>
                                                     </mask>
                                                 </variation>
-                                                <variation key="widthClass=compact">
+                                                <variation key="widthClass=compact" misplaced="YES">
+                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="540"/>
                                                     <mask key="constraints">
                                                         <exclude reference="6mY-To-1gd"/>
                                                         <exclude reference="OYI-1j-9rx"/>
@@ -3022,7 +3109,7 @@
                                                     <outlet property="delegate" destination="4b9-BF-vCA" id="cWv-rh-Fky"/>
                                                 </connections>
                                             </tableView>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jzq-29-T5d" userLabel="People Table">
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="jzq-29-T5d" userLabel="People Table">
                                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                                 <animations/>
                                                 <constraints>
@@ -3040,12 +3127,12 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                                                     <animations/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="width" constant="30" id="8xq-fH-Tes"/>
-                                                                        <constraint firstAttribute="height" constant="30" id="OAt-nJ-s70"/>
+                                                                        <constraint firstAttribute="width" constant="40" id="8xq-fH-Tes"/>
+                                                                        <constraint firstAttribute="height" constant="40" id="OAt-nJ-s70"/>
                                                                     </constraints>
                                                                     <userDefinedRuntimeAttributes>
                                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                                            <integer key="value" value="15"/>
+                                                                            <integer key="value" value="20"/>
                                                                         </userDefinedRuntimeAttribute>
                                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                                     </userDefinedRuntimeAttributes>
@@ -3069,7 +3156,7 @@
                                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <nil key="highlightedColor"/>
                                                                     <variation key="widthClass=compact" misplaced="YES">
-                                                                        <rect key="frame" x="63" y="12" width="169" height="20"/>
+                                                                        <rect key="frame" x="73" y="19" width="519" height="21"/>
                                                                     </variation>
                                                                 </label>
                                                             </subviews>
@@ -3159,7 +3246,8 @@
                                                 <exclude reference="sEC-zP-vIL"/>
                                             </mask>
                                         </variation>
-                                        <variation key="widthClass=compact">
+                                        <variation key="widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="0.0" y="0.0" width="1200" height="540"/>
                                             <mask key="subviews">
                                                 <include reference="dh8-ki-l7S"/>
                                                 <include reference="jzq-29-T5d"/>
@@ -3199,7 +3287,8 @@
                                         <exclude reference="sP1-l2-MC4"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact">
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="60" width="600" height="540"/>
                                     <mask key="subviews">
                                         <include reference="xDE-rm-srF"/>
                                     </mask>
@@ -3224,7 +3313,8 @@
                                         <exclude reference="i5P-ML-JeD"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact">
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="20" width="600" height="40"/>
                                     <mask key="constraints">
                                         <include reference="i5P-ML-JeD"/>
                                     </mask>
@@ -3970,6 +4060,7 @@
                         <viewControllerLayoutGuide type="bottom" id="sDB-nV-JR4"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="t7s-yY-NR2">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

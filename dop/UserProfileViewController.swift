@@ -47,6 +47,13 @@ class UserProfileViewController: UIViewController, UIScrollViewDelegate, UITable
             print(json)
         }
         
+//        if userId == User.
+        print("\(User.userToken)")
+        getPublicUser()
+
+    }
+    
+    func getPublicUser() {
         headerTopView = (NSBundle.mainBundle().loadNibNamed("RewardsActivityHeader", owner: self, options: nil)[0] as? RewardsActivityHeader)!
         
         let nib = UINib(nibName: "RewardsActivityCell", bundle: nil)

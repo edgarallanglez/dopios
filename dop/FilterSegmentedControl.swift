@@ -93,7 +93,7 @@ import UIKit
             label.text = items[index - 1]
             label.backgroundColor = UIColor.clearColor()
             label.textAlignment = .Center
-            label.font = UIFont(name: "Montserrat-Light", size: 15)
+            label.font = UIFont(name: "Montserrat-Light", size: 13)
             label.textColor = index == 1 ? selectedLabelColor : unselectedLabelColor
             label.translatesAutoresizingMaskIntoConstraints = false
             self.addSubview(label)
