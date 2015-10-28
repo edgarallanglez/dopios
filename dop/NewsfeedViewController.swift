@@ -115,7 +115,7 @@ class NewsfeedViewController: UIViewController, UITableViewDataSource, UITableVi
         newsfeedTemporary.removeAll(keepCapacity: false)
         cachedImages.removeAll(keepCapacity: false)
         
-        NewsfeedController.getAllFriendsTakingCouponsOffsetWithSuccess(200,offset:0, success: { (friendsData) -> Void in
+        NewsfeedController.getAllFriendsTakingCouponsOffsetWithSuccess(200, offset:0, success: { (friendsData) -> Void in
             let json = JSON(data: friendsData)
             
             for (index, subJson): (String, JSON) in json["data"] {
@@ -170,7 +170,7 @@ class NewsfeedViewController: UIViewController, UITableViewDataSource, UITableVi
         
         var firstNewsfeed = self.newsfeed.first as NewsfeedNote!
         
-        NewsfeedController.getAllFriendsTakingCouponsOffsetWithSuccess(firstNewsfeed.client_coupon_id,offset:offset, success: { (friendsData) -> Void in
+        NewsfeedController.getAllFriendsTakingCouponsOffsetWithSuccess(firstNewsfeed.client_coupon_id, offset:offset, success: { (friendsData) -> Void in
             let json = JSON(data: friendsData)
             
             for (index, subJson): (String, JSON) in json["data"] {

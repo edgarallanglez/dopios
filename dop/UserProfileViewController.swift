@@ -25,6 +25,10 @@ class UserProfileViewController: UIViewController, UIScrollViewDelegate, UITable
     var userImagePath:String = ""
     var userId:Int! = 0
     var historyCoupon = [Coupon]()
+    var activityArray = [NewsfeedNote]()
+    var activityArrayTemp = [NewsfeedNote]()
+    var initialHeight: CGFloat = 0
+    
     var person: PeopleModel!
     var pageControl : UIPageControl = UIPageControl(frame: CGRectMake(50, 300, 200, 50))
     var historyScroll_size: Int = 0
@@ -74,8 +78,9 @@ class UserProfileViewController: UIViewController, UIScrollViewDelegate, UITable
         activityPage.registerNib(nib, forCellReuseIdentifier: "RewardsActivityCell")
         activityPage.rowHeight = UITableViewAutomaticDimension
         activityPage.rowHeight = 140
-        
+
         getCoupons()
+        getActivity()
     }
     
     @IBAction func setScrollViewBoxPage(sender: UserProfileSegmentedController) {
@@ -102,7 +107,6 @@ class UserProfileViewController: UIViewController, UIScrollViewDelegate, UITable
                 self.profile_image.image = UIImage(data: data!)
             }
         }
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -172,8 +176,8 @@ class UserProfileViewController: UIViewController, UIScrollViewDelegate, UITable
                     //coupon_box.likes = trending[index].likes
                     self.scrollViewBox.addSubview(coupon_box);
                 }
-                
-                self.activityPage.frame.size = CGSizeMake(self.scrollViewBox.frame.size.width, CGFloat(500))
+                self.initialHeight = self.scrollViewBox.frame.size.height
+                self.activityPage.frame.size = CGSizeMake(self.scrollViewBox.frame.size.width, CGFloat(self.initialHeight))
                 
                 self.historyScroll_size = (((margin + couponHeight) * self.historyCoupon.count) + margin) / 2
                 self.scrollViewBox.contentSize = CGSizeMake(self.scrollViewBox.frame.size.width * self.pages, CGFloat(self.historyScroll_size))
@@ -192,6 +196,53 @@ class UserProfileViewController: UIViewController, UIScrollViewDelegate, UITable
         
     }
     
+    func getActivity() {
+        UserProfileController.getAllFriendsTakingCouponsOffsetWithSuccess(200, offset:0, success: { (friendsData) -> Void in
+            let json = JSON(data: friendsData)
+            
+            for (index, subJson): (String, JSON) in json["data"] {
+                let client_coupon_id = subJson["clients_coupon_id"].int
+                let friend_id = subJson["friends_id"].string
+                let exchange_date = subJson["exchange_date"].string
+                let main_image = subJson["main_image"].string
+                let names = subJson["names"].string
+                
+                let longitude = subJson["longitude"].string
+                let latitude = subJson["latitude"].string
+                let branch_id =  subJson["branch_id" ].int
+                let coupon_id =  subJson["coupon_id"].string
+                let logo =  subJson["logo"].string
+                let surnames =  subJson["surnames"].string
+                let user_id =  subJson["user_id"].int
+                let name =  subJson["name"].string
+                let branch_name =  subJson["branch_name"].string
+                let total_likes =  subJson["total_likes"].int!
+                let user_like =  subJson["user_like"].int
+                
+                let model = NewsfeedNote(client_coupon_id:client_coupon_id,friend_id: friend_id, user_id: user_id, branch_id: branch_id, coupon_name: name, branch_name: branch_name, names: names, surnames: surnames, user_image: main_image, branch_image: logo, total_likes:total_likes,user_like: user_like)
+                
+                self.activityArray.append(model)
+                
+                
+            }
+            dispatch_async(dispatch_get_main_queue(), {
+//                self.activityArray.removeAll()
+//                self.activityArray = self.activityArrayTemp
+//                
+                self.activityPage.reloadData()
+//                self.refreshControl.endRefreshing()
+//                
+//                self.offset = self.limit - 1
+            });
+            },
+            
+            failure: { (error) -> Void in
+                dispatch_async(dispatch_get_main_queue(), {
+//                    self.refreshControl.endRefreshing()
+                })
+        })
+    }
+    
     // MARK : TO CHANGE WHILE CLICKING ON PAGE CONTROL
     func changePage(sender: AnyObject) -> () {
         let x = CGFloat(pageControl.currentPage) * self.scrollViewBox.frame.size.width
@@ -204,7 +255,7 @@ class UserProfileViewController: UIViewController, UIScrollViewDelegate, UITable
         pageControl.currentPage = Int(pageNumber)
         
         if pageNumber == 0 {
-            self.scrollViewBox.contentSize = CGSizeMake(self.scrollViewBox.frame.size.width * pages, CGFloat(50))
+            self.scrollViewBox.contentSize = CGSizeMake(self.scrollViewBox.frame.size.width * pages, CGFloat(self.initialHeight))
         } else if pageNumber == 1 {
             self.scrollViewBox.contentSize = CGSizeMake(self.scrollViewBox.frame.size.width * pages, CGFloat(self.historyScroll_size))
         } else if pageNumber == 2 {
@@ -230,16 +281,16 @@ class UserProfileViewController: UIViewController, UIScrollViewDelegate, UITable
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: RewardsActivityCell = tableView.dequeueReusableCellWithIdentifier("RewardsActivityCell", forIndexPath: indexPath) as! RewardsActivityCell
-//        let label = UILabel(frame: CGRect(x:0, y:0, width:200, height:50))
-//        label.text = "\(self.i)"
-//        cell.addSubview(label)
-//        i++
+        
+        let model = self.activityArray[indexPath.row]
+        
         cell.userImage.image = self.profile_image.image
+        cell.loadItem(model, view: self)
         return cell
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 50
+        return self.activityArray.count
     }
     
     func scrollViewWillBeginDecelerating(scrollView: UIScrollView) {

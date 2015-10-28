@@ -11,6 +11,27 @@ import UIKit
 class RewardsActivityCell: UITableViewCell {
     
     @IBOutlet weak var userImage: UIImageView!
+    @IBOutlet weak var user_name: UILabel!
+    @IBOutlet weak var branch_name: UIButton!
+    @IBOutlet weak var moment: UILabel!
+    @IBOutlet weak var branch_image: UIImageView!
+    @IBOutlet weak var total_likes: UILabel!
+    
+    func loadItem(model: NewsfeedNote, view: UIViewController) {
+        self.branch_name.setTitle(model.branch_name, forState: UIControlState.Normal)
+        downloadImage(NSURL(string: "\(Utilities.dopImagesURL)\(model.branch_id)/\(model.branch_image)")!)
+        self.total_likes.text = "\(model.total_likes)"
+    }
+    
+    func downloadImage(url: NSURL) {
+        //        print("Started downloading \"\(url.lastPathComponent!.stringByDeletingPathExtension)\".")
+        Utilities.getDataFromUrl(url) { data in
+            dispatch_async(dispatch_get_main_queue()) {
+                //                print("Finished downloading \"\(url.lastPathComponent!.stringByDeletingPathExtension)\".")
+                self.branch_image.image = UIImage(data: data!)
+            }
+        }
+    }
     
     
 }

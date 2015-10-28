@@ -241,9 +241,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
                 User.userSurnames =  params["surnames"]!
                 do {
                     let payload = try decode(User.userToken)
-                    
                     User.user_id = payload.body["id"]! as! Int
-                    
                 } catch {
                     print("Failed to decode JWT: \(error)")
                 }
