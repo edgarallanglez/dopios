@@ -10,11 +10,23 @@ import UIKit
 
 class NotificationCell: UITableViewCell {
 
-
+    
     @IBOutlet var title: UILabel!
+    
+    var viewController:UIViewController?
+    var notification:Notification?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+    }
+    
+    func loadItem(notification:Notification, viewController:UIViewController) {
+        
+        self.title.text = notification.type
+        
+        
+        self.notification = notification
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
