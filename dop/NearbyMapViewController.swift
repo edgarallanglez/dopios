@@ -25,6 +25,7 @@ class NearbyMapViewController: UIViewController, CLLocationManagerDelegate, MKMa
     @IBOutlet weak var filterSidebarButton: UIButton!
     
     override func viewDidLoad() {
+        self.navigationController?.navigationBar.topItem!.title = "Cerca de ti"
         Utilities.filterArray.removeAll()
         nearbyMap.delegate = self
 //        topBorder.layer.borderWidth = (1.0 / UIScreen.mainScreen.scale) / 2

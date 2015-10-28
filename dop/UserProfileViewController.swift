@@ -15,14 +15,17 @@ class UserProfileViewController: UIViewController, UIScrollViewDelegate, UITable
     var secondPageWidth: Int!
     var thirdPageWidth: Int!
     
+    @IBOutlet weak var private_view: UIView!
     @IBOutlet var profile_image: UIImageView!
+    @IBOutlet weak var user_name: UILabel!
     @IBOutlet weak var userProfileSegmentedController: UserProfileSegmentedController!
     
     var activityPage: UITableView = UITableView()
     var userImage: UIImage!
     var userImagePath:String = ""
-    var userId:Int!
+    var userId:Int! = 0
     var historyCoupon = [Coupon]()
+    var person: PeopleModel!
     var pageControl : UIPageControl = UIPageControl(frame: CGRectMake(50, 300, 200, 50))
     var historyScroll_size: Int = 0
     var headerTopView: RewardsActivityHeader = RewardsActivityHeader()
@@ -30,11 +33,13 @@ class UserProfileViewController: UIViewController, UIScrollViewDelegate, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Perfil"
         scrollViewBox.delegate = self
         self.scrollViewBox.pagingEnabled = true
         
         activityPage.delegate = self
         activityPage.dataSource = self
+        activityPage.backgroundColor = UIColor.clearColor()
         
         pageControl.addTarget(self, action: Selector("changePage:"), forControlEvents: UIControlEvents.ValueChanged)
 
@@ -47,37 +52,49 @@ class UserProfileViewController: UIViewController, UIScrollViewDelegate, UITable
             print(json)
         }
         
-//        if userId == User.
-        print("\(User.userToken)")
-        getPublicUser()
+        if userId == User.user_id {
+            user_name.text = "\(User.userName) \(User.userSurnames)"
+            getPublicUser()
+        } else if person.privacy_status == 0 {
+            user_name.text = "\(person.names) \(person.surnames)"
+            getPublicUser()
+        } else if person.privacy_status == 1 {
+            user_name.text = "\(person.names) \(person.surnames)"
+            private_view.hidden = false
+            scrollViewBox.hidden = true
+        }
 
     }
     
     func getPublicUser() {
         headerTopView = (NSBundle.mainBundle().loadNibNamed("RewardsActivityHeader", owner: self, options: nil)[0] as? RewardsActivityHeader)!
         
+        
         let nib = UINib(nibName: "RewardsActivityCell", bundle: nil)
         activityPage.registerNib(nib, forCellReuseIdentifier: "RewardsActivityCell")
         activityPage.rowHeight = UITableViewAutomaticDimension
         activityPage.rowHeight = 140
+        
         getCoupons()
     }
     
     @IBAction func setScrollViewBoxPage(sender: UserProfileSegmentedController) {
-        switch sender.selectedIndex {
-        case 0:
-            self.scrollViewBox.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
-        case 1:
-            self.scrollViewBox.setContentOffset(CGPoint(x: self.secondPageWidth, y: 0), animated: true)
-        case 2:
-            self.scrollViewBox.setContentOffset(CGPoint(x: self.thirdPageWidth, y: 0), animated: true)
-        default:
-            self.scrollViewBox.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+        if person == nil || person.privacy_status != 1 {
+            switch sender.selectedIndex {
+            case 0:
+                self.scrollViewBox.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+            case 1:
+                self.scrollViewBox.setContentOffset(CGPoint(x: self.secondPageWidth, y: 0), animated: true)
+            case 2:
+                self.scrollViewBox.setContentOffset(CGPoint(x: self.thirdPageWidth, y: 0), animated: true)
+            default:
+                self.scrollViewBox.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+            }
         }
     }
     
     
-    func downloadImage(url:NSURL) {
+    func downloadImage(url: NSURL) {
 //        print("Started downloading \"\(url.lastPathComponent!.stringByDeletingPathExtension)\".")
         Utilities.getDataFromUrl(url) { data in
             dispatch_async(dispatch_get_main_queue()) {
@@ -157,7 +174,6 @@ class UserProfileViewController: UIViewController, UIScrollViewDelegate, UITable
                 }
                 
                 self.activityPage.frame.size = CGSizeMake(self.scrollViewBox.frame.size.width, CGFloat(500))
-                self.activityPage.backgroundColor = UIColor.grayColor()
                 
                 self.historyScroll_size = (((margin + couponHeight) * self.historyCoupon.count) + margin) / 2
                 self.scrollViewBox.contentSize = CGSizeMake(self.scrollViewBox.frame.size.width * self.pages, CGFloat(self.historyScroll_size))
@@ -176,24 +192,11 @@ class UserProfileViewController: UIViewController, UIScrollViewDelegate, UITable
         
     }
     
-    func configurePageControl() {
-        // The total number of pages that are available is based on how many available colors we have.
-        
-        self.pageControl.numberOfPages = 2
-        self.pageControl.currentPage = 0
-        self.pageControl.tintColor = UIColor.redColor()
-        self.pageControl.pageIndicatorTintColor = UIColor.blackColor()
-        self.pageControl.currentPageIndicatorTintColor = UIColor.greenColor()
-        self.view.addSubview(pageControl)
-        
-    }
-    
     // MARK : TO CHANGE WHILE CLICKING ON PAGE CONTROL
     func changePage(sender: AnyObject) -> () {
         let x = CGFloat(pageControl.currentPage) * self.scrollViewBox.frame.size.width
         self.scrollViewBox.setContentOffset(CGPointMake(x, 0), animated: true)
     }
-    
     
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         
@@ -210,7 +213,7 @@ class UserProfileViewController: UIViewController, UIScrollViewDelegate, UITable
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 100
+        return 110
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

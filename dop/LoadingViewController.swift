@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import JWTDecode
 
 class LoadingViewController: UIViewController, FBLoginViewDelegate, CLLocationManagerDelegate {
     @IBOutlet var fbLoginView: FBLoginView!
@@ -80,16 +81,22 @@ class LoadingViewController: UIViewController, FBLoginViewDelegate, CLLocationMa
             User.loginType = type
             let json = JSON(data: loginData)
             
-            let jwt = String(stringInterpolationSegment: json["token"])
-            var error:NSError?
+            let jwt = json["token"].string!
+            var error: NSError?
             
-            User.userToken = String(stringInterpolationSegment: jwt)
+            User.userToken = jwt
+            User.userImageUrl = params["main_image"]!
+            User.userName = params["names"]!
+            User.userSurnames = params["surnames"]!
+            do {
+                let payload = try decode(User.userToken)
+                
+                User.user_id = payload.body["id"]! as! Int
+                
+            } catch {
+                print("Failed to decode JWT: \(error)")
+            }
             
-            
-            User.userImageUrl = String(stringInterpolationSegment: params["main_image"]!)
-            
-            User.userName = String(stringInterpolationSegment: params["names"]!)
-            User.userSurnames = String(stringInterpolationSegment: params["surnames"]!)
             
             dispatch_async(dispatch_get_main_queue(), {
                 //if (!User.activeSession) {

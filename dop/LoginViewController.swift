@@ -8,7 +8,7 @@
 
 import UIKit
 //import TwitterKit
-import JWT
+import JWTDecode
 
 class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDelegate, CLLocationManagerDelegate {
 
@@ -236,17 +236,17 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
                 var error: NSError?
                 
                 User.userToken = jwt
-//                do {
-//                    let payload = try JWT.decode(jwt, algorithm: .HS256("secret"))
-//                    print(payload)
-//                } catch {
-//                    print("Failed to decode JWT: \(error)")
-//                }
-            
                 User.userImageUrl =  params["main_image"]!
-                
                 User.userName =  params["names"]!
                 User.userSurnames =  params["surnames"]!
+                do {
+                    let payload = try decode(User.userToken)
+                    
+                    User.user_id = payload.body["id"]! as! Int
+                    
+                } catch {
+                    print("Failed to decode JWT: \(error)")
+                }
                 
                 dispatch_async(dispatch_get_main_queue(), {
                     //if (!User.activeSession) {

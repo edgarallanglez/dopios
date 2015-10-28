@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -15,30 +14,23 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="add-person" translatesAutoresizingMaskIntoConstraints="NO" id="CYE-lj-7iP">
-                        <rect key="frame" x="8" y="11" width="30" height="30"/>
+                        <rect key="frame" x="18" y="13" width="45" height="45"/>
                         <animations/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="30" id="Cfl-7i-VQp"/>
-                            <constraint firstAttribute="height" constant="30" id="NGe-Qm-sZ2"/>
+                            <constraint firstAttribute="width" constant="45" id="Cfl-7i-VQp"/>
+                            <constraint firstAttribute="height" constant="45" id="NGe-Qm-sZ2"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                <integer key="value" value="15"/>
+                                <real key="value" value="22.5"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                         </userDefinedRuntimeAttributes>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edgar Allan Glez" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7dz-jc-RVd">
-                        <rect key="frame" x="48" y="11" width="126" height="21"/>
+                        <rect key="frame" x="78" y="13" width="126" height="21"/>
                         <animations/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Asistió a cinepolis en" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ogd-Zp-d4A">
-                        <rect key="frame" x="48" y="31" width="144" height="21"/>
-                        <animations/>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -64,26 +56,35 @@
                             <color key="titleColor" red="0.87058823529999996" green="0.0" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
                     </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Asistió a cinepolis en" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ogd-Zp-d4A">
+                        <rect key="frame" x="78" y="31" width="136" height="21"/>
+                        <animations/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <animations/>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
                     <constraint firstItem="79D-Xb-JfI" firstAttribute="top" secondItem="bbz-b2-924" secondAttribute="topMargin" constant="19" id="C1H-qZ-A7d"/>
                     <constraint firstAttribute="trailingMargin" secondItem="rQA-zC-hn6" secondAttribute="trailing" constant="1" id="CPq-6U-KI1"/>
                     <constraint firstItem="cuF-3T-O70" firstAttribute="top" secondItem="Ogd-Zp-d4A" secondAttribute="bottom" constant="13" id="Cfu-2k-FaR"/>
-                    <constraint firstItem="Ogd-Zp-d4A" firstAttribute="leading" secondItem="CYE-lj-7iP" secondAttribute="trailing" constant="10" id="E3Q-60-SSX"/>
-                    <constraint firstItem="CYE-lj-7iP" firstAttribute="top" secondItem="bbz-b2-924" secondAttribute="topMargin" constant="3" id="PPb-e1-qng"/>
-                    <constraint firstItem="7dz-jc-RVd" firstAttribute="top" secondItem="bbz-b2-924" secondAttribute="topMargin" constant="3" id="S4q-o0-rU8"/>
-                    <constraint firstItem="7dz-jc-RVd" firstAttribute="leading" secondItem="CYE-lj-7iP" secondAttribute="trailing" constant="10" id="dXu-HN-PDC"/>
+                    <constraint firstItem="Ogd-Zp-d4A" firstAttribute="leading" secondItem="CYE-lj-7iP" secondAttribute="trailing" constant="15" id="E3Q-60-SSX"/>
+                    <constraint firstItem="CYE-lj-7iP" firstAttribute="top" secondItem="bbz-b2-924" secondAttribute="topMargin" constant="5" id="PPb-e1-qng"/>
+                    <constraint firstItem="7dz-jc-RVd" firstAttribute="top" secondItem="bbz-b2-924" secondAttribute="topMargin" constant="5" id="S4q-o0-rU8"/>
+                    <constraint firstItem="7dz-jc-RVd" firstAttribute="leading" secondItem="CYE-lj-7iP" secondAttribute="trailing" constant="15" id="dXu-HN-PDC"/>
                     <constraint firstItem="Ogd-Zp-d4A" firstAttribute="top" secondItem="bbz-b2-924" secondAttribute="topMargin" constant="23" id="e4t-Ik-gve"/>
                     <constraint firstItem="cuF-3T-O70" firstAttribute="top" secondItem="79D-Xb-JfI" secondAttribute="bottom" constant="8" id="gGh-QP-QUo"/>
                     <constraint firstAttribute="bottom" secondItem="cuF-3T-O70" secondAttribute="bottom" constant="4" id="hUD-Dn-ZYN"/>
                     <constraint firstAttribute="trailing" secondItem="cuF-3T-O70" secondAttribute="trailing" constant="8" id="oBN-WJ-uSW"/>
                     <constraint firstItem="rQA-zC-hn6" firstAttribute="top" secondItem="bbz-b2-924" secondAttribute="topMargin" constant="3" id="roW-tc-XCT"/>
                     <constraint firstItem="79D-Xb-JfI" firstAttribute="trailing" secondItem="bbz-b2-924" secondAttribute="trailingMargin" id="toU-gP-gLI"/>
-                    <constraint firstItem="CYE-lj-7iP" firstAttribute="leading" secondItem="bbz-b2-924" secondAttribute="leadingMargin" id="wf9-uq-ecW"/>
+                    <constraint firstItem="CYE-lj-7iP" firstAttribute="leading" secondItem="bbz-b2-924" secondAttribute="leadingMargin" constant="10" id="wf9-uq-ecW"/>
                 </constraints>
             </tableViewCellContentView>
             <animations/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="userImage" destination="CYE-lj-7iP" id="C0D-PG-jfa"/>
             </connections>

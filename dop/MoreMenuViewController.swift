@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import JWTDecode
 
 class MoreMenuViewController: UITableViewController {
     @IBOutlet var menuTableView: UITableView!
@@ -17,12 +18,12 @@ class MoreMenuViewController: UITableViewController {
     @IBOutlet weak var trophyIcon: UIImageView!
     @IBOutlet weak var configIcon: UIImageView!
 
-    
-    
     override func viewDidLoad() {
+        self.navigationController?.navigationBar.topItem!.title = "Menú"
 //        self.userImage.layer.cornerRadius = self.userImage.frame.height / 2
 //        self.userImage.layer.masksToBounds = true
-//        
+//      
+
         userName.text = User.userName
         getUserImage()
         
@@ -101,6 +102,7 @@ class MoreMenuViewController: UITableViewController {
         if segue.identifier == "userProfile" {
             let destination_view = segue.destinationViewController as! UserProfileViewController
             destination_view.userImage = userImage.image
+            destination_view.userId = User.user_id
             
         }
     }

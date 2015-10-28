@@ -338,8 +338,13 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if(!searching){
-            let cell: SearchCell = tableView.cellForRowAtIndexPath(indexPath) as! SearchCell
-            self.performSegueWithIdentifier("branchProfile", sender: cell)
+            if tableView == self.tableView {
+                let cell: SearchCell = tableView.cellForRowAtIndexPath(indexPath) as! SearchCell
+                self.performSegueWithIdentifier("branchProfile", sender: cell)
+            } else if tableView == self.peopleTableView {
+                let cell: PeopleCell = tableView.cellForRowAtIndexPath(indexPath) as! PeopleCell
+                self.performSegueWithIdentifier("userProfile", sender: cell)
+            }
         }
     }
     
@@ -363,17 +368,28 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
     
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
         if let cell = sender as? SearchCell {
-            
             let i = tableView.indexPathForCell(cell)!.row
-            let model = self.filtered[i]
             
             if segue.identifier == "branchProfile" {
+                let model = self.filtered[i]
                 let view = segue.destinationViewController as! BranchProfileViewController
                 view.branchId = model.id
             }
         }
+        
+        if let cell = sender as? PeopleCell {
+            let i = peopleTableView.indexPathForCell(cell)!.row
+            
+            if segue.identifier == "userProfile" {
+                let model = self.peopleFiltered[i]
+                let view = segue.destinationViewController as! UserProfileViewController
+                view.userId = model.user_id
+                view.person = model
+                view.userImage = self.cachedImages["Cell\(i)"]
+            }
+        }
     }
-    
 
 }

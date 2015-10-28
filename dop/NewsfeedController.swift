@@ -24,7 +24,7 @@ class NewsfeedController: NSObject {
         Utilities.loadDataFromURL(NSURL(string: url)!, completion:{(data, error) -> Void in
             if let urlData = data {
                 succeed(friendsData: urlData)
-            }else{
+            } else {
                 errorFound(friendsData: error)
             }
         })

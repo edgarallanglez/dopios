@@ -22,6 +22,9 @@
 		9D3326191AF7ED1C00498801 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D3326171AF7ED1C00498801 /* LaunchScreen.xib */; };
 		9D3326251AF7ED1C00498801 /* dopTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3326241AF7ED1C00498801 /* dopTests.swift */; };
 		9D3756E11BCED51400796378 /* UserProfileSegmentedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3756E01BCED51400796378 /* UserProfileSegmentedController.swift */; };
+		9D3919211BDFEB83002229EB /* JWTDecode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D39191A1BDFEB67002229EB /* JWTDecode.framework */; };
+		9D3919221BDFEB89002229EB /* JWTDecode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D39191A1BDFEB67002229EB /* JWTDecode.framework */; };
+		9D3919231BDFEB89002229EB /* JWTDecode.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9D39191A1BDFEB67002229EB /* JWTDecode.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9D42966D1BBEFE17000B4A21 /* RewardsActivityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D42966C1BBEFE17000B4A21 /* RewardsActivityCell.xib */; };
 		9D42966F1BBEFE37000B4A21 /* RewardsActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D42966E1BBEFE37000B4A21 /* RewardsActivityCell.swift */; };
 		9D4296711BBF038D000B4A21 /* RewardsActivityHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4296701BBF038D000B4A21 /* RewardsActivityHeader.swift */; };
@@ -44,7 +47,6 @@
 		9DA85CFD1B82587E009DA186 /* BranchProfileLastCampaign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA85CFC1B82587E009DA186 /* BranchProfileLastCampaign.swift */; };
 		9DAAE7B71B0E810B00209588 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DAAE7B51B0E810B00209588 /* Main.storyboard */; };
 		9DACBBF91BA8CE0200CAEECB /* FilterSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DACBBF81BA8CE0200CAEECB /* FilterSegmentedControl.swift */; };
-		9DB317001BDED21700D7FB88 /* JWT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DB316FD1BDED20E00D7FB88 /* JWT.framework */; };
 		9DB327CC1B863C77006BF882 /* MoreMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB327CB1B863C77006BF882 /* MoreMenuController.swift */; };
 		9DB327CE1B863C84006BF882 /* MoreMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB327CD1B863C84006BF882 /* MoreMenuViewController.swift */; };
 		9DB3DABB1B73C28A004AC0F1 /* BranchProfileTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB3DABA1B73C28A004AC0F1 /* BranchProfileTopView.swift */; };
@@ -190,19 +192,40 @@
 			remoteGlobalIDString = 9D3326081AF7ED1C00498801;
 			remoteInfo = dop;
 		};
-		9DB316FC1BDED20E00D7FB88 /* PBXContainerItemProxy */ = {
+		9D3919191BDFEB67002229EB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 9DB316F71BDED20E00D7FB88 /* JWT.xcodeproj */;
+			containerPortal = 9D3919121BDFEB67002229EB /* JWTDecode.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 279D639C1AD07FFF0024E2BC;
-			remoteInfo = JWT;
+			remoteGlobalIDString = 5F0068E21B3B46240048928E;
+			remoteInfo = "JWTDecode-iOS";
 		};
-		9DB316FE1BDED20E00D7FB88 /* PBXContainerItemProxy */ = {
+		9D39191B1BDFEB67002229EB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 9DB316F71BDED20E00D7FB88 /* JWT.xcodeproj */;
+			containerPortal = 9D3919121BDFEB67002229EB /* JWTDecode.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 279D63A71AD07FFF0024E2BC;
-			remoteInfo = JWTTests;
+			remoteGlobalIDString = 5F0068ED1B3B46240048928E;
+			remoteInfo = "JWTDecode-iOSTests";
+		};
+		9D39191D1BDFEB67002229EB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9D3919121BDFEB67002229EB /* JWTDecode.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5F0069091B3B532E0048928E;
+			remoteInfo = "JWTDecode-OSX";
+		};
+		9D39191F1BDFEB67002229EB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9D3919121BDFEB67002229EB /* JWTDecode.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5F0069131B3B532E0048928E;
+			remoteInfo = "JWTDecode-OSXTests";
+		};
+		9D3919241BDFEB89002229EB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9D3919121BDFEB67002229EB /* JWTDecode.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 5F0068E11B3B46240048928E;
+			remoteInfo = "JWTDecode-iOS";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -213,6 +236,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				9D3919231BDFEB89002229EB /* JWTDecode.framework in Embed Frameworks */,
 				9D1205761BDEBF60009EEBAE /* CryptoSwift.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -247,6 +271,7 @@
 		9D3326231AF7ED1C00498801 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9D3326241AF7ED1C00498801 /* dopTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dopTests.swift; sourceTree = "<group>"; };
 		9D3756E01BCED51400796378 /* UserProfileSegmentedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileSegmentedController.swift; sourceTree = "<group>"; };
+		9D3919121BDFEB67002229EB /* JWTDecode.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JWTDecode.xcodeproj; path = "JWTDecode.swift-master/JWTDecode.xcodeproj"; sourceTree = "<group>"; };
 		9D42966C1BBEFE17000B4A21 /* RewardsActivityCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RewardsActivityCell.xib; sourceTree = "<group>"; };
 		9D42966E1BBEFE37000B4A21 /* RewardsActivityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewardsActivityCell.swift; sourceTree = "<group>"; };
 		9D4296701BBF038D000B4A21 /* RewardsActivityHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewardsActivityHeader.swift; sourceTree = "<group>"; };
@@ -268,7 +293,6 @@
 		9DA85CFC1B82587E009DA186 /* BranchProfileLastCampaign.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BranchProfileLastCampaign.swift; sourceTree = "<group>"; };
 		9DAAE7B61B0E810B00209588 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9DACBBF81BA8CE0200CAEECB /* FilterSegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterSegmentedControl.swift; sourceTree = "<group>"; };
-		9DB316F71BDED20E00D7FB88 /* JWT.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JWT.xcodeproj; path = JSONWebToken.swift/JWT.xcodeproj; sourceTree = "<group>"; };
 		9DB327CB1B863C77006BF882 /* MoreMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreMenuController.swift; sourceTree = "<group>"; };
 		9DB327CD1B863C84006BF882 /* MoreMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreMenuViewController.swift; sourceTree = "<group>"; };
 		9DB3DABA1B73C28A004AC0F1 /* BranchProfileTopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BranchProfileTopView.swift; sourceTree = "<group>"; };
@@ -386,7 +410,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9DB317001BDED21700D7FB88 /* JWT.framework in Frameworks */,
+				9D3919211BDFEB83002229EB /* JWTDecode.framework in Frameworks */,
 				9D1205741BDEBF16009EEBAE /* CryptoSwift.framework in Frameworks */,
 				A0EC059D1B7D1FD5003CADB2 /* UIKit.framework in Frameworks */,
 				A0EC059B1B7D1ED1003CADB2 /* CoreGraphics.framework in Frameworks */,
@@ -398,6 +422,7 @@
 				A0EB97E41B0BA7DD005112EF /* AddressBook.framework in Frameworks */,
 				A0578C5F1B0E40D30033B5BD /* GoogleOpenSource.framework in Frameworks */,
 				A0EB97E21B0BA7D5005112EF /* AssetsLibrary.framework in Frameworks */,
+				9D3919221BDFEB89002229EB /* JWTDecode.framework in Frameworks */,
 				9D0DB4731B17DE5A0009FE6C /* MapKit.framework in Frameworks */,
 				A0EB97E01B0BA7CE005112EF /* CoreData.framework in Frameworks */,
 				A0578C611B0E40D30033B5BD /* GooglePlus.framework in Frameworks */,
@@ -431,8 +456,8 @@
 		079462BCCDF3FAF530C45E4E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9D3919121BDFEB67002229EB /* JWTDecode.xcodeproj */,
 				9D1205621BDEBEF8009EEBAE /* CryptoSwift.xcodeproj */,
-				9DB316F71BDED20E00D7FB88 /* JWT.xcodeproj */,
 				9D9C1B2C1B83B3DB00F7895B /* FBSDKCoreKit.framework */,
 				9D9C1B2A1B83B0D900F7895B /* FBSDKShareKit.framework */,
 				A0EC059C1B7D1FD5003CADB2 /* UIKit.framework */,
@@ -600,6 +625,17 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		9D3919131BDFEB67002229EB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9D39191A1BDFEB67002229EB /* JWTDecode.framework */,
+				9D39191C1BDFEB67002229EB /* JWTDecode-iOSTests.xctest */,
+				9D39191E1BDFEB67002229EB /* JWTDecode.framework */,
+				9D3919201BDFEB67002229EB /* JWTDecode-OSXTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		9D7FA0761BBC4FDB00EAEC36 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -614,15 +650,6 @@
 				9D7FA07A1BBC516100EAEC36 /* TrophyViewController.swift */,
 			);
 			name = Trophy;
-			sourceTree = "<group>";
-		};
-		9DB316F81BDED20E00D7FB88 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				9DB316FD1BDED20E00D7FB88 /* JWT.framework */,
-				9DB316FF1BDED20E00D7FB88 /* JWTTests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		9DB327CA1B862EF6006BF882 /* MoreMenu */ = {
@@ -828,6 +855,7 @@
 			);
 			dependencies = (
 				9D1205781BDEBF60009EEBAE /* PBXTargetDependency */,
+				9D3919251BDFEB89002229EB /* PBXTargetDependency */,
 			);
 			name = dop;
 			productName = dop;
@@ -897,8 +925,8 @@
 					ProjectRef = 9D1205621BDEBEF8009EEBAE /* CryptoSwift.xcodeproj */;
 				},
 				{
-					ProductGroup = 9DB316F81BDED20E00D7FB88 /* Products */;
-					ProjectRef = 9DB316F71BDED20E00D7FB88 /* JWT.xcodeproj */;
+					ProductGroup = 9D3919131BDFEB67002229EB /* Products */;
+					ProjectRef = 9D3919121BDFEB67002229EB /* JWTDecode.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -945,18 +973,32 @@
 			remoteRef = 9D1205721BDEBEF9009EEBAE /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		9DB316FD1BDED20E00D7FB88 /* JWT.framework */ = {
+		9D39191A1BDFEB67002229EB /* JWTDecode.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
-			path = JWT.framework;
-			remoteRef = 9DB316FC1BDED20E00D7FB88 /* PBXContainerItemProxy */;
+			path = JWTDecode.framework;
+			remoteRef = 9D3919191BDFEB67002229EB /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		9DB316FF1BDED20E00D7FB88 /* JWTTests.xctest */ = {
+		9D39191C1BDFEB67002229EB /* JWTDecode-iOSTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = JWTTests.xctest;
-			remoteRef = 9DB316FE1BDED20E00D7FB88 /* PBXContainerItemProxy */;
+			path = "JWTDecode-iOSTests.xctest";
+			remoteRef = 9D39191B1BDFEB67002229EB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9D39191E1BDFEB67002229EB /* JWTDecode.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = JWTDecode.framework;
+			remoteRef = 9D39191D1BDFEB67002229EB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9D3919201BDFEB67002229EB /* JWTDecode-OSXTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "JWTDecode-OSXTests.xctest";
+			remoteRef = 9D39191F1BDFEB67002229EB /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -1106,6 +1148,11 @@
 			isa = PBXTargetDependency;
 			target = 9D3326081AF7ED1C00498801 /* dop */;
 			targetProxy = 9D33261F1AF7ED1C00498801 /* PBXContainerItemProxy */;
+		};
+		9D3919251BDFEB89002229EB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "JWTDecode-iOS";
+			targetProxy = 9D3919241BDFEB89002229EB /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
