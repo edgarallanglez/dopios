@@ -136,7 +136,7 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
         
     }
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        print(mainScroll.contentOffset.y)
+
         if(scrollView == mainScroll){
             if(mainScroll.contentOffset.y<=0){
                 branchesScroll.frame.origin.y = (mainScroll.contentOffset.y)
@@ -167,6 +167,9 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
         
     }
     func getTopBranches() {
+        branches = [Branch]()
+
+        
         DashboardController.getDashboardBranchesWithSuccess(success:{(branchesData) -> Void in
             let json = JSON(data: branchesData)
             

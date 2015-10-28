@@ -13,7 +13,7 @@ class TabbarController: UITabBarController, NotificationDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-      /*  var DynamicView=UIView(frame: CGRectMake(0, 0, self.view.bounds.size.width, 49))
+        /*  var DynamicView=UIView(frame: CGRectMake(0, 0, self.view.bounds.size.width, 49))
         DynamicView.backgroundColor=UIColor.greenColor()
         DynamicView.alpha = 0.5
         
@@ -108,7 +108,9 @@ class TabbarController: UITabBarController, NotificationDelegate {
     }
     
     func notification() {
-        self.performSegueWithIdentifier("notificationView", sender: self)
+        self.navigationController!.pushViewController(self.storyboard!.instantiateViewControllerWithIdentifier("Notifications") as UIViewController, animated: true)
+        self.navigationController?.hidesBottomBarWhenPushed = false
+        
     }
     
     func search(){
@@ -127,6 +129,8 @@ class TabbarController: UITabBarController, NotificationDelegate {
         let barViewControllers = segue.destinationViewController 
         barViewControllers.hidesBottomBarWhenPushed = false
         
+        
+        self.hidesBottomBarWhenPushed = false
         /*let nav = barViewControllers.viewControllers![2] as! UINavigationController
         let destinationViewController = nav.topViewController as! SearchViewController*/
         

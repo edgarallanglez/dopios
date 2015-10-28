@@ -61,6 +61,9 @@
 		9DCE5CDF1BDAEF9100A425FB /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCE5CDE1BDAEF9100A425FB /* NotificationViewController.swift */; };
 		9DE55C441BB07C0A005F9776 /* PromoSegmentedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE55C431BB07C0A005F9776 /* PromoSegmentedController.swift */; };
 		9DF8F0751BD7F37E009D80EB /* PeopleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF8F0741BD7F37E009D80EB /* PeopleCell.swift */; };
+		A01A39BA1BDF050800F231F5 /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01A39B91BDF050800F231F5 /* NotificationCell.swift */; };
+		A01A39BC1BDF0D8C00F231F5 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01A39BB1BDF0D8C00F231F5 /* NotificationController.swift */; };
+		A01A39BE1BDF0EB700F231F5 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01A39BD1BDF0EB700F231F5 /* Notification.swift */; };
 		A01D77CC1BDAB93D00AA8FE2 /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A01D77CB1BDAB93D00AA8FE2 /* SRWebSocket.m */; };
 		A01D77D81BDAB94C00AA8FE2 /* SocketIO.m in Sources */ = {isa = PBXBuildFile; fileRef = A01D77CE1BDAB94C00AA8FE2 /* SocketIO.m */; };
 		A01D77D91BDAB94C00AA8FE2 /* SocketIOPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = A01D77D01BDAB94C00AA8FE2 /* SocketIOPacket.m */; };
@@ -306,6 +309,9 @@
 		9DCE5CDE1BDAEF9100A425FB /* NotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		9DE55C431BB07C0A005F9776 /* PromoSegmentedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromoSegmentedController.swift; sourceTree = "<group>"; };
 		9DF8F0741BD7F37E009D80EB /* PeopleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleCell.swift; sourceTree = "<group>"; };
+		A01A39B91BDF050800F231F5 /* NotificationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
+		A01A39BB1BDF0D8C00F231F5 /* NotificationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		A01A39BD1BDF0EB700F231F5 /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		A01D77C91BDAB93D00AA8FE2 /* SocketRocket-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SocketRocket-Prefix.pch"; sourceTree = "<group>"; };
 		A01D77CA1BDAB93D00AA8FE2 /* SRWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRWebSocket.h; sourceTree = "<group>"; };
 		A01D77CB1BDAB93D00AA8FE2 /* SRWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRWebSocket.m; sourceTree = "<group>"; };
@@ -664,8 +670,11 @@
 		9DCE5CDD1BDAEF7E00A425FB /* Notifications */ = {
 			isa = PBXGroup;
 			children = (
+				A01A39BD1BDF0EB700F231F5 /* Notification.swift */,
 				9DCE5CDE1BDAEF9100A425FB /* NotificationViewController.swift */,
 				A09732E01BDBF712006F9378 /* NotificationButton.swift */,
+				A01A39B91BDF050800F231F5 /* NotificationCell.swift */,
+				A01A39BB1BDF0D8C00F231F5 /* NotificationController.swift */,
 			);
 			name = Notifications;
 			sourceTree = "<group>";
@@ -1103,6 +1112,7 @@
 				9D0DB4711B17D2DB0009FE6C /* NearbyMapViewController.swift in Sources */,
 				A060F7821B70184F009D6ADB /* PromoCollectionCell.swift in Sources */,
 				A0DF72951B13E262006EE8F4 /* Friend.swift in Sources */,
+				A01A39BE1BDF0EB700F231F5 /* Notification.swift in Sources */,
 				A082F4831B18CEE6001C8C52 /* NewsfeedViewController.swift in Sources */,
 				9D4296711BBF038D000B4A21 /* RewardsActivityHeader.swift in Sources */,
 				A01D77D91BDAB94C00AA8FE2 /* SocketIOPacket.m in Sources */,
@@ -1121,9 +1131,11 @@
 				9D7FA07B1BBC516100EAEC36 /* TrophyViewController.swift in Sources */,
 				A09AB4E31AF99136004287F7 /* SwiftyJSON.swift in Sources */,
 				A0EB97AD1B03E16A005112EF /* User.swift in Sources */,
+				A01A39BC1BDF0D8C00F231F5 /* NotificationController.swift in Sources */,
 				A01D77CC1BDAB93D00AA8FE2 /* SRWebSocket.m in Sources */,
 				9DB327CE1B863C84006BF882 /* MoreMenuViewController.swift in Sources */,
 				A09AB4DB1AF95A26004287F7 /* DashboardViewController.swift in Sources */,
+				A01A39BA1BDF050800F231F5 /* NotificationCell.swift in Sources */,
 				A06B35791B9F5D9F003C90EF /* SearchCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

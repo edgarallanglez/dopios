@@ -29,22 +29,31 @@ class NotificationButton: UIBarButtonItem, SocketIODelegate {
     func socketIODidConnect(socket: SocketIO) {
         print("socket.io connected.")
         socketIO.sendEvent("join room", withData: User.userToken)
+        //socketIO.sendEvent("notification", withData: User.userToken)
     }
     
     func socketIO(socket: SocketIO, didReceiveEvent packet: SocketIOPacket) {
         print("didReceiveEvent >>> data: %@", packet.dataAsJSON())
    
-
-        
-        let cb: SocketIOCallback = { argsData in
+        if(packet.name == "my response"){
+            //socketIO.sendMessage("hello back!", withAcknowledge: cb)
+        }
+        if(packet.name == "notification"){
+             self.delegate?.getNotification(packet)
+        }
+       
+        /*let cb: SocketIOCallback = { argsData in
             let response: [NSObject : AnyObject] = argsData as! [NSObject : AnyObject]
             print("ack arrived: %@", response)
             self.socketIO.disconnectForced()
             
-        }
-        socketIO.sendMessage("hello back!", withAcknowledge: cb)
+        }*/
         
-        self.delegate?.getNotification(packet)
+        
+       
+    }
+    func socketIODidDisconnect(socket: SocketIO!, disconnectedWithError error: NSError!) {
+        socketIO.connectToHost("inmoon.com.mx", onPort: 443, withParams: nil, withNamespace: "/app")
     }
     
     override init() {
