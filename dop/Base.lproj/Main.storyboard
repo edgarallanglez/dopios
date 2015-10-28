@@ -4177,6 +4177,9 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="zlJ-s8-PeD"/>
                     <navigationItem key="navigationItem" id="Tr0-4S-niY"/>
+                    <connections>
+                        <outlet property="notification_table" destination="Chu-fQ-Sej" id="yfM-Hu-57d"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bSS-HV-QPt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

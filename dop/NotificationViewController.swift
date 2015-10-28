@@ -14,6 +14,7 @@ import UIKit
 class NotificationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     
+    @IBOutlet var notification_table: UITableView!
     let socketIO : SocketIO = SocketIO()
     var notifications = [Notification]()
 
@@ -27,14 +28,15 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         getNotifications()
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return notifications.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as! NotificationCell;
-        cell.title.text = "Te han agregado como amigo"
-        //cell.loadItem(model, viewController: self)
+        
+        let model = self.notifications[indexPath.row]
+        cell.loadItem(model, viewController: self)
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         
         return cell
@@ -54,32 +56,23 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                 let json = JSON(data: couponsData)
                 print(json)
                 for (_, subJson): (String, JSON) in json["data"]{
-                   /* let coupon_id = subJson["coupon_id"].int!
-                    let coupon_name = subJson["name"].string!
-                    let coupon_description = subJson["description"].string!
-                    let coupon_limit = subJson["limit"].string
-                    let coupon_exp = "2015-09-30"
-                    let coupon_logo = subJson["logo"].string!
-                    let branch_id = subJson["branch_id"].int!
-                    let company_id = subJson["company_id"].int!
-                    let total_likes = subJson["total_likes"].int!
-                    let user_like = subJson["user_like"].int!
-                    let latitude = subJson["latitude"].double!
-                    let longitude = subJson["longitude"].double!
-                    let banner = subJson["banner"].string ?? ""
-                    let category_id = subJson["category_id"].int!*/
+                    let type = subJson["type"].string ?? ""
+                    let notification_id = subJson["notification_id"].int ?? 0
+                    let launcher_id = subJson["launcher_id"].int ?? 0
+                    let launcher_name = subJson["launcher_name"].string ?? ""
+                    let launcher_surnames = subJson["launcher_surnames"].string ?? ""
+                    let newsfeed_activity = subJson["newsfeed_activity"].string ?? ""
+                    let friendship_status = subJson["friendship_status"].int ?? 0
                     
+                    let model = Notification(type: type, notification_id: notification_id, launcher_id: launcher_id, launcher_name: launcher_name, launcher_surnames: launcher_surnames, newsfeed_activity: newsfeed_activity, friendship_status: friendship_status)
                     
-                    //let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: category_id)
-                    
-                    //self.notifications.append(model)
-                    
-                    
+                    self.notifications.append(model)
                     
                     
                 }
                 dispatch_async(dispatch_get_main_queue(), {
                     UIView.animateWithDuration(0.3, animations: {
+                        self.notification_table.reloadData()
                         //self.CouponsCollectionView.alpha = 1
                         
                     })
