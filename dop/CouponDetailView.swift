@@ -55,8 +55,8 @@ class CouponDetailView: UIView, MKMapViewDelegate {
             "branch_id": self.branchId,
             "taken_date" : date,
             "folio_date": folioDate,
-            "latitude": coordinate!.latitude,
-            "longitude": coordinate!.longitude ]
+            "latitude": coordinate?.latitude ?? 0,
+            "longitude": coordinate?.longitude ?? 0]
         
         
         CouponController.takeCouponWithSuccess(params,

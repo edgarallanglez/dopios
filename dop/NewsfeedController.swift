@@ -19,6 +19,7 @@ class NewsfeedController: NSObject {
             }
         })
     }
+    
     class func getAllFriendsTakingCouponsOffsetWithSuccess(client_coupon_id:Int, offset:Int,success succeed: ((friendsData: NSData!) -> Void),failure errorFound: ((friendsData: NSError?) -> Void)) {
         let url = "\(Utilities.dopURL)coupon/used/get/user/offset/?offset=\(offset)&client_coupon_id=\(client_coupon_id)"
         Utilities.loadDataFromURL(NSURL(string: url)!, completion:{(data, error) -> Void in

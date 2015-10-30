@@ -41,10 +41,20 @@ class UserProfileViewController: UIViewController, UIScrollViewDelegate, UITable
         scrollViewBox.delegate = self
         self.scrollViewBox.pagingEnabled = true
         
+        // setting activityTable
         activityPage.delegate = self
         activityPage.dataSource = self
         activityPage.backgroundColor = UIColor.clearColor()
         
+        headerTopView = (NSBundle.mainBundle().loadNibNamed("RewardsActivityHeader", owner: self, options: nil)[0] as? RewardsActivityHeader)!
+        
+        
+        let nib = UINib(nibName: "RewardsActivityCell", bundle: nil)
+        activityPage.registerNib(nib, forCellReuseIdentifier: "RewardsActivityCell")
+        activityPage.rowHeight = UITableViewAutomaticDimension
+        activityPage.rowHeight = 140
+        
+        //############################
         pageControl.addTarget(self, action: Selector("changePage:"), forControlEvents: UIControlEvents.ValueChanged)
 
         profile_image.image = userImage
@@ -61,7 +71,8 @@ class UserProfileViewController: UIViewController, UIScrollViewDelegate, UITable
             getPublicUser()
         } else if person.privacy_status == 0 {
             user_name.text = "\(person.names) \(person.surnames)"
-            getPublicUser()
+            userProfileSegmentedController.items.removeLast()
+            getActivity()
         } else if person.privacy_status == 1 {
             user_name.text = "\(person.names) \(person.surnames)"
             private_view.hidden = false
@@ -71,16 +82,18 @@ class UserProfileViewController: UIViewController, UIScrollViewDelegate, UITable
     }
     
     func getPublicUser() {
-        headerTopView = (NSBundle.mainBundle().loadNibNamed("RewardsActivityHeader", owner: self, options: nil)[0] as? RewardsActivityHeader)!
-        
-        
-        let nib = UINib(nibName: "RewardsActivityCell", bundle: nil)
-        activityPage.registerNib(nib, forCellReuseIdentifier: "RewardsActivityCell")
-        activityPage.rowHeight = UITableViewAutomaticDimension
-        activityPage.rowHeight = 140
 
         getCoupons()
         getActivity()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        
+        self.initialHeight = self.scrollViewBox.frame.size.height
+        self.activityPage.frame.size = CGSizeMake(self.scrollViewBox.frame.size.width, CGFloat(self.initialHeight))
+        self.activityPage.frame.origin.x = 0
+
+        self.scrollViewBox.addSubview(self.activityPage)
     }
     
     @IBAction func setScrollViewBoxPage(sender: UserProfileSegmentedController) {
@@ -179,7 +192,14 @@ class UserProfileViewController: UIViewController, UIScrollViewDelegate, UITable
                 self.initialHeight = self.scrollViewBox.frame.size.height
                 self.activityPage.frame.size = CGSizeMake(self.scrollViewBox.frame.size.width, CGFloat(self.initialHeight))
                 
-                self.historyScroll_size = (((margin + couponHeight) * self.historyCoupon.count) + margin) / 2
+                var coupon_count: Int
+                if self.historyCoupon.count % 2 == 0 {
+                    coupon_count = self.historyCoupon.count
+                } else {
+                    coupon_count = self.historyCoupon.count + 1
+                }
+                
+                self.historyScroll_size = (((margin + couponHeight) * coupon_count) + margin) / 2
                 self.scrollViewBox.contentSize = CGSizeMake(self.scrollViewBox.frame.size.width * self.pages, CGFloat(self.historyScroll_size))
                 
                 self.activityPage.frame.origin.x = 0
@@ -197,8 +217,8 @@ class UserProfileViewController: UIViewController, UIScrollViewDelegate, UITable
     }
     
     func getActivity() {
-        UserProfileController.getAllFriendsTakingCouponsOffsetWithSuccess(200, offset:0, success: { (friendsData) -> Void in
-            let json = JSON(data: friendsData)
+        UserProfileController.getAllTakingCouponsWithSuccess(self.userId, limit: 6, success: { (data) -> Void in
+            let json = JSON(data: data)
             
             for (index, subJson): (String, JSON) in json["data"] {
                 let client_coupon_id = subJson["clients_coupon_id"].int
@@ -206,7 +226,7 @@ class UserProfileViewController: UIViewController, UIScrollViewDelegate, UITable
                 let exchange_date = subJson["exchange_date"].string
                 let main_image = subJson["main_image"].string
                 let names = subJson["names"].string
-                
+                let company_id = subJson["company_id"].int ?? 0
                 let longitude = subJson["longitude"].string
                 let latitude = subJson["latitude"].string
                 let branch_id =  subJson["branch_id" ].int
@@ -219,13 +239,15 @@ class UserProfileViewController: UIViewController, UIScrollViewDelegate, UITable
                 let total_likes =  subJson["total_likes"].int!
                 let user_like =  subJson["user_like"].int
                 
-                let model = NewsfeedNote(client_coupon_id:client_coupon_id,friend_id: friend_id, user_id: user_id, branch_id: branch_id, coupon_name: name, branch_name: branch_name, names: names, surnames: surnames, user_image: main_image, branch_image: logo, total_likes:total_likes,user_like: user_like)
+                let model = NewsfeedNote(client_coupon_id:client_coupon_id,friend_id: friend_id, user_id: user_id, branch_id: branch_id, coupon_name: name, branch_name: branch_name, names: names, surnames: surnames, user_image: main_image, company_id: company_id, branch_image: logo, total_likes:total_likes,user_like: user_like)
                 
                 self.activityArray.append(model)
                 
                 
             }
             dispatch_async(dispatch_get_main_queue(), {
+                self.secondPageWidth = Int(self.scrollViewBox.frame.size.width)
+                self.thirdPageWidth = Int(self.scrollViewBox.frame.size.width * 2)
 //                self.activityArray.removeAll()
 //                self.activityArray = self.activityArrayTemp
 //                

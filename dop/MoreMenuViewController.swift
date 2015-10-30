@@ -19,7 +19,6 @@ class MoreMenuViewController: UITableViewController {
     @IBOutlet weak var configIcon: UIImageView!
 
     override func viewDidLoad() {
-        self.navigationController?.navigationBar.topItem!.title = "Menú"
 //        self.userImage.layer.cornerRadius = self.userImage.frame.height / 2
 //        self.userImage.layer.masksToBounds = true
 //      
@@ -37,6 +36,9 @@ class MoreMenuViewController: UITableViewController {
         configIcon.tintColor = UIColor.grayColor()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        self.navigationController?.navigationBar.topItem!.title = "Menú"
+    }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if (indexPath.section == 2) {

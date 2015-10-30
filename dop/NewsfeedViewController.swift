@@ -124,7 +124,7 @@ class NewsfeedViewController: UIViewController, UITableViewDataSource, UITableVi
                 var exchange_date = subJson["exchange_date"].string
                 var main_image = subJson["main_image"].string
                 var names = subJson["names"].string
-                
+                let company_id = subJson["company_id"].int ?? 0
                 var longitude = subJson["longitude"].string
                 let latitude = subJson["latitude"].string
                 let branch_id =  subJson["branch_id" ].int
@@ -137,7 +137,7 @@ class NewsfeedViewController: UIViewController, UITableViewDataSource, UITableVi
                 let total_likes =  subJson["total_likes"].int
                 let user_like =  subJson["user_like"].int
                 
-                let model = NewsfeedNote(client_coupon_id:client_coupon_id,friend_id: friend_id, user_id: user_id, branch_id: branch_id, coupon_name: name, branch_name: branch_name, names: names, surnames: surnames, user_image: main_image, branch_image: logo, total_likes:total_likes,user_like: user_like)
+                let model = NewsfeedNote(client_coupon_id:client_coupon_id,friend_id: friend_id, user_id: user_id, branch_id: branch_id, coupon_name: name, branch_name: branch_name, names: names, surnames: surnames, user_image: main_image, company_id: company_id, branch_image: logo, total_likes:total_likes,user_like: user_like)
                 
                 self.newsfeedTemporary.append(model)
                 
@@ -179,7 +179,7 @@ class NewsfeedViewController: UIViewController, UITableViewDataSource, UITableVi
                 var exchange_date = subJson["exchange_date"].string
                 var main_image = subJson["main_image"].string
                 var names = subJson["names"].string
-                
+                let company_id = subJson["company_id"].int!
                 var longitude = subJson["longitude"].string
                 let latitude = subJson["latitude"].string
                 let branch_id =  subJson["branch_id" ].int
@@ -192,7 +192,7 @@ class NewsfeedViewController: UIViewController, UITableViewDataSource, UITableVi
                 let total_likes =  subJson["total_likes"].int
                 let user_like =  subJson["user_like"].int
                 
-                let model = NewsfeedNote(client_coupon_id:client_coupon_id,friend_id: friend_id, user_id: user_id, branch_id: branch_id, coupon_name: name, branch_name: branch_name, names: names, surnames: surnames, user_image: main_image, branch_image: logo, total_likes:total_likes,user_like: user_like)
+                let model = NewsfeedNote(client_coupon_id:client_coupon_id,friend_id: friend_id, user_id: user_id, branch_id: branch_id, coupon_name: name, branch_name: branch_name, names: names, surnames: surnames, user_image: main_image, company_id: company_id, branch_image: logo, total_likes:total_likes,user_like: user_like)
                 
                 self.newsfeedTemporary.append(model)
                 

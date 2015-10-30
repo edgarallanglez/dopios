@@ -19,8 +19,9 @@ class RewardsActivityCell: UITableViewCell {
     
     func loadItem(model: NewsfeedNote, view: UIViewController) {
         self.branch_name.setTitle(model.branch_name, forState: UIControlState.Normal)
-        downloadImage(NSURL(string: "\(Utilities.dopImagesURL)\(model.branch_id)/\(model.branch_image)")!)
+        downloadImage(NSURL(string: "\(Utilities.dopImagesURL)\(model.company_id)/\(model.branch_image)")!)
         self.total_likes.text = "\(model.total_likes)"
+        self.user_name.text = model.names
     }
     
     func downloadImage(url: NSURL) {

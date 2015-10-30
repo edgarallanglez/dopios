@@ -18,11 +18,15 @@ class NewsfeedNote: NSObject {
     let names: String
     let surnames: String
     let user_image: String
+    let company_id: Int
     let branch_image: String
     var total_likes: Int
     var user_like: Int
     
-    init(client_coupon_id:Int!,friend_id:String!, user_id:Int!, branch_id:Int!, coupon_name: String!, branch_name: String!, names: String!, surnames: String!, user_image: String!, branch_image: String!, total_likes:Int!,user_like:Int! ) {
+    
+    init(client_coupon_id:Int!,friend_id:String!, user_id:Int!, branch_id:Int!, coupon_name: String!,
+         branch_name: String!, names: String!, surnames: String!, user_image: String!, company_id: Int!,
+         branch_image: String!, total_likes:Int!,user_like:Int! ) {
         self.client_coupon_id = client_coupon_id ?? 0
         self.friend_id = friend_id ?? ""
         self.user_id = user_id ?? 0
@@ -32,6 +36,7 @@ class NewsfeedNote: NSObject {
         self.names = names ?? ""
         self.surnames = surnames ?? ""
         self.user_image = user_image ?? ""
+        self.company_id = company_id
         self.branch_image = branch_image ?? ""
         self.total_likes = total_likes ?? 0
         self.user_like = user_like ?? 0
