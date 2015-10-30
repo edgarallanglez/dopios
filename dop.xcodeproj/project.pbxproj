@@ -22,6 +22,8 @@
 		9D3326191AF7ED1C00498801 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D3326171AF7ED1C00498801 /* LaunchScreen.xib */; };
 		9D3326251AF7ED1C00498801 /* dopTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3326241AF7ED1C00498801 /* dopTests.swift */; };
 		9D3756E11BCED51400796378 /* UserProfileSegmentedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3756E01BCED51400796378 /* UserProfileSegmentedController.swift */; };
+		9D3889141BE3E03B00209B9B /* news-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D3889121BE3E03B00209B9B /* news-icon.png */; };
+		9D3889151BE3E03B00209B9B /* request-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D3889131BE3E03B00209B9B /* request-icon.png */; };
 		9D3919211BDFEB83002229EB /* JWTDecode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D39191A1BDFEB67002229EB /* JWTDecode.framework */; };
 		9D3919221BDFEB89002229EB /* JWTDecode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D39191A1BDFEB67002229EB /* JWTDecode.framework */; };
 		9D3919231BDFEB89002229EB /* JWTDecode.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9D39191A1BDFEB67002229EB /* JWTDecode.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -114,8 +116,6 @@
 		A09AB4E21AF99136004287F7 /* CouponController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09AB4E01AF99136004287F7 /* CouponController.swift */; };
 		A09AB4E31AF99136004287F7 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09AB4E11AF99136004287F7 /* SwiftyJSON.swift */; };
 		A09AB4E51AFA880E004287F7 /* Coupon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09AB4E41AFA880E004287F7 /* Coupon.swift */; };
-		A0A494631BE1798B0000E98A /* news-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A0A494611BE1798B0000E98A /* news-icon.png */; };
-		A0A494641BE1798B0000E98A /* request-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A0A494621BE1798B0000E98A /* request-icon.png */; };
 		A0BB9BB91B13E4F1000BA261 /* FriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BB9BB71B13E4F1000BA261 /* FriendCell.swift */; };
 		A0BB9BBA1B13E4F1000BA261 /* FriendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0BB9BB81B13E4F1000BA261 /* FriendCell.xib */; };
 		A0C3AC2E1B9525D5005636E7 /* CustomInfiniteIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C3AC2D1B9525D5005636E7 /* CustomInfiniteIndicator.swift */; };
@@ -276,6 +276,8 @@
 		9D3326231AF7ED1C00498801 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9D3326241AF7ED1C00498801 /* dopTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dopTests.swift; sourceTree = "<group>"; };
 		9D3756E01BCED51400796378 /* UserProfileSegmentedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileSegmentedController.swift; sourceTree = "<group>"; };
+		9D3889121BE3E03B00209B9B /* news-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "news-icon.png"; sourceTree = "<group>"; };
+		9D3889131BE3E03B00209B9B /* request-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "request-icon.png"; sourceTree = "<group>"; };
 		9D3919121BDFEB67002229EB /* JWTDecode.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JWTDecode.xcodeproj; path = "JWTDecode.swift-master/JWTDecode.xcodeproj"; sourceTree = "<group>"; };
 		9D42966C1BBEFE17000B4A21 /* RewardsActivityCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RewardsActivityCell.xib; sourceTree = "<group>"; };
 		9D42966E1BBEFE37000B4A21 /* RewardsActivityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewardsActivityCell.swift; sourceTree = "<group>"; };
@@ -379,8 +381,6 @@
 		A09AB4E01AF99136004287F7 /* CouponController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CouponController.swift; sourceTree = "<group>"; };
 		A09AB4E11AF99136004287F7 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		A09AB4E41AFA880E004287F7 /* Coupon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coupon.swift; sourceTree = "<group>"; };
-		A0A494611BE1798B0000E98A /* news-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "news-icon.png"; path = "../../news-icon.png"; sourceTree = "<group>"; };
-		A0A494621BE1798B0000E98A /* request-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "request-icon.png"; path = "../../request-icon.png"; sourceTree = "<group>"; };
 		A0AE939A1AF8041A00D02315 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		A0BB9BB71B13E4F1000BA261 /* FriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendCell.swift; sourceTree = "<group>"; };
 		A0BB9BB81B13E4F1000BA261 /* FriendCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendCell.xib; sourceTree = "<group>"; };
@@ -609,8 +609,8 @@
 		9D33260C1AF7ED1C00498801 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				A0A494611BE1798B0000E98A /* news-icon.png */,
-				A0A494621BE1798B0000E98A /* request-icon.png */,
+				9D3889121BE3E03B00209B9B /* news-icon.png */,
+				9D3889131BE3E03B00209B9B /* request-icon.png */,
 				A0FE26D21B9AB5EB004EB402 /* search@x3.png */,
 				A060F7831B701EFE009D6ADB /* heart.png */,
 				A04E38891AFC3549007C7B69 /* starbucks.gif */,
@@ -1039,20 +1039,20 @@
 				9DAAE7B71B0E810B00209588 /* Main.storyboard in Resources */,
 				A04E388A1AFC3549007C7B69 /* starbucks.gif in Resources */,
 				9D3326191AF7ED1C00498801 /* LaunchScreen.xib in Resources */,
+				9D3889151BE3E03B00209B9B /* request-icon.png in Resources */,
 				A082F48B1B1920F8001C8C52 /* NewsfeedCell.xib in Resources */,
 				A060F78C1B72A307009D6ADB /* CouponDetailView.xib in Resources */,
+				9D3889141BE3E03B00209B9B /* news-icon.png in Resources */,
 				A086ACE11BB2157A003133BA /* TrendingCoupon.xib in Resources */,
 				9D9D1FF11B9F4BE3000C1299 /* starbucks_banner.jpg in Resources */,
 				A0578C601B0E40D30033B5BD /* GooglePlus.bundle in Resources */,
 				9D42966D1BBEFE17000B4A21 /* RewardsActivityCell.xib in Resources */,
 				9DA3C8961B90C117000D40F2 /* Images.xcassets in Resources */,
-				A0A494641BE1798B0000E98A /* request-icon.png in Resources */,
 				A0FE26D31B9AB5EB004EB402 /* search@x3.png in Resources */,
 				A0F7E9211AFAE48500A4F0F2 /* CouponCell.xib in Resources */,
 				9D1021371B82A019005BED0C /* BranchProfileLastCampaign.xib in Resources */,
 				9DB6BB2A1B72A6A000FF2659 /* BranchProfileTopView.xib in Resources */,
 				A0BB9BBA1B13E4F1000BA261 /* FriendCell.xib in Resources */,
-				A0A494631BE1798B0000E98A /* news-icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
