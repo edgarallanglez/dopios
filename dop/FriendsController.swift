@@ -33,6 +33,7 @@ class FriendsController: NSObject {
     
     class func addFriendWithSuccess(params:[String:AnyObject], success: ((friendsData: NSData!) -> Void), failure errorFound: ((friendsData: NSError?) -> Void)) {
         let url = "\(Utilities.dopURL)user/friends/add"
+        print(url)
         Utilities.sendDataToURL(NSURL(string: url)!, method:"POST", params: params, completion:{(data, error) -> Void in
             if let urlData = data {
                 success(friendsData: urlData)

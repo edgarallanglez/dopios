@@ -39,8 +39,7 @@ class TrendingCoupon: UIView {
     
     
     func tapCoupon(sender:UITapGestureRecognizer){
-        self.viewController!.performSegueWithIdentifier("couponDetail", sender: self)
-        
+        //self.viewController!.performSegueWithIdentifier("couponDetail", sender: self)
         
     }
     

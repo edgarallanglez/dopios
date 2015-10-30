@@ -58,7 +58,7 @@ class TabbarController: UITabBarController, NotificationDelegate {
         UIApplication.sharedApplication().statusBarStyle = .LightContent
         
         
-        let notificationButton: NotificationButton = NotificationButton(image: UIImage(named: "trophy1"), style: UIBarButtonItemStyle.Plain, target: self, action: "notification")
+        let notificationButton: NotificationButton = NotificationButton(image: UIImage(named: "notification"), style: UIBarButtonItemStyle.Plain, target: self, action: "notification")
         
         
         let searchButton : UIBarButtonItem = UIBarButtonItem(image: UIImage(named:"search-icon"), style: UIBarButtonItemStyle.Plain, target: self, action: "search")
@@ -69,6 +69,13 @@ class TabbarController: UITabBarController, NotificationDelegate {
         
         notificationButton.delegate = self
         notificationButton.startListening()
+        
+    
+        //let badge = UIView(frame: CGRectMake(notificationButton.,0,30,30))
+        
+        //badge.backgroundColor = UIColor.redColor()
+
+        
     }
 
     override func didReceiveMemoryWarning() {

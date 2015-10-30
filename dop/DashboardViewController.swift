@@ -393,7 +393,18 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
         
     }
     func tapCoupon(sender:UITapGestureRecognizer){
-        self.performSegueWithIdentifier("couponDetail", sender: sender.view)
+        //self.performSegueWithIdentifier("couponDetail", sender: sender.view)
+        let params:[String: Int] = [
+            "user_two_id": 5]
+        
+        FriendsController.addFriendWithSuccess(params,success:{(friendsData) -> Void in
+            let json = JSON(data: friendsData)
+            print(json)
+            
+            },
+            failure: { (error) -> Void in
+                print("ERROR")
+        })
     }
     
     func getToExpireCoupons() {
