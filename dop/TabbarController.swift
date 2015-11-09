@@ -70,6 +70,7 @@ class TabbarController: UITabBarController, NotificationDelegate {
         notificationButton.delegate = self
         notificationButton.startListening()
         
+        
     
         //let badge = UIView(frame: CGRectMake(notificationButton.,0,30,30))
         

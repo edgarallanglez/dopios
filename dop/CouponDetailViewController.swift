@@ -90,14 +90,20 @@ class CouponDetailViewController: UIViewController, UITableViewDelegate, UITable
     
     func getBannerImage(customView: CouponDetailView) {
         if self.banner == "" {
-            imageUrl = NSURL(string: "\(Utilities.dopImagesURL)local/default_banner.png")
+            imageUrl = NSURL(string: "\(Utilities.dopImagesURL)local/default_banner.pngx")
+            
         } else {
             imageUrl = NSURL(string: "\(Utilities.dopImagesURL)\(companyId)/\(self.banner)")
         }
         Utilities.getDataFromUrl(imageUrl!) { photo in
             dispatch_async(dispatch_get_main_queue()) {
                 let imageData: NSData = NSData(data: photo!)
+                
                 customView.branch_cover.image = UIImage(data: imageData)!
+
+                if(customView.branch_cover.image == nil){
+                    customView.backgroundColor = UIColor.redColor()
+                }
             }
         }
 
@@ -181,9 +187,15 @@ class CouponDetailViewController: UIViewController, UITableViewDelegate, UITable
              //let i = couponsTableView.indexPathForCell(cell)!.section
         
         if segue.identifier == "branchProfile" {
-            let view = segue.destinationViewController as! BranchProfileViewController
+            let view = segue.destinationViewController as! BranchProfileViewControllerN
             view.branchId = branchId
             view.logo = self.logo
+            if(customView.branch_cover.image == nil){
+                
+            }else{
+                view.banner = customView.branch_cover.image
+            }
+            
         }
         
         
