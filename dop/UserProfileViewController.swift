@@ -19,11 +19,13 @@ class UserProfileViewController: UIViewController, UIScrollViewDelegate, UITable
     @IBOutlet var profile_image: UIImageView!
     @IBOutlet weak var user_name: UILabel!
     @IBOutlet weak var userProfileSegmentedController: UserProfileSegmentedController!
+    @IBOutlet weak var follow_button: UIButton!
+    @IBOutlet weak var follow_button_width: NSLayoutConstraint!
     
     var activityPage: UITableView = UITableView()
     var userImage: UIImage!
     var userImagePath:String = ""
-    var userId:Int! = 0
+    var userId:Int = 0
     var historyCoupon = [Coupon]()
     var activityArray = [NewsfeedNote]()
     var activityArrayTemp = [NewsfeedNote]()
@@ -38,6 +40,9 @@ class UserProfileViewController: UIViewController, UIScrollViewDelegate, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Perfil"
+
+        self.follow_button.layer.borderColor = UIColor(red: 248/255, green: 20/255, blue: 90/255, alpha: 1).CGColor
+        
         scrollViewBox.delegate = self
         self.scrollViewBox.pagingEnabled = true
         
@@ -69,6 +74,9 @@ class UserProfileViewController: UIViewController, UIScrollViewDelegate, UITable
         if userId == User.user_id {
             user_name.text = "\(User.userName) \(User.userSurnames)"
             getPublicUser()
+            if self.userImage == nil {
+                self.downloadImage(NSURL(string: User.userImageUrl)!)
+            }
         } else if person.privacy_status == 0 {
             user_name.text = "\(person.names) \(person.surnames)"
             userProfileSegmentedController.items.removeLast()
@@ -78,6 +86,8 @@ class UserProfileViewController: UIViewController, UIScrollViewDelegate, UITable
             private_view.hidden = false
             scrollViewBox.hidden = true
         }
+        
+        
 
     }
     
@@ -242,9 +252,8 @@ class UserProfileViewController: UIViewController, UIScrollViewDelegate, UITable
                 let model = NewsfeedNote(client_coupon_id:client_coupon_id,friend_id: friend_id, user_id: user_id, branch_id: branch_id, coupon_name: name, branch_name: branch_name, names: names, surnames: surnames, user_image: main_image, company_id: company_id, branch_image: logo, total_likes:total_likes,user_like: user_like)
                 
                 self.activityArray.append(model)
-                
-                
             }
+            
             dispatch_async(dispatch_get_main_queue(), {
                 self.secondPageWidth = Int(self.scrollViewBox.frame.size.width)
                 self.thirdPageWidth = Int(self.scrollViewBox.frame.size.width * 2)
@@ -320,5 +329,32 @@ class UserProfileViewController: UIViewController, UIScrollViewDelegate, UITable
         pageControl.currentPage = pageNumber
         self.userProfileSegmentedController.selectedIndex = pageNumber
     }
+    
+    @IBAction func followUnfollow(sender: UIButton) {
+        let params:[String: AnyObject] = [
+            "user_two_id": self.userId
+        ]
+
+        UserProfileController.followFriendWithSuccess(params, success: { (data) -> Void in
+            dispatch_async(dispatch_get_main_queue(), {
+                UIButton.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
+                    self.follow_button.setImage(nil, forState: UIControlState.Normal)
+                    
+                    self.follow_button.backgroundColor = UIColor(red: 248/255, green: 20/255, blue: 90/255, alpha: 1)
+                    self.follow_button_width.constant = CGFloat(100)
+                    self.view.layoutIfNeeded()
+                    }, completion: { (Bool) in
+                        self.follow_button.setTitle("SIGUIENDO", forState: UIControlState.Normal)
+                        
+                })
+            })
+        },
+        failure: { (data) -> Void in
+            dispatch_async(dispatch_get_main_queue(), {})
+                
+        })
+    
+    }
+    
 
 }

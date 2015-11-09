@@ -67,6 +67,17 @@ class UserProfileController: NSObject {
             }
         })
     }
+    
+    class func followFriendWithSuccess(params: [String:AnyObject], success succeed: ((data: NSData!) -> Void), failure errorFound: ((data: NSError?) -> Void)) {
+        let url = "\(Utilities.dopURL)user/friends/add"
+        Utilities.sendDataToURL(NSURL(string: url)!, method:"POST", params: params, completion:{(data, error) -> Void in
+            if let urlData = data {
+                succeed(data: urlData)
+            }else{
+                errorFound(data: error)
+            }
+        })
+    }
 }
 
 

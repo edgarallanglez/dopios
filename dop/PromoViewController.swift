@@ -380,7 +380,7 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
                     let user_like = subJson["user_like"].int!
                     let latitude = subJson["latitude"].double!
                     let longitude = subJson["longitude"].double!
-                    let banner = subJson["banner"].string!
+                    let banner = subJson["banner"].string ?? ""
                     let category_id = subJson["category_id"].int!
                     
                     

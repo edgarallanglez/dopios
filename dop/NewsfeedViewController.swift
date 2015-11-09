@@ -179,7 +179,7 @@ class NewsfeedViewController: UIViewController, UITableViewDataSource, UITableVi
                 var exchange_date = subJson["exchange_date"].string
                 var main_image = subJson["main_image"].string
                 var names = subJson["names"].string
-                let company_id = subJson["company_id"].int!
+                let company_id = subJson["company_id"].int ?? 0
                 var longitude = subJson["longitude"].string
                 let latitude = subJson["latitude"].string
                 let branch_id =  subJson["branch_id" ].int

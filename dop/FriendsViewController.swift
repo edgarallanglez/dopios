@@ -60,8 +60,8 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
                 self.tableView.reloadData()
             });
         },
-        failure: {(friendsData) -> Void in
-        
+        failure: {(error) -> Void in
+            print(error)
         })
     }
     
