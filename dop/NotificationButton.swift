@@ -21,7 +21,6 @@ class NotificationButton: UIBarButtonItem, SocketIODelegate {
             socketIO.delegate = self
             socketIO.useSecure = true
             
-
             socketIO.connectToHost("inmoon.com.mx", onPort: 443, withParams: nil, withNamespace: "/app")
 
         }
@@ -41,16 +40,12 @@ class NotificationButton: UIBarButtonItem, SocketIODelegate {
         if(packet.name == "notification"){
              self.delegate?.getNotification(packet)
         }
-       
         /*let cb: SocketIOCallback = { argsData in
             let response: [NSObject : AnyObject] = argsData as! [NSObject : AnyObject]
             print("ack arrived: %@", response)
             self.socketIO.disconnectForced()
             
         }*/
-        
-        
-       
     }
     func socketIODidDisconnect(socket: SocketIO!, disconnectedWithError error: NSError!) {
         socketIO.connectToHost("inmoon.com.mx", onPort: 443, withParams: nil, withNamespace: "/app")
