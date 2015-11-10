@@ -143,6 +143,7 @@
 		A0EC059B1B7D1ED1003CADB2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EC059A1B7D1ED1003CADB2 /* CoreGraphics.framework */; };
 		A0EC059D1B7D1FD5003CADB2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EC059C1B7D1FD5003CADB2 /* UIKit.framework */; };
 		A0EC05B41B7D622A003CADB2 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EC05B31B7D622A003CADB2 /* LoadingViewController.swift */; };
+		A0F1E0291BF272BD0092C1F4 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F1E0281BF272BD0092C1F4 /* NavigationController.swift */; };
 		A0F7E9201AFAE48500A4F0F2 /* CouponCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F7E91E1AFAE48500A4F0F2 /* CouponCell.swift */; };
 		A0F7E9211AFAE48500A4F0F2 /* CouponCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0F7E91F1AFAE48500A4F0F2 /* CouponCell.xib */; };
 		A0FCF9D81B98D59200BB4537 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0FCF9D71B98D59200BB4537 /* SearchViewController.swift */; };
@@ -412,6 +413,7 @@
 		A0EC059A1B7D1ED1003CADB2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		A0EC059C1B7D1FD5003CADB2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A0EC05B31B7D622A003CADB2 /* LoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
+		A0F1E0281BF272BD0092C1F4 /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		A0F7E91E1AFAE48500A4F0F2 /* CouponCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CouponCell.swift; sourceTree = "<group>"; };
 		A0F7E91F1AFAE48500A4F0F2 /* CouponCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CouponCell.xib; sourceTree = "<group>"; };
 		A0FCF9D71B98D59200BB4537 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -581,6 +583,7 @@
 				9D7FA0761BBC4FDB00EAEC36 /* Settings */,
 				A0AE939A1AF8041A00D02315 /* Bridging-Header.h */,
 				9D33260E1AF7ED1C00498801 /* AppDelegate.swift */,
+				A0F1E0281BF272BD0092C1F4 /* NavigationController.swift */,
 				A060F78D1B72B475009D6ADB /* CouponDetailView.swift */,
 				A060F7851B702FAC009D6ADB /* CouponDetailViewController.swift */,
 				9D697C791B5EF13000D786AA /* iconfonts-fontawesome.swift */,
@@ -1107,6 +1110,7 @@
 				A06B357C1B9F667D003C90EF /* NearbyBranch.swift in Sources */,
 				9DB3DABF1B740070004AC0F1 /* BranchProfileAboutView.swift in Sources */,
 				A01D77DB1BDAB94C00AA8FE2 /* SocketIOTransportWebsocket.m in Sources */,
+				A0F1E0291BF272BD0092C1F4 /* NavigationController.swift in Sources */,
 				A0EC05B41B7D622A003CADB2 /* LoadingViewController.swift in Sources */,
 				A086ACDF1BB09496003133BA /* Branch.swift in Sources */,
 				9DB907DE1B8E25A000A40FE0 /* FilterSideViewController.swift in Sources */,
