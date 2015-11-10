@@ -19,6 +19,8 @@ class BranchProfileAboutView: UITableViewCell, CLLocationManagerDelegate, MKMapV
 
     let regionRadius: CLLocationDistance = 500
     
+    var index: Int = 0
+    
     func loadAbout(description: String) {
         branchDescription.text = description
         pinIcon.image = pinIcon.image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)

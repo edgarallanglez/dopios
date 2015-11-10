@@ -116,6 +116,8 @@
 		A09AB4E21AF99136004287F7 /* CouponController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09AB4E01AF99136004287F7 /* CouponController.swift */; };
 		A09AB4E31AF99136004287F7 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09AB4E11AF99136004287F7 /* SwiftyJSON.swift */; };
 		A09AB4E51AFA880E004287F7 /* Coupon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09AB4E41AFA880E004287F7 /* Coupon.swift */; };
+		A0A494FF1BE546670000E98A /* BranchProfileViewControllerN.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A494FE1BE546670000E98A /* BranchProfileViewControllerN.swift */; };
+		A0A495011BE56C300000E98A /* BranchProfilePromoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A495001BE56C300000E98A /* BranchProfilePromoViewController.swift */; };
 		A0BB9BB91B13E4F1000BA261 /* FriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BB9BB71B13E4F1000BA261 /* FriendCell.swift */; };
 		A0BB9BBA1B13E4F1000BA261 /* FriendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0BB9BB81B13E4F1000BA261 /* FriendCell.xib */; };
 		A0C3AC2E1B9525D5005636E7 /* CustomInfiniteIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C3AC2D1B9525D5005636E7 /* CustomInfiniteIndicator.swift */; };
@@ -381,6 +383,8 @@
 		A09AB4E01AF99136004287F7 /* CouponController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CouponController.swift; sourceTree = "<group>"; };
 		A09AB4E11AF99136004287F7 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		A09AB4E41AFA880E004287F7 /* Coupon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coupon.swift; sourceTree = "<group>"; };
+		A0A494FE1BE546670000E98A /* BranchProfileViewControllerN.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BranchProfileViewControllerN.swift; sourceTree = "<group>"; };
+		A0A495001BE56C300000E98A /* BranchProfilePromoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BranchProfilePromoViewController.swift; sourceTree = "<group>"; };
 		A0AE939A1AF8041A00D02315 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		A0BB9BB71B13E4F1000BA261 /* FriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendCell.swift; sourceTree = "<group>"; };
 		A0BB9BB81B13E4F1000BA261 /* FriendCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendCell.xib; sourceTree = "<group>"; };
@@ -503,6 +507,8 @@
 		9D0C16821B4DC6AE0088DE2F /* BranchProfile */ = {
 			isa = PBXGroup;
 			children = (
+				A0A494FE1BE546670000E98A /* BranchProfileViewControllerN.swift */,
+				A0A495001BE56C300000E98A /* BranchProfilePromoViewController.swift */,
 				9D1FCED61B79295700F42F6D /* SegmentedControl.swift */,
 				9D0C16831B4DC6EB0088DE2F /* BranchProfileViewController.swift */,
 				A086ACDE1BB09496003133BA /* Branch.swift */,
@@ -907,7 +913,7 @@
 				TargetAttributes = {
 					9D3326081AF7ED1C00498801 = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = WKZMSRYE62;
+						DevelopmentTeam = QX6AA77Z42;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -919,7 +925,7 @@
 					};
 					9D33261D1AF7ED1C00498801 = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = WKZMSRYE62;
+						DevelopmentTeam = QX6AA77Z42;
 						TestTargetID = 9D3326081AF7ED1C00498801;
 					};
 				};
@@ -1076,6 +1082,7 @@
 				9D2BDFE41B9DF524003F1260 /* SearchController.swift in Sources */,
 				9DBB7A401B968437005700B9 /* UIImage+ImageEffects.h in Sources */,
 				9D697C7A1B5EF13000D786AA /* iconfonts-fontawesome.swift in Sources */,
+				A0A495011BE56C300000E98A /* BranchProfilePromoViewController.swift in Sources */,
 				9DA1C70C1BD712850029578D /* PeopleModel.swift in Sources */,
 				A04CC2121BBDBB16001AF7E0 /* ToExpireCoupon.swift in Sources */,
 				A04D388F1BC7366600E578F0 /* NearestCoupon.swift in Sources */,
@@ -1130,6 +1137,7 @@
 				9D9C9C911BB2155B00D9F986 /* Annotation.swift in Sources */,
 				A0F7E9201AFAE48500A4F0F2 /* CouponCell.swift in Sources */,
 				9DA85CFD1B82587E009DA186 /* BranchProfileLastCampaign.swift in Sources */,
+				A0A494FF1BE546670000E98A /* BranchProfileViewControllerN.swift in Sources */,
 				A0FCF9D81B98D59200BB4537 /* SearchViewController.swift in Sources */,
 				A060F7891B717DB9009D6ADB /* UIImage+ImageEffects.m in Sources */,
 				9D42966F1BBEFE37000B4A21 /* RewardsActivityCell.swift in Sources */,
@@ -1319,7 +1327,7 @@
 					Security,
 					"-licucore",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.iminced.dop;
+				PRODUCT_BUNDLE_IDENTIFIER = com.imincedu.dop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "dop/Bridging-Header.h";
@@ -1356,7 +1364,7 @@
 					Security,
 					"-licucore",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.iminced.dop;
+				PRODUCT_BUNDLE_IDENTIFIER = com.imincedu.dop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "dop/Bridging-Header.h";
