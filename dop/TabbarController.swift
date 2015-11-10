@@ -32,14 +32,13 @@ class TabbarController: UITabBarController, NotificationDelegate {
         
         self.tabBar.backgroundImage = UIImage(named: "")
         
+        self.navigationController?.navigationBar.hidden = true
         
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(named:"topbarBackground"), forBarMetrics: .Default)
+    /*self.navigationController?.navigationBar.setBackgroundImage(UIImage(named:"topbarBackground"), forBarMetrics: .Default)
         
         var backgroundLayer = Utilities.Colors
         
-        //self.navigationController?.navigationBar.layer.insertSublayer(backgroundLayer,atIndex:5)
 
-        
         self.navigationController?.navigationBar.titleTextAttributes = [
             NSForegroundColorAttributeName: UIColor.whiteColor()
         ]
@@ -50,7 +49,7 @@ class TabbarController: UITabBarController, NotificationDelegate {
         self.navigationController?.navigationBar.translucent = false
         
         self.navigationItem.backBarButtonItem?.setTitleTextAttributes( [NSForegroundColorAttributeName: UIColor.whiteColor()], forState: UIControlState.Normal)
-       
+       */
         
         let imagen:UIImage = UIImage(named: "main-icon-dop")!
         addCenterButtonWithImage(imagen)
@@ -63,18 +62,13 @@ class TabbarController: UITabBarController, NotificationDelegate {
         
         let searchButton : UIBarButtonItem = UIBarButtonItem(image: UIImage(named:"search-icon"), style: UIBarButtonItemStyle.Plain, target: self, action: "search")
         
-       /* var logButton : UIBarButtonItem = UIBarButtonItem(title: "Search", style: UIBarButtonItemStyle.Plain, target: self, action: "search")*/
+
         self.navigationItem.leftBarButtonItem = notificationButton
         self.navigationItem.rightBarButtonItem = searchButton
         
         notificationButton.delegate = self
         notificationButton.startListening()
         
-        
-    
-        //let badge = UIView(frame: CGRectMake(notificationButton.,0,30,30))
-        
-        //badge.backgroundColor = UIColor.redColor()
 
         
     }
@@ -90,21 +84,10 @@ class TabbarController: UITabBarController, NotificationDelegate {
         
         button.frame = CGRectMake(0,0, 57,49)
         button.backgroundColor = UIColor.clearColor()
-        //button.setBackgroundImage(buttonImage, forState: .Normal)
         
         button.setImage(buttonImage, forState: .Normal)
-        
-        var heightDiference = 49 - self.tabBar.frame.size.height
-        
-        var center:CGPoint = self.tabBar.center
-        let navBarHeight = self.navigationController?.navigationBar.frame.size.height
 
-        let staturBarHeight = UIApplication.sharedApplication().statusBarFrame.size.height
-        
-        center.y = center.y - (navBarHeight!)-staturBarHeight
-
-        
-        button.center = center
+        button.center = self.tabBar.center
         
         
         self.view.addSubview(button)
