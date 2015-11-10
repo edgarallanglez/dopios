@@ -452,7 +452,6 @@ class PromoViewController: UIViewController, UICollectionViewDelegate, UICollect
     }
     
  
-    
 
 
 }
