@@ -8,8 +8,10 @@
 
 import UIKit
 
+
 class NavigationController: UINavigationController, NotificationDelegate {
 
+    @IBOutlet var navBar: UINavigationBar!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -38,8 +40,13 @@ class NavigationController: UINavigationController, NotificationDelegate {
         self.navigationItem.leftBarButtonItem = notificationButton
         self.navigationItem.rightBarButtonItem = searchButton
         
+        
+
         notificationButton.delegate = self
         notificationButton.startListening()
+        
+        self.navigationItem.setLeftBarButtonItem(notificationButton, animated: true)
+        
         
     }
     
@@ -66,6 +73,7 @@ class NavigationController: UINavigationController, NotificationDelegate {
     func search(){
         self.performSegueWithIdentifier("searchView", sender: self)
     }
+    
 
     /*
     // MARK: - Navigation

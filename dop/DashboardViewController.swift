@@ -9,7 +9,7 @@
 import UIKit
 import QuartzCore
 
-class DashboardViewController: UIViewController, CLLocationManagerDelegate, UIScrollViewDelegate {
+class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UIScrollViewDelegate {
     
     @IBOutlet weak var menuButton:UIBarButtonItem!
 
@@ -101,12 +101,13 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate, UISc
         locationManager.startUpdatingLocation()
         User.coordinate = locationManager.location!.coordinate
         
+        
+
+        
 
         
     }
-    func getNotification(gameBoardUIView:UIView) {
-        print("DOT")
-    }
+
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         getTopBranches()

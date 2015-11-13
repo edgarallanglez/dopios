@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CouponDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate {
+class CouponDetailViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate {
 
     @IBOutlet var tableView: UITableView!
     var newsfeed = [NewsfeedNote]()
@@ -90,7 +90,7 @@ class CouponDetailViewController: UIViewController, UITableViewDelegate, UITable
     
     func getBannerImage(customView: CouponDetailView) {
         if self.banner == "" {
-            imageUrl = NSURL(string: "\(Utilities.dopImagesURL)local/default_banner.pnga")
+            imageUrl = NSURL(string: "\(Utilities.dopImagesURL)local/default_banner.png")
             
         } else {
             imageUrl = NSURL(string: "\(Utilities.dopImagesURL)\(companyId)/\(self.banner)")

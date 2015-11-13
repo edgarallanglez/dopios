@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PromoViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIAlertViewDelegate {
+class PromoViewController: BaseViewController, UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIAlertViewDelegate {
     
     @IBOutlet weak var CouponsCollectionView: UICollectionView!    
     @IBOutlet weak var emptyMessage: UILabel!

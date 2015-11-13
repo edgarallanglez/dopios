@@ -56,19 +56,7 @@ class TabbarController: UITabBarController, NotificationDelegate {
         
         UIApplication.sharedApplication().statusBarStyle = .LightContent
         
-        
-        let notificationButton: NotificationButton = NotificationButton(image: UIImage(named: "notification"), style: UIBarButtonItemStyle.Plain, target: self, action: "notification")
-        
-        
-        let searchButton : UIBarButtonItem = UIBarButtonItem(image: UIImage(named:"search-icon"), style: UIBarButtonItemStyle.Plain, target: self, action: "search")
-        
 
-        self.navigationItem.leftBarButtonItem = notificationButton
-        self.navigationItem.rightBarButtonItem = searchButton
-        
-        notificationButton.delegate = self
-        notificationButton.startListening()
-        
 
         
     }
