@@ -24,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         Fabric.with([Twitter.sharedInstance()])*/
         
+        
         UIApplication.sharedApplication().statusBarStyle = .LightContent
                 
         FBLoginView.self

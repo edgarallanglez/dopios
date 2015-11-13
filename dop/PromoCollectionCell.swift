@@ -10,7 +10,7 @@ import UIKit
 import Social
 import FBSDKShareKit
 
-class PromoCollectionCell: UICollectionViewCell {
+class PromoCollectionCell: UICollectionViewCell, FBSDKSharingDelegate {
     
     @IBOutlet var coupon_description: UILabel!
     @IBOutlet var branch_banner: UIImageView!
@@ -84,8 +84,19 @@ class PromoCollectionCell: UICollectionViewCell {
         content.contentDescription = self.coupon_description?.text
         content.imageURL = NSURL(string: "\(Utilities.dopImagesURL)\(coupon.company_id)/\(coupon.logo)")
         
-        FBSDKShareDialog.showFromViewController(self.viewController, withContent: content, delegate: nil)
-        
+        FBSDKShareDialog.showFromViewController(self.viewController, withContent: content, delegate: self)
+    }
+    
+    func sharer(sharer: FBSDKSharing!, didFailWithError error: NSError!) {
+        print(error.description)
+    }
+    
+    func sharer(sharer: FBSDKSharing!, didCompleteWithResults results: [NSObject : AnyObject]!) {
+        print(results)
+    }
+    
+    func sharerDidCancel(sharer: FBSDKSharing!) {
+        print("cancel")
     }
 
     func setCouponLike() {
