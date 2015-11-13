@@ -30,6 +30,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
         //SEARCH BAR
         searchBar = UISearchBar(frame: CGRectMake(0, 0, 100, 20))
         searchBar.tintColor = UIColor.whiteColor()
@@ -43,7 +44,9 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         //var rightNavBarButton = UIBarButtonItem(customView:searchBar)
         //self.navigationItem.rightBarButtonItem = rightNavBarButton
         
-        self.navigationController?.navigationBar.addSubview(searchBar)
+        
+        self.navigationItem.titleView = searchBar
+        //self.navigationController?.navigationBar.addSubview(searchBar)
         //self.view.addSubview(searchBar)
         
         tableView.delegate = self
@@ -67,15 +70,16 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         locationManager.startUpdatingLocation()
         User.coordinate = locationManager.location!.coordinate
         
+        UIView.animateWithDuration(0.3, animations: {
+            self.searchBar.alpha = 1
+        })
+        //doSomething()
     }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    override func viewDidAppear(animated: Bool) {
-        
+    func doSomething(){
         let horizonalContraints = NSLayoutConstraint(item: searchBar, attribute:
             .LeadingMargin, relatedBy: .Equal, toItem: self.view,
             attribute: .LeadingMargin, multiplier: 1.0,
@@ -96,6 +100,10 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         UIView.animateWithDuration(0.3, animations: {
             self.searchBar.alpha = 1
         })
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        
     }
     
     override func viewDidDisappear(animated: Bool) {
