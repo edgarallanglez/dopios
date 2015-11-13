@@ -8,15 +8,15 @@
 
 import UIKit
 
-class BaseViewController: UIViewController, NotificationDelegate {
-
+class BaseViewController: UIViewController {
+    var notificationButton: NotificationButton!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         let searchButton : UIBarButtonItem = UIBarButtonItem(image: UIImage(named:"search-icon"), style: UIBarButtonItemStyle.Plain, target: self, action: "search")
         
         
-         let notificationButton: NotificationButton = NotificationButton(image: UIImage(named: "notification"), style: UIBarButtonItemStyle.Plain, target: self, action: "notification")
+        notificationButton = NotificationButton(image: UIImage(named: "notification"), style: UIBarButtonItemStyle.Plain, target: self, action: "notification")
         
         
         self.navigationItem.rightBarButtonItem = searchButton
@@ -50,15 +50,7 @@ class BaseViewController: UIViewController, NotificationDelegate {
         self.navigationController?.hidesBottomBarWhenPushed = false
         
     }
-    
-    func getNotification(packet:SocketIOPacket) {
-        print("NOTIFICATION")
-        var alert = UIAlertController(title: "Alert", message: packet.data, preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
-        
-        self.presentViewController(alert, animated: true, completion: nil)
-        
-    }
+
     
 
     /*

@@ -9,7 +9,7 @@
 import UIKit
 import QuartzCore
 
-class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UIScrollViewDelegate {
+class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UIScrollViewDelegate, NotificationDelegate{
     
     @IBOutlet weak var menuButton:UIBarButtonItem!
 
@@ -51,7 +51,6 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         
         
@@ -101,10 +100,18 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
         locationManager.startUpdatingLocation()
         User.coordinate = locationManager.location!.coordinate
         
-        
+        super.notificationButton.delegate = self
+
 
         
-
+    }
+    
+    func getNotification(packet:SocketIOPacket) {
+        print("NOTIFICATION")
+        var alert = UIAlertController(title: "Alert", message: packet.data, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
+        
+        self.presentViewController(alert, animated: true, completion: nil)
         
     }
 
