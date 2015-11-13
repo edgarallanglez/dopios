@@ -101,6 +101,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
         User.coordinate = locationManager.location!.coordinate
         
         super.notificationButton.delegate = self
+        super.notificationButton.startListening()
 
 
         

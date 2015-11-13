@@ -22,8 +22,6 @@ class BaseViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = searchButton
         self.navigationItem.leftBarButtonItem = notificationButton
         
-        notificationButton.delegate = self
-        notificationButton.startListening()
     }
 
     
