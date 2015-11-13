@@ -90,7 +90,7 @@ class CouponDetailViewController: UIViewController, UITableViewDelegate, UITable
     
     func getBannerImage(customView: CouponDetailView) {
         if self.banner == "" {
-            imageUrl = NSURL(string: "\(Utilities.dopImagesURL)local/default_banner.pngx")
+            imageUrl = NSURL(string: "\(Utilities.dopImagesURL)local/default_banner.pnga")
             
         } else {
             imageUrl = NSURL(string: "\(Utilities.dopImagesURL)\(companyId)/\(self.banner)")

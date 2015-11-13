@@ -10,6 +10,7 @@
 		9D0C16841B4DC6EB0088DE2F /* BranchProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0C16831B4DC6EB0088DE2F /* BranchProfileViewController.swift */; };
 		9D0DB4711B17D2DB0009FE6C /* NearbyMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0DB4701B17D2DB0009FE6C /* NearbyMapViewController.swift */; };
 		9D0DB4731B17DE5A0009FE6C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D0DB4721B17DE5A0009FE6C /* MapKit.framework */; };
+		9D0E43D11BF55F8200BA17D7 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0E43D01BF55F8200BA17D7 /* SettingsController.swift */; };
 		9D1021371B82A019005BED0C /* BranchProfileLastCampaign.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D1021361B82A019005BED0C /* BranchProfileLastCampaign.xib */; };
 		9D1205741BDEBF16009EEBAE /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D12056B1BDEBEF9009EEBAE /* CryptoSwift.framework */; };
 		9D1205751BDEBF60009EEBAE /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D12056B1BDEBEF9009EEBAE /* CryptoSwift.framework */; };
@@ -266,6 +267,7 @@
 		9D0C16831B4DC6EB0088DE2F /* BranchProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BranchProfileViewController.swift; sourceTree = "<group>"; };
 		9D0DB4701B17D2DB0009FE6C /* NearbyMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyMapViewController.swift; sourceTree = "<group>"; };
 		9D0DB4721B17DE5A0009FE6C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		9D0E43D01BF55F8200BA17D7 /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		9D1021361B82A019005BED0C /* BranchProfileLastCampaign.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BranchProfileLastCampaign.xib; sourceTree = "<group>"; };
 		9D1205621BDEBEF8009EEBAE /* CryptoSwift.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CryptoSwift.xcodeproj; path = CryptoSwift/CryptoSwift.xcodeproj; sourceTree = "<group>"; };
 		9D1FCED61B79295700F42F6D /* SegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
@@ -661,6 +663,7 @@
 			isa = PBXGroup;
 			children = (
 				9D7FA0771BBC4FF000EAEC36 /* SettingsViewController.swift */,
+				9D0E43D01BF55F8200BA17D7 /* SettingsController.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -916,7 +919,7 @@
 				TargetAttributes = {
 					9D3326081AF7ED1C00498801 = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = QX6AA77Z42;
+						DevelopmentTeam = WKZMSRYE62;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -1135,6 +1138,7 @@
 				A01A39BE1BDF0EB700F231F5 /* Notification.swift in Sources */,
 				A082F4831B18CEE6001C8C52 /* NewsfeedViewController.swift in Sources */,
 				9D4296711BBF038D000B4A21 /* RewardsActivityHeader.swift in Sources */,
+				9D0E43D11BF55F8200BA17D7 /* SettingsController.swift in Sources */,
 				A01D77D91BDAB94C00AA8FE2 /* SocketIOPacket.m in Sources */,
 				9DACBBF91BA8CE0200CAEECB /* FilterSegmentedControl.swift in Sources */,
 				9DE55C441BB07C0A005F9776 /* PromoSegmentedController.swift in Sources */,
@@ -1331,7 +1335,7 @@
 					Security,
 					"-licucore",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.imincedu.dop;
+				PRODUCT_BUNDLE_IDENTIFIER = com.iminced.dop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "dop/Bridging-Header.h";
@@ -1368,7 +1372,7 @@
 					Security,
 					"-licucore",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.imincedu.dop;
+				PRODUCT_BUNDLE_IDENTIFIER = com.iminced.dop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "dop/Bridging-Header.h";

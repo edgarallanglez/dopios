@@ -21,8 +21,7 @@ class MoreMenuViewController: UITableViewController {
     override func viewDidLoad() {
 //        self.userImage.layer.cornerRadius = self.userImage.frame.height / 2
 //        self.userImage.layer.masksToBounds = true
-//      
-
+//
         userName.text = User.userName
         getUserImage()
         
@@ -44,8 +43,9 @@ class MoreMenuViewController: UITableViewController {
         if (indexPath.section == 2) {
             setActionSheet()
         }
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
-    
+
     @IBAction func getFriends(sender: UIButton) {
         self.performSegueWithIdentifier("friendsList", sender: self)
     }
