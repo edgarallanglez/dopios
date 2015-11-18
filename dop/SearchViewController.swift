@@ -319,8 +319,9 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
                         let facebook_key = subJson["facebok_key"].string ?? ""
                         let privacy_status = subJson["privacy_status"].int!
                         let main_image = subJson["main_image"].string!
+                        let isFriend = subJson["friend"].bool!
                         
-                        let model = PeopleModel(names: names, surnames: surnames, user_id: user_id, birth_date: birth_date, facebook_key: facebook_key, privacy_status: privacy_status, main_image: main_image)
+                        let model = PeopleModel(names: names, surnames: surnames, user_id: user_id, birth_date: birth_date, facebook_key: facebook_key, privacy_status: privacy_status, main_image: main_image, isFiend: isFriend)
                         
                         self.peopleFiltered.append(model)
                     }
