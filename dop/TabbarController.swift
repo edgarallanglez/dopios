@@ -51,7 +51,7 @@ class TabbarController: UITabBarController, NotificationDelegate {
         self.navigationItem.backBarButtonItem?.setTitleTextAttributes( [NSForegroundColorAttributeName: UIColor.whiteColor()], forState: UIControlState.Normal)
        */
         
-        let imagen:UIImage = UIImage(named: "main-icon-dop")!
+        let imagen:UIImage = UIImage(named: "tabButton")!
         addCenterButtonWithImage(imagen)
         
         UIApplication.sharedApplication().statusBarStyle = .LightContent
@@ -70,12 +70,13 @@ class TabbarController: UITabBarController, NotificationDelegate {
         let button : UIButton = UIButton(type: UIButtonType.Custom)
         
         
-        button.frame = CGRectMake(0,0, 57,49)
+        button.frame = CGRectMake(0,0, 57,57)
         button.backgroundColor = UIColor.clearColor()
         
         button.setImage(buttonImage, forState: .Normal)
 
         button.center = self.tabBar.center
+        button.center.y = button.center.y - 6
         
         
         self.view.addSubview(button)

@@ -9,7 +9,7 @@
 import Foundation
 import MapKit
 
-class NearbyMapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
+class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
  
     @IBOutlet weak var currentLocationLbl: UIButton!

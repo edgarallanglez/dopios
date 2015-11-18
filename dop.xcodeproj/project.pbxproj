@@ -17,6 +17,10 @@
 		9D1205761BDEBF60009EEBAE /* CryptoSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9D12056B1BDEBEF9009EEBAE /* CryptoSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9D1FCED71B79295700F42F6D /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1FCED61B79295700F42F6D /* SegmentedControl.swift */; };
 		9D2BDFE41B9DF524003F1260 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0FE26D01B9A4D12004EB402 /* SearchController.swift */; };
+		9D2CEA2B1BFCE4BD0088B6BC /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D2CEA281BFCE4BD0088B6BC /* FBSDKCoreKit.framework */; };
+		9D2CEA2C1BFCE4BD0088B6BC /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D2CEA291BFCE4BD0088B6BC /* FBSDKLoginKit.framework */; };
+		9D2CEA2D1BFCE4BD0088B6BC /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D2CEA2A1BFCE4BD0088B6BC /* FBSDKShareKit.framework */; };
+		9D2CEA2F1BFCE5070088B6BC /* FacebookSDKStrings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9D2CEA2E1BFCE5070088B6BC /* FacebookSDKStrings.bundle */; };
 		9D30F9071BD5B19600D225D5 /* SearchSegmentedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D30F9061BD5B19600D225D5 /* SearchSegmentedController.swift */; };
 		9D33260F1AF7ED1C00498801 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D33260E1AF7ED1C00498801 /* AppDelegate.swift */; };
 		9D3326111AF7ED1C00498801 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3326101AF7ED1C00498801 /* LoginViewController.swift */; };
@@ -40,8 +44,6 @@
 		9D697C7A1B5EF13000D786AA /* iconfonts-fontawesome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D697C791B5EF13000D786AA /* iconfonts-fontawesome.swift */; };
 		9D7FA0781BBC4FF000EAEC36 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7FA0771BBC4FF000EAEC36 /* SettingsViewController.swift */; };
 		9D7FA07B1BBC516100EAEC36 /* TrophyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7FA07A1BBC516100EAEC36 /* TrophyViewController.swift */; };
-		9D9C1B2B1B83B0D900F7895B /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D9C1B2A1B83B0D900F7895B /* FBSDKShareKit.framework */; };
-		9D9C1B2D1B83B3DB00F7895B /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D9C1B2C1B83B3DB00F7895B /* FBSDKCoreKit.framework */; };
 		9D9C9C911BB2155B00D9F986 /* Annotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9C9C901BB2155B00D9F986 /* Annotation.swift */; };
 		9D9D1FF11B9F4BE3000C1299 /* starbucks_banner.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A060F77D1B700355009D6ADB /* starbucks_banner.jpg */; };
 		9DA1C70C1BD712850029578D /* PeopleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA1C70B1BD712850029578D /* PeopleModel.swift */; };
@@ -73,7 +75,6 @@
 		A01D77DA1BDAB94C00AA8FE2 /* SocketIOJSONSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = A01D77D21BDAB94C00AA8FE2 /* SocketIOJSONSerialization.m */; };
 		A01D77DB1BDAB94C00AA8FE2 /* SocketIOTransportWebsocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A01D77D51BDAB94C00AA8FE2 /* SocketIOTransportWebsocket.m */; };
 		A01D77DC1BDAB94C00AA8FE2 /* SocketIOTransportXHR.m in Sources */ = {isa = PBXBuildFile; fileRef = A01D77D71BDAB94C00AA8FE2 /* SocketIOTransportXHR.m */; };
-		A04860981B0D5658009FEF1F /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A04860971B0D5658009FEF1F /* FacebookSDK.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		A04CC2101BBD968E001AF7E0 /* ToExpireCoupon.xib in Resources */ = {isa = PBXBuildFile; fileRef = A04CC20F1BBD968E001AF7E0 /* ToExpireCoupon.xib */; };
 		A04CC2121BBDBB16001AF7E0 /* ToExpireCoupon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04CC2111BBDBB16001AF7E0 /* ToExpireCoupon.swift */; };
 		A04D388D1BC7361900E578F0 /* NearestCoupon.xib in Resources */ = {isa = PBXBuildFile; fileRef = A04D388C1BC7361900E578F0 /* NearestCoupon.xib */; };
@@ -112,6 +113,9 @@
 		A086ACDF1BB09496003133BA /* Branch.swift in Sources */ = {isa = PBXBuildFile; fileRef = A086ACDE1BB09496003133BA /* Branch.swift */; };
 		A086ACE11BB2157A003133BA /* TrendingCoupon.xib in Resources */ = {isa = PBXBuildFile; fileRef = A086ACE01BB2157A003133BA /* TrendingCoupon.xib */; };
 		A086ACE31BB383A4003133BA /* TrendingCoupon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A086ACE21BB383A4003133BA /* TrendingCoupon.swift */; };
+		A08D13FA1BFBB86100A19AAF /* NSDateTimeAgo.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A08D13F91BFBB86100A19AAF /* NSDateTimeAgo.bundle */; };
+		A08D13FB1BFBB88F00A19AAF /* NSDateTimeAgo.bundle in Frameworks */ = {isa = PBXBuildFile; fileRef = A08D13F91BFBB86100A19AAF /* NSDateTimeAgo.bundle */; };
+		A08D13FD1BFBB90C00A19AAF /* NSDate+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08D13FC1BFBB90C00A19AAF /* NSDate+Extension.swift */; };
 		A09732E11BDBF712006F9378 /* NotificationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09732E01BDBF712006F9378 /* NotificationButton.swift */; };
 		A09AB4DB1AF95A26004287F7 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09AB4DA1AF95A26004287F7 /* DashboardViewController.swift */; };
 		A09AB4E21AF99136004287F7 /* CouponController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09AB4E01AF99136004287F7 /* CouponController.swift */; };
@@ -272,6 +276,10 @@
 		9D1021361B82A019005BED0C /* BranchProfileLastCampaign.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BranchProfileLastCampaign.xib; sourceTree = "<group>"; };
 		9D1205621BDEBEF8009EEBAE /* CryptoSwift.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CryptoSwift.xcodeproj; path = CryptoSwift/CryptoSwift.xcodeproj; sourceTree = "<group>"; };
 		9D1FCED61B79295700F42F6D /* SegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
+		9D2CEA281BFCE4BD0088B6BC /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = Facebook/FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		9D2CEA291BFCE4BD0088B6BC /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = Facebook/FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		9D2CEA2A1BFCE4BD0088B6BC /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = Facebook/FBSDKShareKit.framework; sourceTree = "<group>"; };
+		9D2CEA2E1BFCE5070088B6BC /* FacebookSDKStrings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = FacebookSDKStrings.bundle; path = Facebook/FacebookSDKStrings.bundle; sourceTree = "<group>"; };
 		9D30F9061BD5B19600D225D5 /* SearchSegmentedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchSegmentedController.swift; sourceTree = "<group>"; };
 		9D3326091AF7ED1C00498801 /* dop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D33260D1AF7ED1C00498801 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -297,8 +305,6 @@
 		9D697C791B5EF13000D786AA /* iconfonts-fontawesome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "iconfonts-fontawesome.swift"; sourceTree = "<group>"; };
 		9D7FA0771BBC4FF000EAEC36 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		9D7FA07A1BBC516100EAEC36 /* TrophyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrophyViewController.swift; sourceTree = "<group>"; };
-		9D9C1B2A1B83B0D900F7895B /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = dop/FBSDKShareKit.framework; sourceTree = "<group>"; };
-		9D9C1B2C1B83B3DB00F7895B /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = dop/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		9D9C9C901BB2155B00D9F986 /* Annotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Annotation.swift; sourceTree = "<group>"; };
 		9DA1C70B1BD712850029578D /* PeopleModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleModel.swift; sourceTree = "<group>"; };
 		9DA3C8951B90C117000D40F2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -336,7 +342,6 @@
 		A01D77D51BDAB94C00AA8FE2 /* SocketIOTransportWebsocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketIOTransportWebsocket.m; sourceTree = "<group>"; };
 		A01D77D61BDAB94C00AA8FE2 /* SocketIOTransportXHR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketIOTransportXHR.h; sourceTree = "<group>"; };
 		A01D77D71BDAB94C00AA8FE2 /* SocketIOTransportXHR.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketIOTransportXHR.m; sourceTree = "<group>"; };
-		A04860971B0D5658009FEF1F /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = dop/FacebookSDK.framework; sourceTree = "<group>"; };
 		A04CC20F1BBD968E001AF7E0 /* ToExpireCoupon.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ToExpireCoupon.xib; sourceTree = "<group>"; };
 		A04CC2111BBDBB16001AF7E0 /* ToExpireCoupon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToExpireCoupon.swift; sourceTree = "<group>"; };
 		A04CC2181BC2EF10001AF7E0 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
@@ -382,6 +387,8 @@
 		A086ACDE1BB09496003133BA /* Branch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Branch.swift; sourceTree = "<group>"; };
 		A086ACE01BB2157A003133BA /* TrendingCoupon.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TrendingCoupon.xib; sourceTree = "<group>"; };
 		A086ACE21BB383A4003133BA /* TrendingCoupon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendingCoupon.swift; sourceTree = "<group>"; };
+		A08D13F91BFBB86100A19AAF /* NSDateTimeAgo.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = NSDateTimeAgo.bundle; sourceTree = "<group>"; };
+		A08D13FC1BFBB90C00A19AAF /* NSDate+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+Extension.swift"; sourceTree = "<group>"; };
 		A09732E01BDBF712006F9378 /* NotificationButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationButton.swift; sourceTree = "<group>"; };
 		A09AB4DA1AF95A26004287F7 /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		A09AB4E01AF99136004287F7 /* CouponController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CouponController.swift; sourceTree = "<group>"; };
@@ -430,14 +437,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A08D13FB1BFBB88F00A19AAF /* NSDateTimeAgo.bundle in Frameworks */,
 				9D3919211BDFEB83002229EB /* JWTDecode.framework in Frameworks */,
+				9D2CEA2C1BFCE4BD0088B6BC /* FBSDKLoginKit.framework in Frameworks */,
+				9D2CEA2B1BFCE4BD0088B6BC /* FBSDKCoreKit.framework in Frameworks */,
 				9D1205741BDEBF16009EEBAE /* CryptoSwift.framework in Frameworks */,
 				A0EC059D1B7D1FD5003CADB2 /* UIKit.framework in Frameworks */,
 				A0EC059B1B7D1ED1003CADB2 /* CoreGraphics.framework in Frameworks */,
 				A05F78311B505DED00371708 /* Accounts.framework in Frameworks */,
 				A05F782F1B503A4E00371708 /* Social.framework in Frameworks */,
-				9D9C1B2B1B83B0D900F7895B /* FBSDKShareKit.framework in Frameworks */,
-				A04860981B0D5658009FEF1F /* FacebookSDK.framework in Frameworks */,
+				9D2CEA2D1BFCE4BD0088B6BC /* FBSDKShareKit.framework in Frameworks */,
 				9D1205751BDEBF60009EEBAE /* CryptoSwift.framework in Frameworks */,
 				A0EB97E41B0BA7DD005112EF /* AddressBook.framework in Frameworks */,
 				A0578C5F1B0E40D30033B5BD /* GoogleOpenSource.framework in Frameworks */,
@@ -451,7 +460,6 @@
 				A0578C521B0D64AD0033B5BD /* Fabric.framework in Frameworks */,
 				A0EB97DE1B0BA7C5005112EF /* CoreLocation.framework in Frameworks */,
 				A0EB97DC1B0BA7C0005112EF /* CoreMotion.framework in Frameworks */,
-				9D9C1B2D1B83B3DB00F7895B /* FBSDKCoreKit.framework in Frameworks */,
 				A0EB97DA1B0BA7B8005112EF /* CoreTelephony.framework in Frameworks */,
 				A0EB97D81B0BA7AD005112EF /* CoreText.framework in Frameworks */,
 				A0EB97D61B0BA7A5005112EF /* Foundation.framework in Frameworks */,
@@ -476,10 +484,10 @@
 		079462BCCDF3FAF530C45E4E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9D2CEA271BFCE41D0088B6BC /* Facebook */,
+				A08D13F91BFBB86100A19AAF /* NSDateTimeAgo.bundle */,
 				9D3919121BDFEB67002229EB /* JWTDecode.xcodeproj */,
 				9D1205621BDEBEF8009EEBAE /* CryptoSwift.xcodeproj */,
-				9D9C1B2C1B83B3DB00F7895B /* FBSDKCoreKit.framework */,
-				9D9C1B2A1B83B0D900F7895B /* FBSDKShareKit.framework */,
 				A0EC059C1B7D1FD5003CADB2 /* UIKit.framework */,
 				A0EC059A1B7D1ED1003CADB2 /* CoreGraphics.framework */,
 				A05F78301B505DED00371708 /* Accounts.framework */,
@@ -504,7 +512,6 @@
 				A0EB97CD1B0BA77E005112EF /* SystemConfiguration.framework */,
 				A05592A41BDB19B70041E20D /* libc.dylib */,
 				A05592A51BDB19B70041E20D /* libc++.dylib */,
-				A04860971B0D5658009FEF1F /* FacebookSDK.framework */,
 				A04CC2181BC2EF10001AF7E0 /* NotificationCenter.framework */,
 			);
 			name = Frameworks;
@@ -554,6 +561,17 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		9D2CEA271BFCE41D0088B6BC /* Facebook */ = {
+			isa = PBXGroup;
+			children = (
+				9D2CEA2E1BFCE5070088B6BC /* FacebookSDKStrings.bundle */,
+				9D2CEA281BFCE4BD0088B6BC /* FBSDKCoreKit.framework */,
+				9D2CEA291BFCE4BD0088B6BC /* FBSDKLoginKit.framework */,
+				9D2CEA2A1BFCE4BD0088B6BC /* FBSDKShareKit.framework */,
+			);
+			name = Facebook;
+			sourceTree = "<group>";
+		};
 		9D3326001AF7ED1C00498801 = {
 			isa = PBXGroup;
 			children = (
@@ -581,6 +599,7 @@
 		9D33260B1AF7ED1C00498801 /* dop */ = {
 			isa = PBXGroup;
 			children = (
+				A08D13FC1BFBB90C00A19AAF /* NSDate+Extension.swift */,
 				9DCE5CDD1BDAEF7E00A425FB /* Notifications */,
 				A01D77C71BDAB92500AA8FE2 /* Socket */,
 				9D7FA0791BBC513000EAEC36 /* Trophy */,
@@ -1054,12 +1073,14 @@
 				9DAAE7B71B0E810B00209588 /* Main.storyboard in Resources */,
 				A04E388A1AFC3549007C7B69 /* starbucks.gif in Resources */,
 				9D3326191AF7ED1C00498801 /* LaunchScreen.xib in Resources */,
+				9D2CEA2F1BFCE5070088B6BC /* FacebookSDKStrings.bundle in Resources */,
 				9D3889151BE3E03B00209B9B /* request-icon.png in Resources */,
 				A082F48B1B1920F8001C8C52 /* NewsfeedCell.xib in Resources */,
 				A060F78C1B72A307009D6ADB /* CouponDetailView.xib in Resources */,
 				9D3889141BE3E03B00209B9B /* news-icon.png in Resources */,
 				A086ACE11BB2157A003133BA /* TrendingCoupon.xib in Resources */,
 				9D9D1FF11B9F4BE3000C1299 /* starbucks_banner.jpg in Resources */,
+				A08D13FA1BFBB86100A19AAF /* NSDateTimeAgo.bundle in Resources */,
 				A0578C601B0E40D30033B5BD /* GooglePlus.bundle in Resources */,
 				9D42966D1BBEFE17000B4A21 /* RewardsActivityCell.xib in Resources */,
 				9DA3C8961B90C117000D40F2 /* Images.xcassets in Resources */,
@@ -1101,6 +1122,7 @@
 				A01D77DC1BDAB94C00AA8FE2 /* SocketIOTransportXHR.m in Sources */,
 				A065EB321BA8E60A003B7390 /* DashboardController.swift in Sources */,
 				9D3756E11BCED51400796378 /* UserProfileSegmentedController.swift in Sources */,
+				A08D13FD1BFBB90C00A19AAF /* NSDate+Extension.swift in Sources */,
 				A060F7861B702FAC009D6ADB /* CouponDetailViewController.swift in Sources */,
 				A0C3AC2E1B9525D5005636E7 /* CustomInfiniteIndicator.swift in Sources */,
 				A0DF72931B13AEBF006EE8F4 /* FriendsController.swift in Sources */,
@@ -1323,6 +1345,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/dop",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Facebook",
 				);
 				INFOPLIST_FILE = dop/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1360,6 +1383,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/dop",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Facebook",
 				);
 				INFOPLIST_FILE = dop/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;

@@ -8,31 +8,63 @@
 
 import UIKit
 
-class BaseViewController: UIViewController, NotificationDelegate {
-
+class BaseViewController: UIViewController, UISearchBarDelegate {
+    var notificationButton: NotificationButton!
+    var vc: SearchViewController!
+    var searchBar: UISearchBar = UISearchBar()
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let searchButton : UIBarButtonItem = UIBarButtonItem(image: UIImage(named:"search-icon"), style: UIBarButtonItemStyle.Plain, target: self, action: "search")
+        //let searchButton : UIBarButtonItem = UIBarButtonItem(image: UIImage(named:"search-icon"), style: UIBarButtonItemStyle.Plain, target: self, action: "search")
         
         
-         let notificationButton: NotificationButton = NotificationButton(image: UIImage(named: "notification"), style: UIBarButtonItemStyle.Plain, target: self, action: "notification")
+        notificationButton = NotificationButton(image: UIImage(named: "notification"), style: UIBarButtonItemStyle.Plain, target: self, action: "notification")
         
         
-        self.navigationItem.rightBarButtonItem = searchButton
-        self.navigationItem.leftBarButtonItem = notificationButton
+        self.navigationItem.rightBarButtonItem = notificationButton
+
         
-        notificationButton.delegate = self
-        notificationButton.startListening()
+         vc  = self.storyboard!.instantiateViewControllerWithIdentifier("SearchView") as! SearchViewController
+        
+        
+        searchBar.delegate = self
+        
+        
+        self.navigationItem.titleView = searchBar
+        
+        searchBar.tintColor = UIColor.whiteColor()
+        searchBar.searchBarStyle = UISearchBarStyle.Minimal
+        searchBar.placeholder = "Buscar"
+
+        
+        
+        for subView in self.searchBar.subviews{
+            for subsubView in subView.subviews{
+                if let textField = subsubView as? UITextField{
+                    textField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("Buscar", comment: ""), attributes: [NSForegroundColorAttributeName: Utilities.lightGrayColor])
+                    textField.textColor = UIColor.whiteColor()
+
+                }
+            }
+        }
+        /*let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        launcherSearchBar.addGestureRecognizer(tap)*/
+        
+        
     }
 
-    
+    func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
+        self.navigationController?.pushViewController(vc, animated: false)
+        return false
+    }
+
+
     func search(){
         //self.navigationController?.popToRootViewControllerAnimated(true)
         //self.navigationController?.pushViewController(nextViewController, animated: true)
-        let vc : SearchViewController = self.storyboard!.instantiateViewControllerWithIdentifier("SearchView") as! SearchViewController
         
-        self.navigationController?.pushViewController(vc, animated: true)
+        
+        self.navigationController?.pushViewController(vc, animated: false)
         
  
         
@@ -50,15 +82,7 @@ class BaseViewController: UIViewController, NotificationDelegate {
         self.navigationController?.hidesBottomBarWhenPushed = false
         
     }
-    
-    func getNotification(packet:SocketIOPacket) {
-        print("NOTIFICATION")
-        var alert = UIAlertController(title: "Alert", message: packet.data, preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
-        
-        self.presentViewController(alert, animated: true, completion: nil)
-        
-    }
+
     
 
     /*

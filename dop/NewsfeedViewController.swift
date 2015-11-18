@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewsfeedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate {
     
     var newsfeed = [NewsfeedNote]()
     var cachedImages: [String: UIImage] = [:]

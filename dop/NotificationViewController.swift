@@ -49,6 +49,11 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         }
 
         getNotifications()
+        
+        
+        var fecha = NSDate(dateString: "2015-11-17 13:15:00")
+        
+        print(fecha.timeAgo)
     }
     func refresh(sender:AnyObject){
         getNotifications()

@@ -12,7 +12,6 @@
 #import <GoogleOpenSource/GoogleOpenSource.h>
 #endif
 
-#import <FacebookSDK/FacebookSDK.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKShareKit/FBSDKShareKit.h>
 #import "SWRevealViewController.h"
@@ -23,4 +22,3 @@
 #import "SocketIOTransport.h"
 #import "SocketIOTransportWebsocket.h"
 #import "SocketIOTransportXHR.h"
-#import "BBBadgeBarButtonItem.h"
