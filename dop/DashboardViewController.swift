@@ -52,27 +52,13 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
-        
-        self.title = "Dashboard"
         self.navigationController?.navigationBar.topItem!.title = "Dashboard"
         
         mainScroll.frame.size = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height)
         
         mainScroll.contentSize = CGSizeMake(mainScroll.frame.size.width, 4000)
 
-        
-        
-      //  var nib = UINib(nibName: "CouponCell", bundle: nil)
-     // couponsTableView.registerNib(nib, forCellReuseIdentifier: "CouponCell")
-        
-        locationManager = CLLocationManager()
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestAlwaysAuthorization()
-        locationManager.startUpdatingLocation()
-        
+
         
         
         mainScroll.delegate = self
@@ -99,9 +85,9 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
         locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
         User.coordinate = locationManager.location!.coordinate
-        
-        super.notificationButton.delegate = self
-        super.notificationButton.startListening()
+
+        //super.notificationButton.delegate = self
+        //super.notificationButton.startListening()
 
 
         
@@ -215,7 +201,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
         updater = CADisplayLink(target: self, selector: Selector("changePage"))
         
         
-        updater!.frameInterval = 200
+        updater!.frameInterval = 300
         updater!.addToRunLoop(NSRunLoop.currentRunLoop(), forMode: NSRunLoopCommonModes)
         
 
@@ -594,6 +580,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
         failure: { (error) -> Void in
             
         })
+        
     
     }
     
@@ -646,6 +633,11 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                 
             }, completion: nil)
 
+    }
+    override func viewDidDisappear(animated: Bool) {
+        if((updater) != nil){
+            updater!.paused = true
+        }
     }
     
 

@@ -112,6 +112,9 @@
 		A086ACDF1BB09496003133BA /* Branch.swift in Sources */ = {isa = PBXBuildFile; fileRef = A086ACDE1BB09496003133BA /* Branch.swift */; };
 		A086ACE11BB2157A003133BA /* TrendingCoupon.xib in Resources */ = {isa = PBXBuildFile; fileRef = A086ACE01BB2157A003133BA /* TrendingCoupon.xib */; };
 		A086ACE31BB383A4003133BA /* TrendingCoupon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A086ACE21BB383A4003133BA /* TrendingCoupon.swift */; };
+		A08D13FA1BFBB86100A19AAF /* NSDateTimeAgo.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A08D13F91BFBB86100A19AAF /* NSDateTimeAgo.bundle */; };
+		A08D13FB1BFBB88F00A19AAF /* NSDateTimeAgo.bundle in Frameworks */ = {isa = PBXBuildFile; fileRef = A08D13F91BFBB86100A19AAF /* NSDateTimeAgo.bundle */; };
+		A08D13FD1BFBB90C00A19AAF /* NSDate+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08D13FC1BFBB90C00A19AAF /* NSDate+Extension.swift */; };
 		A09732E11BDBF712006F9378 /* NotificationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09732E01BDBF712006F9378 /* NotificationButton.swift */; };
 		A09AB4DB1AF95A26004287F7 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09AB4DA1AF95A26004287F7 /* DashboardViewController.swift */; };
 		A09AB4E21AF99136004287F7 /* CouponController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09AB4E01AF99136004287F7 /* CouponController.swift */; };
@@ -382,6 +385,8 @@
 		A086ACDE1BB09496003133BA /* Branch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Branch.swift; sourceTree = "<group>"; };
 		A086ACE01BB2157A003133BA /* TrendingCoupon.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TrendingCoupon.xib; sourceTree = "<group>"; };
 		A086ACE21BB383A4003133BA /* TrendingCoupon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendingCoupon.swift; sourceTree = "<group>"; };
+		A08D13F91BFBB86100A19AAF /* NSDateTimeAgo.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = NSDateTimeAgo.bundle; sourceTree = "<group>"; };
+		A08D13FC1BFBB90C00A19AAF /* NSDate+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+Extension.swift"; sourceTree = "<group>"; };
 		A09732E01BDBF712006F9378 /* NotificationButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationButton.swift; sourceTree = "<group>"; };
 		A09AB4DA1AF95A26004287F7 /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		A09AB4E01AF99136004287F7 /* CouponController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CouponController.swift; sourceTree = "<group>"; };
@@ -430,6 +435,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A08D13FB1BFBB88F00A19AAF /* NSDateTimeAgo.bundle in Frameworks */,
 				9D3919211BDFEB83002229EB /* JWTDecode.framework in Frameworks */,
 				9D1205741BDEBF16009EEBAE /* CryptoSwift.framework in Frameworks */,
 				A0EC059D1B7D1FD5003CADB2 /* UIKit.framework in Frameworks */,
@@ -476,6 +482,7 @@
 		079462BCCDF3FAF530C45E4E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A08D13F91BFBB86100A19AAF /* NSDateTimeAgo.bundle */,
 				9D3919121BDFEB67002229EB /* JWTDecode.xcodeproj */,
 				9D1205621BDEBEF8009EEBAE /* CryptoSwift.xcodeproj */,
 				9D9C1B2C1B83B3DB00F7895B /* FBSDKCoreKit.framework */,
@@ -581,6 +588,7 @@
 		9D33260B1AF7ED1C00498801 /* dop */ = {
 			isa = PBXGroup;
 			children = (
+				A08D13FC1BFBB90C00A19AAF /* NSDate+Extension.swift */,
 				9DCE5CDD1BDAEF7E00A425FB /* Notifications */,
 				A01D77C71BDAB92500AA8FE2 /* Socket */,
 				9D7FA0791BBC513000EAEC36 /* Trophy */,
@@ -922,7 +930,7 @@
 				TargetAttributes = {
 					9D3326081AF7ED1C00498801 = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = WKZMSRYE62;
+						DevelopmentTeam = QX6AA77Z42;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -1060,6 +1068,7 @@
 				9D3889141BE3E03B00209B9B /* news-icon.png in Resources */,
 				A086ACE11BB2157A003133BA /* TrendingCoupon.xib in Resources */,
 				9D9D1FF11B9F4BE3000C1299 /* starbucks_banner.jpg in Resources */,
+				A08D13FA1BFBB86100A19AAF /* NSDateTimeAgo.bundle in Resources */,
 				A0578C601B0E40D30033B5BD /* GooglePlus.bundle in Resources */,
 				9D42966D1BBEFE17000B4A21 /* RewardsActivityCell.xib in Resources */,
 				9DA3C8961B90C117000D40F2 /* Images.xcassets in Resources */,
@@ -1101,6 +1110,7 @@
 				A01D77DC1BDAB94C00AA8FE2 /* SocketIOTransportXHR.m in Sources */,
 				A065EB321BA8E60A003B7390 /* DashboardController.swift in Sources */,
 				9D3756E11BCED51400796378 /* UserProfileSegmentedController.swift in Sources */,
+				A08D13FD1BFBB90C00A19AAF /* NSDate+Extension.swift in Sources */,
 				A060F7861B702FAC009D6ADB /* CouponDetailViewController.swift in Sources */,
 				A0C3AC2E1B9525D5005636E7 /* CustomInfiniteIndicator.swift in Sources */,
 				A0DF72931B13AEBF006EE8F4 /* FriendsController.swift in Sources */,
@@ -1339,7 +1349,7 @@
 					Security,
 					"-licucore",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.iminced.dop;
+				PRODUCT_BUNDLE_IDENTIFIER = com.imincedu.dop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "dop/Bridging-Header.h";
@@ -1376,7 +1386,7 @@
 					Security,
 					"-licucore",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.iminced.dop;
+				PRODUCT_BUNDLE_IDENTIFIER = com.imincedu.dop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "dop/Bridging-Header.h";

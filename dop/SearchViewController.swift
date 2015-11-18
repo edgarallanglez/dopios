@@ -57,7 +57,6 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         
         searchBar.delegate = self
         
-        searchBar.becomeFirstResponder()
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         searchBar.alpha = 0
         
@@ -73,11 +72,28 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         UIView.animateWithDuration(0.3, animations: {
             self.searchBar.alpha = 1
         })
+        
+        
+        
+        self.navigationItem.hidesBackButton = true
+        let newBackButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Rewind, target: self, action: "back:")
+        
+        self.navigationItem.leftBarButtonItem = newBackButton;
+        
+       
+        
         //doSomething()
+    }
+    func back(sender: UIBarButtonItem) {
+        //searchBar.resignFirstResponder()
+        self.navigationController?.popViewControllerAnimated(false)
+    }
+    override func viewWillAppear(animated: Bool) {
+        searchBar.becomeFirstResponder()
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+
     }
     func doSomething(){
         let horizonalContraints = NSLayoutConstraint(item: searchBar, attribute:

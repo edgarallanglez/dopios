@@ -8,29 +8,63 @@
 
 import UIKit
 
-class BaseViewController: UIViewController {
+class BaseViewController: UIViewController, UISearchBarDelegate {
     var notificationButton: NotificationButton!
+    var vc: SearchViewController!
+    var searchBar: UISearchBar = UISearchBar()
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let searchButton : UIBarButtonItem = UIBarButtonItem(image: UIImage(named:"search-icon"), style: UIBarButtonItemStyle.Plain, target: self, action: "search")
+        //let searchButton : UIBarButtonItem = UIBarButtonItem(image: UIImage(named:"search-icon"), style: UIBarButtonItemStyle.Plain, target: self, action: "search")
         
         
         notificationButton = NotificationButton(image: UIImage(named: "notification"), style: UIBarButtonItemStyle.Plain, target: self, action: "notification")
         
         
-        self.navigationItem.rightBarButtonItem = searchButton
-        self.navigationItem.leftBarButtonItem = notificationButton
+        self.navigationItem.rightBarButtonItem = notificationButton
+
+        
+         vc  = self.storyboard!.instantiateViewControllerWithIdentifier("SearchView") as! SearchViewController
+        
+        
+        searchBar.delegate = self
+        
+        
+        self.navigationItem.titleView = searchBar
+        
+        searchBar.tintColor = UIColor.whiteColor()
+        searchBar.searchBarStyle = UISearchBarStyle.Minimal
+        searchBar.placeholder = "Buscar"
+
+        
+        
+        for subView in self.searchBar.subviews{
+            for subsubView in subView.subviews{
+                if let textField = subsubView as? UITextField{
+                    textField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("Buscar", comment: ""), attributes: [NSForegroundColorAttributeName: Utilities.lightGrayColor])
+                    textField.textColor = UIColor.whiteColor()
+
+                }
+            }
+        }
+        /*let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        launcherSearchBar.addGestureRecognizer(tap)*/
+        
         
     }
 
-    
+    func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
+        self.navigationController?.pushViewController(vc, animated: false)
+        return false
+    }
+
+
     func search(){
         //self.navigationController?.popToRootViewControllerAnimated(true)
         //self.navigationController?.pushViewController(nextViewController, animated: true)
-        let vc : SearchViewController = self.storyboard!.instantiateViewControllerWithIdentifier("SearchView") as! SearchViewController
         
-        self.navigationController?.pushViewController(vc, animated: true)
+        
+        self.navigationController?.pushViewController(vc, animated: false)
         
  
         

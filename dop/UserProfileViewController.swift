@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UserProfileViewController: UIViewController, UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate {
+class UserProfileViewController: BaseViewController, UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var scrollViewBox: UIScrollView!
     let pages: CGFloat = 3
