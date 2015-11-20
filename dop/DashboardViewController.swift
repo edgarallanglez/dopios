@@ -52,7 +52,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBar.topItem!.title = "Dashboard"
+        //self.navigationController?.navigationBar.topItem!.title = "Dashboard"
         
         mainScroll.frame.size = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height)
         
@@ -104,7 +104,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        getTopBranches()
+        //getTopBranches()
 
     }
     

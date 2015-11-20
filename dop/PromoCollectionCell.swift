@@ -85,6 +85,8 @@ class PromoCollectionCell: UICollectionViewCell, FBSDKSharingDelegate {
         content.imageURL = NSURL(string: "\(Utilities.dopImagesURL)\(coupon.company_id)/\(coupon.logo)")
         
         FBSDKShareDialog.showFromViewController(self.viewController, withContent: content, delegate: self)
+        
+        
     }
     
     func sharer(sharer: FBSDKSharing!, didFailWithError error: NSError!) {
