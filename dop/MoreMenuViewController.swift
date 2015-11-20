@@ -8,6 +8,7 @@
 
 import UIKit
 import JWTDecode
+import FBSDKLoginKit
 
 class MoreMenuViewController: UITableViewController {
     @IBOutlet var menuTableView: UITableView!
@@ -84,10 +85,11 @@ class MoreMenuViewController: UITableViewController {
         switch(User.loginType) {
         case("facebook"):
             // Facebook logout
-            if (FBSession.activeSession().state.rawValue == FBSessionStateOpen.rawValue || FBSession.activeSession().state.rawValue == FBSessionStateOpenTokenExtended.rawValue) {
+            if((FBSDKAccessToken.currentAccessToken()) != nil) {
                 // Close the session and remove the access token from the cache
                 // The session state handler (in the app delegate) will be called automatically
-                FBSession.activeSession().closeAndClearTokenInformation()
+                let loginManager: FBSDKLoginManager = FBSDKLoginManager()
+                loginManager.logOut()
                 self.dismissViewControllerAnimated(true, completion:nil)
                 User.activeSession = false
                 performSegueWithIdentifier("loginController", sender: self)

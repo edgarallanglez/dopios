@@ -9,48 +9,27 @@
 import UIKit
 //import TwitterKit
 import Fabric
+import FBSDKLoginKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        
-      
-
-    /* Twitter.sharedInstance().startWithConsumerKey("mNtK5gCZ1KZsZdzGbwPrDZvwR", consumerSecret: "X70nDMV3aFCObSuL0k3u9NaaadNtSDlhmmjIlQhWZzzF4RAUiO")
-        
-        Fabric.with([Twitter.sharedInstance()])*/
-        
-        
-        UIApplication.sharedApplication().statusBarStyle = .LightContent
-                
-        FBLoginView.self
-        FBProfilePictureView.self
-        
-        if FBSession.activeSession().state.rawValue == FBSessionStateCreatedTokenLoaded.rawValue {
-            FBSession.openActiveSessionWithReadPermissions(["public_profile", "user_friends"], allowLoginUI: false, completionHandler: {
-                (session, state, error) -> Void in
-                self.sessionStateChanged(session, state: state, error: error)
-            })
-        }
-        return true
+        // Override point for customization after application launch.
+        return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
     
-    
-    func sessionStateChanged(session : FBSession, state : FBSessionState, error : NSError?) {
-        print("el estado cambio")
-    }
-    
-    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
-        let wasHandledFB:Bool = FBAppCall.handleOpenURL(url, sourceApplication: sourceApplication)
-        
-        let wasHandledGG:Bool = GPPURLHandler.handleURL(url, sourceApplication: sourceApplication, annotation: annotation)
-        
-        return  wasHandledGG || wasHandledFB
-
+    func application(application: UIApplication,
+        openURL url: NSURL,
+        sourceApplication: String?,
+        annotation: AnyObject) -> Bool {
+            return FBSDKApplicationDelegate.sharedInstance().application(
+                application,
+                openURL: url,
+                sourceApplication: sourceApplication,
+                annotation: annotation)
     }
     
     func applicationWillResignActive(application: UIApplication) {

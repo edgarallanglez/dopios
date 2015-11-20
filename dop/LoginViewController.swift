@@ -7,13 +7,13 @@
 //
 
 import UIKit
-//import TwitterKit
+import FBSDKLoginKit
 import JWTDecode
 
-class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDelegate, CLLocationManagerDelegate {
+class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationManagerDelegate {
 
 
-    @IBOutlet weak var fbLoginView: FBLoginView!
+    @IBOutlet weak var fbLoginView: FBSDKLoginButton!
     @IBOutlet weak var passField: UITextField!
     @IBOutlet weak var userNameField: UITextField!
     @IBOutlet weak var dopLogo: UIImageView!
@@ -40,12 +40,12 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
 
         UIApplication.sharedApplication().statusBarStyle = .Default
         
-        let signIn = GPPSignIn.sharedInstance();
-        signIn.shouldFetchGooglePlusUser = true;
-        signIn.clientID = kClientId;
-        signIn.scopes = [kGTLAuthScopePlusLogin,kGTLAuthScopePlusUserinfoEmail];
-        signIn.trySilentAuthentication();
-        signIn.delegate = self;
+//        let signIn = GPPSignIn.sharedInstance();
+//        signIn.shouldFetchGooglePlusUser = true;
+//        signIn.clientID = kClientId;
+//        signIn.scopes = [kGTLAuthScopePlusLogin,kGTLAuthScopePlusUserinfoEmail];
+//        signIn.trySilentAuthentication();
+//        signIn.delegate = self;
         
         
         
@@ -96,39 +96,44 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
         self.fbLoginView.delegate = self
         self.fbLoginView.readPermissions = ["public_profile", "email", "user_friends", "user_birthday"]
         
+        if (FBSDKAccessToken.currentAccessToken() != nil) {
+            // User is already logged in, do work such as go to next view controller.
+            self.getFBUserData()
+        }
+        
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
     //Google + login
-    @IBAction func signInWithGoogle(sender: AnyObject) {
-        let signIn = GPPSignIn.sharedInstance();
-        signIn.authenticate();
-    }
-    
-    func finishedWithAuth(auth: GTMOAuth2Authentication!, error: NSError!) {
-       if (GPPSignIn.sharedInstance().googlePlusUser != nil){
-            print("Sign in")
-            let user = GPPSignIn.sharedInstance().googlePlusUser
-            let userId = GPPSignIn.sharedInstance().googlePlusUser.identifier
-            let userEmail = user.emails.first?.value ?? ""
-            let userImage =  user.image.url + "&sz=320"
-        
-        print(userImage)
-            let params:[String: String] = [
-                "google_key" : userId,
-                "names" : user.name.givenName,
-                "surnames":user.name.familyName,
-                "birth_date" : "2015-01-01",
-                "email": userEmail,
-                "main_image":userImage]
-            
-            self.socialLogin("google", params: params)
-        } else {
-           print("Signed out.");
-        }
-    }
+//    @IBAction func signInWithGoogle(sender: AnyObject) {
+////        let signIn = GPPSignIn.sharedInstance();
+////        signIn.authenticate();
+//    }
+//
+//    func finishedWithAuth(auth: GTMOAuth2Authentication!, error: NSError!) {
+//       if (GPPSignIn.sharedInstance().googlePlusUser != nil){
+//            print("Sign in")
+//            let user = GPPSignIn.sharedInstance().googlePlusUser
+//            let userId = GPPSignIn.sharedInstance().googlePlusUser.identifier
+//            let userEmail = user.emails.first?.value ?? ""
+//            let userImage =  user.image.url + "&sz=320"
+//        
+//        print(userImage)
+//            let params:[String: String] = [
+//                "google_key" : userId,
+//                "names" : user.name.givenName,
+//                "surnames":user.name.familyName,
+//                "birth_date" : "2015-01-01",
+//                "email": userEmail,
+//                "main_image":userImage]
+//            
+//            self.socialLogin("google", params: params)
+//        } else {
+//           print("Signed out.");
+//        }
+//    }
     
     //Twitter login
 //    @IBAction func signInWithTwitter(sender: UIButton) {
@@ -172,53 +177,65 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
     
     
     // Facebook Delegate Methods
-    func loginViewShowingLoggedInUser(loginView : FBLoginView!) {
+    func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
         print("User Logged In")
-    }
-    
-    func loginViewFetchedUserInfo(loginView : FBLoginView!, user: FBGraphUser) {
-        
-        let userEmail = user.objectForKey("email") as? String ?? ""
-        let birthday = user.birthday ?? "2015-01-01"
-    
-        let params:[String: String] = [
-            "facebook_key" : user.objectID,
-            "names" : user.first_name + " " + user.middle_name,
-            "surnames":user.last_name,
-            "birth_date" : birthday,
-            "email": userEmail,
-            "main_image":"https://graph.facebook.com/\(user.objectID)/picture?type=large"]
-        
-        self.socialLogin("facebook", params: params)
-    }
-    
-    func loginViewShowingLoggedOutUser(loginView : FBLoginView!) {
-        print("User Logged Out")
-    }
-    
-    func loginView(loginView : FBLoginView!, handleError:NSError) {
-        print("Error: \(handleError.localizedDescription)")
-    }
-    
-
-    
-    @IBAction func FBlogin(sender: UIButton) {
-        if (FBSession.activeSession().state.rawValue == FBSessionStateOpen.rawValue || FBSession.activeSession().state.rawValue == FBSessionStateOpenTokenExtended.rawValue) {
-            // Close the session and remove the access token from the cache
-            // The session state handler (in the app delegate) will be called automatically
-            FBSession.activeSession().closeAndClearTokenInformation()
+        if ((error) != nil)
+        {
+            // Process error
+        }
+        else if result.isCancelled {
+            // Handle cancellations
         }
         else {
-            // Open a session showing the user the login UI
-            // You must ALWAYS ask for public_profile permissions when opening a session
-            FBSession.openActiveSessionWithReadPermissions(["public_profile", "email", "user_friends", "user_birthday"], allowLoginUI: true, completionHandler: {
-                (session: FBSession!, state: FBSessionState, error: NSError!) in
-                
-                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-                // Call the app delegate's sessionStateChanged:state:error method to handle session state changes
-                appDelegate.sessionStateChanged(session, state: state, error: error)
-            })
+            // If you ask for multiple permissions at once, you
+            // should check if specific permissions missing
+            if result.grantedPermissions.contains("email")
+            {
+                // Do work
+            }
         }
+    }
+    
+    func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
+        self.performSegueWithIdentifier("showLogin", sender: self)
+    }
+    
+    func getFBUserData() {
+        let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, email, birthday"])
+        graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
+            let json: JSON = JSON(result)
+            if ((error) != nil) {
+                // Process error
+                print("Error: \(error)")
+            } else {
+                let userEmail = json["email"].string ?? ""
+                let birthday = json["birthday"].string ?? "2015-01-01"
+                print("\(birthday )")
+                
+                let params:[String: String] = [
+                    "facebook_key" : json["id"].string!,
+                    "names" : json["name"].string!,
+                    "surnames": json["last_name"].string!,
+                    "birth_date" : birthday,
+                    "email": userEmail,
+                    "main_image":"https://graph.facebook.com/\(json["id"].string!)/picture?type=large"]
+                
+                self.socialLogin("facebook", params: params)
+            }
+        })
+    }
+
+    @IBAction func FBlogin(sender: UIButton) {
+        let loginManager: FBSDKLoginManager = FBSDKLoginManager()
+        loginManager.logInWithReadPermissions(["public_profile", "email", "user_friends", "user_birthday"], fromViewController: self, handler: { (result, error) -> Void in
+                if (error != nil) {
+                    print("Process error")
+                } else if result.isCancelled {
+                    print("Cancelled")
+                } else if result.grantedPermissions.contains("email") {
+                    self.getFBUserData()
+                }
+            })
     }
     
     
@@ -261,5 +278,9 @@ class LoginViewController: UIViewController, FBLoginViewDelegate , GPPSignInDele
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         locationManager.stopUpdatingLocation()
     }
-        
+    
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError)  {
+            
+    }
+    
 }

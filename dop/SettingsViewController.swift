@@ -25,7 +25,7 @@ class SettingsViewController: UITableViewController {
     }
     
     override func viewDidLoad() {
-        if(FBSession.activeSession().state.rawValue == FBSessionStateOpen.rawValue) {
+        if((FBSDKAccessToken.currentAccessToken()) != nil) {
             facebook_connect.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
             facebook_connect.backgroundColor = UIColor(red: 248/255, green: 20/255, blue: 90/255, alpha: 1)
             facebook_connect.setTitle("DESCONECTAR", forState: UIControlState.Normal)

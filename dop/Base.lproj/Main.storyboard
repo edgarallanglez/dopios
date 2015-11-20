@@ -102,7 +102,7 @@
                                 <rect key="frame" x="290" y="598" width="20" height="20"/>
                                 <animations/>
                             </activityIndicatorView>
-                            <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bTk-lf-RsN" customClass="FBLoginView">
+                            <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bTk-lf-RsN" customClass="FBSDKLoginButton">
                                 <rect key="frame" x="16" y="459" width="100" height="100"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -118,7 +118,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="fbLoginView" destination="bTk-lf-RsN" id="uTE-dY-2YL"/>
+                        <outlet property="loginView" destination="bTk-lf-RsN" id="ULG-1M-YEO"/>
                         <segue destination="NXt-XB-PrX" kind="presentation" identifier="showDashboard" id="njR-gH-Wm2"/>
                         <segue destination="vXZ-lx-hvc" kind="presentation" identifier="showLogin" id="Y2I-Nl-h09"/>
                     </connections>
@@ -139,35 +139,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="800"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="center" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ugN-9a-zrS" userLabel="LoginButtonView">
-                                <rect key="frame" x="41" y="665" width="518" height="80"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4x1-vM-hMg">
-                                        <rect key="frame" x="0.0" y="0.0" width="510" height="80"/>
-                                        <animations/>
-                                        <color key="backgroundColor" red="0.23137254900000001" green="0.34901960780000002" blue="0.59607843140000005" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="24"/>
-                                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" title="Iniciar con facebook">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="FBlogin:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="PIX-mp-rHe"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <animations/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="centerY" secondItem="4x1-vM-hMg" secondAttribute="centerY" id="0Q6-pA-Vle"/>
-                                    <constraint firstItem="4x1-vM-hMg" firstAttribute="leading" secondItem="ugN-9a-zrS" secondAttribute="leading" id="E7h-ch-o3s"/>
-                                    <constraint firstItem="4x1-vM-hMg" firstAttribute="top" secondItem="ugN-9a-zrS" secondAttribute="top" id="fo0-Mu-hVG"/>
-                                    <constraint firstAttribute="trailing" secondItem="4x1-vM-hMg" secondAttribute="trailing" id="mSy-cv-8ZI"/>
-                                    <constraint firstAttribute="centerX" secondItem="4x1-vM-hMg" secondAttribute="centerX" id="nPQ-n6-Wy2"/>
-                                    <constraint firstAttribute="bottom" secondItem="4x1-vM-hMg" secondAttribute="bottom" id="ynl-hu-f2a"/>
-                                </constraints>
-                            </view>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HU1-A0-rLf" userLabel="password">
                                 <rect key="frame" x="41" y="444" width="518" height="40"/>
                                 <animations/>
@@ -230,7 +201,7 @@
                                     <rect key="frame" x="106" y="519" width="94" height="31"/>
                                 </variation>
                             </label>
-                            <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OyP-6l-WrR" customClass="FBLoginView">
+                            <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OyP-6l-WrR" customClass="FBSDKLoginButton">
                                 <rect key="frame" x="16" y="459" width="100" height="100"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -245,6 +216,38 @@
                                     <constraint firstAttribute="width" secondItem="vsO-2Q-CNK" secondAttribute="height" multiplier="1:1" id="67t-Cx-tgy"/>
                                 </constraints>
                             </imageView>
+                            <view contentMode="center" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ugN-9a-zrS" userLabel="LoginButtonView">
+                                <rect key="frame" x="41" y="665" width="518" height="80"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4x1-vM-hMg">
+                                        <rect key="frame" x="0.0" y="0.0" width="510" height="80"/>
+                                        <animations/>
+                                        <color key="backgroundColor" red="0.23137254900000001" green="0.34901960780000002" blue="0.59607843140000005" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="24"/>
+                                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Iniciar con facebook">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="FBlogin:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="PIX-mp-rHe"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <animations/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="centerY" secondItem="4x1-vM-hMg" secondAttribute="centerY" id="0Q6-pA-Vle"/>
+                                    <constraint firstItem="4x1-vM-hMg" firstAttribute="leading" secondItem="ugN-9a-zrS" secondAttribute="leading" id="E7h-ch-o3s"/>
+                                    <constraint firstItem="4x1-vM-hMg" firstAttribute="top" secondItem="ugN-9a-zrS" secondAttribute="top" id="fo0-Mu-hVG"/>
+                                    <constraint firstAttribute="trailing" secondItem="4x1-vM-hMg" secondAttribute="trailing" id="mSy-cv-8ZI"/>
+                                    <constraint firstAttribute="centerX" secondItem="4x1-vM-hMg" secondAttribute="centerX" id="nPQ-n6-Wy2"/>
+                                    <constraint firstAttribute="bottom" secondItem="4x1-vM-hMg" secondAttribute="bottom" id="ynl-hu-f2a"/>
+                                </constraints>
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="45" y="667" width="510" height="80"/>
+                                </variation>
+                            </view>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -2902,9 +2905,6 @@
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="285" width="400" height="271"/>
-                                </variation>
                             </view>
                         </subviews>
                         <animations/>
@@ -3109,8 +3109,7 @@
                                                 <exclude reference="L5u-ub-vaC"/>
                                             </mask>
                                         </variation>
-                                        <variation key="widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="0.0" y="102" width="400" height="125"/>
+                                        <variation key="widthClass=compact">
                                             <mask key="subviews">
                                                 <include reference="naj-OF-IFl"/>
                                                 <include reference="hPI-oS-mqi"/>
@@ -4541,7 +4540,7 @@
                                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <nil key="highlightedColor"/>
                                                                     <variation key="widthClass=compact" misplaced="YES">
-                                                                        <rect key="frame" x="73" y="20" width="319" height="20"/>
+                                                                        <rect key="frame" x="73" y="20" width="159" height="20"/>
                                                                     </variation>
                                                                 </label>
                                                             </subviews>
@@ -5454,7 +5453,7 @@
                                         <rect key="frame" x="0.0" y="22" width="600" height="61"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7g5-Sp-GuZ" id="kGG-Jp-GlR">
-                                            <rect key="frame" x="0.0" y="0.0" width="240" height="60"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="207" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o8K-zg-9by">
@@ -5703,11 +5702,11 @@
         <image name="twitter-logo" width="42" height="42"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="TKt-eX-Ulp"/>
-        <segue reference="jqZ-Ew-h2B"/>
+        <segue reference="fBW-ak-0oy"/>
+        <segue reference="LNr-ih-gHl"/>
         <segue reference="njR-gH-Wm2"/>
         <segue reference="Y2I-Nl-h09"/>
-        <segue reference="fBW-ak-0oy"/>
+        <segue reference="TKt-eX-Ulp"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

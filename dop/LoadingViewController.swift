@@ -8,17 +8,57 @@
 
 import UIKit
 import JWTDecode
+import FBSDKLoginKit
 
-class LoadingViewController: UIViewController, FBLoginViewDelegate, CLLocationManagerDelegate {
-    @IBOutlet var fbLoginView: FBLoginView!
-    
+class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationManagerDelegate {
+//
+    @IBOutlet weak var loginView: FBSDKLoginButton!
+    var loginManager: FBSDKLoginManager = FBSDKLoginManager()
     var firstTime:Bool = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.fbLoginView.delegate = self
-        self.fbLoginView.readPermissions = ["public_profile", "email", "user_friends", "user_birthday"]
+        self.loginView.readPermissions = ["public_profile", "email", "user_friends", "user_birthday"]
+        self.loginView.delegate = self
+        if (FBSDKAccessToken.currentAccessToken() != nil) {
+            self.getFBUserData()
+        } else {
+            loginManager.logInWithReadPermissions(["public_profile", "email", "user_friends", "user_birthday"], fromViewController: self, handler: { (result, error) -> Void in
+                if (error == nil) {
+                    let fbLoginResult : FBSDKLoginManagerLoginResult = result
+                    if(fbLoginResult.grantedPermissions.contains("email")) {
+                        self.getFBUserData()
+                    }
+                }
+            })
+        }
+        
+    }
+    
+    func getFBUserData() {
+        let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, email, birthday"])
+        graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
+            
+            if ((error) != nil) {
+                // Process error
+                print("Error: \(error)")
+            } else {
+                let json: JSON = JSON(result)
+                let userEmail = json["email"].string ?? ""
+                let birthday = json["birthday"].string ?? "2015-01-01"
+                print("\(birthday )")
+        
+                let params:[String: String] = [
+                    "facebook_key" : json["id"].string!,
+                    "names" : json["name"].string!,
+                    "surnames": json["last_name"].string!,
+                    "birth_date" : birthday,
+                    "email": userEmail,
+                    "main_image":"https://graph.facebook.com/\(json["id"].string!)/picture?type=large"]
+                
+                self.socialLogin("facebook", params: params)
+            }
+        })
     }
     
 
@@ -32,7 +72,7 @@ class LoadingViewController: UIViewController, FBLoginViewDelegate, CLLocationMa
     }
 
     //  book Delegate Methods
-    func loginViewShowingLoggedInUser(loginView : FBLoginView!) {
+    func loginViewShowingLoggedInUser(loginView : FBSDKLoginButton!) {
         print("User Logged In")
     }
     
@@ -43,30 +83,27 @@ class LoadingViewController: UIViewController, FBLoginViewDelegate, CLLocationMa
         }
         
     }
-    func loginViewFetchedUserInfo(loginView : FBLoginView!, user: FBGraphUser) {
-        
-        let userEmail = user.objectForKey("email") as? String ?? ""
-        let birthday = user.birthday ?? "2015-01-01"
-        print("\(birthday )")
-        
-        
-        let params:[String: String] = [
-            "facebook_key" : user.objectID,
-            "names" : user.first_name + " " + user.middle_name,
-            "surnames":user.last_name,
-            "birth_date" : birthday,
-            "email": userEmail,
-            "main_image":"https://graph.facebook.com/\(user.objectID)/picture?type=large"]
-        
-        self.socialLogin("facebook", params: params)
-    }
-    
-    func loginViewShowingLoggedOutUser(loginView : FBLoginView!) {
-        self.performSegueWithIdentifier("showLogin", sender: self)
 
+    func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
+        print("User Logged In")
+        if ((error) != nil) {
+            // Process error
+        } else if result.isCancelled {
+            // Handle cancellations
+        } else {
+            // If you ask for multiple permissions at once, you
+            // should check if specific permissions missing
+            if result.grantedPermissions.contains("email") {
+                // Do work
+            }
+        }
     }
     
-    func loginView(loginView : FBLoginView!, handleError:NSError) {
+    func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
+        self.performSegueWithIdentifier("showLogin", sender: self)
+    }
+    
+    func loginView(loginView : FBSDKLoginButton!, handleError: NSError) {
         print("Error: \(handleError.localizedDescription)")
     }
     
@@ -107,7 +144,7 @@ class LoadingViewController: UIViewController, FBLoginViewDelegate, CLLocationMa
             })
         },
         failure:{ (error) -> Void in
-
+            print(error)
         })
     }
     

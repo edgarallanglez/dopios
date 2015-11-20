@@ -14,6 +14,7 @@
 
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKShareKit/FBSDKShareKit.h>
+#import <CoreLocation/CoreLocation.h>
 #import "SWRevealViewController.h"
 #import "UIImage+ImageEffects.h"
 #import "UIScrollView+InfiniteScroll.h"
