@@ -56,7 +56,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
         
         mainScroll.frame.size = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height)
         
-        mainScroll.contentSize = CGSizeMake(mainScroll.frame.size.width, 4000)
+        mainScroll.contentSize = CGSizeMake(mainScroll.frame.size.width, 4500)
 
 
         
@@ -90,7 +90,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
         //super.notificationButton.startListening()
 
 
-        
+        self.setNeedsStatusBarAppearanceUpdate()
     }
     
     func getNotification(packet:SocketIOPacket) {
@@ -104,7 +104,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        //getTopBranches()
+        getTopBranches()
 
     }
     
@@ -589,6 +589,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
         locationManager.stopUpdatingLocation()
         
         if(!obtained_location){
+            print("CERCANoS")
             getNearestCoupons()
             obtained_location = true
         }
@@ -640,5 +641,9 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
         }
     }
     
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return .LightContent
+    }
+ 
 
 }

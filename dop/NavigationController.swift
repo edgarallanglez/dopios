@@ -73,7 +73,7 @@ class NavigationController: UINavigationController, NotificationDelegate {
     func search(){
         self.performSegueWithIdentifier("searchView", sender: self)
     }
-    
+
 
     /*
     // MARK: - Navigation

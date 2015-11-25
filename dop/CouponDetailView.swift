@@ -16,7 +16,8 @@ class CouponDetailView: UIView, MKMapViewDelegate {
     @IBOutlet var location: MKMapView!
     @IBOutlet weak var couponsName: UIButton!
     @IBOutlet weak var couponsDescription: UITextView!
-    
+
+
     
     var couponId: Int!
     var branchId: Int!
@@ -27,6 +28,8 @@ class CouponDetailView: UIView, MKMapViewDelegate {
     var viewController: UIViewController?
     let regionRadius: CLLocationDistance = 1000
     
+    var readQRView:readQRViewController?
+    
     @IBAction func triggerSegue(sender: UIButton) {
         self.viewController!.performSegueWithIdentifier("branchProfile", sender: self)
     }
@@ -34,6 +37,10 @@ class CouponDetailView: UIView, MKMapViewDelegate {
     func loadView(viewController: UIViewController) {
         self.viewController = viewController
         self.location.delegate = self
+        
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        readQRView = storyboard.instantiateViewControllerWithIdentifier("readQRView") as! readQRViewController
     }
     
     func centerMapOnLocation(location: CLLocationCoordinate2D) {
@@ -44,7 +51,7 @@ class CouponDetailView: UIView, MKMapViewDelegate {
     }
     
     @IBAction func dopixCoupon(sender: UIButton) {
-        let dateFormatter = NSDateFormatter()
+        /*let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyyMMdd"
         let folioDate = dateFormatter.stringFromDate(NSDate())
         dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
@@ -71,10 +78,15 @@ class CouponDetailView: UIView, MKMapViewDelegate {
                     print(error)
                 })
             }
-        )
-
-        print(date)
+        )*/
         
+        //self.viewController!.performSegueWithIdentifier("readQR", sender: self)
+        
+        readQRView?.coupon_id = 5
+        self.viewController!.presentViewController(readQRView!,
+            animated: true,
+            completion: nil)
+                
     }
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView?{

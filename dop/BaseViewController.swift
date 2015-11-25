@@ -47,12 +47,11 @@ class BaseViewController: UIViewController, UISearchBarDelegate {
                 }
             }
         }
-        /*let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
-        launcherSearchBar.addGestureRecognizer(tap)*/
+        
         
         
     }
-
+    
     func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
         self.navigationController?.pushViewController(vc, animated: false)
         return false
@@ -81,6 +80,13 @@ class BaseViewController: UIViewController, UISearchBarDelegate {
         self.navigationController!.pushViewController(self.storyboard!.instantiateViewControllerWithIdentifier("Notifications") as UIViewController, animated: true)
         self.navigationController?.hidesBottomBarWhenPushed = false
         
+    }
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return .LightContent
+    }
+    
+    override func prefersStatusBarHidden() -> Bool {
+        return false
     }
 
     

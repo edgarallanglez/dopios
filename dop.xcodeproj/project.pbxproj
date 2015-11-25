@@ -152,6 +152,9 @@
 		A0F1E0321BF3D3000092C1F4 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F1E0311BF3D3000092C1F4 /* BaseViewController.swift */; };
 		A0F7E9201AFAE48500A4F0F2 /* CouponCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F7E91E1AFAE48500A4F0F2 /* CouponCell.swift */; };
 		A0F7E9211AFAE48500A4F0F2 /* CouponCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0F7E91F1AFAE48500A4F0F2 /* CouponCell.xib */; };
+		A0FB84341BFFF0630099B2F4 /* readQRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0FB84331BFFF0630099B2F4 /* readQRViewController.swift */; };
+		A0FB84361BFFF07D0099B2F4 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0FB84351BFFF07D0099B2F4 /* AVFoundation.framework */; };
+		A0FB84381C03F5780099B2F4 /* readQRController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0FB84371C03F5780099B2F4 /* readQRController.swift */; };
 		A0FCF9D81B98D59200BB4537 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0FCF9D71B98D59200BB4537 /* SearchViewController.swift */; };
 		A0FE26D31B9AB5EB004EB402 /* search@x3.png in Resources */ = {isa = PBXBuildFile; fileRef = A0FE26D21B9AB5EB004EB402 /* search@x3.png */; };
 /* End PBXBuildFile section */
@@ -427,6 +430,9 @@
 		A0F1E0311BF3D3000092C1F4 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		A0F7E91E1AFAE48500A4F0F2 /* CouponCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CouponCell.swift; sourceTree = "<group>"; };
 		A0F7E91F1AFAE48500A4F0F2 /* CouponCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CouponCell.xib; sourceTree = "<group>"; };
+		A0FB84331BFFF0630099B2F4 /* readQRViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = readQRViewController.swift; sourceTree = "<group>"; };
+		A0FB84351BFFF07D0099B2F4 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		A0FB84371C03F5780099B2F4 /* readQRController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = readQRController.swift; sourceTree = "<group>"; };
 		A0FCF9D71B98D59200BB4537 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		A0FE26D01B9A4D12004EB402 /* SearchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
 		A0FE26D21B9AB5EB004EB402 /* search@x3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "search@x3.png"; sourceTree = "<group>"; };
@@ -437,6 +443,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0FB84361BFFF07D0099B2F4 /* AVFoundation.framework in Frameworks */,
 				A08D13FB1BFBB88F00A19AAF /* NSDateTimeAgo.bundle in Frameworks */,
 				9D3919211BDFEB83002229EB /* JWTDecode.framework in Frameworks */,
 				9D2CEA2C1BFCE4BD0088B6BC /* FBSDKLoginKit.framework in Frameworks */,
@@ -484,6 +491,7 @@
 		079462BCCDF3FAF530C45E4E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A0FB84351BFFF07D0099B2F4 /* AVFoundation.framework */,
 				9D2CEA271BFCE41D0088B6BC /* Facebook */,
 				A08D13F91BFBB86100A19AAF /* NSDateTimeAgo.bundle */,
 				9D3919121BDFEB67002229EB /* JWTDecode.xcodeproj */,
@@ -606,6 +614,8 @@
 				9D7FA0761BBC4FDB00EAEC36 /* Settings */,
 				A0AE939A1AF8041A00D02315 /* Bridging-Header.h */,
 				9D33260E1AF7ED1C00498801 /* AppDelegate.swift */,
+				A0FB84331BFFF0630099B2F4 /* readQRViewController.swift */,
+				A0FB84371C03F5780099B2F4 /* readQRController.swift */,
 				A0F1E0311BF3D3000092C1F4 /* BaseViewController.swift */,
 				A0F1E0281BF272BD0092C1F4 /* NavigationController.swift */,
 				A060F78D1B72B475009D6ADB /* CouponDetailView.swift */,
@@ -1106,6 +1116,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0FB84381C03F5780099B2F4 /* readQRController.swift in Sources */,
 				A01D77D81BDAB94C00AA8FE2 /* SocketIO.m in Sources */,
 				9DC9218A1B9F8D4900241FFD /* UIScrollView+InfiniteScroll.h in Sources */,
 				9DC9218B1B9F8D4900241FFD /* UIScrollView+InfiniteScroll.m in Sources */,
@@ -1122,6 +1133,7 @@
 				A01D77DC1BDAB94C00AA8FE2 /* SocketIOTransportXHR.m in Sources */,
 				A065EB321BA8E60A003B7390 /* DashboardController.swift in Sources */,
 				9D3756E11BCED51400796378 /* UserProfileSegmentedController.swift in Sources */,
+				A0FB84341BFFF0630099B2F4 /* readQRViewController.swift in Sources */,
 				A08D13FD1BFBB90C00A19AAF /* NSDate+Extension.swift in Sources */,
 				A060F7861B702FAC009D6ADB /* CouponDetailViewController.swift in Sources */,
 				A0C3AC2E1B9525D5005636E7 /* CustomInfiniteIndicator.swift in Sources */,
@@ -1362,7 +1374,7 @@
 					Security,
 					"-licucore",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.imincedu.dop;
+				PRODUCT_BUNDLE_IDENTIFIER = com.imincedua.dop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "dop/Bridging-Header.h";
@@ -1400,7 +1412,7 @@
 					Security,
 					"-licucore",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.imincedu.dop;
+				PRODUCT_BUNDLE_IDENTIFIER = com.imincedua.dop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "dop/Bridging-Header.h";
