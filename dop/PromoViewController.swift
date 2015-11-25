@@ -246,7 +246,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
             //self.CouponsCollectionView.alpha = 0
         })
         
-        CouponController.getAllCouponsOffsetWithSuccess(firstCoupon.id,offset: offset,
+        CouponController.getAllCouponsOffsetWithSuccess(firstCoupon.id, offset: offset,
             success: { (couponsData) -> Void in
                 let json = JSON(data: couponsData)
                 

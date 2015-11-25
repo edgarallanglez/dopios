@@ -75,13 +75,13 @@
 	<string>927375797314743</string>
 	<key>FacebookDisplayName</key>
 	<string>dop</string>
-  <key>LSApplicationQueriesSchemes</key>
-  <array>
-          <string>fbapi</string>
-          <string>fb-messenger-api</string>
-          <string>fbauth2</string>
-          <string>fbshareextension</string>
-  </array>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fb-messenger-api</string>
+		<string>fbauth2</string>
+		<string>fbshareextension</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MKDirectionsApplicationSupportedModes</key>
@@ -94,30 +94,30 @@
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
-    <key>NSExceptionDomains</key>
-    <dict>
-        <key>facebook.com</key>
-        <dict>
-            <key>NSIncludesSubdomains</key>
-            <true/>                
-            <key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
-            <false/>
-        </dict>
-        <key>fbcdn.net</key>
-        <dict>
-            <key>NSIncludesSubdomains</key>
-            <true/>
-            <key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
-            <false/>
-        </dict>
-        <key>akamaihd.net</key>
-        <dict>
-            <key>NSIncludesSubdomains</key>
-            <true/>
-            <key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
-            <false/>
-        </dict>
-    </dict>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>akamaihd.net</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
+				<false/>
+			</dict>
+			<key>facebook.com</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
+				<false/>
+			</dict>
+			<key>fbcdn.net</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
+				<false/>
+			</dict>
+		</dict>
 	</dict>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>We need to know your location to show you the coordinates where you are located</string>

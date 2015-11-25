@@ -38,7 +38,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     override func viewDidLoad() {
-        var nib = UINib(nibName: "FriendCell", bundle: nil)
+        let nib = UINib(nibName: "FriendCell", bundle: nil)
         tableView.registerNib(nib, forCellReuseIdentifier: "FriendCell")
         
         FriendsController.getAllFriendsWithSuccess(
@@ -46,8 +46,8 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
             let json = JSON(data: friendsData)
             
             for (_, subJson): (String, JSON) in json["data"] {
-                var friend_id = subJson["friends_id"].int
-                var user_id = subJson["user_id"].int
+                let friend_id = subJson["friends_id"].int
+                let user_id = subJson["user_id"].int
                 let user_name = subJson["names"].string
                 let user_surnames = subJson["surnames"].string
                 let main_image = subJson["main_image"].string
