@@ -35,6 +35,12 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
         
     }
     
+    @IBAction func provisionalLogOut(sender: UIButton) {
+        loginManager.logOut()
+        self.performSegueWithIdentifier("showLogin", sender: self)
+    }
+    
+    
     func getFBUserData() {
         let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, email, birthday"])
         graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in

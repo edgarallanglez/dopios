@@ -108,6 +108,19 @@
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="20g-cP-oi7">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <animations/>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" red="0.4823529412" green="0.73333333329999995" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="325" y="248" width="46" height="30"/>
+                                </variation>
+                                <connections>
+                                    <action selector="provisionalLogOut:" destination="wsr-0B-cyM" eventType="touchUpInside" id="LWl-Ww-uat"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" red="0.78823529410000004" green="0.0" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -117,6 +130,16 @@
                             <constraint firstAttribute="centerY" secondItem="17t-ND-Fy0" secondAttribute="centerY" id="XAa-8Z-qsN"/>
                             <constraint firstAttribute="centerX" secondItem="g5c-vP-1JZ" secondAttribute="centerX" id="ncK-3L-rcn"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="20g-cP-oi7"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="20g-cP-oi7"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="loginView" destination="bTk-lf-RsN" id="ULG-1M-YEO"/>
@@ -207,7 +230,7 @@
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="93" y="99" width="64" height="50"/>
+                                    <rect key="frame" x="99" y="-83" width="26" height="88"/>
                                 </variation>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vsO-2Q-CNK">
@@ -245,9 +268,6 @@
                                     <constraint firstAttribute="centerX" secondItem="4x1-vM-hMg" secondAttribute="centerX" id="nPQ-n6-Wy2"/>
                                     <constraint firstAttribute="bottom" secondItem="4x1-vM-hMg" secondAttribute="bottom" id="ynl-hu-f2a"/>
                                 </constraints>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="45" y="667" width="510" height="80"/>
-                                </variation>
                             </view>
                         </subviews>
                         <animations/>
@@ -3059,6 +3079,9 @@
                                                         <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="35"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
+                                                        <variation key="widthClass=compact" misplaced="YES">
+                                                            <rect key="frame" x="41" y="76" width="319" height="79"/>
+                                                        </variation>
                                                     </label>
                                                 </subviews>
                                                 <animations/>
@@ -3103,6 +3126,7 @@
                                         <constraint firstItem="8y5-Zs-I2R" firstAttribute="leading" secondItem="j0I-sX-bpP" secondAttribute="leading" id="4Ti-8O-IOf"/>
                                         <constraint firstItem="8y5-Zs-I2R" firstAttribute="top" secondItem="j0I-sX-bpP" secondAttribute="top" id="624-MK-Ak2"/>
                                         <constraint firstAttribute="bottom" secondItem="8y5-Zs-I2R" secondAttribute="bottom" id="cOU-bZ-ah7"/>
+                                        <constraint firstItem="8y5-Zs-I2R" firstAttribute="top" secondItem="j0I-sX-bpP" secondAttribute="top" constant="-20" id="x5v-Xo-giM"/>
                                     </constraints>
                                     <variation key="default">
                                         <mask key="constraints">
@@ -3110,14 +3134,16 @@
                                             <exclude reference="4Ti-8O-IOf"/>
                                             <exclude reference="624-MK-Ak2"/>
                                             <exclude reference="cOU-bZ-ah7"/>
+                                            <exclude reference="x5v-Xo-giM"/>
                                         </mask>
                                     </variation>
                                     <variation key="widthClass=compact">
                                         <mask key="constraints">
                                             <include reference="2F7-LT-nt1"/>
                                             <include reference="4Ti-8O-IOf"/>
-                                            <include reference="624-MK-Ak2"/>
+                                            <exclude reference="624-MK-Ak2"/>
                                             <include reference="cOU-bZ-ah7"/>
+                                            <include reference="x5v-Xo-giM"/>
                                         </mask>
                                     </variation>
                                 </view>
@@ -4348,7 +4374,7 @@
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <variation key="widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="135" y="131" width="35" height="35"/>
+                                                        <rect key="frame" x="135" y="133" width="35" height="35"/>
                                                     </variation>
                                                     <connections>
                                                         <action selector="take_coupon:" destination="HMm-I9-k2N" eventType="touchUpInside" id="srd-Y5-ySb"/>
@@ -4366,9 +4392,6 @@
                                                         <color key="titleColor" red="0.23137254900000001" green="0.34901960780000002" blue="0.59607843140000005" alpha="1" colorSpace="calibratedRGB"/>
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
-                                                    <variation key="widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="132" y="197" width="25" height="25"/>
-                                                    </variation>
                                                     <connections>
                                                         <action selector="shareCoupon:" destination="HMm-I9-k2N" eventType="touchUpInside" id="ZgT-kO-bUz"/>
                                                     </connections>
@@ -5881,7 +5904,7 @@
         <segue reference="LNr-ih-gHl"/>
         <segue reference="njR-gH-Wm2"/>
         <segue reference="Y2I-Nl-h09"/>
-        <segue reference="AaG-PG-nLf"/>
+        <segue reference="TKt-eX-Ulp"/>
         <segue reference="fBW-ak-0oy"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

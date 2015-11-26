@@ -8,6 +8,7 @@
 
 import UIKit
 import Social
+import FBSDKLoginKit
 import FBSDKShareKit
 
 class PromoCollectionCell: UICollectionViewCell, FBSDKSharingDelegate {
@@ -78,15 +79,26 @@ class PromoCollectionCell: UICollectionViewCell, FBSDKSharingDelegate {
     
     
     @IBAction func shareCoupon(sender: UIButton) {
-        let content : FBSDKShareLinkContent = FBSDKShareLinkContent()
-        content.contentURL = NSURL(string: "http://www.allan-glez.com/")
-        content.contentTitle = coupon.name
-        content.contentDescription = self.coupon_description?.text
-        content.imageURL = NSURL(string: "\(Utilities.dopImagesURL)\(coupon.company_id)/\(coupon.logo)")
         
-        FBSDKShareDialog.showFromViewController(self.viewController, withContent: content, delegate: self)
-        
-        
+        let loginManager: FBSDKLoginManager = FBSDKLoginManager()
+        loginManager.logInWithPublishPermissions(["publish_actions"], handler: { (result, error) -> Void in
+            if result.declinedPermissions.contains("publish_actions") {
+                let content : FBSDKShareLinkContent = FBSDKShareLinkContent()
+                content.contentURL = NSURL(string: "http://www.allan-glez.com/")
+                content.contentTitle = self.coupon.name
+                content.contentDescription = self.coupon_description?.text
+                content.imageURL = NSURL(string: "\(Utilities.dopImagesURL)\(self.coupon.company_id)/\(self.coupon.logo)")
+                
+                //        let dialog: FBSDKShareDialog = FBSDKShareDialog()
+                //        dialog.mode = FBSDKShareDialogModeShareSheet
+                
+                FBSDKShareDialog.showFromViewController(self.viewController, withContent: content, delegate: self)
+            } else {
+                print("no nos dieron permiso")
+            }
+            
+        })
+
     }
     
     func sharer(sharer: FBSDKSharing!, didFailWithError error: NSError!) {

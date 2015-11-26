@@ -607,44 +607,31 @@
 		9D33260B1AF7ED1C00498801 /* dop */ = {
 			isa = PBXGroup;
 			children = (
-				A08D13FC1BFBB90C00A19AAF /* NSDate+Extension.swift */,
-				9DCE5CDD1BDAEF7E00A425FB /* Notifications */,
-				A01D77C71BDAB92500AA8FE2 /* Socket */,
-				9D7FA0791BBC513000EAEC36 /* Trophy */,
-				9D7FA0761BBC4FDB00EAEC36 /* Settings */,
-				A0AE939A1AF8041A00D02315 /* Bridging-Header.h */,
 				9D33260E1AF7ED1C00498801 /* AppDelegate.swift */,
-				A0FB84331BFFF0630099B2F4 /* readQRViewController.swift */,
-				A0FB84371C03F5780099B2F4 /* readQRController.swift */,
-				A0F1E0311BF3D3000092C1F4 /* BaseViewController.swift */,
-				A0F1E0281BF272BD0092C1F4 /* NavigationController.swift */,
-				A060F78D1B72B475009D6ADB /* CouponDetailView.swift */,
-				A060F7851B702FAC009D6ADB /* CouponDetailViewController.swift */,
-				9D697C791B5EF13000D786AA /* iconfonts-fontawesome.swift */,
-				A09AB4E11AF99136004287F7 /* SwiftyJSON.swift */,
-				9D4C04801B18EAF600D5DCEE /* FontAwesome.ttf */,
 				9DA3C8951B90C117000D40F2 /* Images.xcassets */,
-				A0EB97AF1B05131E005112EF /* Utilities.swift */,
-				A060F78B1B72A307009D6ADB /* CouponDetailView.xib */,
-				A060F7791B6C4CA3009D6ADB /* TabbarController.swift */,
-				A0EC05B31B7D622A003CADB2 /* LoadingViewController.swift */,
-				A065EB301BA8E413003B7390 /* Dashboard */,
-				A06B357A1B9F5DBD003C90EF /* Search */,
-				A060F78A1B717FD2009D6ADB /* Blur */,
+				9D3326171AF7ED1C00498801 /* LaunchScreen.xib */,
+				9DAAE7B51B0E810B00209588 /* Main.storyboard */,
+				9DC2713A1C0776E600C6F825 /* App Flow */,
 				9D0C16821B4DC6AE0088DE2F /* BranchProfile */,
 				A09AB4E61AFA9609004287F7 /* Coupon */,
+				A065EB301BA8E413003B7390 /* Dashboard */,
+				9DC2713B1C07770100C6F825 /* ExchangeQR */,
 				A0BB9BB61B13E4CA000BA261 /* Friend */,
 				A0D6FBFE1B9105E200C8E87F /* InfiniteScroll */,
-				9D3326171AF7ED1C00498801 /* LaunchScreen.xib */,
 				A0EB97B31B052074005112EF /* Login */,
-				9DAAE7B51B0E810B00209588 /* Main.storyboard */,
 				9DB327CA1B862EF6006BF882 /* MoreMenu */,
 				9D0DB46F1B17D2A50009FE6C /* Nearby */,
 				A082F4811B18CEC7001C8C52 /* Newsfeed */,
+				9DCE5CDD1BDAEF7E00A425FB /* Notifications */,
 				9DE55C421BB07BB5005F9776 /* Promotions */,
+				A06B357A1B9F5DBD003C90EF /* Search */,
+				9D7FA0761BBC4FDB00EAEC36 /* Settings */,
+				A01D77C71BDAB92500AA8FE2 /* Socket */,
 				9D33260C1AF7ED1C00498801 /* Supporting Files */,
 				A0365FDB1AF9463B000A325D /* SWRevealViewController */,
+				9D7FA0791BBC513000EAEC36 /* Trophy */,
 				A0EB97AE1B03E198005112EF /* User */,
+				9DC271321C07766D00C6F825 /* Utilities */,
 			);
 			path = dop;
 			sourceTree = "<group>";
@@ -715,6 +702,40 @@
 				9DB327CB1B863C77006BF882 /* MoreMenuController.swift */,
 			);
 			name = MoreMenu;
+			sourceTree = "<group>";
+		};
+		9DC271321C07766D00C6F825 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				A0AE939A1AF8041A00D02315 /* Bridging-Header.h */,
+				9D4C04801B18EAF600D5DCEE /* FontAwesome.ttf */,
+				9D697C791B5EF13000D786AA /* iconfonts-fontawesome.swift */,
+				A08D13FC1BFBB90C00A19AAF /* NSDate+Extension.swift */,
+				A09AB4E11AF99136004287F7 /* SwiftyJSON.swift */,
+				A060F7871B717DB9009D6ADB /* UIImage+ImageEffects.h */,
+				A060F7881B717DB9009D6ADB /* UIImage+ImageEffects.m */,
+				A0EB97AF1B05131E005112EF /* Utilities.swift */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
+		9DC2713A1C0776E600C6F825 /* App Flow */ = {
+			isa = PBXGroup;
+			children = (
+				A0F1E0311BF3D3000092C1F4 /* BaseViewController.swift */,
+				A0F1E0281BF272BD0092C1F4 /* NavigationController.swift */,
+				A060F7791B6C4CA3009D6ADB /* TabbarController.swift */,
+			);
+			name = "App Flow";
+			sourceTree = "<group>";
+		};
+		9DC2713B1C07770100C6F825 /* ExchangeQR */ = {
+			isa = PBXGroup;
+			children = (
+				A0FB84331BFFF0630099B2F4 /* readQRViewController.swift */,
+				A0FB84371C03F5780099B2F4 /* readQRController.swift */,
+			);
+			name = ExchangeQR;
 			sourceTree = "<group>";
 		};
 		9DCE5CDD1BDAEF7E00A425FB /* Notifications */ = {
@@ -790,15 +811,6 @@
 			path = widget;
 			sourceTree = "<group>";
 		};
-		A060F78A1B717FD2009D6ADB /* Blur */ = {
-			isa = PBXGroup;
-			children = (
-				A060F7871B717DB9009D6ADB /* UIImage+ImageEffects.h */,
-				A060F7881B717DB9009D6ADB /* UIImage+ImageEffects.m */,
-			);
-			name = Blur;
-			sourceTree = "<group>";
-		};
 		A065EB301BA8E413003B7390 /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
@@ -842,6 +854,9 @@
 		A09AB4E61AFA9609004287F7 /* Coupon */ = {
 			isa = PBXGroup;
 			children = (
+				A060F78B1B72A307009D6ADB /* CouponDetailView.xib */,
+				A060F78D1B72B475009D6ADB /* CouponDetailView.swift */,
+				A060F7851B702FAC009D6ADB /* CouponDetailViewController.swift */,
 				A09AB4E01AF99136004287F7 /* CouponController.swift */,
 				A09AB4E41AFA880E004287F7 /* Coupon.swift */,
 				A0F7E91E1AFAE48500A4F0F2 /* CouponCell.swift */,
@@ -891,6 +906,7 @@
 		A0EB97B31B052074005112EF /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				A0EC05B31B7D622A003CADB2 /* LoadingViewController.swift */,
 				9D3326101AF7ED1C00498801 /* LoginViewController.swift */,
 				A0EB97B11B051F02005112EF /* LoginController.swift */,
 			);
@@ -951,7 +967,7 @@
 				TargetAttributes = {
 					9D3326081AF7ED1C00498801 = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = QX6AA77Z42;
+						DevelopmentTeam = WKZMSRYE62;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -1374,7 +1390,7 @@
 					Security,
 					"-licucore",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.imincedua.dop;
+				PRODUCT_BUNDLE_IDENTIFIER = com.iminced.dop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "dop/Bridging-Header.h";
@@ -1412,7 +1428,7 @@
 					Security,
 					"-licucore",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.imincedua.dop;
+				PRODUCT_BUNDLE_IDENTIFIER = com.iminced.dop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "dop/Bridging-Header.h";
