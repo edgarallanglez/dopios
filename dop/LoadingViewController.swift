@@ -18,6 +18,10 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        validateSession()
+    }
+    
+    func validateSession() {
         self.loginView.readPermissions = ["public_profile", "email", "user_friends", "user_birthday"]
         self.loginView.delegate = self
         if (FBSDKAccessToken.currentAccessToken() != nil) {
@@ -32,7 +36,6 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
                 }
             })
         }
-        
     }
     
     @IBAction func provisionalLogOut(sender: UIButton) {
@@ -150,7 +153,12 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
             })
         },
         failure:{ (error) -> Void in
-            print(error)
+            let alert = UIAlertController(title: "Oops!", message:"Oops! Parece que hubo un error", preferredStyle: .Alert)
+            let action = UIAlertAction(title: "Reintentar", style: .Default) { _ in
+                self.validateSession()
+            }
+            alert.addAction(action)
+            self.presentViewController(alert, animated: true){}
         })
     }
     
