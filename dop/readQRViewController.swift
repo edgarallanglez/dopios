@@ -129,12 +129,11 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                     //captureSession?.stopRunning()
                     
                     self.qr_detected = true
-                    var qrInt:Int?
-                    do{
-                        qrInt = try! Int(metadataObj.stringValue)!
-                    }
-                    catch {
-                        
+                    
+                    if let qrInt =  Int(metadataObj.stringValue){
+                        self.sendQR(qrInt)
+                    }else{
+                        print("Error")
                     }
                     
                 }
@@ -184,7 +183,9 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
         // Dispose of any resources that can be recreated.
     }
     @IBAction func goBack(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismissViewControllerAnimated(true, completion: {
+            self.removeFromParentViewController()
+        })
     }
     
     override func prefersStatusBarHidden() -> Bool {

@@ -30,7 +30,6 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
         self.title = ""
         offset = limit - 1
 
-        self.navigationController?.navigationBar.topItem!.title = "Hoy tenemos"
         
         self.refreshControl = UIRefreshControl()
         
