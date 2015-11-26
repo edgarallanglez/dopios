@@ -50,6 +50,14 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
 
         getNotifications()
         
+        let fullName = "FirstTLast"
+        
+        let replaced = String(fullName.characters.map {
+            $0 == "T" ? " " : $0
+            })
+        
+        print("FECHA ES \(replaced)")
+        
         
         var fecha = NSDate(dateString: "2015-11-17 13:15:00")
         

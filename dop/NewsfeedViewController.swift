@@ -86,13 +86,13 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
         getNewsfeedActivity()
         
         self.offset = self.limit - 1
-
         
         // Set custom indicator
         self.tableView.infiniteScrollIndicatorView = CustomInfiniteIndicator(frame: CGRectMake(0, 0, 24, 24))
         
         // Set custom indicator margin
         tableView.infiniteScrollIndicatorMargin = 40
+        
         
         // Add infinite scroll handler
         tableView.addInfiniteScrollWithHandler { [weak self] (scrollView) -> Void in

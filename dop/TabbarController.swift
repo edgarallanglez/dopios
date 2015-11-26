@@ -57,7 +57,6 @@ class TabbarController: UITabBarController, NotificationDelegate {
         UIApplication.sharedApplication().statusBarStyle = .LightContent
         
 
-
         
     }
 
