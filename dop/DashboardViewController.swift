@@ -11,6 +11,7 @@ import QuartzCore
 
 class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UIScrollViewDelegate, NotificationDelegate{
     
+    @IBOutlet var mainLoader: UIActivityIndicatorView!
     @IBOutlet weak var menuButton:UIBarButtonItem!
 
     @IBOutlet var trendingPageControl: UIPageControl!
@@ -49,6 +50,8 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        mainLoader.startAnimating()
         
         //self.navigationController?.navigationBar.topItem!.title = "Dashboard"
         
@@ -160,7 +163,8 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
     }
     func getTopBranches() {
         branches = [Branch]()
-
+        
+        
         
         DashboardController.getDashboardBranchesWithSuccess(success:{(branchesData) -> Void in
             let json = JSON(data: branchesData)
@@ -185,6 +189,10 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                 
                 self.showViewAnimation(self.branchesScroll, delay: 0, duration:0.3)
                 self.showViewAnimation(self.pageControlContainer, delay:0, duration:0.3)
+                
+                if(self.view.subviews.contains(self.mainLoader)){
+                    self.mainLoader.removeFromSuperview()
+                }
             });
         },
         failure: { (error) -> Void in
@@ -226,7 +234,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
             
             
             let progressIcon = UIActivityIndicatorView(frame: CGRectMake(actualX+((branchesScroll.frame.size.width/2)-(30/2)), (branchesScroll.frame.size.height/2) - (30/2), 30, 30))
-            progressIcon.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.WhiteLarge
+            progressIcon.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
             progressIcon.startAnimating()
             
 
@@ -295,6 +303,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
     }
     func getTrendingCoupons() {
         trending = [Coupon]()
+        
         
         DashboardController.getTrendingCouponsWithSuccess(success: { (couponsData) -> Void in
             let json = JSON(data: couponsData)
@@ -374,6 +383,10 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                     
                     self.showViewAnimation(self.trendingContainer, delay:0, duration:0.4)
                     
+                    if(self.view.subviews.contains(self.mainLoader)){
+                        self.mainLoader.removeFromSuperview()
+                    }
+                    
                 });
             },
             
@@ -401,6 +414,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
     
     func getToExpireCoupons() {
         almost_expired = [Coupon]()
+        
         
         DashboardController.getAlmostExpiredCouponsWithSuccess(success: { (couponsData) -> Void in
             let json = JSON(data: couponsData)
@@ -476,7 +490,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
     
     func getNearestCoupons() {
         nearest = [Coupon]()
-        
+
         let latitude = User.coordinate.latitude
         let longitude = User.coordinate.longitude
         

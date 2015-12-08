@@ -156,15 +156,15 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                 dispatch_async(dispatch_get_main_queue(), {
                     
                     let json = JSON(data: couponsData)
-                    
-                    print(json)
+                    let name = json["data"]["name"].string
+
+                    self.branchName.text = name
                     
                     self.blurViewLeadingConstraint.constant = 0
                     
                     UIView.animateWithDuration(1, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
                             self.view.layoutIfNeeded()
                         }, completion: nil)
-                    
                 })
             },
             failure: { (error) -> Void in

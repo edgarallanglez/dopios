@@ -12,6 +12,7 @@ import UIKit
     
     private var labels = [UILabel]()
     var thumbView = UIView()
+    var animating:Bool = false
     
     var items: [String] = ["ACERCA DE", "TIMELINE", "RESEÑAS"] {
         didSet {
@@ -139,6 +140,7 @@ import UIKit
     }
     
     func displayNewSelectedIndex(){
+        
         for (index, item) in labels.enumerate() {
             item.textColor = unselectedLabelColor
         }
@@ -149,7 +151,6 @@ import UIKit
         UIView.animateWithDuration(0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 0.8, options: [], animations: {
             
             self.thumbView.frame = label.frame
-            
             }, completion: nil)
     }
     
@@ -197,7 +198,7 @@ import UIKit
             mainView.addConstraints([topConstraint, bottomConstraint, rightConstraint, leftConstraint])
         }
     }
-    
+
     func setSelectedColors(){
         for item in labels {
             item.textColor = unselectedLabelColor

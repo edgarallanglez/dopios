@@ -76,6 +76,7 @@
 		A01D77DA1BDAB94C00AA8FE2 /* SocketIOJSONSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = A01D77D21BDAB94C00AA8FE2 /* SocketIOJSONSerialization.m */; };
 		A01D77DB1BDAB94C00AA8FE2 /* SocketIOTransportWebsocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A01D77D51BDAB94C00AA8FE2 /* SocketIOTransportWebsocket.m */; };
 		A01D77DC1BDAB94C00AA8FE2 /* SocketIOTransportXHR.m in Sources */ = {isa = PBXBuildFile; fileRef = A01D77D71BDAB94C00AA8FE2 /* SocketIOTransportXHR.m */; };
+		A030B8411C10B4D300148CAA /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A030B8401C10B4D300148CAA /* TestViewController.swift */; };
 		A04CC2101BBD968E001AF7E0 /* ToExpireCoupon.xib in Resources */ = {isa = PBXBuildFile; fileRef = A04CC20F1BBD968E001AF7E0 /* ToExpireCoupon.xib */; };
 		A04CC2121BBDBB16001AF7E0 /* ToExpireCoupon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04CC2111BBDBB16001AF7E0 /* ToExpireCoupon.swift */; };
 		A04D388D1BC7361900E578F0 /* NearestCoupon.xib in Resources */ = {isa = PBXBuildFile; fileRef = A04D388C1BC7361900E578F0 /* NearestCoupon.xib */; };
@@ -129,6 +130,8 @@
 		A0DF72911B13A66C006EE8F4 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DF72901B13A66C006EE8F4 /* FriendsViewController.swift */; };
 		A0DF72931B13AEBF006EE8F4 /* FriendsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DF72921B13AEBF006EE8F4 /* FriendsController.swift */; };
 		A0DF72951B13E262006EE8F4 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DF72941B13E262006EE8F4 /* Friend.swift */; };
+		A0E4F6BB1C0D4B7400DFA6EE /* BranchPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E4F6BA1C0D4B7400DFA6EE /* BranchPageViewController.swift */; };
+		A0E4F6C41C0D524900DFA6EE /* ReviewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E4F6C31C0D524900DFA6EE /* ReviewsViewController.swift */; };
 		A0EB97AD1B03E16A005112EF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EB97AC1B03E16A005112EF /* User.swift */; };
 		A0EB97B01B05131E005112EF /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EB97AF1B05131E005112EF /* Utilities.swift */; };
 		A0EB97B21B051F02005112EF /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EB97B11B051F02005112EF /* LoginController.swift */; };
@@ -346,6 +349,7 @@
 		A01D77D51BDAB94C00AA8FE2 /* SocketIOTransportWebsocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketIOTransportWebsocket.m; sourceTree = "<group>"; };
 		A01D77D61BDAB94C00AA8FE2 /* SocketIOTransportXHR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketIOTransportXHR.h; sourceTree = "<group>"; };
 		A01D77D71BDAB94C00AA8FE2 /* SocketIOTransportXHR.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketIOTransportXHR.m; sourceTree = "<group>"; };
+		A030B8401C10B4D300148CAA /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		A04CC20F1BBD968E001AF7E0 /* ToExpireCoupon.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ToExpireCoupon.xib; sourceTree = "<group>"; };
 		A04CC2111BBDBB16001AF7E0 /* ToExpireCoupon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToExpireCoupon.swift; sourceTree = "<group>"; };
 		A04CC2181BC2EF10001AF7E0 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
@@ -406,6 +410,8 @@
 		A0DF72901B13A66C006EE8F4 /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
 		A0DF72921B13AEBF006EE8F4 /* FriendsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsController.swift; sourceTree = "<group>"; };
 		A0DF72941B13E262006EE8F4 /* Friend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
+		A0E4F6BA1C0D4B7400DFA6EE /* BranchPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BranchPageViewController.swift; sourceTree = "<group>"; };
+		A0E4F6C31C0D524900DFA6EE /* ReviewsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewsViewController.swift; sourceTree = "<group>"; };
 		A0EB97AC1B03E16A005112EF /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A0EB97AF1B05131E005112EF /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		A0EB97B11B051F02005112EF /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
@@ -529,7 +535,9 @@
 			isa = PBXGroup;
 			children = (
 				A0A494FE1BE546670000E98A /* BranchProfileViewControllerN.swift */,
+				A0E4F6BA1C0D4B7400DFA6EE /* BranchPageViewController.swift */,
 				A0A495001BE56C300000E98A /* BranchProfilePromoViewController.swift */,
+				A0E4F6C31C0D524900DFA6EE /* ReviewsViewController.swift */,
 				9D1FCED61B79295700F42F6D /* SegmentedControl.swift */,
 				9D0C16831B4DC6EB0088DE2F /* BranchProfileViewController.swift */,
 				A086ACDE1BB09496003133BA /* Branch.swift */,
@@ -608,6 +616,7 @@
 			isa = PBXGroup;
 			children = (
 				9D33260E1AF7ED1C00498801 /* AppDelegate.swift */,
+				A030B8401C10B4D300148CAA /* TestViewController.swift */,
 				9DA3C8951B90C117000D40F2 /* Images.xcassets */,
 				9D3326171AF7ED1C00498801 /* LaunchScreen.xib */,
 				9DAAE7B51B0E810B00209588 /* Main.storyboard */,
@@ -1143,6 +1152,7 @@
 				A04CC2121BBDBB16001AF7E0 /* ToExpireCoupon.swift in Sources */,
 				A04D388F1BC7366600E578F0 /* NearestCoupon.swift in Sources */,
 				9D7FA0781BBC4FF000EAEC36 /* SettingsViewController.swift in Sources */,
+				A0E4F6C41C0D524900DFA6EE /* ReviewsViewController.swift in Sources */,
 				A0EC05991B7D1C69003CADB2 /* SWRevealViewController.m in Sources */,
 				9D0C16841B4DC6EB0088DE2F /* BranchProfileViewController.swift in Sources */,
 				A01D77DC1BDAB94C00AA8FE2 /* SocketIOTransportXHR.m in Sources */,
@@ -1155,6 +1165,7 @@
 				A0DF72931B13AEBF006EE8F4 /* FriendsController.swift in Sources */,
 				A01D77DA1BDAB94C00AA8FE2 /* SocketIOJSONSerialization.m in Sources */,
 				9D1FCED71B79295700F42F6D /* SegmentedControl.swift in Sources */,
+				A030B8411C10B4D300148CAA /* TestViewController.swift in Sources */,
 				9D30F9071BD5B19600D225D5 /* SearchSegmentedController.swift in Sources */,
 				9DCE5CDF1BDAEF9100A425FB /* NotificationViewController.swift in Sources */,
 				A082F4851B18CF01001C8C52 /* NewsfeedController.swift in Sources */,
@@ -1178,6 +1189,7 @@
 				A09AB4E21AF99136004287F7 /* CouponController.swift in Sources */,
 				A0EB97B01B05131E005112EF /* Utilities.swift in Sources */,
 				A0578C641B0E7D2B0033B5BD /* UserProfileController.swift in Sources */,
+				A0E4F6BB1C0D4B7400DFA6EE /* BranchPageViewController.swift in Sources */,
 				9D3326111AF7ED1C00498801 /* LoginViewController.swift in Sources */,
 				A09732E11BDBF712006F9378 /* NotificationButton.swift in Sources */,
 				A0F1E0321BF3D3000092C1F4 /* BaseViewController.swift in Sources */,
