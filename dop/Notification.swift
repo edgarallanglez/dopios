@@ -17,8 +17,9 @@ class Notification:NSObject{
     let newsfeed_activity: String
     let friendship_status: Int
     var read: Bool
+    var date: String
 
-    init(type:String!,notification_id:Int!, launcher_id:Int!, launcher_name: String!, launcher_surnames: String!, newsfeed_activity:String!, friendship_status:Int!, read:Bool) {
+    init(type:String!,notification_id:Int!, launcher_id:Int!, launcher_name: String!, launcher_surnames: String!, newsfeed_activity:String!, friendship_status:Int!, read:Bool, date:String!) {
         self.type = type ?? ""
         self.notification_id = notification_id ?? 0
         self.launcher_id = launcher_id ?? 0
@@ -27,5 +28,6 @@ class Notification:NSObject{
         self.newsfeed_activity = newsfeed_activity ?? ""
         self.friendship_status = friendship_status ?? 0
         self.read = read ?? false
+        self.date = date ?? ""
     }
 }

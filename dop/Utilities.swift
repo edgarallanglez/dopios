@@ -19,7 +19,7 @@ class Utilities {
         return "http://45.55.7.118/branches/images/"
     }
     class var dopColor: UIColor {
-        return UIColor( red: 222.0/255.0 , green: 0.0/255.0 , blue: 120/255.0, alpha:1.0)
+        return UIColor( red: 251.0/255.0 , green: 34.0/255.0 , blue: 111.0/255.0, alpha:1.0)
     }
     class var lightGrayColor: UIColor {
         return UIColor( red: 250.0/255.0 , green: 250.0/255.0 , blue: 250.0/255.0, alpha:1.0)

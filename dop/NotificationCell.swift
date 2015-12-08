@@ -11,6 +11,7 @@ import UIKit
 class NotificationCell: UITableViewCell {
 
     
+    @IBOutlet var date_label: UILabel!
     @IBOutlet var notification_view: UIView!
     @IBOutlet var notification_image: UIImageView!
     @IBOutlet var title: UILabel!
@@ -26,7 +27,12 @@ class NotificationCell: UITableViewCell {
     func loadItem(notification:Notification, viewController:UIViewController) {
         var string_format = NSMutableAttributedString()
         
-
+        let linex = notification.date
+        let separators = NSCharacterSet(charactersInString: "T.")
+        let parts = linex.componentsSeparatedByCharactersInSet(separators)
+        var fecha = NSDate(dateString: "\(parts[0]) \(parts[1])").timeAgo
+        
+        
         
         if(notification.type == "newsfeed"){
             let notification_text = "A \(notification.launcher_name) \(notification.launcher_surnames) le a gustado tu actividad en \(notification.newsfeed_activity)"
@@ -38,11 +44,12 @@ class NotificationCell: UITableViewCell {
             string_format.addAttribute(NSForegroundColorAttributeName, value: Utilities.dopColor, range: NSRange(location:2,length:name_lenght))
             
             
-            /*self.title.text = "A \(notification.launcher_name) \(notification.launcher_surnames) le a gustado tu actividad en \(notification.newsfeed_activity)"*/
+            print("FECHA NOTIFICACION \(fecha)")
+            
+            
             self.notification_image.image = UIImage(named: "news-icon")
             
             self.title.attributedText = string_format
-            //self.title.text = myString as String
         }
         if(notification.type == "friend"){
             self.title.text = "\(notification.launcher_name) \(notification.launcher_surnames) te envió una solicitud de amistad"
@@ -56,7 +63,8 @@ class NotificationCell: UITableViewCell {
             })*/
         }
         
-        
+        self.date_label.text = fecha
+
         self.notification = notification
     }
 

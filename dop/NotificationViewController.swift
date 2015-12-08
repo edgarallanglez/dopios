@@ -50,18 +50,6 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
 
         getNotifications()
         
-        let fullName = "FirstTLast"
-        
-        let replaced = String(fullName.characters.map {
-            $0 == "T" ? " " : $0
-            })
-        
-        print("FECHA ES \(replaced)")
-        
-        
-        var fecha = NSDate(dateString: "2015-11-17 13:15:00")
-        
-        print(fecha.timeAgo)
     }
     func refresh(sender:AnyObject){
         getNotifications()
@@ -101,8 +89,9 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                     let newsfeed_activity = subJson["newsfeed_activity"].string ?? ""
                     let friendship_status = subJson["friendship_status"].int ?? 0
                     let read = subJson["readed"].bool ?? false
-
-                    let model = Notification(type: type, notification_id: notification_id, launcher_id: launcher_id, launcher_name: launcher_name, launcher_surnames: launcher_surnames, newsfeed_activity: newsfeed_activity, friendship_status: friendship_status,read: read)
+                    let date = subJson["notification_date"].string ?? ""
+                    
+                    let model = Notification(type: type, notification_id: notification_id, launcher_id: launcher_id, launcher_name: launcher_name, launcher_surnames: launcher_surnames, newsfeed_activity: newsfeed_activity, friendship_status: friendship_status,read: read, date: date)
                     
                     self.notificationsTemporary.append(model)
                     
@@ -154,8 +143,9 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                     let newsfeed_activity = subJson["newsfeed_activity"].string ?? ""
                     let friendship_status = subJson["friendship_status"].int ?? 0
                     let read = subJson["readed"].bool ?? false
+                    let date = subJson["notification_date"].string ?? ""
                     
-                    let model = Notification(type: type, notification_id: notification_id, launcher_id: launcher_id, launcher_name: launcher_name, launcher_surnames: launcher_surnames, newsfeed_activity: newsfeed_activity, friendship_status: friendship_status,read: read)
+                    let model = Notification(type: type, notification_id: notification_id, launcher_id: launcher_id, launcher_name: launcher_name, launcher_surnames: launcher_surnames, newsfeed_activity: newsfeed_activity, friendship_status: friendship_status,read: read, date:date)
                     
                     
                     self.notificationsTemporary.append(model)
