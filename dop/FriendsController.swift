@@ -42,5 +42,16 @@ class FriendsController: NSObject {
             }
         })
     }
+    
+    class func getAllFollowingWithSuccess(success succeed: ((friendsData: NSData!) -> Void), failure errorFound: ((friendsData: NSError?) -> Void)) {
+        let url = "\(Utilities.dopURL)user/following/get"
+        Utilities.loadDataFromURL(NSURL(string: url)!, completion:{(data, error) -> Void in
+            if let urlData = data {
+                succeed(friendsData: urlData)
+            }else{
+                errorFound(friendsData: error)
+            }
+        })
+    }
 
 }

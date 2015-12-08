@@ -11,24 +11,104 @@ import UIKit
 class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
 
+    @IBOutlet weak var friendScrollView: UIScrollView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var followingTableView: UITableView!
+    @IBOutlet weak var friendSegmentedController: FriendSegmentedController!
   
     var friends = [Friend]()
-
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return friends.count
+    var following = [Friend]()
+    var cachedImages: [String: UIImage] = [:]
+    var cachedFollowingImages: [String: UIImage] = [:]
+    
+    override func viewDidLoad() {
+//        let nib = UINib(nibName: "FriendCell", bundle: nil)
+//        tableView.registerNib(nib, forCellReuseIdentifier: "FriendCell")
+//        followingTableView.registerNib(nib, forCellReuseIdentifier: "FriendCell")
+        
+        getAllPeople()
     }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if tableView == self.tableView {
+            return friends.count
+        } else {
+            return following.count
+        }
+    }
+    
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell: FriendCell = tableView.dequeueReusableCellWithIdentifier("FriendCell", forIndexPath: indexPath) as! FriendCell
-        let model = self.friends[indexPath.row]
-        let (title) = model.names
-        let imageUrl = NSURL(string: model.main_image)
-        cell.loadItem(title: title, image: imageUrl!, friend_id: model.friend_id)
+        let cell = self.tableView.dequeueReusableCellWithIdentifier("FriendCell") as! FriendCell;
+//        let cell = tableView.dequeueReusableCellWithIdentifier("FriendCell", forIndexPath: indexPath) as! FriendCell
+        var model: Friend
+        if tableView == self.tableView {
+            model = self.friends[indexPath.row]
+        } else {
+            model = self.following[indexPath.row]
+        }
         
+        let imageUrl = NSURL(string: model.main_image)
+        cell.loadItem(model, viewController: self)
+
+        
+        cell.selectionStyle = UITableViewCellSelectionStyle.None
+        ////////
+        let identifier = "Cell\(indexPath.row)"
+        if tableView == self.tableView {
+            if (self.cachedImages[identifier] != nil){
+                let cell_image_saved : UIImage = self.cachedImages[identifier]!
+                cell.user_image.image = cell_image_saved
+                cell.user_image.alpha = 1
+                
+            } else {
+                cell.user_image.alpha = 1
+
+                Utilities.getDataFromUrl(imageUrl!) { data in
+                    dispatch_async(dispatch_get_main_queue()) {
+                        var cell_image : UIImage = UIImage()
+                        cell_image = UIImage (data: data!)!
+                        
+                        if tableView.indexPathForCell(cell)?.row == indexPath.row {
+                            self.cachedImages[identifier] = cell_image
+                            let cell_image_saved : UIImage = self.cachedImages[identifier]!
+                            cell.user_image.image = cell_image_saved
+                            UIView.animateWithDuration(0.5, animations: {
+                                cell.user_image.alpha = 1
+                            })
+                        }
+                    }
+                }
+            }
+        } else {
+            if (self.cachedFollowingImages[identifier] != nil){
+                let cell_image_saved : UIImage = self.cachedFollowingImages[identifier]!
+                cell.user_image.image = cell_image_saved
+                cell.user_image.alpha = 1
+                
+            } else {
+                cell.user_image.alpha = 1
+                
+                Utilities.getDataFromUrl(imageUrl!) { data in
+                    dispatch_async(dispatch_get_main_queue()) {
+                        var cell_image : UIImage = UIImage()
+                        cell_image = UIImage (data: data!)!
+                        
+                        if tableView.indexPathForCell(cell)?.row == indexPath.row {
+                            self.cachedFollowingImages[identifier] = cell_image
+                            let cell_image_saved : UIImage = self.cachedFollowingImages[identifier]!
+                            cell.user_image.image = cell_image_saved
+                            UIView.animateWithDuration(0.5, animations: {
+                                cell.user_image.alpha = 1
+                            })
+                        }
+                    }
+                }
+            }
+        }
         return cell
     }
     
@@ -37,32 +117,83 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.performSegueWithIdentifier("friendUserProfile", sender: cell)
     }
     
-    override func viewDidLoad() {
-        let nib = UINib(nibName: "FriendCell", bundle: nil)
-        tableView.registerNib(nib, forCellReuseIdentifier: "FriendCell")
-        
+    func getAllPeople() {
+        friends.removeAll()
+        cachedImages.removeAll()
         FriendsController.getAllFriendsWithSuccess(
-        success:{ (friendsData) -> Void in
-            let json = JSON(data: friendsData)
-            
-            for (_, subJson): (String, JSON) in json["data"] {
-                let friend_id = subJson["friends_id"].int
-                let user_id = subJson["user_id"].int
-                let user_name = subJson["names"].string
-                let user_surnames = subJson["surnames"].string
-                let main_image = subJson["main_image"].string
-                let model = Friend(friend_id: friend_id, user_id: user_id, names: user_name, surnames: user_surnames, main_image: main_image)
+            success:{ (friendsData) -> Void in
+                let json = JSON(data: friendsData)
                 
-                self.friends.append(model)
-            }
-            
-            dispatch_async(dispatch_get_main_queue(), {
-                self.tableView.reloadData()
-            });
-        },
-        failure: {(error) -> Void in
-            print(error)
+                for (_, subJson): (String, JSON) in json["data"] {
+                    let friend_id = subJson["friends_id"].int
+                    let user_id = subJson["user_id"].int
+                    let user_name = subJson["names"].string
+                    let user_surnames = subJson["surnames"].string
+                    let main_image = subJson["main_image"].string
+                    let friend = subJson["friend"].bool!
+                    let birth_date = subJson["birth_date"].string!
+                    let privacy_status = subJson["privacy_status"].int
+                    let facebook_key = subJson["facebook_key"].string ?? ""
+                    
+                    let model = Friend(friend_id: friend_id, user_id: user_id, names: user_name, surnames: user_surnames, main_image: main_image, friend: friend, birth_date: birth_date, privacy_status: privacy_status, facebook_key: facebook_key)
+                    
+                    self.friends.append(model)
+                }
+                
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.tableView.reloadData()
+                });
+            },
+            failure: {(error) -> Void in
+                print(error)
         })
+    }
+    
+    func getFollowings() {
+        following.removeAll()
+        cachedFollowingImages.removeAll()
+        FriendsController.getAllFollowingWithSuccess(
+            success:{ (friendsData) -> Void in
+                let json = JSON(data: friendsData)
+                print(json)
+                for (_, subJson): (String, JSON) in json["data"] {
+                    let friend_id = subJson["friends_id"].int
+                    let user_id = subJson["user_id"].int
+                    let user_name = subJson["names"].string ?? ""
+                    let user_surnames = subJson["surnames"].string ?? ""
+                    let main_image = subJson["main_image"].string ?? ""
+                    let friend = subJson["friend"].bool!
+                    let birth_date = subJson["birth_date"].string!
+                    let privacy_status = subJson["privacy_status"].int
+                    let facebook_key = subJson["facebook_key"].string ?? ""
+                    
+                    let model = Friend(friend_id: friend_id, user_id: user_id, names: user_name, surnames: user_surnames, main_image: main_image, friend: friend, birth_date: birth_date, privacy_status: privacy_status, facebook_key: facebook_key)
+                    
+                    self.following.append(model)
+                }
+                
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.followingTableView.reloadData()
+                });
+            },
+            failure: {(error) -> Void in
+                print(error)
+        })
+    }
+    
+    @IBAction func setPeopleTarget(sender: FriendSegmentedController) {
+        switch sender.selectedIndex {
+        case 0:
+//            tableView.reloadData()
+            print("holis")
+        case 1:
+            getFollowings()
+//            followingTableView.reloadData()
+        default:
+            print("Oops!")
+        }
+        let x = CGFloat(sender.selectedIndex) * self.friendScrollView.frame.size.width
+        self.friendScrollView.setContentOffset(CGPointMake(x, 0), animated: true)
     }
     
     @IBAction func getFriends(sender: UIBarButtonItem) {
@@ -99,6 +230,8 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
                 let view = segue.destinationViewController as! UserProfileViewController
                 view.userId = model.user_id
                 view.userImagePath = model.main_image
+                let person = PeopleModel(names: model.names, surnames: model.surnames, user_id: model.user_id, birth_date: model.birth_date, facebook_key: model.facebook_key, privacy_status: model.privacy_status, main_image: model.main_image, is_friend: model.friend)
+                view.person = person
             }
         }
     }

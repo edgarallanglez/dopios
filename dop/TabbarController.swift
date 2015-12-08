@@ -51,8 +51,8 @@ class TabbarController: UITabBarController, NotificationDelegate {
         self.navigationItem.backBarButtonItem?.setTitleTextAttributes( [NSForegroundColorAttributeName: UIColor.whiteColor()], forState: UIControlState.Normal)
        */
         
-        let imagen:UIImage = UIImage(named: "tabButton")!
-        addCenterButtonWithImage(imagen)
+        //let imagen:UIImage = UIImage(named: "tabButtonn")!
+        //addCenterButtonWithImage(imagen)
         
         UIApplication.sharedApplication().statusBarStyle = .LightContent
         

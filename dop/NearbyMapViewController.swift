@@ -14,7 +14,6 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
  
     @IBOutlet weak var currentLocationLbl: UIButton!
     @IBOutlet weak var nearbyMap: MKMapView!
-    @IBOutlet weak var toolView: UIView!
     @IBOutlet weak var topBorder: UIView!
     
     var coordinate: CLLocationCoordinate2D?
@@ -22,15 +21,16 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
     var current: CLLocation!
     var filterArray: [Int] = []
     var annotationArray: [MKAnnotation] = []
-    @IBOutlet weak var filterSidebarButton: UIButton!
+    var filterSidebarButton: UIBarButtonItem = UIBarButtonItem()
     
     override func viewDidLoad() {
-        self.navigationController?.navigationBar.topItem!.title = "Cerca de ti"
         Utilities.filterArray.removeAll()
         nearbyMap.delegate = self
 //        topBorder.layer.borderWidth = (1.0 / UIScreen.mainScreen.scale) / 2
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "getNearestBranches", name: "filtersChanged", object: nil)
+        
+        
         
         locationManager = CLLocationManager()
         locationManager.delegate = self
@@ -39,15 +39,17 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
         locationManager.startUpdatingLocation()
         User.coordinate = locationManager.location!.coordinate
         if (self.revealViewController() != nil) {
-            self.filterSidebarButton.addTarget(self.revealViewController(), action: "revealToggle:", forControlEvents: UIControlEvents.TouchUpInside)
+            filterSidebarButton = UIBarButtonItem(image: UIImage(named: "filter"), style: UIBarButtonItemStyle.Plain, target: self.revealViewController(), action: "revealToggle:")
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+            self.navigationItem.leftBarButtonItem = filterSidebarButton
         }
         
         let locationArrow:UIImageView = UIImageView(image: UIImage(named: "locationArrow")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate))
-        currentLocationLbl.setBackgroundImage(locationArrow.image, forState: UIControlState.Normal)
+        currentLocationLbl.setImage(locationArrow.image, forState: UIControlState.Normal)
         currentLocationLbl.tintColor = Utilities.dopColor
+        currentLocationLbl.backgroundColor = UIColor.whiteColor()
         
-        //getNearestBranches()
+        getNearestBranches()
         super.viewDidLoad()
 
     }
@@ -72,10 +74,6 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
     
     @IBAction func currentLocation(sender: UIButton) {
         setMapAtCurrent()
-    }
-    
-    @IBAction func searchNearest(sender: UIButton) {
-        getNearestBranches()
     }
     
     func setMapAtCurrent() {
