@@ -76,7 +76,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             
             
             if(model.type == "newsfeed"){
-                imageUrl = NSURL(string: "\(Utilities.dopImagesURL)\(model.image_name)")!
+                imageUrl = NSURL(string: "\(Utilities.dopImagesURL)\(model.)\(model.image_name)")!
             }else{
                 imageUrl = NSURL(string: "\(model.image_name)")!
             }
