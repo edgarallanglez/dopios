@@ -33,9 +33,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
     
 
     var coupons = [Coupon]()
-    
     var branches = [Branch]()
-    
     var trending = [Coupon]()
     var almost_expired = [Coupon]()
     var nearest = [Coupon]()
@@ -84,8 +82,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
-        User.coordinate = locationManager.location!.coordinate
-
+        
         //super.notificationButton.delegate = self
         //super.notificationButton.startListening()
 
@@ -586,6 +583,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         locValue = manager.location!.coordinate
+        User.coordinate = locationManager.location!.coordinate
         locationManager.stopUpdatingLocation()
         
         if(!obtained_location){

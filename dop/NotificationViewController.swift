@@ -91,7 +91,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         NotificationController.getNotificationsWithSuccess(
             success: { (couponsData) -> Void in
                 let json = JSON(data: couponsData)
-                print(json)
+
                 for (_, subJson): (String, JSON) in json["data"]{
                     let type = subJson["type"].string ?? ""
                     let notification_id = subJson["notification_id"].int ?? 0
@@ -105,9 +105,11 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                     let model = Notification(type: type, notification_id: notification_id, launcher_id: launcher_id, launcher_name: launcher_name, launcher_surnames: launcher_surnames, newsfeed_activity: newsfeed_activity, friendship_status: friendship_status,read: read)
                     
                     self.notificationsTemporary.append(model)
-                    
+                    var date = subJson["notification_date"].string!
+                    print(date)
                     
                 }
+                
                 dispatch_async(dispatch_get_main_queue(), {
                     UIView.animateWithDuration(0.3, animations: {
                         self.notifications.removeAll()

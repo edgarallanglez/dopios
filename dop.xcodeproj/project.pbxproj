@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9D01E7F21C0D0F8A006A1F21 /* FriendSegmentedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D01E7F11C0D0F8A006A1F21 /* FriendSegmentedController.swift */; };
 		9D0C16841B4DC6EB0088DE2F /* BranchProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0C16831B4DC6EB0088DE2F /* BranchProfileViewController.swift */; };
 		9D0DB4711B17D2DB0009FE6C /* NearbyMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0DB4701B17D2DB0009FE6C /* NearbyMapViewController.swift */; };
 		9D0DB4731B17DE5A0009FE6C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D0DB4721B17DE5A0009FE6C /* MapKit.framework */; };
@@ -124,7 +125,6 @@
 		A0A494FF1BE546670000E98A /* BranchProfileViewControllerN.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A494FE1BE546670000E98A /* BranchProfileViewControllerN.swift */; };
 		A0A495011BE56C300000E98A /* BranchProfilePromoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A495001BE56C300000E98A /* BranchProfilePromoViewController.swift */; };
 		A0BB9BB91B13E4F1000BA261 /* FriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BB9BB71B13E4F1000BA261 /* FriendCell.swift */; };
-		A0BB9BBA1B13E4F1000BA261 /* FriendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0BB9BB81B13E4F1000BA261 /* FriendCell.xib */; };
 		A0C3AC2E1B9525D5005636E7 /* CustomInfiniteIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C3AC2D1B9525D5005636E7 /* CustomInfiniteIndicator.swift */; };
 		A0DF72911B13A66C006EE8F4 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DF72901B13A66C006EE8F4 /* FriendsViewController.swift */; };
 		A0DF72931B13AEBF006EE8F4 /* FriendsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DF72921B13AEBF006EE8F4 /* FriendsController.swift */; };
@@ -272,6 +272,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9D01E7F11C0D0F8A006A1F21 /* FriendSegmentedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendSegmentedController.swift; sourceTree = "<group>"; };
 		9D0C16831B4DC6EB0088DE2F /* BranchProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BranchProfileViewController.swift; sourceTree = "<group>"; };
 		9D0DB4701B17D2DB0009FE6C /* NearbyMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyMapViewController.swift; sourceTree = "<group>"; };
 		9D0DB4721B17DE5A0009FE6C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -401,7 +402,6 @@
 		A0A495001BE56C300000E98A /* BranchProfilePromoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BranchProfilePromoViewController.swift; sourceTree = "<group>"; };
 		A0AE939A1AF8041A00D02315 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		A0BB9BB71B13E4F1000BA261 /* FriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendCell.swift; sourceTree = "<group>"; };
-		A0BB9BB81B13E4F1000BA261 /* FriendCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendCell.xib; sourceTree = "<group>"; };
 		A0C3AC2D1B9525D5005636E7 /* CustomInfiniteIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomInfiniteIndicator.swift; sourceTree = "<group>"; };
 		A0DF72901B13A66C006EE8F4 /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
 		A0DF72921B13AEBF006EE8F4 /* FriendsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsController.swift; sourceTree = "<group>"; };
@@ -870,9 +870,9 @@
 			children = (
 				A0DF72901B13A66C006EE8F4 /* FriendsViewController.swift */,
 				A0BB9BB71B13E4F1000BA261 /* FriendCell.swift */,
-				A0BB9BB81B13E4F1000BA261 /* FriendCell.xib */,
 				A0DF72941B13E262006EE8F4 /* Friend.swift */,
 				A0DF72921B13AEBF006EE8F4 /* FriendsController.swift */,
+				9D01E7F11C0D0F8A006A1F21 /* FriendSegmentedController.swift */,
 			);
 			name = Friend;
 			sourceTree = "<group>";
@@ -1114,7 +1114,6 @@
 				A0F7E9211AFAE48500A4F0F2 /* CouponCell.xib in Resources */,
 				9D1021371B82A019005BED0C /* BranchProfileLastCampaign.xib in Resources */,
 				9DB6BB2A1B72A6A000FF2659 /* BranchProfileTopView.xib in Resources */,
-				A0BB9BBA1B13E4F1000BA261 /* FriendCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1175,6 +1174,7 @@
 				A082F4871B18E4FF001C8C52 /* NewsfeedNote.swift in Sources */,
 				9DB327CC1B863C77006BF882 /* MoreMenuController.swift in Sources */,
 				A0EB97B21B051F02005112EF /* LoginController.swift in Sources */,
+				9D01E7F21C0D0F8A006A1F21 /* FriendSegmentedController.swift in Sources */,
 				A09AB4E21AF99136004287F7 /* CouponController.swift in Sources */,
 				A0EB97B01B05131E005112EF /* Utilities.swift in Sources */,
 				A0578C641B0E7D2B0033B5BD /* UserProfileController.swift in Sources */,

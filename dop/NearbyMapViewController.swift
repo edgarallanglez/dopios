@@ -24,14 +24,13 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
     var filterSidebarButton: UIBarButtonItem = UIBarButtonItem()
     
     override func viewDidLoad() {
-        self.navigationController?.navigationBar.topItem!.title = "Cerca de ti"
         Utilities.filterArray.removeAll()
         nearbyMap.delegate = self
 //        topBorder.layer.borderWidth = (1.0 / UIScreen.mainScreen.scale) / 2
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "getNearestBranches", name: "filtersChanged", object: nil)
         
-        self.navigationItem.leftBarButtonItem = filterSidebarButton
+        
         
         locationManager = CLLocationManager()
         locationManager.delegate = self
@@ -42,6 +41,7 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
         if (self.revealViewController() != nil) {
             filterSidebarButton = UIBarButtonItem(image: UIImage(named: "filter"), style: UIBarButtonItemStyle.Plain, target: self.revealViewController(), action: "revealToggle:")
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+            self.navigationItem.leftBarButtonItem = filterSidebarButton
         }
         
         let locationArrow:UIImageView = UIImageView(image: UIImage(named: "locationArrow")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate))
