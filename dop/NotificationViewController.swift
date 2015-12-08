@@ -21,7 +21,8 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     var offset:Int = 0
     let limit:Int = 11
     var refreshControl: UIRefreshControl!
-
+    var cachedImages: [String: UIImage] = [:]
+    
     override func viewDidLoad() {
         
         self.title = "Notificaciones"
@@ -65,9 +66,34 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as! NotificationCell;
         
-        let model = self.notifications[indexPath.row]
-        cell.loadItem(model, viewController: self)
-        cell.selectionStyle = UITableViewCellSelectionStyle.None
+        if(!notifications.isEmpty){
+            let model = self.notifications[indexPath.row]
+            cell.loadItem(model, viewController: self)
+            cell.selectionStyle = UITableViewCellSelectionStyle.None
+            
+            var imageUrl:NSURL
+            let identifier = "Cell\(indexPath.row)"
+            
+            
+            if(model.type == "newsfeed"){
+                imageUrl = NSURL(string: "\(Utilities.dopImagesURL)\(model.image_name)")!
+            }else{
+                imageUrl = NSURL(string: "\(model.image_name)")!
+            }
+            Utilities.getDataFromUrl(imageUrl) { photo in
+                dispatch_async(dispatch_get_main_queue()) {
+                    let imageData : NSData = NSData(data:photo!)
+                    if tableView.indexPathForCell(cell)?.row == indexPath.row {
+                        //self.cachedImages[identifier] = imageData
+                        //let image_saved : UIImage = self.cachedImages[identifier]!
+                        cell.notification_image.image = UIImage(data: imageData)
+                        UIView.animateWithDuration(0.5, animations: {
+                            cell.notification_image.alpha = 1
+                        })
+                    }
+                }
+            }
+        }
         
         return cell
 
@@ -91,7 +117,16 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                     let read = subJson["readed"].bool ?? false
                     let date = subJson["notification_date"].string ?? ""
                     
-                    let model = Notification(type: type, notification_id: notification_id, launcher_id: launcher_id, launcher_name: launcher_name, launcher_surnames: launcher_surnames, newsfeed_activity: newsfeed_activity, friendship_status: friendship_status,read: read, date: date)
+                    var image:String
+                    if(subJson["user_image"]==nil){
+                        image = subJson["branch_image"].string!
+                    }else{
+                        image = subJson["user_image"].string!
+                    }
+                   
+                    
+                    
+                    let model = Notification(type: type, notification_id: notification_id, launcher_id: launcher_id, launcher_name: launcher_name, launcher_surnames: launcher_surnames, newsfeed_activity: newsfeed_activity, friendship_status: friendship_status,read: read, date: date, image_name: image)
                     
                     self.notificationsTemporary.append(model)
                     
@@ -144,8 +179,10 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                     let friendship_status = subJson["friendship_status"].int ?? 0
                     let read = subJson["readed"].bool ?? false
                     let date = subJson["notification_date"].string ?? ""
+
+                    let image = subJson["user_image"].string! ?? subJson["branch_image"].string!
                     
-                    let model = Notification(type: type, notification_id: notification_id, launcher_id: launcher_id, launcher_name: launcher_name, launcher_surnames: launcher_surnames, newsfeed_activity: newsfeed_activity, friendship_status: friendship_status,read: read, date:date)
+                    let model = Notification(type: type, notification_id: notification_id, launcher_id: launcher_id, launcher_name: launcher_name, launcher_surnames: launcher_surnames, newsfeed_activity: newsfeed_activity, friendship_status: friendship_status,read: read, date:date, image_name: image)
                     
                     
                     self.notificationsTemporary.append(model)

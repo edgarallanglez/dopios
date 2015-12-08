@@ -44,16 +44,13 @@ class NotificationCell: UITableViewCell {
             string_format.addAttribute(NSForegroundColorAttributeName, value: Utilities.dopColor, range: NSRange(location:2,length:name_lenght))
             
             
-            print("FECHA NOTIFICACION \(fecha)")
-            
-            
-            self.notification_image.image = UIImage(named: "news-icon")
+            //self.notification_image.image = UIImage(named: "news-icon")
             
             self.title.attributedText = string_format
         }
         if(notification.type == "friend"){
             self.title.text = "\(notification.launcher_name) \(notification.launcher_surnames) te envió una solicitud de amistad"
-            self.notification_image.image = UIImage(named: "request-icon")
+            //self.notification_image.image = UIImage(named: "request-icon")
         }
         if(notification.read == false){
             notification_view.backgroundColor = Utilities.lightGrayColor
