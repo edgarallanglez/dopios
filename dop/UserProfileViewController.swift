@@ -98,7 +98,6 @@ class UserProfileViewController: BaseViewController, UIScrollViewDelegate, UITab
     }
     
     override func viewDidAppear(animated: Bool) {
-        
         self.initialHeight = self.scrollViewBox.frame.size.height
         self.activityPage.frame.size = CGSizeMake(self.scrollViewBox.frame.size.width, CGFloat(self.initialHeight))
         self.activityPage.frame.origin.x = 0

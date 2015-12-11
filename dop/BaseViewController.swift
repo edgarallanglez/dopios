@@ -24,7 +24,7 @@ class BaseViewController: UIViewController, UISearchBarDelegate {
         self.navigationItem.rightBarButtonItem = notificationButton
 
         
-         vc  = self.storyboard!.instantiateViewControllerWithIdentifier("SearchView") as! SearchViewController
+        vc  = self.storyboard!.instantiateViewControllerWithIdentifier("SearchView") as! SearchViewController
         
         
         searchBar.delegate = self
@@ -41,7 +41,7 @@ class BaseViewController: UIViewController, UISearchBarDelegate {
         for subView in self.searchBar.subviews{
             for subsubView in subView.subviews{
                 if let textField = subsubView as? UITextField{
-                    textField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("Buscar", comment: ""), attributes: [NSForegroundColorAttributeName: Utilities.lightGrayColor])
+                    textField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("Buscar", comment: ""), attributes: [NSForegroundColorAttributeName: Utilities.extraLightGrayColor])
                     textField.textColor = UIColor.whiteColor()
 
                 }
@@ -78,8 +78,8 @@ class BaseViewController: UIViewController, UISearchBarDelegate {
     }
     func notification() {
         self.navigationController!.pushViewController(self.storyboard!.instantiateViewControllerWithIdentifier("Notifications") as UIViewController, animated: true)
-        self.navigationController?.hidesBottomBarWhenPushed = false
-        
+        //self.navigationController?.hidesBottomBarWhenPushed = true
+
     }
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return .LightContent

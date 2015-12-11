@@ -34,6 +34,7 @@ class NotificationCell: UITableViewCell {
         
         
         
+        
         if(notification.type == "newsfeed"){
             let notification_text = "A \(notification.launcher_name) \(notification.launcher_surnames) le a gustado tu actividad en \(notification.newsfeed_activity)"
             
@@ -49,21 +50,33 @@ class NotificationCell: UITableViewCell {
             self.title.attributedText = string_format
         }
         if(notification.type == "friend"){
-            self.title.text = "\(notification.launcher_name) \(notification.launcher_surnames) te envió una solicitud de amistad"
-            //self.notification_image.image = UIImage(named: "request-icon")
+            let notification_text = "\(notification.launcher_name) \(notification.launcher_surnames) te envió una solicitud de amistad"
+            let name_lenght = notification.launcher_name.characters.count + notification.launcher_surnames.characters.count + 1
+            
+            string_format = NSMutableAttributedString(string: notification_text as String)
+            
+            string_format.addAttribute(NSForegroundColorAttributeName, value: Utilities.dopColor, range: NSRange(location:0,length:name_lenght))
+            
+            self.title.attributedText = string_format
+            
         }
         if(notification.read == false){
             notification_view.backgroundColor = Utilities.lightGrayColor
+            self.contentView.backgroundColor = Utilities.lightGrayColor
+
         }else{
-            /*UIView.animateWithDuration(3, animations: {
-                self.notification_view.backgroundColor = UIColor.whiteColor()
-            })*/
+            notification_view.backgroundColor = UIColor.whiteColor()
+            self.contentView.backgroundColor = UIColor.whiteColor()
         }
         
         self.date_label.text = fecha
 
         self.notification = notification
+        
+
     }
+
+    
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

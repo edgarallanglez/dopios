@@ -56,7 +56,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         getNotifications()
     }
     override func viewDidAppear(animated: Bool) {
-        
+        notification_table.reloadData()
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return notifications.count
@@ -76,20 +76,39 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             
             
             if(model.type == "newsfeed"){
-                imageUrl = NSURL(string: "\(Utilities.dopImagesURL)\(model.)\(model.image_name)")!
+                imageUrl = NSURL(string: "\(Utilities.dopImagesURL)\(model.company_id)/\(model.image_name)")!
             }else{
                 imageUrl = NSURL(string: "\(model.image_name)")!
             }
-            Utilities.getDataFromUrl(imageUrl) { photo in
-                dispatch_async(dispatch_get_main_queue()) {
-                    let imageData : NSData = NSData(data:photo!)
-                    if tableView.indexPathForCell(cell)?.row == indexPath.row {
-                        //self.cachedImages[identifier] = imageData
-                        //let image_saved : UIImage = self.cachedImages[identifier]!
-                        cell.notification_image.image = UIImage(data: imageData)
-                        UIView.animateWithDuration(0.5, animations: {
-                            cell.notification_image.alpha = 1
-                        })
+            
+            
+            let color = cell.contentView.backgroundColor
+            cell.backgroundColor = color
+            
+            
+            cell.notification_image.layer.cornerRadius = cell.notification_image.frame.width/2
+
+            if (self.cachedImages[identifier] != nil){
+                let cell_image_saved : UIImage = self.cachedImages[identifier]!
+                cell.notification_image.image = cell_image_saved
+                UIView.animateWithDuration(0.5, animations: {
+                    cell.notification_image.alpha = 1
+                })
+                
+            } else {
+                cell.notification_image.alpha=0
+                Utilities.getDataFromUrl(imageUrl) { photo in
+                    dispatch_async(dispatch_get_main_queue()) {
+                        let imageData : NSData = NSData(data:photo!)
+                        if tableView.indexPathForCell(cell)?.row == indexPath.row {
+                            self.cachedImages[identifier] = UIImage(data: imageData)
+                            //self.cachedImages[identifier] = imageData
+                            let image_saved : UIImage = self.cachedImages[identifier]!
+                            cell.notification_image.image = image_saved
+                            UIView.animateWithDuration(0.5, animations: {
+                                cell.notification_image.alpha = 1
+                            })
+                        }
                     }
                 }
             }
@@ -105,7 +124,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         NotificationController.getNotificationsWithSuccess(
             success: { (couponsData) -> Void in
                 let json = JSON(data: couponsData)
-
+                print(json)
                 for (_, subJson): (String, JSON) in json["data"]{
                     let type = subJson["type"].string ?? ""
                     let notification_id = subJson["notification_id"].int ?? 0
@@ -114,9 +133,10 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                     let launcher_surnames = subJson["launcher_surnames"].string ?? ""
                     let newsfeed_activity = subJson["newsfeed_activity"].string ?? ""
                     let friendship_status = subJson["friendship_status"].int ?? 0
-                    let read = subJson["readed"].bool ?? false
+                    let read = subJson["read"].bool ?? false
                     let date = subJson["notification_date"].string ?? ""
-                    
+                    let company_id = subJson["company_id"].int ?? 0
+
                     var image:String
                     if(subJson["user_image"]==nil){
                         image = subJson["branch_image"].string!
@@ -126,7 +146,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                    
                     
                     
-                    let model = Notification(type: type, notification_id: notification_id, launcher_id: launcher_id, launcher_name: launcher_name, launcher_surnames: launcher_surnames, newsfeed_activity: newsfeed_activity, friendship_status: friendship_status,read: read, date: date, image_name: image)
+                    let model = Notification(type: type, notification_id: notification_id, launcher_id: launcher_id, launcher_name: launcher_name, launcher_surnames: launcher_surnames, newsfeed_activity: newsfeed_activity, friendship_status: friendship_status,read: read, date: date, image_name: image, company_id: company_id)
                     
                     self.notificationsTemporary.append(model)
                     
@@ -138,7 +158,6 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                         self.notifications = self.notificationsTemporary
                         
                         self.notification_table.reloadData()
-                        self.readNotifications()
                         self.notification_table.finishInfiniteScroll()
                         
                         self.offset = self.limit - 1
@@ -177,12 +196,18 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                     let launcher_surnames = subJson["launcher_surnames"].string ?? ""
                     let newsfeed_activity = subJson["newsfeed_activity"].string ?? ""
                     let friendship_status = subJson["friendship_status"].int ?? 0
-                    let read = subJson["readed"].bool ?? false
+                    let read = subJson["read"].bool ?? false
                     let date = subJson["notification_date"].string ?? ""
-
-                    let image = subJson["user_image"].string! ?? subJson["branch_image"].string!
+                    let company_id = subJson["company_id"].int ?? 0
                     
-                    let model = Notification(type: type, notification_id: notification_id, launcher_id: launcher_id, launcher_name: launcher_name, launcher_surnames: launcher_surnames, newsfeed_activity: newsfeed_activity, friendship_status: friendship_status,read: read, date:date, image_name: image)
+                    var image:String
+                    if(subJson["user_image"]==nil){
+                        image = subJson["branch_image"].string!
+                    }else{
+                        image = subJson["user_image"].string!
+                    }
+                    
+                    let model = Notification(type: type, notification_id: notification_id, launcher_id: launcher_id, launcher_name: launcher_name, launcher_surnames: launcher_surnames, newsfeed_activity: newsfeed_activity, friendship_status: friendship_status,read: read, date:date, image_name: image, company_id: company_id)
                     
                     
                     self.notificationsTemporary.append(model)
@@ -216,22 +241,21 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                 })
         })
     }
-    func readNotifications(){
+    func readNotification(notification:Notification){
+        
+        
         let params:[String: AnyObject] = [
-            "coupon_id" : ""]
+            "notification_id" : notification.notification_id]
         
         NotificationController.setNotificationsReadWithSuccess(params,
             success: { (couponsData) -> Void in
-                let json = JSON(data: couponsData)
-                print(json)
-                for (index, notification) in self.notifications.enumerate() {
-                    notification.read = true
-                }
+               let json = JSON(data: couponsData)
+                
+                notification.read = true
 
                 dispatch_async(dispatch_get_main_queue(), {
                     UIView.animateWithDuration(0.3, animations: {
-                        self.notification_table.reloadData()
-                        
+                        //self.notification_table.reloadData()
                     })
                 });
             },
@@ -242,5 +266,42 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         })
 
     }
-   
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let selectedItem = notifications[indexPath.row]
+        let itemId = selectedItem.notification_id
+        
+        
+        
+        let cell: NotificationCell = tableView.cellForRowAtIndexPath(indexPath) as! NotificationCell
+        
+        if(selectedItem.type == "friend"){
+            self.performSegueWithIdentifier("userProfile", sender: cell)
+        }
+        if(selectedItem.type == "newsfeed"){
+            self.performSegueWithIdentifier("userProfile", sender: cell)
+        }
+    }
+    
+
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let cell = sender as? NotificationCell {
+            let i = notification_table.indexPathForCell(cell)!.row
+            let model = self.notifications[i]
+            
+            self.readNotification(model)
+            
+            if segue.identifier == "userProfile" {
+
+                
+                let view = segue.destinationViewController as! UserProfileViewController
+                view.userId = model.launcher_id
+                
+                var people:PeopleModel = PeopleModel(names: "Jose Eduardo", surnames: "Quintero Gutierrez!", user_id: model.launcher_id, birth_date: "", facebook_key: "", privacy_status: 0, main_image: "", is_friend: true)
+                
+                view.person = people
+                //view.userImage = self.cachedImages["Cell\(i)"]
+            }
+        }
+    }
 }

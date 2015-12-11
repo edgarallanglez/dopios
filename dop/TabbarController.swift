@@ -9,7 +9,8 @@
 import UIKit
 
 class TabbarController: UITabBarController, NotificationDelegate {
-
+    
+    var lastSelected = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,6 +34,8 @@ class TabbarController: UITabBarController, NotificationDelegate {
         self.tabBar.backgroundImage = UIImage(named: "")
         
         self.navigationController?.navigationBar.hidden = true
+        
+        
         
     /*self.navigationController?.navigationBar.setBackgroundImage(UIImage(named:"topbarBackground"), forBarMetrics: .Default)
         
@@ -123,6 +126,15 @@ class TabbarController: UITabBarController, NotificationDelegate {
         self.presentViewController(alert, animated: true, completion: nil)
 
     }
+
+    override func tabBar(tabBar: UITabBar, didSelectItem item: UITabBarItem) {
+        let currentSelected = self.selectedIndex
+        if(lastSelected == currentSelected){
+            self.navigationController?.popToRootViewControllerAnimated(true)
+        }
+        lastSelected = currentSelected
+    }
+   
 
   
 

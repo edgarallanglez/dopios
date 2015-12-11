@@ -121,10 +121,13 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
     override func viewDidAppear(animated: Bool) {
         
     }
+    override func viewWillDisappear(animated: Bool) {
+        searchBar.resignFirstResponder()
+        //self.navigationController?.popToRootViewControllerAnimated(true)
+    }
     
     override func viewDidDisappear(animated: Bool) {
-        searchBar.resignFirstResponder()
-        
+
         UIView.animateWithDuration(0.3, animations: {
             self.searchBar.alpha = 0
         })

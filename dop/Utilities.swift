@@ -22,6 +22,9 @@ class Utilities {
         return UIColor( red: 251.0/255.0 , green: 34.0/255.0 , blue: 111.0/255.0, alpha:1.0)
     }
     class var lightGrayColor: UIColor {
+        return UIColor( red: 243.0/255.0 , green: 243.0/255.0 , blue: 243.0/255.0, alpha:1.0)
+    }
+    class var extraLightGrayColor: UIColor {
         return UIColor( red: 250.0/255.0 , green: 250.0/255.0 , blue: 250.0/255.0, alpha:1.0)
     }
     class var Colors:CAGradientLayer {
@@ -103,38 +106,6 @@ class Utilities {
             }.resume()
     }
     
-    class func relativeTimeInString(value: NSTimeInterval) -> String {
-            func getTimeData(value: NSTimeInterval) -> (count: Int, suffix: String) {
-                let count = Int(floor(value))
-                let suffix = count != 1 ? "s" : ""
-                return (count: count, suffix: suffix)
-            }
-            
-            let value = -value
-            switch value {
-            case 0...15: return "just now"
-                
-            case 0..<60:
-                let timeData = getTimeData(value)
-                return "\(timeData.count) second\(timeData.suffix) ago"
-                
-            case 0..<3600:
-                let timeData = getTimeData(value/60)
-                return "\(timeData.count) minute\(timeData.suffix) ago"
-                
-            case 0..<86400:
-                let timeData = getTimeData(value/3600)
-                return "\(timeData.count) hour\(timeData.suffix) ago"
-                
-            case 0..<604800:
-                let timeData = getTimeData(value/86400)
-                return "\(timeData.count) days\(timeData.suffix) ago"
-                
-            default:
-                let timeData = getTimeData(value/604800)
-                return "\(timeData.count) week\(timeData.suffix) ago"
-            }
-    }
 }
 
 /*
