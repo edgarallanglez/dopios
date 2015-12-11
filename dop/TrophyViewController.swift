@@ -10,4 +10,9 @@ import UIKit
 
 class TrophyViewController: UIViewController {
     
+    
+    
+    @IBAction func launchBadgeAlert(sender: UIButton) {
+        self.presentViewController(AlertClass.launchAlert(), animated: true, completion: nil)
+    }
 }

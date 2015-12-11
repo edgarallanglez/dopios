@@ -16,6 +16,7 @@
 		9D1205741BDEBF16009EEBAE /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D12056B1BDEBEF9009EEBAE /* CryptoSwift.framework */; };
 		9D1205751BDEBF60009EEBAE /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D12056B1BDEBEF9009EEBAE /* CryptoSwift.framework */; };
 		9D1205761BDEBF60009EEBAE /* CryptoSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9D12056B1BDEBEF9009EEBAE /* CryptoSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9D1B5F851C1A1030003F28E5 /* AlertClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1B5F841C1A1030003F28E5 /* AlertClass.swift */; };
 		9D1FCED71B79295700F42F6D /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1FCED61B79295700F42F6D /* SegmentedControl.swift */; };
 		9D2BDFE41B9DF524003F1260 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0FE26D01B9A4D12004EB402 /* SearchController.swift */; };
 		9D2CEA2B1BFCE4BD0088B6BC /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D2CEA281BFCE4BD0088B6BC /* FBSDKCoreKit.framework */; };
@@ -282,6 +283,7 @@
 		9D0E43D01BF55F8200BA17D7 /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		9D1021361B82A019005BED0C /* BranchProfileLastCampaign.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BranchProfileLastCampaign.xib; sourceTree = "<group>"; };
 		9D1205621BDEBEF8009EEBAE /* CryptoSwift.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CryptoSwift.xcodeproj; path = CryptoSwift/CryptoSwift.xcodeproj; sourceTree = "<group>"; };
+		9D1B5F841C1A1030003F28E5 /* AlertClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertClass.swift; sourceTree = "<group>"; };
 		9D1FCED61B79295700F42F6D /* SegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
 		9D2CEA281BFCE4BD0088B6BC /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = Facebook/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		9D2CEA291BFCE4BD0088B6BC /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = Facebook/FBSDKLoginKit.framework; sourceTree = "<group>"; };
@@ -724,6 +726,7 @@
 				A060F7871B717DB9009D6ADB /* UIImage+ImageEffects.h */,
 				A060F7881B717DB9009D6ADB /* UIImage+ImageEffects.m */,
 				A0EB97AF1B05131E005112EF /* Utilities.swift */,
+				9D1B5F841C1A1030003F28E5 /* AlertClass.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -1186,6 +1189,7 @@
 				9DB327CC1B863C77006BF882 /* MoreMenuController.swift in Sources */,
 				A0EB97B21B051F02005112EF /* LoginController.swift in Sources */,
 				9D01E7F21C0D0F8A006A1F21 /* FriendSegmentedController.swift in Sources */,
+				9D1B5F851C1A1030003F28E5 /* AlertClass.swift in Sources */,
 				A09AB4E21AF99136004287F7 /* CouponController.swift in Sources */,
 				A0EB97B01B05131E005112EF /* Utilities.swift in Sources */,
 				A0578C641B0E7D2B0033B5BD /* UserProfileController.swift in Sources */,
