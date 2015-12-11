@@ -126,7 +126,7 @@
                             </button>
                         </subviews>
                         <animations/>
-                        <color key="backgroundColor" red="0.78823529410000004" green="0.0" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.98431372549999996" green="0.1333333333" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="17t-ND-Fy0" secondAttribute="centerX" id="2Gt-Ir-qOc"/>
                             <constraint firstItem="g5c-vP-1JZ" firstAttribute="top" secondItem="17t-ND-Fy0" secondAttribute="bottom" constant="57" id="4s3-pQ-5Dk"/>
@@ -359,10 +359,10 @@
             </objects>
             <point key="canvasLocation" x="-5138" y="2190"/>
         </scene>
-        <!--Item-->
+        <!-- -->
         <scene sceneID="2bg-Ph-BB3">
             <objects>
-                <navigationController id="VaC-N9-SbM" customClass="NavigationController" customModule="dop" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController title=" " id="VaC-N9-SbM" customClass="NavigationController" customModule="dop" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="Kfj-AK-f4w"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="UmP-Ab-0o3">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1831,7 +1831,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o4o-23-0wi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="876" y="3598"/>
+            <point key="canvasLocation" x="892.5" y="3634"/>
         </scene>
         <!--Item-->
         <scene sceneID="GZ6-MI-9og">
@@ -5060,7 +5060,7 @@
                                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <nil key="highlightedColor"/>
                                                                     <variation key="widthClass=compact" misplaced="YES">
-                                                                        <rect key="frame" x="73" y="20" width="319" height="20"/>
+                                                                        <rect key="frame" x="73" y="20" width="159" height="20"/>
                                                                     </variation>
                                                                 </label>
                                                             </subviews>
@@ -5284,10 +5284,10 @@
             </objects>
             <point key="canvasLocation" x="-5146.5" y="3005"/>
         </scene>
-        <!--View-->
+        <!-- -->
         <scene sceneID="RLG-2o-LsD">
             <objects>
-                <viewController id="LnE-pO-m5e" customClass="DashboardViewController" customModule="dop" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title=" " id="LnE-pO-m5e" customClass="DashboardViewController" customModule="dop" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="q4c-hL-qxp"/>
                         <viewControllerLayoutGuide type="bottom" id="OCC-Xu-geL"/>
@@ -5331,7 +5331,7 @@
                                                         <rect key="frame" x="20" y="20" width="39" height="37"/>
                                                         <animations/>
                                                         <color key="pageIndicatorTintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <color key="currentPageIndicatorTintColor" red="0.85098039219999999" green="0.015686274510000001" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="currentPageIndicatorTintColor" red="0.98431372549999996" green="0.1333333333" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
                                                         <variation key="widthClass=compact" misplaced="YES">
                                                             <rect key="frame" x="40" y="-12" width="39" height="37"/>
                                                         </variation>
@@ -5420,7 +5420,7 @@
                                                         <rect key="frame" x="20" y="20" width="39" height="37"/>
                                                         <animations/>
                                                         <color key="pageIndicatorTintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <color key="currentPageIndicatorTintColor" red="0.85098039219999999" green="0.015686274510000001" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="currentPageIndicatorTintColor" red="0.98431372549999996" green="0.1333333333" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
                                                     </pageControl>
                                                 </subviews>
                                                 <animations/>
@@ -5539,7 +5539,7 @@
                                                             <constraint firstAttribute="height" constant="30" id="tD0-0K-Z7c"/>
                                                         </constraints>
                                                         <color key="pageIndicatorTintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <color key="currentPageIndicatorTintColor" red="0.85098039219999999" green="0.015686274510000001" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="currentPageIndicatorTintColor" red="0.98431372549999996" green="0.1333333333" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
                                                         <variation key="default">
                                                             <mask key="constraints">
                                                                 <exclude reference="tD0-0K-Z7c"/>
@@ -5895,7 +5895,9 @@
                         <inset key="imageInsets" minX="0.0" minY="5" maxX="0.0" maxY="-5"/>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="View" id="nsM-lF-9Hu"/>
+                    <navigationItem key="navigationItem" id="nsM-lF-9Hu">
+                        <barButtonItem key="backBarButtonItem" title=" " id="Bje-G7-ocX"/>
+                    </navigationItem>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="400" height="1200"/>
                     <connections>
@@ -6002,13 +6004,16 @@
                                                 <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o8K-zg-9by">
                                                     <rect key="frame" x="-11" y="-20" width="334" height="100"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oCf-0F-Ii8">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oCf-0F-Ii8">
                                                             <rect key="frame" x="20" y="22" width="55" height="55"/>
                                                             <animations/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="55" id="dn4-l0-u9L"/>
                                                                 <constraint firstAttribute="height" constant="55" id="ufS-oZ-dLS"/>
                                                             </constraints>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                            </userDefinedRuntimeAttributes>
                                                             <variation key="default">
                                                                 <mask key="constraints">
                                                                     <exclude reference="dn4-l0-u9L"/>
@@ -6197,6 +6202,7 @@
                     <navigationItem key="navigationItem" id="Tr0-4S-niY"/>
                     <connections>
                         <outlet property="notification_table" destination="Chu-fQ-Sej" id="yfM-Hu-57d"/>
+                        <segue destination="OTe-uN-tYr" kind="show" identifier="userProfile" id="GOG-Xj-j89"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bSS-HV-QPt" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -6633,7 +6639,7 @@
         <segue reference="njR-gH-Wm2"/>
         <segue reference="Y2I-Nl-h09"/>
         <segue reference="AaG-PG-nLf"/>
-        <segue reference="fBW-ak-0oy"/>
+        <segue reference="GOG-Xj-j89"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>
