@@ -9,7 +9,7 @@
 import UIKit
 import QuartzCore
 
-class DashboardViewController: BaseViewController/*, CLLocationManagerDelegate, UIScrollViewDelegate , NotificationDelegate*/{
+class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UIScrollViewDelegate , NotificationDelegate{
     
     @IBOutlet var mainLoader: UIActivityIndicatorView!
     @IBOutlet weak var menuButton:UIBarButtonItem!
@@ -51,20 +51,20 @@ class DashboardViewController: BaseViewController/*, CLLocationManagerDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //mainLoader.startAnimating()
+        mainLoader.startAnimating()
         
         //self.navigationController?.navigationBar.topItem!.title = "Dashboard"
         
         //mainScroll.frame.size = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height)
         
-        //mainScroll.contentSize = CGSizeMake(mainScroll.frame.size.width, 4500)
+        mainScroll.contentSize = CGSizeMake(mainScroll.frame.size.width, 4500)
 
 
         
         
-        //mainScroll.delegate = self
+        mainScroll.delegate = self
         
-        /*branchesScroll.delegate = self
+        branchesScroll.delegate = self
         trendingScroll.delegate = self
         toExpireScroll.delegate = self
         nearestScroll.delegate = self
@@ -73,29 +73,22 @@ class DashboardViewController: BaseViewController/*, CLLocationManagerDelegate, 
         pageControlContainer.alpha = 0
         trendingContainer.alpha = 0
         toExpireContainer.alpha = 0
-        nearestContainer.alpha = 0*/
+        nearestContainer.alpha = 0
+
+        
+        getToExpireCoupons()
+        getTrendingCoupons()
         
         
-        branchesScroll.hidden = true
-        pageControlContainer.hidden = true
-        trendingContainer.hidden = true
-        toExpireContainer.hidden = true
-        nearestContainer.hidden = true
-        
-        //getToExpireCoupons()
-        //getTrendingCoupons()
-        
-        
-        /*locationManager = CLLocationManager()
+        locationManager = CLLocationManager()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestAlwaysAuthorization()
-        locationManager.startUpdatingLocation()*/
+        locationManager.startUpdatingLocation()
         
-        //super.notificationButton.delegate = self
-        //super.notificationButton.startListening()
+        super.notificationButton.delegate = self
+        super.notificationButton.startListening()
 
-        //getTopBranches()
 
         self.setNeedsStatusBarAppearanceUpdate()
     }
@@ -109,11 +102,10 @@ class DashboardViewController: BaseViewController/*, CLLocationManagerDelegate, 
         
     }
 
-   /* override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
-
-    }*/
+        getTopBranches()
+    }
     
 
     override func didReceiveMemoryWarning() {
@@ -215,9 +207,6 @@ class DashboardViewController: BaseViewController/*, CLLocationManagerDelegate, 
         
         
         for (index, branch) in branches.enumerate() {
-            
-            
-            
             
             let scrollWidth = branchesScroll.frame.size.width
             let scrollHeight = branchesScroll.frame.size.height
