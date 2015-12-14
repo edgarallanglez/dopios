@@ -14,7 +14,11 @@ class NavigationController: UINavigationController, NotificationDelegate {
     @IBOutlet var navBar: UINavigationBar!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        delegate = nil
 
+        self.delegate = self.navigationController?.delegate
+        
         self.navigationBar.titleTextAttributes = [
             NSForegroundColorAttributeName: UIColor.whiteColor()
         ]

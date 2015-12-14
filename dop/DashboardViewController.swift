@@ -78,7 +78,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
         
         getToExpireCoupons()
         getTrendingCoupons()
-        
+        getTopBranches()
         
         locationManager = CLLocationManager()
         locationManager.delegate = self
@@ -93,6 +93,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
         self.setNeedsStatusBarAppearanceUpdate()
     }
     
+
     func getNotification(packet:SocketIOPacket) {
         print("NOTIFICATION")
         var alert = UIAlertController(title: "Alert", message: packet.data, preferredStyle: UIAlertControllerStyle.Alert)
@@ -101,10 +102,12 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
         self.presentViewController(alert, animated: true, completion: nil)
         
     }
+    override func viewDidAppear(animated: Bool) {
+        print("Dashboard View Controller DidAppear")
+    }
 
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        getTopBranches()
+   override func viewWillAppear(animated: Bool) {
+    
     }
     
 
@@ -160,6 +163,8 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
     func getTopBranches() {
         branches = [Branch]()
         
+
+        
         DashboardController.getDashboardBranchesWithSuccess(success:{(branchesData) -> Void in
             let json = JSON(data: branchesData)
             
@@ -205,7 +210,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
         
 
         
-        
+  
         for (index, branch) in branches.enumerate() {
             
             let scrollWidth = branchesScroll.frame.size.width

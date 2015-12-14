@@ -59,9 +59,8 @@ class TabbarController: UITabBarController, NotificationDelegate {
         
         UIApplication.sharedApplication().statusBarStyle = .LightContent
         
-
-        
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -102,11 +101,12 @@ class TabbarController: UITabBarController, NotificationDelegate {
     func pressed(sender: UIButton!) {
         self.selectedIndex = 2
     }
-    
-    override func viewDidAppear(animated: Bool) {
-        //self.performSegueWithIdentifier("searchView", sender: self)
+    override func viewWillAppear(animated: Bool) {
+        self.selectedIndex = 1
+        self.selectedIndex = 0
     }
     
+ 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let barViewControllers = segue.destinationViewController 
         barViewControllers.hidesBottomBarWhenPushed = false
@@ -134,6 +134,7 @@ class TabbarController: UITabBarController, NotificationDelegate {
         }
         lastSelected = currentSelected
     }
+
    
 
   
