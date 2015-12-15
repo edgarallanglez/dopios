@@ -56,7 +56,12 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         getNotifications()
     }
     override func viewDidAppear(animated: Bool) {
-        notification_table.reloadData()
+        print("Notification View Controller DidAppear")
+        super.viewDidAppear(true)
+        //notification_table.reloadData()
+    }
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return notifications.count

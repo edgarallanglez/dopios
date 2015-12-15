@@ -8,14 +8,17 @@
 
 import UIKit
 
-class BaseViewController: UIViewController, UISearchBarDelegate {
+class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationControllerDelegate {
     var notificationButton: NotificationButton!
     var vc: SearchViewController!
+    var vcNot: NotificationViewController!
     var searchBar: UISearchBar = UISearchBar()
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        
 
-        //let searchButton : UIBarButtonItem = UIBarButtonItem(image: UIImage(named:"search-icon"), style: UIBarButtonItemStyle.Plain, target: self, action: "search")
         
         
         notificationButton = NotificationButton(image: UIImage(named: "notification"), style: UIBarButtonItemStyle.Plain, target: self, action: "notification")
@@ -25,6 +28,8 @@ class BaseViewController: UIViewController, UISearchBarDelegate {
 
         
         vc  = self.storyboard!.instantiateViewControllerWithIdentifier("SearchView") as! SearchViewController
+        
+        vcNot = self.storyboard!.instantiateViewControllerWithIdentifier("Notifications") as! NotificationViewController
         
         
         searchBar.delegate = self
@@ -48,7 +53,8 @@ class BaseViewController: UIViewController, UISearchBarDelegate {
             }
         }
         
-        
+
+        self.navigationController?.delegate = self
         
     }
     
@@ -77,8 +83,11 @@ class BaseViewController: UIViewController, UISearchBarDelegate {
         super.didReceiveMemoryWarning()
     }
     func notification() {
-    self.navigationController!.pushViewController(self.storyboard!.instantiateViewControllerWithIdentifier("Notifications") as UIViewController, animated: true)
+       self.navigationController?.pushViewController(vcNot, animated: true)
+        //self.navigationController!.pushViewController(self.storyboard!.instantiateViewControllerWithIdentifier("Notifications") as UIViewController, animated: true)
         //self.navigationController?.hidesBottomBarWhenPushed = true
+        
+        //self.performSegueWithIdentifier("notificationView", sender: nil)
 
     }
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
@@ -88,8 +97,14 @@ class BaseViewController: UIViewController, UISearchBarDelegate {
     override func prefersStatusBarHidden() -> Bool {
         return false
     }
-
     
+    func navigationController(navigationController: UINavigationController, didShowViewController viewController: UIViewController, animated: Bool) {
+        print("NAVIGATION SHOW")
+        viewController.viewDidAppear(true)
+    }
+    func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
+        viewController.viewWillAppear(true)
+    }
 
     /*
     // MARK: - Navigation
