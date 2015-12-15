@@ -204,7 +204,6 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
                 self.newsfeed = self.newsfeedTemporary
                 
                 self.tableView.reloadData()
-                
                 self.tableView.finishInfiniteScroll()
                 
                 if(newData){

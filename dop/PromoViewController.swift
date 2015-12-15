@@ -38,13 +38,15 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
         
         self.CouponsCollectionView.contentInset = UIEdgeInsetsMake(0,0,49,0)
         
+        
+        
         getCoupons()
         
         // Set custom indicator
         self.CouponsCollectionView.infiniteScrollIndicatorView = CustomInfiniteIndicator(frame: CGRectMake(0, 0, 24, 24))
         
         // Set custom indicator margin
-        CouponsCollectionView.infiniteScrollIndicatorMargin = 10
+        //CouponsCollectionView.infiniteScrollIndicatorMargin = 49
         
         // Add infinite scroll handler
         CouponsCollectionView.addInfiniteScrollWithHandler { [weak self] (scrollView) -> Void in
@@ -213,7 +215,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                 dispatch_async(dispatch_get_main_queue(), {
                     self.CouponsCollectionView.reloadData()
                     self.emptyMessage.hidden = true
-                    self.CouponsCollectionView.alwaysBounceVertical = true
+                    //self.CouponsCollectionView.alwaysBounceVertical = true
                     self.refreshControl.endRefreshing()
                     self.offset = self.limit - 1
                     
@@ -275,10 +277,10 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                     
                 }
                 dispatch_async(dispatch_get_main_queue(), {
+                    self.CouponsCollectionView.finishInfiniteScroll()
                     self.CouponsCollectionView.reloadData()
                     self.emptyMessage.hidden = true
-                    self.CouponsCollectionView.alwaysBounceVertical = true
-                    self.CouponsCollectionView.finishInfiniteScroll()
+                    //self.CouponsCollectionView.alwaysBounceVertical = true
                     
                     if(newData){
                         self.offset+=addedValues
@@ -332,7 +334,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                 dispatch_async(dispatch_get_main_queue(), {
                     self.CouponsCollectionView.reloadData()
                     self.emptyMessage.hidden = true
-                    self.CouponsCollectionView.alwaysBounceVertical = true
+                    //self.CouponsCollectionView.alwaysBounceVertical = true
                     self.refreshControl.endRefreshing()
                     self.offset = self.limit - 1
                     
@@ -393,7 +395,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                 }
                 dispatch_async(dispatch_get_main_queue(), {
                     self.CouponsCollectionView.reloadData()
-                    self.CouponsCollectionView.alwaysBounceVertical = true
+                    //self.CouponsCollectionView.alwaysBounceVertical = true
                     self.CouponsCollectionView.finishInfiniteScroll()
                     
                     if(newData){

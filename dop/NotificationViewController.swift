@@ -56,12 +56,12 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         getNotifications()
     }
     override func viewDidAppear(animated: Bool) {
-        print("Notification View Controller DidAppear")
         super.viewDidAppear(true)
-        //notification_table.reloadData()
+        
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
+        notification_table.reloadData()
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return notifications.count
@@ -125,7 +125,8 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     
     func getNotifications() {
         notificationsTemporary.removeAll(keepCapacity: false)
-        
+        cachedImages.removeAll(keepCapacity: false)
+
         NotificationController.getNotificationsWithSuccess(
             success: { (couponsData) -> Void in
                 let json = JSON(data: couponsData)
