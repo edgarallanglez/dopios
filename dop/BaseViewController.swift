@@ -62,6 +62,8 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
     
     func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
         self.navigationController?.pushViewController(vc, animated: true)
+        searchBar.delegate = nil
+        vc.searchBar.delegate = vc
         return false
     }
 
