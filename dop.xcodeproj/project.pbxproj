@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6D522D8A1C20D8EF00A4CE06 /* MedalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D522D891C20D8EF00A4CE06 /* MedalModel.swift */; };
+		6D522D931C20D9F600A4CE06 /* MedalCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D522D921C20D9F600A4CE06 /* MedalCollectionCell.swift */; };
+		6D8BD4CA1C207328003AC2D7 /* TrophyCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8BD4C91C207328003AC2D7 /* TrophyCollectionCell.swift */; };
+		6D9F5A111C208894005D0EBE /* TrophyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9F5A101C208894005D0EBE /* TrophyController.swift */; };
+		6D9F5A1A1C209306005D0EBE /* RewardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9F5A191C209306005D0EBE /* RewardsViewController.swift */; };
+		6D9F5A1C1C2094ED005D0EBE /* RewardsSegmentedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9F5A1B1C2094ED005D0EBE /* RewardsSegmentedController.swift */; };
+		6D9F5A1E1C209626005D0EBE /* TrophyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9F5A1D1C209626005D0EBE /* TrophyModel.swift */; };
+		6D9F5A201C20A8A7005D0EBE /* MedalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9F5A1F1C20A8A7005D0EBE /* MedalViewController.swift */; };
 		9D01E7F21C0D0F8A006A1F21 /* FriendSegmentedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D01E7F11C0D0F8A006A1F21 /* FriendSegmentedController.swift */; };
 		9D0C16841B4DC6EB0088DE2F /* BranchProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0C16831B4DC6EB0088DE2F /* BranchProfileViewController.swift */; };
 		9D0DB4711B17D2DB0009FE6C /* NearbyMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0DB4701B17D2DB0009FE6C /* NearbyMapViewController.swift */; };
@@ -276,6 +284,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6D522D891C20D8EF00A4CE06 /* MedalModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedalModel.swift; sourceTree = "<group>"; };
+		6D522D921C20D9F600A4CE06 /* MedalCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedalCollectionCell.swift; sourceTree = "<group>"; };
+		6D8BD4C91C207328003AC2D7 /* TrophyCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrophyCollectionCell.swift; sourceTree = "<group>"; };
+		6D9F5A101C208894005D0EBE /* TrophyController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrophyController.swift; sourceTree = "<group>"; };
+		6D9F5A191C209306005D0EBE /* RewardsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewardsViewController.swift; sourceTree = "<group>"; };
+		6D9F5A1B1C2094ED005D0EBE /* RewardsSegmentedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewardsSegmentedController.swift; sourceTree = "<group>"; };
+		6D9F5A1D1C209626005D0EBE /* TrophyModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrophyModel.swift; sourceTree = "<group>"; };
+		6D9F5A1F1C20A8A7005D0EBE /* MedalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedalViewController.swift; sourceTree = "<group>"; };
 		9D01E7F11C0D0F8A006A1F21 /* FriendSegmentedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendSegmentedController.swift; sourceTree = "<group>"; };
 		9D0C16831B4DC6EB0088DE2F /* BranchProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BranchProfileViewController.swift; sourceTree = "<group>"; };
 		9D0DB4701B17D2DB0009FE6C /* NearbyMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyMapViewController.swift; sourceTree = "<group>"; };
@@ -702,6 +718,14 @@
 			isa = PBXGroup;
 			children = (
 				9D7FA07A1BBC516100EAEC36 /* TrophyViewController.swift */,
+				6D8BD4C91C207328003AC2D7 /* TrophyCollectionCell.swift */,
+				6D9F5A101C208894005D0EBE /* TrophyController.swift */,
+				6D9F5A191C209306005D0EBE /* RewardsViewController.swift */,
+				6D9F5A1B1C2094ED005D0EBE /* RewardsSegmentedController.swift */,
+				6D9F5A1D1C209626005D0EBE /* TrophyModel.swift */,
+				6D9F5A1F1C20A8A7005D0EBE /* MedalViewController.swift */,
+				6D522D891C20D8EF00A4CE06 /* MedalModel.swift */,
+				6D522D921C20D9F600A4CE06 /* MedalCollectionCell.swift */,
 			);
 			name = Trophy;
 			sourceTree = "<group>";
@@ -1161,6 +1185,7 @@
 				A01D77DC1BDAB94C00AA8FE2 /* SocketIOTransportXHR.m in Sources */,
 				A065EB321BA8E60A003B7390 /* DashboardController.swift in Sources */,
 				9D3756E11BCED51400796378 /* UserProfileSegmentedController.swift in Sources */,
+				6D522D931C20D9F600A4CE06 /* MedalCollectionCell.swift in Sources */,
 				A0FB84341BFFF0630099B2F4 /* readQRViewController.swift in Sources */,
 				A08D13FD1BFBB90C00A19AAF /* NSDate+Extension.swift in Sources */,
 				A060F7861B702FAC009D6ADB /* CouponDetailViewController.swift in Sources */,
@@ -1168,13 +1193,17 @@
 				A0DF72931B13AEBF006EE8F4 /* FriendsController.swift in Sources */,
 				A01D77DA1BDAB94C00AA8FE2 /* SocketIOJSONSerialization.m in Sources */,
 				9D1FCED71B79295700F42F6D /* SegmentedControl.swift in Sources */,
+				6D9F5A111C208894005D0EBE /* TrophyController.swift in Sources */,
 				A030B8411C10B4D300148CAA /* TestViewController.swift in Sources */,
 				9D30F9071BD5B19600D225D5 /* SearchSegmentedController.swift in Sources */,
 				9DCE5CDF1BDAEF9100A425FB /* NotificationViewController.swift in Sources */,
+				6D9F5A1A1C209306005D0EBE /* RewardsViewController.swift in Sources */,
 				A082F4851B18CF01001C8C52 /* NewsfeedController.swift in Sources */,
 				A0BB9BB91B13E4F1000BA261 /* FriendCell.swift in Sources */,
 				9DF8F0751BD7F37E009D80EB /* PeopleCell.swift in Sources */,
+				6D8BD4CA1C207328003AC2D7 /* TrophyCollectionCell.swift in Sources */,
 				A0DF72911B13A66C006EE8F4 /* FriendsViewController.swift in Sources */,
+				6D9F5A1E1C209626005D0EBE /* TrophyModel.swift in Sources */,
 				A0662A361BA0CEF5006D6278 /* LoadingCell.swift in Sources */,
 				A06B357C1B9F667D003C90EF /* NearbyBranch.swift in Sources */,
 				9DB3DABF1B740070004AC0F1 /* BranchProfileAboutView.swift in Sources */,
@@ -1184,6 +1213,7 @@
 				A086ACDF1BB09496003133BA /* Branch.swift in Sources */,
 				9DB907DE1B8E25A000A40FE0 /* FilterSideViewController.swift in Sources */,
 				A0578C651B0E7D2B0033B5BD /* UserProfileViewController.swift in Sources */,
+				6D9F5A1C1C2094ED005D0EBE /* RewardsSegmentedController.swift in Sources */,
 				9DB6121A1B192FCC004B8DB8 /* NearbyMapController.swift in Sources */,
 				A082F4871B18E4FF001C8C52 /* NewsfeedNote.swift in Sources */,
 				9DB327CC1B863C77006BF882 /* MoreMenuController.swift in Sources */,
@@ -1199,6 +1229,7 @@
 				A0F1E0321BF3D3000092C1F4 /* BaseViewController.swift in Sources */,
 				A086ACE31BB383A4003133BA /* TrendingCoupon.swift in Sources */,
 				A060F78E1B72B475009D6ADB /* CouponDetailView.swift in Sources */,
+				6D9F5A201C20A8A7005D0EBE /* MedalViewController.swift in Sources */,
 				A082F48A1B1920F8001C8C52 /* NewsfeedCell.swift in Sources */,
 				A09AB4E51AFA880E004287F7 /* Coupon.swift in Sources */,
 				9D33260F1AF7ED1C00498801 /* AppDelegate.swift in Sources */,
@@ -1232,6 +1263,7 @@
 				A09AB4DB1AF95A26004287F7 /* DashboardViewController.swift in Sources */,
 				A01A39BA1BDF050800F231F5 /* NotificationCell.swift in Sources */,
 				A06B35791B9F5D9F003C90EF /* SearchCell.swift in Sources */,
+				6D522D8A1C20D8EF00A4CE06 /* MedalModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

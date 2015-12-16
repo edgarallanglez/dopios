@@ -1,18 +1,19 @@
 //
-//  TrophyViewController.swift
+//  MedalViewController.swift
 //  dop
 //
-//  Created by Edgar Allan Glez on 9/30/15.
+//  Created by Edgar Allan Glez on 12/15/15.
 //  Copyright © 2015 Edgar Allan Glez. All rights reserved.
 //
 
 import UIKit
 
-class TrophyViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, UIAlertViewDelegate {
+class MedalViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, UIAlertViewDelegate {
     
     @IBOutlet weak var collection_view: UICollectionView!
     
-    var trophy_list = [TrophyModel]()
+    
+    var medal_list = [MedalModel]()
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
@@ -29,8 +30,8 @@ class TrophyViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("trophy_identifier", forIndexPath: indexPath) as! TrophyCollectionCell
-
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("medal_identifier", forIndexPath: indexPath) as! MedalCollectionCell
+        
         
         return cell
     }
