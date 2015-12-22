@@ -9,7 +9,7 @@
 import UIKit
 import QuartzCore
 
-class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UIScrollViewDelegate , NotificationDelegate{
+class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UIScrollViewDelegate {
     
     @IBOutlet var mainLoader: UIActivityIndicatorView!
     @IBOutlet weak var menuButton:UIBarButtonItem!
@@ -86,22 +86,13 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
         locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
         
-        super.notificationButton.delegate = self
-        super.notificationButton.startListening()
+
 
 
         self.setNeedsStatusBarAppearanceUpdate()
     }
     
 
-    func getNotification(packet:SocketIOPacket) {
-        print("NOTIFICATION")
-        var alert = UIAlertController(title: "Alert", message: packet.data, preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
-        
-        self.presentViewController(alert, animated: true, completion: nil)
-        
-    }
     override func viewDidAppear(animated: Bool) {
         if((updater) != nil){
             updater!.paused = false

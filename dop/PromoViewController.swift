@@ -277,9 +277,12 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                     
                 }
                 dispatch_async(dispatch_get_main_queue(), {
+                    //self.CouponsCollectionView.setContentOffset(CGPointMake(self.CouponsCollectionView.contentOffset.x, self.CouponsCollectionView.contentOffset.y+24), animated: true)
                     self.CouponsCollectionView.finishInfiniteScroll()
                     self.CouponsCollectionView.reloadData()
+                   
                     self.emptyMessage.hidden = true
+                
                     //self.CouponsCollectionView.alwaysBounceVertical = true
                     
                     if(newData){

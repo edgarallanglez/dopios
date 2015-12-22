@@ -119,13 +119,13 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
             let json = JSON(data: friendsData)
             
             for (index, subJson): (String, JSON) in json["data"] {
-                var client_coupon_id = subJson["clients_coupon_id"].int
-                var friend_id = subJson["friends_id"].string
-                var exchange_date = subJson["exchange_date"].string
-                var main_image = subJson["main_image"].string
-                var names = subJson["names"].string
+                let client_coupon_id = subJson["clients_coupon_id"].int
+                let friend_id = subJson["friends_id"].string
+                let exchange_date = subJson["exchange_date"].string
+                let main_image = subJson["main_image"].string
+                let names = subJson["names"].string
                 let company_id = subJson["company_id"].int ?? 0
-                var longitude = subJson["longitude"].string
+                let longitude = subJson["longitude"].string
                 let latitude = subJson["latitude"].string
                 let branch_id =  subJson["branch_id" ].int
                 let coupon_id =  subJson["coupon_id"].string
@@ -136,8 +136,9 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
                 let branch_name =  subJson["branch_name"].string
                 let total_likes =  subJson["total_likes"].int
                 let user_like =  subJson["user_like"].int
-                
-                let model = NewsfeedNote(client_coupon_id:client_coupon_id,friend_id: friend_id, user_id: user_id, branch_id: branch_id, coupon_name: name, branch_name: branch_name, names: names, surnames: surnames, user_image: main_image, company_id: company_id, branch_image: logo, total_likes:total_likes,user_like: user_like)
+                let date =  subJson["used_date"].string
+
+                let model = NewsfeedNote(client_coupon_id:client_coupon_id,friend_id: friend_id, user_id: user_id, branch_id: branch_id, coupon_name: name, branch_name: branch_name, names: names, surnames: surnames, user_image: main_image, company_id: company_id, branch_image: logo, total_likes:total_likes,user_like: user_like, date:date)
                 
                 self.newsfeedTemporary.append(model)
                 
@@ -149,6 +150,9 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
                 
                 self.tableView.reloadData()
                 self.refreshControl.endRefreshing()
+                
+                print("Printed")
+                print(json)
                 
                 self.offset = self.limit - 1
             });
@@ -191,8 +195,9 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
                 let branch_name =  subJson["branch_name"].string
                 let total_likes =  subJson["total_likes"].int
                 let user_like =  subJson["user_like"].int
+                let date =  subJson["used_date"].string
                 
-                let model = NewsfeedNote(client_coupon_id:client_coupon_id,friend_id: friend_id, user_id: user_id, branch_id: branch_id, coupon_name: name, branch_name: branch_name, names: names, surnames: surnames, user_image: main_image, company_id: company_id, branch_image: logo, total_likes:total_likes,user_like: user_like)
+                let model = NewsfeedNote(client_coupon_id:client_coupon_id,friend_id: friend_id, user_id: user_id, branch_id: branch_id, coupon_name: name, branch_name: branch_name, names: names, surnames: surnames, user_image: main_image, company_id: company_id, branch_image: logo, total_likes:total_likes,user_like: user_like, date:date)
                 
                 self.newsfeedTemporary.append(model)
                 
@@ -206,6 +211,7 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
                 self.tableView.reloadData()
                 self.tableView.finishInfiniteScroll()
                 
+                print(json)
                 if(newData){
                     self.offset+=addedValues
                 }
@@ -220,7 +226,18 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
         })
         
     }
-    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        if(cell.respondsToSelector(Selector("setSeparatorInset:"))){
+            cell.separatorInset = UIEdgeInsetsZero
+        }
+        if(cell.respondsToSelector(Selector("setPreservesSuperviewLayoutMargins:"))){
+            cell.preservesSuperviewLayoutMargins = false
+        }
+        if(cell.respondsToSelector(Selector("setLayoutMargins:"))){
+            cell.layoutMargins = UIEdgeInsetsZero
+        }
+    }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let cell = sender as? NewsfeedCell {
 

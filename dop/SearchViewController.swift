@@ -70,8 +70,8 @@ class SearchViewController: BaseViewController, UITableViewDataSource, UITableVi
         peopleTableView.delegate = self
         peopleTableView.dataSource = self
         
+        //searchBar.delegate = nil
         //searchBar.delegate = self
-        
         //searchBar.translatesAutoresizingMaskIntoConstraints = false
         
         
@@ -88,13 +88,22 @@ class SearchViewController: BaseViewController, UITableViewDataSource, UITableVi
         
         self.navigationItem.rightBarButtonItem = nil
         
+        let myBackButton:UIButton = UIButton(type: .Custom) as UIButton
+        
+        myBackButton.addTarget(self, action: "back:", forControlEvents: UIControlEvents.TouchUpInside)
+        myBackButton.setBackgroundImage(UIImage(named: "nav-back"), forState: .Normal)
+        //myBackButton.setTitle("BACKS", forState: UIControlState.Normal)
+        myBackButton.sizeToFit()
+        
+        var myCustomBackButtonItem:UIBarButtonItem = UIBarButtonItem(customView: myBackButton)
+        self.navigationItem.leftBarButtonItem  = myCustomBackButtonItem
         
         
         //doSomething()
     }
     func back(sender: UIBarButtonItem) {
         //searchBar.resignFirstResponder()
-        self.navigationController?.popViewControllerAnimated(false)
+        self.navigationController?.popViewControllerAnimated(true)
     }
     override func viewWillAppear(animated: Bool) {
         
@@ -173,6 +182,11 @@ class SearchViewController: BaseViewController, UITableViewDataSource, UITableVi
     func searchBar(searchBar: UISearchBar, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
         timer?.invalidate()
         timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "timeOut", userInfo: nil, repeats: false)
+        
+        return true
+    }
+    override func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
+        print("SCROLL DELEGATE")
         
         return true
     }

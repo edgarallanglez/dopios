@@ -10,6 +10,7 @@ import UIKit
 
 class NewsfeedCell: UITableViewCell {
 
+    @IBOutlet var date_label: UILabel!
     @IBOutlet var username_button: UIButton!
     @IBOutlet var user_image: UIImageView!
     @IBOutlet var newsfeed_description: UILabel!
@@ -27,15 +28,18 @@ class NewsfeedCell: UITableViewCell {
         // Initialization code
     }
     func loadItem(newsfeed_note:NewsfeedNote, viewController:UIViewController) {
-        self.newsfeed_description.text = "utilizó \(newsfeed_note.coupon_name) en \(newsfeed_note.branch_name)"
+        
+     
+        
+        self.newsfeed_description.text = "Asistió a \(newsfeed_note.branch_name.uppercaseString)"
         
         self.user_image.layer.masksToBounds = true
         self.user_image.layer.cornerRadius = 25
         self.user_image.alpha=0
-        self.username_button.setTitle(newsfeed_note.names, forState: UIControlState.Normal)
+        self.username_button.setTitle(newsfeed_note.names.uppercaseString, forState: UIControlState.Normal)
         self.username_button.addTarget(self, action: "goToUserProfile:", forControlEvents: UIControlEvents.TouchUpInside)
         self.viewController=viewController
-        
+        self.date_label.text = Utilities.friendlyDate(newsfeed_note.date)
         
         self.newsfeedNote = newsfeed_note
         
@@ -118,6 +122,7 @@ class NewsfeedCell: UITableViewCell {
         self.likes.text = String(stringInterpolationSegment: totalLikes)
         self.newsfeedNote!.setUserLike(0,total_likes: totalLikes)
     }
+
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

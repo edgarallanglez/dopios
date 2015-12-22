@@ -26,14 +26,7 @@ class NotificationCell: UITableViewCell {
     
     func loadItem(notification:Notification, viewController:UIViewController) {
         var string_format = NSMutableAttributedString()
-        
-        let linex = notification.date
-        let separators = NSCharacterSet(charactersInString: "T.")
-        let parts = linex.componentsSeparatedByCharactersInSet(separators)
-        var fecha = NSDate(dateString: "\(parts[0]) \(parts[1])").timeAgo
-        
-        
-        
+
         
         if(notification.type == "newsfeed"){
             let notification_text = "A \(notification.launcher_name) \(notification.launcher_surnames) le a gustado tu actividad en \(notification.newsfeed_activity)"
@@ -69,7 +62,7 @@ class NotificationCell: UITableViewCell {
             self.contentView.backgroundColor = UIColor.whiteColor()
         }
         
-        self.date_label.text = fecha
+        self.date_label.text = Utilities.friendlyDate(notification.date)
 
         self.notification = notification
         

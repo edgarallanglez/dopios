@@ -147,6 +147,9 @@ class BranchProfileViewControllerN: UIViewController, UIPageViewControllerDataSo
 
         let index = self.identifiers.indexOfObject(identifier!)
         
+        if(index<0){
+            return nil
+        }
         
 
         self.index = index - 1
