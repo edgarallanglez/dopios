@@ -18,15 +18,23 @@ class Utilities {
     class var dopImagesURL : String {
         return "http://45.55.7.118/branches/images/"
     }
+    
+    class var badgeURL: String {
+        return "http://45.55.7.118/badges/"
+    }
+    
     class var dopColor: UIColor {
         return UIColor( red: 251.0/255.0 , green: 34.0/255.0 , blue: 111.0/255.0, alpha:1.0)
     }
+    
     class var lightGrayColor: UIColor {
         return UIColor( red: 243.0/255.0 , green: 243.0/255.0 , blue: 243.0/255.0, alpha:1.0)
     }
+    
     class var extraLightGrayColor: UIColor {
         return UIColor( red: 250.0/255.0 , green: 250.0/255.0 , blue: 250.0/255.0, alpha:1.0)
     }
+    
     class var Colors:CAGradientLayer {
         let colorBottom = UIColor(red: 217.0/255.0, green: 4.0/255.0, blue: 121.0/255.0, alpha: 1.0).CGColor
         let colorTop = UIColor(red: 248.0/255.0, green: 20.0/255.0, blue: 90.0/255.0, alpha: 1.0).CGColor
@@ -39,6 +47,7 @@ class Utilities {
         
         return gl
     }
+    
     class func roundValue(value:Double,numberOfPlaces:Double)->Double{
         let multiplier = pow(10.0, numberOfPlaces)
         let rounded = round(value * multiplier) / multiplier
@@ -76,11 +85,11 @@ class Utilities {
         request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
         request.addValue(User.userToken, forHTTPHeaderField: "Authorization")
         request.HTTPMethod = method
-        var err: NSError?
+        
         do {
             request.HTTPBody = try NSJSONSerialization.dataWithJSONObject(params, options: NSJSONWritingOptions())
         } catch let error as NSError {
-            err = error
+            let err = error
             request.HTTPBody = nil
         }
         

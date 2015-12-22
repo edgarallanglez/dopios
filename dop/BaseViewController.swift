@@ -40,7 +40,8 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
         searchBar.tintColor = UIColor.whiteColor()
         searchBar.searchBarStyle = UISearchBarStyle.Minimal
         searchBar.placeholder = "Buscar"
-
+        
+     
         
         
         for subView in self.searchBar.subviews{
@@ -56,10 +57,11 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
 
         self.navigationController?.delegate = self
         
+        
     }
     
     func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
-        self.navigationController?.pushViewController(vc, animated: false)
+        self.navigationController?.pushViewController(vc, animated: true)
         return false
     }
 

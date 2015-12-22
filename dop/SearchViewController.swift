@@ -8,14 +8,14 @@
 
 import UIKit
 
-class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, CLLocationManagerDelegate {
+class SearchViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, CLLocationManagerDelegate {
     
     @IBOutlet var tableView: UITableView!
     @IBOutlet weak var peopleTableView: UITableView!
     @IBOutlet weak var searchSegmentedController: SearchSegmentedController!
     @IBOutlet weak var searchScrollView: UIScrollView!
     
-    var searchBar: UISearchBar!
+    //var searchBar: UISearchBar!
     var searchActive: Bool = false
     var filtered: [NearbyBranch] = []
     var peopleFiltered: [PeopleModel] = []
@@ -29,25 +29,40 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        notificationButton.action = nil
         
         //SEARCH BAR
-        searchBar = UISearchBar(frame: CGRectMake(0, 0, 100, 20))
+       /* searchBar = UISearchBar(frame: CGRectMake(0, 0, 100, 20))
         searchBar.tintColor = UIColor.whiteColor()
         
-        //searchScrollView.contentSize = CGSizeMake(searchScrollView.frame.size.width * 2, searchScrollView.frame.height)
-        let textFieldInsideSearchBar = searchBar.valueForKey("searchField") as? UITextField
-        textFieldInsideSearchBar?.textColor = UIColor.whiteColor()
-        
+        searchBar.tintColor = UIColor.whiteColor()
         searchBar.searchBarStyle = UISearchBarStyle.Minimal
         searchBar.placeholder = "Buscar"
-        //var rightNavBarButton = UIBarButtonItem(customView:searchBar)
-        //self.navigationItem.rightBarButtonItem = rightNavBarButton
         
         
-        self.navigationItem.titleView = searchBar
-        //self.navigationController?.navigationBar.addSubview(searchBar)
-        //self.view.addSubview(searchBar)
+        
+        for subView in self.searchBar.subviews{
+            for subsubView in subView.subviews{
+                if let textField = subsubView as? UITextField{
+                    textField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("Buscar", comment: ""), attributes: [NSForegroundColorAttributeName: Utilities.extraLightGrayColor])
+                    textField.textColor = UIColor.whiteColor()
+                    
+                }
+            }
+        }*/
+        
+        
+        //searchScrollView.contentSize = CGSizeMake(searchScrollView.frame.size.width * 2, searchScrollView.frame.height)
+        //let textFieldInsideSearchBar = searchBar.valueForKey("searchField") as? UITextField
+        //textFieldInsideSearchBar?.textColor = UIColor.whiteColor()
+        
+
+        
+        
+        //self.navigationItem.titleView = searchBar
+       
+        
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -55,10 +70,10 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         peopleTableView.delegate = self
         peopleTableView.dataSource = self
         
-        searchBar.delegate = self
+        //searchBar.delegate = self
         
-        searchBar.translatesAutoresizingMaskIntoConstraints = false
-        searchBar.alpha = 0
+        //searchBar.translatesAutoresizingMaskIntoConstraints = false
+        
         
         tableView.reloadData()
 
@@ -69,18 +84,11 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         locationManager.startUpdatingLocation()
         User.coordinate = locationManager.location!.coordinate
         
-        UIView.animateWithDuration(0.3, animations: {
-            self.searchBar.alpha = 1
-        })
         
         
+        self.navigationItem.rightBarButtonItem = nil
         
-        self.navigationItem.hidesBackButton = true
-        let newBackButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Rewind, target: self, action: "back:")
         
-        self.navigationItem.leftBarButtonItem = newBackButton;
-        
-       
         
         //doSomething()
     }
@@ -89,8 +97,11 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         self.navigationController?.popViewControllerAnimated(false)
     }
     override func viewWillAppear(animated: Bool) {
-        searchBar.becomeFirstResponder()
+        
+        
+        //searchBar.becomeFirstResponder()
     }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
 
@@ -113,13 +124,16 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         
         NSLayoutConstraint.activateConstraints([horizonalContraints, horizonal2Contraints, pinTop])
         
-        UIView.animateWithDuration(0.3, animations: {
+        /*UIView.animateWithDuration(0.3, animations: {
             self.searchBar.alpha = 1
-        })
+        })*/
     }
     
     override func viewDidAppear(animated: Bool) {
-        
+        /*UIView.animateWithDuration(3, animations: {
+            self.searchBar.alpha = 1
+        })*/
+        //searchBar.alpha = 0
     }
     override func viewWillDisappear(animated: Bool) {
         searchBar.resignFirstResponder()
@@ -128,9 +142,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
     
     override func viewDidDisappear(animated: Bool) {
 
-        UIView.animateWithDuration(0.3, animations: {
-            self.searchBar.alpha = 0
-        })
+     
     }
     
     
@@ -274,7 +286,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
     }
     
     
-    func search(){
+    /*func search(){
         filtered.removeAll()
         peopleFiltered.removeAll()
         cachedImages.removeAll()
@@ -358,7 +370,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
                 }
             )
         }
-    }
+    }*/
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
         searchBar.resignFirstResponder()
