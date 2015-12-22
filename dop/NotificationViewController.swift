@@ -11,7 +11,7 @@ import UIKit
 
 
 
-class NotificationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class NotificationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, TTTAttributedLabelDelegate {
 
     
     @IBOutlet var notification_table: UITableView!
@@ -279,6 +279,13 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         
         
         let cell: NotificationCell = tableView.cellForRowAtIndexPath(indexPath) as! NotificationCell
+        
+        cell.title.delegate = self
+        
+        cell.title.linkAttributes = [NSForegroundColorAttributeName : UIColor.redColor()]
+        cell.title.linkAttributes = [NSForegroundColorAttributeName: UIColor.purpleColor()]
+        cell.title.activeLinkAttributes = [NSForegroundColorAttributeName : UIColor.yellowColor()]
+        cell.title.enabledTextCheckingTypes = NSTextCheckingType.Link.rawValue
         
         if(selectedItem.type == "friend"){
             self.performSegueWithIdentifier("userProfile", sender: cell)

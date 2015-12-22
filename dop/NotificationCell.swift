@@ -14,7 +14,7 @@ class NotificationCell: UITableViewCell {
     @IBOutlet var date_label: UILabel!
     @IBOutlet var notification_view: UIView!
     @IBOutlet var notification_image: UIImageView!
-    @IBOutlet var title: UILabel!
+    @IBOutlet var title: TTTAttributedLabel!
     
     var viewController:UIViewController?
     var notification:Notification?
@@ -26,10 +26,21 @@ class NotificationCell: UITableViewCell {
     
     func loadItem(notification:Notification, viewController:UIViewController) {
         var string_format = NSMutableAttributedString()
-
+        
+        let name = "tomo"
+        let string = "My name is \(name)"
+        title.text = string
+        let nsString = string as NSString
+        let range = nsString.rangeOfString(name)
+        let url = NSURL(string: "action://users/\(name)")!
+        title.addLinkToURL(url, withRange: range)
+        
+        
+        
         
         if(notification.type == "newsfeed"){
-            let notification_text = "A \(notification.launcher_name) \(notification.launcher_surnames) le a gustado tu actividad en \(notification.newsfeed_activity)"
+           
+           /* let notification_text = "A \(notification.launcher_name) \(notification.launcher_surnames) le a gustado tu actividad en \(notification.newsfeed_activity)"
             
             let name_lenght = notification.launcher_name.characters.count + notification.launcher_surnames.characters.count + 1
             
@@ -38,9 +49,9 @@ class NotificationCell: UITableViewCell {
             string_format.addAttribute(NSForegroundColorAttributeName, value: Utilities.dopColor, range: NSRange(location:2,length:name_lenght))
             
             
-            //self.notification_image.image = UIImage(named: "news-icon")
+            self.title.attributedText = string_format */
             
-            self.title.attributedText = string_format
+        
         }
         if(notification.type == "friend"){
             let notification_text = "\(notification.launcher_name) \(notification.launcher_surnames) te envió una solicitud de amistad"
@@ -69,7 +80,6 @@ class NotificationCell: UITableViewCell {
 
     }
 
-    
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
