@@ -62,10 +62,12 @@ class NavigationController: UINavigationController, NotificationDelegate {
     
     func getNotification(packet:SocketIOPacket) {
         print("NOTIFICATION")
-        var alert = UIAlertController(title: "Alert", message: packet.data, preferredStyle: UIAlertControllerStyle.Alert)
+       
+        /*var alert = UIAlertController(title: "Alert", message: packet.data, preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
         
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.presentViewController(alert, animated: true, completion: nil)*/
+
         
     }
     func notification() {

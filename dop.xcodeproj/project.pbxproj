@@ -120,6 +120,7 @@
 		A08D13FB1BFBB88F00A19AAF /* NSDateTimeAgo.bundle in Frameworks */ = {isa = PBXBuildFile; fileRef = A08D13F91BFBB86100A19AAF /* NSDateTimeAgo.bundle */; };
 		A08D13FD1BFBB90C00A19AAF /* NSDate+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08D13FC1BFBB90C00A19AAF /* NSDate+Extension.swift */; };
 		A09732E11BDBF712006F9378 /* NotificationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09732E01BDBF712006F9378 /* NotificationButton.swift */; };
+		A0995E451C29DAA900C4F802 /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A0995E441C29DAA900C4F802 /* TTTAttributedLabel.m */; };
 		A09AB4DB1AF95A26004287F7 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09AB4DA1AF95A26004287F7 /* DashboardViewController.swift */; };
 		A09AB4E21AF99136004287F7 /* CouponController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09AB4E01AF99136004287F7 /* CouponController.swift */; };
 		A09AB4E31AF99136004287F7 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09AB4E11AF99136004287F7 /* SwiftyJSON.swift */; };
@@ -400,6 +401,8 @@
 		A08D13F91BFBB86100A19AAF /* NSDateTimeAgo.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = NSDateTimeAgo.bundle; sourceTree = "<group>"; };
 		A08D13FC1BFBB90C00A19AAF /* NSDate+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+Extension.swift"; sourceTree = "<group>"; };
 		A09732E01BDBF712006F9378 /* NotificationButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationButton.swift; sourceTree = "<group>"; };
+		A0995E431C29DAA900C4F802 /* TTTAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTAttributedLabel.h; sourceTree = "<group>"; };
+		A0995E441C29DAA900C4F802 /* TTTAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTAttributedLabel.m; sourceTree = "<group>"; };
 		A09AB4DA1AF95A26004287F7 /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		A09AB4E01AF99136004287F7 /* CouponController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CouponController.swift; sourceTree = "<group>"; };
 		A09AB4E11AF99136004287F7 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
@@ -718,6 +721,7 @@
 		9DC271321C07766D00C6F825 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				A0995E421C29D9D900C4F802 /* TTTAttributedLabel */,
 				A0AE939A1AF8041A00D02315 /* Bridging-Header.h */,
 				9D4C04801B18EAF600D5DCEE /* FontAwesome.ttf */,
 				9D697C791B5EF13000D786AA /* iconfonts-fontawesome.swift */,
@@ -863,6 +867,15 @@
 			name = Newsfeed;
 			sourceTree = "<group>";
 		};
+		A0995E421C29D9D900C4F802 /* TTTAttributedLabel */ = {
+			isa = PBXGroup;
+			children = (
+				A0995E431C29DAA900C4F802 /* TTTAttributedLabel.h */,
+				A0995E441C29DAA900C4F802 /* TTTAttributedLabel.m */,
+			);
+			name = TTTAttributedLabel;
+			sourceTree = "<group>";
+		};
 		A09AB4E61AFA9609004287F7 /* Coupon */ = {
 			isa = PBXGroup;
 			children = (
@@ -982,7 +995,7 @@
 						DevelopmentTeam = QX6AA77Z42;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
-								enabled = 0;
+								enabled = 1;
 							};
 							com.apple.Maps.iOS = {
 								enabled = 1;
@@ -1232,6 +1245,7 @@
 				A09AB4DB1AF95A26004287F7 /* DashboardViewController.swift in Sources */,
 				A01A39BA1BDF050800F231F5 /* NotificationCell.swift in Sources */,
 				A06B35791B9F5D9F003C90EF /* SearchCell.swift in Sources */,
+				A0995E451C29DAA900C4F802 /* TTTAttributedLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
