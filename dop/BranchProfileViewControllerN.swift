@@ -139,6 +139,7 @@ class BranchProfileViewControllerN: UIViewController, UIPageViewControllerDataSo
         
         return UIViewController()
     }
+    
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
         
         
@@ -212,7 +213,7 @@ class BranchProfileViewControllerN: UIViewController, UIPageViewControllerDataSo
             var direction:UIPageViewControllerNavigationDirection;
             
             
-            if(sender.selectedIndex<self.currentPressedTab){
+            if(sender.selectedIndex < self.currentPressedTab){
                 direction = .Reverse
             }else{
                 direction = .Forward

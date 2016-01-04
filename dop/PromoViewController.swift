@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PromoViewController: BaseViewController, UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIAlertViewDelegate {
+class PromoViewController: BaseViewController, UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIAlertViewDelegate, ModalDelegate {
     
     @IBOutlet weak var CouponsCollectionView: UICollectionView!    
     @IBOutlet weak var emptyMessage: UILabel!
@@ -19,6 +19,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
     var cachedImages: [String: UIImage] = [:]
     var refreshControl: UIRefreshControl!
     
+    var showing_modal:Bool = false
     
     let limit:Int = 6
     var offset:Int = 0
@@ -164,8 +165,20 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
         return size
     }
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let cell = self.CouponsCollectionView.cellForItemAtIndexPath(indexPath)
-        self.performSegueWithIdentifier("couponDetail", sender: cell)
+        if(showing_modal == false){
+            let cell = self.CouponsCollectionView.cellForItemAtIndexPath(indexPath)
+            //self.performSegueWithIdentifier("couponDetail", sender: cell)
+            //(self.storyboard?.instantiateViewControllerWithIdentifier("SimpleModal") as! SimpleModalViewController)
+            
+            let modal:ModalViewController = ModalViewController(currentView: self, type: ModalViewControllerType.Share)
+            
+            modal.presentAnimated(true) { (UIViewController) -> Void in
+                self.showing_modal = true
+            }
+            modal.delegate = self
+        }
+        
+     
     }
 
     override func didReceiveMemoryWarning() {
@@ -455,7 +468,15 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
         }
     }
     
- 
-
+    //MODAL DELEGATE
+    
+    func pressActionButton(modal:MZFormSheetController) {
+        if(showing_modal == true){
+            modal.mz_dismissFormSheetControllerAnimated(true) { (MZFormSheetController) -> Void in
+                self.showing_modal = false
+            }
+        }
+    }
+   
 
 }

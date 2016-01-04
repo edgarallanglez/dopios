@@ -71,6 +71,14 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as! NotificationCell;
         
+        cell.title.delegate = self
+        
+        cell.title.linkAttributes = [NSForegroundColorAttributeName: Utilities.dopColor]
+        cell.title.activeLinkAttributes = [NSForegroundColorAttributeName : UIColor.blackColor(), NSBackgroundColorAttributeName: UIColor.lightGrayColor()]
+        cell.title.enabledTextCheckingTypes = NSTextCheckingType.Link.rawValue
+
+        
+        
         if(!notifications.isEmpty){
             let model = self.notifications[indexPath.row]
             cell.loadItem(model, viewController: self)
@@ -280,12 +288,6 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         
         let cell: NotificationCell = tableView.cellForRowAtIndexPath(indexPath) as! NotificationCell
         
-        cell.title.delegate = self
-        
-        cell.title.linkAttributes = [NSForegroundColorAttributeName : UIColor.redColor()]
-        cell.title.linkAttributes = [NSForegroundColorAttributeName: UIColor.purpleColor()]
-        cell.title.activeLinkAttributes = [NSForegroundColorAttributeName : UIColor.yellowColor()]
-        cell.title.enabledTextCheckingTypes = NSTextCheckingType.Link.rawValue
         
         if(selectedItem.type == "friend"){
             self.performSegueWithIdentifier("userProfile", sender: cell)
@@ -295,26 +297,46 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         }
     }
     
+    func attributedLabel(label: TTTAttributedLabel!, didSelectLinkWithURL url: NSURL!) {
+        let segue = "\(url)"
+        
+        
+        
+        self.performSegueWithIdentifier(segue, sender: self)
+    }
 
-    
+    func attributedLabel(label: TTTAttributedLabel!, didLongPressLinkWithURL url: NSURL!, atPoint point: CGPoint) {
+        let segue = "\(url)"
+        self.performSegueWithIdentifier(segue, sender: self)
+
+    }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let cell = sender as? NotificationCell {
-            let i = notification_table.indexPathForCell(cell)!.row
-            let model = self.notifications[i]
-            
-            self.readNotification(model)
-            
-            if segue.identifier == "userProfile" {
+        print("SMN")
+//        if let cell = sender as? NotificationCell {
+//            let i = notification_table.indexPathForCell(cell)!.row
+//            let model = self.notifications[i]
+//            
+//            self.readNotification(model)
+//            
+//            if segue.identifier == "userProfile" {
+//
+//                
+//                let view = segue.destinationViewController as! UserProfileViewController
+//                view.userId = model.launcher_id
+//                
+//                var people:PeopleModel = PeopleModel(names: "Jose Eduardo", surnames: "Quintero Gutierrez!", user_id: model.launcher_id, birth_date: "", facebook_key: "", privacy_status: 0, main_image: "", is_friend: true)
+//                
+//                view.person = people
+//                //view.userImage = self.cachedImages["Cell\(i)"]
+//            }
+//        }
+        if segue.identifier == "userProfile" {
+            let view = segue.destinationViewController as! UserProfileViewController
+            view.userId = 5
 
-                
-                let view = segue.destinationViewController as! UserProfileViewController
-                view.userId = model.launcher_id
-                
-                var people:PeopleModel = PeopleModel(names: "Jose Eduardo", surnames: "Quintero Gutierrez!", user_id: model.launcher_id, birth_date: "", facebook_key: "", privacy_status: 0, main_image: "", is_friend: true)
-                
-                view.person = people
-                //view.userImage = self.cachedImages["Cell\(i)"]
-            }
+            var people:PeopleModel = PeopleModel(names: "Jose Eduardo", surnames: "Quintero Gutierrez!", user_id: 5, birth_date: "", facebook_key: "", privacy_status: 0, main_image: "", is_friend: true)
+
+            view.person = people
         }
     }
 }

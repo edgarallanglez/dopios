@@ -115,28 +115,7 @@ class SearchViewController: BaseViewController, UITableViewDataSource, UITableVi
         super.didReceiveMemoryWarning()
 
     }
-    func doSomething(){
-        let horizonalContraints = NSLayoutConstraint(item: searchBar, attribute:
-            .LeadingMargin, relatedBy: .Equal, toItem: self.view,
-            attribute: .LeadingMargin, multiplier: 1.0,
-            constant: 30)
-        
-        
-        let horizonal2Contraints = NSLayoutConstraint(item: searchBar, attribute:
-            .TrailingMargin, relatedBy: .Equal, toItem: self.view,
-            attribute: .TrailingMargin, multiplier: 1.0, constant: 0)
-        
-        
-        let pinTop = NSLayoutConstraint(item: searchBar, attribute: .Top, relatedBy: .Equal,
-            toItem: self.navigationController?.navigationBar, attribute: .Top, multiplier: 1.0, constant: 0)
-        
-        
-        NSLayoutConstraint.activateConstraints([horizonalContraints, horizonal2Contraints, pinTop])
-        
-        /*UIView.animateWithDuration(0.3, animations: {
-            self.searchBar.alpha = 1
-        })*/
-    }
+
     
     override func viewDidAppear(animated: Bool) {
         /*UIView.animateWithDuration(3, animations: {

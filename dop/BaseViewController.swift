@@ -13,6 +13,8 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
     var vc: SearchViewController!
     var vcNot: NotificationViewController!
     var searchBar: UISearchBar = UISearchBar()
+    var errorView: UIView = UIView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -58,6 +60,11 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
         self.navigationController?.delegate = self
         
         
+        errorView = (NSBundle.mainBundle().loadNibNamed("ErrorView", owner: self, options: nil)[0] as? UIView)!
+        
+        
+        errorView.frame.size.width = self.view.frame.width
+        errorView.backgroundColor = UIColor.redColor()
     }
     
     func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
@@ -87,8 +94,7 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
         super.didReceiveMemoryWarning()
     }
     func notification() {
-        
-        self.navigationController?.pushViewController(vcNot, animated: true)
+       self.navigationController?.pushViewController(vcNot, animated: true)
         //self.navigationController!.pushViewController(self.storyboard!.instantiateViewControllerWithIdentifier("Notifications") as UIViewController, animated: true)
         //self.navigationController?.hidesBottomBarWhenPushed = true
         
@@ -110,15 +116,4 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
     func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
         viewController.viewWillAppear(true)
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

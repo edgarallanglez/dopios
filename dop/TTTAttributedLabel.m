@@ -670,6 +670,13 @@ static inline CGSize CTFramesetterSuggestFrameSizeForAttributedStringWithConstra
     return [self addLinkWithTextCheckingResult:[NSTextCheckingResult linkCheckingResultWithRange:range URL:url]];
 }
 
+- (TTTAttributedLabelLink *)addLinkToString:(NSString *)string
+                                  withRange:(NSRange)range
+{
+    
+    return [self addLinkWithTextCheckingResult:[NSTextCheckingResult addressCheckingResultWithRange:range components:string]];
+    
+}
 - (TTTAttributedLabelLink *)addLinkToAddress:(NSDictionary *)addressComponents
                                    withRange:(NSRange)range
 {
