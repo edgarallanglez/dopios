@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PromoViewController: BaseViewController, UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIAlertViewDelegate, ModalDelegate {
+class PromoViewController: BaseViewController, UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIAlertViewDelegate, UIDocumentInteractionControllerDelegate, ModalDelegate {
     
     @IBOutlet weak var CouponsCollectionView: UICollectionView!    
     @IBOutlet weak var emptyMessage: UILabel!
@@ -24,6 +24,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
     let limit:Int = 6
     var offset:Int = 0
     
+    var documentController:UIDocumentInteractionController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -471,11 +472,61 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
     //MODAL DELEGATE
     
     func pressActionButton(modal:MZFormSheetController) {
-        if(showing_modal == true){
+        var YourImage:UIImage = UIImage(named: "starbucks_banner.jpg")!
+
+        
+            let instagramUrl = NSURL(string: "instagram://camera")
+            if(UIApplication.sharedApplication().canOpenURL(instagramUrl!)){
+                
+                //Instagram App avaible
+                let imageData = UIImageJPEGRepresentation(YourImage, 100)
+                let captionString = "Your Caption"
+                
+                let documentsURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
+
+                let writePath = NSURL(fileURLWithPath: NSTemporaryDirectory()).URLByAppendingPathComponent("/insta.igo")
+                
+
+                if(!imageData!.writeToFile(writePath.path!, atomically: true)){
+                    //Fail to write.
+                    return
+                } else{
+                    //Safe to post
+                    
+                    let fileURL = NSURL(fileURLWithPath: writePath.path!)
+                    
+                   
+                    self.documentController = UIDocumentInteractionController(URL: fileURL)
+
+                   self.documentController.UTI = "com.instagram.exclusivegram"
+                    
+                    self.documentController.delegate = self
+                    
+                    self.documentController.annotation =  NSDictionary(object: captionString, forKey: "InstagramCaption")
+                    self.documentController.presentOpenInMenuFromRect(self.view.frame, inView: self.view, animated: true)
+                    
+                    
+                    
+                    self.documentController.presentOpenInMenuFromRect(CGRectMake(0,0,0,0), inView: self.view, animated: true)
+                    
+                    UIApplication.sharedApplication().openURL(instagramUrl!)
+                }
+            } else {
+                //Instagram App NOT avaible...
+            }
+        
+       /* if(showing_modal == true){
             modal.mz_dismissFormSheetControllerAnimated(true) { (MZFormSheetController) -> Void in
                 self.showing_modal = false
+                
+                let instagramURL = NSURL(string: "instagram://app")
+              
+                    if(UIApplication.sharedApplication().canOpenURL(instagramURL!)){
+                        print("INSTAGRAM OPENED")
+                        UIApplication.sharedApplication().openURL(instagramURL!)
+                }
             }
-        }
+        }*/
     }
    
 
