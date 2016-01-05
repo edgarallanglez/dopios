@@ -98,6 +98,10 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
             updater!.paused = false
         }
         print("Dashboard View Controller DidAppear")
+        
+        
+        
+        
     }
 
    override func viewWillAppear(animated: Bool) {
@@ -190,7 +194,9 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
         },
         failure: { (error) -> Void in
             dispatch_async(dispatch_get_main_queue(), {
-                    
+              self.view.addSubview(super.errorView)
+              self.errorView.translatesAutoresizingMaskIntoConstraints = false
+
             })
         })
 

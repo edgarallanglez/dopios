@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PromoViewController: BaseViewController, UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIAlertViewDelegate {
+class PromoViewController: BaseViewController, UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIAlertViewDelegate, UIDocumentInteractionControllerDelegate, ModalDelegate {
     
     @IBOutlet weak var CouponsCollectionView: UICollectionView!    
     @IBOutlet weak var emptyMessage: UILabel!
@@ -19,10 +19,12 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
     var cachedImages: [String: UIImage] = [:]
     var refreshControl: UIRefreshControl!
     
+    var showing_modal:Bool = false
     
     let limit:Int = 6
     var offset:Int = 0
     
+    var documentController:UIDocumentInteractionController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -164,8 +166,20 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
         return size
     }
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let cell = self.CouponsCollectionView.cellForItemAtIndexPath(indexPath)
-        self.performSegueWithIdentifier("couponDetail", sender: cell)
+        if(showing_modal == false){
+            let cell = self.CouponsCollectionView.cellForItemAtIndexPath(indexPath)
+            //self.performSegueWithIdentifier("couponDetail", sender: cell)
+            //(self.storyboard?.instantiateViewControllerWithIdentifier("SimpleModal") as! SimpleModalViewController)
+            
+            let modal:ModalViewController = ModalViewController(currentView: self, type: ModalViewControllerType.Share)
+            
+            modal.presentAnimated(true) { (UIViewController) -> Void in
+                self.showing_modal = true
+            }
+            modal.delegate = self
+        }
+        
+     
     }
 
     override func didReceiveMemoryWarning() {
@@ -455,7 +469,65 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
         }
     }
     
- 
+    //MODAL DELEGATE
+    
+    func pressActionButton(modal:MZFormSheetController) {
+        var YourImage:UIImage = UIImage(named: "starbucks_banner.jpg")!
 
+        
+            let instagramUrl = NSURL(string: "instagram://camera")
+            if(UIApplication.sharedApplication().canOpenURL(instagramUrl!)){
+                
+                //Instagram App avaible
+                let imageData = UIImageJPEGRepresentation(YourImage, 100)
+                let captionString = "Your Caption"
+                
+                let documentsURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
+
+                let writePath = NSURL(fileURLWithPath: NSTemporaryDirectory()).URLByAppendingPathComponent("/insta.igo")
+                
+
+                if(!imageData!.writeToFile(writePath.path!, atomically: true)){
+                    //Fail to write.
+                    return
+                } else{
+                    //Safe to post
+                    
+                    let fileURL = NSURL(fileURLWithPath: writePath.path!)
+                    
+                   
+                    self.documentController = UIDocumentInteractionController(URL: fileURL)
+
+                   self.documentController.UTI = "com.instagram.exclusivegram"
+                    
+                    self.documentController.delegate = self
+                    
+                    self.documentController.annotation =  NSDictionary(object: captionString, forKey: "InstagramCaption")
+                    self.documentController.presentOpenInMenuFromRect(self.view.frame, inView: self.view, animated: true)
+                    
+                    
+                    
+                    self.documentController.presentOpenInMenuFromRect(CGRectMake(0,0,0,0), inView: self.view, animated: true)
+                    
+                    UIApplication.sharedApplication().openURL(instagramUrl!)
+                }
+            } else {
+                //Instagram App NOT avaible...
+            }
+        
+       /* if(showing_modal == true){
+            modal.mz_dismissFormSheetControllerAnimated(true) { (MZFormSheetController) -> Void in
+                self.showing_modal = false
+                
+                let instagramURL = NSURL(string: "instagram://app")
+              
+                    if(UIApplication.sharedApplication().canOpenURL(instagramURL!)){
+                        print("INSTAGRAM OPENED")
+                        UIApplication.sharedApplication().openURL(instagramURL!)
+                }
+            }
+        }*/
+    }
+   
 
 }

@@ -47,6 +47,19 @@ class Utilities {
         
         return gl
     }
+    class var DarkColors:CAGradientLayer {
+        let colorBottom = UIColor(red: 201.0/255.0, green: 4.0/255.0, blue: 107.0/255.0, alpha: 1.0).CGColor
+        let colorTop = UIColor(red: 207.0/255.0, green: 17.0/255.0, blue: 74.0/255.0, alpha: 1.0).CGColor
+        
+        let gl: CAGradientLayer
+        
+        gl = CAGradientLayer()
+        gl.colors = [ colorTop, colorBottom]
+        gl.locations = [ 0.0, 1.0]
+        
+        return gl
+    }
+
     
     class func roundValue(value:Double,numberOfPlaces:Double)->Double{
         let multiplier = pow(10.0, numberOfPlaces)
@@ -122,6 +135,14 @@ class Utilities {
         let friendly_date = NSDate(dateString: "\(parts[0]) \(parts[1])").timeAgo
         
         return friendly_date
+    }
+    
+    
+    
+    //CONSTANTS
+    
+    class var connectionError:String{
+        return "Error de conexión de red. Comprueba tu conexión a internet."
     }
     
 }
