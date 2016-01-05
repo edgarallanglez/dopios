@@ -10,7 +10,6 @@ import UIKit
 
 class UserProfileViewController: BaseViewController, UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate {
 
-    @IBOutlet weak var scrollViewBox: UIScrollView!
     let pages: CGFloat = 3
     var secondPageWidth: Int!
     var thirdPageWidth: Int!
@@ -18,13 +17,12 @@ class UserProfileViewController: BaseViewController, UIScrollViewDelegate, UITab
     @IBOutlet weak var private_view: UIView!
     @IBOutlet var profile_image: UIImageView!
     @IBOutlet weak var user_name: UILabel!
-    @IBOutlet weak var userProfileSegmentedController: UserProfileSegmentedController!
     @IBOutlet weak var follow_button: UIButton!
     @IBOutlet weak var follow_button_width: NSLayoutConstraint!
     
     var activityPage: UITableView = UITableView()
     var userImage: UIImage!
-    var userImagePath:String = ""
+    var userImagePath: String = ""
     var userId:Int = 0
     var historyCoupon = [Coupon]()
     var activityArray = [NewsfeedNote]()
@@ -41,10 +39,10 @@ class UserProfileViewController: BaseViewController, UIScrollViewDelegate, UITab
         super.viewDidLoad()
         self.title = "Perfil"
 
-        self.follow_button.layer.borderColor = UIColor(red: 248/255, green: 20/255, blue: 90/255, alpha: 1).CGColor
+        self.follow_button.layer.borderColor = Utilities.dopColor.CGColor
         
-        scrollViewBox.delegate = self
-        self.scrollViewBox.pagingEnabled = true
+//        scrollViewBox.delegate = self
+//        self.scrollViewBox.pagingEnabled = true
         
         // setting activityTable
         activityPage.delegate = self
@@ -79,12 +77,12 @@ class UserProfileViewController: BaseViewController, UIScrollViewDelegate, UITab
             }
         } else if person.privacy_status == 0 {
             user_name.text = "\(person.names) \(person.surnames)"
-            userProfileSegmentedController.items.removeLast()
+//            userProfileSegmentedController.items.removeLast()
             getActivity()
         } else if person.privacy_status == 1 {
             user_name.text = "\(person.names) \(person.surnames)"
             private_view.hidden = false
-            scrollViewBox.hidden = true
+//            scrollViewBox.hidden = true
         }
         
         
@@ -98,26 +96,26 @@ class UserProfileViewController: BaseViewController, UIScrollViewDelegate, UITab
     }
     
     override func viewDidAppear(animated: Bool) {
-        self.initialHeight = self.scrollViewBox.frame.size.height
-        self.activityPage.frame.size = CGSizeMake(self.scrollViewBox.frame.size.width, CGFloat(self.initialHeight))
+//        self.initialHeight = self.scrollViewBox.frame.size.height
+//        self.activityPage.frame.size = CGSizeMake(self.scrollViewBox.frame.size.width, CGFloat(self.initialHeight))
         self.activityPage.frame.origin.x = 0
 
-        self.scrollViewBox.addSubview(self.activityPage)
+//        self.scrollViewBox.addSubview(self.activityPage)
     }
     
     @IBAction func setScrollViewBoxPage(sender: UserProfileSegmentedController) {
-        if person == nil || person.privacy_status != 1 {
-            switch sender.selectedIndex {
-            case 0:
-                self.scrollViewBox.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
-            case 1:
-                self.scrollViewBox.setContentOffset(CGPoint(x: self.secondPageWidth, y: 0), animated: true)
-            case 2:
-                self.scrollViewBox.setContentOffset(CGPoint(x: self.thirdPageWidth, y: 0), animated: true)
-            default:
-                self.scrollViewBox.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
-            }
-        }
+//        if person == nil || person.privacy_status != 1 {
+//            switch sender.selectedIndex {
+//            case 0:
+//                self.scrollViewBox.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+//            case 1:
+//                self.scrollViewBox.setContentOffset(CGPoint(x: self.secondPageWidth, y: 0), animated: true)
+//            case 2:
+//                self.scrollViewBox.setContentOffset(CGPoint(x: self.thirdPageWidth, y: 0), animated: true)
+//            default:
+//                self.scrollViewBox.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+//            }
+//        }
     }
     
     
@@ -162,9 +160,9 @@ class UserProfileViewController: BaseViewController, UIScrollViewDelegate, UITab
             }
     
             dispatch_async(dispatch_get_main_queue(), {
-                self.secondPageWidth = Int(self.scrollViewBox.frame.size.width)
-                self.thirdPageWidth = Int(self.scrollViewBox.frame.size.width * 2)
-                
+//                self.secondPageWidth = Int(self.scrollViewBox.frame.size.width)
+//                self.thirdPageWidth = Int(self.scrollViewBox.frame.size.width * 2)
+//                
                 let margin = 18
                 let couponWidth = 180
                 let couponHeight = 245
@@ -196,11 +194,11 @@ class UserProfileViewController: BaseViewController, UIScrollViewDelegate, UITab
                     
                     coupon_box.descriptionLbl.text = coupon.couponDescription
                     //coupon_box.likes = trending[index].likes
-                    self.scrollViewBox.addSubview(coupon_box);
+//                    self.scrollViewBox.addSubview(coupon_box);
                 }
-                self.initialHeight = self.scrollViewBox.frame.size.height
-                self.activityPage.frame.size = CGSizeMake(self.scrollViewBox.frame.size.width, CGFloat(self.initialHeight))
-                
+//                self.initialHeight = self.scrollViewBox.frame.size.height
+//                self.activityPage.frame.size = CGSizeMake(self.scrollViewBox.frame.size.width, CGFloat(self.initialHeight))
+//                
                 var coupon_count: Int
                 if self.historyCoupon.count % 2 == 0 {
                     coupon_count = self.historyCoupon.count
@@ -209,11 +207,11 @@ class UserProfileViewController: BaseViewController, UIScrollViewDelegate, UITab
                 }
                 
                 self.historyScroll_size = (((margin + couponHeight) * coupon_count) + margin) / 2
-                self.scrollViewBox.contentSize = CGSizeMake(self.scrollViewBox.frame.size.width * self.pages, CGFloat(self.historyScroll_size))
+//                self.scrollViewBox.contentSize = CGSizeMake(self.scrollViewBox.frame.size.width * self.pages, CGFloat(self.historyScroll_size))
                 
                 self.activityPage.frame.origin.x = 0
                 
-                self.scrollViewBox.addSubview(self.activityPage)
+//                self.scrollViewBox.addSubview(self.activityPage)
             });
             },
             
@@ -255,8 +253,8 @@ class UserProfileViewController: BaseViewController, UIScrollViewDelegate, UITab
             }
             
             dispatch_async(dispatch_get_main_queue(), {
-                self.secondPageWidth = Int(self.scrollViewBox.frame.size.width)
-                self.thirdPageWidth = Int(self.scrollViewBox.frame.size.width * 2)
+//                self.secondPageWidth = Int(self.scrollViewBox.frame.size.width)
+//                self.thirdPageWidth = Int(self.scrollViewBox.frame.size.width * 2)
 //                self.activityArray.removeAll()
 //                self.activityArray = self.activityArrayTemp
 //                
@@ -276,22 +274,22 @@ class UserProfileViewController: BaseViewController, UIScrollViewDelegate, UITab
     
     // MARK : TO CHANGE WHILE CLICKING ON PAGE CONTROL
     func changePage(sender: AnyObject) -> () {
-        let x = CGFloat(pageControl.currentPage) * self.scrollViewBox.frame.size.width
-        self.scrollViewBox.setContentOffset(CGPointMake(x, 0), animated: true)
+//        let x = CGFloat(pageControl.currentPage) * self.scrollViewBox.frame.size.width
+//        self.scrollViewBox.setContentOffset(CGPointMake(x, 0), animated: true)
     }
     
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         
-        let pageNumber = round(scrollViewBox.contentOffset.x / scrollViewBox.frame.size.width)
-        pageControl.currentPage = Int(pageNumber)
+//        let pageNumber = round(scrollViewBox.contentOffset.x / scrollViewBox.frame.size.width)
+//        pageControl.currentPage = Int(pageNumber)
         
-        if pageNumber == 0 {
-            self.scrollViewBox.contentSize = CGSizeMake(self.scrollViewBox.frame.size.width * pages, CGFloat(self.initialHeight))
-        } else if pageNumber == 1 {
-            self.scrollViewBox.contentSize = CGSizeMake(self.scrollViewBox.frame.size.width * pages, CGFloat(self.historyScroll_size))
-        } else if pageNumber == 2 {
-            self.scrollViewBox.contentSize = CGSizeMake(self.scrollViewBox.frame.size.width * pages, CGFloat(self.historyScroll_size))
-        }
+//        if pageNumber == 0 {
+//            self.scrollViewBox.contentSize = CGSizeMake(self.scrollViewBox.frame.size.width * pages, CGFloat(self.initialHeight))
+//        } else if pageNumber == 1 {
+//            self.scrollViewBox.contentSize = CGSizeMake(self.scrollViewBox.frame.size.width * pages, CGFloat(self.historyScroll_size))
+//        } else if pageNumber == 2 {
+//            self.scrollViewBox.contentSize = CGSizeMake(self.scrollViewBox.frame.size.width * pages, CGFloat(self.historyScroll_size))
+//        }
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -307,6 +305,7 @@ class UserProfileViewController: BaseViewController, UIScrollViewDelegate, UITab
             trophy.frame.origin = CGPointMake(CGFloat(xPoint), CGFloat(1))
             headerTopView.trophyScrollView.addSubview(trophy)
         }
+        
         return headerTopView
     }
     
@@ -315,7 +314,7 @@ class UserProfileViewController: BaseViewController, UIScrollViewDelegate, UITab
         
         let model = self.activityArray[indexPath.row]
         
-        cell.userImage.image = self.profile_image.image
+        cell.user_image.image = self.profile_image.image
         cell.loadItem(model, view: self)
         return cell
     }
@@ -325,9 +324,9 @@ class UserProfileViewController: BaseViewController, UIScrollViewDelegate, UITab
     }
     
     func scrollViewWillBeginDecelerating(scrollView: UIScrollView) {
-        let pageNumber = Int(scrollViewBox.contentOffset.x / scrollViewBox.frame.size.width)
-        pageControl.currentPage = pageNumber
-        self.userProfileSegmentedController.selectedIndex = pageNumber
+//        let pageNumber = Int(scrollViewBox.contentOffset.x / scrollViewBox.frame.size.width)
+//        pageControl.currentPage = pageNumber
+//        self.userProfileSegmentedController.selectedIndex = pageNumber
     }
     
     @IBAction func followUnfollow(sender: UIButton) {

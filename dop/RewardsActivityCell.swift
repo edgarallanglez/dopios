@@ -10,7 +10,7 @@ import UIKit
 
 class RewardsActivityCell: UITableViewCell {
     
-    @IBOutlet weak var userImage: UIImageView!
+    @IBOutlet weak var user_image: UIImageView!
     @IBOutlet weak var user_name: UILabel!
     @IBOutlet weak var branch_name: UIButton!
     @IBOutlet weak var moment: UILabel!
@@ -25,14 +25,14 @@ class RewardsActivityCell: UITableViewCell {
     }
     
     func downloadImage(url: NSURL) {
-        //        print("Started downloading \"\(url.lastPathComponent!.stringByDeletingPathExtension)\".")
         Utilities.getDataFromUrl(url) { data in
             dispatch_async(dispatch_get_main_queue()) {
-                //                print("Finished downloading \"\(url.lastPathComponent!.stringByDeletingPathExtension)\".")
                 self.branch_image.image = UIImage(data: data!)
             }
         }
     }
+    
+    
     
     
 }

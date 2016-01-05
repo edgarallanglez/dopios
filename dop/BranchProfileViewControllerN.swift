@@ -64,7 +64,7 @@ class BranchProfileViewControllerN: UIViewController, UIPageViewControllerDataSo
         
         let viewControllers: NSArray = [branchDetailView]
         
-        self.pageViewController.setViewControllers(viewControllers as! [UIViewController], direction: .Forward, animated: true, completion: nil)
+        self.pageViewController.setViewControllers(viewControllers as? [UIViewController], direction: .Forward, animated: true, completion: nil)
         
         self.addChildViewController(self.pageViewController)
         
@@ -147,7 +147,7 @@ class BranchProfileViewControllerN: UIViewController, UIPageViewControllerDataSo
 
         let index = self.identifiers.indexOfObject(identifier!)
         
-        if(index<0){
+        if (index < 0) {
             return nil
         }
         

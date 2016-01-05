@@ -14,4 +14,5 @@ import FBSDKShareKit
 class TrophyCollectionCell: UICollectionViewCell {
     
     @IBOutlet weak var badge_image: UIImageView!
+    
 }

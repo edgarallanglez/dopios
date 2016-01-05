@@ -438,10 +438,10 @@ class SearchViewController: BaseViewController, UITableViewDataSource, UITableVi
             
             if segue.identifier == "userProfile" {
                 let model = self.peopleFiltered[i]
-                let view = segue.destinationViewController as! UserProfileViewController
-                view.userId = model.user_id
+                let view = segue.destinationViewController as! UserProfileStickyController
+                view.user_id = model.user_id
                 view.person = model
-                view.userImage = self.cachedImages["Cell\(i)"]
+                view.user_image.image = self.cachedImages["Cell\(i)"]
             }
         }
     }

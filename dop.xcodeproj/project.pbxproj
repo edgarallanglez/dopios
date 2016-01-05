@@ -7,15 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6D134AC11C2B6B4600EDD5E4 /* ActivityPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D134AC01C2B6B4600EDD5E4 /* ActivityPage.swift */; };
+		6D134AC31C2B6C5C00EDD5E4 /* BadgesPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D134AC21C2B6C5C00EDD5E4 /* BadgesPage.swift */; };
+		6D5C95711C2B049A0017B166 /* UserProfileStickyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5C95701C2B049A0017B166 /* UserProfileStickyController.swift */; };
+		6D5C957A1C2B06460017B166 /* UserProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5C95791C2B06460017B166 /* UserProfileHeader.swift */; };
+		6D5C957C1C2B16020017B166 /* UserProfileSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5C957B1C2B16020017B166 /* UserProfileSectionHeader.swift */; };
+		6D5C957E1C2B2AD70017B166 /* UserPaginationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5C957D1C2B2AD70017B166 /* UserPaginationViewController.swift */; };
 		6D8BD4CA1C207328003AC2D7 /* TrophyCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8BD4C91C207328003AC2D7 /* TrophyCollectionCell.swift */; };
+		6D9080D51C319EED00DA3072 /* UserProfileStickyHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9080D41C319EED00DA3072 /* UserProfileStickyHeader.swift */; };
+		6D9080DE1C319FF600DA3072 /* UserProfileStickyHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D9080DD1C319FF600DA3072 /* UserProfileStickyHeader.xib */; };
 		6D9F5A111C208894005D0EBE /* BadgeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9F5A101C208894005D0EBE /* BadgeController.swift */; };
 		6D9F5A1A1C209306005D0EBE /* RewardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9F5A191C209306005D0EBE /* RewardsViewController.swift */; };
 		6D9F5A1C1C2094ED005D0EBE /* RewardsSegmentedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9F5A1B1C2094ED005D0EBE /* RewardsSegmentedController.swift */; };
 		6D9F5A1E1C209626005D0EBE /* BadgeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9F5A1D1C209626005D0EBE /* BadgeModel.swift */; };
 		6DBB43971C29C4E5001FEDAF /* CSStickyHeaderFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DBB43941C29C4E5001FEDAF /* CSStickyHeaderFlowLayout.m */; };
 		6DBB43981C29C4E5001FEDAF /* CSStickyHeaderFlowLayoutAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DBB43961C29C4E5001FEDAF /* CSStickyHeaderFlowLayoutAttributes.m */; };
+		6DBBB1451C35987B002AFB57 /* ConnectionsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBBB1441C35987B002AFB57 /* ConnectionsPage.swift */; };
+		6DBBB14E1C359A07002AFB57 /* ConnectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBBB14D1C359A07002AFB57 /* ConnectionCell.swift */; };
+		6DBBB1501C35B9A0002AFB57 /* ConnectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBBB14F1C35B9A0002AFB57 /* ConnectionModel.swift */; };
 		6DD3B2221C24862A00BEE129 /* TrophyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD3B2211C24862A00BEE129 /* TrophyTableViewController.swift */; };
 		6DD3B2241C24864000BEE129 /* BadgeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD3B2231C24864000BEE129 /* BadgeCell.swift */; };
+		6DD56C071C32EC9B006636F4 /* BadgeCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD56C061C32EC9B006636F4 /* BadgeCollectionCell.swift */; };
 		6DEE480C1C28628400C7F5FB /* MedalTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DEE480B1C28628400C7F5FB /* MedalTableViewController.swift */; };
 		9D01E7F21C0D0F8A006A1F21 /* FriendSegmentedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D01E7F11C0D0F8A006A1F21 /* FriendSegmentedController.swift */; };
 		9D0C16841B4DC6EB0088DE2F /* BranchProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0C16831B4DC6EB0088DE2F /* BranchProfileViewController.swift */; };
@@ -287,7 +299,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6D134AC01C2B6B4600EDD5E4 /* ActivityPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityPage.swift; sourceTree = "<group>"; };
+		6D134AC21C2B6C5C00EDD5E4 /* BadgesPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadgesPage.swift; sourceTree = "<group>"; };
+		6D5C95701C2B049A0017B166 /* UserProfileStickyController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileStickyController.swift; sourceTree = "<group>"; };
+		6D5C95791C2B06460017B166 /* UserProfileHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileHeader.swift; sourceTree = "<group>"; };
+		6D5C957B1C2B16020017B166 /* UserProfileSectionHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileSectionHeader.swift; sourceTree = "<group>"; };
+		6D5C957D1C2B2AD70017B166 /* UserPaginationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPaginationViewController.swift; sourceTree = "<group>"; };
 		6D8BD4C91C207328003AC2D7 /* TrophyCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrophyCollectionCell.swift; sourceTree = "<group>"; };
+		6D9080D41C319EED00DA3072 /* UserProfileStickyHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileStickyHeader.swift; sourceTree = "<group>"; };
+		6D9080DD1C319FF600DA3072 /* UserProfileStickyHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserProfileStickyHeader.xib; sourceTree = "<group>"; };
 		6D9F5A101C208894005D0EBE /* BadgeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadgeController.swift; sourceTree = "<group>"; };
 		6D9F5A191C209306005D0EBE /* RewardsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewardsViewController.swift; sourceTree = "<group>"; };
 		6D9F5A1B1C2094ED005D0EBE /* RewardsSegmentedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewardsSegmentedController.swift; sourceTree = "<group>"; };
@@ -296,8 +316,12 @@
 		6DBB43941C29C4E5001FEDAF /* CSStickyHeaderFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSStickyHeaderFlowLayout.m; sourceTree = "<group>"; };
 		6DBB43951C29C4E5001FEDAF /* CSStickyHeaderFlowLayoutAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSStickyHeaderFlowLayoutAttributes.h; sourceTree = "<group>"; };
 		6DBB43961C29C4E5001FEDAF /* CSStickyHeaderFlowLayoutAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSStickyHeaderFlowLayoutAttributes.m; sourceTree = "<group>"; };
+		6DBBB1441C35987B002AFB57 /* ConnectionsPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionsPage.swift; sourceTree = "<group>"; };
+		6DBBB14D1C359A07002AFB57 /* ConnectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionCell.swift; sourceTree = "<group>"; };
+		6DBBB14F1C35B9A0002AFB57 /* ConnectionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionModel.swift; sourceTree = "<group>"; };
 		6DD3B2211C24862A00BEE129 /* TrophyTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrophyTableViewController.swift; sourceTree = "<group>"; };
 		6DD3B2231C24864000BEE129 /* BadgeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadgeCell.swift; sourceTree = "<group>"; };
+		6DD56C061C32EC9B006636F4 /* BadgeCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadgeCollectionCell.swift; sourceTree = "<group>"; };
 		6DEE480B1C28628400C7F5FB /* MedalTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedalTableViewController.swift; sourceTree = "<group>"; };
 		9D01E7F11C0D0F8A006A1F21 /* FriendSegmentedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendSegmentedController.swift; sourceTree = "<group>"; };
 		9D0C16831B4DC6EB0088DE2F /* BranchProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BranchProfileViewController.swift; sourceTree = "<group>"; };
@@ -558,6 +582,20 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		6D134AB81C2B6B2E00EDD5E4 /* TEST */ = {
+			isa = PBXGroup;
+			children = (
+				6D134AC01C2B6B4600EDD5E4 /* ActivityPage.swift */,
+				6D134AC21C2B6C5C00EDD5E4 /* BadgesPage.swift */,
+				6D9080D41C319EED00DA3072 /* UserProfileStickyHeader.swift */,
+				6D9080DD1C319FF600DA3072 /* UserProfileStickyHeader.xib */,
+				6DBBB1441C35987B002AFB57 /* ConnectionsPage.swift */,
+				6DBBB14D1C359A07002AFB57 /* ConnectionCell.swift */,
+				6DBBB14F1C35B9A0002AFB57 /* ConnectionModel.swift */,
+			);
+			name = TEST;
+			sourceTree = "<group>";
+		};
 		6DBB43851C29C48A001FEDAF /* StickyHeader */ = {
 			isa = PBXGroup;
 			children = (
@@ -738,13 +776,14 @@
 		9D7FA0791BBC513000EAEC36 /* Badge */ = {
 			isa = PBXGroup;
 			children = (
-				6D9F5A1B1C2094ED005D0EBE /* RewardsSegmentedController.swift */,
-				6D9F5A191C209306005D0EBE /* RewardsViewController.swift */,
-				6D9F5A101C208894005D0EBE /* BadgeController.swift */,
-				6DD3B2211C24862A00BEE129 /* TrophyTableViewController.swift */,
 				6DD3B2231C24864000BEE129 /* BadgeCell.swift */,
+				6DD56C061C32EC9B006636F4 /* BadgeCollectionCell.swift */,
+				6D9F5A101C208894005D0EBE /* BadgeController.swift */,
 				6D9F5A1D1C209626005D0EBE /* BadgeModel.swift */,
 				6DEE480B1C28628400C7F5FB /* MedalTableViewController.swift */,
+				6D9F5A1B1C2094ED005D0EBE /* RewardsSegmentedController.swift */,
+				6D9F5A191C209306005D0EBE /* RewardsViewController.swift */,
+				6DD3B2211C24862A00BEE129 /* TrophyTableViewController.swift */,
 			);
 			name = Badge;
 			sourceTree = "<group>";
@@ -955,6 +994,7 @@
 		A0EB97AE1B03E198005112EF /* User */ = {
 			isa = PBXGroup;
 			children = (
+				6D134AB81C2B6B2E00EDD5E4 /* TEST */,
 				6D8BD4C91C207328003AC2D7 /* TrophyCollectionCell.swift */,
 				9D7FA07A1BBC516100EAEC36 /* TrophyViewController.swift */,
 				A0578C631B0E7D2B0033B5BD /* UserProfileViewController.swift */,
@@ -966,6 +1006,10 @@
 				9D4296721BBF03D1000B4A21 /* RewardsActivityHeader.xib */,
 				9D3756E01BCED51400796378 /* UserProfileSegmentedController.swift */,
 				9DA1C70B1BD712850029578D /* PeopleModel.swift */,
+				6D5C95701C2B049A0017B166 /* UserProfileStickyController.swift */,
+				6D5C95791C2B06460017B166 /* UserProfileHeader.swift */,
+				6D5C957B1C2B16020017B166 /* UserProfileSectionHeader.swift */,
+				6D5C957D1C2B2AD70017B166 /* UserPaginationViewController.swift */,
 			);
 			name = User;
 			sourceTree = "<group>";
@@ -1152,6 +1196,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A05592AA1BDB1C5E0041E20D /* libc.dylib in Resources */,
+				6D9080DE1C319FF600DA3072 /* UserProfileStickyHeader.xib in Resources */,
 				A05592AB1BDB1C5E0041E20D /* libc++.dylib in Resources */,
 				9D4D298C1B9F50A100CE58A9 /* Montserrat-Light.otf in Resources */,
 				A04CC2101BBD968E001AF7E0 /* ToExpireCoupon.xib in Resources */,
@@ -1205,15 +1250,19 @@
 				9D2BDFE41B9DF524003F1260 /* SearchController.swift in Sources */,
 				9DBB7A401B968437005700B9 /* UIImage+ImageEffects.h in Sources */,
 				9D697C7A1B5EF13000D786AA /* iconfonts-fontawesome.swift in Sources */,
+				6DBBB1501C35B9A0002AFB57 /* ConnectionModel.swift in Sources */,
 				A0A495011BE56C300000E98A /* BranchProfilePromoViewController.swift in Sources */,
 				6DBB43981C29C4E5001FEDAF /* CSStickyHeaderFlowLayoutAttributes.m in Sources */,
 				9DA1C70C1BD712850029578D /* PeopleModel.swift in Sources */,
+				6D9080D51C319EED00DA3072 /* UserProfileStickyHeader.swift in Sources */,
 				A04CC2121BBDBB16001AF7E0 /* ToExpireCoupon.swift in Sources */,
 				A04D388F1BC7366600E578F0 /* NearestCoupon.swift in Sources */,
 				9D7FA0781BBC4FF000EAEC36 /* SettingsViewController.swift in Sources */,
 				A0E4F6C41C0D524900DFA6EE /* ReviewsViewController.swift in Sources */,
+				6DD56C071C32EC9B006636F4 /* BadgeCollectionCell.swift in Sources */,
 				A0EC05991B7D1C69003CADB2 /* SWRevealViewController.m in Sources */,
 				9D0C16841B4DC6EB0088DE2F /* BranchProfileViewController.swift in Sources */,
+				6D134AC11C2B6B4600EDD5E4 /* ActivityPage.swift in Sources */,
 				A01D77DC1BDAB94C00AA8FE2 /* SocketIOTransportXHR.m in Sources */,
 				A065EB321BA8E60A003B7390 /* DashboardController.swift in Sources */,
 				9D3756E11BCED51400796378 /* UserProfileSegmentedController.swift in Sources */,
@@ -1239,7 +1288,9 @@
 				A0662A361BA0CEF5006D6278 /* LoadingCell.swift in Sources */,
 				A06B357C1B9F667D003C90EF /* NearbyBranch.swift in Sources */,
 				9DB3DABF1B740070004AC0F1 /* BranchProfileAboutView.swift in Sources */,
+				6DBBB1451C35987B002AFB57 /* ConnectionsPage.swift in Sources */,
 				A01D77DB1BDAB94C00AA8FE2 /* SocketIOTransportWebsocket.m in Sources */,
+				6D5C95711C2B049A0017B166 /* UserProfileStickyController.swift in Sources */,
 				A0F1E0291BF272BD0092C1F4 /* NavigationController.swift in Sources */,
 				A0EC05B41B7D622A003CADB2 /* LoadingViewController.swift in Sources */,
 				A086ACDF1BB09496003133BA /* Branch.swift in Sources */,
@@ -1248,11 +1299,13 @@
 				6DBB43971C29C4E5001FEDAF /* CSStickyHeaderFlowLayout.m in Sources */,
 				6D9F5A1C1C2094ED005D0EBE /* RewardsSegmentedController.swift in Sources */,
 				9DB6121A1B192FCC004B8DB8 /* NearbyMapController.swift in Sources */,
+				6D5C957A1C2B06460017B166 /* UserProfileHeader.swift in Sources */,
 				A082F4871B18E4FF001C8C52 /* NewsfeedNote.swift in Sources */,
 				9DB327CC1B863C77006BF882 /* MoreMenuController.swift in Sources */,
 				A0EB97B21B051F02005112EF /* LoginController.swift in Sources */,
 				9D01E7F21C0D0F8A006A1F21 /* FriendSegmentedController.swift in Sources */,
 				9D1B5F851C1A1030003F28E5 /* AlertClass.swift in Sources */,
+				6D5C957E1C2B2AD70017B166 /* UserPaginationViewController.swift in Sources */,
 				A09AB4E21AF99136004287F7 /* CouponController.swift in Sources */,
 				A0EB97B01B05131E005112EF /* Utilities.swift in Sources */,
 				A0578C641B0E7D2B0033B5BD /* UserProfileController.swift in Sources */,
@@ -1262,6 +1315,7 @@
 				A0F1E0321BF3D3000092C1F4 /* BaseViewController.swift in Sources */,
 				A086ACE31BB383A4003133BA /* TrendingCoupon.swift in Sources */,
 				6DD3B2221C24862A00BEE129 /* TrophyTableViewController.swift in Sources */,
+				6D134AC31C2B6C5C00EDD5E4 /* BadgesPage.swift in Sources */,
 				A060F78E1B72B475009D6ADB /* CouponDetailView.swift in Sources */,
 				A082F48A1B1920F8001C8C52 /* NewsfeedCell.swift in Sources */,
 				A09AB4E51AFA880E004287F7 /* Coupon.swift in Sources */,
@@ -1269,6 +1323,7 @@
 				9D0DB4711B17D2DB0009FE6C /* NearbyMapViewController.swift in Sources */,
 				A060F7821B70184F009D6ADB /* PromoCollectionCell.swift in Sources */,
 				A0DF72951B13E262006EE8F4 /* Friend.swift in Sources */,
+				6DBBB14E1C359A07002AFB57 /* ConnectionCell.swift in Sources */,
 				A01A39BE1BDF0EB700F231F5 /* Notification.swift in Sources */,
 				A082F4831B18CEE6001C8C52 /* NewsfeedViewController.swift in Sources */,
 				9D4296711BBF038D000B4A21 /* RewardsActivityHeader.swift in Sources */,
@@ -1278,6 +1333,7 @@
 				9DACBBF91BA8CE0200CAEECB /* FilterSegmentedControl.swift in Sources */,
 				9DE55C441BB07C0A005F9776 /* PromoSegmentedController.swift in Sources */,
 				9D9C9C911BB2155B00D9F986 /* Annotation.swift in Sources */,
+				6D5C957C1C2B16020017B166 /* UserProfileSectionHeader.swift in Sources */,
 				A0F7E9201AFAE48500A4F0F2 /* CouponCell.swift in Sources */,
 				9DA85CFD1B82587E009DA186 /* BranchProfileLastCampaign.swift in Sources */,
 				A0A494FF1BE546670000E98A /* BranchProfileViewControllerN.swift in Sources */,
