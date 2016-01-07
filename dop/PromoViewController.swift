@@ -166,18 +166,15 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
         return size
     }
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        if(showing_modal == false){
+        //if(showing_modal == false){
             let cell = self.CouponsCollectionView.cellForItemAtIndexPath(indexPath)
-            //self.performSegueWithIdentifier("couponDetail", sender: cell)
-            //(self.storyboard?.instantiateViewControllerWithIdentifier("SimpleModal") as! SimpleModalViewController)
             
             let modal:ModalViewController = ModalViewController(currentView: self, type: ModalViewControllerType.Share)
-            
             modal.presentAnimated(true) { (UIViewController) -> Void in
                 self.showing_modal = true
             }
             modal.delegate = self
-        }
+        //}
         
      
     }
@@ -472,10 +469,10 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
     //MODAL DELEGATE
     
     func pressActionButton(modal:MZFormSheetController) {
-        var YourImage:UIImage = UIImage(named: "starbucks_banner.jpg")!
+        let YourImage:UIImage = UIImage(named: "starbucks_banner.jpg")!
 
         
-            let instagramUrl = NSURL(string: "instagram://camera")
+            let instagramUrl = NSURL(string: "instagram://app")
             if(UIApplication.sharedApplication().canOpenURL(instagramUrl!)){
                 
                 //Instagram App avaible
@@ -498,7 +495,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                    
                     self.documentController = UIDocumentInteractionController(URL: fileURL)
 
-                   self.documentController.UTI = "com.instagram.exclusivegram"
+                    self.documentController.UTI = "com.instagram.exclusivegram"
                     
                     self.documentController.delegate = self
                     
@@ -509,7 +506,6 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                     
                     self.documentController.presentOpenInMenuFromRect(CGRectMake(0,0,0,0), inView: self.view, animated: true)
                     
-                    UIApplication.sharedApplication().openURL(instagramUrl!)
                 }
             } else {
                 //Instagram App NOT avaible...

@@ -10,6 +10,7 @@ import UIKit
 enum ModalViewControllerType: String {
     case ConnectionError
     case Share
+    case CouponDetail
 }
 protocol ModalDelegate {
     func pressActionButton(modal:MZFormSheetController)
@@ -39,7 +40,7 @@ class ModalViewController: MZFormSheetController {
     init(currentView presentedFormSheetViewController: UIViewController, type: ModalViewControllerType) {
         self.type = type
         
-        var vc : SimpleModalViewController?
+        var vc : SimpleModalViewController!
         
         if(type == .ConnectionError){
             vc = presentedFormSheetViewController.storyboard?.instantiateViewControllerWithIdentifier("SimpleModal") as? SimpleModalViewController
@@ -47,12 +48,16 @@ class ModalViewController: MZFormSheetController {
         if(type == .Share){
             vc = presentedFormSheetViewController.storyboard?.instantiateViewControllerWithIdentifier("ShareModal") as? SimpleModalViewController
         }
+        if(type == .CouponDetail){
+            vc = presentedFormSheetViewController.storyboard?.instantiateViewControllerWithIdentifier("CouponDetailView") as? SimpleModalViewController
+        }
+
 
         super.init(viewController: vc!)
         
         if(type == .ConnectionError){
             self.presentedFormSheetSize = CGSizeMake(350, 271)
-            vc!.modal_text.text = Utilities.connectionError
+            vc.modal_text.text = Utilities.connectionError
         }
         if(type == .Share){
             self.presentedFormSheetSize = CGSizeMake(350, 330)
