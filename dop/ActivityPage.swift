@@ -8,7 +8,12 @@
 
 import UIKit
 
+@objc protocol ActivityPageDelegate {
+   optional func resizeActivityView(dynamic_height: CGFloat)
+}
+
 class ActivityPage: UITableViewController {
+    var delegate: ActivityPageDelegate?
     
     @IBOutlet var activityTableView: UITableView!
 
@@ -21,29 +26,19 @@ class ActivityPage: UITableViewController {
     override func viewDidLoad() {
         self.tableView.alwaysBounceVertical = false
         self.tableView.scrollEnabled = false
-        self.view.translatesAutoresizingMaskIntoConstraints = false
         
         let nib = UINib(nibName: "RewardsActivityCell", bundle: nil)
         self.tableView.registerNib(nib, forCellReuseIdentifier: "RewardsActivityCell")
-//        self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.rowHeight = 140
-        
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "setParentView:", name: "SetParentView", object: nil)
-        
-        getActivity()
-    }
-    
-    func getHeight() -> CGFloat! {
-        return self.tableViewSize
+
     }
     
     override func viewDidAppear(animated: Bool) {
-        setFrame()
+        if activity_array.count == 0 { getActivity() } else { setFrame() }
     }
     
     func setFrame() {
-        self.tableView.frame.size.height = self.tableView.contentSize.height
-        NSNotificationCenter.defaultCenter().postNotificationName("PageLoaded", object: self.view)
+        delegate?.resizeActivityView!(self.tableView.contentSize.height)
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -63,19 +58,20 @@ class ActivityPage: UITableViewController {
         
         let model = self.activity_array[indexPath.row]
         
-        if self.parent_view.user_image.image != nil {
-            cell.user_image.image = self.parent_view.user_image.image
-        } else {
-            downloadImage(NSURL(string: self.parent_view.person.main_image)!, cell: cell)
+        if self.parent_view != nil {
+            if self.parent_view?.user_image.image != nil {
+                cell.user_image.image = self.parent_view.user_image.image
+            } else {
+                downloadImage(NSURL(string: self.parent_view.person.main_image)!, cell: cell)
+            }
         }
-        
         cell.loadItem(model, view: self)
         return cell
     }
     
     
     func getActivity() {
-        UserProfileController.getAllTakingCouponsWithSuccess(User.user_id, limit: 6, success: { (data) -> Void in
+        UserProfileController.getAllTakingCouponsWithSuccess(parent_view.user_id, limit: 6, success: { (data) -> Void in
             let json = JSON(data: data)
             
             for (_, subJson): (String, JSON) in json["data"] {
@@ -105,8 +101,6 @@ class ActivityPage: UITableViewController {
             
             dispatch_async(dispatch_get_main_queue(), {
                 self.reload()
-                self.setFrame()
-
             });
             },
             
@@ -119,18 +113,9 @@ class ActivityPage: UITableViewController {
     
     func reload() {
         self.tableView.reloadData()
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-            NSNotificationCenter.defaultCenter().postNotificationName("PageLoaded", object: self.view)
-        })
-    }
-    
-    override func viewDidLayoutSubviews() {
-        self.activityTableView.frame.size.width = UIScreen.mainScreen().bounds.width
-        
-    }
-    
-    func setParentView(notification: NSNotification) {
-        self.parent_view = notification.object as! UserProfileStickyController
+        dispatch_async(dispatch_get_main_queue(), {
+            self.setFrame()
+        });
     }
     
     func downloadImage(url: NSURL, cell: RewardsActivityCell) {

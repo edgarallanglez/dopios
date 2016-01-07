@@ -8,28 +8,33 @@
 
 import UIKit
 
+@objc protocol BadgePageDelegate {
+    optional func resizeBadgeView(dynamic_height: CGFloat)
+}
+
 class BadgesPage: UICollectionViewController {
-    
+    var delegate: BadgePageDelegate?
     
     @IBOutlet var badgeCollectionView: UICollectionView!
+    
+    var parent_view: UserProfileStickyController!
     
     var cached_images: [String: UIImage] = [:]
     var badge_array: [BadgeModel] = [BadgeModel]()
     var frame_width: CGFloat!
-    var frame_height: CGFloat = 450
+    var frame_height: CGFloat = 270
     var cell_size: CGFloat!
     
     override func viewDidLoad() {
+        self.collectionView!.scrollEnabled = false
+        self.collectionView!.alwaysBounceVertical = false
+        
         frame_width = self.badgeCollectionView.frame.size.width
         cell_size = (self.frame_width ) / 3
-        setFrame()
-        
     }
     
     override func viewDidAppear(animated: Bool) {
-        if badge_array.count == 0 { getBadges() }
-        setFrame()
-        NSNotificationCenter.defaultCenter().postNotificationName("PageLoaded", object: self.badgeCollectionView)
+        if badge_array.count == 0 { getBadges() } else { setFrame() }
     }
     
     func setFrame() {
@@ -38,7 +43,8 @@ class BadgesPage: UICollectionViewController {
             frame_height = frame_height * cell_size
         }
         
-        self.badgeCollectionView.frame.size.height = frame_height
+        //self.badgeCollectionView.frame.size.height = frame_height
+        delegate?.resizeBadgeView!(frame_height)
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
@@ -109,7 +115,6 @@ class BadgesPage: UICollectionViewController {
                 
                 dispatch_async(dispatch_get_main_queue(), {
                     self.reload()
-                    self.setFrame()
                     //self.refreshControl.endRefreshing()
                 });
             },
@@ -123,11 +128,11 @@ class BadgesPage: UICollectionViewController {
     func reload() {
         self.badgeCollectionView.reloadData()
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
-            NSNotificationCenter.defaultCenter().postNotificationName("PageLoaded", object: self.badgeCollectionView)
+            self.setFrame()
         })
     }
     
-    override func viewDidLayoutSubviews() {
-        self.badgeCollectionView.frame.size.height = self.frame_height
-    }
+//    override func viewDidLayoutSubviews() {
+//        self.badgeCollectionView.frame.size.height = self.frame_height
+//    }
 }

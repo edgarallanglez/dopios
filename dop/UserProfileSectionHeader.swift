@@ -8,7 +8,12 @@
 
 import UIKit
 
+@objc protocol SegmentedControlDelegate {
+    optional func setupIndex(index: Int)
+}
+
 class UserProfileSectionHeader: UICollectionReusableView {
+    var delegate: SegmentedControlDelegate?
     
     let segmented_controller: UserProfileSegmentedController = UserProfileSegmentedController()
     override init(frame: CGRect) {
@@ -24,5 +29,12 @@ class UserProfileSectionHeader: UICollectionReusableView {
     func commonInit() {
         self.addSubview(segmented_controller)
         segmented_controller.frame = self.bounds
+        segmented_controller.sendActionsForControlEvents(UIControlEvents.TouchUpInside)
+        segmented_controller.addTarget(self, action: "setSegmentedController", forControlEvents: UIControlEvents.ValueChanged)
+        
+    }
+    
+    func setSegmentedController() {
+        delegate?.setupIndex!(segmented_controller.selectedIndex)
     }
 }

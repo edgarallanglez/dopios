@@ -331,10 +331,10 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
 //            }
 //        }
         if segue.identifier == "userProfile" {
-            let view = segue.destinationViewController as! UserProfileViewController
-            view.userId = 5
+            let view = segue.destinationViewController as! UserProfileStickyController
+            view.user_id = 5
 
-            var people:PeopleModel = PeopleModel(names: "Jose Eduardo", surnames: "Quintero Gutierrez!", user_id: 5, birth_date: "", facebook_key: "", privacy_status: 0, main_image: "", is_friend: true)
+            var people: PeopleModel = PeopleModel(names: "Jose Eduardo", surnames: "Quintero Gutierrez!", user_id: 5, birth_date: "", facebook_key: "", privacy_status: 0, main_image: "", is_friend: true)
 
             view.person = people
         }

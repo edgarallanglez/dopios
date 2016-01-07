@@ -20,8 +20,6 @@ class UserProfileHeader: UICollectionReusableView {
         user_profile = (NSBundle.mainBundle().loadNibNamed("UserProfileStickyHeader", owner: self, options: nil)[0] as? UserProfileStickyHeader)!
         
         self.addSubview(user_profile)
-        
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "setUserProfile:", name: "SetParentView", object: nil)
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -33,10 +31,8 @@ class UserProfileHeader: UICollectionReusableView {
         self.user_profile.frame = self.bounds
     }
     
-    func setUserProfile(notification: NSNotification) {
-        let view = notification.object as! UserProfileStickyController
-       // print(person)
-        user_profile.setView(view)
+    func setUserProfile(viewController: UserProfileStickyController) {
+        user_profile.setView(viewController)
     }
     
     

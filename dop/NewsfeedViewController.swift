@@ -245,9 +245,9 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
             let model = self.newsfeed[i]
 
             if segue.identifier == "userProfile" {
-                let vc = segue.destinationViewController as! UserProfileViewController
-                vc.userId = model.user_id
-                vc.userImagePath = model.user_image
+                let vc = segue.destinationViewController as! UserProfileStickyController
+                vc.user_id = model.user_id
+                vc.user_image_path = model.user_image
             }
         }
     }
