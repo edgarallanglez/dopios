@@ -24,6 +24,7 @@ class NotificationButton: UIBarButtonItem, SocketIODelegate {
             socketIO.connectToHost("inmoon.com.mx", onPort: 443, withParams: nil, withNamespace: "/app")
 
         }
+        
     }
     func socketIODidConnect(socket: SocketIO) {
         print("socket.io connected.")

@@ -352,8 +352,10 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                             }
                         }
                         
+                        coupon_box.loadItem(coupon, viewController: self)
                         
-                        coupon_box.descriptionLbl.text = coupon.couponDescription
+                        
+                        //coupon_box.descriptionLbl.text = coupon.couponDescription
                         //coupon_box.likes = trending[index].likes
                         
                         coupon_box.layer.borderWidth = 0.5
@@ -361,9 +363,9 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                         
                         self.trendingScroll.addSubview(coupon_box)
                         
-                        let gesture = UITapGestureRecognizer(target: self, action: "tapCoupon:")
+                       /* let gesture = UITapGestureRecognizer(target: self, action: "tapCoupon:")
                         
-                        coupon_box.addGestureRecognizer(gesture)
+                        coupon_box.addGestureRecognizer(gesture)*/
                         
                         coupon_box.tag = index
                         

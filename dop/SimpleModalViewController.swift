@@ -20,13 +20,20 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate {
     @IBOutlet var limit_label: UILabel!
     @IBOutlet var action_button: ModalButton!
     @IBOutlet var cancel_button: ModalButton!
+    
+    var normalAttrdict: [String:AnyObject]?
+    var highlightAttrdict: [String:AnyObject]?
+    var currentAttribute : [String:AnyObject]?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        cancel_button.addTarget(self, action: "buttonPressed:", forControlEvents: UIControlEvents.TouchDown)
-        
-        cancel_button.addTarget(self, action: "buttonReleased:", forControlEvents: UIControlEvents.TouchDragOutside)
-        cancel_button.addTarget(self, action: "cancelTouched:", forControlEvents: UIControlEvents.TouchUpInside)
+        if((cancel_button) != nil){
+            cancel_button.addTarget(self, action: "buttonPressed:", forControlEvents: UIControlEvents.TouchDown)
+            
+            cancel_button.addTarget(self, action: "buttonReleased:", forControlEvents: UIControlEvents.TouchDragOutside)
+            cancel_button.addTarget(self, action: "cancelTouched:", forControlEvents: UIControlEvents.TouchUpInside)
+        }
         
         action_button.addTarget(self, action: "buttonPressed:", forControlEvents: UIControlEvents.TouchDown)
         action_button.addTarget(self, action: "buttonReleased:", forControlEvents: UIControlEvents.TouchDragOutside)
@@ -35,6 +42,11 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate {
         if((share_text) != nil){
             share_text.delegate = self
         }
+        
+        normalAttrdict = [NSFontAttributeName:UIFont(name: "Montserrat-Light",size: 16.0)!,NSForegroundColorAttributeName: UIColor.lightGrayColor()]
+        highlightAttrdict = [NSFontAttributeName:UIFont(name: "Montserrat-Light",size: 16.0)!, NSForegroundColorAttributeName: Utilities.dopColor]
+        
+        currentAttribute = normalAttrdict
         
         
     }
@@ -57,7 +69,9 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate {
   
     override func viewDidAppear(animated: Bool) {
         action_button.layoutIfNeeded()
-        cancel_button.layoutIfNeeded()
+        if(cancel_button != nil){
+            cancel_button.layoutIfNeeded()
+        }
        
         
     }
@@ -68,21 +82,31 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate {
     }
 
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
-        let maxLength = 139
-        let currentString: NSString = textView.text!
-        let newString: NSString =
-        currentString.stringByReplacingCharactersInRange(range, withString: text)
-        limit_label.text = "\(newString.length)/140"
-        
-        if(text == "#"){
-            let attributedString = NSMutableAttributedString(string: "\(textView.text)")
-            attributedString.addAttribute(NSForegroundColorAttributeName, value: Utilities.dopColor, range: NSRange(location:0, length: 10))
-            textView.attributedText = attributedString
+        let maxLength = 140
+        let currentString: String = textView.text!
+        let newString: String = (currentString as NSString).stringByReplacingCharactersInRange(range, withString: text)
+
+        if(newString.characters.count <= maxLength) {
+            self.limit_label.text = "\(newString.characters.count)/\(maxLength)"
         }
-    
+        
+        if(newString.characters.count >= 2){
+            if(text == "#" && newString[newString.characters.endIndex.predecessor().predecessor()] == " "){
+                currentAttribute = highlightAttrdict!
+            }
+            if(text == " "){
+                currentAttribute = normalAttrdict!
+            }
+            
+        }
         
         
-        return newString.length <= maxLength
+        textView.typingAttributes = currentAttribute!
+        
+        
+        
+        
+        return (newString.characters.count) <= maxLength
     }
    
 
