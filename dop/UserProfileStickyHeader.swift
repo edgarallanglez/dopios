@@ -16,18 +16,18 @@ class UserProfileStickyHeader: UIView {
     @IBOutlet weak var user_name: UILabel!
     @IBOutlet weak var follow_button: UIButton!
     
-    var parent_view_controller: UserProfileStickyController!
+    var parent_view: UserProfileStickyController!
     var user_id: Int = User.user_id
     
     func setView(parent_view_controller: UserProfileStickyController) {
-        self.parent_view_controller = parent_view_controller
+        self.parent_view = parent_view_controller
         
         self.follow_button.layer.borderColor = Utilities.dopColor.CGColor
         
         if parent_view_controller.user_image.image != nil {
             user_image.image = parent_view_controller.user_image.image
         } else {
-            downloadImage(NSURL(string:parent_view_controller.person.main_image)!)
+            downloadImage(NSURL(string: parent_view_controller.person.main_image)!)
         }
         
         user_image.layer.cornerRadius = user_image.frame.width / 2

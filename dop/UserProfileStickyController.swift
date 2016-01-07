@@ -8,8 +8,12 @@
 
 import UIKit
 
-class UserProfileStickyController: UICollectionViewController {
-    
+@objc protocol SetSegmentedPageDelegate {
+    optional func setPage(index: Int)
+}
+
+class UserProfileStickyController: UICollectionViewController, UserPaginationDelegate, SegmentedControlDelegate {
+    var delegate: SetSegmentedPageDelegate?
     var new_height: CGFloat!
     var frame_width: CGFloat!
     
@@ -19,6 +23,8 @@ class UserProfileStickyController: UICollectionViewController {
     var user_image: UIImageView!
     var user_image_path: String = ""
     var person: PeopleModel!
+    var page_index: Int!
+    var segmented_controller: UserProfileSegmentedController?
     
     private var layout : CSStickyHeaderFlowLayout? {
         return self.collectionView?.collectionViewLayout as? CSStickyHeaderFlowLayout
@@ -36,28 +42,24 @@ class UserProfileStickyController: UICollectionViewController {
 
         // Setup Header
         self.collectionView?.registerClass(UserProfileHeader.self, forSupplementaryViewOfKind: CSStickyHeaderParallaxHeader, withReuseIdentifier: "userHeader")
-        self.layout?.parallaxHeaderReferenceSize = CGSizeMake(self.view.frame.size.width, 300)
+        self.layout?.parallaxHeaderReferenceSize = CGSizeMake(self.view.frame.size.width, 250)
         
         // Setup Section Header
         self.collectionView?.registerClass(UserProfileSectionHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "sectionHeader")
         self.layout?.headerReferenceSize = CGSizeMake(320, 40)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "resizeCell:", name: "ResizeCell", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "invalidateLayout", name: "InvalidateLayout", object: nil)
-        
+        self.collectionView?.delegate = self
         setupProfileDetail()
     }
     
     // Cells
-    
-    func resizeCell(notification: NSNotification) {
-        let page_height = notification.object as! CGFloat
+    func resizeView(new_height: CGFloat) {
         var size_changed = false
-        if page_height != self.new_height && page_height != 0 { size_changed = true }
-        if page_height > 200 { self.new_height = page_height } else { self.new_height = 250 }
+        if new_height != self.new_height && new_height != 0 { size_changed = true }
+        self.new_height = new_height
         if size_changed { invalidateLayout() }
     }
-    
+
     func invalidateLayout(){
         self.layout?.invalidateLayout()
     }
@@ -65,10 +67,11 @@ class UserProfileStickyController: UICollectionViewController {
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("page_identifier", forIndexPath: indexPath) as! UserPaginationViewController
-        cell.setPaginator(self)
-        self.layout!.itemSize = CGSizeMake(self.frame_width, cell.dynamic_height)
-        self.new_height = cell.dynamic_height
         
+        cell.delegate = self
+        cell.setPaginator(self)
+        self.new_height = cell.dynamic_height
+    
         return cell
     }
     
@@ -96,13 +99,14 @@ class UserProfileStickyController: UICollectionViewController {
         
         if kind == CSStickyHeaderParallaxHeader {
             let view = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "userHeader", forIndexPath: indexPath) as! UserProfileHeader
-            
-            NSNotificationCenter.defaultCenter().postNotificationName("SetParentView", object: self)
+            view.setUserProfile(self)
             
             return view
         } else if kind == UICollectionElementKindSectionHeader {
-            let view = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "sectionHeader", forIndexPath: indexPath)
-        
+            let view = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "sectionHeader", forIndexPath: indexPath) as! UserProfileSectionHeader
+            
+            view.delegate = self
+            self.segmented_controller = view.segmented_controller
             return view
         }
         
@@ -133,6 +137,14 @@ class UserProfileStickyController: UICollectionViewController {
                 self.user_image?.image = UIImage(data: data!)
             }
         }
+    }
+    
+    func setupIndex(index: Int) {
+        delegate?.setPage!(index)
+    }
+    
+    func setSegmentedIndex(index: Int) {
+        self.segmented_controller!.selectedIndex = index
     }
 }
 
