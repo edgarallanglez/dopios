@@ -311,7 +311,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
 
     }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        print("SMN")
+        
 //        if let cell = sender as? NotificationCell {
 //            let i = notification_table.indexPathForCell(cell)!.row
 //            let model = self.notifications[i]
