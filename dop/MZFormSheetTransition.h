@@ -41,6 +41,8 @@ typedef NS_ENUM(NSInteger, MZFormSheetTransitionStyle) {
     MZFormSheetTransitionStyleDropDown,
     MZFormSheetTransitionStyleCustom,
     MZFormSheetTransitionStyleNone,
+    MZFormSheetTransitionStyleFadeScale,
+    MZFormSheetTransitionStyleEaseFromBottom
 };
 
 @protocol MZFormSheetControllerTransition <NSObject>

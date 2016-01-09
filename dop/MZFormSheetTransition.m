@@ -402,3 +402,73 @@ CGFloat const MZTransitionDefaultDropDownDuration = 0.4;
                      }];
 }
 @end
+
+@interface MZFadeScaleTransition : MZFormSheetTransition
+@end
+@implementation MZFadeScaleTransition
++ (void)load
+{
+    [MZFormSheetController registerTransitionClass:self forTransitionStyle:MZFormSheetTransitionStyleFadeScale];
+}
+- (void)entryFormSheetControllerTransition:(MZFormSheetController *)formSheetController completionHandler:(MZTransitionCompletionHandler)completionHandler
+{
+
+
+    [self contentViewControllerForController:formSheetController].alpha = 0;
+    [self contentViewControllerForController:formSheetController].transform = CGAffineTransformMakeScale(0.9f, 0.9f);
+    [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [self contentViewControllerForController:formSheetController].alpha = 1;
+        [self contentViewControllerForController:formSheetController].transform = CGAffineTransformMakeScale(1.0f, 1.0f);
+    } completion:^(BOOL finished){
+        completionHandler();
+    }];
+}
+- (void)exitFormSheetControllerTransition:(MZFormSheetController *)formSheetController completionHandler:(MZTransitionCompletionHandler)completionHandler
+{
+    [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [self contentViewControllerForController:formSheetController].alpha = 0;
+        [self contentViewControllerForController:formSheetController].transform = CGAffineTransformMakeScale(0.9f, 0.9f);
+    } completion:^(BOOL finished){
+        completionHandler();
+    }];
+}
+@end
+
+@interface MZEaseFromBottomTransition : MZFormSheetTransition
+@end
+@implementation MZEaseFromBottomTransition
++ (void)load
+{
+    [MZFormSheetController registerTransitionClass:self forTransitionStyle:MZFormSheetTransitionStyleEaseFromBottom];
+}
+- (void)entryFormSheetControllerTransition:(MZFormSheetController *)formSheetController completionHandler:(MZTransitionCompletionHandler)completionHandler
+{
+    [self contentViewControllerForController:formSheetController].alpha = 0;
+    CGRect formSheetRect = [self contentViewControllerForController:formSheetController].frame;
+    CGRect originalFormSheetRect = formSheetRect;
+    formSheetRect.origin.y+=20;
+    
+    //formSheetRect.origin.y = formSheetController.view.bounds.size.height/4;
+    [self contentViewControllerForController:formSheetController].frame = formSheetRect;
+   
+    
+    [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [self contentViewControllerForController:formSheetController].alpha = 1;
+        [self contentViewControllerForController:formSheetController].frame = originalFormSheetRect;
+        
+    } completion:^(BOOL finished){
+        completionHandler();
+    }];
+}
+- (void)exitFormSheetControllerTransition:(MZFormSheetController *)formSheetController completionHandler:(MZTransitionCompletionHandler)completionHandler
+{
+    CGRect formSheetRect = [self contentViewControllerForController:formSheetController].frame;
+    formSheetRect.origin.y += 20;
+    [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [self contentViewControllerForController:formSheetController].frame = formSheetRect;
+        [self contentViewControllerForController:formSheetController].alpha = 0;
+    } completion:^(BOOL finished){
+        completionHandler();
+    }];
+}
+@end

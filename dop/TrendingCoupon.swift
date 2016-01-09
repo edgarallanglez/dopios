@@ -101,7 +101,8 @@ class TrendingCoupon: UIView {
     
     func tapCoupon(sender:UITapGestureRecognizer){
         //self.viewController!.performSegueWithIdentifier("couponDetail", sender: self)
-        print("SEGUEEE")
+        let modal:ModalViewController = ModalViewController(currentView: self.viewController!, type: ModalViewControllerType.Share)
+        modal.presentAnimated(true, completionHandler: nil)
     }
     
     required init(coder aDecoder: NSCoder) {

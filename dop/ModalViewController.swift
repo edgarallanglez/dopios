@@ -32,7 +32,7 @@ class ModalViewController: MZFormSheetController {
         MZFormSheetController.sharedBackgroundWindow().backgroundColor = UIColor.clearColor()*/
         self.shouldDismissOnBackgroundViewTap = false
         self.cornerRadius = 8.0
-        self.transitionStyle = MZFormSheetTransitionStyle.SlideFromBottom
+        self.transitionStyle = MZFormSheetTransitionStyle.EaseFromBottom
         self.portraitTopInset = 40.0
         self.landscapeTopInset = 6.0
         
