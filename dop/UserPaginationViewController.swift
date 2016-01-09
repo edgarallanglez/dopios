@@ -14,7 +14,7 @@ import UIKit
     optional func setSegmentedIndex(index: Int)
 }
 
-class UserPaginationViewController: UICollectionViewCell, UIPageViewControllerDataSource, UIPageViewControllerDelegate, SetSegmentedPageDelegate, ActivityPageDelegate, BadgePageDelegate, ConnectionsPageDelegate {
+class UserPaginationViewController: UICollectionViewCell, UIPageViewControllerDataSource, UIPageViewControllerDelegate, SetSegmentedPageDelegate, ActivityPageDelegate, BadgePageDelegate, ConnectionsPageDelegate, UIScrollViewDelegate {
     
     var delegate: UserPaginationDelegate?
     var userPageViewController: UIPageViewController = UIPageViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
@@ -67,6 +67,16 @@ class UserPaginationViewController: UICollectionViewCell, UIPageViewControllerDa
         self.userPageViewController.setViewControllers(viewControllers, direction: .Forward, animated: true, completion: nil)
         
         self.contentView.addSubview(self.userPageViewController.view)
+
+//        self.userPageViewController.scroll
+//        self.infiniteScrollIndicatorView = CustomInfiniteIndicator(frame: CGRectMake(0, 0, 24, 24))
+//        self.tableView.infiniteScrollIndicatorMargin = 40
+//        
+//        tableView.addInfiniteScrollWithHandler { [weak self] (scrollView) -> Void in
+//            if(!self!.activity_array.isEmpty){
+//                self!.getActivityWithOffset()
+//            }
+//        }
     }
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
@@ -171,6 +181,23 @@ class UserPaginationViewController: UICollectionViewCell, UIPageViewControllerDa
         
         let viewControllers: NSArray = [toViewController!]
         self.userPageViewController.setViewControllers(viewControllers as? [UIViewController], direction: direction, animated: true, completion: nil)
+    }
+    
+    func launchInfiniteScroll(parent_scroll: UICollectionView) {
+        let viewController = userPageViewController.viewControllers!.first!
+//        var currentController: UIViewController?
+        switch viewController.title! {
+            case "activityPage": var currentController = viewController as! ActivityPage
+                                    currentController.reloadWithOffset(parent_scroll)
+            
+            case "badgesPage": var currentController = viewController as! BadgesPage
+                                    currentController.reloadWithOffset()
+            
+            case "connectionsPage": var currentController = viewController as! ConnectionsPage
+                                    currentController.reloadWithOffset()
+            
+        default: var currentController = viewController as! ActivityPage
+        }
     }
 
 }

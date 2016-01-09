@@ -95,9 +95,9 @@ class ConnectionsPage: UITableViewController {
         })
     }
     
-//    override func viewDidLayoutSubviews() {
-//        self.tableView.frame.size.width = UIScreen.mainScreen().bounds.width
-//        
-//    }
+    func reloadWithOffset() {
+        print("llegue hasta abajo en connections :D")
+//        self.tableView.finishInfiniteScroll()
+    }
     
 }

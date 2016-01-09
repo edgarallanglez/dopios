@@ -132,6 +132,11 @@ class BadgesPage: UICollectionViewController {
         })
     }
     
+    func reloadWithOffset() {
+        print("llegue hasta abajo en badges :D")
+        
+    }
+    
 //    override func viewDidLayoutSubviews() {
 //        self.badgeCollectionView.frame.size.height = self.frame_height
 //    }

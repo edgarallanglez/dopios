@@ -10,6 +10,8 @@ import UIKit
 
 @objc protocol SetSegmentedPageDelegate {
     optional func setPage(index: Int)
+    
+    optional func launchInfiniteScroll(parent_scroll: UICollectionView)
 }
 
 class UserProfileStickyController: UICollectionViewController, UserPaginationDelegate, SegmentedControlDelegate {
@@ -50,6 +52,16 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
         
         self.collectionView?.delegate = self
         setupProfileDetail()
+        
+        self.collectionView!.infiniteScrollIndicatorView = CustomInfiniteIndicator(frame: CGRectMake(0, 0, 24, 24))
+        self.collectionView!.infiniteScrollIndicatorMargin = 40
+
+        self.collectionView!.addInfiniteScrollWithHandler { [weak self] (scrollView) -> Void in
+            self?.infiniteScroll()
+//            if(!self!.activity_array.isEmpty){
+//                self!.getActivityWithOffset()
+//            }
+        }
     }
     
     // Cells
@@ -141,6 +153,10 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
     
     func setupIndex(index: Int) {
         delegate?.setPage!(index)
+    }
+    
+    func infiniteScroll() {
+        delegate?.launchInfiniteScroll!(self.collectionView!)
     }
     
     func setSegmentedIndex(index: Int) {

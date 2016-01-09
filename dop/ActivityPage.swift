@@ -22,6 +22,10 @@ class ActivityPage: UITableViewController {
     var activity_array = [NewsfeedNote]()
     var frame_width: CGFloat!
     var parent_view: UserProfileStickyController!
+    var offset = 5
+    
+    var new_data: Bool = false
+    var added_values: Int = 0
     
     override func viewDidLoad() {
         self.tableView.alwaysBounceVertical = false
@@ -30,6 +34,15 @@ class ActivityPage: UITableViewController {
         let nib = UINib(nibName: "RewardsActivityCell", bundle: nil)
         self.tableView.registerNib(nib, forCellReuseIdentifier: "RewardsActivityCell")
         self.tableView.rowHeight = 140
+        
+        self.tableView.infiniteScrollIndicatorView = CustomInfiniteIndicator(frame: CGRectMake(0, 0, 24, 24))
+        self.tableView.infiniteScrollIndicatorMargin = 40
+        
+        tableView.addInfiniteScrollWithHandler { [weak self] (scrollView) -> Void in
+            if(!self!.activity_array.isEmpty){
+//                self!.getActivityWithOffset()
+            }
+        }
 
     }
     
@@ -109,6 +122,56 @@ class ActivityPage: UITableViewController {
                     //                    self.refreshControl.endRefreshing()
                 })
         })
+    }
+    
+    func reloadWithOffset(parent_scroll: UICollectionView) {
+        UserProfileController.getAllTakingCouponsOffsetWithSuccess(self.activity_array[0].client_coupon_id, user_id: parent_view.user_id, offset: offset, success: { (data) -> Void in
+            let json = JSON(data: data)
+            
+            self.new_data = false
+            self.added_values = 0
+            
+            for (_, subJson): (String, JSON) in json["data"] {
+                let client_coupon_id = subJson["clients_coupon_id"].int
+                let friend_id = subJson["friends_id"].string
+                let exchange_date = subJson["exchange_date"].string
+                let main_image = subJson["main_image"].string
+                let names = subJson["names"].string
+                let company_id = subJson["company_id"].int ?? 0
+                let longitude = subJson["longitude"].string
+                let latitude = subJson["latitude"].string
+                let branch_id =  subJson["branch_id" ].int
+                let coupon_id =  subJson["coupon_id"].string
+                let logo =  subJson["logo"].string
+                let surnames =  subJson["surnames"].string
+                let user_id =  subJson["user_id"].int
+                let name =  subJson["name"].string
+                let branch_name =  subJson["branch_name"].string
+                let total_likes =  subJson["total_likes"].int!
+                let user_like =  subJson["user_like"].int
+                let date =  subJson["used_date"].string
+                
+                let model = NewsfeedNote(client_coupon_id:client_coupon_id,friend_id: friend_id, user_id: user_id, branch_id: branch_id, coupon_name: name, branch_name: branch_name, names: names, surnames: surnames, user_image: main_image, company_id: company_id, branch_image: logo, total_likes:total_likes,user_like: user_like, date:date)
+                
+                self.activity_array.append(model)
+                self.new_data = true
+                self.added_values++
+            }
+            
+            dispatch_async(dispatch_get_main_queue(), {
+                self.reload()
+                if self.new_data { self.offset += self.added_values }
+                parent_scroll.finishInfiniteScroll()
+                
+            });
+            },
+            
+            failure: { (error) -> Void in
+                dispatch_async(dispatch_get_main_queue(), {
+                    //                    self.refreshControl.endRefreshing()
+                })
+        })
+
     }
     
     func reload() {

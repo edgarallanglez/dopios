@@ -30,8 +30,6 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "getNearestBranches", name: "filtersChanged", object: nil)
         
-        
-        
         locationManager = CLLocationManager()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
