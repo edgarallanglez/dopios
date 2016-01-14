@@ -53,14 +53,12 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
         self.collectionView?.delegate = self
         setupProfileDetail()
         
+        
         self.collectionView!.infiniteScrollIndicatorView = CustomInfiniteIndicator(frame: CGRectMake(0, 0, 24, 24))
         self.collectionView!.infiniteScrollIndicatorMargin = 40
 
         self.collectionView!.addInfiniteScrollWithHandler { [weak self] (scrollView) -> Void in
             self?.infiniteScroll()
-//            if(!self!.activity_array.isEmpty){
-//                self!.getActivityWithOffset()
-//            }
         }
     }
     
@@ -77,12 +75,18 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        var cell: UICollectionViewCell!
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("page_identifier", forIndexPath: indexPath) as! UserPaginationViewController
-        
-        cell.delegate = self
-        cell.setPaginator(self)
-        self.new_height = cell.dynamic_height
+        if self.person.privacy_status == 0 || User.user_id == self.person.user_id {
+            let custom_cell = collectionView.dequeueReusableCellWithReuseIdentifier("page_identifier", forIndexPath: indexPath) as! UserPaginationViewController
+            
+            custom_cell.delegate = self
+            custom_cell.setPaginator(self)
+            self.new_height = custom_cell.dynamic_height
+            return custom_cell
+        } else {
+            cell = collectionView.dequeueReusableCellWithReuseIdentifier("locked_identifier", forIndexPath: indexPath)
+        }
     
         return cell
     }
@@ -91,7 +95,7 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
         
         let width = collectionView.frame.width
         var height: CGFloat!
-        if self.new_height != nil { height = self.new_height } else { height = 450 }
+        if self.new_height != nil || self.new_height > 250 { height = self.new_height } else { height = 250 }
         
         return CGSizeMake(width, height)
     }
@@ -138,9 +142,7 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
         } else if person.privacy_status == 1 {
             user_name = "\(person.names) \(person.surnames)"
 //            private_view.hidden = false
-            
         }
-    
     }
     
     func downloadImage(url: NSURL) {
@@ -157,6 +159,7 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
     
     func infiniteScroll() {
         delegate?.launchInfiniteScroll!(self.collectionView!)
+        if person.privacy_status == 1 { self.collectionView!.finishInfiniteScroll() }
     }
     
     func setSegmentedIndex(index: Int) {

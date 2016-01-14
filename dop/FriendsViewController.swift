@@ -230,6 +230,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
                 let view = segue.destinationViewController as! UserProfileStickyController
                 view.user_id = model.user_id
                 view.user_image_path = model.main_image
+                view.user_image = cell.user_image
                 let person = PeopleModel(names: model.names, surnames: model.surnames, user_id: model.user_id, birth_date: model.birth_date, facebook_key: model.facebook_key, privacy_status: model.privacy_status, main_image: model.main_image, is_friend: model.friend)
                 view.person = person
             }

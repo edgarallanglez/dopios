@@ -67,16 +67,6 @@ class UserPaginationViewController: UICollectionViewCell, UIPageViewControllerDa
         self.userPageViewController.setViewControllers(viewControllers, direction: .Forward, animated: true, completion: nil)
         
         self.contentView.addSubview(self.userPageViewController.view)
-
-//        self.userPageViewController.scroll
-//        self.infiniteScrollIndicatorView = CustomInfiniteIndicator(frame: CGRectMake(0, 0, 24, 24))
-//        self.tableView.infiniteScrollIndicatorMargin = 40
-//        
-//        tableView.addInfiniteScrollWithHandler { [weak self] (scrollView) -> Void in
-//            if(!self!.activity_array.isEmpty){
-//                self!.getActivityWithOffset()
-//            }
-//        }
     }
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
@@ -160,23 +150,22 @@ class UserPaginationViewController: UICollectionViewCell, UIPageViewControllerDa
     }
     
     func setPage(index: Int) {
-        var direction: UIPageViewControllerNavigationDirection;
+        var direction: UIPageViewControllerNavigationDirection
         
         if(index < self.index){ direction = .Reverse } else { direction = .Forward }
         var toViewController = self.viewControllerAtIndex(0)
         
         switch index {
-        case 0:
-            toViewController = self.viewControllerAtIndex(0)
-            self.index = 0
-        case 1:
-            toViewController = self.viewControllerAtIndex(1)
-            self.index = 1
-        case 2:
-            toViewController = self.viewControllerAtIndex(2)
-            self.index = 2
-        default:
-            print("Default t")
+            case 0:
+                toViewController = self.viewControllerAtIndex(0)
+                self.index = 0
+            case 1:
+                toViewController = self.viewControllerAtIndex(1)
+                self.index = 1
+            case 2:
+                toViewController = self.viewControllerAtIndex(2)
+                self.index = 2
+        default: break
         }
         
         let viewControllers: NSArray = [toViewController!]
@@ -185,18 +174,16 @@ class UserPaginationViewController: UICollectionViewCell, UIPageViewControllerDa
     
     func launchInfiniteScroll(parent_scroll: UICollectionView) {
         let viewController = userPageViewController.viewControllers!.first!
-//        var currentController: UIViewController?
         switch viewController.title! {
-            case "activityPage": var currentController = viewController as! ActivityPage
+            case "activityPage": let currentController = viewController as! ActivityPage
                                     currentController.reloadWithOffset(parent_scroll)
             
-            case "badgesPage": var currentController = viewController as! BadgesPage
-                                    currentController.reloadWithOffset()
+            case "badgesPage": let currentController = viewController as! BadgesPage
+                                    currentController.reloadWithOffset(parent_scroll)
             
-            case "connectionsPage": var currentController = viewController as! ConnectionsPage
-                                    currentController.reloadWithOffset()
-            
-        default: var currentController = viewController as! ActivityPage
+            case "connectionsPage": let currentController = viewController as! ConnectionsPage
+                                    currentController.reloadWithOffset(parent_scroll)
+        default: break
         }
     }
 

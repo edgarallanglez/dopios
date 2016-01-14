@@ -78,8 +78,9 @@ class MedalTableViewController: UITableViewController {
                     if earned {
                         let user_id = subJson["user_id"].int!
                         let reward_date = subJson["reward_date"].string ?? ""
+                        let users_badges_id = subJson["users_badges_id"].int!
                         
-                        let model = BadgeModel(badge_id: badge_id, name: name, info: info, user_id: user_id, reward_date: reward_date, earned: earned)
+                        let model = BadgeModel(badge_id: badge_id, name: name, info: info, user_id: user_id, reward_date: reward_date, earned: earned, users_badges_id: users_badges_id)
                         
                         self.medal_list.append(model)
                         

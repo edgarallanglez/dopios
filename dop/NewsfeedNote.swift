@@ -24,7 +24,7 @@ class NewsfeedNote: NSObject {
     var user_like: Int
     var date: String
     
-    init(client_coupon_id:Int!,friend_id:String!, user_id:Int!, branch_id:Int!, coupon_name: String!,
+    init(client_coupon_id: Int!,friend_id:String!, user_id:Int!, branch_id:Int!, coupon_name: String!,
          branch_name: String!, names: String!, surnames: String!, user_image: String!, company_id: Int!,
         branch_image: String!, total_likes:Int!,user_like:Int!, date:String! ) {
         self.client_coupon_id = client_coupon_id ?? 0

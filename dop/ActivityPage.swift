@@ -16,7 +16,8 @@ class ActivityPage: UITableViewController {
     var delegate: ActivityPageDelegate?
     
     @IBOutlet var activityTableView: UITableView!
-
+    @IBOutlet weak var default_view: UITableViewCell!
+    
     var cached_images: [String: UIImage] = [:]
     var tableViewSize: CGFloat!
     var activity_array = [NewsfeedNote]()
@@ -36,13 +37,7 @@ class ActivityPage: UITableViewController {
         self.tableView.rowHeight = 140
         
         self.tableView.infiniteScrollIndicatorView = CustomInfiniteIndicator(frame: CGRectMake(0, 0, 24, 24))
-        self.tableView.infiniteScrollIndicatorMargin = 40
-        
-        tableView.addInfiniteScrollWithHandler { [weak self] (scrollView) -> Void in
-            if(!self!.activity_array.isEmpty){
-//                self!.getActivityWithOffset()
-            }
-        }
+        self.tableView.infiniteScrollIndicatorMargin = 0
 
     }
     
@@ -51,7 +46,9 @@ class ActivityPage: UITableViewController {
     }
     
     func setFrame() {
-        delegate?.resizeActivityView!(self.tableView.contentSize.height)
+        var dynamic_height: CGFloat = 250
+        if self.tableView.contentSize.height > dynamic_height { dynamic_height = self.tableView.contentSize.height }
+        delegate?.resizeActivityView!(dynamic_height)
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -59,7 +56,9 @@ class ActivityPage: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.activity_array.count
+        if self.activity_array.count != 0 { return self.activity_array.count }
+        
+        return 1
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -67,19 +66,25 @@ class ActivityPage: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell: RewardsActivityCell = tableView.dequeueReusableCellWithIdentifier("RewardsActivityCell", forIndexPath: indexPath) as! RewardsActivityCell
-        
-        let model = self.activity_array[indexPath.row]
-        
-        if self.parent_view != nil {
-            if self.parent_view?.user_image.image != nil {
-                cell.user_image.image = self.parent_view.user_image.image
-            } else {
-                downloadImage(NSURL(string: self.parent_view.person.main_image)!, cell: cell)
+        if self.activity_array.count != 0 {
+            let custom_cell: RewardsActivityCell = tableView.dequeueReusableCellWithIdentifier("RewardsActivityCell", forIndexPath: indexPath) as! RewardsActivityCell
+            let model = self.activity_array[indexPath.row]
+            
+            if self.parent_view != nil {
+                if self.parent_view?.user_image.image != nil {
+                    custom_cell.user_image.image = self.parent_view.user_image.image
+                } else {
+                    downloadImage(NSURL(string: self.parent_view.person.main_image)!, cell: custom_cell)
+                }
             }
+            custom_cell.loadItem(model, view: self)
+            return custom_cell
+        } else {
+           let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("default_view", forIndexPath: indexPath)
+            cell.hidden = false
+            return cell
         }
-        cell.loadItem(model, view: self)
-        return cell
+        
     }
     
     
@@ -125,52 +130,54 @@ class ActivityPage: UITableViewController {
     }
     
     func reloadWithOffset(parent_scroll: UICollectionView) {
-        UserProfileController.getAllTakingCouponsOffsetWithSuccess(self.activity_array[0].client_coupon_id, user_id: parent_view.user_id, offset: offset, success: { (data) -> Void in
-            let json = JSON(data: data)
-            
-            self.new_data = false
-            self.added_values = 0
-            
-            for (_, subJson): (String, JSON) in json["data"] {
-                let client_coupon_id = subJson["clients_coupon_id"].int
-                let friend_id = subJson["friends_id"].string
-                let exchange_date = subJson["exchange_date"].string
-                let main_image = subJson["main_image"].string
-                let names = subJson["names"].string
-                let company_id = subJson["company_id"].int ?? 0
-                let longitude = subJson["longitude"].string
-                let latitude = subJson["latitude"].string
-                let branch_id =  subJson["branch_id" ].int
-                let coupon_id =  subJson["coupon_id"].string
-                let logo =  subJson["logo"].string
-                let surnames =  subJson["surnames"].string
-                let user_id =  subJson["user_id"].int
-                let name =  subJson["name"].string
-                let branch_name =  subJson["branch_name"].string
-                let total_likes =  subJson["total_likes"].int!
-                let user_like =  subJson["user_like"].int
-                let date =  subJson["used_date"].string
+        if activity_array.count != 0 {
+            UserProfileController.getAllTakingCouponsOffsetWithSuccess(self.activity_array[0].client_coupon_id, user_id: parent_view.user_id, offset: offset, success: { (data) -> Void in
+                let json = JSON(data: data)
                 
-                let model = NewsfeedNote(client_coupon_id:client_coupon_id,friend_id: friend_id, user_id: user_id, branch_id: branch_id, coupon_name: name, branch_name: branch_name, names: names, surnames: surnames, user_image: main_image, company_id: company_id, branch_image: logo, total_likes:total_likes,user_like: user_like, date:date)
+                self.new_data = false
+                self.added_values = 0
                 
-                self.activity_array.append(model)
-                self.new_data = true
-                self.added_values++
-            }
-            
-            dispatch_async(dispatch_get_main_queue(), {
-                self.reload()
-                if self.new_data { self.offset += self.added_values }
-                parent_scroll.finishInfiniteScroll()
+                for (_, subJson): (String, JSON) in json["data"] {
+                    let client_coupon_id = subJson["clients_coupon_id"].int
+                    let friend_id = subJson["friends_id"].string
+                    let exchange_date = subJson["exchange_date"].string
+                    let main_image = subJson["main_image"].string
+                    let names = subJson["names"].string
+                    let company_id = subJson["company_id"].int ?? 0
+                    let longitude = subJson["longitude"].string
+                    let latitude = subJson["latitude"].string
+                    let branch_id =  subJson["branch_id" ].int
+                    let coupon_id =  subJson["coupon_id"].string
+                    let logo =  subJson["logo"].string
+                    let surnames =  subJson["surnames"].string
+                    let user_id =  subJson["user_id"].int
+                    let name =  subJson["name"].string
+                    let branch_name =  subJson["branch_name"].string
+                    let total_likes =  subJson["total_likes"].int!
+                    let user_like =  subJson["user_like"].int
+                    let date =  subJson["used_date"].string
+                    
+                    let model = NewsfeedNote(client_coupon_id:client_coupon_id,friend_id: friend_id, user_id: user_id, branch_id: branch_id, coupon_name: name, branch_name: branch_name, names: names, surnames: surnames, user_image: main_image, company_id: company_id, branch_image: logo, total_likes:total_likes,user_like: user_like, date:date)
+                    
+                    self.activity_array.append(model)
+                    self.new_data = true
+                    self.added_values++
+                }
                 
-            });
-            },
-            
-            failure: { (error) -> Void in
                 dispatch_async(dispatch_get_main_queue(), {
-                    //                    self.refreshControl.endRefreshing()
-                })
-        })
+                    self.reload()
+                    if self.new_data { self.offset += self.added_values }
+                    parent_scroll.finishInfiniteScroll()
+                    
+                });
+                },
+                
+                failure: { (error) -> Void in
+                    dispatch_async(dispatch_get_main_queue(), {
+                        parent_scroll.finishInfiniteScroll()
+                    })
+            })
+        } else { parent_scroll.finishInfiniteScroll() }
 
     }
     

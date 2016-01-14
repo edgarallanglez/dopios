@@ -79,8 +79,19 @@ class UserProfileController: NSObject {
         })
     }
     
-    class func getAllBranchesFollowedWithSuccess(success succeed: ((data: NSData!) -> Void), failure errorFound: ((data: NSError?) -> Void)) {
-        let url = "\(Utilities.dopURL)company/branch/following/get"
+    class func getAllBranchesFollowedWithSuccess(user_id: Int, success succeed: ((data: NSData!) -> Void), failure errorFound: ((data: NSError?) -> Void)) {
+        let url = "\(Utilities.dopURL)company/branch/\(user_id)/following/get"
+        Utilities.loadDataFromURL(NSURL(string: url)!, completion:{(data, error) -> Void in
+            if let urlData = data {
+                succeed(data: urlData)
+            } else {
+                errorFound(data: error)
+            }
+        })
+    }
+    
+    class func getAllBranchesFollowedOffsetWithSuccess(user_id: Int, last_branch: Int, offset: Int, success succeed: ((data: NSData!) -> Void), failure errorFound: ((data: NSError?) -> Void)) {
+        let url = "\(Utilities.dopURL)company/branch/\(user_id)/following/\(last_branch)/\(offset)/get"
         Utilities.loadDataFromURL(NSURL(string: url)!, completion:{(data, error) -> Void in
             if let urlData = data {
                 succeed(data: urlData)
