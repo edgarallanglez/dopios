@@ -16,7 +16,6 @@ class ActivityPage: UITableViewController {
     var delegate: ActivityPageDelegate?
     
     @IBOutlet var activityTableView: UITableView!
-    @IBOutlet weak var default_view: UITableViewCell!
     
     var cached_images: [String: UIImage] = [:]
     var tableViewSize: CGFloat!
@@ -35,14 +34,14 @@ class ActivityPage: UITableViewController {
         let nib = UINib(nibName: "RewardsActivityCell", bundle: nil)
         self.tableView.registerNib(nib, forCellReuseIdentifier: "RewardsActivityCell")
         self.tableView.rowHeight = 140
-        
-        self.tableView.infiniteScrollIndicatorView = CustomInfiniteIndicator(frame: CGRectMake(0, 0, 24, 24))
-        self.tableView.infiniteScrollIndicatorMargin = 0
-
     }
     
     override func viewDidAppear(animated: Bool) {
-        if activity_array.count == 0 { getActivity() } else { setFrame() }
+        if activity_array.count == 0 { getActivity() } else {
+            setFrame()
+            let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("default_view")!
+            cell.hidden = false
+        }
     }
     
     func setFrame() {
@@ -80,11 +79,9 @@ class ActivityPage: UITableViewController {
             custom_cell.loadItem(model, view: self)
             return custom_cell
         } else {
-           let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("default_view", forIndexPath: indexPath)
-            cell.hidden = false
+            let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("default_view", forIndexPath: indexPath)
             return cell
         }
-        
     }
     
     
