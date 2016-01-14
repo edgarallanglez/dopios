@@ -146,6 +146,26 @@ class Utilities {
         return "Error de conexión de red. Comprueba tu conexión a internet."
     }
     
+    //Animations
+    class func fadeViewAnimation(view:UIView, delay:NSTimeInterval, duration:NSTimeInterval){
+        
+        UIView.animateWithDuration(duration, delay: delay, options: .CurveEaseInOut,
+            animations: {
+                view.alpha = 1
+                
+            }, completion: nil)
+        
+    }
+    class func fadeSlideAnimation(view:UIView, delay:NSTimeInterval, duration:NSTimeInterval){
+        
+        UIView.animateWithDuration(duration, delay: delay, options: .CurveEaseInOut,
+            animations: {
+                view.alpha = 1
+                
+            }, completion: nil)
+        
+    }
+    
 }
 
 /*
