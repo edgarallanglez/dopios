@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import MapKit
 
-
-class SimpleModalViewController: UIViewController, UITextViewDelegate {
+class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapViewDelegate {
     @IBOutlet var close_button: UIButton!
     @IBOutlet var title_label: UILabel!
     @IBOutlet var twitter_button: UIButton!
+    @IBOutlet var category_label: UILabel!
     @IBOutlet var instagram_button: UIButton!
     @IBOutlet var facebook_button: UIButton!
     @IBOutlet var share_text: UITextView!
@@ -21,24 +22,35 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate {
     @IBOutlet var action_button: ModalButton!
     @IBOutlet var cancel_button: ModalButton!
     
+    @IBOutlet var map: MKMapView!
+    
     var normalAttrdict: [String:AnyObject]?
     var highlightAttrdict: [String:AnyObject]?
     var currentAttribute : [String:AnyObject]?
-
+    
+    //
+    var coupon:Coupon?
+    let regionRadius: CLLocationDistance = 1000
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
         if((cancel_button) != nil){
             cancel_button.addTarget(self, action: "buttonPressed:", forControlEvents: UIControlEvents.TouchDown)
-            
             cancel_button.addTarget(self, action: "buttonReleased:", forControlEvents: UIControlEvents.TouchDragOutside)
             cancel_button.addTarget(self, action: "cancelTouched:", forControlEvents: UIControlEvents.TouchUpInside)
         }
         
-        action_button.addTarget(self, action: "buttonPressed:", forControlEvents: UIControlEvents.TouchDown)
-        action_button.addTarget(self, action: "buttonReleased:", forControlEvents: UIControlEvents.TouchDragOutside)
-        action_button.addTarget(self, action: "actionTouched:", forControlEvents: UIControlEvents.TouchUpInside)
+        if((action_button) != nil){
+            action_button.addTarget(self, action: "buttonPressed:", forControlEvents: UIControlEvents.TouchDown)
+            action_button.addTarget(self, action: "buttonReleased:", forControlEvents: UIControlEvents.TouchDragOutside)
+            action_button.addTarget(self, action: "actionTouched:", forControlEvents: UIControlEvents.TouchUpInside)
+        }
+        
+        if((close_button) != nil){
+            close_button.addTarget(self, action: "closePressed:", forControlEvents: .TouchDown)
+        }
         
         if((share_text) != nil){
             share_text.delegate = self
@@ -50,7 +62,10 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate {
         currentAttribute = normalAttrdict
         
         
+
     }
+    
+    
     func startListening(){
        
     }
@@ -67,14 +82,31 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate {
     func actionTouched(sender: ModalButton){
         sender.selected = false
     }
+    func closePressed(sender: UIButton){
+        self.mz_dismissFormSheetControllerAnimated(true, completionHandler: nil)
+    }
   
     override func viewDidAppear(animated: Bool) {
-        action_button.layoutIfNeeded()
+        if(coupon != nil){
+            self.title_label.text = coupon?.name.uppercaseString
+            self.category_label.text = "Cafeteria".uppercaseString
+            self.map.delegate = self
+            self.centerMapOnLocation((self.coupon?.location)!)
+            self.setBranchAnnotation()
+            
+            let constrain = self.map.constraints.last
+            
+            print(constrain)
+
+        }
+
+        if(action_button != nil){
+            action_button.layoutIfNeeded()
+        }
         if(cancel_button != nil){
             cancel_button.layoutIfNeeded()
         }
        
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -104,21 +136,49 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate {
         
         textView.typingAttributes = currentAttribute!
         
-        
-        
-        
         return (newString.characters.count) <= maxLength
     }
    
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView?{
+        let reuseId = "custom"
+        var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId)
+        if mapView.userLocation == annotation as! NSObject { return nil }
+        if (annotationView == nil) {
+            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            annotationView!.canShowCallout = true
+            
+        } else {
+            annotationView?.annotation = annotation
+        }
+        
+        let customAnnotation = annotation as! Annotation
+        annotationView!.image = UIImage(named: customAnnotation.typeOfAnnotation)
+        
+        return annotationView
     }
-    */
-
+    func centerMapOnLocation(location: CLLocationCoordinate2D) {
+        let centerPin = CLLocation(latitude: location.latitude, longitude: location.longitude)
+        let coordinateRegion = MKCoordinateRegionMakeWithDistance(centerPin.coordinate,
+            regionRadius * 2.0, regionRadius * 2.0)
+        self.map.setRegion(coordinateRegion, animated: true)
+       
+    }
+    func mapViewDidFinishRenderingMap(mapView: MKMapView, fullyRendered: Bool) {
+        self.map.hidden = false
+        Utilities.fadeViewAnimation(self.map, delay: 0, duration: 0.3)
+    }
+    
+    func setBranchAnnotation () {
+        let dropPin : Annotation = Annotation(coordinate: (coupon?.location)!, title: coupon!.name, subTitle: "Los mejores")
+        if coupon?.categoryId == 1 {
+            dropPin.typeOfAnnotation = "marker-food-icon"
+        } else if coupon!.categoryId == 2 {
+            dropPin.typeOfAnnotation = "marker-services-icon"
+        } else if coupon!.categoryId == 3 {
+            dropPin.typeOfAnnotation = "marker-entertainment-icon"
+        }
+        
+        self.map.addAnnotation(dropPin)
+    }
 }

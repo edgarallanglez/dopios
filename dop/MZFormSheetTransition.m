@@ -452,7 +452,7 @@ CGFloat const MZTransitionDefaultDropDownDuration = 0.4;
     [self contentViewControllerForController:formSheetController].frame = formSheetRect;
    
     
-    [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         [self contentViewControllerForController:formSheetController].alpha = 1;
         [self contentViewControllerForController:formSheetController].frame = originalFormSheetRect;
         
@@ -464,7 +464,7 @@ CGFloat const MZTransitionDefaultDropDownDuration = 0.4;
 {
     CGRect formSheetRect = [self contentViewControllerForController:formSheetController].frame;
     formSheetRect.origin.y += 20;
-    [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         [self contentViewControllerForController:formSheetController].frame = formSheetRect;
         [self contentViewControllerForController:formSheetController].alpha = 0;
     } completion:^(BOOL finished){

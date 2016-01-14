@@ -18,6 +18,7 @@ protocol ModalDelegate {
 class ModalViewController: MZFormSheetController {
     var delegate:ModalDelegate? = nil
     var type:ModalViewControllerType?
+    var vc : SimpleModalViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +37,10 @@ class ModalViewController: MZFormSheetController {
         self.portraitTopInset = 40.0
         self.landscapeTopInset = 6.0
         
+        self.willPresentCompletionHandler = { vc in
+            
+        }
+        
     }
     init(currentView presentedFormSheetViewController: UIViewController, type: ModalViewControllerType) {
         self.type = type
@@ -49,9 +54,8 @@ class ModalViewController: MZFormSheetController {
             vc = presentedFormSheetViewController.storyboard?.instantiateViewControllerWithIdentifier("ShareModal") as? SimpleModalViewController
         }
         if(type == .CouponDetail){
-            vc = presentedFormSheetViewController.storyboard?.instantiateViewControllerWithIdentifier("CouponDetailView") as? SimpleModalViewController
+            vc = presentedFormSheetViewController.storyboard?.instantiateViewControllerWithIdentifier("CouponDetailModal") as? SimpleModalViewController
         }
-
 
         super.init(viewController: vc!)
         
@@ -67,11 +71,16 @@ class ModalViewController: MZFormSheetController {
             vc!.twitter_button.addTarget(self, action: "tintButton:", forControlEvents: .TouchUpInside)
             vc!.facebook_button.addTarget(self, action: "tintButton:", forControlEvents: .TouchUpInside)
             vc!.instagram_button.addTarget(self, action: "tintButton:", forControlEvents: .TouchUpInside)
-            vc!.close_button.addTarget(self, action: "close:", forControlEvents: .TouchUpInside)
             //vc!.modal_text.text = "Share"
         }
+        if(type == .CouponDetail){
+            self.presentedFormSheetSize = CGSizeMake(380, 530)
+            
+        }
         
-        vc!.action_button.addTarget(self, action: "pressed:", forControlEvents: .TouchUpInside)
+        if(vc!.action_button != nil){
+            vc!.action_button.addTarget(self, action: "pressed:", forControlEvents: .TouchUpInside)
+        }
     }
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nil, bundle:nil)
@@ -97,10 +106,6 @@ class ModalViewController: MZFormSheetController {
             sender.selected = true
             sender.tintColor = Utilities.dopColor
         }
-    }
-    
-    func close(sender: UIButton!){
-        self.mz_dismissFormSheetControllerAnimated(true, completionHandler: nil)
     }
 
 }

@@ -101,8 +101,22 @@ class TrendingCoupon: UIView {
     
     func tapCoupon(sender:UITapGestureRecognizer){
         //self.viewController!.performSegueWithIdentifier("couponDetail", sender: self)
-        let modal:ModalViewController = ModalViewController(currentView: self.viewController!, type: ModalViewControllerType.Share)
-        modal.presentAnimated(true, completionHandler: nil)
+        let modal:ModalViewController = ModalViewController(currentView: self.viewController!, type: ModalViewControllerType.CouponDetail)
+        
+        dispatch_async(dispatch_get_main_queue()) {
+            
+            modal.willPresentCompletionHandler = { vc in
+                let navigationController = vc as! SimpleModalViewController
+                /*navigationController.title_label.text = self.coupon.name
+                navigationController.title_label.text = navigationController.title_label.text?.uppercaseString
+                navigationController.category_label.text = "Cafeteria"
+                navigationController.category_label.text = navigationController.category_label.text?.uppercaseString*/
+                navigationController.coupon = self.coupon
+                
+            }
+            modal.presentAnimated(true, completionHandler: nil)
+           
+        }
     }
     
     required init(coder aDecoder: NSCoder) {
