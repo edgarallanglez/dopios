@@ -157,13 +157,15 @@ class Utilities {
         
     }
     class func fadeSlideAnimation(view:UIView, delay:NSTimeInterval, duration:NSTimeInterval){
+        view.alpha = 0
+        let finalYPosition = view.frame.origin.y
+        view.frame.origin.y += 30
         
         UIView.animateWithDuration(duration, delay: delay, options: .CurveEaseInOut,
             animations: {
+                view.frame.origin.y = finalYPosition
                 view.alpha = 1
-                
             }, completion: nil)
-        
     }
     
 }

@@ -10,7 +10,11 @@ import UIKit
 import MapKit
 
 class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapViewDelegate {
+    @IBOutlet var description_title: UILabel!
+    @IBOutlet var branch_title: UIButton!
+    @IBOutlet var description_separator: UIView!
     @IBOutlet var close_button: UIButton!
+    @IBOutlet var coupon_description: UILabel!
     @IBOutlet var title_label: UILabel!
     @IBOutlet var twitter_button: UIButton!
     @IBOutlet var category_label: UILabel!
@@ -23,14 +27,19 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapVie
     @IBOutlet var cancel_button: ModalButton!
     
     @IBOutlet var map: MKMapView!
+    var map_loaded: Bool = false
+    
+    var animations_delay = 0.0
     
     var normalAttrdict: [String:AnyObject]?
     var highlightAttrdict: [String:AnyObject]?
     var currentAttribute : [String:AnyObject]?
     
+    @IBOutlet var loader: UIActivityIndicatorView!
     //
     var coupon:Coupon?
     let regionRadius: CLLocationDistance = 1000
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,16 +97,21 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapVie
   
     override func viewDidAppear(animated: Bool) {
         if(coupon != nil){
-            self.title_label.text = coupon?.name.uppercaseString
+            self.branch_title.setTitle(self.coupon?.name.uppercaseString, forState: .Normal)
             self.category_label.text = "Cafeteria".uppercaseString
             self.map.delegate = self
             self.centerMapOnLocation((self.coupon?.location)!)
             self.setBranchAnnotation()
+            self.coupon_description.text = coupon?.couponDescription
             
-            let constrain = self.map.constraints.last
+            description_title.alpha = 0
+            description_separator.alpha = 0
+            coupon_description.alpha = 0
             
-            print(constrain)
-
+            
+            Utilities.fadeSlideAnimation(self.branch_title, delay: 0, duration: 0.5)
+            Utilities.fadeSlideAnimation(self.category_label, delay: 0, duration: 0.5)
+            
         }
 
         if(action_button != nil){
@@ -161,12 +175,21 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapVie
         let centerPin = CLLocation(latitude: location.latitude, longitude: location.longitude)
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(centerPin.coordinate,
             regionRadius * 2.0, regionRadius * 2.0)
-        self.map.setRegion(coordinateRegion, animated: true)
+        self.map.setRegion(coordinateRegion, animated: false)
        
     }
     func mapViewDidFinishRenderingMap(mapView: MKMapView, fullyRendered: Bool) {
-        self.map.hidden = false
-        Utilities.fadeViewAnimation(self.map, delay: 0, duration: 0.3)
+        if(map_loaded == false){
+            loader.removeFromSuperview()
+            map_loaded = true
+            self.map.hidden = false
+            Utilities.fadeSlideAnimation(self.map, delay: 0, duration: 0.5)
+            
+            Utilities.fadeSlideAnimation(self.description_title, delay: 0, duration: 0.5)
+            Utilities.fadeSlideAnimation(self.description_separator, delay: 0, duration: 0.5)
+            Utilities.fadeSlideAnimation(self.coupon_description, delay: 0, duration: 0.5)
+
+        }
     }
     
     func setBranchAnnotation () {
