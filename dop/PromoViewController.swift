@@ -168,14 +168,15 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         //if(showing_modal == false){
             let cell = self.CouponsCollectionView.cellForItemAtIndexPath(indexPath)
-        
-            self.performSegueWithIdentifier("couponDetail", sender: cell)
-        
-//            let modal:ModalViewController = ModalViewController(currentView: self, type: ModalViewControllerType.Share)
-//            modal.presentAnimated(true) { (UIViewController) -> Void in
-//                self.showing_modal = true
-//            }
-            //modal.delegate = self
+            let model = self.coupons[indexPath.row] as Coupon
+            
+            let modal:ModalViewController = ModalViewController(currentView: self, type: ModalViewControllerType.CouponDetail)
+            modal.willPresentCompletionHandler = { vc in
+                let navigationController = vc as! SimpleModalViewController
+                navigationController.coupon = model
+            }
+            modal.delegate = self
+            modal.presentAnimated(true, completionHandler: nil)
         //}
         
      
