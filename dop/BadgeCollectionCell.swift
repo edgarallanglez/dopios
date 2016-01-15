@@ -11,10 +11,10 @@ import UIKit
 class BadgeCollectionCell: UICollectionViewCell {
     
     @IBOutlet weak var badge_image: UIImageView!
-    @IBOutlet weak var badge_name: UILabel!
+   // @IBOutlet weak var badge_name: UILabel!
     
     func loadItem(model: BadgeModel) {
-        badge_name.text = model.name
+        //badge_name.text = model.name
         
 //        badge_description.text = model.info
         

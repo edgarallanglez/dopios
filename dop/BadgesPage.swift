@@ -24,13 +24,16 @@ class BadgesPage: UICollectionViewController {
     var frame_width: CGFloat!
     var frame_height: CGFloat = 270
     var cell_size: CGFloat!
+    var offset = 5
+    var new_data: Bool = false
+    var added_values: Int = 0
     
     override func viewDidLoad() {
         self.collectionView!.scrollEnabled = false
         self.collectionView!.alwaysBounceVertical = false
         
         frame_width = self.badgeCollectionView.frame.size.width
-        cell_size = (self.frame_width ) / 3
+        cell_size = ((self.frame_width ) / 3) - 9
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -39,11 +42,10 @@ class BadgesPage: UICollectionViewController {
     
     func setFrame() {
         if cell_size != nil {
-            frame_height = ceil(CGFloat((badge_array.count / 3)))
-            frame_height = frame_height * cell_size
+            frame_height = ceil(CGFloat((Double(badge_array.count) / 3.0)))
+            frame_height = (frame_height * cell_size) + 40
         }
         
-        //self.badgeCollectionView.frame.size.height = frame_height
         delegate?.resizeBadgeView!(frame_height)
     }
     
@@ -80,6 +82,8 @@ class BadgesPage: UICollectionViewController {
             }
         }
         
+        cell.layer.borderColor = UIColor.lightGrayColor().CGColor
+        
         return cell
     }
     
@@ -88,7 +92,7 @@ class BadgesPage: UICollectionViewController {
     }
     
     func getBadges() {
-        BadgeController.getAllBadgesWithSuccess(
+        BadgeController.getAllBadgesWithSuccess(parent_view.user_id,
             success: { (data) -> Void in
                 let json = JSON(data: data)
                 print(json)
@@ -102,8 +106,9 @@ class BadgesPage: UICollectionViewController {
                     if earned {
                         let user_id = subJson["user_id"].int!
                         let reward_date = subJson["reward_date"].string ?? ""
+                        let users_badges_id = subJson["users_badges_id"].int!
                         
-                        let model = BadgeModel(badge_id: badge_id, name: name, info: info, user_id: user_id, reward_date: reward_date, earned: earned)
+                        let model = BadgeModel(badge_id: badge_id, name: name, info: info, user_id: user_id, reward_date: reward_date, earned: earned, users_badges_id: users_badges_id)
                         
                         self.badge_array.append(model)
                         
@@ -132,8 +137,46 @@ class BadgesPage: UICollectionViewController {
         })
     }
     
-    func reloadWithOffset() {
-        print("llegue hasta abajo en badges :D")
+    func reloadWithOffset(parent_scroll: UICollectionView) {
+        if badge_array.count != 0 {
+            BadgeController.getAllBadgesOffsetWithSuccess(parent_view.user_id, last_badge: self.badge_array[0].users_badges_id!, offset: offset,
+                success: { (data) -> Void in
+                    let json = JSON(data: data)
+                    print(json)
+                    self.new_data = false
+                    self.added_values = 0
+                    
+                    for (_, subJson): (String, JSON) in json["data"] {
+                        
+                        let badge_id = subJson["badge_id"].int!
+                        let earned = subJson["earned"].bool!
+                        let name = subJson["name"].string!
+                        let info = subJson["info"].string!
+                        let user_id = subJson["user_id"].int!
+                        let reward_date = subJson["reward_date"].string ?? ""
+                        let users_badges_id = subJson["users_badges_id"].int!
+
+                        let model = BadgeModel(badge_id: badge_id, name: name, info: info, user_id: user_id, reward_date: reward_date, earned: earned, users_badges_id: users_badges_id)
+                        
+                        self.badge_array.append(model)
+                        self.new_data = true
+                        self.added_values++
+                    }
+                    
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.reload()
+                        if self.new_data { self.offset += self.added_values }
+                        parent_scroll.finishInfiniteScroll()
+
+                    });
+                },
+                failure: { (error) -> Void in
+                    dispatch_async(dispatch_get_main_queue(), {
+                        parent_scroll.finishInfiniteScroll()
+                    })
+            })
+        } else { parent_scroll.finishInfiniteScroll() }
+
         
     }
     

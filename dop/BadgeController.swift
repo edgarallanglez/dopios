@@ -9,8 +9,20 @@
 import Foundation
 
 class BadgeController {
-    class func getAllBadgesWithSuccess(success succeed: ((couponsData: NSData!) -> Void),failure errorFound: ((couponsData: NSError?) -> Void)) {
-        let url = "\(Utilities.dopURL)badge/all/get"
+    class func getAllBadgesWithSuccess(user_id: Int, success succeed: ((couponsData: NSData!) -> Void),failure errorFound: ((couponsData: NSError?) -> Void)) {
+        let url = "\(Utilities.dopURL)badge/\(user_id)/all/get"
+        
+        Utilities.loadDataFromURL(NSURL(string: url)!, completion:{(data, error) -> Void in
+            if let urlData = data {
+                succeed(couponsData: urlData)
+            }else{
+                errorFound(couponsData: error)
+            }
+        })
+    }
+    
+    class func getAllBadgesOffsetWithSuccess(user_id: Int, last_badge: Int, offset: Int, success succeed: ((couponsData: NSData!) -> Void),failure errorFound: ((couponsData: NSError?) -> Void)) {
+        let url = "\(Utilities.dopURL)badge/\(user_id)/all/\(last_badge)/\(offset)/get"
         
         Utilities.loadDataFromURL(NSURL(string: url)!, completion:{(data, error) -> Void in
             if let urlData = data {

@@ -18,6 +18,9 @@ class ConnectionsPage: UITableViewController {
     var parent_view: UserProfileStickyController!
     var cached_images: [String: UIImage] = [:]
     var connection_array = [ConnectionModel]()
+    var offset = 5
+    var new_data: Bool = false
+    var added_values: Int = 0
     
     override func viewDidLoad() {
         self.tableView.alwaysBounceVertical = false
@@ -54,14 +57,14 @@ class ConnectionsPage: UITableViewController {
         let cell: ConnectionCell = tableView.dequeueReusableCellWithIdentifier("ConnectionCell", forIndexPath: indexPath) as! ConnectionCell
         
         let model = self.connection_array[indexPath.row]
-        
-        cell.connection_image.image = UIImage(named: "circleLogo")
+        downloadImage(model, cell: cell)
         cell.loadItem(model)
+        
         return cell
     }
     
     func getConnections() {
-        UserProfileController.getAllBranchesFollowedWithSuccess(success: { (data) -> Void in
+        UserProfileController.getAllBranchesFollowedWithSuccess(parent_view.user_id, success: { (data) -> Void in
             let json = JSON(data: data)
             
             for (_, subJson): (String, JSON) in json["data"] {
@@ -70,8 +73,10 @@ class ConnectionsPage: UITableViewController {
                 let branch_id =  subJson["branch_id" ].int!
                 let logo =  subJson["logo"].string
                 let banner = subJson["banner"].string ?? ""
+                let branch_follower_id = subJson["branch_follower_id"].int!
+
                 
-                let model = ConnectionModel(branch_id: branch_id, name: name, company_id: company_id, banner: banner, logo: logo)
+                let model = ConnectionModel(branch_id: branch_id, name: name, company_id: company_id, banner: banner, logo: logo, branch_follower_id: branch_follower_id)
                 
                 self.connection_array.append(model)
             }
@@ -95,9 +100,51 @@ class ConnectionsPage: UITableViewController {
         })
     }
     
-    func reloadWithOffset() {
-        print("llegue hasta abajo en connections :D")
-//        self.tableView.finishInfiniteScroll()
+    func reloadWithOffset(parent_scroll: UICollectionView) {
+        if connection_array.count != 0 {
+            UserProfileController.getAllBranchesFollowedOffsetWithSuccess(parent_view.user_id, last_branch: connection_array.first!.branch_follower_id, offset: offset, success: { (data) -> Void in
+                let json = JSON(data: data)
+                
+                self.new_data = false
+                self.added_values = 0
+                
+                for (_, subJson): (String, JSON) in json["data"] {
+                    let name = subJson["name"].string!
+                    let company_id = subJson["company_id"].int ?? 0
+                    let branch_id =  subJson["branch_id" ].int!
+                    let logo =  subJson["logo"].string
+                    let banner = subJson["banner"].string ?? ""
+                    let branch_follower_id = subJson["branch_follower_id"].int!
+                    
+                    let model = ConnectionModel(branch_id: branch_id, name: name, company_id: company_id, banner: banner, logo: logo, branch_follower_id: branch_follower_id)
+                    
+                    self.connection_array.append(model)
+                    self.new_data = true
+                    self.added_values++
+                }
+                
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.reload()
+                    if self.new_data { self.offset += self.added_values }
+                    parent_scroll.finishInfiniteScroll()
+                });
+                },
+                
+                failure: { (error) -> Void in
+                    dispatch_async(dispatch_get_main_queue(), {
+                        parent_scroll.finishInfiniteScroll()
+                    })
+            })
+        } else { parent_scroll.finishInfiniteScroll() }
+    }
+    
+    func downloadImage(model: ConnectionModel, cell: ConnectionCell) {
+        let url = NSURL(string: "\(Utilities.dopImagesURL)\(model.company_id)/\(model.logo!)")!
+        Utilities.getDataFromUrl(url) { data in
+            dispatch_async(dispatch_get_main_queue()) {
+                cell.connection_image.image = UIImage(data: data!)
+            }
+        }
     }
     
 }
