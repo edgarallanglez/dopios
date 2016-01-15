@@ -11,7 +11,6 @@ import MapKit
 class CouponDetailView: UIView, MKMapViewDelegate {
 
     @IBOutlet var branch_cover: UIImageView!
-    @IBOutlet var branch_logo: UIImageView!
     @IBOutlet var branch_category: UILabel!
     @IBOutlet var location: MKMapView!
     @IBOutlet weak var couponsName: UIButton!

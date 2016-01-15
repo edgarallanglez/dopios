@@ -192,7 +192,7 @@ class CouponDetailViewController: BaseViewController, UITableViewDelegate, UITab
             view.logo = self.logo
             if(customView.branch_cover.image == nil){
                 
-            }else{
+            } else {
                 view.banner = customView.branch_cover.image
             }
             
@@ -203,7 +203,8 @@ class CouponDetailViewController: BaseViewController, UITableViewDelegate, UITab
     
     func getNewsfeedActivity() {
         let params:[String: AnyObject] = [
-            "coupon_id" : couponId]
+            "coupon_id" : couponId
+        ]
         
         CouponController.getPeopleTakingSpecificCouponWithSuccess(params,
             success: { (peopleData) -> Void in

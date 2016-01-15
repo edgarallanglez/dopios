@@ -13,21 +13,20 @@ class SettingsViewController: UITableViewController {
     @IBOutlet var configTableView: UITableView!
     @IBOutlet weak var facebook_connect: UIButton!
     @IBOutlet weak var twitter_connect: UIButton!
-    
-    
-    
+    @IBOutlet weak var privacy_switch: UISwitch!
+
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if (indexPath.section == 2) {
-            setActionSheet()
-        }
+        if (indexPath.section == 2) { setActionSheet() }
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
     override func viewDidLoad() {
+        if User.privacy_status == 1 { privacy_switch.setOn(true, animated: true) }
+        
         if((FBSDKAccessToken.currentAccessToken()) != nil) {
             facebook_connect.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-            facebook_connect.backgroundColor = UIColor(red: 248/255, green: 20/255, blue: 90/255, alpha: 1)
+            facebook_connect.backgroundColor = Utilities.dopColor
             facebook_connect.setTitle("DESCONECTAR", forState: UIControlState.Normal)
         }
     }
@@ -36,17 +35,9 @@ class SettingsViewController: UITableViewController {
         let currentState = sender.on
         var newState: Int
         
-        if currentState {
-            newState = 1
-        } else {
-            newState = 0
-        }
-        
-        let params: [String: AnyObject] = [
-            "privacy_status": newState
-        ]
+        if currentState { newState = 1 } else { newState = 0 }
+        let params: [String: AnyObject] = [ "privacy_status": newState ]
 
-        
         SettingsController.setPrivacyWithSuccess("\(Utilities.dopURL)user/privacy_status/set", params: params,
             success: { (data) -> Void in
                 print(data)
