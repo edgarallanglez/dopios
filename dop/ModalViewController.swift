@@ -17,13 +17,15 @@ protocol ModalDelegate {
 }
 class ModalViewController: MZFormSheetController {
     var delegate:ModalDelegate? = nil
-    var type:ModalViewControllerType?
-    var vc : SimpleModalViewController?
+    var type: ModalViewControllerType?
+    var simple_modal : SimpleModalViewController?
+    var parent_view: UIViewController!
+    var action_type: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //let vc:UIViewController = (self.storyboard?.instantiateViewControllerWithIdentifier("SimpleModal"))!
-        //ModalViewController(viewController: vc)
+        //let simple_modal:UIViewController = (self.storyboard?.instantiateViewControllerWithIdentifier("SimpleModal"))!
+        //ModalViewController(viewController: simple_modal)
         /*MZFormSheetBackgroundWindow.appearance().backgroundBlurEffect = true
         MZFormSheetBackgroundWindow.appearance().blurRadius = 1.0
         MZFormSheetBackgroundWindow.appearance().backgroundColor = UIColor.clearColor()
@@ -37,7 +39,7 @@ class ModalViewController: MZFormSheetController {
         self.portraitTopInset = 40.0
         self.landscapeTopInset = 6.0
         
-        self.willPresentCompletionHandler = { vc in
+        self.willPresentCompletionHandler = { simple_modal in
             
         }
         
@@ -45,41 +47,42 @@ class ModalViewController: MZFormSheetController {
     init(currentView presentedFormSheetViewController: UIViewController, type: ModalViewControllerType) {
         self.type = type
         
-        var vc : SimpleModalViewController!
+        self.parent_view = presentedFormSheetViewController
+        var simple_modal : SimpleModalViewController!
         
         if(type == .ConnectionError){
-            vc = presentedFormSheetViewController.storyboard?.instantiateViewControllerWithIdentifier("SimpleModal") as? SimpleModalViewController
+            simple_modal = presentedFormSheetViewController.storyboard?.instantiateViewControllerWithIdentifier("SimpleModal") as? SimpleModalViewController
         }
         if(type == .Share){
-            vc = presentedFormSheetViewController.storyboard?.instantiateViewControllerWithIdentifier("ShareModal") as? SimpleModalViewController
+            simple_modal = presentedFormSheetViewController.storyboard?.instantiateViewControllerWithIdentifier("ShareModal") as? SimpleModalViewController
         }
         if(type == .CouponDetail){
-            vc = presentedFormSheetViewController.storyboard?.instantiateViewControllerWithIdentifier("CouponDetailModal") as? SimpleModalViewController
+            simple_modal = presentedFormSheetViewController.storyboard?.instantiateViewControllerWithIdentifier("CouponDetailModal") as? SimpleModalViewController
         }
 
-        super.init(viewController: vc!)
+        super.init(viewController: simple_modal!)
         
         if(type == .ConnectionError){
             self.presentedFormSheetSize = CGSizeMake(350, 271)
-            vc.modal_text.text = Utilities.connectionError
+            simple_modal.modal_text.text = Utilities.connectionError
         }
         if(type == .Share){
             self.presentedFormSheetSize = CGSizeMake(350, 330)
-            vc!.title_label.text = "Compartir"
-            vc!.action_button.titleLabel!.text = "Compartir"
-            vc!.share_text.contentInset = UIEdgeInsetsMake(0,-5,0,0)
-            vc!.twitter_button.addTarget(self, action: "tintButton:", forControlEvents: .TouchUpInside)
-            vc!.facebook_button.addTarget(self, action: "tintButton:", forControlEvents: .TouchUpInside)
-            vc!.instagram_button.addTarget(self, action: "tintButton:", forControlEvents: .TouchUpInside)
-            //vc!.modal_text.text = "Share"
+            simple_modal!.title_label.text = "Compartir"
+            simple_modal!.action_button.titleLabel!.text = "Compartir"
+            simple_modal!.share_text.contentInset = UIEdgeInsetsMake(0,-5,0,0)
+            simple_modal!.twitter_button.addTarget(self, action: "tintButton:", forControlEvents: .TouchUpInside)
+            simple_modal!.facebook_button.addTarget(self, action: "tintButton:", forControlEvents: .TouchUpInside)
+            simple_modal!.instagram_button.addTarget(self, action: "tintButton:", forControlEvents: .TouchUpInside)
+            //simple_modal!.modal_text.text = "Share"
         }
         if(type == .CouponDetail){
             self.presentedFormSheetSize = CGSizeMake(380, 530)
-            
+            simple_modal.branch_title.addTarget(self, action: "toBranch", forControlEvents: .TouchUpInside)
         }
         
-        if(vc!.action_button != nil){
-            vc!.action_button.addTarget(self, action: "pressed:", forControlEvents: .TouchUpInside)
+        if(simple_modal!.action_button != nil){
+            simple_modal!.action_button.addTarget(self, action: "pressed:", forControlEvents: .TouchUpInside)
         }
     }
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -90,19 +93,25 @@ class ModalViewController: MZFormSheetController {
         fatalError("init(coder:) has not been implemented")
     }
     
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     func pressed(sender: UIButton!) {
         self.delegate?.pressActionButton(self)
     }
+    
+    func toBranch() {
+        self.action_type = "profile"
+        self.delegate?.pressActionButton(self)
+    }
+    
     func tintButton(sender: UIButton!) {
-        if(sender.selected){
+        if (sender.selected) {
             sender.selected = false
             sender.tintColor = UIColor.lightGrayColor()
-        }else{
+        } else {
             sender.selected = true
             sender.tintColor = Utilities.dopColor
         }

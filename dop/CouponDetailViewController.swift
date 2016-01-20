@@ -187,14 +187,9 @@ class CouponDetailViewController: BaseViewController, UITableViewDelegate, UITab
              //let i = couponsTableView.indexPathForCell(cell)!.section
         
         if segue.identifier == "branchProfile" {
-            let view = segue.destinationViewController as! BranchProfileViewControllerN
-            view.branchId = branchId
+            let view = segue.destinationViewController as! BranchProfileStickyController
+            view.branch_id = branchId
             view.logo = self.logo
-            if(customView.branch_cover.image == nil){
-                
-            } else {
-                view.banner = customView.branch_cover.image
-            }
             
         }
         

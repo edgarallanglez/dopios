@@ -204,4 +204,16 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapVie
         
         self.map.addAnnotation(dropPin)
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "branchProfile" {
+            let view = segue.destinationViewController as! BranchProfileStickyController
+            view.branch_id = self.coupon!.branch_id
+            //            view.logo = self.logo
+            
+        }
+        
+        
+    }
 }

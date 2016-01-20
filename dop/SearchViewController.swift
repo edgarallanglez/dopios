@@ -95,7 +95,7 @@ class SearchViewController: BaseViewController, UITableViewDataSource, UITableVi
         //myBackButton.setTitle("BACKS", forState: UIControlState.Normal)
         myBackButton.sizeToFit()
         
-        var myCustomBackButtonItem:UIBarButtonItem = UIBarButtonItem(customView: myBackButton)
+        let myCustomBackButtonItem:UIBarButtonItem = UIBarButtonItem(customView: myBackButton)
         self.navigationItem.leftBarButtonItem  = myCustomBackButtonItem
         
         
@@ -407,8 +407,8 @@ class SearchViewController: BaseViewController, UITableViewDataSource, UITableVi
             
             if segue.identifier == "branchProfile" {
                 let model = self.filtered[i]
-                let view = segue.destinationViewController as! BranchProfileViewController
-                view.branchId = model.id
+                let view = segue.destinationViewController as! BranchProfileStickyController
+                view.branch_id = model.id
             }
         }
         

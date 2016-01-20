@@ -9,6 +9,7 @@
 import UIKit
 import MapKit
 
+
 class BranchProfileAboutView: UITableViewCell, CLLocationManagerDelegate, MKMapViewDelegate {
     
     @IBOutlet weak var branchLocationMap: MKMapView!

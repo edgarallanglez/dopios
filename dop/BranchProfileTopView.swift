@@ -13,14 +13,15 @@ class BranchProfileTopView: UIView {
     @IBOutlet weak var branchCover: UIImageView!
     @IBOutlet weak var branchName: UILabel!
     @IBOutlet weak var branchLogo: UIImageView!
-    @IBOutlet weak var branchProfileSegmented: SegmentedControl!
-    var branchId:Int!
+    
+    var branch_id: Int!
+    var parent_view: BranchProfileStickyController!
     
     
     @IBAction func followBranch(sender: AnyObject) {
         
         let params:[String: AnyObject] = [
-            "branch_id" : String(stringInterpolationSegment: branchId),
+            "branch_id" : String(stringInterpolationSegment: branch_id),
             "date" : "2015-01-01"]
         
         print(params)
@@ -37,5 +38,9 @@ class BranchProfileTopView: UIView {
                 })
         })
 
+    }
+    
+    func setView(viewController: BranchProfileStickyController) {
+        self.parent_view = viewController
     }
 }
