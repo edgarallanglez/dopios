@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TrendingCoupon: UIView {
+class TrendingCoupon: UIView,ModalDelegate {
     
     @IBOutlet var descriptionLbl: UILabel!
     @IBOutlet var logo: UIImageView!
@@ -104,18 +104,13 @@ class TrendingCoupon: UIView {
         let modal:ModalViewController = ModalViewController(currentView: self.viewController!, type: ModalViewControllerType.CouponDetail)
         
         dispatch_async(dispatch_get_main_queue()) {
-            
             modal.willPresentCompletionHandler = { vc in
                 let navigationController = vc as! SimpleModalViewController
-                /*navigationController.title_label.text = self.coupon.name
-                navigationController.title_label.text = navigationController.title_label.text?.uppercaseString
-                navigationController.category_label.text = "Cafeteria"
-                navigationController.category_label.text = navigationController.category_label.text?.uppercaseString*/
                 navigationController.coupon = self.coupon
                 
             }
             modal.presentAnimated(true, completionHandler: nil)
-           
+            modal.delegate = self
         }
     }
     
@@ -127,6 +122,13 @@ class TrendingCoupon: UIView {
         self.coupon = coupon
         self.viewController = view
         self.frame.origin = CGPointMake(x,y)
+    }
+    func pressActionButton(modal: MZFormSheetController) {
+        let vc  = viewController!.storyboard!.instantiateViewControllerWithIdentifier("readQRView") as! readQRViewController
+        viewController?.hidesBottomBarWhenPushed = true
+        viewController!.navigationController?.pushViewController(vc, animated: true)
+        viewController?.hidesBottomBarWhenPushed = false
+        modal.dismissAnimated(true, completionHandler: nil)
     }
     
 }

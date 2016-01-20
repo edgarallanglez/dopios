@@ -19,10 +19,13 @@ class ToExpireCoupon: UIView {
     */
     @IBOutlet var descriptionLbl: UILabel!
     @IBOutlet var branchNameLbl: UILabel!
-    init(height:Int) {
-        
+    var viewController: UIViewController?
+    var coupon:Coupon!
+    
+    init(height:Int, coupon:Coupon, viewController:UIViewController) {
         super.init(frame: CGRect(x: 0, y: 0, width: 180, height: 230))
-
+        let coupon_gesture = UITapGestureRecognizer(target: self, action: "tapCoupon:")
+        self.addGestureRecognizer(coupon_gesture)
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -32,6 +35,24 @@ class ToExpireCoupon: UIView {
     func move(x:CGFloat,y:CGFloat){
         self.frame.origin = CGPointMake(x,y)
     }
+    func tapCoupon(sender:UITapGestureRecognizer){
 
+        /*let modal:ModalViewController = ModalViewController(currentView: self.viewController!, type: ModalViewControllerType.CouponDetail)
+        
+        dispatch_async(dispatch_get_main_queue()) {
+            
+            modal.willPresentCompletionHandler = { vc in
+                let navigationController = vc as! SimpleModalViewController
+                /*navigationController.title_label.text = self.coupon.name
+                navigationController.title_label.text = navigationController.title_label.text?.uppercaseString
+                navigationController.category_label.text = "Cafeteria"
+                navigationController.category_label.text = navigationController.category_label.text?.uppercaseString*/
+                //navigationController.coupon = self.coupon
+                
+            }
+            modal.presentAnimated(true, completionHandler: nil)
+            
+        }*/
+    }
 
 }

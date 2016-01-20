@@ -156,18 +156,41 @@ class Utilities {
             }, completion: nil)
         
     }
-    class func fadeSlideAnimation(view:UIView, delay:NSTimeInterval, duration:NSTimeInterval){
+    class func fadeSlideAnimation(view:UIView, delay:NSTimeInterval, duration:NSTimeInterval, yPosition:CGFloat){
         view.alpha = 0
         let finalYPosition = view.frame.origin.y
-        view.frame.origin.y += 30
+        view.frame.origin.y += yPosition
         
-        UIView.animateWithDuration(duration, delay: delay, options: .CurveEaseInOut,
-            animations: {
-                view.frame.origin.y = finalYPosition
-                view.alpha = 1
-            }, completion: nil)
+        UIView.animateWithDuration(duration, delay: delay, usingSpringWithDamping: 1, initialSpringVelocity: 2, options: .CurveEaseInOut, animations: ({
+            view.frame.origin.y = finalYPosition
+            view.alpha = 1
+        }), completion:nil)
     }
-    
+    class func fadeSlideFromBottomAnimation(view:UIView, delay:NSTimeInterval, duration:NSTimeInterval, yPosition:CGFloat){
+        view.alpha = 0
+        let finalYPosition = view.frame.origin.y
+        view.frame.origin.y -= yPosition
+        
+        UIView.animateWithDuration(duration, delay: delay, usingSpringWithDamping: 1, initialSpringVelocity: 2, options: .CurveEaseInOut, animations: ({
+            view.frame.origin.y = finalYPosition
+            view.alpha = 1
+        }), completion:nil)
+    }
+    class func permanentBounce(view:UIView, delay:NSTimeInterval, duration:NSTimeInterval){
+        view.transform = CGAffineTransformMakeScale(0.9, 0.9)
+        var bounce_delay:NSTimeInterval = 0
+        UIView.animateWithDuration(duration, delay: delay, usingSpringWithDamping: 1, initialSpringVelocity: 2, options: .CurveEaseInOut, animations: ({
+                view.alpha = 1
+                view.transform = CGAffineTransformMakeScale(0.9, 0.9)
+        }), completion: { (value:Bool) in
+            UIView.animateWithDuration(duration, delay: bounce_delay, usingSpringWithDamping: 0.5, initialSpringVelocity: 8, options: [.CurveEaseInOut, .Repeat, .Autoreverse], animations: ({
+                view.transform = CGAffineTransformMakeScale(1, 1)
+                bounce_delay = 3
+                //view.transform = CGAffineTransformIdentity
+                
+            }), completion: nil)
+        })
+    }
 }
 
 /*
