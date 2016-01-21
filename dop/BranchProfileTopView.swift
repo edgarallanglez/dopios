@@ -16,8 +16,7 @@ class BranchProfileTopView: UIView {
     
     var branch_id: Int!
     var parent_view: BranchProfileStickyController!
-    
-    
+
     @IBAction func followBranch(sender: AnyObject) {
         
         let params:[String: AnyObject] = [

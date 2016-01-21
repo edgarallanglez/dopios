@@ -12,8 +12,8 @@ enum ModalViewControllerType: String {
     case Share
     case CouponDetail
 }
-protocol ModalDelegate {
-    func pressActionButton(modal:MZFormSheetController)
+@objc protocol ModalDelegate {
+    func pressActionButton(modal: ModalViewController)
 }
 class ModalViewController: MZFormSheetController {
     var delegate:ModalDelegate? = nil

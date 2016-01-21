@@ -471,7 +471,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
     
     //MODAL DELEGATE
     
-    func pressActionButton(modal:MZFormSheetController) {
+    func pressActionButton(modal: ModalViewController) {
         let YourImage:UIImage = UIImage(named: "starbucks_banner.jpg")!
 
         

@@ -11,13 +11,12 @@ import AVFoundation
 
 class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     var captureSession:AVCaptureSession?
-    @IBOutlet var branchName: UILabel!
     var videoPreviewLayer:AVCaptureVideoPreviewLayer?
     var qrCodeFrameView:UIView?
-    @IBOutlet var blurViewLeadingConstraint: NSLayoutConstraint!
-    @IBOutlet var blurView: UIVisualEffectView!
     var captureMetadataOutput:AVCaptureMetadataOutput?
     
+    @IBOutlet var qr_instructions_view: UIView!
+    @IBOutlet var qr_image: UIImageView!
     var qr_detected:Bool = false
     var loader:CustomInfiniteIndicator?
     
@@ -85,7 +84,7 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
             
             view.addSubview(loader!)
             
-            view.bringSubviewToFront(blurView)
+            //view.bringSubviewToFront(blurView)
             //blurView.bringSubviewToFront(loader!)
             
             
@@ -95,11 +94,13 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
         }
         
         
-        self.blurViewLeadingConstraint.constant = UIScreen.mainScreen().bounds.size.width
+        //self.blurViewLeadingConstraint.constant = UIScreen.mainScreen().bounds.size.width
 
         
         self.view.layoutIfNeeded()
         
+        self.qr_image.alpha = 0
+        self.qr_instructions_view.alpha = 0
 
     }
 
@@ -158,9 +159,9 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                     let json = JSON(data: couponsData)
                     let name = json["data"]["name"].string
 
-                    self.branchName.text = name
+                    //self.branchName.text = name
                     
-                    self.blurViewLeadingConstraint.constant = 0
+                    //self.blurViewLeadingConstraint.constant = 0
                     
                     UIView.animateWithDuration(1, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
                             self.view.layoutIfNeeded()
@@ -182,25 +183,26 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    @IBAction func goBack(sender: AnyObject) {
+    /*@IBAction func goBack(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: {
             self.removeFromParentViewController()
         })
-    }
+    }*/
     
     override func prefersStatusBarHidden() -> Bool {
         return true
     }
     
     override func viewDidAppear(animated: Bool) {
-        UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: UIStatusBarAnimation.Fade)
+        Utilities.permanentBounce(qr_image, delay: 0.5, duration: 0.8)
+        Utilities.fadeSlideFromBottomAnimation(qr_instructions_view, delay: 0, duration: 1, yPosition: 15)
     }
 
-    
+    /*
     override func viewWillDisappear(animated: Bool) {
         UIApplication.sharedApplication().statusBarHidden = false
 
-    }
+    }*/
     /*
     // MARK: - Navigation
 
