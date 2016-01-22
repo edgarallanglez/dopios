@@ -300,6 +300,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
     func getTrendingCoupons() {
         trending = [Coupon]()
         
+        trendingScroll.layer.masksToBounds = false
         
         DashboardController.getTrendingCouponsWithSuccess(success: { (couponsData) -> Void in
             let json = JSON(data: couponsData)
@@ -358,9 +359,10 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                         //coupon_box.descriptionLbl.text = coupon.couponDescription
                         //coupon_box.likes = trending[index].likes
                         
-                        coupon_box.layer.borderWidth = 0.5
-                        coupon_box.layer.borderColor = UIColor.lightGrayColor().CGColor
-                        
+                        //coupon_box.layer.borderWidth = 0.5
+                        //coupon_box.layer.borderColor = UIColor.lightGrayColor().CGColor
+                        Utilities.applyPlainShadow(coupon_box)
+
                         self.trendingScroll.addSubview(coupon_box)
                         
                        /* let gesture = UITapGestureRecognizer(target: self, action: "tapCoupon:")

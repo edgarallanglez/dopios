@@ -143,9 +143,9 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
     }
     func sendQR(qr_code:Int){
         
-        UIView.animateWithDuration(0.6, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
+        /*UIView.animateWithDuration(0.6, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
                 self.loader!.alpha = 1
-            }, completion: nil)
+            }, completion: nil)*/
         
         let params:[String: AnyObject] = [
             "qr_code" : qr_code,
@@ -163,9 +163,11 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                     
                     //self.blurViewLeadingConstraint.constant = 0
                     
-                    UIView.animateWithDuration(1, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
-                            self.view.layoutIfNeeded()
-                        }, completion: nil)
+                    /*UIView.animateWithDuration(1, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
+
+                        }, completion: nil)*/
+                    print(json)
+                    print("Éxito")
                 })
             },
             failure: { (error) -> Void in
@@ -200,7 +202,7 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
 
     /*
     override func viewWillDisappear(animated: Bool) {
-        UIApplication.sharedApplication().statusBarHidden = false
+        UIAppliºcation.sharedApplication().statusBarHidden = false
 
     }*/
     /*

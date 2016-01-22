@@ -146,7 +146,17 @@ class Utilities {
         return "Error de conexión de red. Comprueba tu conexión a internet."
     }
     
-    //Animations
+    //SHADOWS
+    class func applyPlainShadow(view: UIView) {
+        let layer = view.layer
+        
+        layer.shadowColor = UIColor.lightGrayColor().CGColor
+        layer.shadowOffset = CGSize(width: 0, height: 6)
+        layer.shadowOpacity = 0.4
+        layer.shadowRadius = 4
+    }
+    
+    //ANIMATIONS
     class func fadeViewAnimation(view:UIView, delay:NSTimeInterval, duration:NSTimeInterval){
         
         UIView.animateWithDuration(duration, delay: delay, options: .CurveEaseInOut,

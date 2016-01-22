@@ -99,6 +99,7 @@ class ModalViewController: MZFormSheetController {
     }
     
     func pressed(sender: UIButton!) {
+        self.action_type = "redeem"
         self.delegate?.pressActionButton(self)
     }
     
