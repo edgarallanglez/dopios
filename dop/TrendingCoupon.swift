@@ -107,7 +107,6 @@ class TrendingCoupon: UIView,ModalDelegate {
             modal.willPresentCompletionHandler = { vc in
                 let navigationController = vc as! SimpleModalViewController
                 navigationController.coupon = self.coupon
-                
             }
             modal.presentAnimated(true, completionHandler: nil)
             modal.delegate = self
@@ -131,6 +130,7 @@ class TrendingCoupon: UIView,ModalDelegate {
             modal.dismissAnimated(true, completionHandler: nil)
         } else {
             let vc  = viewController!.storyboard!.instantiateViewControllerWithIdentifier("readQRView") as! readQRViewController
+            vc.coupon_id = self.coupon.id
             viewController?.hidesBottomBarWhenPushed = true
             viewController!.navigationController?.pushViewController(vc, animated: true)
             viewController?.hidesBottomBarWhenPushed = false
