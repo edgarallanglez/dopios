@@ -19,10 +19,11 @@ class BranchAboutViewController: UIViewController {
     
     override func viewDidLoad() {
         self.view.clipsToBounds = true
-        self.branch_about = (NSBundle.mainBundle().loadNibNamed("BranchProfileAboutView", owner: self, options: nil)[0] as? BranchProfileAboutView)!
-        
-        self.view.addSubview(branch_about)
-        self.branch_about.frame = self.view.bounds
+//        
+//        
+//        self.branch_about = (NSBundle.mainBundle().loadNibNamed("BranchProfileAboutView", owner: self, options: nil)[0] as? BranchProfileAboutView)!
+//        self.branch_about.frame.size.width = self.view.frame.size.width
+//        self.view.addSubview(branch_about)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -31,8 +32,11 @@ class BranchAboutViewController: UIViewController {
     
     func setFrame() {
         var dynamic_height: CGFloat = 250
-        if self.branch_about.frame.height > dynamic_height { dynamic_height = self.branch_about.frame.height }
+//        self.view.frame.size.height = self.branch_about.frame.height
+//        self.branch_about.frame.size.height = CGFloat(280)
+        //if self.branch_about.frame.height > dynamic_height { dynamic_height = self.branch_about.frame.height }
         delegate?.resizeAboutView!(dynamic_height)
+
     }
     
     func reloadWithOffset(parent_scroll: UICollectionView) {

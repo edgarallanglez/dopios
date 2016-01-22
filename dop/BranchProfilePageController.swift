@@ -56,6 +56,7 @@ class BranchProfilePageController: UICollectionViewCell, UIPageViewControllerDat
         
         parentViewController = viewController
         parentViewController.delegate = self
+        
         self.branchPageViewController.dataSource = self
         self.branchPageViewController.delegate = self
         

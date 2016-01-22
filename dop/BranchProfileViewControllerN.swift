@@ -74,9 +74,9 @@ class BranchProfileViewControllerN: UIViewController, UIPageViewControllerDataSo
         
         branchLogo.image = self.logo
         
-        if(self.banner==nil){
+        if (self.banner == nil) {
             branchCover.backgroundColor = Utilities.dopColor
-        }else{
+        } else {
             branchCover.image = self.banner?.applyLightEffect()
         }
         
