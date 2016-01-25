@@ -30,6 +30,7 @@ class TrendingCoupon: UIView,ModalDelegate {
         self.addGestureRecognizer(coupon_gesture)
         self.coupon = coupon
         self.likes.text = String(coupon.total_likes)
+        self.descriptionLbl.text = coupon.couponDescription
         self.viewController = viewController
         if coupon.user_like == 1 {
             self.heart.tintColor = Utilities.dopColor
@@ -131,6 +132,7 @@ class TrendingCoupon: UIView,ModalDelegate {
         } else {
             let vc  = viewController!.storyboard!.instantiateViewControllerWithIdentifier("readQRView") as! readQRViewController
             vc.coupon_id = self.coupon.id
+            vc.branch_id = self.coupon.branch_id
             viewController?.hidesBottomBarWhenPushed = true
             viewController!.navigationController?.pushViewController(vc, animated: true)
             viewController?.hidesBottomBarWhenPushed = false
