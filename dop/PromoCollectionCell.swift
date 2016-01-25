@@ -149,8 +149,8 @@ class PromoCollectionCell: UICollectionViewCell, FBSDKSharingDelegate {
             "branch_id": self.branch_id,
             "taken_date" : date,
             "folio_date": folioDate,
-            "latitude": coordinate?.latitude ?? 0,
-            "longitude": coordinate?.longitude ?? 0]
+            "latitude": User.coordinate.latitude ?? 0,
+            "longitude": User.coordinate.longitude ?? 0]
         
         
         CouponController.takeCouponWithSuccess(params,

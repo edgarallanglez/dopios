@@ -21,6 +21,7 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
     var loader:CustomInfiniteIndicator?
     
     var coupon_id:Int?
+    var branch_id:Int?
     
     override func viewDidLoad() {
         
@@ -90,7 +91,7 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
             
             loader?.startAnimating()
             
-           print("EL CODIGO ES \(coupon_id)")
+           print("EL CODIGO ES \(branch_id)")
         }
         
         
@@ -123,20 +124,19 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                 self.qrCodeFrameView?.frame = barCodeObject.bounds;
                 
                 if metadataObj.stringValue != nil {
-                    
                     AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
                     //captureSession?.stopRunning()
-                    
-                    //captureSession?.stopRunning()
-                    
                     self.qr_detected = true
                     
                     if let qrInt =  Int(metadataObj.stringValue){
-                        self.sendQR(qrInt)
+                        if(qrInt == self.branch_id){
+                            self.sendQR(qrInt)
+                        }else{
+                            print("Error de sucursal")
+                        }
                     }else{
-                        print("Error")
+                        print("Código Erroneo")
                     }
-                    
                 }
             }
         }
@@ -149,7 +149,10 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
         
         let params:[String: AnyObject] = [
             "qr_code" : qr_code,
-            "coupon_id": self.coupon_id!]
+            "coupon_id": self.coupon_id!,
+            "branch_id": self.branch_id!,
+            "latitude": User.coordinate.latitude ?? 0,
+            "longitude": User.coordinate.longitude ?? 0]
         
         
         readQRController.sendQRWithSuccess(params,
