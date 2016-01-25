@@ -166,6 +166,7 @@ class Utilities {
             }, completion: nil)
         
     }
+    
     class func fadeSlideAnimation(view:UIView, delay:NSTimeInterval, duration:NSTimeInterval, yPosition:CGFloat){
         view.alpha = 0
         let finalYPosition = view.frame.origin.y
@@ -176,6 +177,7 @@ class Utilities {
             view.alpha = 1
         }), completion:nil)
     }
+    
     class func fadeSlideFromBottomAnimation(view:UIView, delay:NSTimeInterval, duration:NSTimeInterval, yPosition:CGFloat){
         view.alpha = 0
         let finalYPosition = view.frame.origin.y
@@ -186,6 +188,7 @@ class Utilities {
             view.alpha = 1
         }), completion:nil)
     }
+    
     class func permanentBounce(view:UIView, delay:NSTimeInterval, duration:NSTimeInterval){
         view.transform = CGAffineTransformMakeScale(0.9, 0.9)
         var bounce_delay:NSTimeInterval = 0

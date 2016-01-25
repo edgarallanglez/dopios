@@ -125,6 +125,7 @@ class TrendingCoupon: UIView,ModalDelegate {
     func pressActionButton(modal: ModalViewController) {
         if modal.action_type == "profile" {
             let view_controller = viewController!.storyboard!.instantiateViewControllerWithIdentifier("BranchProfileStickyController") as! BranchProfileStickyController
+            view_controller.branch_id = coupon.branch_id
             viewController!.navigationController?.pushViewController(view_controller, animated: true)
             viewController?.hidesBottomBarWhenPushed = false
             modal.dismissAnimated(true, completionHandler: nil)

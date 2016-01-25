@@ -179,8 +179,4 @@ class BadgesPage: UICollectionViewController {
 
         
     }
-    
-//    override func viewDidLayoutSubviews() {
-//        self.badgeCollectionView.frame.size.height = self.frame_height
-//    }
 }
