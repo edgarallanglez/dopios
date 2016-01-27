@@ -171,6 +171,7 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapVie
         
         return annotationView
     }
+    
     func centerMapOnLocation(location: CLLocationCoordinate2D) {
         let centerPin = CLLocation(latitude: location.latitude, longitude: location.longitude)
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(centerPin.coordinate,

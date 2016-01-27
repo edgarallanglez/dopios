@@ -33,11 +33,18 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
         clock_icon.tintColor = UIColor.lightGrayColor()
         
         self.branch_location_map.delegate = self
+        self.view.frame.size.width = UIScreen.mainScreen().bounds.width
+        self.view.frame.size.height = 350
         getBranchProfile()
     }
     
+    
+//    override func viewWillAppear(animated: Bool) {
+//        delegate?.resizeAboutView!(330)
+//    }
+//    
     override func viewDidAppear(animated: Bool) {
-        setFrame()
+        parent_view.view.setNeedsLayout()
     }
     
     func setFrame() {
@@ -72,8 +79,8 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
 
     
     func getBranchProfile() {
-        BranchProfileController.getBranchProfileWithSuccess(parent_view.branch_id, success: { (branchData) -> Void in
-            let data = JSON(data: branchData)
+        BranchProfileController.getBranchProfileWithSuccess(parent_view.branch_id, success: { (data) -> Void in
+            let data = JSON(data: data)
             var json = data["data"]
             json = json[0]
             let latitude = json["latitude"].double
@@ -85,7 +92,7 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
             
             dispatch_async(dispatch_get_main_queue(), {
 //                self.branchName.text = json["name"].string
-                var drop_pin = Annotation(coordinate: new_location, title: json["name"].string!, subTitle: "nada")
+                let drop_pin = Annotation(coordinate: new_location, title: json["name"].string!, subTitle: "nada")
                 if json["category_id"].int! == 1 {
                     drop_pin.typeOfAnnotation = "marker-food-icon"
                 } else if json["category_id"].int! == 2 {
@@ -93,13 +100,14 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
                 } else if json["category_id"].int! == 3 {
                     drop_pin.typeOfAnnotation = "marker-entertainment-icon"
                 }
+                self.branch_location_map.addAnnotation(drop_pin)
                 //                self.headerTopView.setImages(self.logo, company_id: json["company_id"].int!)
                 
             })
         })
     }
 
-
+//
     override func viewDidLayoutSubviews() {
         self.view.frame.size.width = UIScreen.mainScreen().bounds.width
     }

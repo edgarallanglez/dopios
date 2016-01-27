@@ -16,7 +16,8 @@ class PeopleModel: NSObject {
     let facebook_key: String
     let privacy_status: Int
     let main_image: String
-    let is_friend: Bool
+    let is_friend: Bool?
+    let total_used: Int?
     
     init(names: String!, surnames: String!, user_id: Int!, birth_date: String?, facebook_key: String?, privacy_status: Int, main_image: String?, is_friend: Bool) {
         
@@ -28,5 +29,19 @@ class PeopleModel: NSObject {
         self.privacy_status = privacy_status
         self.main_image = main_image ?? ""
         self.is_friend = is_friend
+        self.total_used = nil
+    }
+    
+    init(names: String!, surnames: String!, user_id: Int!, birth_date: String?, facebook_key: String?, privacy_status: Int, main_image: String?, total_used: Int) {
+        
+        self.names = names
+        self.surnames = surnames
+        self.user_id = user_id
+        self.birth_date = birth_date ?? ""
+        self.facebook_key = facebook_key ?? ""
+        self.privacy_status = privacy_status
+        self.main_image = main_image ?? ""
+        self.is_friend = nil
+        self.total_used = total_used
     }
 }

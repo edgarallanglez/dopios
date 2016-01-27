@@ -34,7 +34,7 @@ class UserProfileStickyHeader: UIView {
         user_image.layer.masksToBounds = true
         
         user_name.text = self.parent_view.user_name
-        if parent_view.person.is_friend { setFollowingButton() }
+        if (parent_view.person.is_friend != nil) { setFollowingButton() }
         
     }
     

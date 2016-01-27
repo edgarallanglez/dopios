@@ -131,10 +131,10 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                     if let qrInt =  Int(metadataObj.stringValue){
                         if(qrInt == self.branch_id){
                             self.sendQR(qrInt)
-                        }else{
+                        } else {
                             print("Error de sucursal")
                         }
-                    }else{
+                    } else {
                         print("Código Erroneo")
                     }
                 }
@@ -152,7 +152,7 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
             "coupon_id": self.coupon_id!,
             "branch_id": self.branch_id!,
             "latitude": User.coordinate.latitude ?? 0,
-            "longitude": User.coordinate.longitude ?? 0]
+            "longitude": User.coordinate.longitude ?? 0 ]
         
         
         readQRController.sendQRWithSuccess(params,

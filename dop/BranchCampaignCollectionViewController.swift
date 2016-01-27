@@ -41,13 +41,12 @@ class BranchCampaignCollectionViewController: UICollectionViewController {
         self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         self.collection_view.addSubview(refreshControl)
         
-        
-        getCoupons()
-        
     }
     
     override func viewDidAppear(animated: Bool) {
+        if coupons.count == 0 { getCoupons() } else { setFrame() }
         collection_view.frame.size.width = UIScreen.mainScreen().bounds.width
+
     }
     
     func refresh(sender:AnyObject) {
@@ -130,7 +129,7 @@ class BranchCampaignCollectionViewController: UICollectionViewController {
     
     func setFrame() {
         let rows = ceil(CGFloat((Double(coupons.count) / 2.0)))
-        let frame_height = 250 * rows
+        let frame_height = 260 * rows
         
         delegate?.resizeCampaignView!(frame_height)
     }

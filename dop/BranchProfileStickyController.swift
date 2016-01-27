@@ -89,7 +89,7 @@ class BranchProfileStickyController: UICollectionViewController, BranchPaginatio
         
         let width = collectionView.frame.width
         var height: CGFloat!
-        if self.new_height != nil || self.new_height > 250 { height = self.new_height } else { height = 250 }
+        if self.new_height != nil && self.new_height > 300 { height = self.new_height } else { height = 300 }
         
         return CGSizeMake(width, height)
     }
