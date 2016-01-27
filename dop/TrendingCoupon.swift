@@ -130,12 +130,13 @@ class TrendingCoupon: UIView,ModalDelegate {
             viewController!.navigationController?.pushViewController(view_controller, animated: true)
             viewController?.hidesBottomBarWhenPushed = false
             modal.dismissAnimated(true, completionHandler: nil)
-        } else {
-            let vc  = viewController!.storyboard!.instantiateViewControllerWithIdentifier("readQRView") as! readQRViewController
-            vc.coupon_id = self.coupon.id
-            vc.branch_id = self.coupon.branch_id
+        }
+        if modal.action_type == "redeem" {
+            let view_controller  = viewController!.storyboard!.instantiateViewControllerWithIdentifier("readQRView") as! readQRViewController
+            view_controller.coupon_id = self.coupon.id
+            view_controller.branch_id = self.coupon.branch_id
             viewController?.hidesBottomBarWhenPushed = true
-            viewController!.navigationController?.pushViewController(vc, animated: true)
+            viewController!.navigationController?.pushViewController(view_controller, animated: true)
             viewController?.hidesBottomBarWhenPushed = false
             modal.dismissAnimated(true, completionHandler: nil)
         }

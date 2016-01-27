@@ -14,6 +14,7 @@ import UIKit
 class NotificationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, TTTAttributedLabelDelegate {
 
     
+    @IBOutlet var mainLoader: UIActivityIndicatorView!
     @IBOutlet var notification_table: UITableView!
     let socketIO : SocketIO = SocketIO()
     var notifications = [Notification]()
@@ -178,11 +179,8 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                         
                         self.refreshControl.endRefreshing()
 
-                        
-                        UIView.animateWithDuration(0.3, animations: {
-                            self.notification_table.alpha = 1
-                        })
-                        
+                        Utilities.fadeOutViewAnimation(self.mainLoader, delay: 0, duration: 0.3)
+                        Utilities.fadeInFromBottomAnimation(self.notification_table, delay: 0, duration: 1, yPosition: 20)
                     })
                 });
             },
