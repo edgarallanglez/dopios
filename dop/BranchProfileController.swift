@@ -38,4 +38,15 @@ class BranchProfileController {
             }
         })
     }
+    
+    class func getBranchProfileRankingWithSuccess(branch_id: Int, success: ((data: NSData!) -> Void), failure: ((data: NSError?) -> Void)) {
+        let url = "\(Utilities.dopURL)company/branch/\(branch_id)/ranking/get"
+        Utilities.loadDataFromURL(NSURL(string: url)!, completion: {(data, error) -> Void in
+            if let urlData = data {
+                success(data: urlData)
+            } else {
+                failure(data: error)
+            }
+        })
+    }
 }
