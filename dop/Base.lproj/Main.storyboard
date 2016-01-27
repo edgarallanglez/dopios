@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="wsr-0B-cyM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="wsr-0B-cyM">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -4852,7 +4852,7 @@
                                                                 <rect key="frame" x="44" y="9" width="16" height="17"/>
                                                             </variation>
                                                         </label>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="fav-counter" translatesAutoresizingMaskIntoConstraints="NO" id="qKx-kF-X6K">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="heart" translatesAutoresizingMaskIntoConstraints="NO" id="qKx-kF-X6K">
                                                             <rect key="frame" x="20" y="8" width="19" height="19"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="19" id="7LP-yE-6du"/>
@@ -4942,6 +4942,12 @@
                                     <outlet property="delegate" destination="Oc2-QP-LbR" id="OvJ-mj-jtI"/>
                                 </connections>
                             </collectionView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="rOP-if-vSf">
+                                <rect key="frame" x="-10" y="-10" width="20" height="20"/>
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="290" y="234" width="20" height="20"/>
+                                </variation>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -4954,8 +4960,10 @@
                             <constraint firstItem="1Rc-5J-I71" firstAttribute="leading" secondItem="sgE-PX-xd1" secondAttribute="leading" id="HuT-cu-VV6"/>
                             <constraint firstItem="S6V-kp-QsR" firstAttribute="top" secondItem="1vz-t4-S0t" secondAttribute="bottom" id="Nk3-xk-mQB"/>
                             <constraint firstItem="YXf-Z9-RcB" firstAttribute="top" secondItem="1Rc-5J-I71" secondAttribute="bottom" constant="100" id="RQV-zU-8EE"/>
+                            <constraint firstItem="rOP-if-vSf" firstAttribute="centerX" secondItem="sgE-PX-xd1" secondAttribute="centerX" id="emh-S3-Le1"/>
                             <constraint firstItem="S6V-kp-QsR" firstAttribute="top" secondItem="1Rc-5J-I71" secondAttribute="bottom" id="fGA-PZ-obH"/>
                             <constraint firstItem="1Rc-5J-I71" firstAttribute="top" secondItem="1vz-t4-S0t" secondAttribute="bottom" id="hPL-ni-j66"/>
+                            <constraint firstItem="rOP-if-vSf" firstAttribute="centerY" secondItem="sgE-PX-xd1" secondAttribute="centerY" id="knZ-9O-5zj"/>
                             <constraint firstItem="S6V-kp-QsR" firstAttribute="top" secondItem="1vz-t4-S0t" secondAttribute="bottom" constant="20" id="q2a-cf-87g"/>
                             <constraint firstItem="YXf-Z9-RcB" firstAttribute="centerX" secondItem="sgE-PX-xd1" secondAttribute="centerX" id="utk-QQ-0ll"/>
                         </constraints>
@@ -4964,9 +4972,12 @@
                                 <exclude reference="1Rc-5J-I71"/>
                                 <exclude reference="YXf-Z9-RcB"/>
                                 <exclude reference="S6V-kp-QsR"/>
+                                <exclude reference="rOP-if-vSf"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="8u5-LV-oNE"/>
+                                <exclude reference="emh-S3-Le1"/>
+                                <exclude reference="knZ-9O-5zj"/>
                                 <exclude reference="RQV-zU-8EE"/>
                                 <exclude reference="utk-QQ-0ll"/>
                                 <exclude reference="1L5-Tf-Hm4"/>
@@ -4984,9 +4995,12 @@
                                 <include reference="1Rc-5J-I71"/>
                                 <include reference="YXf-Z9-RcB"/>
                                 <include reference="S6V-kp-QsR"/>
+                                <include reference="rOP-if-vSf"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="8u5-LV-oNE"/>
+                                <include reference="emh-S3-Le1"/>
+                                <include reference="knZ-9O-5zj"/>
                                 <include reference="RQV-zU-8EE"/>
                                 <include reference="utk-QQ-0ll"/>
                                 <include reference="1L5-Tf-Hm4"/>
@@ -5006,6 +5020,7 @@
                     <connections>
                         <outlet property="CouponsCollectionView" destination="S6V-kp-QsR" id="4id-Ck-mko"/>
                         <outlet property="emptyMessage" destination="YXf-Z9-RcB" id="Dqg-2y-Jg0"/>
+                        <outlet property="mainLoader" destination="rOP-if-vSf" id="xej-EU-cdD"/>
                         <outlet property="promoSegmentedController" destination="1Rc-5J-I71" id="1mZ-cz-S1O"/>
                         <segue destination="Hpm-OJ-mEW" kind="show" identifier="couponDetail" id="TKt-eX-Ulp"/>
                     </connections>
@@ -5989,7 +6004,7 @@
                                     <constraint firstAttribute="trailing" secondItem="8U5-Xl-KD3" secondAttribute="trailing" id="rx9-39-hS4"/>
                                 </constraints>
                                 <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="649"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="957"/>
                                 </variation>
                             </scrollView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="5wY-VE-Dvd">
@@ -6106,6 +6121,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="uiu-gU-CjU">
+                                <rect key="frame" x="-10" y="-10" width="20" height="20"/>
+                            </activityIndicatorView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="68" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Chu-fQ-Sej">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -6283,34 +6301,43 @@
                             <constraint firstItem="Chu-fQ-Sej" firstAttribute="leading" secondItem="t7s-yY-NR2" secondAttribute="leading" id="7vW-uL-W07"/>
                             <constraint firstItem="sDB-nV-JR4" firstAttribute="top" secondItem="Chu-fQ-Sej" secondAttribute="bottom" id="DBj-0l-8wm"/>
                             <constraint firstItem="Chu-fQ-Sej" firstAttribute="top" secondItem="NHT-Ra-8PJ" secondAttribute="bottom" id="Ysf-Cj-x3x"/>
+                            <constraint firstItem="uiu-gU-CjU" firstAttribute="centerY" secondItem="t7s-yY-NR2" secondAttribute="centerY" id="asD-ny-E6O"/>
                             <constraint firstAttribute="trailing" secondItem="Chu-fQ-Sej" secondAttribute="trailing" id="g5Q-02-Qa9"/>
+                            <constraint firstItem="uiu-gU-CjU" firstAttribute="centerX" secondItem="t7s-yY-NR2" secondAttribute="centerX" id="n4Q-Tr-0cS"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
+                                <exclude reference="uiu-gU-CjU"/>
                                 <exclude reference="Chu-fQ-Sej"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="DBj-0l-8wm"/>
                                 <exclude reference="7vW-uL-W07"/>
                                 <exclude reference="Ysf-Cj-x3x"/>
                                 <exclude reference="g5Q-02-Qa9"/>
+                                <exclude reference="asD-ny-E6O"/>
+                                <exclude reference="n4Q-Tr-0cS"/>
+                                <exclude reference="DBj-0l-8wm"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
+                                <include reference="uiu-gU-CjU"/>
                                 <include reference="Chu-fQ-Sej"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="DBj-0l-8wm"/>
                                 <include reference="7vW-uL-W07"/>
                                 <include reference="Ysf-Cj-x3x"/>
                                 <include reference="g5Q-02-Qa9"/>
+                                <include reference="asD-ny-E6O"/>
+                                <include reference="n4Q-Tr-0cS"/>
+                                <include reference="DBj-0l-8wm"/>
                             </mask>
                         </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="zlJ-s8-PeD"/>
                     <navigationItem key="navigationItem" id="Tr0-4S-niY"/>
                     <connections>
+                        <outlet property="mainLoader" destination="uiu-gU-CjU" id="wfG-op-sjK"/>
                         <outlet property="notification_table" destination="Chu-fQ-Sej" id="yfM-Hu-57d"/>
                         <segue destination="cf5-lv-Mm7" kind="show" identifier="userProfile" id="fpu-8Z-7Bb"/>
                     </connections>
@@ -8242,6 +8269,7 @@
         <image name="filter-services-viajes" width="40" height="40"/>
         <image name="follow-icon" width="66" height="66"/>
         <image name="friends" width="60" height="60"/>
+        <image name="heart" width="30" height="30"/>
         <image name="instagram-black" width="30" height="30"/>
         <image name="lockIcon" width="66" height="66"/>
         <image name="main" width="30" height="30"/>
@@ -8260,11 +8288,11 @@
         <image name="twitter-logo" width="42" height="42"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="AaG-PG-nLf"/>
         <segue reference="8iK-Yr-WEc"/>
         <segue reference="NZR-gR-mOn"/>
         <segue reference="H7K-TF-KnO"/>
-        <segue reference="hgi-kp-Ocz"/>
+        <segue reference="AaG-PG-nLf"/>
+        <segue reference="fpu-8Z-7Bb"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

@@ -157,17 +157,24 @@ class Utilities {
     }
     
     //ANIMATIONS
-    class func fadeViewAnimation(view:UIView, delay:NSTimeInterval, duration:NSTimeInterval){
+    class func fadeInViewAnimation(view:UIView, delay:NSTimeInterval, duration:NSTimeInterval){
         
         UIView.animateWithDuration(duration, delay: delay, options: .CurveEaseInOut,
             animations: {
                 view.alpha = 1
                 
             }, completion: nil)
+    }
+    class func fadeOutViewAnimation(view:UIView, delay:NSTimeInterval, duration:NSTimeInterval){
         
+        UIView.animateWithDuration(duration, delay: delay, options: .CurveEaseInOut,
+            animations: {
+                view.alpha = 0
+                
+            }, completion: nil)
     }
     
-    class func fadeSlideAnimation(view:UIView, delay:NSTimeInterval, duration:NSTimeInterval, yPosition:CGFloat){
+    class func fadeInFromBottomAnimation(view:UIView, delay:NSTimeInterval, duration:NSTimeInterval, yPosition:CGFloat){
         view.alpha = 0
         let finalYPosition = view.frame.origin.y
         view.frame.origin.y += yPosition
@@ -178,7 +185,7 @@ class Utilities {
         }), completion:nil)
     }
     
-    class func fadeSlideFromBottomAnimation(view:UIView, delay:NSTimeInterval, duration:NSTimeInterval, yPosition:CGFloat){
+    class func fadeInFromTopAnimation(view:UIView, delay:NSTimeInterval, duration:NSTimeInterval, yPosition:CGFloat){
         view.alpha = 0
         let finalYPosition = view.frame.origin.y
         view.frame.origin.y -= yPosition
@@ -187,6 +194,27 @@ class Utilities {
             view.frame.origin.y = finalYPosition
             view.alpha = 1
         }), completion:nil)
+    }
+    class func fadeOutToTopAnimation(view:UIView, delay:NSTimeInterval, duration:NSTimeInterval, yPosition:CGFloat){
+        let finalYPosition = view.frame.origin.y - yPosition
+        
+        UIView.animateWithDuration(duration, delay: delay, usingSpringWithDamping: 1, initialSpringVelocity: 2, options: .CurveEaseInOut, animations: ({
+            view.frame.origin.y = finalYPosition
+            view.alpha = 0
+        }), completion:{(value:Bool) in
+            view.frame.origin.y += yPosition
+        })
+    }
+    
+    class func fadeOutToBottomAnimation(view:UIView, delay:NSTimeInterval, duration:NSTimeInterval, yPosition:CGFloat){
+        let finalYPosition = view.frame.origin.y + yPosition
+        
+        UIView.animateWithDuration(duration, delay: delay, usingSpringWithDamping: 1, initialSpringVelocity: 2, options: .CurveEaseInOut, animations: ({
+            view.frame.origin.y = finalYPosition
+            view.alpha = 0
+        }), completion:{ (value:Bool) in
+            view.frame.origin.y -= yPosition
+        })
     }
     
     class func permanentBounce(view:UIView, delay:NSTimeInterval, duration:NSTimeInterval){

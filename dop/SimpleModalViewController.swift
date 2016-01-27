@@ -109,8 +109,8 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapVie
             coupon_description.alpha = 0
             
             
-            Utilities.fadeSlideAnimation(self.branch_title, delay: 0, duration: 0.5, yPosition: 30)
-            Utilities.fadeSlideAnimation(self.category_label, delay: 0, duration: 0.5, yPosition: 30)
+            Utilities.fadeInFromBottomAnimation(self.branch_title, delay: 0, duration: 0.5, yPosition: 30)
+            Utilities.fadeInFromBottomAnimation(self.category_label, delay: 0, duration: 0.5, yPosition: 30)
             
         }
 
@@ -183,11 +183,11 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapVie
             loader.removeFromSuperview()
             map_loaded = true
             self.map.hidden = false
-            Utilities.fadeSlideAnimation(self.map, delay: 0, duration: 0.5, yPosition: 30)
+            Utilities.fadeInFromBottomAnimation(self.map, delay: 0, duration: 0.5, yPosition: 30)
             
-            Utilities.fadeSlideAnimation(self.description_title, delay: 0, duration: 0.5, yPosition: 30)
-            Utilities.fadeSlideAnimation(self.description_separator, delay: 0, duration: 0.5, yPosition: 30)
-            Utilities.fadeSlideAnimation(self.coupon_description, delay: 0, duration: 0.5, yPosition: 30)
+            Utilities.fadeInFromBottomAnimation(self.description_title, delay: 0, duration: 0.5, yPosition: 30)
+            Utilities.fadeInFromBottomAnimation(self.description_separator, delay: 0, duration: 0.5, yPosition: 30)
+            Utilities.fadeInFromBottomAnimation(self.coupon_description, delay: 0, duration: 0.5, yPosition: 30)
 
         }
     }

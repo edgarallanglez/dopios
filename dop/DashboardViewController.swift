@@ -29,7 +29,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
     @IBOutlet var branchesScroll: UIScrollView!
     var locValue:CLLocationCoordinate2D?
     
-
+    var refreshControl: UIRefreshControl!
     
     
 
@@ -47,6 +47,8 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
     
     var updater:CADisplayLink? = nil
     var firstCallToUpdater:Bool = true
+    
+    //var pageContainerOffset:CGFloat?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,11 +88,16 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
         locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
         
-
-
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        //self.refreshControl.tintColor = UIColor.whiteColor()
+        self.mainScroll.addSubview(refreshControl)
 
         self.setNeedsStatusBarAppearanceUpdate()
+        //pageContainerOffset =  176
+
     }
+    
     
 
     override func viewDidAppear(animated: Bool) {
@@ -103,11 +110,14 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
         
         
     }
-
-   override func viewWillAppear(animated: Bool) {
     
+    func refresh(sender:AnyObject) {
+        getToExpireCoupons()
+        getTrendingCoupons()
+        
+        
+        refreshControl.endRefreshing()
     }
-    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -132,11 +142,12 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
     }
     func scrollViewDidScroll(scrollView: UIScrollView) {
 
-        if(scrollView == mainScroll){
+        /*if(scrollView == mainScroll){
             if(mainScroll.contentOffset.y<=0){
                 branchesScroll.frame.origin.y = (mainScroll.contentOffset.y)
+                pageControlContainer.frame.origin.y = branchesScroll.frame.origin.y + pageContainerOffset!
             }
-        }
+        }*/
         if(scrollView == branchesScroll){
             let pagenumber=Int(branchesScroll.contentOffset.x / branchesScroll.frame.size.width)
             pageControl.currentPage = pagenumber
@@ -161,7 +172,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
     func getTopBranches() {
         branches = [Branch]()
         
-
+        
         
         DashboardController.getDashboardBranchesWithSuccess(success:{(branchesData) -> Void in
             let json = JSON(data: branchesData)
@@ -184,8 +195,9 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                 self.reloadBranchCarousel()
                 self.pageControl.numberOfPages = self.branches.count
                 
-                self.showViewAnimation(self.branchesScroll, delay: 0, duration:0.3)
-                self.showViewAnimation(self.pageControlContainer, delay:0, duration:0.3)
+                Utilities.fadeInFromBottomAnimation(self.branchesScroll, delay: 0, duration: 1, yPosition: 40)
+                //self.showViewAnimation(self.branchesScroll, delay: 0, duration:0.3)
+                 Utilities.fadeInFromBottomAnimation(self.pageControlContainer, delay:0.3, duration:0.3, yPosition: 10)
                 
                 if(self.view.subviews.contains(self.mainLoader)){
                     self.mainLoader.removeFromSuperview()
@@ -194,8 +206,8 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
         },
         failure: { (error) -> Void in
             dispatch_async(dispatch_get_main_queue(), {
-              self.view.addSubview(super.errorView)
-              self.errorView.translatesAutoresizingMaskIntoConstraints = false
+              //self.view.addSubview(super.errorView)
+              //self.errorView.translatesAutoresizingMaskIntoConstraints = false
 
             })
         })
@@ -256,10 +268,10 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                     }
                     
                     
-                    self.showViewAnimation(imageView, delay: 0, duration: 0.4)
-                    self.showViewAnimation(branchNameLbl, delay: 0.4, duration: 0.4)
-                    progressIcon.removeFromSuperview()
+                    Utilities.fadeInFromBottomAnimation(imageView, delay:0, duration:1, yPosition: 20)
+                    Utilities.fadeInFromBottomAnimation(branchNameLbl, delay:0.8, duration:1, yPosition: 20)
                     
+                    Utilities.fadeOutViewAnimation(progressIcon, delay:0, duration:0.5)
                 }
             }
             
@@ -301,6 +313,8 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
         trending = [Coupon]()
         
         trendingScroll.layer.masksToBounds = false
+        
+        trendingScroll.subviews.forEach({ $0.removeFromSuperview() })
         
         DashboardController.getTrendingCouponsWithSuccess(success: { (couponsData) -> Void in
             let json = JSON(data: couponsData)
@@ -349,7 +363,8 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                             dispatch_async(dispatch_get_main_queue()) {
                                 let imageData: NSData = NSData(data: photo!)
                                 coupon_box.logo.image = UIImage(data: imageData)
-                                self.showViewAnimation(coupon_box.logo, delay:0, duration:0.3)
+                                Utilities.fadeInViewAnimation(coupon_box.logo, delay:0, duration:1)
+
                             }
                         }
                         
@@ -381,7 +396,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
 
                     self.trendingScroll.contentSize = CGSizeMake(CGFloat(trendingScroll_size), self.trendingScroll.frame.size.height)
                     
-                    self.showViewAnimation(self.trendingContainer, delay:0, duration:0.4)
+                    Utilities.fadeInFromBottomAnimation(self.trendingContainer, delay:0, duration:1, yPosition: 30)
                     
                     if(self.view.subviews.contains(self.mainLoader)){
                         self.mainLoader.removeFromSuperview()
@@ -414,8 +429,9 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
     
     func getToExpireCoupons() {
         almost_expired = [Coupon]()
-        
-        
+
+        toExpireScroll.subviews.forEach({ $0.removeFromSuperview() })
+
         DashboardController.getAlmostExpiredCouponsWithSuccess(success: { (couponsData) -> Void in
             let json = JSON(data: couponsData)
             
@@ -475,7 +491,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
 
                 self.toExpireScroll.contentSize = CGSizeMake(CGFloat(trendingScroll_size), self.toExpireScroll.frame.size.height)
                 
-                self.showViewAnimation(self.toExpireContainer, delay:0, duration:0.4)
+                Utilities.fadeInFromBottomAnimation(self.toExpireContainer, delay:0, duration:1, yPosition: 20)
 
             });
             },
@@ -490,6 +506,8 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
     
     func getNearestCoupons() {
         nearest = [Coupon]()
+        
+        nearestScroll.subviews.forEach({ $0.removeFromSuperview() })
 
         let latitude = User.coordinate.latitude
         let longitude = User.coordinate.longitude
@@ -557,7 +575,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
 
                 self.nearestScroll.contentSize = CGSizeMake(CGFloat(trendingScroll_size), self.nearestScroll.frame.size.height)
                 
-                self.showViewAnimation(self.nearestContainer, delay:0, duration:0.4)
+                Utilities.fadeInFromBottomAnimation(self.nearestContainer, delay:0, duration:1, yPosition: 20)
 
             });
 
@@ -636,15 +654,6 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
         
     }
     
-    func showViewAnimation(view:UIView, delay:NSTimeInterval, duration:NSTimeInterval){
-    
-        UIView.animateWithDuration(duration, delay: delay, options: .CurveEaseInOut,
-            animations: {
-                view.alpha = 1
-                
-            }, completion: nil)
-
-    }
     override func viewDidDisappear(animated: Bool) {
         if((updater) != nil){
             updater!.paused = true

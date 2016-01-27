@@ -10,6 +10,7 @@ import UIKit
 
 class PromoViewController: BaseViewController, UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIAlertViewDelegate, UIDocumentInteractionControllerDelegate, ModalDelegate {
     
+    @IBOutlet var mainLoader: UIActivityIndicatorView!
     @IBOutlet weak var CouponsCollectionView: UICollectionView!    
     @IBOutlet weak var emptyMessage: UILabel!
     @IBOutlet weak var promoSegmentedController: PromoSegmentedController!
@@ -26,6 +27,8 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
     
     var documentController:UIDocumentInteractionController!
     
+    var selected_coupon: Coupon!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,7 +43,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
         
         self.CouponsCollectionView.contentInset = UIEdgeInsetsMake(0,0,49,0)
         
-        
+        mainLoader.alpha = 0
         
         getCoupons()
         
@@ -72,6 +75,8 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
         
         CouponsCollectionView.addGestureRecognizer(rightSwipe)
         CouponsCollectionView.addGestureRecognizer(leftSwipe)
+        CouponsCollectionView.alpha = 0
+        
 
     }
     
@@ -168,12 +173,12 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         //if(showing_modal == false){
             let cell = self.CouponsCollectionView.cellForItemAtIndexPath(indexPath)
-            let model = self.coupons[indexPath.row] as Coupon
+            selected_coupon = self.coupons[indexPath.row] as Coupon
             
             let modal:ModalViewController = ModalViewController(currentView: self, type: ModalViewControllerType.CouponDetail)
             modal.willPresentCompletionHandler = { vc in
                 let navigationController = vc as! SimpleModalViewController
-                navigationController.coupon = model
+                navigationController.coupon = self.selected_coupon
             }
             modal.delegate = self
             modal.presentAnimated(true, completionHandler: nil)
@@ -192,9 +197,11 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
     }
 
     func getCoupons() {
+        offset = 0
         coupons.removeAll(keepCapacity: false)
         cachedImages.removeAll(keepCapacity: false)
         
+        Utilities.fadeInViewAnimation(mainLoader, delay: 0, duration: 0.3)
         
         UIView.animateWithDuration(0.3, animations: {
             //self.CouponsCollectionView.alpha = 0
@@ -233,9 +240,11 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                     self.refreshControl.endRefreshing()
                     self.offset = self.limit - 1
                     
+                    Utilities.fadeOutViewAnimation(self.mainLoader, delay: 0, duration: 0.3)
+                    Utilities.fadeInFromBottomAnimation(self.CouponsCollectionView, delay: 0, duration: 1, yPosition: 20)
+                    
                     UIView.animateWithDuration(0.3, animations: {
                         //self.CouponsCollectionView.alpha = 1
-                        
                     })
 
                 });
@@ -244,6 +253,8 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
             failure: { (error) -> Void in
                 dispatch_async(dispatch_get_main_queue(), {
                     self.refreshControl.endRefreshing()
+                    Utilities.fadeOutViewAnimation(self.mainLoader, delay: 0, duration: 0.3)
+                    
                 })
             })
         
@@ -316,11 +327,13 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
     }
     
     func getTakenCoupons() {
+        offset = 0
         UIView.animateWithDuration(0.3, animations: {
             //self.CouponsCollectionView.alpha = 0
         })
         coupons.removeAll()
         cachedImages.removeAll(keepCapacity: false)
+        Utilities.fadeInViewAnimation(mainLoader, delay: 0, duration: 0.5)
         
         CouponController.getAllTakenCouponsWithSuccess(limit,
             success: { (couponsData) -> Void in
@@ -355,6 +368,9 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                     self.refreshControl.endRefreshing()
                     self.offset = self.limit - 1
                     
+                    Utilities.fadeInFromBottomAnimation(self.CouponsCollectionView, delay: 0, duration: 1, yPosition: 20)
+                    Utilities.fadeOutViewAnimation(self.mainLoader, delay: 0, duration: 0.3)
+
                     UIView.animateWithDuration(0.3, animations: {
                         //self.CouponsCollectionView.alpha = 1
                         
@@ -368,6 +384,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                     self.CouponsCollectionView.reloadData()
                     self.emptyMessage.hidden = false
                     self.refreshControl.endRefreshing()
+                    Utilities.fadeOutViewAnimation(self.mainLoader, delay: 0, duration: 0.3)
                 })
         })
         
@@ -453,26 +470,41 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
     }
     
     @IBAction func setPromoCollectionView(sender: PromoSegmentedController) {
+        Utilities.fadeOutViewAnimation(self.CouponsCollectionView, delay: 0, duration: 0.3)
+        
         switch promoSegmentedController.selectedIndex {
-        case 0:
-            getCoupons()
-            UIView.animateWithDuration(0.3, animations: {
-                //self.CouponsCollectionView.frame.origin = CGPointMake(self.CouponsCollectionView.frame.origin.x+20, self.CouponsCollectionView.frame.origin.y)
-            })
-        case 1:
-            getTakenCoupons()
-            UIView.animateWithDuration(0.3, animations: {
-                //self.CouponsCollectionView.frame.origin = CGPointMake(self.CouponsCollectionView.frame.origin.x-20, self.CouponsCollectionView.frame.origin.y)
-            })
-        default:
-            print("default")
-        }
+            case 0:
+                getCoupons()
+
+            case 1:
+                getTakenCoupons()
+
+            default:
+                print("default")
+            }
     }
     
     //MODAL DELEGATE
     
     func pressActionButton(modal: ModalViewController) {
-        let YourImage:UIImage = UIImage(named: "starbucks_banner.jpg")!
+        if modal.action_type == "profile" {
+            let view_controller = self.storyboard!.instantiateViewControllerWithIdentifier("BranchProfileStickyController") as! BranchProfileStickyController
+            view_controller.branch_id = self.selected_coupon.branch_id
+            self.navigationController?.pushViewController(view_controller, animated: true)
+            self.hidesBottomBarWhenPushed = false
+            modal.dismissAnimated(true, completionHandler: nil)
+        }
+        if modal.action_type == "redeem" {
+            let view_controller  = self.storyboard!.instantiateViewControllerWithIdentifier("readQRView") as! readQRViewController
+            view_controller.coupon_id = self.selected_coupon.id
+            view_controller.branch_id = self.selected_coupon.branch_id
+            self.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(view_controller, animated: true)
+            self.hidesBottomBarWhenPushed = false
+            modal.dismissAnimated(true, completionHandler: nil)
+        }
+        if modal.action_type == "share" {
+            let YourImage:UIImage = UIImage(named: "starbucks_banner.jpg")!
 
         
             let instagramUrl = NSURL(string: "instagram://app")
@@ -485,8 +517,6 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                 let documentsURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
 
                 let writePath = NSURL(fileURLWithPath: NSTemporaryDirectory()).URLByAppendingPathComponent("/insta.igo")
-                
-
                 if(!imageData!.writeToFile(writePath.path!, atomically: true)){
                     //Fail to write.
                     return
@@ -494,39 +524,16 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                     //Safe to post
                     
                     let fileURL = NSURL(fileURLWithPath: writePath.path!)
-                    
-                   
                     self.documentController = UIDocumentInteractionController(URL: fileURL)
-
                     self.documentController.UTI = "com.instagram.exclusivegram"
-                    
                     self.documentController.delegate = self
-                    
                     self.documentController.annotation =  NSDictionary(object: captionString, forKey: "InstagramCaption")
                     self.documentController.presentOpenInMenuFromRect(self.view.frame, inView: self.view, animated: true)
-                    
-                    
-                    
                     self.documentController.presentOpenInMenuFromRect(CGRectMake(0,0,0,0), inView: self.view, animated: true)
-                    
                 }
             } else {
                 //Instagram App NOT avaible...
             }
-        
-       /* if(showing_modal == true){
-            modal.mz_dismissFormSheetControllerAnimated(true) { (MZFormSheetController) -> Void in
-                self.showing_modal = false
-                
-                let instagramURL = NSURL(string: "instagram://app")
-              
-                    if(UIApplication.sharedApplication().canOpenURL(instagramURL!)){
-                        print("INSTAGRAM OPENED")
-                        UIApplication.sharedApplication().openURL(instagramURL!)
-                }
-            }
-        }*/
+        }
     }
-   
-
 }
