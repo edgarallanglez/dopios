@@ -65,6 +65,11 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapVie
             share_text.delegate = self
         }
         
+        if((map) != nil){
+            let tap = UITapGestureRecognizer(target: self, action: Selector("pressMap:"))
+            map.addGestureRecognizer(tap)
+        }
+        
         normalAttrdict = [NSFontAttributeName:UIFont(name: "Montserrat-Light",size: 16.0)!,NSForegroundColorAttributeName: UIColor.lightGrayColor()]
         highlightAttrdict = [NSFontAttributeName:UIFont(name: "Montserrat-Light",size: 16.0)!, NSForegroundColorAttributeName: Utilities.dopColor]
         
@@ -171,7 +176,10 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapVie
         
         return annotationView
     }
-    
+    func pressMap(sender: UITapGestureRecognizer){
+        print("HOLAA")
+    }
+
     func centerMapOnLocation(location: CLLocationCoordinate2D) {
         let centerPin = CLLocation(latitude: location.latitude, longitude: location.longitude)
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(centerPin.coordinate,
