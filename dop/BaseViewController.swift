@@ -94,6 +94,8 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
         super.didReceiveMemoryWarning()
     }
     func notification() {
+        print("Aloooo")
+       vcNot.navigationController?.hidesBottomBarWhenPushed = true
        self.navigationController?.pushViewController(vcNot, animated: true)
         //self.navigationController!.pushViewController(self.storyboard!.instantiateViewControllerWithIdentifier("Notifications") as UIViewController, animated: true)
         //self.navigationController?.hidesBottomBarWhenPushed = true

@@ -168,25 +168,27 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                 }
                 
                 dispatch_async(dispatch_get_main_queue(), {
-                    UIView.animateWithDuration(0.3, animations: {
-                        self.notifications.removeAll()
-                        self.notifications = self.notificationsTemporary
-                        
-                        self.notification_table.reloadData()
-                        self.notification_table.finishInfiniteScroll()
-                        
-                        self.offset = self.limit - 1
-                        
-                        self.refreshControl.endRefreshing()
+                    self.notifications.removeAll()
+                    self.notifications = self.notificationsTemporary
+                    
+                    self.notification_table.reloadData()
+                    self.notification_table.finishInfiniteScroll()
+                    
+                    self.offset = self.limit - 1
+                    
+                    self.refreshControl.endRefreshing()
 
-                        Utilities.fadeOutViewAnimation(self.mainLoader, delay: 0, duration: 0.3)
-                        Utilities.fadeInFromBottomAnimation(self.notification_table, delay: 0, duration: 1, yPosition: 20)
-                    })
+                    Utilities.fadeOutViewAnimation(self.mainLoader, delay: 0, duration: 0.3)
+                    
+                    //Utilities.fadeInViewAnimation(self.notification_table, delay: 0, duration: 1)
+                    Utilities.fadeInFromBottomAnimation(self.notification_table, delay: 0, duration: 1, yPosition: 20)
                 });
             },
             failure: { (error) -> Void in
                 dispatch_async(dispatch_get_main_queue(), {
-                    //self.CouponsCollectionView.finishInfiniteScroll()
+                    self.notification_table.finishInfiniteScroll()
+                    Utilities.fadeOutViewAnimation(self.mainLoader, delay: 0, duration: 0.3)
+
                 })
         })
     }
@@ -240,16 +242,16 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                             self.offset+=addedValues
                         }
                         
-                        UIView.animateWithDuration(0.3, animations: {
+                        /*UIView.animateWithDuration(0.3, animations: {
                             self.notification_table.alpha = 1
-                        })
+                        })*/
                         
                     })
                 });
             },
             failure: { (error) -> Void in
                 dispatch_async(dispatch_get_main_queue(), {
-                    //self.CouponsCollectionView.finishInfiniteScroll()
+                    self.notification_table.finishInfiniteScroll()
                 })
         })
     }
