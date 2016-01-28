@@ -132,7 +132,7 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
     
     func setupProfileDetail() {
         if self.user_id == User.user_id {
-            user_name = "\(User.userName) \(User.userSurnames)"
+            user_name = "\(User.userName)"
             if self.user_image == nil {
                 self.downloadImage(NSURL(string: User.userImageUrl)!)
             }

@@ -118,19 +118,22 @@ class TrendingCoupon: UIView,ModalDelegate {
         super.init(coder: aDecoder)!
     }
     
-    func setCoupon(coupon:Coupon, view:UIViewController, x:CGFloat, y:CGFloat){
+    func setCoupon(coupon:Coupon, view: UIViewController, x: CGFloat, y: CGFloat){
         self.coupon = coupon
         self.viewController = view
         self.frame.origin = CGPointMake(x,y)
     }
+
     func pressActionButton(modal: ModalViewController) {
         if modal.action_type == "profile" {
             let view_controller = viewController!.storyboard!.instantiateViewControllerWithIdentifier("BranchProfileStickyController") as! BranchProfileStickyController
+            view_controller.coupon = self.coupon
             view_controller.branch_id = coupon.branch_id
             viewController!.navigationController?.pushViewController(view_controller, animated: true)
             viewController?.hidesBottomBarWhenPushed = false
             modal.dismissAnimated(true, completionHandler: nil)
         }
+        
         if modal.action_type == "redeem" {
             let view_controller  = viewController!.storyboard!.instantiateViewControllerWithIdentifier("readQRView") as! readQRViewController
             view_controller.coupon_id = self.coupon.id

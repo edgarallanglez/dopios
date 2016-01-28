@@ -19,6 +19,8 @@ class BranchProfileStickyController: UICollectionViewController, BranchPaginatio
     var new_height: CGFloat!
     var frame_width: CGFloat!
     
+    var coupon: Coupon!
+    
     /// User data
     var branch_id: Int = 0
     var branch_name: String!
