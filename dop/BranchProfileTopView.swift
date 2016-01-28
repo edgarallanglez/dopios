@@ -10,9 +10,9 @@ import UIKit
 
 class BranchProfileTopView: UIView {
     
-    @IBOutlet weak var branchCover: UIImageView!
-    @IBOutlet weak var branchName: UILabel!
-    @IBOutlet weak var branchLogo: UIImageView!
+    @IBOutlet weak var branch_banner: UIImageView!
+    @IBOutlet weak var branch_name: UILabel!
+    @IBOutlet weak var branch_logo: UIImageView!
     
     var branch_id: Int!
     var parent_view: BranchProfileStickyController!
@@ -41,5 +41,31 @@ class BranchProfileTopView: UIView {
     
     func setView(viewController: BranchProfileStickyController) {
         self.parent_view = viewController
+        self.branch_name.text = self.parent_view.coupon.name
+        downloadImage(parent_view.coupon)
     }
+    
+    func downloadImage(model: Coupon) {
+        let logo_url = NSURL(string: "\(Utilities.dopImagesURL)\(model.company_id)/\(model.logo)")
+        Utilities.getDataFromUrl(logo_url!) { data in
+            dispatch_async(dispatch_get_main_queue()) {
+                self.branch_logo.image = UIImage(data: data!)
+            }
+        }
+        
+        if model.banner.isEmpty || model.banner == "" {
+            self.branch_name.textColor = UIColor.darkGrayColor()
+            self.branch_name.shadowColor = UIColor.clearColor()
+        } else {
+            let banner_url = NSURL(string: "\(Utilities.dopImagesURL)\(model.company_id)/\(model.banner)")
+            Utilities.getDataFromUrl(banner_url!) { data in
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.branch_banner.image = UIImage(data: data!)!.applyLightEffect()
+//                    self.branch_banner.image self.branch_banner.image?.applyLightEffect()
+                }
+            }
+        }
+    }
+    
+    
 }
