@@ -78,6 +78,10 @@ class ModalViewController: MZFormSheetController {
         if(type == .CouponDetail){
             self.presentedFormSheetSize = CGSizeMake(380, 530)
             simple_modal.branch_title.addTarget(self, action: "toBranch", forControlEvents: .TouchUpInside)
+            
+            let gesture = UITapGestureRecognizer(target: self, action: "likeCoupon:")
+            simple_modal.heartView.addGestureRecognizer(gesture)
+
         }
         
         if(simple_modal!.action_button != nil){
@@ -116,5 +120,38 @@ class ModalViewController: MZFormSheetController {
             sender.tintColor = Utilities.dopColor
         }
     }
-
+    
+    func likeCoupon(sender: UITapGestureRecognizer){
+        let params:[String: AnyObject] = [
+            "coupon_id" : String(stringInterpolationSegment: simple_modal.coupon.id),
+            "date" : "2015-01-01"]
+        
+        var liked: Bool
+        
+        if (simple_modal?.heart.tintColor == UIColor.lightGrayColor()) {
+            self.simple_modal?.setCouponLike()
+            liked = true
+        } else {
+            self.simple_modal?.removeCouponLike()
+            liked = false
+        }
+        
+        CouponController.likeCouponWithSuccess(params,
+            success: { (couponsData) -> Void in
+                dispatch_async(dispatch_get_main_queue(), {
+                    let json = JSON(data: couponsData)
+                    print(json)
+                })
+            },
+            failure: { (error) -> Void in
+                dispatch_async(dispatch_get_main_queue(), {
+                    if(liked == true){
+                        self.simple_modal?.removeCouponLike()
+                    }else{
+                        self.simple_modal?.setCouponLike()
+                    }
+                })
+        })
+    }
+    
 }
