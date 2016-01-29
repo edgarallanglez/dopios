@@ -24,7 +24,7 @@ class UserProfileStickyHeader: UIView {
         self.user_id = self.parent_view.user_id
         self.follow_button.layer.borderColor = Utilities.dopColor.CGColor
         
-        if parent_view.user_image.image != nil {
+        if parent_view.user_image?.image != nil {
             user_image.image = parent_view_controller.user_image.image
         } else {
             downloadImage(NSURL(string: parent_view_controller.person.main_image)!)

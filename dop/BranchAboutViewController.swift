@@ -56,7 +56,7 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
     func centerMapOnLocation(location: CLLocation) {
         let coordinate_region = MKCoordinateRegionMakeWithDistance(location.coordinate,
             regions_radius * 2.0, regions_radius * 2.0)
-        branch_location_map.setRegion(coordinate_region, animated: true)
+        branch_location_map.setRegion(coordinate_region, animated: false)
     }
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView?{
@@ -102,7 +102,7 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
                 }
                 self.branch_location_map.addAnnotation(drop_pin)
                 //                self.headerTopView.setImages(self.logo, company_id: json["company_id"].int!)
-                
+                Utilities.fadeInFromBottomAnimation(self.view, delay: 0, duration: 1, yPosition: 20)
             })
         })
     }

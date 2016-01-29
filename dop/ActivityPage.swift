@@ -116,6 +116,7 @@ class ActivityPage: UITableViewController {
             
             dispatch_async(dispatch_get_main_queue(), {
                 self.reload()
+                Utilities.fadeInFromBottomAnimation(self.tableView, delay: 0, duration: 1, yPosition: 20)
             });
             },
             

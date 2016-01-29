@@ -89,6 +89,7 @@ class BranchRankingViewController: UITableViewController {
             dispatch_async(dispatch_get_main_queue(), {
                 self.ranking_array.sortInPlace({ $0.total_used > $1.total_used })
                 self.reload()
+                Utilities.fadeInFromBottomAnimation(self.tableView, delay: 0, duration: 1, yPosition: 20)
             });
             },
             

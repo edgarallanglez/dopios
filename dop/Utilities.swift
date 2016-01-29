@@ -55,7 +55,7 @@ class Utilities {
         
         gl = CAGradientLayer()
         gl.colors = [ colorTop, colorBottom]
-        gl.locations = [ 0.0, 1.0]
+        gl.locations = [ 0.0, 1.0 ]
         
         return gl
     }
@@ -174,7 +174,7 @@ class Utilities {
             }, completion: nil)
     }
     
-    class func fadeInFromBottomAnimation(view:UIView, delay:NSTimeInterval, duration:NSTimeInterval, yPosition:CGFloat){
+    class func fadeInFromBottomAnimation(view: UIView, delay: NSTimeInterval, duration: NSTimeInterval, yPosition: CGFloat){
         view.alpha = 0
         let finalYPosition = view.frame.origin.y
         view.frame.origin.y += yPosition
@@ -182,7 +182,7 @@ class Utilities {
         UIView.animateWithDuration(duration, delay: delay, usingSpringWithDamping: 1, initialSpringVelocity: 2, options: .CurveEaseInOut, animations: ({
             view.frame.origin.y = finalYPosition
             view.alpha = 1
-        }), completion:nil)
+        }), completion: nil)
     }
     
     class func fadeInFromTopAnimation(view:UIView, delay:NSTimeInterval, duration:NSTimeInterval, yPosition:CGFloat){
@@ -212,7 +212,7 @@ class Utilities {
         UIView.animateWithDuration(duration, delay: delay, usingSpringWithDamping: 1, initialSpringVelocity: 2, options: .CurveEaseInOut, animations: ({
             view.frame.origin.y = finalYPosition
             view.alpha = 0
-        }), completion:{ (value:Bool) in
+        }), completion:{ (value: Bool) in
             view.frame.origin.y -= yPosition
         })
     }
