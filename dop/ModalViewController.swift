@@ -40,7 +40,6 @@ class ModalViewController: MZFormSheetController {
         self.landscapeTopInset = 6.0
         
         self.willPresentCompletionHandler = { simple_modal in
-            
         }
         
     }

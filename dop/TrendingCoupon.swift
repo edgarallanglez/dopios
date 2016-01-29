@@ -19,7 +19,7 @@ class TrendingCoupon: UIView,ModalDelegate {
     var viewController: UIViewController?
     var coupon:Coupon!
     
-    func loadItem(coupon:Coupon, viewController: UIViewController) {
+    func loadItem(coupon: Coupon, viewController: UIViewController) {
         //coupon_description.text = coupon.couponDescription
         
       /*  self.shareButton.setBackgroundImage(UIImage(named: "share-icon"), forState: UIControlState.Normal)*/
@@ -41,6 +41,15 @@ class TrendingCoupon: UIView,ModalDelegate {
     
     init() {
         super.init(frame: CGRect(x: 0, y: 0, width: 180, height: 230))
+    }
+    func viewDidAppear(){
+        print("USER LIKE ES \(coupon.user_like)")
+        self.likes.text = String(coupon.total_likes)
+        if coupon.user_like == 1 {
+            self.heart.tintColor = Utilities.dopColor
+        } else {
+            self.heart.tintColor = UIColor.lightGrayColor()
+        }
     }
     
     func likeCoupon(sender: UITapGestureRecognizer){

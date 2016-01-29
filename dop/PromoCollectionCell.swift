@@ -44,6 +44,7 @@ class PromoCollectionCell: UICollectionViewCell, FBSDKSharingDelegate {
         }
     }
     
+    
     func likeCoupon(sender: UITapGestureRecognizer){
         let params:[String: AnyObject] = [
             "coupon_id" : String(stringInterpolationSegment: coupon.id),
