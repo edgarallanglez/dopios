@@ -490,6 +490,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
         if modal.action_type == "profile" {
             let view_controller = self.storyboard!.instantiateViewControllerWithIdentifier("BranchProfileStickyController") as! BranchProfileStickyController
             view_controller.branch_id = self.selected_coupon.branch_id
+            view_controller.coupon = self.selected_coupon
             self.navigationController?.pushViewController(view_controller, animated: true)
             self.hidesBottomBarWhenPushed = false
             modal.dismissAnimated(true, completionHandler: nil)
