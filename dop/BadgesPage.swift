@@ -120,7 +120,7 @@ class BadgesPage: UICollectionViewController {
                 
                 dispatch_async(dispatch_get_main_queue(), {
                     self.reload()
-                    //self.refreshControl.endRefreshing()
+                    Utilities.fadeInFromBottomAnimation((self.collectionView)!, delay: 0, duration: 1, yPosition: 20)
                 });
             },
             failure: { (error) -> Void in

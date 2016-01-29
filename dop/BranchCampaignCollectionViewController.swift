@@ -182,7 +182,7 @@ class BranchCampaignCollectionViewController: UICollectionViewController {
                     
                     self.refreshControl.endRefreshing()
                     self.offset = self.limit - 1
-                    
+                    Utilities.fadeInFromBottomAnimation((self.collectionView)!, delay: 0, duration: 1, yPosition: 20)
                     UIView.animateWithDuration(0.3, animations: {
                         //self.CouponsCollectionView.alpha = 1
                         

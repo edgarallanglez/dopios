@@ -17,6 +17,6 @@ class ConnectionCell: UITableViewCell {
     func loadItem(connection: ConnectionModel) {
         connection_name.text = connection.name
     }
-    
+
     
 }

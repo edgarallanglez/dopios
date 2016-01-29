@@ -31,9 +31,7 @@ class ConnectionsPage: UITableViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
-        if connection_array.count == 0 {
-            getConnections()
-        } else { setFrame() }
+        if connection_array.count == 0 { getConnections() } else { setFrame() }
     }
     
     func setFrame() {
@@ -55,8 +53,10 @@ class ConnectionsPage: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: ConnectionCell = tableView.dequeueReusableCellWithIdentifier("ConnectionCell", forIndexPath: indexPath) as! ConnectionCell
+        cell.selectionStyle = UITableViewCellSelectionStyle.None
         
         let model = self.connection_array[indexPath.row]
+        cell.hidden = true
         downloadImage(model, cell: cell)
         cell.loadItem(model)
         
@@ -83,6 +83,7 @@ class ConnectionsPage: UITableViewController {
             
             dispatch_async(dispatch_get_main_queue(), {
                 self.reload()
+                Utilities.fadeInFromBottomAnimation(self.tableView, delay: 0, duration: 1, yPosition: 20)
             });
         },
             
@@ -127,6 +128,7 @@ class ConnectionsPage: UITableViewController {
                     self.reload()
                     if self.new_data { self.offset += self.added_values }
                     parent_scroll.finishInfiniteScroll()
+                    
                 });
                 },
                 
@@ -138,11 +140,21 @@ class ConnectionsPage: UITableViewController {
         } else { parent_scroll.finishInfiniteScroll() }
     }
     
+    override func tableView(tableView: UITableView, didEndDisplayingCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            UIView.animateWithDuration(1, animations: { cell.alpha = 1 })
+        })
+    }
+    
     func downloadImage(model: ConnectionModel, cell: ConnectionCell) {
         let url = NSURL(string: "\(Utilities.dopImagesURL)\(model.company_id)/\(model.logo!)")!
         Utilities.getDataFromUrl(url) { data in
             dispatch_async(dispatch_get_main_queue()) {
                 cell.connection_image.image = UIImage(data: data!)
+                UIView.animateWithDuration(0.5, animations: {
+                    cell.hidden = false
+                })
+
             }
         }
     }
