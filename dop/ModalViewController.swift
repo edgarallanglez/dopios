@@ -62,10 +62,12 @@ class ModalViewController: MZFormSheetController {
         super.init(viewController: simple_modal!)
         
         if(type == .ConnectionError){
+            let width = UIScreen.mainScreen().bounds.width - 50
             self.presentedFormSheetSize = CGSizeMake(350, 271)
             simple_modal.modal_text.text = Utilities.connectionError
         }
         if(type == .Share){
+            let width = UIScreen.mainScreen().bounds.width - 50
             self.presentedFormSheetSize = CGSizeMake(350, 330)
             simple_modal!.title_label.text = "Compartir"
             simple_modal!.action_button.titleLabel!.text = "Compartir"
@@ -76,6 +78,7 @@ class ModalViewController: MZFormSheetController {
             //simple_modal!.modal_text.text = "Share"
         }
         if(type == .CouponDetail){
+            let width = UIScreen.mainScreen().bounds.width - 30
             self.presentedFormSheetSize = CGSizeMake(380, 530)
             simple_modal.branch_title.addTarget(self, action: "toBranch", forControlEvents: .TouchUpInside)
         }
