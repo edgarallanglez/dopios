@@ -104,10 +104,6 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
         if((updater) != nil){
             updater!.paused = false
         }
-        print("Dashboard View Controller DidAppear")
-        
-        
-        
         
     }
     

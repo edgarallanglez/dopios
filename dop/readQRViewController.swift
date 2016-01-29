@@ -200,7 +200,7 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
     
     override func viewDidAppear(animated: Bool) {
         Utilities.permanentBounce(qr_image, delay: 0.5, duration: 0.8)
-        Utilities.fadeInFromBottomAnimation(qr_instructions_view, delay: 0, duration: 1, yPosition: 15)
+        Utilities.fadeInFromTopAnimation(qr_instructions_view, delay: 0, duration: 1, yPosition: 15)
     }
 
     /*
