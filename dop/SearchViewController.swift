@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, CLLocationManagerDelegate {
+class SearchViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, CLLocationManagerDelegate {
     
     @IBOutlet var tableView: UITableView!
     @IBOutlet weak var peopleTableView: UITableView!
@@ -27,10 +27,12 @@ class SearchViewController: BaseViewController, UITableViewDataSource, UITableVi
     var locationManager: CLLocationManager!
     var current: CLLocation!
     
+    var searchText: NSString!
+    
     override func viewDidLoad() {
-        super.viewDidLoad()
+        //super.viewDidLoad()
         
-        notificationButton.action = nil
+        //notificationButton.action = nil
         
 
         //SEARCH BAR
@@ -87,7 +89,7 @@ class SearchViewController: BaseViewController, UITableViewDataSource, UITableVi
         
         
         
-        self.navigationItem.rightBarButtonItem = nil
+        //self.navigationItem.rightBarButtonItem = nil
         
         let myBackButton:UIButton = UIButton(type: .Custom) as UIButton
         
@@ -97,79 +99,43 @@ class SearchViewController: BaseViewController, UITableViewDataSource, UITableVi
         myBackButton.sizeToFit()
         
         let myCustomBackButtonItem:UIBarButtonItem = UIBarButtonItem(customView: myBackButton)
-        self.navigationItem.leftBarButtonItem  = myCustomBackButtonItem
+        //self.navigationItem.leftBarButtonItem  = myCustomBackButtonItem
         
         
         //doSomething()
     }
     func back(sender: UIBarButtonItem) {
         //searchBar.resignFirstResponder()
-        self.navigationController?.popViewControllerAnimated(true)
-    }
-    override func viewWillAppear(animated: Bool) {
-        
-        
-        //searchBar.becomeFirstResponder()
+        //self.navigationController?.popViewControllerAnimated(true)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
 
-    }
-
-    
-    override func viewDidAppear(animated: Bool) {
-        /*UIView.animateWithDuration(3, animations: {
-            self.searchBar.alpha = 1
-        })*/
-        //searchBar.alpha = 0
-    }
-    override func viewWillDisappear(animated: Bool) {
-        searchBar.resignFirstResponder()
-        //self.navigationController?.popToRootViewControllerAnimated(true)
-    }
-    
-    override func viewDidDisappear(animated: Bool) {
-
-     
-    }
-    
     
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
         //searchActive = true;
     }
     
-    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+    /*func searchBarTextDidEndEditing(searchBar: UISearchBar) {
         searchActive = false;
     }
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         searchActive = false;
-    }
+    }*/
     
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        searchActive = false;
-        timer?.invalidate()
-        
-        let searchText = searchBar.text
-        
-        if(searchText != ""){
-            search()
-            searchBar.resignFirstResponder()
-        }
-    }
     
-    func searchBar(searchBar: UISearchBar, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+    
+    /*func searchBar(searchBar: UISearchBar, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
         timer?.invalidate()
         timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "timeOut", userInfo: nil, repeats: false)
         
         return true
-    }
-    override func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
+    }*/
+    /*override func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
         print("SCROLL DELEGATE")
         
         return true
-    }
+    }*/
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         /*filtered = data.filter({ (text) -> Bool in
@@ -186,8 +152,7 @@ class SearchViewController: BaseViewController, UITableViewDataSource, UITableVi
     }
     
     func timeOut(){
-        let searchText = searchBar.text
-        
+        //let searchText = searchBar.text
         if(searchText != ""){
             search()
         }
@@ -279,18 +244,24 @@ class SearchViewController: BaseViewController, UITableViewDataSource, UITableVi
         return(default_cell)
     }
     
+    func searchTimer(){
+        print("TIME Ouyt \(searchText)")
+
+        timer?.invalidate()
+        timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "timeOut", userInfo: nil, repeats: false)
+    }
     
-    /*func search(){
+    
+    func search(){
         filtered.removeAll()
         peopleFiltered.removeAll()
         cachedImages.removeAll()
         
         
-        let searchText: String = searchBar.text!
         let latitude = User.coordinate.latitude
         let longitude = User.coordinate.longitude
         let params: [String:AnyObject] = [
-            "text": searchText,
+            "text": searchText!,
             "latitude": latitude,
             "longitude":longitude
         ]
@@ -364,10 +335,10 @@ class SearchViewController: BaseViewController, UITableViewDataSource, UITableVi
                 }
             )
         }
-    }*/
+    }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        searchBar.resignFirstResponder()
+        //searchBar.resignFirstResponder()
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
