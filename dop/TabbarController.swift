@@ -95,7 +95,7 @@ class TabbarController: UITabBarController, NotificationDelegate {
     }
     
     func search(){
-        self.performSegueWithIdentifier("searchView", sender: self)
+        //self.performSegueWithIdentifier("searchView", sender: self)
     }
     
     func pressed(sender: UIButton!) {

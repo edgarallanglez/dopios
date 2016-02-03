@@ -63,12 +63,12 @@ class ModalViewController: MZFormSheetController {
         
         if(type == .ConnectionError){
             let width = UIScreen.mainScreen().bounds.width - 50
-            self.presentedFormSheetSize = CGSizeMake(350, 271)
+            self.presentedFormSheetSize = CGSizeMake(width, 271)
             simple_modal.modal_text.text = Utilities.connectionError
         }
         if(type == .Share){
             let width = UIScreen.mainScreen().bounds.width - 50
-            self.presentedFormSheetSize = CGSizeMake(350, 330)
+            self.presentedFormSheetSize = CGSizeMake(width, 330)
             simple_modal!.title_label.text = "Compartir"
             simple_modal!.action_button.titleLabel!.text = "Compartir"
             simple_modal!.share_text.contentInset = UIEdgeInsetsMake(0,-5,0,0)
@@ -79,7 +79,7 @@ class ModalViewController: MZFormSheetController {
         }
         if(type == .CouponDetail){
             let width = UIScreen.mainScreen().bounds.width - 30
-            self.presentedFormSheetSize = CGSizeMake(380, 530)
+            self.presentedFormSheetSize = CGSizeMake(width, 530)
             simple_modal.branch_title.addTarget(self, action: "toBranch", forControlEvents: .TouchUpInside)
             
             let gesture = UITapGestureRecognizer(target: self, action: "likeCoupon:")
@@ -125,8 +125,8 @@ class ModalViewController: MZFormSheetController {
     }
     
     func likeCoupon(sender: UITapGestureRecognizer){
-        let params:[String: AnyObject] = [
-            "coupon_id" : String(stringInterpolationSegment: simple_modal.coupon.id),
+        /*let params:[String: AnyObject] = [
+            "coupon_id" : String(stringInterpolationSegment: simple_modal!.coupon!.id),
             "date" : "2015-01-01"]
         
         var liked: Bool
@@ -154,7 +154,7 @@ class ModalViewController: MZFormSheetController {
                         self.simple_modal?.setCouponLike()
                     }
                 })
-        })
+        })*/
     }
     
 }

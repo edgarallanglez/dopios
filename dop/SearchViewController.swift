@@ -32,6 +32,7 @@ class SearchViewController: BaseViewController, UITableViewDataSource, UITableVi
         
         notificationButton.action = nil
         
+
         //SEARCH BAR
        /* searchBar = UISearchBar(frame: CGRectMake(0, 0, 100, 20))
         searchBar.tintColor = UIColor.whiteColor()
@@ -62,7 +63,7 @@ class SearchViewController: BaseViewController, UITableViewDataSource, UITableVi
         
         //self.navigationItem.titleView = searchBar
        
-        
+        //searchBar.delegate = self
         
         tableView.delegate = self
         tableView.dataSource = self

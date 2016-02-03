@@ -14,19 +14,15 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
     var vcNot: NotificationViewController!
     var searchBar: UISearchBar = UISearchBar()
     var errorView: UIView = UIView()
+    var searchView:UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
-
-        
-        
         notificationButton = NotificationButton(image: UIImage(named: "notification"), style: UIBarButtonItemStyle.Plain, target: self, action: "notification")
         
         
-        self.navigationItem.rightBarButtonItem = notificationButton
+        //self.navigationItem.rightBarButtonItem = notificationButton
 
         
         vc  = self.storyboard!.instantiateViewControllerWithIdentifier("SearchView") as! SearchViewController
@@ -68,40 +64,46 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
     }
     
     func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
-        self.navigationController?.pushViewController(vc, animated: true)
-        searchBar.delegate = nil
-        vc.searchBar.delegate = vc
-        return false
-    }
+        if(searchView == nil){
+            searchView = UIView(frame: CGRectMake(0,0,self.view.frame.width,self.view.frame.height+49))
+            searchView.backgroundColor = UIColor.redColor()
 
+            /*view.addConstraints([leadingConstraint, trailingConstraint, topConstraint, bottomConstraint])
+            view.layoutIfNeeded()*/
+            
+            self.view.addSubview(searchView)
+            
+            searchView.addSubview(vc.view)
+            
+            //vc.searchBarTextDidBeginEditing(searchBar)
+            searchBar.delegate = vc
+        }
+        return true
+    }
 
     func search(){
         //self.navigationController?.popToRootViewControllerAnimated(true)
         //self.navigationController?.pushViewController(nextViewController, animated: true)
         
         
-        self.navigationController?.pushViewController(vc, animated: false)
+        //self.navigationController?.pushViewController(vc, animated: false)
         
- 
         
         /*self.navigationController?.pushViewController(vc, animated: true) {
             vc.doSomething()
         }*/
         
-
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     func notification() {
-        print("Aloooo")
        vcNot.navigationController?.hidesBottomBarWhenPushed = true
        self.navigationController?.pushViewController(vcNot, animated: true)
         //self.navigationController!.pushViewController(self.storyboard!.instantiateViewControllerWithIdentifier("Notifications") as UIViewController, animated: true)
         //self.navigationController?.hidesBottomBarWhenPushed = true
         
         //self.performSegueWithIdentifier("notificationView", sender: nil)
-
     }
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return .LightContent
@@ -110,12 +112,16 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
     override func prefersStatusBarHidden() -> Bool {
         return false
     }
+
     
     func navigationController(navigationController: UINavigationController, didShowViewController viewController: UIViewController, animated: Bool) {
-        print("NAVIGATION SHOW")
         viewController.viewDidAppear(true)
     }
     func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
+        if((searchView) != nil){
+            searchView.removeFromSuperview()
+        }
         viewController.viewWillAppear(true)
     }
+    
 }
