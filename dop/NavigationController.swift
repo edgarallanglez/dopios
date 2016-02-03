@@ -9,7 +9,7 @@
 import UIKit
 
 
-class NavigationController: UINavigationController, NotificationDelegate {
+class NavigationController: UINavigationController{
 
     @IBOutlet var navBar: UINavigationBar!
     override func viewDidLoad() {
@@ -33,25 +33,7 @@ class NavigationController: UINavigationController, NotificationDelegate {
    
         
         UIApplication.sharedApplication().statusBarStyle = .LightContent
-        
-        
-        let notificationButton: NotificationButton = NotificationButton(image: UIImage(named: "notification"), style: UIBarButtonItemStyle.Plain, target: self, action: "notification")
-        
-        
-        let searchButton : UIBarButtonItem = UIBarButtonItem(image: UIImage(named:"search-icon"), style: UIBarButtonItemStyle.Plain, target: self, action: "search")
-        
-        
-        self.navigationItem.leftBarButtonItem = notificationButton
-        self.navigationItem.rightBarButtonItem = searchButton
-        
-        
-
-        notificationButton.delegate = self
-        notificationButton.startListening()
-        
-        self.navigationItem.setLeftBarButtonItem(notificationButton, animated: true)
-        
-        
+  
     }
     
 
@@ -70,16 +52,10 @@ class NavigationController: UINavigationController, NotificationDelegate {
 
         
     }
-    func notification() {
-        
-        self.navigationController!.pushViewController(self.storyboard!.instantiateViewControllerWithIdentifier("Notifications") as UIViewController, animated: true)
-        self.navigationController?.hidesBottomBarWhenPushed = false
-        
-    }
     
-    func search(){
-        self.performSegueWithIdentifier("searchView", sender: self)
-    }
+   /* func search(){
+        //self.performSegueWithIdentifier("searchView", sender: self)
+    }*/
 
 
     /*

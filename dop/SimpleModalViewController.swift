@@ -94,7 +94,6 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapVie
 
         self.mz_dismissFormSheetControllerAnimated(true, completionHandler: { (MZFormSheetController) -> Void in
             
-            
         })
     }
     func actionTouched(sender: ModalButton){
@@ -117,8 +116,6 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapVie
             description_separator.alpha = 0
             coupon_description.alpha = 0
             
-            let gesture = UITapGestureRecognizer(target: self, action: "likeCoupon:")
-            heartView.addGestureRecognizer(gesture)
             
             if coupon!.user_like == 1 {
                 self.heart.tintColor = Utilities.dopColor
@@ -139,38 +136,7 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapVie
         }
        
     }
-    func likeCoupon(sender: UITapGestureRecognizer){
-        let params:[String: AnyObject] = [
-            "coupon_id" : String(stringInterpolationSegment: coupon!.id),
-            "date" : "2015-01-01"]
-        
-        var liked: Bool
-        
-        if (self.heart.tintColor == UIColor.lightGrayColor()) {
-            self.setCouponLike()
-            liked = true
-        } else {
-            self.removeCouponLike()
-            liked = false
-        }
-        
-        CouponController.likeCouponWithSuccess(params,
-            success: { (couponsData) -> Void in
-                dispatch_async(dispatch_get_main_queue(), {
-                    let json = JSON(data: couponsData)
-                    print(json)
-                })
-            },
-            failure: { (error) -> Void in
-                dispatch_async(dispatch_get_main_queue(), {
-                    if(liked == true){
-                        self.removeCouponLike()
-                    }else{
-                        self.setCouponLike()
-                    }
-                })
-        })
-    }
+  
     func setCouponLike() {
         heart.transform = CGAffineTransformMakeScale(0.1, 0.1)
         UIView.animateWithDuration(0.8,

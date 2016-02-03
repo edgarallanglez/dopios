@@ -653,6 +653,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
     override func viewDidDisappear(animated: Bool) {
         if((updater) != nil){
             updater!.paused = true
+            branchesScroll.setContentOffset(CGPointMake(0, 0), animated: false)
         }
     }
     
