@@ -22,18 +22,6 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
     
     var kClientId = "517644806961-ocmqel4aloa86mtsn5jsmmuvi3fcdpln.apps.googleusercontent.com";
     var locationManager: CLLocationManager!
-
-    override func viewWillAppear(animated: Bool) {
-        var cornerRound:CGFloat
-        
-        if signInButton.frame.height > 70 {
-            cornerRound = 2
-        } else {
-            cornerRound = 1.9
-        }
-        signInButton.layer.cornerRadius = signInButton.frame.height / cornerRound
-        fbButton.layer.cornerRadius = signInButton.frame.height / cornerRound
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,7 +43,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
         locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
         
-        dopLogo.image = UIImage(named: "dopLogo.png")
+//        dopLogo.image = UIImage(named: "dopLogo.png")
         
         let border = CALayer()
         let border2 = CALayer()

@@ -106,6 +106,7 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
                 self.branch_location_map.addAnnotation(drop_pin)
                 //                self.headerTopView.setImages(self.logo, company_id: json["company_id"].int!)
                 Utilities.fadeInFromBottomAnimation(self.view, delay: 0, duration: 1, yPosition: 20)
+                //self.branch_location_map.alpha = 1
                 self.delegate!.setFollow!(following)
             })
         })
