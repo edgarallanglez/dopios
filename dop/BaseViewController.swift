@@ -73,28 +73,40 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
             
             self.view.addSubview(searchView)
             
+
+            
             searchView.addSubview(vc.view)
             
             //vc.searchBarTextDidBeginEditing(searchBar)
-            vc.searchBar.text = searchBar.text
-            //searchBar.delegate = vc
+            //vc.searchBar.text = searchBar.text
+            //self.searchBar.delegate = searchView
         }
         return true
     }
-
-    func search(){
-        //self.navigationController?.popToRootViewControllerAnimated(true)
-        //self.navigationController?.pushViewController(nextViewController, animated: true)
-        
-        
-        //self.navigationController?.pushViewController(vc, animated: false)
-        
-        
-        /*self.navigationController?.pushViewController(vc, animated: true) {
-            vc.doSomething()
-        }*/
-        
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        vc.searchText = searchText
+        vc.searchTimer()
     }
+    
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        vc.searchActive = false;
+        vc.timer?.invalidate()
+        
+        if(vc.searchText != ""){
+            vc.search()
+            searchBar.resignFirstResponder()
+        }
+    }
+    
+    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+        vc.searchActive = false;
+    }
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        vc.searchActive = false;
+    }
+    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
