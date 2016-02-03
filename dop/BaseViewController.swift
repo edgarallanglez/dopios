@@ -76,7 +76,8 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
             searchView.addSubview(vc.view)
             
             //vc.searchBarTextDidBeginEditing(searchBar)
-            searchBar.delegate = vc
+            vc.searchBar.text = searchBar.text
+            //searchBar.delegate = vc
         }
         return true
     }
