@@ -180,7 +180,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                 let banner = subJson["banner"].string
                 
                 
-                let model = Branch(id: branch_id, name: branch_name, logo: "", banner: banner,company_id: company_id, total_likes: 0, user_like: 0, latitude: 0.0, longitude: 0.0)
+                let model = Branch(id: branch_id, name: branch_name, logo: "", banner: banner,company_id: company_id, total_likes: 0, user_like: 0, latitude: 0.0, longitude: 0.0, following: false)
 
                 
                 self.branches.append(model)

@@ -10,12 +10,18 @@ import UIKit
 
 @objc protocol SetSegmentedBranchPageDelegate {
     optional func setPage(index: Int)
-    
     optional func launchInfiniteScroll(parent_scroll: UICollectionView)
 }
 
+@objc protocol SetFollowFromController {
+    optional func setFollowButton(following: Bool)
+}
+
 class BranchProfileStickyController: UICollectionViewController, BranchPaginationDelegate, BranchSegmentedControlDelegate {
+    
     var delegate: SetSegmentedBranchPageDelegate?
+    var delegateFollow: SetFollowFromController?
+    
     var new_height: CGFloat!
     var frame_width: CGFloat!
     
@@ -26,9 +32,10 @@ class BranchProfileStickyController: UICollectionViewController, BranchPaginatio
     var branch_name: String!
     var logo: UIImage!
     var user_image_path: String = ""
-    var branch: Branch!
+    var top_view: BranchProfileStickyHeader!
     var page_index: Int!
     var segmented_controller: BranchProfileSegmentedController?
+    var following: Bool!
     
     private var layout : CSStickyHeaderFlowLayout? {
         return self.collectionView?.collectionViewLayout as? CSStickyHeaderFlowLayout
@@ -53,8 +60,6 @@ class BranchProfileStickyController: UICollectionViewController, BranchPaginatio
         self.layout?.headerReferenceSize = CGSizeMake(320, 40)
         
         self.collectionView?.delegate = self
-//        setupProfileDetail()
-        
         
         self.collectionView!.infiniteScrollIndicatorView = CustomInfiniteIndicator(frame: CGRectMake(0, 0, 24, 24))
         self.collectionView!.infiniteScrollIndicatorMargin = 40
@@ -110,10 +115,11 @@ class BranchProfileStickyController: UICollectionViewController, BranchPaginatio
     override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
         
         if kind == CSStickyHeaderParallaxHeader {
-            let view = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "branchHeader", forIndexPath: indexPath) as! BranchProfileStickyHeader
-            view.setBranchProfile(self)
+            self.top_view = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "branchHeader", forIndexPath: indexPath) as! BranchProfileStickyHeader
+            self.top_view.setBranchProfile(self)
             
-            return view
+            
+            return self.top_view
         } else if kind == UICollectionElementKindSectionHeader {
             let view = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "sectionHeader", forIndexPath: indexPath) as! BranchProfileStickySectionHeader
             
@@ -160,6 +166,11 @@ class BranchProfileStickyController: UICollectionViewController, BranchPaginatio
     
     func setSegmentedIndex(index: Int) {
         self.segmented_controller!.selectedIndex = index
+    }
+    
+    func setFollowButton(following: Bool) {
+        self.following = following
+        self.top_view.setBranchFollow(self.following)
     }
 }
 

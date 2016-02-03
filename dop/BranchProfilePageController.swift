@@ -10,8 +10,8 @@ import UIKit
 
 @objc protocol BranchPaginationDelegate {
     optional func resizeView(new_height: CGFloat)
-    
     optional func setSegmentedIndex(index: Int)
+    optional func setFollowButton(following: Bool)
 }
 
 class BranchProfilePageController: UICollectionViewCell, UIPageViewControllerDataSource, UIPageViewControllerDelegate, SetSegmentedBranchPageDelegate, AboutPageDelegate, CampaignPageDelegate, RankingPageDelegate, UIScrollViewDelegate {
@@ -188,4 +188,7 @@ class BranchProfilePageController: UICollectionViewCell, UIPageViewControllerDat
         }
     }
     
+    func setFollow(following: Bool) {
+        delegate?.setFollowButton!(following)
+    }
 }

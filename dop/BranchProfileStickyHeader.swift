@@ -10,7 +10,6 @@ import UIKit
 
 class BranchProfileStickyHeader: UICollectionReusableView {
     
-    
     private var imageView : UIImageView?
     private var branch_profile: BranchProfileTopView = BranchProfileTopView()
     
@@ -35,5 +34,8 @@ class BranchProfileStickyHeader: UICollectionReusableView {
         branch_profile.setView(viewController)
     }
     
-    
+    func setBranchFollow(following: Bool) {
+        branch_profile.setFollow()
+    }
+
 }

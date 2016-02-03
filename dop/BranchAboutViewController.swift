@@ -11,6 +11,7 @@ import MapKit
 
 @objc protocol AboutPageDelegate {
     optional func resizeAboutView(dynamic_height: CGFloat)
+    optional func setFollow(following: Bool)
 }
 
 class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
@@ -82,9 +83,11 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
         BranchProfileController.getBranchProfileWithSuccess(parent_view.branch_id, success: { (data) -> Void in
             let data = JSON(data: data)
             var json = data["data"]
+            print(json)
             json = json[0]
             let latitude = json["latitude"].double
             let longitude = json["longitude"].double
+            let following = json["following"].bool!
             
             self.branch_pin = CLLocation(latitude: latitude!, longitude: longitude!)
             let new_location = CLLocationCoordinate2DMake(latitude!, longitude!)
@@ -103,6 +106,7 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
                 self.branch_location_map.addAnnotation(drop_pin)
                 //                self.headerTopView.setImages(self.logo, company_id: json["company_id"].int!)
                 Utilities.fadeInFromBottomAnimation(self.view, delay: 0, duration: 1, yPosition: 20)
+                self.delegate!.setFollow!(following)
             })
         })
     }

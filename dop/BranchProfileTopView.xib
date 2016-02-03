@@ -73,12 +73,11 @@
                                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                     </userDefinedRuntimeAttributes>
                                 </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j1t-e9-jfI">
-                                    <rect key="frame" x="292" y="132" width="16" height="33"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j1t-e9-jfI">
+                                    <rect key="frame" x="293" y="137" width="14" height="28"/>
                                     <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="23"/>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
-                                    <color key="shadowColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                     <size key="shadowOffset" width="0.0" height="1"/>
                                 </label>
                             </subviews>
@@ -118,6 +117,8 @@
                 <outlet property="branch_banner" destination="x9r-hb-NOG" id="BCu-eY-RGh"/>
                 <outlet property="branch_logo" destination="ph0-mH-WMX" id="AXF-rg-V4F"/>
                 <outlet property="branch_name" destination="j1t-e9-jfI" id="0MU-k1-o65"/>
+                <outlet property="follow_button" destination="vnf-zr-owF" id="Z1m-rv-ipT"/>
+                <outlet property="follow_button_width" destination="wuu-jp-C9X" id="ud0-pi-A9b"/>
             </connections>
             <point key="canvasLocation" x="230" y="33.5"/>
         </view>

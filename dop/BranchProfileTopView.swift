@@ -13,6 +13,8 @@ class BranchProfileTopView: UIView {
     @IBOutlet weak var branch_banner: UIImageView!
     @IBOutlet weak var branch_name: UILabel!
     @IBOutlet weak var branch_logo: UIImageView!
+    @IBOutlet weak var follow_button: UIButton!
+    @IBOutlet weak var follow_button_width: NSLayoutConstraint!
     
     var branch_id: Int!
     var parent_view: BranchProfileStickyController!
@@ -20,15 +22,24 @@ class BranchProfileTopView: UIView {
     @IBAction func followBranch(sender: AnyObject) {
         
         let params:[String: AnyObject] = [
-            "branch_id" : String(stringInterpolationSegment: branch_id),
+            "branch_id" : String(stringInterpolationSegment: parent_view.branch_id),
             "date" : "2015-01-01"]
         
         print(params)
         BranchProfileController.followBranchWithSuccess(params,
-            success: { (couponsData) -> Void in
+            success: { (data) -> Void in
                 dispatch_async(dispatch_get_main_queue(), {
-                    let json = JSON(data: couponsData)
-                    print(json)
+                    UIButton.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
+                        self.follow_button.setImage(nil, forState: UIControlState.Normal)
+                        
+                        self.follow_button.backgroundColor = Utilities.dopColor
+                        self.follow_button_width.constant = CGFloat(100)
+                        self.layoutIfNeeded()
+                        }, completion: { (Bool) in
+                            self.follow_button.setTitle("SIGUIENDO", forState: UIControlState.Normal)
+                            
+                    })
+
                 })
             },
             failure: { (error) -> Void in
@@ -39,10 +50,27 @@ class BranchProfileTopView: UIView {
 
     }
     
+    func setFollow() {
+        if (parent_view.following != nil && parent_view.following == true) { setFollowingButton() }
+    }
+    
     func setView(viewController: BranchProfileStickyController) {
         self.parent_view = viewController
         self.branch_name.text = self.parent_view.coupon.name
         downloadImage(parent_view.coupon)
+    }
+    
+    func setFollowingButton() {
+        UIButton.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
+            self.follow_button.setImage(nil, forState: UIControlState.Normal)
+            
+            self.follow_button.backgroundColor = Utilities.dopColor
+            self.follow_button_width.constant = CGFloat(100)
+            self.layoutIfNeeded()
+            }, completion: { (Bool) in
+                self.follow_button.setTitle("SIGUIENDO", forState: UIControlState.Normal)
+                
+        })
     }
     
     func downloadImage(model: Coupon) {
@@ -53,15 +81,13 @@ class BranchProfileTopView: UIView {
             }
         }
         
-        if model.banner.isEmpty || model.banner == "" {
-            self.branch_name.textColor = UIColor.darkGrayColor()
-            self.branch_name.shadowColor = UIColor.clearColor()
-        } else {
+        if !model.banner.isEmpty {
             let banner_url = NSURL(string: "\(Utilities.dopImagesURL)\(model.company_id)/\(model.banner)")
             Utilities.getDataFromUrl(banner_url!) { data in
                 dispatch_async(dispatch_get_main_queue()) {
                     self.branch_banner.image = UIImage(data: data!)!.applyLightEffect()
-//                    self.branch_banner.image self.branch_banner.image?.applyLightEffect()
+                    self.branch_name.textColor = UIColor.whiteColor()
+                    self.branch_name.shadowColor = UIColor.darkGrayColor()
                 }
             }
         }
