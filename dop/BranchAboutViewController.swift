@@ -95,7 +95,7 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
             
             dispatch_async(dispatch_get_main_queue(), {
 //                self.branchName.text = json["name"].string
-                let drop_pin = Annotation(coordinate: new_location, title: json["name"].string!, subTitle: "nada")
+                let drop_pin = Annotation(coordinate: new_location, title: json["name"].string!, subTitle: "nada", branch_distance: "4.3")
                 if json["category_id"].int! == 1 {
                     drop_pin.typeOfAnnotation = "marker-food-icon"
                 } else if json["category_id"].int! == 2 {

@@ -15,11 +15,13 @@ class Annotation: NSObject, MKAnnotation {
     var subTitle : String
     var direction : CLLocationDirection!
     var typeOfAnnotation : String!
+    var branch_distance: String?
     
-    init(coordinate: CLLocationCoordinate2D, title : String, subTitle : String) {
+    init(coordinate: CLLocationCoordinate2D, title : String, subTitle : String, branch_distance: String) {
         self.currentLocation = coordinate
         self._title = title
         self.subTitle = subTitle
+        self.branch_distance = branch_distance
     }
     
     func getLocation() -> CLLocation {
@@ -37,4 +39,9 @@ class Annotation: NSObject, MKAnnotation {
     var subtitle: String? {
         return self.subTitle
     }
+    
+    var distance: String? {
+        return self.branch_distance
+    }
+    
 }

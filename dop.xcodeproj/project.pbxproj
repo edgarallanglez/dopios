@@ -79,7 +79,6 @@
 		9DB327CC1B863C77006BF882 /* MoreMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB327CB1B863C77006BF882 /* MoreMenuController.swift */; };
 		9DB327CE1B863C84006BF882 /* MoreMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB327CD1B863C84006BF882 /* MoreMenuViewController.swift */; };
 		9DB3DABB1B73C28A004AC0F1 /* BranchProfileTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB3DABA1B73C28A004AC0F1 /* BranchProfileTopView.swift */; };
-		9DB3DABF1B740070004AC0F1 /* BranchProfileAboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB3DABE1B740070004AC0F1 /* BranchProfileAboutView.swift */; };
 		9DB6121A1B192FCC004B8DB8 /* NearbyMapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB612191B192FCC004B8DB8 /* NearbyMapController.swift */; };
 		9DB6BB2A1B72A6A000FF2659 /* BranchProfileTopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DB6BB291B72A6A000FF2659 /* BranchProfileTopView.xib */; };
 		9DB907DE1B8E25A000A40FE0 /* FilterSideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB907DD1B8E25A000A40FE0 /* FilterSideViewController.swift */; };
@@ -378,7 +377,6 @@
 		9DB327CB1B863C77006BF882 /* MoreMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreMenuController.swift; sourceTree = "<group>"; };
 		9DB327CD1B863C84006BF882 /* MoreMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreMenuViewController.swift; sourceTree = "<group>"; };
 		9DB3DABA1B73C28A004AC0F1 /* BranchProfileTopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BranchProfileTopView.swift; sourceTree = "<group>"; };
-		9DB3DABE1B740070004AC0F1 /* BranchProfileAboutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BranchProfileAboutView.swift; sourceTree = "<group>"; };
 		9DB612191B192FCC004B8DB8 /* NearbyMapController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyMapController.swift; sourceTree = "<group>"; };
 		9DB6BB291B72A6A000FF2659 /* BranchProfileTopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BranchProfileTopView.xib; sourceTree = "<group>"; };
 		9DB907DD1B8E25A000A40FE0 /* FilterSideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterSideViewController.swift; sourceTree = "<group>"; };
@@ -640,7 +638,6 @@
 		6D81DF1A1C4EA7650068168D /* BranchProfilePages */ = {
 			isa = PBXGroup;
 			children = (
-				9DB3DABE1B740070004AC0F1 /* BranchProfileAboutView.swift */,
 				6D81DF1D1C4EABF90068168D /* BranchAboutViewController.swift */,
 				6D81DF1F1C4EAC480068168D /* BranchCampaignCollectionViewController.swift */,
 				6D81DF211C4EAC720068168D /* BranchRankingViewController.swift */,
@@ -1377,7 +1374,6 @@
 				6D9F5A1E1C209626005D0EBE /* BadgeModel.swift in Sources */,
 				A0662A361BA0CEF5006D6278 /* LoadingCell.swift in Sources */,
 				A06B357C1B9F667D003C90EF /* NearbyBranch.swift in Sources */,
-				9DB3DABF1B740070004AC0F1 /* BranchProfileAboutView.swift in Sources */,
 				6DBBB1451C35987B002AFB57 /* ConnectionsPage.swift in Sources */,
 				A01D77DB1BDAB94C00AA8FE2 /* SocketIOTransportWebsocket.m in Sources */,
 				6D5C95711C2B049A0017B166 /* UserProfileStickyController.swift in Sources */,

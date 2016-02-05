@@ -103,7 +103,7 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
                 let newLocation = CLLocationCoordinate2DMake(latitude!, longitude!)
                 dispatch_async(dispatch_get_main_queue()) {
                     // Drop a pin
-                    let dropPin : Annotation = Annotation(coordinate: newLocation, title: branch["name"].string!, subTitle: "Los mejores")
+                    let dropPin : Annotation = Annotation(coordinate: newLocation, title: branch["name"].string!, subTitle: "Los mejores", branch_distance: "4.3")
                     if branch["category_id"].int! == 1 {
                         dropPin.typeOfAnnotation = "marker-food-icon"
                     } else if branch["category_id"].int! == 2 {
@@ -128,15 +128,23 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
             annotationView!.canShowCallout = true
             
-        } else {
-            annotationView?.annotation = annotation
-        }
+        } else { annotationView?.annotation = annotation }
         
         let customAnnotation = annotation as! Annotation
         annotationView!.image = UIImage(named: customAnnotation.typeOfAnnotation)
         
+        
         return annotationView
     }
     
+    func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
+        if view.annotation is MKUserLocation {  print("h") } else {
+            var custom_view: UIView = UIView(frame: CGRectMake(0, 0, 100, 100))
+            custom_view.backgroundColor = UIColor.redColor()
+            view.addSubview(custom_view)
+        }
+        
+        
+    }
 
 }

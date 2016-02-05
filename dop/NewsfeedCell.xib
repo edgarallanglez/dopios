@@ -113,7 +113,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nfq-uf-WD3">
-                                <rect key="frame" x="378" y="8" width="42" height="30"/>
+                                <rect key="frame" x="437" y="8" width="52" height="30"/>
                                 <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="15"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -134,6 +134,7 @@
                             <constraint firstItem="gER-ff-IW6" firstAttribute="leading" secondItem="hEa-8D-NiC" secondAttribute="leading" constant="8" id="o4O-DP-I2w"/>
                             <constraint firstItem="Nfq-uf-WD3" firstAttribute="leading" secondItem="PDX-4C-OXZ" secondAttribute="trailing" id="oaL-zQ-vPo"/>
                             <constraint firstItem="gER-ff-IW6" firstAttribute="top" secondItem="hEa-8D-NiC" secondAttribute="top" constant="8" id="tUn-HD-GSy"/>
+                            <constraint firstAttribute="trailing" secondItem="Nfq-uf-WD3" secondAttribute="trailing" constant="10" id="uVO-MC-d9o"/>
                             <constraint firstItem="Ifi-iL-sC3" firstAttribute="top" secondItem="gER-ff-IW6" secondAttribute="bottom" constant="3" id="vHh-ec-3dX"/>
                             <constraint firstAttribute="trailing" secondItem="OtS-VL-PUS" secondAttribute="trailing" constant="1" id="vq4-3l-0YA"/>
                             <constraint firstItem="PDX-4C-OXZ" firstAttribute="top" secondItem="hEa-8D-NiC" secondAttribute="top" constant="8" id="wSj-Dh-9Jj"/>
@@ -142,14 +143,14 @@
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="CxA-DF-179"/>
-                                <exclude reference="oaL-zQ-vPo"/>
                                 <exclude reference="g0N-X1-OEf"/>
                                 <exclude reference="lJv-Vl-M2f"/>
+                                <exclude reference="oaL-zQ-vPo"/>
                             </mask>
                         </variation>
                     </view>
                 </subviews>
-                <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 <constraints>
                     <constraint firstItem="hEa-8D-NiC" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="746-H4-nQV"/>
                     <constraint firstAttribute="trailing" secondItem="hEa-8D-NiC" secondAttribute="trailing" constant="8" id="Zp1-mp-dxZ"/>
