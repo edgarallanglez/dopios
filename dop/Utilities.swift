@@ -232,6 +232,15 @@ class Utilities {
             }), completion: nil)
         })
     }
+    
+    class func slideFromBottomAnimation(view: UIView, delay: NSTimeInterval, duration: NSTimeInterval, yPosition: CGFloat){
+        let finalYPosition = view.frame.origin.y
+        view.frame.origin.y += yPosition
+        
+        UIView.animateWithDuration(duration, delay: delay, usingSpringWithDamping: 1, initialSpringVelocity: 2, options: .CurveEaseInOut, animations: ({
+            view.frame.origin.y = finalYPosition
+        }), completion: nil)
+    }
 }
 
 /*

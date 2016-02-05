@@ -15,7 +15,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet weak var searchSegmentedController: SearchSegmentedController!
     @IBOutlet weak var searchScrollView: UIScrollView!
     
-    //var searchBar: UISearchBar!
+    var searchBar: UISearchBar!
     var searchActive: Bool = false
     var filtered: [NearbyBranch] = []
     var peopleFiltered: [PeopleModel] = []
@@ -30,53 +30,12 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     var searchText: NSString!
     
     override func viewDidLoad() {
-        //super.viewDidLoad()
-        
-        //notificationButton.action = nil
-        
-
-        //SEARCH BAR
-       /* searchBar = UISearchBar(frame: CGRectMake(0, 0, 100, 20))
-        searchBar.tintColor = UIColor.whiteColor()
-        
-        searchBar.tintColor = UIColor.whiteColor()
-        searchBar.searchBarStyle = UISearchBarStyle.Minimal
-        searchBar.placeholder = "Buscar"
-        
-        
-        
-        for subView in self.searchBar.subviews{
-            for subsubView in subView.subviews{
-                if let textField = subsubView as? UITextField{
-                    textField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("Buscar", comment: ""), attributes: [NSForegroundColorAttributeName: Utilities.extraLightGrayColor])
-                    textField.textColor = UIColor.whiteColor()
-                    
-                }
-            }
-        }*/
-        
-        
-        //searchScrollView.contentSize = CGSizeMake(searchScrollView.frame.size.width * 2, searchScrollView.frame.height)
-        //let textFieldInsideSearchBar = searchBar.valueForKey("searchField") as? UITextField
-        //textFieldInsideSearchBar?.textColor = UIColor.whiteColor()
-        
-
-        
-        
-        //self.navigationItem.titleView = searchBar
-       
-        //searchBar.delegate = self
         
         tableView.delegate = self
         tableView.dataSource = self
         
         peopleTableView.delegate = self
         peopleTableView.dataSource = self
-        
-        //searchBar.delegate = nil
-        //searchBar.delegate = self
-        //searchBar.translatesAutoresizingMaskIntoConstraints = false
-        
         
         tableView.reloadData()
 
@@ -88,69 +47,11 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         User.coordinate = locationManager.location!.coordinate
         
         
+
+        self.view.backgroundColor = UIColor.clearColor()
         
-        //self.navigationItem.rightBarButtonItem = nil
-        
-        let myBackButton:UIButton = UIButton(type: .Custom) as UIButton
-        
-        myBackButton.addTarget(self, action: "back:", forControlEvents: UIControlEvents.TouchUpInside)
-        myBackButton.setBackgroundImage(UIImage(named: "nav-back"), forState: .Normal)
-        //myBackButton.setTitle("BACKS", forState: UIControlState.Normal)
-        myBackButton.sizeToFit()
-        
-        let myCustomBackButtonItem:UIBarButtonItem = UIBarButtonItem(customView: myBackButton)
-        //self.navigationItem.leftBarButtonItem  = myCustomBackButtonItem
-        
-        
-        //doSomething()
-    }
-    func back(sender: UIBarButtonItem) {
-        //searchBar.resignFirstResponder()
-        //self.navigationController?.popViewControllerAnimated(true)
     }
 
-
-    
-    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
-        //searchActive = true;
-    }
-    
-    /*func searchBarTextDidEndEditing(searchBar: UISearchBar) {
-        searchActive = false;
-    }
-    
-    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-        searchActive = false;
-    }*/
-    
-    
-    
-    /*func searchBar(searchBar: UISearchBar, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
-        timer?.invalidate()
-        timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "timeOut", userInfo: nil, repeats: false)
-        
-        return true
-    }*/
-    /*override func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
-        print("SCROLL DELEGATE")
-        
-        return true
-    }*/
-    
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        /*filtered = data.filter({ (text) -> Bool in
-            let tmp: NSString = text
-            let range = tmp.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
-            return range.location != NSNotFound
-        })*/
-        /*if(filtered.isEmpty){
-            searchActive = false;
-        } else {
-            searchActive = true;
-        }*/
-        //self.tableView.reloadData()
-    }
-    
     func timeOut(){
         //let searchText = searchBar.text
         if(searchText != ""){
@@ -165,72 +66,102 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if(!searching) {
             if tableView == self.tableView {
-                return filtered.count
-            } else {
-                return peopleFiltered.count
+                if filtered.count == 0{
+                    return 1
+                }else{
+                    return filtered.count
+                }
+            }else{
+                if peopleFiltered.count == 0{
+                    return 1
+                }else{
+                    return peopleFiltered.count
+                }
             }
+
         } else {
-            return 1;
+            return 1
         }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let default_cell: UITableViewCell = UITableViewCell()
+        
         if tableView == self.tableView {
             if(!searching){
-                let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as! SearchCell;
-                let model = self.filtered[indexPath.row]
-                cell.loadItem(model, viewController: self)
-                cell.selectionStyle = UITableViewCellSelectionStyle.None
-                
-                return (cell)
+                if(self.filtered.count != 0){
+                    let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as! SearchCell;
+                    let model = self.filtered[indexPath.row]
+                    cell.loadItem(model, viewController: self)
+                    cell.selectionStyle = UITableViewCellSelectionStyle.None
+                    
+                    return (cell)
+                }else{
+                    let cell = tableView.dequeueReusableCellWithIdentifier("loadingCell") as! LoadingCell;
+                    cell.label.text = "No se encontraron resultados"
+                    cell.selectionStyle = UITableViewCellSelectionStyle.None
+                    cell.loading_indicator.hidden = true
+                    
+                    return (cell)
+                }
                 
             } else {
                 let cell = tableView.dequeueReusableCellWithIdentifier("loadingCell") as! LoadingCell;
+                cell.label.text = "Buscando"
                 cell.selectionStyle = UITableViewCellSelectionStyle.None
+                cell.loading_indicator.hidden = false
                 cell.loading_indicator.startAnimating()
                 
                 return (cell)
             }
         } else if tableView == self.peopleTableView {
             if(!searching){
-                let cell = tableView.dequeueReusableCellWithIdentifier("PeopleCell") as! PeopleCell;
-                let model = self.peopleFiltered[indexPath.row]
-                cell.loadItem(model, viewController: self)
-                cell.selectionStyle = UITableViewCellSelectionStyle.None
-                ////////
-                let imageUrl = NSURL(string: model.main_image)
-                let identifier = "Cell\(indexPath.row)"
-                
-                if (self.cachedImages[identifier] != nil){
-                    let cell_image_saved : UIImage = self.cachedImages[identifier]!
-                    cell.user_image.image = cell_image_saved
-                    cell.user_image.alpha = 1
-                    cell.user_name.alpha = 1
+                if(self.peopleFiltered.count != 0){
+                    let cell = tableView.dequeueReusableCellWithIdentifier("PeopleCell") as! PeopleCell;
+                    let model = self.peopleFiltered[indexPath.row]
+                    cell.loadItem(model, viewController: self)
+                    cell.selectionStyle = UITableViewCellSelectionStyle.None
+                    ////////
+                    let imageUrl = NSURL(string: model.main_image)
+                    let identifier = "Cell\(indexPath.row)"
                     
-                } else {
-                    cell.user_image.alpha = 0
-                   // cell.user_name.alpha = 0
-                    Utilities.getDataFromUrl(imageUrl!) { data in
-                        dispatch_async(dispatch_get_main_queue()) {
-                            var cell_image : UIImage = UIImage()
-                            cell_image = UIImage (data: data!)!
-                            
-                            if tableView.indexPathForCell(cell)?.row == indexPath.row {
-                                self.cachedImages[identifier] = cell_image
-                                let cell_image_saved : UIImage = self.cachedImages[identifier]!
-                                cell.user_image.image = cell_image_saved
-                                UIView.animateWithDuration(0.5, animations: {
-                                    cell.user_image.alpha = 1
-                                    cell.user_name.alpha = 1
-                                })
+                    if (self.cachedImages[identifier] != nil){
+                        let cell_image_saved : UIImage = self.cachedImages[identifier]!
+                        cell.user_image.image = cell_image_saved
+                        cell.user_image.alpha = 1
+                        cell.user_name.alpha = 1
+                        
+                    } else {
+                        cell.user_image.alpha = 0
+                       // cell.user_name.alpha = 0
+                        Utilities.getDataFromUrl(imageUrl!) { data in
+                            dispatch_async(dispatch_get_main_queue()) {
+                                var cell_image : UIImage = UIImage()
+                                cell_image = UIImage (data: data!)!
+                                
+                                if tableView.indexPathForCell(cell)?.row == indexPath.row {
+                                    self.cachedImages[identifier] = cell_image
+                                    let cell_image_saved : UIImage = self.cachedImages[identifier]!
+                                    cell.user_image.image = cell_image_saved
+                                    UIView.animateWithDuration(0.5, animations: {
+                                        cell.user_image.alpha = 1
+                                        cell.user_name.alpha = 1
+                                    })
+                                }
                             }
                         }
                     }
+                    ////////
+                    
+                    return (cell)
+                }else{
+                    let cell = self.tableView.dequeueReusableCellWithIdentifier("loadingCell") as! LoadingCell;
+                    cell.label.text = "No se encontraron resultados"
+                    cell.selectionStyle = UITableViewCellSelectionStyle.None
+                    cell.loading_indicator.hidden = true
+                    
+                    return (cell)
                 }
-                ////////
-                
-                return (cell)
                 
             } else {
                 let cell = self.tableView.dequeueReusableCellWithIdentifier("loadingCell") as! LoadingCell;
@@ -245,10 +176,12 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func searchTimer(){
-        print("TIME Ouyt \(searchText)")
-
-        timer?.invalidate()
-        timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "timeOut", userInfo: nil, repeats: false)
+        if(searchText.length == 1){
+            search()
+        }else{
+            timer?.invalidate()
+            timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "timeOut", userInfo: nil, repeats: false)
+        }
     }
     
     
@@ -338,21 +271,27 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        //searchBar.resignFirstResponder()
+        searchBar.resignFirstResponder()
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if(!searching){
-            if tableView == self.tableView {
+            
+        
+            NSNotificationCenter.defaultCenter().postNotificationName("performSegue", object: nil)
+
+            //self.navigationController?.pushViewController(vcNot, animated: true)
+
+            /*if tableView == self.tableView {
                 let cell: SearchCell = tableView.cellForRowAtIndexPath(indexPath) as! SearchCell
                 self.performSegueWithIdentifier("branchProfile", sender: cell)
             } else if tableView == self.peopleTableView {
                 let cell: PeopleCell = tableView.cellForRowAtIndexPath(indexPath) as! PeopleCell
                 self.performSegueWithIdentifier("userProfile", sender: cell)
-            }
+            }*/
         }
     }
-    
+
     @IBAction func setSearchTarget(sender: SearchSegmentedController) {
         switch sender.selectedIndex {
         case 0:
@@ -373,8 +312,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        if let cell = sender as? SearchCell {
+        /*if let cell = sender as? SearchCell {
             let i = tableView.indexPathForCell(cell)!.row
             
             if segue.identifier == "branchProfile" {
@@ -392,9 +330,10 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
                 let view = segue.destinationViewController as! UserProfileStickyController
                 view.user_id = model.user_id
                 view.person = model
-                view.user_image.image = self.cachedImages["Cell\(i)"]
+                //view.user_image.image = self.cachedImages["Cell\(i)"]
             }
-        }
+        }*/
     }
+    
 
 }
