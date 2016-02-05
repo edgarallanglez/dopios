@@ -14,7 +14,12 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
     var vcNot: NotificationViewController!
     var searchBar: UISearchBar = UISearchBar()
     var errorView: UIView = UIView()
-    var searchView:UIView!
+    
+    var searchView: UIView!
+    var searchViewIsOpen: Bool = false
+    var searchViewIsSegue: Bool = false
+    
+    var cancelSearchButton:UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +27,7 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
         notificationButton = NotificationButton(image: UIImage(named: "notification"), style: UIBarButtonItemStyle.Plain, target: self, action: "notification")
         
         
-        //self.navigationItem.rightBarButtonItem = notificationButton
+        self.navigationItem.rightBarButtonItem = notificationButton
 
         
         vc  = self.storyboard!.instantiateViewControllerWithIdentifier("SearchView") as! SearchViewController
@@ -61,31 +66,72 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
         
         errorView.frame.size.width = self.view.frame.width
         errorView.backgroundColor = UIColor.redColor()
+        
+        searchView = UIView(frame: CGRectMake(0,0,self.view.frame.width,self.view.frame.height))
+        
+        //Add blur view to search view
+        var blurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.ExtraLight))
+        blurView.frame = searchView.bounds
+        
+        vc.view.addSubview(blurView)
+        
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: "cancelSearch")
+        blurView.addGestureRecognizer(gestureRecognizer)
+        
+        //vc.searchScrollView.hidden = true
+        vc.searchScrollView.hidden = true
+        
+        
+        cancelSearchButton = UIBarButtonItem(title: "Cancelar", style: .Plain, target: self, action: "cancelSearch")
+        
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: "presentView",
+            name: "performSegue",
+            object: nil)
     }
     
     func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
-        if(searchView == nil){
-            searchView = UIView(frame: CGRectMake(0,0,self.view.frame.width,self.view.frame.height+49))
-            searchView.backgroundColor = UIColor.redColor()
-
-            /*view.addConstraints([leadingConstraint, trailingConstraint, topConstraint, bottomConstraint])
-            view.layoutIfNeeded()*/
+        if(searchViewIsOpen == false){
+            self.navigationItem.rightBarButtonItem = cancelSearchButton
             
+            searchView.layer.masksToBounds = true
             self.view.addSubview(searchView)
-            
-
+            Utilities.fadeInFromBottomAnimation(searchView, delay: 0, duration: 0.7, yPosition: 20)
             
             searchView.addSubview(vc.view)
+            vc.searchBar = self.searchBar
             
-            //vc.searchBarTextDidBeginEditing(searchBar)
-            //vc.searchBar.text = searchBar.text
-            //self.searchBar.delegate = searchView
+            searchViewIsOpen = true
         }
         return true
     }
+    func cancelSearch(){
+        if(searchViewIsOpen == true){
+            searchView.removeFromSuperview()
+            searchBar.resignFirstResponder()
+            searchViewIsOpen = false
+            self.navigationItem.rightBarButtonItem = notificationButton
+            searchBar.text = ""
+            vc.searchScrollView.hidden = true
+            vc.peopleFiltered.removeAll()
+            vc.peopleTableView.reloadData()
+            vc.filtered.removeAll()
+            vc.tableView.reloadData()
+        }
+    }
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        vc.searchText = searchText
-        vc.searchTimer()
+        if(searchViewIsOpen == true && vc.searchScrollView.hidden == true){
+            vc.searchScrollView.hidden = false
+            Utilities.slideFromBottomAnimation(vc.searchScrollView, delay: 0, duration: 0.5, yPosition: 600)
+        }
+        
+        if(searchText.characters.count == 0){
+            vc.searchScrollView.hidden = true
+        }else{
+            vc.searchText = searchText
+            vc.searchTimer()
+        }
     }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
@@ -128,13 +174,27 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
 
     
     func navigationController(navigationController: UINavigationController, didShowViewController viewController: UIViewController, animated: Bool) {
+        searchViewIsSegue = false
         viewController.viewDidAppear(true)
+        
     }
+
     func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
-        if((searchView) != nil){
-            searchView.removeFromSuperview()
-        }
         viewController.viewWillAppear(true)
     }
+    override func viewDidDisappear(animated: Bool) {
+        if(searchViewIsOpen && !searchViewIsSegue) { cancelSearch() }
+    }
+    func presentView(){
+        searchViewIsSegue = true
+        
+        searchBar.resignFirstResponder()
+        let vcNot = self.storyboard!.instantiateViewControllerWithIdentifier("Notifications") as! NotificationViewController
+        
+        self.navigationController?.pushViewController(vcNot, animated: true)
+
+        
+    }
+
     
 }
