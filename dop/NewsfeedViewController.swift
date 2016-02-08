@@ -34,7 +34,10 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
         
         if(!newsfeed.isEmpty){
             let model = self.newsfeed[indexPath.row]
+            cell.newsfeed_description.linkAttributes = [NSForegroundColorAttributeName: Utilities.dopColor]
+            cell.newsfeed_description.enabledTextCheckingTypes = NSTextCheckingType.Link.rawValue
             cell.loadItem(model, viewController: self)
+
             let imageUrl = NSURL(string: model.user_image)
             let identifier = "Cell\(indexPath.row)"
         

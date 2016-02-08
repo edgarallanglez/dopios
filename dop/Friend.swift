@@ -14,7 +14,7 @@ class Friend: NSObject {
     let names:String
     let surnames:String
     let main_image: String
-    let friend: Bool
+    var friend: Bool
     let birth_date: String
     let privacy_status: Int
     let facebook_key: String

@@ -99,7 +99,7 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
             for (_, branch) in json["data"] {
                 let latitude = branch["latitude"].double
                 let longitude = branch["longitude"].double
-                
+
                 let newLocation = CLLocationCoordinate2DMake(latitude!, longitude!)
                 dispatch_async(dispatch_get_main_queue()) {
                     // Drop a pin
@@ -141,7 +141,7 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
         if view.annotation is MKUserLocation {  print("h") } else {
             var custom_view: UIView = UIView(frame: CGRectMake(0, 0, 100, 100))
             custom_view.backgroundColor = UIColor.redColor()
-            view.addSubview(custom_view)
+//            view.addSubview(custom_view)
         }
         
         

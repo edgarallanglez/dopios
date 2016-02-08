@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="wsr-0B-cyM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="wsr-0B-cyM">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -1812,33 +1812,51 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" rowHeight="170" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="OZc-ML-bCf">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="488"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="140" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Wkj-oU-bl0">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
-                                    <outlet property="dataSource" destination="TTn-gh-Dpv" id="ehz-7c-BhE"/>
-                                    <outlet property="delegate" destination="TTn-gh-Dpv" id="oAc-5m-lPv"/>
+                                    <outlet property="dataSource" destination="TTn-gh-Dpv" id="sCl-d7-3kq"/>
+                                    <outlet property="delegate" destination="TTn-gh-Dpv" id="2im-Yf-Uq6"/>
                                 </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="37d-tA-MMx" firstAttribute="top" secondItem="OZc-ML-bCf" secondAttribute="bottom" id="QqC-p2-x7w"/>
-                            <constraint firstAttribute="trailing" secondItem="OZc-ML-bCf" secondAttribute="trailing" id="Yyj-H5-Nw9"/>
-                            <constraint firstItem="OZc-ML-bCf" firstAttribute="leading" secondItem="W3U-ac-5LL" secondAttribute="leading" id="mMe-38-hns"/>
-                            <constraint firstItem="OZc-ML-bCf" firstAttribute="top" secondItem="IO3-pJ-NPT" secondAttribute="bottom" id="nCq-sA-dGU"/>
+                            <constraint firstItem="37d-tA-MMx" firstAttribute="top" secondItem="Wkj-oU-bl0" secondAttribute="bottom" id="8mV-jT-fxi"/>
+                            <constraint firstItem="Wkj-oU-bl0" firstAttribute="leading" secondItem="W3U-ac-5LL" secondAttribute="leading" id="U2d-AI-neT"/>
+                            <constraint firstItem="Wkj-oU-bl0" firstAttribute="top" secondItem="IO3-pJ-NPT" secondAttribute="bottom" id="VMy-2e-NLy"/>
+                            <constraint firstAttribute="trailing" secondItem="Wkj-oU-bl0" secondAttribute="trailing" id="h3q-m2-4Ki"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="Wkj-oU-bl0"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="8mV-jT-fxi"/>
+                                <exclude reference="U2d-AI-neT"/>
+                                <exclude reference="VMy-2e-NLy"/>
+                                <exclude reference="h3q-m2-4Ki"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="Wkj-oU-bl0"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="8mV-jT-fxi"/>
+                                <include reference="U2d-AI-neT"/>
+                                <include reference="VMy-2e-NLy"/>
+                                <include reference="h3q-m2-4Ki"/>
+                            </mask>
+                        </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="coupons-fav" id="GGq-MD-JNo">
                         <inset key="imageInsets" minX="0.0" minY="5" maxX="0.0" maxY="-5"/>
                     </tabBarItem>
                     <navigationItem key="navigationItem" id="p99-5y-bDX"/>
                     <connections>
-                        <outlet property="tableView" destination="OZc-ML-bCf" id="b7Y-Ms-gf2"/>
+                        <outlet property="tableView" destination="Wkj-oU-bl0" id="N82-px-WuG"/>
                         <segue destination="cf5-lv-Mm7" kind="show" identifier="userProfile" id="ckc-bH-DVq"/>
                     </connections>
                 </viewController>
@@ -3028,7 +3046,7 @@
                                         <subviews>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="FLU-Kf-evd" userLabel="Friends TableView">
                                                 <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
-                                                <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FriendCell" id="wtK-C8-KcO" customClass="FriendCell" customModule="dop" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -3212,6 +3230,7 @@
                                         </variation>
                                     </view>
                                 </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="XE1-V8-aCq" secondAttribute="trailing" id="19w-YV-uzs"/>
                                     <constraint firstAttribute="bottom" secondItem="XE1-V8-aCq" secondAttribute="bottom" id="Nno-6S-T1v"/>
@@ -3406,6 +3425,7 @@
                                 </variation>
                             </view>
                         </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="zwu-PH-Zxk" firstAttribute="top" secondItem="7dI-6i-Edq" secondAttribute="top" id="g91-LN-yba"/>
                             <constraint firstItem="zwu-PH-Zxk" firstAttribute="leading" secondItem="7dI-6i-Edq" secondAttribute="leading" id="lq5-tW-LpP"/>
@@ -3449,6 +3469,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="separatorColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BadgeCell" rowHeight="120" id="3Tw-8P-ApX" customClass="BadgeCell" customModule="dop" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="600" height="120"/>
@@ -7328,12 +7350,11 @@
         <image name="twitter-logo" width="42" height="42"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="8iK-Yr-WEc"/>
         <segue reference="njR-gH-Wm2"/>
         <segue reference="Y2I-Nl-h09"/>
-        <segue reference="8iK-Yr-WEc"/>
+        <segue reference="fpu-8Z-7Bb"/>
         <segue reference="TKt-eX-Ulp"/>
-        <segue reference="ckc-bH-DVq"/>
-        <segue reference="oM7-aa-JgN"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

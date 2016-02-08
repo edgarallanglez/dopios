@@ -13,7 +13,8 @@ class NewsfeedCell: UITableViewCell {
     @IBOutlet var date_label: UILabel!
     @IBOutlet var username_button: UIButton!
     @IBOutlet var user_image: UIImageView!
-    @IBOutlet var newsfeed_description: UILabel!
+    @IBOutlet var newsfeed_description: TTTAttributedLabel!
+    @IBOutlet weak var branch_logo: UIImageView!
     
     @IBOutlet var heart: UIImageView!
     @IBOutlet var likes: UILabel!
@@ -27,11 +28,24 @@ class NewsfeedCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-    func loadItem(newsfeed_note:NewsfeedNote, viewController:UIViewController) {
+    func loadItem(newsfeed_note: NewsfeedNote, viewController: UIViewController) {
         
      
         
-        self.newsfeed_description.text = "Asistió a \(newsfeed_note.branch_name.uppercaseString)"
+        let newsfeed_activity = "\(newsfeed_note.branch_name.uppercaseString)"
+    
+        downloadImage(NSURL(string: "\(Utilities.dopImagesURL)\(newsfeed_note.company_id)/\(newsfeed_note.branch_image)")!)
+        
+        //////////
+        let notification_text = "Asistió a \(newsfeed_activity)"
+        
+        newsfeed_description.text = notification_text
+        let ns_string = notification_text as NSString
+        let newsfeed_activity_range = ns_string.rangeOfString(newsfeed_activity)
+        let segue = NSURL(string: "branchProfile")!
+
+        newsfeed_description.addLinkToURL(segue, withRange: newsfeed_activity_range)
+        //////////////
         
         self.user_image.layer.masksToBounds = true
         self.user_image.layer.cornerRadius = 25
@@ -126,6 +140,14 @@ class NewsfeedCell: UITableViewCell {
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+    }
+    
+    func downloadImage(url: NSURL) {
+        Utilities.getDataFromUrl(url) { data in
+            dispatch_async(dispatch_get_main_queue()) {
+                self.branch_logo.image = UIImage(data: data!)
+            }
+        }
     }
     
 }

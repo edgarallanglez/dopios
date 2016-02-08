@@ -78,6 +78,8 @@ class BranchProfileTopView: UIView {
         Utilities.getDataFromUrl(logo_url!) { data in
             dispatch_async(dispatch_get_main_queue()) {
                 self.branch_logo.image = UIImage(data: data!)
+                Utilities.applyPlainShadow(self.branch_logo)
+                self.branch_logo.layer.cornerRadius = 4
             }
         }
         
