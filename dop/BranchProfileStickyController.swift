@@ -27,6 +27,7 @@ class BranchProfileStickyController: UICollectionViewController, BranchPaginatio
     
     var coupon: Coupon!
     
+    var branch: Branch!
     /// User data
     var branch_id: Int = 0
     var branch_name: String!

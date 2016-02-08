@@ -180,9 +180,9 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                 let banner = subJson["banner"].string
                 
                 
-                let model = Branch(id: branch_id, name: branch_name, logo: "", banner: banner,company_id: company_id, total_likes: 0, user_like: 0, latitude: 0.0, longitude: 0.0, following: false)
-
+                let model = Branch(id: branch_id, name: branch_name, banner: banner, company_id: company_id)
                 
+                        
                 self.branches.append(model)
                 
             }
@@ -248,9 +248,9 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
             imageView.alpha = 0
             
             
-            let imageUrl = NSURL(string: "\(Utilities.dopImagesURL)\(branch.company_id)/\(branch.banner)")
+            let imageUrl = NSURL(string: "\(Utilities.dopImagesURL)\(branch.company_id!)/\(branch.banner!)")
             
-            print("\(Utilities.dopImagesURL)\(branch.company_id)/\(branch.banner)")
+            print("\(Utilities.dopImagesURL)\(branch.company_id!)/\(branch.banner!)")
             //let imageUrl = NSURL(string: "https://www.apple.com/v/imac-with-retina/a/images/overview/5k_image.jpg")
             
             Utilities.getDataFromUrl(imageUrl!) { photo in
@@ -613,7 +613,6 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
         locationManager.stopUpdatingLocation()
         
         if(!obtained_location){
-            print("CERCANoS")
             getNearestCoupons()
             obtained_location = true
         }

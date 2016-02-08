@@ -17,7 +17,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     
     var searchBar: UISearchBar!
     var searchActive: Bool = false
-    var filtered: [NearbyBranch] = []
+    var filtered: [Branch] = []
     var peopleFiltered: [PeopleModel] = []
     var cachedImages: [String: UIImage] = [:]
     
@@ -216,7 +216,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
                         }
                         let name = subJson["name"].string!
                         let branch_id = subJson["branch_id"].int
-                        let model = NearbyBranch(id: branch_id, name: name, distance:distance)
+                        let model = Branch(id: branch_id, name: name, distance: distance)
                         
                         self.filtered.append(model)
                     }
@@ -277,8 +277,18 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if(!searching){
             
-        
-            NSNotificationCenter.defaultCenter().postNotificationName("performSegue", object: nil)
+            if(tableView == self.tableView){
+                 let model = self.filtered[indexPath.row]
+                
+                NSNotificationCenter.defaultCenter().postNotificationName("performSegue", object: model.id)
+
+            }else{
+                 let model = self.peopleFiltered[indexPath.row] 
+                NSNotificationCenter.defaultCenter().postNotificationName("performSegue", object: model.user_id)
+
+            }
+
+            
 
             //self.navigationController?.pushViewController(vcNot, animated: true)
 

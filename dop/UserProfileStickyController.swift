@@ -53,7 +53,6 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
         self.collectionView?.delegate = self
         setupProfileDetail()
         
-        
         self.collectionView!.infiniteScrollIndicatorView = CustomInfiniteIndicator(frame: CGRectMake(0, 0, 24, 24))
         self.collectionView!.infiniteScrollIndicatorMargin = 40
 
