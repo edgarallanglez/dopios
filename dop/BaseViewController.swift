@@ -86,7 +86,7 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
         
         NSNotificationCenter.defaultCenter().addObserver(
             self,
-            selector: "presentView",
+            selector: "presentView:",
             name: "performSegue",
             object: nil)
     }
@@ -174,26 +174,40 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
 
     
     func navigationController(navigationController: UINavigationController, didShowViewController viewController: UIViewController, animated: Bool) {
-        searchViewIsSegue = false
         viewController.viewDidAppear(true)
-        
     }
 
     func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
         viewController.viewWillAppear(true)
+        if(!searchViewIsSegue) {
+            cancelSearch()
+        }
+        searchViewIsSegue = false
+
+
     }
     override func viewDidDisappear(animated: Bool) {
-        if(searchViewIsOpen && !searchViewIsSegue) { cancelSearch() }
+        super.viewDidDisappear(true)
     }
-    func presentView(){
-        searchViewIsSegue = true
-        
-        searchBar.resignFirstResponder()
-        let vcNot = self.storyboard!.instantiateViewControllerWithIdentifier("Notifications") as! NotificationViewController
-        
-        self.navigationController?.pushViewController(vcNot, animated: true)
-
-        
+    func presentView(notification:NSNotification){
+        if(searchViewIsOpen){
+            searchViewIsSegue = true
+            
+            let object_id = notification.object as! Int
+            
+            if vc.searchSegmentedController.selectedIndex == 0 {
+                let viewControllerToPresent = self.storyboard!.instantiateViewControllerWithIdentifier("BranchProfileStickyController") as! BranchProfileStickyController
+                viewControllerToPresent.branch_id = object_id
+                self.navigationController?.pushViewController(viewControllerToPresent, animated: true)
+            }else{
+                let viewControllerToPresent = self.storyboard!.instantiateViewControllerWithIdentifier("UserProfileStickyController") as! UserProfileStickyController
+                viewControllerToPresent.user_id = object_id
+                self.navigationController?.pushViewController(viewControllerToPresent, animated: true)
+            }
+            
+            searchBar.resignFirstResponder()
+            
+        }
     }
 
     

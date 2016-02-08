@@ -26,10 +26,9 @@ class SearchCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func loadItem(branch:NearbyBranch, viewController: UIViewController) {
+    func loadItem(branch:Branch, viewController: UIViewController) {
         branch_name.text = branch.name
         distance.text = branch.distance
-        //        branchImage.setBackgroundImage(UIImage(named: coupon.logo), forState: UIControlState.Normal)
         self.viewController = viewController
         
     }
