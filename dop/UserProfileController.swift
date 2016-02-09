@@ -16,10 +16,13 @@ class UserProfileController: NSObject {
             }
         })
     }
-    class func getUserProfile(url:String, success: ((profileData: NSData!) -> Void)) {
+    class func getUserProfile(user_id: Int, success succeed: ((profileData: NSData!) -> Void), failure errorFound: ((profileData: NSError?) -> Void)) {
+        let url = "\(Utilities.dopURL)user/\(user_id)/profile"
         Utilities.loadDataFromURL(NSURL(string: url)!, completion:{(data, error) -> Void in
             if let urlData = data {
-                success(profileData: urlData)
+                succeed(profileData: urlData)
+            }else{
+                errorFound(profileData: error)
             }
         })
     }
