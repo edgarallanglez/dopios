@@ -134,6 +134,7 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
         annotationView!.image = UIImage(named: customAnnotation.typeOfAnnotation)
         
         
+        
         return annotationView
     }
     
