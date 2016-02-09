@@ -15,26 +15,19 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var followingTableView: UITableView!
     @IBOutlet weak var friendSegmentedController: FriendSegmentedController!
-  
+    
+    var current_table: String = "all"
     var friends = [Friend]()
     var following = [Friend]()
     var cachedImages: [String: UIImage] = [:]
     var cachedFollowingImages: [String: UIImage] = [:]
     
     override func viewDidLoad() {
-//        let nib = UINib(nibName: "FriendCell", bundle: nil)
-//        tableView.registerNib(nib, forCellReuseIdentifier: "FriendCell")
-//        followingTableView.registerNib(nib, forCellReuseIdentifier: "FriendCell")
-        
         getAllPeople()
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableView == self.tableView {
-            return friends.count
-        } else {
-            return following.count
-        }
+        if tableView == self.tableView { return friends.count } else { return following.count }
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -43,13 +36,8 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCellWithIdentifier("FriendCell") as! FriendCell;
-//        let cell = tableView.dequeueReusableCellWithIdentifier("FriendCell", forIndexPath: indexPath) as! FriendCell
         var model: Friend
-        if tableView == self.tableView {
-            model = self.friends[indexPath.row]
-        } else {
-            model = self.following[indexPath.row]
-        }
+        if tableView == self.tableView { model = self.friends[indexPath.row] } else { model = self.following[indexPath.row] }
         
         let imageUrl = NSURL(string: model.main_image)
         cell.loadItem(model, viewController: self)
@@ -188,6 +176,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
             print("holis")
         case 1:
             getFollowings()
+            self.current_table = "following"
 //            followingTableView.reloadData()
         default:
             print("Oops!")
@@ -223,8 +212,14 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let cell = sender as? FriendCell {
             
-            let i = tableView.indexPathForCell(cell)!.row
-            let model = self.friends[i]
+            var model: Friend
+            if current_table == "all" {
+                let i = self.tableView.indexPathForCell(cell)!.row
+                model = self.friends[i]
+            } else {
+                let i = self.followingTableView.indexPathForCell(cell)!.row
+                model = self.following[i]
+            }
             
             if segue.identifier == "friendUserProfile" {
                 let view = segue.destinationViewController as! UserProfileStickyController
