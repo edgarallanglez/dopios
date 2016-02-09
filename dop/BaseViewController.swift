@@ -193,16 +193,23 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
         if(searchViewIsOpen){
             searchViewIsSegue = true
             
+            print("SEGMENTED INDEX \(vc.searchSegmentedController.selectedIndex)")
+            
             let object_id = notification.object as! Int
             
             if vc.searchSegmentedController.selectedIndex == 0 {
                 let viewControllerToPresent = self.storyboard!.instantiateViewControllerWithIdentifier("BranchProfileStickyController") as! BranchProfileStickyController
                 viewControllerToPresent.branch_id = object_id
                 self.navigationController?.pushViewController(viewControllerToPresent, animated: true)
-            }else{
+                
+                print("BRANCH PROFILE")
+            }
+            if vc.searchSegmentedController.selectedIndex == 1 {
                 let viewControllerToPresent = self.storyboard!.instantiateViewControllerWithIdentifier("UserProfileStickyController") as! UserProfileStickyController
                 viewControllerToPresent.user_id = object_id
                 self.navigationController?.pushViewController(viewControllerToPresent, animated: true)
+                
+                print("USER PROFILE")
             }
             
             searchBar.resignFirstResponder()

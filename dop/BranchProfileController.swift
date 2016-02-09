@@ -10,12 +10,16 @@ import Foundation
 
 class BranchProfileController {
     
-    class func getBranchProfileWithSuccess(branchId: Int, success: ((branchData: NSData!) -> Void)) {
+    class func getBranchProfileWithSuccess(branchId: Int, success: ((branchData: NSData!) -> Void),failure errorFound: ((branchData: NSError?) -> Void)) {
+
         let url = "\(Utilities.dopURL)company/branch/\(branchId)/profile/get"
         Utilities.loadDataFromURL(NSURL(string: url)!, completion: {(data, error) -> Void in
             if let urlData = data {
                 success(branchData: urlData)
+            }else {
+                errorFound(branchData: error)
             }
+            
         })
     }
     

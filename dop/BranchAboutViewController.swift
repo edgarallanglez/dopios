@@ -109,10 +109,15 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
                 //self.branch_location_map.alpha = 1
                 self.delegate!.setFollow!(following)
             })
+            
+            },
+            failure: { (error) -> Void in
+                dispatch_async(dispatch_get_main_queue(), {
+                    print(error)
+                })
         })
     }
 
-//
     override func viewDidLayoutSubviews() {
         self.view.frame.size.width = UIScreen.mainScreen().bounds.width
     }
