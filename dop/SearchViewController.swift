@@ -277,28 +277,17 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if(!searching){
             
-            if(tableView == self.tableView){
+            if(tableView == self.tableView && filtered.count>0){
                  let model = self.filtered[indexPath.row]
                 
                 NSNotificationCenter.defaultCenter().postNotificationName("performSegue", object: model.id)
 
-            }else{
+            }else
+                if(peopleFiltered.count > 0){
                  let model = self.peopleFiltered[indexPath.row] 
                 NSNotificationCenter.defaultCenter().postNotificationName("performSegue", object: model.user_id)
 
             }
-
-            
-
-            //self.navigationController?.pushViewController(vcNot, animated: true)
-
-            /*if tableView == self.tableView {
-                let cell: SearchCell = tableView.cellForRowAtIndexPath(indexPath) as! SearchCell
-                self.performSegueWithIdentifier("branchProfile", sender: cell)
-            } else if tableView == self.peopleTableView {
-                let cell: PeopleCell = tableView.cellForRowAtIndexPath(indexPath) as! PeopleCell
-                self.performSegueWithIdentifier("userProfile", sender: cell)
-            }*/
         }
     }
 
