@@ -26,7 +26,7 @@ class UserProfileStickyHeader: UIView {
         
         if parent_view.user_image?.image != nil {
             user_image.image = parent_view_controller.user_image.image
-        } else {
+        } else if parent_view.person != nil {
             downloadImage(NSURL(string: parent_view_controller.person.main_image)!)
         }
         
@@ -34,7 +34,7 @@ class UserProfileStickyHeader: UIView {
         user_image.layer.masksToBounds = true
         
         user_name.text = self.parent_view.user_name
-        if (parent_view.person.is_friend != nil) { setFollowingButton() }
+        if (parent_view.person?.is_friend != nil) { setFollowingButton() }
         
     }
     

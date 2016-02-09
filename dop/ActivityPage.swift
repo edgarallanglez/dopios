@@ -70,7 +70,7 @@ class ActivityPage: UITableViewController {
             let model = self.activity_array[indexPath.row]
             
             if self.parent_view != nil {
-                if self.parent_view?.user_image.image != nil {
+                if self.parent_view?.user_image?.image != nil {
                     custom_cell.user_image.image = self.parent_view.user_image.image
                 } else {
                     downloadImage(NSURL(string: self.parent_view.person.main_image)!, cell: custom_cell)

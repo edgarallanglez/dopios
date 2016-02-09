@@ -87,6 +87,7 @@ class FriendCell: UITableViewCell {
                         //                    self.follow_button_width.constant = CGFloat(100)
     //                    self.view.layoutIfNeeded()
                         }, completion: { (Bool) in
+                            self.person.friend = true
                             self.setFollowButton.setTitle("DEJAR DE SEGUIR", forState: UIControlState.Normal)
                             self.setFollowButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
                     })
