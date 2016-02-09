@@ -166,7 +166,8 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
   
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        let size = CGSizeMake(185, 230)
+        var width = (UIScreen.mainScreen().bounds.width / 2) - 20
+        let size = CGSizeMake(width, 230)
         
         return size
     }
