@@ -50,8 +50,9 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
         self.collectionView?.registerClass(UserProfileSectionHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "sectionHeader")
         self.layout?.headerReferenceSize = CGSizeMake(320, 40)
         
-        self.collectionView?.delegate = self
-        setupProfileDetail()
+        //self.collectionView?.delegate = self
+        checkForProfile()
+        //setupProfileDetail()
         
         self.collectionView!.infiniteScrollIndicatorView = CustomInfiniteIndicator(frame: CGRectMake(0, 0, 24, 24))
         self.collectionView!.infiniteScrollIndicatorMargin = 40
@@ -76,7 +77,7 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         var cell: UICollectionViewCell!
         
-        if self.person.privacy_status == 0 || User.user_id == self.person.user_id {
+        if self.person?.privacy_status == 0 || User.user_id == self.person.user_id {
             let custom_cell = collectionView.dequeueReusableCellWithReuseIdentifier("page_identifier", forIndexPath: indexPath) as! UserPaginationViewController
             
             custom_cell.delegate = self
@@ -128,8 +129,43 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
         return UICollectionReusableView()
         
     }
+    func checkForProfile(){
+        if person == nil{
+            UserProfileController.getUserProfile(user_id, success: { (profileData) -> Void in
+                let json = JSON(data: profileData)
+                for (_, subJson): (String, JSON) in json["data"] {
+                    let names = subJson["names"].string!
+                    let surnames = subJson["surnames"].string!
+                    let facebook_key = subJson["facebook_key"].string!
+                    let user_id = subJson["user_id"].int!
+                    let birth_date = subJson["birth_date"].string!
+                    let privacy_status = subJson["privacy_status"].int!
+                    let main_image = subJson["main_image"].string!
+                    //let total_used = subJson["total_used"].int!
+                    
+                    let model = PeopleModel(names:names, surnames: surnames, user_id: user_id, birth_date: birth_date, facebook_key: facebook_key, privacy_status: privacy_status, main_image: main_image, is_friend: true)
+    
+
+                    self.person = model
+                }
+                
+                dispatch_async(dispatch_get_main_queue(), {
+                    print("Person name \(self.person.names)")
+                    self.setupProfileDetail()
+                    
+                })
+                },
+                failure: { (error) -> Void in
+                    dispatch_async(dispatch_get_main_queue(), {
+                        print("Error")
+                    })
+            
+            })
+        }
+    }
     
     func setupProfileDetail() {
+        
         if self.user_id == User.user_id {
             user_name = "\(User.userName)"
             if self.user_image == nil {
