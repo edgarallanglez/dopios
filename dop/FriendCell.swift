@@ -52,13 +52,18 @@ class FriendCell: UITableViewCell {
         FriendsController.deleteFriend(params,
             success:{(data) -> Void in
                 let json = JSON(data: data)
-                print(json)
-                self.setFollowButton.layer.borderWidth = 1
-                self.setFollowButton.backgroundColor = UIColor.whiteColor()
-                self.setFollowButton.setTitle("SEGUIR", forState: UIControlState.Normal)
-                self.setFollowButton.layer.borderColor = Utilities.dopColor.CGColor
-                self.setFollowButton.setTitleColor(Utilities.dopColor, forState: UIControlState.Normal)
-                self.person.friend = false
+                dispatch_async(dispatch_get_main_queue(), {
+                    UIButton.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
+                            self.setFollowButton.layer.borderWidth = 1
+                            self.setFollowButton.backgroundColor = UIColor.whiteColor()
+                            self.setFollowButton.setTitle("SEGUIENDO", forState: UIControlState.Normal)
+                            self.setFollowButton.layer.borderColor = Utilities.dopColor.CGColor
+                            self.setFollowButton.setTitleColor(Utilities.dopColor, forState: UIControlState.Normal)
+                            self.person.friend = false
+                        }, completion: { (Bool) in
+                            
+                    })
+                })
 
             },
             failure:{(error) -> Void in

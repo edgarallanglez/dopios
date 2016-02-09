@@ -56,8 +56,8 @@ class BranchProfileTopView: UIView {
     
     func setView(viewController: BranchProfileStickyController) {
         self.parent_view = viewController
-        self.branch_name.text = self.parent_view.coupon.name
-        downloadImage(parent_view.coupon)
+        self.branch_name.text = self.parent_view.coupon?.name
+        if parent_view.coupon != nil { downloadImage(parent_view.coupon) }
     }
     
     func setFollowingButton() {
