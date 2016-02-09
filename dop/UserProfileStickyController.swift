@@ -76,18 +76,17 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         var cell: UICollectionViewCell!
+        if self.person != nil {
+            if self.person?.privacy_status == 0 || User.user_id == self.person.user_id {
+                let custom_cell = collectionView.dequeueReusableCellWithReuseIdentifier("page_identifier", forIndexPath: indexPath) as! UserPaginationViewController
+                
+                custom_cell.delegate = self
+                custom_cell.setPaginator(self)
+                self.new_height = custom_cell.dynamic_height
+                return custom_cell
+            } else { cell = collectionView.dequeueReusableCellWithReuseIdentifier("locked_identifier", forIndexPath: indexPath) }
+        } else { cell = collectionView.dequeueReusableCellWithReuseIdentifier("locked_identifier", forIndexPath: indexPath) }
         
-        if self.person?.privacy_status == 0 || User.user_id == self.person.user_id {
-            let custom_cell = collectionView.dequeueReusableCellWithReuseIdentifier("page_identifier", forIndexPath: indexPath) as! UserPaginationViewController
-            
-            custom_cell.delegate = self
-            custom_cell.setPaginator(self)
-            self.new_height = custom_cell.dynamic_height
-            return custom_cell
-        } else {
-            cell = collectionView.dequeueReusableCellWithReuseIdentifier("locked_identifier", forIndexPath: indexPath)
-        }
-    
         return cell
     }
     
@@ -136,7 +135,7 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
                 for (_, subJson): (String, JSON) in json["data"] {
                     let names = subJson["names"].string!
                     let surnames = subJson["surnames"].string!
-                    let facebook_key = subJson["facebook_key"].string!
+                    let facebook_key = subJson["facebook_key"].string ?? ""
                     let user_id = subJson["user_id"].int!
                     let birth_date = subJson["birth_date"].string!
                     let privacy_status = subJson["privacy_status"].int!
@@ -178,6 +177,7 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
             user_name = "\(person.names) \(person.surnames)"
 //            private_view.hidden = false
         }
+        self.collectionView?.reloadData()
     }
     
     func downloadImage(url: NSURL) {
