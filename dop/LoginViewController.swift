@@ -82,7 +82,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
         view.addSubview(lockIcon)
         
         self.fbLoginView.delegate = self
-        self.fbLoginView.readPermissions = ["public_profile", "email", "user_friends", "user_birthday", "publish_actions"]
+        self.fbLoginView.readPermissions = ["public_profile", "email", "user_friends", "user_birthday"]
         
         if (FBSDKAccessToken.currentAccessToken() != nil) {
             // User is already logged in, do work such as go to next view controller.

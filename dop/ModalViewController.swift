@@ -8,13 +8,15 @@
 
 import UIKit
 enum ModalViewControllerType: String {
-    case ConnectionError
     case Share
     case CouponDetail
+    case AlertModal
 }
+
 @objc protocol ModalDelegate {
     func pressActionButton(modal: ModalViewController)
 }
+
 class ModalViewController: MZFormSheetController {
     var delegate:ModalDelegate? = nil
     var type: ModalViewControllerType?
@@ -43,54 +45,49 @@ class ModalViewController: MZFormSheetController {
         }
         
     }
+    
     init(currentView presentedFormSheetViewController: UIViewController, type: ModalViewControllerType) {
         self.type = type
-        
         self.parent_view = presentedFormSheetViewController
         var simple_modal : SimpleModalViewController!
         
-        if(type == .ConnectionError){
-            simple_modal = presentedFormSheetViewController.storyboard?.instantiateViewControllerWithIdentifier("SimpleModal") as? SimpleModalViewController
-        }
-        if(type == .Share){
-            simple_modal = presentedFormSheetViewController.storyboard?.instantiateViewControllerWithIdentifier("ShareModal") as? SimpleModalViewController
-        }
-        if(type == .CouponDetail){
-            simple_modal = presentedFormSheetViewController.storyboard?.instantiateViewControllerWithIdentifier("CouponDetailModal") as? SimpleModalViewController
-        }
-
-        super.init(viewController: simple_modal!)
-        
-        if(type == .ConnectionError){
-            let width = UIScreen.mainScreen().bounds.width - 50
-            self.presentedFormSheetSize = CGSizeMake(width, 271)
-            simple_modal.modal_text.text = Utilities.connectionError
-        }
-        if(type == .Share){
-            let width = UIScreen.mainScreen().bounds.width - 50
-            self.presentedFormSheetSize = CGSizeMake(width, 330)
-            simple_modal!.title_label.text = "Compartir"
-            simple_modal!.action_button.titleLabel!.text = "Compartir"
-            simple_modal!.share_text.contentInset = UIEdgeInsetsMake(0,-5,0,0)
-            simple_modal!.twitter_button.addTarget(self, action: "tintButton:", forControlEvents: .TouchUpInside)
-            simple_modal!.facebook_button.addTarget(self, action: "tintButton:", forControlEvents: .TouchUpInside)
-            simple_modal!.instagram_button.addTarget(self, action: "tintButton:", forControlEvents: .TouchUpInside)
-            //simple_modal!.modal_text.text = "Share"
-        }
-        if(type == .CouponDetail){
-            let width = UIScreen.mainScreen().bounds.width - 30
-            self.presentedFormSheetSize = CGSizeMake(width, 530)
-            simple_modal.branch_title.addTarget(self, action: "toBranch", forControlEvents: .TouchUpInside)
+        switch type {
+            case .Share: simple_modal = presentedFormSheetViewController.storyboard?.instantiateViewControllerWithIdentifier("ShareModal") as? SimpleModalViewController
+                super.init(viewController: simple_modal!)
             
-            let gesture = UITapGestureRecognizer(target: self, action: "likeCoupon:")
-            simple_modal.heartView.addGestureRecognizer(gesture)
+                let width = UIScreen.mainScreen().bounds.width - 50
+                self.presentedFormSheetSize = CGSizeMake(width, 330)
+                simple_modal!.title_label.text = "Compartir"
+                simple_modal!.action_button.titleLabel!.text = "Compartir"
+                simple_modal!.share_text.contentInset = UIEdgeInsetsMake(0,-5,0,0)
+                simple_modal!.twitter_button.addTarget(self, action: "tintButton:", forControlEvents: .TouchUpInside)
+                simple_modal!.facebook_button.addTarget(self, action: "tintButton:", forControlEvents: .TouchUpInside)
+                simple_modal!.instagram_button.addTarget(self, action: "tintButton:", forControlEvents: .TouchUpInside)
+            
+            case .CouponDetail: simple_modal = presentedFormSheetViewController.storyboard?.instantiateViewControllerWithIdentifier("CouponDetailModal") as? SimpleModalViewController
+                super.init(viewController: simple_modal!)
+            
+                let width = UIScreen.mainScreen().bounds.width - 30
+                self.presentedFormSheetSize = CGSizeMake(width, 530)
+                simple_modal.branch_title.addTarget(self, action: "toBranch", forControlEvents: .TouchUpInside)
+                
+                let gesture = UITapGestureRecognizer(target: self, action: "likeCoupon:")
+                simple_modal.heartView.addGestureRecognizer(gesture)
 
+            
+            case .AlertModal: let alert_modal = presentedFormSheetViewController.storyboard?.instantiateViewControllerWithIdentifier("AlertModal") as? AlertModalViewController
+                super.init(viewController: alert_modal!)
+            
+                let width = UIScreen.mainScreen().bounds.width - 60
+                let height = (UIScreen.mainScreen().bounds.height / 3) * 2
+                self.presentedFormSheetSize = CGSizeMake(width, height)
+            
+        default: super.init(viewController: simple_modal!)
         }
-        
-        if(simple_modal!.action_button != nil){
-            simple_modal!.action_button.addTarget(self, action: "pressed:", forControlEvents: .TouchUpInside)
-        }
+
+        if simple_modal?.action_button != nil { simple_modal!.action_button.addTarget(self, action: "pressed:", forControlEvents: .TouchUpInside) }
     }
+    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nil, bundle:nil)
     }

@@ -10,6 +10,7 @@
 		6D07C8611C4DA7A30051EA28 /* BranchProfileStickyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D07C8601C4DA7A30051EA28 /* BranchProfileStickyController.swift */; };
 		6D134AC11C2B6B4600EDD5E4 /* ActivityPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D134AC01C2B6B4600EDD5E4 /* ActivityPage.swift */; };
 		6D134AC31C2B6C5C00EDD5E4 /* BadgesPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D134AC21C2B6C5C00EDD5E4 /* BadgesPage.swift */; };
+		6D34641F1C6AC611003621EA /* AlertModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D34641E1C6AC611003621EA /* AlertModalViewController.swift */; };
 		6D5C95711C2B049A0017B166 /* UserProfileStickyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5C95701C2B049A0017B166 /* UserProfileStickyController.swift */; };
 		6D5C957A1C2B06460017B166 /* UserProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5C95791C2B06460017B166 /* UserProfileHeader.swift */; };
 		6D5C957C1C2B16020017B166 /* UserProfileSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5C957B1C2B16020017B166 /* UserProfileSectionHeader.swift */; };
@@ -308,6 +309,7 @@
 		6D07C8601C4DA7A30051EA28 /* BranchProfileStickyController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BranchProfileStickyController.swift; sourceTree = "<group>"; };
 		6D134AC01C2B6B4600EDD5E4 /* ActivityPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityPage.swift; sourceTree = "<group>"; };
 		6D134AC21C2B6C5C00EDD5E4 /* BadgesPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadgesPage.swift; sourceTree = "<group>"; };
+		6D34641E1C6AC611003621EA /* AlertModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertModalViewController.swift; sourceTree = "<group>"; };
 		6D5C95701C2B049A0017B166 /* UserProfileStickyController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileStickyController.swift; sourceTree = "<group>"; };
 		6D5C95791C2B06460017B166 /* UserProfileHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileHeader.swift; sourceTree = "<group>"; };
 		6D5C957B1C2B16020017B166 /* UserProfileSectionHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileSectionHeader.swift; sourceTree = "<group>"; };
@@ -991,6 +993,7 @@
 				A0B6EA541C31BB82003F17DF /* ModalViewController.swift */,
 				A0646AE81C2C649700527B90 /* SimpleModalViewController.swift */,
 				A0646AF21C2C773A00527B90 /* ModalButton.swift */,
+				6D34641E1C6AC611003621EA /* AlertModalViewController.swift */,
 			);
 			name = CustomModals;
 			sourceTree = "<group>";
@@ -1351,6 +1354,7 @@
 				A01D77DC1BDAB94C00AA8FE2 /* SocketIOTransportXHR.m in Sources */,
 				A065EB321BA8E60A003B7390 /* DashboardController.swift in Sources */,
 				A01D17DD1C2B2A15002FC5F2 /* MZFormSheetSegue.m in Sources */,
+				6D34641F1C6AC611003621EA /* AlertModalViewController.swift in Sources */,
 				9D3756E11BCED51400796378 /* UserProfileSegmentedController.swift in Sources */,
 				6D81DF221C4EAC720068168D /* BranchRankingViewController.swift in Sources */,
 				A0FB84341BFFF0630099B2F4 /* readQRViewController.swift in Sources */,

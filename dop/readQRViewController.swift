@@ -132,7 +132,14 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                         if(qrInt == self.branch_id){
                             self.sendQR(qrInt)
                         } else {
-                            print("Error de sucursal")
+                            let modal: ModalViewController = ModalViewController(currentView: self, type: ModalViewControllerType.AlertModal)
+                            
+                            modal.willPresentCompletionHandler = { vc in
+                                let navigation_controller = vc as! AlertModalViewController
+                                navigation_controller.setAlert("error", alert_title: "¡Oops!", alert_description: "Ha ocurrido un error, al parecer el QR no es el correcto")
+                            }
+                            modal.presentAnimated(true, completionHandler: nil)
+
                         }
                     } else {
                         print("Código Erroneo")
@@ -141,6 +148,7 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
             }
         }
     }
+    
     func sendQR(qr_code:Int){
         
         /*UIView.animateWithDuration(0.6, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
@@ -162,21 +170,29 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                     let json = JSON(data: couponsData)
                     let name = json["data"]["name"].string
 
-                    //self.branchName.text = name
+                    let modal: ModalViewController = ModalViewController(currentView: self, type: ModalViewControllerType.AlertModal)
                     
-                    //self.blurViewLeadingConstraint.constant = 0
+                    dispatch_async(dispatch_get_main_queue()) {
+                        modal.willPresentCompletionHandler = { vc in
+                            let navigation_controller = vc as! AlertModalViewController
+                            navigation_controller.setAlert("success", alert_title: "¡Felicidades!", alert_description: "Has redimido tu promoción con éxito en \(name!)")
+                        }
+                        modal.presentAnimated(true, completionHandler: nil)
+                    }
                     
-                    /*UIView.animateWithDuration(1, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
-
-                        }, completion: nil)*/
                     print(json)
                     print("Éxito")
                 })
             },
             failure: { (error) -> Void in
                 dispatch_async(dispatch_get_main_queue(), {
-                    print(error)
-                    print("OCURRIO UN ERROR")
+                    let modal: ModalViewController = ModalViewController(currentView: self, type: ModalViewControllerType.AlertModal)
+                    
+                    modal.willPresentCompletionHandler = { vc in
+                        let navigation_controller = vc as! AlertModalViewController
+                        navigation_controller.setAlert("error", alert_title: "¡Oops!", alert_description: "Ha ocurrido un error, al parecer es nuestra culpa :(")
+                    }
+                    modal.presentAnimated(true, completionHandler: nil)
                 })
             }
         )

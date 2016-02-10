@@ -81,24 +81,18 @@ class PromoCollectionCell: UICollectionViewCell, FBSDKSharingDelegate {
     
     @IBAction func shareCoupon(sender: UIButton) {
         
-        let loginManager: FBSDKLoginManager = FBSDKLoginManager()
-        loginManager.logInWithPublishPermissions(["publish_actions"], handler: { (result, error) -> Void in
-            if result.declinedPermissions.contains("publish_actions") {
-                let content : FBSDKShareLinkContent = FBSDKShareLinkContent()
-                content.contentURL = NSURL(string: "http://www.allan-glez.com/")
-                content.contentTitle = self.coupon.name
-                content.contentDescription = self.coupon_description?.text
-                content.imageURL = NSURL(string: "\(Utilities.dopImagesURL)\(self.coupon.company_id)/\(self.coupon.logo)")
-                
-                //        let dialog: FBSDKShareDialog = FBSDKShareDialog()
-                //        dialog.mode = FBSDKShareDialogModeShareSheet
-                
-                FBSDKShareDialog.showFromViewController(self.viewController, withContent: content, delegate: self)
-            } else {
-                print("no nos dieron permiso")
-            }
-            
-        })
+        let content : FBSDKShareLinkContent = FBSDKShareLinkContent()
+        content.contentURL = NSURL(string: "https://www.inmoon.com.mx")
+        content.contentTitle = self.coupon.name
+        content.contentDescription = self.coupon_description?.text
+        content.imageURL = NSURL(string: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Facebook_Headquarters_Menlo_Park.jpg/2880px-Facebook_Headquarters_Menlo_Park.jpg") //NSURL(string: "\(Utilities.dopImagesURL)\(self.coupon.company_id)/\(self.coupon.logo)")
+        
+        //        let dialog: FBSDKShareDialog = FBSDKShareDialog()
+        //        dialog.mode = FBSDKShareDialogModeShareSheet
+        
+        FBSDKShareDialog.showFromViewController(self.viewController, withContent: content, delegate: self)
+        
+        
 
     }
     
