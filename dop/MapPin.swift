@@ -7,8 +7,9 @@
 //
 
 import UIKit
-/*
-class MapAnnotation: MKAnnotationView {
+import MapKit
+
+class MapPin: MKAnnotationView {
         class var reuseIdentifier:String {
             return "mapPin"
         }
@@ -62,6 +63,6 @@ class MapAnnotation: MKAnnotationView {
             
             return hitView;
         }
-    }
+}
 
-}*/
+
