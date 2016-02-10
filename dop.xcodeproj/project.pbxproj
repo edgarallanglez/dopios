@@ -89,6 +89,8 @@
 		9DCE5CDF1BDAEF9100A425FB /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCE5CDE1BDAEF9100A425FB /* NotificationViewController.swift */; };
 		9DE55C441BB07C0A005F9776 /* PromoSegmentedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE55C431BB07C0A005F9776 /* PromoSegmentedController.swift */; };
 		9DF8F0751BD7F37E009D80EB /* PeopleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF8F0741BD7F37E009D80EB /* PeopleCell.swift */; };
+		A009A7D81C6A6D7B001C384D /* MapPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = A009A7D71C6A6D7B001C384D /* MapPin.swift */; };
+		A009A7E31C6B9DBC001C384D /* MapPinCallout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A009A7E21C6B9DBC001C384D /* MapPinCallout.swift */; };
 		A01A39BA1BDF050800F231F5 /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01A39B91BDF050800F231F5 /* NotificationCell.swift */; };
 		A01A39BC1BDF0D8C00F231F5 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01A39BB1BDF0D8C00F231F5 /* NotificationController.swift */; };
 		A01A39BE1BDF0EB700F231F5 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01A39BD1BDF0EB700F231F5 /* Notification.swift */; };
@@ -387,6 +389,8 @@
 		9DCE5CDE1BDAEF9100A425FB /* NotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		9DE55C431BB07C0A005F9776 /* PromoSegmentedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromoSegmentedController.swift; sourceTree = "<group>"; };
 		9DF8F0741BD7F37E009D80EB /* PeopleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleCell.swift; sourceTree = "<group>"; };
+		A009A7D71C6A6D7B001C384D /* MapPin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapPin.swift; sourceTree = "<group>"; };
+		A009A7E21C6B9DBC001C384D /* MapPinCallout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapPinCallout.swift; sourceTree = "<group>"; };
 		A01A39B91BDF050800F231F5 /* NotificationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
 		A01A39BB1BDF0D8C00F231F5 /* NotificationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
 		A01A39BD1BDF0EB700F231F5 /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
@@ -690,6 +694,8 @@
 				9DB612191B192FCC004B8DB8 /* NearbyMapController.swift */,
 				9DACBBF81BA8CE0200CAEECB /* FilterSegmentedControl.swift */,
 				9D9C9C901BB2155B00D9F986 /* Annotation.swift */,
+				A009A7D71C6A6D7B001C384D /* MapPin.swift */,
+				A009A7E21C6B9DBC001C384D /* MapPinCallout.swift */,
 			);
 			name = Nearby;
 			sourceTree = "<group>";
@@ -1168,7 +1174,7 @@
 				TargetAttributes = {
 					9D3326081AF7ED1C00498801 = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = WKZMSRYE62;
+						DevelopmentTeam = QX6AA77Z42;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1395,6 +1401,7 @@
 				A0EB97B21B051F02005112EF /* LoginController.swift in Sources */,
 				9D01E7F21C0D0F8A006A1F21 /* FriendSegmentedController.swift in Sources */,
 				9D1B5F851C1A1030003F28E5 /* AlertClass.swift in Sources */,
+				A009A7E31C6B9DBC001C384D /* MapPinCallout.swift in Sources */,
 				6D81DF151C4EA7340068168D /* BranchProfileStickyHeader.swift in Sources */,
 				6D5C957E1C2B2AD70017B166 /* UserPaginationViewController.swift in Sources */,
 				A09AB4E21AF99136004287F7 /* CouponController.swift in Sources */,
@@ -1403,6 +1410,7 @@
 				6D07C8611C4DA7A30051EA28 /* BranchProfileStickyController.swift in Sources */,
 				9D3326111AF7ED1C00498801 /* LoginViewController.swift in Sources */,
 				A09732E11BDBF712006F9378 /* NotificationButton.swift in Sources */,
+				A009A7D81C6A6D7B001C384D /* MapPin.swift in Sources */,
 				A0F1E0321BF3D3000092C1F4 /* BaseViewController.swift in Sources */,
 				A086ACE31BB383A4003133BA /* TrendingCoupon.swift in Sources */,
 				6DD3B2221C24862A00BEE129 /* TrophyTableViewController.swift in Sources */,
@@ -1624,7 +1632,7 @@
 					Security,
 					"-licucore",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.iminced.dop;
+				PRODUCT_BUNDLE_IDENTIFIER = com.iminceduardoqu.dop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "dop/Bridging-Header.h";
@@ -1662,7 +1670,7 @@
 					Security,
 					"-licucore",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.iminced.dop;
+				PRODUCT_BUNDLE_IDENTIFIER = com.iminceduardoqu.dop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "dop/Bridging-Header.h";
