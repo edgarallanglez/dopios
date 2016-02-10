@@ -6975,12 +6975,16 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="53" id="frK-qF-Dvj"/>
-                                    <constraint firstAttribute="width" constant="35" id="jwj-ZB-OLz"/>
-                                    <constraint firstAttribute="height" constant="35" id="sDh-qb-D79"/>
+                                    <constraint firstAttribute="width" constant="35" id="jwj-ZB-OLz">
+                                        <variation key="widthClass=compact" constant="45"/>
+                                    </constraint>
+                                    <constraint firstAttribute="height" constant="35" id="sDh-qb-D79">
+                                        <variation key="widthClass=compact" constant="45"/>
+                                    </constraint>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="18"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <inset key="contentEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
+                                <inset key="contentEdgeInsets" minX="16" minY="16" maxX="7" maxY="7"/>
                                 <state key="normal" image="close"/>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -7194,7 +7198,7 @@
                             <constraint firstItem="2o4-2t-qZl" firstAttribute="top" secondItem="z3g-Wt-4hc" secondAttribute="bottom" constant="7" id="VHQ-Z9-afB"/>
                             <constraint firstItem="2o4-2t-qZl" firstAttribute="leading" secondItem="Wth-cL-Ob6" secondAttribute="leading" constant="20" id="WcS-yv-8yh"/>
                             <constraint firstItem="VSk-iK-QFW" firstAttribute="centerX" secondItem="Wth-cL-Ob6" secondAttribute="centerX" id="XMb-de-urD"/>
-                            <constraint firstItem="Aai-X7-oFC" firstAttribute="leading" secondItem="Wth-cL-Ob6" secondAttribute="leading" constant="10" id="Xt2-Z2-TC9"/>
+                            <constraint firstItem="Aai-X7-oFC" firstAttribute="leading" secondItem="Wth-cL-Ob6" secondAttribute="leading" id="Xt2-Z2-TC9"/>
                             <constraint firstItem="rAB-Dt-ERv" firstAttribute="top" secondItem="HdL-ih-ypw" secondAttribute="bottom" id="XzL-mb-wcT"/>
                             <constraint firstItem="z3g-Wt-4hc" firstAttribute="top" secondItem="yhr-OK-KEE" secondAttribute="bottom" constant="5" id="ZID-IZ-Cm4"/>
                             <constraint firstItem="986-GH-7Oh" firstAttribute="top" secondItem="rAB-Dt-ERv" secondAttribute="bottom" constant="6" id="ZKX-O7-IKI">
@@ -7213,7 +7217,7 @@
                             <constraint firstItem="VSk-iK-QFW" firstAttribute="centerY" secondItem="Wth-cL-Ob6" secondAttribute="centerY" id="nlI-Zr-YaM"/>
                             <constraint firstItem="HdL-ih-ypw" firstAttribute="leading" secondItem="Wth-cL-Ob6" secondAttribute="leading" id="rbM-St-gAE"/>
                             <constraint firstItem="mdC-Yu-xQN" firstAttribute="leading" secondItem="Wth-cL-Ob6" secondAttribute="leading" id="sge-Hk-ZuT"/>
-                            <constraint firstItem="Aai-X7-oFC" firstAttribute="top" secondItem="HKV-3w-en1" secondAttribute="bottom" constant="10" id="voV-CS-PWG"/>
+                            <constraint firstItem="Aai-X7-oFC" firstAttribute="top" secondItem="HKV-3w-en1" secondAttribute="bottom" id="voV-CS-PWG"/>
                             <constraint firstAttribute="trailing" secondItem="z3g-Wt-4hc" secondAttribute="trailing" constant="20" id="wYN-Hh-LIB"/>
                             <constraint firstItem="uYp-z6-LPT" firstAttribute="top" secondItem="LPg-wU-Gm4" secondAttribute="bottom" id="xOo-D0-XGR"/>
                             <constraint firstItem="LPg-wU-Gm4" firstAttribute="leading" secondItem="Wth-cL-Ob6" secondAttribute="leading" id="xS6-gO-iWU"/>

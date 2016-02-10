@@ -8,10 +8,10 @@
 
 import UIKit
 
-@objc protocol BranchPaginationDelegate {
-    optional func resizeView(new_height: CGFloat)
-    optional func setSegmentedIndex(index: Int)
-    optional func setFollowButton(following: Bool)
+protocol BranchPaginationDelegate {
+    func resizeView(new_height: CGFloat)
+    func setSegmentedIndex(index: Int)
+    func setFollowButton(branch: Branch)
 }
 
 class BranchProfilePageController: UICollectionViewCell, UIPageViewControllerDataSource, UIPageViewControllerDelegate, SetSegmentedBranchPageDelegate, AboutPageDelegate, CampaignPageDelegate, RankingPageDelegate, UIScrollViewDelegate {
@@ -38,17 +38,17 @@ class BranchProfilePageController: UICollectionViewCell, UIPageViewControllerDat
     func resizeAboutView(dynamic_height: CGFloat) {
         self.dynamic_height = dynamic_height
         setNeedsLayout()
-        delegate?.resizeView!(dynamic_height)
+        delegate?.resizeView(dynamic_height)
     }
     
     func resizeCampaignView(dynamic_height: CGFloat) {
         self.dynamic_height = dynamic_height
-        delegate?.resizeView!(dynamic_height)
+        delegate?.resizeView(dynamic_height)
     }
     
     func resizeRankingView(dynamic_height: CGFloat) {
         self.dynamic_height = dynamic_height
-        delegate?.resizeView!(dynamic_height)
+        delegate?.resizeView(dynamic_height)
     }
     
     
@@ -107,7 +107,7 @@ class BranchProfilePageController: UICollectionViewCell, UIPageViewControllerDat
             case "rankingPage": index = 2
             default: index = 0
             }
-            delegate?.setSegmentedIndex!(index)
+            delegate?.setSegmentedIndex(index)
         }
         
     }
@@ -122,7 +122,7 @@ class BranchProfilePageController: UICollectionViewCell, UIPageViewControllerDat
         default: index = 0
         }
         
-        delegate?.setSegmentedIndex!(index)
+        delegate?.setSegmentedIndex(index)
     }
     
     func viewControllerAtIndex(index: Int) -> UIViewController?{
@@ -188,7 +188,7 @@ class BranchProfilePageController: UICollectionViewCell, UIPageViewControllerDat
         }
     }
     
-    func setFollow(following: Bool) {
-        delegate?.setFollowButton!(following)
+    func setFollow(branch: Branch) {
+        delegate?.setFollowButton(branch)
     }
 }

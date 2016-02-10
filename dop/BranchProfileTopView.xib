@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -37,7 +37,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tvf-aj-Usd">
                             <rect key="frame" x="0.0" y="58" width="600" height="170"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j1t-e9-jfI">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j1t-e9-jfI">
                                     <rect key="frame" x="293" y="137" width="14" height="28"/>
                                     <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="23"/>
                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -75,7 +75,7 @@
                             </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vnf-zr-owF">
-                            <rect key="frame" x="498" y="249" width="87" height="28"/>
+                            <rect key="frame" x="498" y="247" width="87" height="28"/>
                             <color key="backgroundColor" red="0.98431372549999996" green="0.1333333333" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="87" id="wuu-jp-C9X"/>
@@ -103,7 +103,7 @@
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="x9r-hb-NOG" secondAttribute="trailing" id="3at-lX-ppW"/>
                         <constraint firstAttribute="trailing" secondItem="vnf-zr-owF" secondAttribute="trailing" constant="15" id="3xY-V8-Iu0"/>
-                        <constraint firstAttribute="bottom" secondItem="vnf-zr-owF" secondAttribute="bottom" priority="1" constant="8" id="8lU-wi-6g4"/>
+                        <constraint firstAttribute="bottom" secondItem="vnf-zr-owF" secondAttribute="bottom" priority="1" constant="10" id="8lU-wi-6g4"/>
                         <constraint firstItem="Tvf-aj-Usd" firstAttribute="centerY" secondItem="Ym2-Xv-ltU" secondAttribute="centerY" id="Bpu-uy-IdG"/>
                         <constraint firstAttribute="trailing" secondItem="Tvf-aj-Usd" secondAttribute="trailing" id="Uxf-RR-Jw9"/>
                         <constraint firstItem="x9r-hb-NOG" firstAttribute="top" secondItem="Ym2-Xv-ltU" secondAttribute="top" id="ccW-VQ-cdU"/>

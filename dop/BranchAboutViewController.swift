@@ -9,9 +9,9 @@
 import UIKit
 import MapKit
 
-@objc protocol AboutPageDelegate {
-    optional func resizeAboutView(dynamic_height: CGFloat)
-    optional func setFollow(following: Bool)
+protocol AboutPageDelegate {
+    func resizeAboutView(dynamic_height: CGFloat)
+    func setFollow(branch: Branch)
 }
 
 class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
@@ -50,7 +50,7 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
     
     func setFrame() {
         let dynamic_height: CGFloat = 330
-        delegate?.resizeAboutView!(dynamic_height)
+        delegate?.resizeAboutView(dynamic_height)
 
     }
     
@@ -88,26 +88,35 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
             let latitude = json["latitude"].double
             let longitude = json["longitude"].double
             let following = json["following"].bool!
+            let branch_id = json["branch_id"].int
+            let branch_name = json["name"].string
+            let company_id = json["company_id"].int
+            let banner = json["banner"].string
+            let logo = json["logo"].string!
+            
+            
+            let model = Branch(id: branch_id, name: branch_name, banner: banner, company_id: company_id, logo: logo, following: following)
+            
             
             self.branch_pin = CLLocation(latitude: latitude!, longitude: longitude!)
             let new_location = CLLocationCoordinate2DMake(latitude!, longitude!)
             self.centerMapOnLocation(self.branch_pin)
             
             dispatch_async(dispatch_get_main_queue(), {
-//                self.branchName.text = json["name"].string
+
                 let drop_pin = Annotation(coordinate: new_location, title: json["name"].string!, subTitle: "nada", branch_distance: "4.3")
-                if json["category_id"].int! == 1 {
-                    drop_pin.typeOfAnnotation = "marker-food-icon"
-                } else if json["category_id"].int! == 2 {
-                    drop_pin.typeOfAnnotation = "marker-services-icon"
-                } else if json["category_id"].int! == 3 {
-                    drop_pin.typeOfAnnotation = "marker-entertainment-icon"
+                
+                switch json["category_id"].int! {
+                    case 1: drop_pin.typeOfAnnotation = "marker-food-icon"
+                    case 2: drop_pin.typeOfAnnotation = "marker-services-icon"
+                    case 3: drop_pin.typeOfAnnotation = "marker-entertainment-icon"
+                default: break
                 }
+                
                 self.branch_location_map.addAnnotation(drop_pin)
-                //                self.headerTopView.setImages(self.logo, company_id: json["company_id"].int!)
                 Utilities.fadeInFromBottomAnimation(self.view, delay: 0, duration: 1, yPosition: 20)
-                //self.branch_location_map.alpha = 1
-                self.delegate!.setFollow!(following)
+
+                self.delegate!.setFollow(model)
             })
             
             },

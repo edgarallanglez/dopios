@@ -18,6 +18,7 @@ class BranchProfileTopView: UIView {
     
     var branch_id: Int!
     var parent_view: BranchProfileStickyController!
+    var branch: Branch!
 
     @IBAction func followBranch(sender: AnyObject) {
         
@@ -50,7 +51,10 @@ class BranchProfileTopView: UIView {
 
     }
     
-    func setFollow() {
+    func setFollow(branch: Branch) {
+        self.branch = branch
+        self.branch_name.text = branch.name
+        self.downloadImage(self.branch)
         if (parent_view.following != nil && parent_view.following == true) { setFollowingButton() }
     }
     
@@ -90,6 +94,29 @@ class BranchProfileTopView: UIView {
                     self.branch_banner.image = UIImage(data: data!)!.applyLightEffect()
                     self.branch_name.textColor = UIColor.whiteColor()
                     self.branch_name.shadowColor = UIColor.darkGrayColor()
+                }
+            }
+        }
+    }
+    
+    func downloadImage(model: Branch) {
+        let logo_url = NSURL(string: "\(Utilities.dopImagesURL)\(model.company_id!)/\(model.logo!)")
+        Utilities.getDataFromUrl(logo_url!) { data in
+            dispatch_async(dispatch_get_main_queue()) {
+                self.branch_logo.image = UIImage(data: data!)
+                self.branch_logo.layer.cornerRadius = self.branch_logo.frame.width / 2
+                Utilities.fadeInFromBottomAnimation(self.branch_logo, delay: 0, duration: 1, yPosition: 1)
+            }
+        }
+        
+        if !model.banner!.isEmpty {
+            let banner_url = NSURL(string: "\(Utilities.dopImagesURL)\(model.company_id!)/\(model.banner!)")
+            Utilities.getDataFromUrl(banner_url!) { data in
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.branch_banner.image = UIImage(data: data!)!.applyLightEffect()
+                    self.branch_name.textColor = UIColor.whiteColor()
+                    self.branch_name.shadowColor = UIColor.darkGrayColor()
+                    Utilities.fadeInFromBottomAnimation(self.branch_banner, delay: 0, duration: 0.8, yPosition: 2)
                 }
             }
         }

@@ -44,16 +44,25 @@ struct Branch {
     init(id: Int?, name: String?, distance: Double!) {
         self.id = id ?? 0
         self.name = name ?? ""
-        if(distance == 0.0){
-            self.distance = String(stringInterpolationSegment: "")
-        }else{
-            self.distance = String(stringInterpolationSegment: "A \(distance) Km")
-        }
+        
+        if distance == 0.0 { self.distance = String(stringInterpolationSegment: "") } else { self.distance = String(stringInterpolationSegment: "A \(distance) Km") }
         
         self.logo = nil
         self.banner = nil
         self.company_id = nil
         self.location = nil
         self.following = nil
+    }
+    
+    init(id: Int?, name: String?, banner: String?, company_id: Int?, logo: String!, following: Bool!) {
+        self.id = id ?? 0
+        self.name = name ?? ""
+        self.banner = banner ?? ""
+        self.company_id = company_id ?? 0
+        self.logo = logo
+        self.following = following
+        
+        self.distance = nil
+        self.location = nil
     }
 }

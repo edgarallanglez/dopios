@@ -13,8 +13,8 @@ import UIKit
     optional func launchInfiniteScroll(parent_scroll: UICollectionView)
 }
 
-@objc protocol SetFollowFromController {
-    optional func setFollowButton(following: Bool)
+protocol SetFollowFromController {
+    func setFollowButton(branch: Branch)
 }
 
 class BranchProfileStickyController: UICollectionViewController, BranchPaginationDelegate, BranchSegmentedControlDelegate {
@@ -169,9 +169,10 @@ class BranchProfileStickyController: UICollectionViewController, BranchPaginatio
         self.segmented_controller!.selectedIndex = index
     }
     
-    func setFollowButton(following: Bool) {
-        self.following = following
-        self.top_view.setBranchFollow(self.following)
+    func setFollowButton(branch: Branch) {
+        self.branch = branch
+        self.following = branch.following
+        self.top_view.setBranchFollow(self.branch)
     }
 }
 

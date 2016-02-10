@@ -34,8 +34,8 @@ class BranchProfileStickyHeader: UICollectionReusableView {
         branch_profile.setView(viewController)
     }
     
-    func setBranchFollow(following: Bool) {
-        branch_profile.setFollow()
+    func setBranchFollow(branch: Branch) {
+        branch_profile.setFollow(branch)
     }
 
 }
