@@ -280,7 +280,7 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapVie
     }
     
     func setBranchAnnotation () {
-        let dropPin : Annotation = Annotation(coordinate: (coupon?.location)!, title: coupon!.name, subTitle: "Los mejores", branch_distance: "4.3")
+        let dropPin : Annotation = Annotation(coordinate: (coupon?.location)!, title: coupon!.name, subTitle: "Los mejores", branch_distance: "4.3", branch_id: coupon!.branch_id, company_id:  coupon!.company_id, logo: coupon!.logo)
         if coupon?.categoryId == 1 {
             dropPin.typeOfAnnotation = "marker-food-icon"
         } else if coupon!.categoryId == 2 {

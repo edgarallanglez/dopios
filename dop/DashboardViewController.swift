@@ -96,6 +96,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
         self.setNeedsStatusBarAppearanceUpdate()
         //pageContainerOffset =  176
 
+        Utilities.printFonts()
     }
     
     

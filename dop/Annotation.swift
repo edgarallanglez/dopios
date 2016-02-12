@@ -13,15 +13,20 @@ class Annotation: NSObject, MKAnnotation {
     var currentLocation: CLLocationCoordinate2D
     var _title : String
     var subTitle : String
-    var direction : CLLocationDirection!
     var typeOfAnnotation : String!
     var branch_distance: String?
+    var branch_id: Int?
+    var company_id: Int?
+    var logo: String?
     
-    init(coordinate: CLLocationCoordinate2D, title : String, subTitle : String, branch_distance: String) {
+    init(coordinate: CLLocationCoordinate2D, title : String, subTitle : String, branch_distance: String, branch_id: Int, company_id: Int, logo: String) {
         self.currentLocation = coordinate
         self._title = title
         self.subTitle = subTitle
         self.branch_distance = branch_distance
+        self.branch_id = branch_id
+        self.company_id = company_id
+        self.logo = logo
     }
     
     func getLocation() -> CLLocation {

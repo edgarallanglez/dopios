@@ -155,6 +155,14 @@ class Utilities {
         layer.shadowOpacity = 0.4
         layer.shadowRadius = 4
     }
+    class func applySolidShadow(view: UIView) {
+        let layer = view.layer
+        
+        layer.shadowColor = UIColor.lightGrayColor().CGColor
+        layer.shadowOffset = CGSize(width: 0, height: 3)
+        layer.shadowOpacity = 0.5
+        layer.shadowRadius = 1
+    }
     
     //ANIMATIONS
     class func fadeInViewAnimation(view:UIView, delay:NSTimeInterval, duration:NSTimeInterval){
@@ -216,6 +224,16 @@ class Utilities {
             view.frame.origin.y -= yPosition
         })
     }
+    class func fadeOutToBottomWithRemoveAnimation(view:UIView, delay:NSTimeInterval, duration:NSTimeInterval, yPosition:CGFloat, completion: (value: Bool) -> Void){
+        let finalYPosition = view.frame.origin.y + yPosition
+        
+        UIView.animateWithDuration(duration, delay: delay, usingSpringWithDamping: 1, initialSpringVelocity: 2, options: .CurveEaseInOut, animations: ({
+            view.frame.origin.y = finalYPosition
+            view.alpha = 0
+        }), completion: { (value: Bool) in
+            completion(value: true)
+        })
+    }
     
     class func permanentBounce(view:UIView, delay:NSTimeInterval, duration:NSTimeInterval){
         view.transform = CGAffineTransformMakeScale(0.9, 0.9)
@@ -240,6 +258,18 @@ class Utilities {
         UIView.animateWithDuration(duration, delay: delay, usingSpringWithDamping: 1, initialSpringVelocity: 2, options: .CurveEaseInOut, animations: ({
             view.frame.origin.y = finalYPosition
         }), completion: nil)
+    }
+    
+    
+    //PRINT FONTS
+    class func printFonts(){
+        let fontFamilyNames = UIFont.familyNames()
+        for familyName in fontFamilyNames {
+            print("------------------------------")
+            print("Font Family Name = [\(familyName)]")
+            let names = UIFont.fontNamesForFamilyName(familyName as! String)
+            print("Font Names = [\(names)]")
+        }
     }
 }
 

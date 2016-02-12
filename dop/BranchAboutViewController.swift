@@ -85,6 +85,7 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
             var json = data["data"]
             print(json)
             json = json[0]
+            let branch_id = json["branch_id"].int!
             let latitude = json["latitude"].double
             let longitude = json["longitude"].double
             let following = json["following"].bool!
@@ -95,7 +96,7 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
             
             dispatch_async(dispatch_get_main_queue(), {
 //                self.branchName.text = json["name"].string
-                let drop_pin = Annotation(coordinate: new_location, title: json["name"].string!, subTitle: "nada", branch_distance: "4.3")
+                let drop_pin = Annotation(coordinate: new_location, title: json["name"].string!, subTitle: "nada", branch_distance: "4.3", branch_id: branch_id, company_id: 0, logo: "")
                 if json["category_id"].int! == 1 {
                     drop_pin.typeOfAnnotation = "marker-food-icon"
                 } else if json["category_id"].int! == 2 {
