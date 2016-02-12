@@ -54,7 +54,7 @@ class BranchProfileTopView: UIView {
     func setFollow(branch: Branch) {
         self.branch = branch
         self.branch_name.text = branch.name
-        self.downloadImage(self.branch)
+        if branch_logo.image == nil { self.downloadImage(self.branch) }
         if (parent_view.following != nil && parent_view.following == true) { setFollowingButton() }
     }
     
@@ -82,8 +82,8 @@ class BranchProfileTopView: UIView {
         Utilities.getDataFromUrl(logo_url!) { data in
             dispatch_async(dispatch_get_main_queue()) {
                 self.branch_logo.image = UIImage(data: data!)
-                Utilities.applyPlainShadow(self.branch_logo)
-                self.branch_logo.layer.cornerRadius = 4
+                self.branch_logo.layer.cornerRadius = self.branch_logo.frame.width / 2
+                Utilities.fadeInFromBottomAnimation(self.branch_logo, delay: 0, duration: 1, yPosition: 1)
             }
         }
         
@@ -94,6 +94,7 @@ class BranchProfileTopView: UIView {
                     self.branch_banner.image = UIImage(data: data!)!.applyLightEffect()
                     self.branch_name.textColor = UIColor.whiteColor()
                     self.branch_name.shadowColor = UIColor.darkGrayColor()
+                    Utilities.fadeInFromBottomAnimation(self.branch_banner, delay: 0, duration: 0.8, yPosition: 2)
                 }
             }
         }

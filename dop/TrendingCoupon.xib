@@ -2,10 +2,12 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Montserrat-Light.otf">
+            <string>Montserrat-Light</string>
             <string>Montserrat-Light</string>
         </mutableArray>
     </customFonts>
@@ -16,11 +18,12 @@
             <rect key="frame" x="0.0" y="0.0" width="180" height="230"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label dffdsf dsfdsfds dsfsdf dsfs dkdjskfds sdfk ldsjfds sdfsdj" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fqe-o2-bK7">
-                    <rect key="frame" x="4" y="151" width="172" height="39"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                    <color key="textColor" red="0.17498273480000001" green="0.17498273480000001" blue="0.17498273480000001" alpha="1" colorSpace="calibratedRGB"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label dffdsf dsfdsfds dsfsdf dsfs dkdjskfds sdfk ldsjfds sdfsdj" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fqe-o2-bK7">
+                    <rect key="frame" x="5" y="151" width="170" height="39"/>
+                    <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="13"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
+                    <size key="shadowOffset" width="0.0" height="0.0"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iCm-15-ahI">
                     <rect key="frame" x="8" y="194" width="164" height="1"/>
@@ -33,7 +36,7 @@
                     <rect key="frame" x="15" y="195" width="85" height="35"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="13" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="92R-cH-23A">
-                            <rect key="frame" x="44" y="9" width="13" height="17"/>
+                            <rect key="frame" x="45" y="9" width="13" height="17"/>
                             <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="14"/>
                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
@@ -42,10 +45,10 @@
                             </variation>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart" translatesAutoresizingMaskIntoConstraints="NO" id="qHM-zy-8In">
-                            <rect key="frame" x="20" y="8" width="19" height="19"/>
+                            <rect key="frame" x="20" y="8" width="20" height="20"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="19" id="64M-ER-tqj"/>
-                                <constraint firstAttribute="width" constant="19" id="XgL-GN-3iK"/>
+                                <constraint firstAttribute="width" secondItem="qHM-zy-8In" secondAttribute="height" multiplier="1:1" id="XdA-cf-6Zq"/>
+                                <constraint firstAttribute="width" constant="20" id="XgL-GN-3iK"/>
                             </constraints>
                         </imageView>
                     </subviews>
@@ -91,14 +94,14 @@
                 <constraint firstItem="KVu-8V-pcC" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="541-HG-7t7"/>
                 <constraint firstItem="Fqe-o2-bK7" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="5X2-hW-Tw2"/>
                 <constraint firstAttribute="bottom" secondItem="KVu-8V-pcC" secondAttribute="bottom" id="7oj-9j-rU4"/>
-                <constraint firstAttribute="trailing" secondItem="Fqe-o2-bK7" secondAttribute="trailing" constant="4" id="B90-Vc-Sut"/>
+                <constraint firstAttribute="trailing" secondItem="Fqe-o2-bK7" secondAttribute="trailing" constant="5" id="B90-Vc-Sut"/>
                 <constraint firstItem="9X0-SB-a07" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="BlK-uh-2Vq"/>
                 <constraint firstAttribute="trailing" secondItem="hGK-JF-Kot" secondAttribute="trailing" constant="25" id="Dhl-jF-Jhw"/>
                 <constraint firstItem="KVu-8V-pcC" firstAttribute="top" secondItem="iCm-15-ahI" secondAttribute="bottom" id="Hq3-wz-XOw"/>
                 <constraint firstAttribute="bottom" secondItem="9X0-SB-a07" secondAttribute="bottom" constant="80" id="If9-mi-24w"/>
                 <constraint firstItem="hGK-JF-Kot" firstAttribute="leading" secondItem="KVu-8V-pcC" secondAttribute="trailing" constant="30" id="RA3-8W-2ey"/>
                 <constraint firstItem="Fqe-o2-bK7" firstAttribute="top" secondItem="9X0-SB-a07" secondAttribute="bottom" constant="1" id="YPS-R0-DSP"/>
-                <constraint firstItem="Fqe-o2-bK7" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="4" id="ahj-au-jyd"/>
+                <constraint firstItem="Fqe-o2-bK7" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="5" id="ahj-au-jyd"/>
                 <constraint firstAttribute="bottom" secondItem="iCm-15-ahI" secondAttribute="bottom" constant="35" id="cVn-p3-Jwp"/>
                 <constraint firstItem="hGK-JF-Kot" firstAttribute="top" secondItem="iCm-15-ahI" secondAttribute="bottom" constant="6" id="gyH-t3-WOI"/>
                 <constraint firstItem="iCm-15-ahI" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="hb4-w4-sgY"/>

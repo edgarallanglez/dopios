@@ -27,6 +27,8 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapVie
     @IBOutlet var limit_label: UILabel!
     @IBOutlet var action_button: ModalButton!
     @IBOutlet var cancel_button: ModalButton!
+    @IBOutlet weak var available_coupon: UILabel!
+    @IBOutlet weak var likes_label: UILabel!
     
     @IBOutlet var map: MKMapView!
     var map_loaded: Bool = false
@@ -39,13 +41,12 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapVie
     
     @IBOutlet var loader: UIActivityIndicatorView!
     //
-    var coupon:Coupon?
+    var coupon: Coupon!
     let regionRadius: CLLocationDistance = 1000
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         if((cancel_button) != nil){
             cancel_button.addTarget(self, action: "buttonPressed:", forControlEvents: UIControlEvents.TouchDown)
@@ -76,19 +77,21 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapVie
         highlightAttrdict = [NSFontAttributeName:UIFont(name: "Montserrat-Light",size: 16.0)!, NSForegroundColorAttributeName: Utilities.dopColor]
         
         currentAttribute = normalAttrdict
-        
     }
     
     
     func startListening(){
        
     }
+    
     func buttonPressed(sender: ModalButton){
         sender.selected = true
     }
+    
     func buttonReleased(sender: ModalButton){
         sender.selected = false
     }
+    
     func cancelTouched(sender: ModalButton){
         sender.selected = false
 
@@ -96,9 +99,11 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapVie
             
         })
     }
+    
     func actionTouched(sender: ModalButton){
         sender.selected = false
     }
+    
     func closePressed(sender: UIButton){
         self.mz_dismissFormSheetControllerAnimated(true, completionHandler: nil)
     }
@@ -106,6 +111,7 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapVie
     override func viewDidAppear(animated: Bool) {
         if(coupon != nil){
             self.branch_title.setTitle(self.coupon?.name.uppercaseString, forState: .Normal)
+            self.available_coupon.text = String(self.coupon!.available)
             self.category_label.text = "Cafeteria".uppercaseString
             self.map.delegate = self
             self.centerMapOnLocation((self.coupon?.location)!)
@@ -116,25 +122,17 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapVie
             description_separator.alpha = 0
             coupon_description.alpha = 0
             
-            
-            if coupon!.user_like == 1 {
-                self.heart.tintColor = Utilities.dopColor
-            } else {
-                self.heart.tintColor = UIColor.lightGrayColor()
-            }            
+            self.likes_label.text = String(coupon!.total_likes)
+            if coupon!.user_like == 1 { self.heart.tintColor = Utilities.dopColor } else { self.heart.tintColor = UIColor.lightGrayColor() }
             
             Utilities.fadeInFromBottomAnimation(self.branch_title, delay: 0, duration: 0.5, yPosition: 30)
             Utilities.fadeInFromBottomAnimation(self.category_label, delay: 0, duration: 0.5, yPosition: 30)
             
         }
-
-        if(action_button != nil){
-            action_button.layoutIfNeeded()
-        }
-        if(cancel_button != nil){
-            cancel_button.layoutIfNeeded()
-        }
-       
+        
+        if action_button != nil { action_button.layoutIfNeeded() }
+        if cancel_button != nil { cancel_button.layoutIfNeeded() }
+        self.heartView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "likeCoupon:"))
     }
   
     func setCouponLike() {
@@ -150,14 +148,14 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapVie
         
         self.heart.tintColor = Utilities.dopColor
         let totalLikes = (self.coupon?.total_likes)! + 1
-        //self.likes.text = String(stringInterpolationSegment: totalLikes)
+        self.likes_label.text = String(stringInterpolationSegment: totalLikes)
         self.coupon!.setUserLike(1, total_likes: totalLikes)
     }
     
     func removeCouponLike() {
         self.heart.tintColor = UIColor.lightGrayColor()
         let totalLikes = (self.coupon?.total_likes)! - 1
-        //self.likes.text = String(stringInterpolationSegment: totalLikes)
+        self.likes_label.text = String(stringInterpolationSegment: totalLikes)
         self.coupon!.setUserLike(0, total_likes: totalLikes)
     }
 
@@ -280,16 +278,58 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapVie
     }
     
     func setBranchAnnotation () {
-        let dropPin : Annotation = Annotation(coordinate: (coupon?.location)!, title: coupon!.name, subTitle: "Los mejores", branch_distance: "4.3")
-        if coupon?.categoryId == 1 {
-            dropPin.typeOfAnnotation = "marker-food-icon"
-        } else if coupon!.categoryId == 2 {
-            dropPin.typeOfAnnotation = "marker-services-icon"
-        } else if coupon!.categoryId == 3 {
-            dropPin.typeOfAnnotation = "marker-entertainment-icon"
+        let drop_pin : Annotation = Annotation(coordinate: (coupon?.location)!, title: coupon!.name, subTitle: "Los mejores", branch_distance: "4.3")
+        
+        switch coupon!.categoryId {
+            case 1: drop_pin.typeOfAnnotation = "marker-food-icon"
+            case 2: drop_pin.typeOfAnnotation = "marker-services-icon"
+            case 3: drop_pin.typeOfAnnotation = "marker-entertainment-icon"
+        default: break
         }
         
-        self.map.addAnnotation(dropPin)
+        self.map.addAnnotation(drop_pin)
+    }
+    
+    @IBAction func setTakeCoupon(sender: UIButton) {
+        sender.transform = CGAffineTransformMakeScale(0.1, 0.1)
+        UIView.animateWithDuration(0.8,
+            delay: 0,
+            usingSpringWithDamping: 0.2,
+            initialSpringVelocity: 6.0,
+            options: UIViewAnimationOptions.AllowUserInteraction,
+            animations: {
+                sender.transform = CGAffineTransformIdentity
+            }, completion: nil)
+        sender.setImage(UIImage(named: "take-coupon"), forState: .Normal)
+    }
+    
+    func likeCoupon(sender: UIGestureRecognizer) {
+        let params:[String: AnyObject] = [
+            "coupon_id" :  coupon.id,
+            "date" : "2015-01-01" ]
+        
+        var liked: Bool
+        
+        if self.heart.tintColor == UIColor.lightGrayColor() {
+            self.setCouponLike()
+            liked = true
+        } else {
+            self.removeCouponLike()
+            liked = false
+        }
+        
+        CouponController.likeCouponWithSuccess(params,
+            success: { (couponsData) -> Void in
+                dispatch_async(dispatch_get_main_queue(), {
+                    let json = JSON(data: couponsData)
+                    print(json)
+                })
+            },
+            failure: { (error) -> Void in
+                dispatch_async(dispatch_get_main_queue(), {
+                    if liked { self.removeCouponLike() } else { self.setCouponLike() }
+                })
+        })
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -300,7 +340,5 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapVie
             //            view.logo = self.logo
             
         }
-        
-        
     }
 }

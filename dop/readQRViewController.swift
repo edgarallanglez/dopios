@@ -21,6 +21,7 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
     var loader:CustomInfiniteIndicator?
     
     var coupon_id:Int?
+    var coupon: Coupon!
     var branch_id:Int?
     
     override func viewDidLoad() {
@@ -178,6 +179,7 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                             navigation_controller.setAlert("success", alert_title: "¡Felicidades!", alert_description: "Has redimido tu promoción con éxito en \(name!)")
                         }
                         modal.presentAnimated(true, completionHandler: nil)
+                        self.coupon.available = self.coupon.available - 1
                     }
                     
                     print(json)

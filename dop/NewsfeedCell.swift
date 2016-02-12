@@ -62,14 +62,10 @@ class NewsfeedCell: UITableViewCell {
         
         
         self.likes.text = String(newsfeed_note.total_likes)
-        
         self.heart.image = self.heart.image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
         
-        if(newsfeed_note.user_like == 1){
-            self.heart.tintColor = Utilities.dopColor
-        } else {
-            self.heart.tintColor = UIColor.lightGrayColor()
-        }
+        if newsfeed_note.user_like == 1 { self.heart.tintColor = Utilities.dopColor }
+        else { self.heart.tintColor = UIColor.lightGrayColor() }
         
     }
     
@@ -80,29 +76,25 @@ class NewsfeedCell: UITableViewCell {
         
         var liked:Bool;
         
-        if(self.heart.tintColor == UIColor.lightGrayColor()){
+        if self.heart.tintColor == UIColor.lightGrayColor() {
             self.setCouponLike()
             liked = true
-        }else{
+        } else {
             self.removeCouponLike()
             liked = false
         }
         
         print(params)
         NewsfeedController.likeFriendsActivityWithSuccess(params,
-            success: { (couponsData) -> Void in
+            success: { (data) -> Void in
                 dispatch_async(dispatch_get_main_queue(), {
-                    let json = JSON(data: couponsData)
+                    let json = JSON(data: data)
                     print(json)
                 })
             },
             failure: { (error) -> Void in
                 dispatch_async(dispatch_get_main_queue(), {
-                    if(liked == true){
-                        self.removeCouponLike()
-                    }else{
-                        self.setCouponLike()
-                    }
+                    if liked { self.removeCouponLike() } else { self.setCouponLike() }
                 })
         })
     }

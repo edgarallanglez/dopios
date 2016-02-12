@@ -91,9 +91,6 @@ class PromoCollectionCell: UICollectionViewCell, FBSDKSharingDelegate {
         //        dialog.mode = FBSDKShareDialogModeShareSheet
         
         FBSDKShareDialog.showFromViewController(self.viewController, withContent: content, delegate: self)
-        
-        
-
     }
     
     func sharer(sharer: FBSDKSharing!, didFailWithError error: NSError!) {
@@ -132,7 +129,7 @@ class PromoCollectionCell: UICollectionViewCell, FBSDKSharingDelegate {
         self.coupon.setUserLike(0, total_likes: totalLikes)
     }
     
-    @IBAction func take_coupon(sender: UIButton) {
+    @IBAction func setTakeCoupon(sender: UIButton) {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyyMMdd"
         let folioDate = dateFormatter.stringFromDate(NSDate())
@@ -145,23 +142,24 @@ class PromoCollectionCell: UICollectionViewCell, FBSDKSharingDelegate {
             "taken_date" : date,
             "folio_date": folioDate,
             "latitude": User.coordinate.latitude ?? 0,
-            "longitude": User.coordinate.longitude ?? 0]
+            "longitude": User.coordinate.longitude ?? 0 ]
         
         
         CouponController.takeCouponWithSuccess(params,
-            success: { (couponsData) -> Void in
+            success: { (data) -> Void in
                 dispatch_async(dispatch_get_main_queue(), {
-                    let json = JSON(data: couponsData)
+                    let json = JSON(data: data)
                     print(json)
                     
-                    UIView.animateWithDuration(0.4, delay: 0.0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
-                        self.take_coupon_btn.alpha = 0.45
-                        }, completion: { (Bool) in
-                            UIView.animateWithDuration(0.7, animations: { () -> Void in
-                                self.take_coupon_btn.setImage(UIImage(named: "take-coupon"), forState: UIControlState.Normal)
-                                self.take_coupon_btn.alpha = 1
-                            })
-                    })
+                    self.take_coupon_btn.transform = CGAffineTransformMakeScale(0.1, 0.1)
+                    UIView.animateWithDuration(0.8,
+                        delay: 0,
+                        usingSpringWithDamping: 0.2,
+                        initialSpringVelocity: 6.0,
+                        options: UIViewAnimationOptions.AllowUserInteraction,
+                        animations: { self.take_coupon_btn.transform = CGAffineTransformIdentity }, completion: nil)
+                    
+                    self.take_coupon_btn.setImage(UIImage(named: "take-coupon"), forState: .Normal)
                 })
 
             },

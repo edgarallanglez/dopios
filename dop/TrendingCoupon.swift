@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TrendingCoupon: UIView,ModalDelegate {
+class TrendingCoupon: UIView, ModalDelegate {
     
     @IBOutlet var descriptionLbl: UILabel!
     @IBOutlet var logo: UIImageView!
@@ -17,39 +17,27 @@ class TrendingCoupon: UIView,ModalDelegate {
     @IBOutlet var heartView: UIView!
     @IBOutlet var heart: UIImageView!
     var viewController: UIViewController?
-    var coupon:Coupon!
+    var coupon: Coupon!
     
     func loadItem(coupon: Coupon, viewController: UIViewController) {
-        //coupon_description.text = coupon.couponDescription
-        
-      /*  self.shareButton.setBackgroundImage(UIImage(named: "share-icon"), forState: UIControlState.Normal)*/
-        let gesture = UITapGestureRecognizer(target: self, action: "likeCoupon:")
-        let coupon_gesture = UITapGestureRecognizer(target: self, action: "tapCoupon:")
-        
-        heartView.addGestureRecognizer(gesture)
-        self.addGestureRecognizer(coupon_gesture)
+        heartView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "likeCoupon:"))
+        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "tapCoupon:"))
         self.coupon = coupon
+        
         self.likes.text = String(coupon.total_likes)
         self.descriptionLbl.text = coupon.couponDescription
         self.viewController = viewController
-        if coupon.user_like == 1 {
-            self.heart.tintColor = Utilities.dopColor
-        } else {
-            self.heart.tintColor = UIColor.lightGrayColor()
-        }
+        if coupon.user_like == 1 { self.heart.tintColor = Utilities.dopColor } else { self.heart.tintColor = UIColor.lightGrayColor() }
     }
     
     init() {
         super.init(frame: CGRect(x: 0, y: 0, width: 180, height: 230))
     }
+    
     func viewDidAppear(){
         print("USER LIKE ES \(coupon.user_like)")
         self.likes.text = String(coupon.total_likes)
-        if coupon.user_like == 1 {
-            self.heart.tintColor = Utilities.dopColor
-        } else {
-            self.heart.tintColor = UIColor.lightGrayColor()
-        }
+        if coupon.user_like == 1 { self.heart.tintColor = Utilities.dopColor } else { self.heart.tintColor = UIColor.lightGrayColor() }
     }
     
     func likeCoupon(sender: UITapGestureRecognizer){
@@ -59,7 +47,7 @@ class TrendingCoupon: UIView,ModalDelegate {
         
         var liked: Bool
         
-        if (self.heart.tintColor == UIColor.lightGrayColor()) {
+        if self.heart.tintColor == UIColor.lightGrayColor() {
             self.setCouponLike()
             liked = true
         } else {
@@ -111,7 +99,7 @@ class TrendingCoupon: UIView,ModalDelegate {
     
     func tapCoupon(sender:UITapGestureRecognizer){
         //self.viewController!.performSegueWithIdentifier("couponDetail", sender: self)
-        let modal:ModalViewController = ModalViewController(currentView: self.viewController!, type: ModalViewControllerType.CouponDetail)
+        let modal: ModalViewController = ModalViewController(currentView: self.viewController!, type: ModalViewControllerType.CouponDetail)
         
         dispatch_async(dispatch_get_main_queue()) {
             modal.willPresentCompletionHandler = { vc in
@@ -146,6 +134,7 @@ class TrendingCoupon: UIView,ModalDelegate {
         if modal.action_type == "redeem" {
             let view_controller  = viewController!.storyboard!.instantiateViewControllerWithIdentifier("readQRView") as! readQRViewController
             view_controller.coupon_id = self.coupon.id
+            view_controller.coupon = self.coupon
             view_controller.branch_id = self.coupon.branch_id
             viewController?.hidesBottomBarWhenPushed = true
             viewController!.navigationController?.pushViewController(view_controller, animated: true)

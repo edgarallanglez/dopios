@@ -8,22 +8,24 @@
 
 import Foundation
 
-class Coupon:NSObject {
-    let id:Int
-    let name:String
-    let couponDescription:String
-    let limit:String
+class Coupon: NSObject {
+    let id: Int
+    let name: String
+    let couponDescription: String
+    let limit: String
     let exp: String
     let logo: String
-    let branch_id:Int
+    let branch_id: Int
     let company_id: Int
     var total_likes: Int
     var user_like: Int
     let location: CLLocationCoordinate2D
     let banner: String
     let categoryId: Int
+    var available: Int
 
-    init(id: Int?, name: String?, description: String?, limit: String?, exp: String?, logo: String? ,branch_id:Int?, company_id: Int?, total_likes: Int?, user_like: Int?, latitude: Double, longitude: Double, banner: String, category_id: Int) {
+    init(id: Int?, name: String?, description: String?, limit: String?, exp: String?, logo: String? ,branch_id:Int?, company_id: Int?, total_likes: Int?, user_like: Int?, latitude: Double, longitude: Double, banner: String, category_id: Int, available: Int) {
+        
         self.id = id ?? 0
         self.name = name ?? ""
         self.couponDescription = description ?? ""
@@ -37,6 +39,7 @@ class Coupon:NSObject {
         self.location = CLLocationCoordinate2DMake(latitude, longitude) ?? CLLocationCoordinate2DMake(0.0, 0.0)
         self.banner = banner
         self.categoryId = category_id
+        self.available = available
     }
     
     func setUserLike(user_like: Int!,total_likes: Int!){

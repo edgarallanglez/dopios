@@ -40,12 +40,17 @@
                                 <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="13"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="kern">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OtS-VL-PUS" userLabel="heartView">
-                                <rect key="frame" x="454" y="114" width="44" height="35"/>
+                                <rect key="frame" x="453" y="113" width="45" height="36"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YrH-em-Gbl">
-                                        <rect key="frame" x="29" y="10" width="15" height="17"/>
+                                        <rect key="frame" x="30" y="11" width="15" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="15" id="0Rb-Dx-JOY"/>
                                             <constraint firstAttribute="height" constant="17" id="jNQ-zy-D2v"/>
@@ -55,10 +60,10 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart" translatesAutoresizingMaskIntoConstraints="NO" id="AFV-nS-l3u">
-                                        <rect key="frame" x="5" y="8" width="19" height="19"/>
+                                        <rect key="frame" x="5" y="8" width="20" height="20"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="19" id="bTg-PI-62r"/>
-                                            <constraint firstAttribute="height" constant="19" id="mpL-8g-GAf"/>
+                                            <constraint firstAttribute="width" constant="20" id="bTg-PI-62r"/>
+                                            <constraint firstAttribute="width" secondItem="AFV-nS-l3u" secondAttribute="height" multiplier="1:1" id="veU-aU-leT"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>
