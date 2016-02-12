@@ -57,7 +57,6 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
     
     override func viewDidAppear(animated: Bool) {
         setMapAtCurrent()
-        
     }
     
     let regionRadius: CLLocationDistance = 1000
