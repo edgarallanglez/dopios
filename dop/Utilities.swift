@@ -134,7 +134,6 @@ class Utilities {
         let separators = NSCharacterSet(charactersInString: "T.")
         let parts = date.componentsSeparatedByCharactersInSet(separators)
         let friendly_date = NSDate(dateString: "\(parts[0]) \(parts[1])").timeAgo
-        
     
         return friendly_date
     }
@@ -168,7 +167,6 @@ class Utilities {
     
     //ANIMATIONS
     class func fadeInViewAnimation(view:UIView, delay:NSTimeInterval, duration:NSTimeInterval){
-        
         UIView.animateWithDuration(duration, delay: delay, options: .CurveEaseInOut,
             animations: {
                 view.alpha = 1
@@ -176,7 +174,6 @@ class Utilities {
             }, completion: nil)
     }
     class func fadeOutViewAnimation(view:UIView, delay:NSTimeInterval, duration:NSTimeInterval){
-        
         UIView.animateWithDuration(duration, delay: delay, options: .CurveEaseInOut,
             animations: {
                 view.alpha = 0
@@ -205,6 +202,7 @@ class Utilities {
             view.alpha = 1
         }), completion:nil)
     }
+    
     class func fadeOutToTopAnimation(view:UIView, delay:NSTimeInterval, duration:NSTimeInterval, yPosition:CGFloat){
         let finalYPosition = view.frame.origin.y - yPosition
         

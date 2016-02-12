@@ -133,29 +133,6 @@ class BranchProfileStickyController: UICollectionViewController, BranchPaginatio
         
     }
     
-//    func setupProfileDetail() {
-//        if self.user_id == User.user_id {
-//            user_name = "\(User.userName) \(User.userSurnames)"
-//            if self.user_image == nil {
-//                self.downloadImage(NSURL(string: User.userImageUrl)!)
-//            }
-//        } else if person.privacy_status == 0 {
-//            user_name = "\(person.names) \(person.surnames)"
-//            //            userProfileSegmentedController.items.removeLast()
-//        } else if person.privacy_status == 1 {
-//            user_name = "\(person.names) \(person.surnames)"
-//            //            private_view.hidden = false
-//        }
-//    }
-//    
-//    func downloadImage(url: NSURL) {
-//        Utilities.getDataFromUrl(url) { data in
-//            dispatch_async(dispatch_get_main_queue()) {
-//                self.user_image?.image = UIImage(data: data!)
-//            }
-//        }
-//    }
-    
     func setupIndex(index: Int) {
         delegate?.setPage!(index)
     }

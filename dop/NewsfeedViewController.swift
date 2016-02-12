@@ -32,7 +32,7 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell:NewsfeedCell = tableView.dequeueReusableCellWithIdentifier("NewsfeedCell", forIndexPath: indexPath) as! NewsfeedCell
         
-        if(!newsfeed.isEmpty){
+        if !newsfeed.isEmpty {
             let model = self.newsfeed[indexPath.row]
             cell.newsfeed_description.linkAttributes = [NSForegroundColorAttributeName: Utilities.dopColor]
             cell.newsfeed_description.enabledTextCheckingTypes = NSTextCheckingType.Link.rawValue
@@ -164,6 +164,8 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
                 
                 self.tableView.reloadData()
                 self.refreshControl.endRefreshing()
+                
+                Utilities.fadeInFromBottomAnimation(self.tableView, delay: 0, duration: 1, yPosition: 20)
                 
                 print("Printed")
                 print(json)

@@ -30,9 +30,7 @@ class NewsfeedCell: UITableViewCell {
     }
     
     func loadItem(newsfeed_note: NewsfeedNote, viewController: UIViewController) {
-        
-     
-        
+
         let newsfeed_activity = "\(newsfeed_note.branch_name.uppercaseString)"
     
         downloadImage(NSURL(string: "\(Utilities.dopImagesURL)\(newsfeed_note.company_id)/\(newsfeed_note.branch_image)")!)
@@ -49,11 +47,14 @@ class NewsfeedCell: UITableViewCell {
         //////////////
         
         self.user_image.layer.masksToBounds = true
-        self.user_image.layer.cornerRadius = 25
-        self.user_image.alpha=0
+        self.user_image.layer.cornerRadius = self.user_image.frame.width / 2
+        self.user_image.alpha = 0
         self.username_button.setTitle(newsfeed_note.names.uppercaseString, forState: UIControlState.Normal)
         self.username_button.addTarget(self, action: "goToUserProfile:", forControlEvents: UIControlEvents.TouchUpInside)
-        self.viewController=viewController
+        self.user_image.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "goToUserProfile:"))
+        self.branch_logo.tag = newsfeed_note.branch_id
+        self.branch_logo.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "goToBranchProfile:"))
+        self.viewController = viewController
         self.date_label.text = Utilities.friendlyDate(newsfeed_note.date)
         
         self.newsfeedNote = newsfeed_note
@@ -104,6 +105,12 @@ class NewsfeedCell: UITableViewCell {
     
     func goToUserProfile(_: UIButton!){
         self.viewController!.performSegueWithIdentifier("userProfile", sender: self)
+    }
+    
+    func goToBranchProfile(sender: UIGestureRecognizer!){
+        let view_controller = self.viewController?.storyboard!.instantiateViewControllerWithIdentifier("BranchProfileStickyController") as! BranchProfileStickyController
+        view_controller.branch_id = sender.view!.tag
+        self.viewController!.navigationController?.pushViewController(view_controller, animated: true)
     }
     
     func setCouponLike() {

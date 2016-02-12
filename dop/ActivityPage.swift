@@ -12,7 +12,7 @@ import UIKit
    optional func resizeActivityView(dynamic_height: CGFloat)
 }
 
-class ActivityPage: UITableViewController {
+class ActivityPage: UITableViewController, TTTAttributedLabelDelegate {
     var delegate: ActivityPageDelegate?
     
     @IBOutlet var activityTableView: UITableView!
@@ -76,11 +76,26 @@ class ActivityPage: UITableViewController {
                     downloadImage(NSURL(string: self.parent_view.person.main_image)!, cell: custom_cell)
                 }
             }
-            custom_cell.loadItem(model, view: self)
+            custom_cell.activity_description.linkAttributes = [NSForegroundColorAttributeName: Utilities.dopColor]
+            custom_cell.activity_description.enabledTextCheckingTypes = NSTextCheckingType.Link.rawValue
+            custom_cell.activity_description.delegate = self
+            custom_cell.loadItem(model, viewController: self)
             return custom_cell
         } else {
             let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("default_view", forIndexPath: indexPath)
             return cell
+        }
+    }
+    
+    func attributedLabel(label: TTTAttributedLabel!, didSelectLinkWithURL url: NSURL!) {
+        let splitter = String(url).componentsSeparatedByString(":")
+        let segue: String = splitter[0]
+        let branch_id: Int = Int(splitter[1])!
+        
+        if segue == "branchProfile" {
+            let view_controller = self.storyboard!.instantiateViewControllerWithIdentifier("BranchProfileStickyController") as! BranchProfileStickyController
+            view_controller.branch_id = branch_id
+            self.navigationController?.pushViewController(view_controller, animated: true)
         }
     }
     
@@ -109,7 +124,7 @@ class ActivityPage: UITableViewController {
                 let user_like =  subJson["user_like"].int
                 let date =  subJson["used_date"].string
                 
-                let model = NewsfeedNote(client_coupon_id:client_coupon_id,friend_id: friend_id, user_id: user_id, branch_id: branch_id, coupon_name: name, branch_name: branch_name, names: names, surnames: surnames, user_image: main_image, company_id: company_id, branch_image: logo, total_likes:total_likes,user_like: user_like, date:date)
+                let model = NewsfeedNote(client_coupon_id:client_coupon_id,friend_id: friend_id, user_id: user_id, branch_id: branch_id, coupon_name: name, branch_name: branch_name, names: names, surnames: surnames, user_image: main_image, company_id: company_id, branch_image: logo, total_likes:total_likes,user_like: user_like, date: date)
                 
                 self.activity_array.append(model)
             }
