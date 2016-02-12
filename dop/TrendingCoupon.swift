@@ -134,7 +134,7 @@ class TrendingCoupon: UIView, ModalDelegate {
             view_controller.branch_id = coupon.branch_id
             viewController!.navigationController?.pushViewController(view_controller, animated: true)
             viewController?.hidesBottomBarWhenPushed = false
-            //modal.dismissAnimated(true, completionHandler: nil)
+            modal.dismissAnimated(true, completionHandler: nil)
         }
         
         if modal.action_type == "redeem" {

@@ -43,7 +43,7 @@ class NotificationCell: UITableViewCell {
             title.addLinkToURL(segue, withRange: launcher_range)
             title.addLinkToURL(segue, withRange: newsfeed_activity_range)
             
-           /* let notification_text = "A \(notification.launcher_name) \(notification.launcher_surnames) le a gustado tu actividad en \(notification.newsfeed_activity)"
+           /*let notification_text = "A \(notification.launcher_name) \(notification.launcher_surnames) le a gustado tu actividad en \(notification.newsfeed_activity)"
             let name_lenght = notification.launcher_name.characters.count + notification.launcher_surnames.characters.count + 1
             string_format = NSMutableAttributedString(string: notification_text as String)
             string_format.addAttribute(NSForegroundColorAttributeName, value: Utilities.dopColor, range: NSRange(location:2,length:name_lenght))
@@ -86,7 +86,6 @@ class NotificationCell: UITableViewCell {
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
     }
 

@@ -307,6 +307,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
 
     func attributedLabel(label: TTTAttributedLabel!, didLongPressLinkWithURL url: NSURL!, atPoint point: CGPoint) {
         let segue = "\(url)"
+    
         self.performSegueWithIdentifier(segue, sender: self)
 
     }
