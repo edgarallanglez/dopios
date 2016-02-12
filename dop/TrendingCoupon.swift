@@ -106,6 +106,12 @@ class TrendingCoupon: UIView, ModalDelegate {
                 let navigationController = vc as! SimpleModalViewController
                 navigationController.coupon = self.coupon
             }
+            modal.definesPresentationContext = true
+            modal.modalPresentationStyle = .FullScreen
+            self.viewController?.modalPresentationStyle = .FullScreen
+            self.viewController?.navigationController?.modalPresentationStyle = .FullScreen
+           
+
             modal.presentAnimated(true, completionHandler: nil)
             modal.delegate = self
         }
@@ -128,7 +134,7 @@ class TrendingCoupon: UIView, ModalDelegate {
             view_controller.branch_id = coupon.branch_id
             viewController!.navigationController?.pushViewController(view_controller, animated: true)
             viewController?.hidesBottomBarWhenPushed = false
-            modal.dismissAnimated(true, completionHandler: nil)
+            //modal.dismissAnimated(true, completionHandler: nil)
         }
         
         if modal.action_type == "redeem" {

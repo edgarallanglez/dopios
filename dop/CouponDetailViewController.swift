@@ -110,7 +110,7 @@ class CouponDetailViewController: BaseViewController, UITableViewDelegate, UITab
     }
     
     func setBranchAnnotation () {
-        let dropPin : Annotation = Annotation(coordinate: location, title: self.couponsName, subTitle: "Los mejores", branch_distance: "4.3")
+        let dropPin : Annotation = Annotation(coordinate: location, title: self.couponsName, subTitle: "Los mejores", branch_distance: "4.3", branch_id: branchId, company_id: 0, logo: "")
         if categoryId == 1 {
             dropPin.typeOfAnnotation = "marker-food-icon"
         } else if categoryId == 2 {

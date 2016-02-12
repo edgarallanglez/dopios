@@ -85,6 +85,7 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
             var json = data["data"]
             print(json)
             json = json[0]
+            let branch_id = json["branch_id"].int!
             let latitude = json["latitude"].double
             let longitude = json["longitude"].double
             let following = json["following"].bool!
@@ -103,7 +104,6 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
             self.centerMapOnLocation(self.branch_pin)
             
             dispatch_async(dispatch_get_main_queue(), {
-
                 let drop_pin = Annotation(coordinate: new_location, title: json["name"].string!, subTitle: "nada", branch_distance: "4.3")
                 
                 switch json["category_id"].int! {

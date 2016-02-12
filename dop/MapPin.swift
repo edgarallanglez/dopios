@@ -10,11 +10,19 @@ import UIKit
 import MapKit
 
 class MapPin: MKAnnotationView {
+        var name: String = ""
+        var address: String = ""
+        var info: String = ""
+        var logo: String = ""
+    
         class var reuseIdentifier:String {
-            return "mapPin"
+            return "custom"
         }
-        
-        private var calloutView:MapPinCallout?
+    
+        class var name:String {
+            return "custom"
+        }
+        var calloutView:MapPinCallout?
         private var hitOutside:Bool = true
         
         var preventDeselection:Bool {
@@ -25,6 +33,7 @@ class MapPin: MKAnnotationView {
         convenience init(annotation:MKAnnotation!) {
             self.init(annotation: annotation, reuseIdentifier: MapPin.reuseIdentifier)
             
+
             canShowCallout = false;
         }
         
@@ -38,11 +47,13 @@ class MapPin: MKAnnotationView {
             self.superview?.bringSubviewToFront(self)
             
             if (calloutView == nil) {
-                calloutView = MapPinCallout()
+                calloutView = MapPinCallout(name: self.name, address: "", info: "", logo: "")
             }
             
             if (self.selected && !calloutViewAdded) {
                 addSubview(calloutView!)
+                Utilities.fadeInFromBottomAnimation(calloutView!, delay: 0, duration: 0.5, yPosition: 10)
+
             }
             
             if (!self.selected) {
@@ -54,7 +65,7 @@ class MapPin: MKAnnotationView {
             var hitView = super.hitTest(point, withEvent: event)
             
             if let callout = calloutView {
-                if (hitView == nil && self.selected) {
+                if (hitView == nil && self.selected ) {
                     hitView = callout.hitTest(point, withEvent: event)
                 }
             }
