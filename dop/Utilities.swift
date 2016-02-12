@@ -120,6 +120,7 @@ class Utilities {
                 }
             }
         })
+        
         task.resume()
     }
     class func getDataFromUrl(urL:NSURL, completion: ((data: NSData?) -> Void)) {
@@ -155,6 +156,7 @@ class Utilities {
         layer.shadowOpacity = 0.4
         layer.shadowRadius = 4
     }
+    
     class func applySolidShadow(view: UIView) {
         let layer = view.layer
         

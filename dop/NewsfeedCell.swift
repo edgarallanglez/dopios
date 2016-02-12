@@ -22,12 +22,13 @@ class NewsfeedCell: UITableViewCell {
     
     var viewController:UIViewController?
     
-    var newsfeedNote:NewsfeedNote?
+    var newsfeedNote: NewsfeedNote?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
+    
     func loadItem(newsfeed_note: NewsfeedNote, viewController: UIViewController) {
         
      
@@ -42,7 +43,7 @@ class NewsfeedCell: UITableViewCell {
         newsfeed_description.text = notification_text
         let ns_string = notification_text as NSString
         let newsfeed_activity_range = ns_string.rangeOfString(newsfeed_activity)
-        let segue = NSURL(string: "branchProfile")!
+        let segue = NSURL(string: "branchProfile:\(newsfeed_note.branch_id)")!
 
         newsfeed_description.addLinkToURL(segue, withRange: newsfeed_activity_range)
         //////////////

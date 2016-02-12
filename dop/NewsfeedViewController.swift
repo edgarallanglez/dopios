@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate {
+class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, TTTAttributedLabelDelegate {
     
     var newsfeed = [NewsfeedNote]()
     var cachedImages: [String: UIImage] = [:]
@@ -36,7 +36,9 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
             let model = self.newsfeed[indexPath.row]
             cell.newsfeed_description.linkAttributes = [NSForegroundColorAttributeName: Utilities.dopColor]
             cell.newsfeed_description.enabledTextCheckingTypes = NSTextCheckingType.Link.rawValue
+            cell.newsfeed_description.delegate = self
             cell.loadItem(model, viewController: self)
+            
 
             let imageUrl = NSURL(string: model.user_image)
             let identifier = "Cell\(indexPath.row)"
@@ -73,8 +75,19 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
         
         return cell
     }
-
     
+    func attributedLabel(label: TTTAttributedLabel!, didSelectLinkWithURL url: NSURL!) {
+        let splitter = String(url).componentsSeparatedByString(":")
+        let segue: String = splitter[0]
+        let branch_id: Int = Int(splitter[1])!
+        
+        if segue == "branchProfile" {
+            let view_controller = self.storyboard!.instantiateViewControllerWithIdentifier("BranchProfileStickyController") as! BranchProfileStickyController
+            view_controller.branch_id = branch_id
+            self.navigationController?.pushViewController(view_controller, animated: true)
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -99,9 +112,7 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
         
         // Add infinite scroll handler
         tableView.addInfiniteScrollWithHandler { [weak self] (scrollView) -> Void in
-            if(!self!.newsfeed.isEmpty){
-                self!.getNewsfeedActivityWithOffset()
-            }
+            if !self!.newsfeed.isEmpty { self!.getNewsfeedActivityWithOffset() }
         }
     }
     
