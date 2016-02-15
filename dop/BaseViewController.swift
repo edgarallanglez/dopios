@@ -186,9 +186,11 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
 
 
     }
+    
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(true)
     }
+    
     func presentView(notification:NSNotification){
         if(searchViewIsOpen){
             searchViewIsSegue = true
