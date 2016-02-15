@@ -283,7 +283,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                 for (_, subJson): (String, JSON) in json["data"]{
                     let coupon_id = subJson["coupon_id"].int!
                     let coupon_name = subJson["name"].string!
-                    let coupon_description = subJson["description"].string!
+                    let coupon_description = subJson["description"].string ?? ""
                     let coupon_limit = subJson["limit"].string
                     let coupon_exp = "2015-09-30"
                     let coupon_logo = subJson["logo"].string!

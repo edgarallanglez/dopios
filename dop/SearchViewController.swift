@@ -133,16 +133,15 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
                         
                     } else {
                         cell.user_image.alpha = 0
-                       // cell.user_name.alpha = 0
                         Utilities.getDataFromUrl(imageUrl!) { data in
                             dispatch_async(dispatch_get_main_queue()) {
-                                var cell_image : UIImage = UIImage()
-                                cell_image = UIImage (data: data!)!
+                                let cell_image: UIImage? = UIImage(data: data!)
                                 
                                 if tableView.indexPathForCell(cell)?.row == indexPath.row {
-                                    self.cachedImages[identifier] = cell_image
-                                    let cell_image_saved : UIImage = self.cachedImages[identifier]!
-                                    cell.user_image.image = cell_image_saved
+                                    if cell_image == nil { self.cachedImages[identifier] = UIImage(named: "dopLogo") }
+                                    else { self.cachedImages[identifier] = cell_image }
+                    
+                                    cell.user_image.image = self.cachedImages[identifier]!
                                     UIView.animateWithDuration(0.5, animations: {
                                         cell.user_image.alpha = 1
                                         cell.user_name.alpha = 1
@@ -154,7 +153,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
                     ////////
                     
                     return (cell)
-                }else{
+                } else {
                     let cell = self.tableView.dequeueReusableCellWithIdentifier("loadingCell") as! LoadingCell;
                     cell.label.text = "No se encontraron resultados"
                     cell.selectionStyle = UITableViewCellSelectionStyle.None
