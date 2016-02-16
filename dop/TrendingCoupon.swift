@@ -132,9 +132,10 @@ class TrendingCoupon: UIView, ModalDelegate {
             let view_controller = viewController!.storyboard!.instantiateViewControllerWithIdentifier("BranchProfileStickyController") as! BranchProfileStickyController
             view_controller.coupon = self.coupon
             view_controller.branch_id = coupon.branch_id
-            viewController!.navigationController?.pushViewController(view_controller, animated: true)
+            modal.dismissAnimated(true, completionHandler: { (modal) -> Void in
+                self.viewController!.navigationController?.pushViewController(view_controller, animated: true)
+            })
             viewController?.hidesBottomBarWhenPushed = false
-           // modal.dismissAnimated(true, completionHandler: nil)
         }
         
         if modal.action_type == "redeem" {
@@ -143,9 +144,11 @@ class TrendingCoupon: UIView, ModalDelegate {
             view_controller.coupon = self.coupon
             view_controller.branch_id = self.coupon.branch_id
             viewController?.hidesBottomBarWhenPushed = true
-            viewController!.navigationController?.pushViewController(view_controller, animated: true)
+
+            modal.dismissAnimated(true, completionHandler:{ (modal) -> Void in
+                self.viewController!.navigationController?.pushViewController(view_controller, animated: true)
+            })
             viewController?.hidesBottomBarWhenPushed = false
-            //modal.dismissAnimated(true, completionHandler: nil)
         }
     }
     
