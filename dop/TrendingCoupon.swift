@@ -64,11 +64,8 @@ class TrendingCoupon: UIView, ModalDelegate {
             },
             failure: { (error) -> Void in
                 dispatch_async(dispatch_get_main_queue(), {
-                    if(liked == true){
-                        self.removeCouponLike()
-                    }else{
-                        self.setCouponLike()
-                    }
+                    if liked { self.removeCouponLike() }
+                    else { self.setCouponLike() }
                 })
         })
     }
@@ -111,7 +108,6 @@ class TrendingCoupon: UIView, ModalDelegate {
             //self.viewController?.modalPresentationStyle = .FullScreen
             //self.viewController?.navigationController?.modalPresentationStyle = .FullScreen
            
-
             modal.presentAnimated(true, completionHandler: nil)
             modal.delegate = self
         }

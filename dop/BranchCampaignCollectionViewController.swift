@@ -12,13 +12,14 @@ import UIKit
     optional func resizeCampaignView(dynamic_height: CGFloat)
 }
 
-class BranchCampaignCollectionViewController: UICollectionViewController {
+class BranchCampaignCollectionViewController: UICollectionViewController, ModalDelegate {
     var delegate: CampaignPageDelegate?
     
     @IBOutlet var collection_view: UICollectionView!
     
     var parent_view: BranchProfileStickyController!
     var coupons = [Coupon]()
+    var selected_coupon: Coupon!
     private let reuseIdentifier = "PromoCell"
     
     var cachedImages: [String: UIImage] = [:]
@@ -64,6 +65,23 @@ class BranchCampaignCollectionViewController: UICollectionViewController {
 
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return coupons.count
+    }
+    
+    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        //if(showing_modal == false){
+        let cell = self.collection_view.cellForItemAtIndexPath(indexPath)
+        selected_coupon = self.coupons[indexPath.row] as Coupon
+        
+        let modal: ModalViewController = ModalViewController(currentView: self, type: ModalViewControllerType.CouponDetail)
+        modal.willPresentCompletionHandler = { vc in
+            let navigationController = vc as! SimpleModalViewController
+            navigationController.coupon = self.selected_coupon
+        }
+        modal.delegate = self
+        modal.presentAnimated(true, completionHandler: nil)
+        //}
+        
+        
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -120,11 +138,6 @@ class BranchCampaignCollectionViewController: UICollectionViewController {
         let size = CGSizeMake(width, 230)
         
         return size
-    }
-    
-    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let cell = self.collection_view.cellForItemAtIndexPath(indexPath)
-        self.performSegueWithIdentifier("couponDetail", sender: cell)
     }
     
     func setFrame() {
@@ -201,6 +214,58 @@ class BranchCampaignCollectionViewController: UICollectionViewController {
     }
 
     func reloadWithOffset(parent_scroll: UICollectionView) {
+    }
+    
+    func pressActionButton(modal: ModalViewController) {
+        if modal.action_type == "profile" {
+            let view_controller = self.storyboard!.instantiateViewControllerWithIdentifier("BranchProfileStickyController") as! BranchProfileStickyController
+            view_controller.branch_id = self.selected_coupon.branch_id
+            view_controller.coupon = self.selected_coupon
+            self.navigationController?.pushViewController(view_controller, animated: true)
+            self.hidesBottomBarWhenPushed = false
+            modal.dismissAnimated(true, completionHandler: nil)
+        }
+        if modal.action_type == "redeem" {
+            let view_controller  = self.storyboard!.instantiateViewControllerWithIdentifier("readQRView") as! readQRViewController
+            view_controller.coupon_id = self.selected_coupon.id
+            view_controller.branch_id = self.selected_coupon.branch_id
+            self.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(view_controller, animated: true)
+            self.hidesBottomBarWhenPushed = false
+            modal.dismissAnimated(true, completionHandler: nil)
+        }
+//        if modal.action_type == "share" {
+//            let YourImage:UIImage = UIImage(named: "starbucks_banner.jpg")!
+//            
+//            
+//            let instagramUrl = NSURL(string: "instagram://app")
+//            if(UIApplication.sharedApplication().canOpenURL(instagramUrl!)){
+//                
+//                //Instagram App avaible
+//                let imageData = UIImageJPEGRepresentation(YourImage, 100)
+//                let captionString = "Your Caption"
+//                
+//                let documentsURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
+//                
+//                let writePath = NSURL(fileURLWithPath: NSTemporaryDirectory()).URLByAppendingPathComponent("/insta.igo")
+//                if(!imageData!.writeToFile(writePath.path!, atomically: true)){
+//                    //Fail to write.
+//                    return
+//                } else{
+//                    //Safe to post
+//                    
+//                    let fileURL = NSURL(fileURLWithPath: writePath.path!)
+//                    self.documentController = UIDocumentInteractionController(URL: fileURL)
+//                    self.documentController.UTI = "com.instagram.exclusivegram"
+//                    self.documentController.delegate = self
+//                    self.documentController.annotation =  NSDictionary(object: captionString, forKey: "InstagramCaption")
+//                    self.documentController.presentOpenInMenuFromRect(self.view.frame, inView: self.view, animated: true)
+//                    self.documentController.presentOpenInMenuFromRect(CGRectMake(0,0,0,0), inView: self.view, animated: true)
+//                }
+//            } else {
+//                //Instagram App NOT avaible...
+//            }
+//        }
     }
     
 }

@@ -19,6 +19,7 @@ class TrophyTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         getTrophies()
+        self.table_view.contentInset = UIEdgeInsetsMake(0, 0, 49, 0)
     }
     
     
