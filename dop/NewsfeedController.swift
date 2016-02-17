@@ -20,15 +20,17 @@ class NewsfeedController: NSObject {
         })
     }
     
-    class func getAllFriendsTakingCouponsOffsetWithSuccess(used_date: String, offset: Int, success succeed: ((friendsData: NSData!) -> Void),failure errorFound: ((friendsData: NSError?) -> Void)) {
-        let url = "\(Utilities.dopURL)coupon/used/get/user/offset/?offset=\(offset)&used_date=\(used_date)"
-        Utilities.loadDataFromURL(NSURL(string: url)!, completion:{(data, error) -> Void in
-            if let urlData = data {
-                succeed(friendsData: urlData)
-            } else {
-                errorFound(friendsData: error)
-            }
-        })
+    class func getAllFriendsTakingCouponsOffsetWithSuccess(params:[String:AnyObject], success succeed: ((friendsData: NSData!) -> Void),failure errorFound: ((friendsData: NSError?) -> Void)) {
+        let url = "\(Utilities.dopURL)coupon/used/get/user/offset"
+        
+        Utilities.sendDataToURL(NSURL(string: url)!, method: "POST", params: params, completion:{(data, error) -> Void in
+                if let urlData = data {
+                    succeed(friendsData: urlData)
+                } else {
+                    errorFound(friendsData: error)
+                }
+            })
+
     }
     
     class func likeFriendsActivityWithSuccess(params:[String:AnyObject],success succeed: ((friendsData: NSData!) -> Void),failure errorFound: ((friendsData: NSError?) -> Void)) {

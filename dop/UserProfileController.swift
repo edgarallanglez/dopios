@@ -27,7 +27,7 @@ class UserProfileController: NSObject {
         })
     }
     
-    class func getAllUsedCouponsWithSuccess(limit: Int, success succeed: ((couponsData: NSData!) -> Void),failure errorFound: ((couponsData: NSError?) -> Void)) {
+/*    class func getAllUsedCouponsWithSuccess(limit: Int, success succeed: ((couponsData: NSData!) -> Void),failure errorFound: ((couponsData: NSError?) -> Void)) {
         let url = "\(Utilities.dopURL)coupon/all/used/for/myself/get/?limit=\(limit)"
         Utilities.loadDataFromURL(NSURL(string: url)!, completion:{(data, error) -> Void in
             if let urlData = data {
@@ -47,7 +47,7 @@ class UserProfileController: NSObject {
                 errorFound(couponsData: error)
             }
         })
-    }
+    }*/
     
     class func getAllTakingCouponsWithSuccess(user_id: Int, limit: Int, success succeed: ((friendsData: NSData!) -> Void), failure errorFound: ((friendsData: NSError?) -> Void)) {
         let url = "\(Utilities.dopURL)user/activity/get/user/?user_profile_id=\(user_id)&limit=\(limit)"
@@ -60,9 +60,10 @@ class UserProfileController: NSObject {
         })
     }
     
-    class func getAllTakingCouponsOffsetWithSuccess(client_coupon_id: Int, user_id: Int, offset: Int, success succeed: ((friendsData: NSData!) -> Void),failure errorFound: ((friendsData: NSError?) -> Void)) {
-        let url = "\(Utilities.dopURL)user/activity/get/user/offset/?offset=\(offset)&client_coupon_id=\(client_coupon_id)&user_profile_id=\(user_id)"
-        Utilities.loadDataFromURL(NSURL(string: url)!, completion:{(data, error) -> Void in
+    class func getAllTakingCouponsOffsetWithSuccess(params:[String:AnyObject], success succeed: ((friendsData: NSData!) -> Void),failure errorFound: ((friendsData: NSError?) -> Void)) {
+        let url = "\(Utilities.dopURL)user/activity/get/user/offset"
+        
+        Utilities.sendDataToURL(NSURL(string: url)!, method: "POST", params: params, completion:{(data, error) -> Void in
             if let urlData = data {
                 succeed(friendsData: urlData)
             } else {
