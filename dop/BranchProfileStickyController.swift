@@ -66,7 +66,9 @@ class BranchProfileStickyController: UICollectionViewController, BranchPaginatio
         self.collectionView!.infiniteScrollIndicatorMargin = 40
         
         self.collectionView!.addInfiniteScrollWithHandler { [weak self] (scrollView) -> Void in
-            self?.infiniteScroll()
+            if self!.segmented_controller?.selectedIndex != 0 {
+                self?.infiniteScroll()
+            } else { self?.collectionView?.finishInfiniteScroll() }
         }
     }
     
@@ -78,7 +80,7 @@ class BranchProfileStickyController: UICollectionViewController, BranchPaginatio
         if size_changed { invalidateLayout() }
     }
     
-    func invalidateLayout(){
+    func invalidateLayout() {
         self.layout?.invalidateLayout()
     }
     

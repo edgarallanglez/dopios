@@ -4,6 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Montserrat-Light.otf">
@@ -33,9 +34,9 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KVu-8V-pcC" userLabel="heartView">
-                    <rect key="frame" x="10" y="195" width="90" height="35"/>
+                    <rect key="frame" x="0.0" y="195" width="90" height="35"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="13" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="92R-cH-23A">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="13" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="92R-cH-23A">
                             <rect key="frame" x="45" y="9" width="16" height="17"/>
                             <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="14"/>
                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -66,17 +67,6 @@
                         </mask>
                     </variation>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hGK-JF-Kot">
-                    <rect key="frame" x="130" y="200" width="25" height="25"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="25" id="7pi-4B-5Uz"/>
-                        <constraint firstAttribute="height" constant="25" id="M0X-FT-doH"/>
-                    </constraints>
-                    <state key="normal" image="share-icon">
-                        <color key="titleColor" red="0.23137254900000001" green="0.34901960780000002" blue="0.59607843140000005" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9X0-SB-a07">
                     <rect key="frame" x="0.0" y="0.0" width="180" height="150"/>
                     <constraints>
@@ -86,6 +76,25 @@
                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oJs-dM-Upw" userLabel="takeCouponView">
+                    <rect key="frame" x="90" y="195" width="90" height="35"/>
+                    <subviews>
+                        <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PAJ-ZE-6nL">
+                            <rect key="frame" x="34" y="7" width="22" height="22"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="22" id="rl7-xA-98V"/>
+                                <constraint firstAttribute="width" secondItem="PAJ-ZE-6nL" secondAttribute="height" multiplier="1:1" id="sPU-os-P9Z"/>
+                            </constraints>
+                            <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <state key="normal" image="coupons-fav"/>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="PAJ-ZE-6nL" firstAttribute="centerY" secondItem="oJs-dM-Upw" secondAttribute="centerY" id="GdW-d5-VaZ"/>
+                        <constraint firstItem="PAJ-ZE-6nL" firstAttribute="centerX" secondItem="oJs-dM-Upw" secondAttribute="centerX" id="QHr-5x-7x4"/>
+                        <constraint firstAttribute="height" constant="35" id="ksJ-qv-BU1"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
@@ -94,16 +103,18 @@
                 <constraint firstItem="Fqe-o2-bK7" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="5X2-hW-Tw2"/>
                 <constraint firstAttribute="bottom" secondItem="KVu-8V-pcC" secondAttribute="bottom" id="7oj-9j-rU4"/>
                 <constraint firstItem="9X0-SB-a07" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="BlK-uh-2Vq"/>
-                <constraint firstAttribute="trailing" secondItem="hGK-JF-Kot" secondAttribute="trailing" constant="25" id="Dhl-jF-Jhw"/>
                 <constraint firstItem="KVu-8V-pcC" firstAttribute="top" secondItem="iCm-15-ahI" secondAttribute="bottom" id="Hq3-wz-XOw"/>
-                <constraint firstItem="hGK-JF-Kot" firstAttribute="centerY" secondItem="KVu-8V-pcC" secondAttribute="centerY" id="KxQ-sX-hF8"/>
-                <constraint firstItem="hGK-JF-Kot" firstAttribute="leading" secondItem="KVu-8V-pcC" secondAttribute="trailing" constant="30" id="RA3-8W-2ey"/>
+                <constraint firstItem="KVu-8V-pcC" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="1/2" id="IKc-sp-HOh"/>
                 <constraint firstItem="Fqe-o2-bK7" firstAttribute="top" secondItem="9X0-SB-a07" secondAttribute="bottom" id="YPS-R0-DSP"/>
+                <constraint firstAttribute="bottom" secondItem="oJs-dM-Upw" secondAttribute="bottom" id="Ygk-Mo-gN4"/>
+                <constraint firstItem="oJs-dM-Upw" firstAttribute="leading" secondItem="KVu-8V-pcC" secondAttribute="trailing" id="Yzi-1f-brT"/>
                 <constraint firstAttribute="bottom" secondItem="iCm-15-ahI" secondAttribute="bottom" constant="35" id="cVn-p3-Jwp"/>
                 <constraint firstItem="Fqe-o2-bK7" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="guf-b2-HvH"/>
+                <constraint firstItem="oJs-dM-Upw" firstAttribute="width" secondItem="KVu-8V-pcC" secondAttribute="width" id="h03-dZ-ywh"/>
                 <constraint firstItem="iCm-15-ahI" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="hb4-w4-sgY"/>
                 <constraint firstAttribute="trailing" secondItem="9X0-SB-a07" secondAttribute="trailing" id="jEA-dF-Iqs"/>
                 <constraint firstItem="iCm-15-ahI" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailingMargin" id="qfg-Vi-YSV"/>
+                <constraint firstItem="KVu-8V-pcC" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="sej-kQ-sRj"/>
                 <constraint firstAttribute="trailing" secondItem="Fqe-o2-bK7" secondAttribute="trailing" constant="10" id="sfY-4A-2cg"/>
                 <constraint firstItem="9X0-SB-a07" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="xb1-Be-xZN"/>
             </constraints>
@@ -113,18 +124,25 @@
                     <integer key="value" value="4"/>
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="541-HG-7t7"/>
+                </mask>
+            </variation>
             <connections>
                 <outlet property="descriptionLbl" destination="Fqe-o2-bK7" id="xjV-GY-bEc"/>
                 <outlet property="heart" destination="qHM-zy-8In" id="2wl-Pi-SZ6"/>
                 <outlet property="heartView" destination="KVu-8V-pcC" id="G8E-7C-dQs"/>
                 <outlet property="likes" destination="92R-cH-23A" id="HcR-iZ-sxZ"/>
                 <outlet property="logo" destination="9X0-SB-a07" id="Imr-00-WfQ"/>
+                <outlet property="takeCouponButton" destination="PAJ-ZE-6nL" id="qQA-sl-Rag"/>
+                <outlet property="takeView" destination="oJs-dM-Upw" id="jpY-aC-ViH"/>
             </connections>
-            <point key="canvasLocation" x="-1" y="-70"/>
+            <point key="canvasLocation" x="184" y="72"/>
         </view>
     </objects>
     <resources>
+        <image name="coupons-fav" width="30" height="30"/>
         <image name="heart" width="30" height="30"/>
-        <image name="share-icon" width="30" height="30"/>
     </resources>
 </document>

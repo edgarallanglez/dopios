@@ -31,7 +31,7 @@ class PromoCollectionCell: UICollectionViewCell, FBSDKSharingDelegate {
         coupon_description.text = coupon.couponDescription
         self.branch_id = coupon.branch_id
         self.coupon_id = coupon.id
-        self.shareButton.setBackgroundImage(UIImage(named: "share-icon"), forState: UIControlState.Normal)
+        //self.shareButton.setBackgroundImage(UIImage(named: "share-icon"), forState: UIControlState.Normal)
         let gesture = UITapGestureRecognizer(target: self, action: "likeCoupon:")
         heartView.addGestureRecognizer(gesture)
         self.coupon = coupon
@@ -52,7 +52,7 @@ class PromoCollectionCell: UICollectionViewCell, FBSDKSharingDelegate {
         
         var liked: Bool
         
-        if (self.heart.tintColor == UIColor.lightGrayColor()) {
+        if  self.heart.tintColor == UIColor.lightGrayColor() {
             self.setCouponLike()
             liked = true
         } else {
@@ -159,7 +159,7 @@ class PromoCollectionCell: UICollectionViewCell, FBSDKSharingDelegate {
                         options: UIViewAnimationOptions.AllowUserInteraction,
                         animations: { self.take_coupon_btn.transform = CGAffineTransformIdentity }, completion: nil)
                     
-                    self.take_coupon_btn.setImage(UIImage(named: "take-coupon"), forState: .Normal)
+                    self.take_coupon_btn.tintColor = Utilities.dopColor
                 })
 
             },
