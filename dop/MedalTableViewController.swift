@@ -18,6 +18,7 @@ class MedalTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         getMedals()
+        self.table_view.contentInset = UIEdgeInsetsMake(0, 0, 49, 0)
     }
     
     
@@ -53,7 +54,7 @@ class MedalTableViewController: UITableViewController {
                     }
                 }
             }
-            
+    
             if !model.earned { cell.backgroundColor = Utilities.lightGrayColor }
         }
         
