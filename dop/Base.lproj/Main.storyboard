@@ -1655,10 +1655,15 @@
                                     <outlet property="delegate" destination="TTn-gh-Dpv" id="2im-Yf-Uq6"/>
                                 </connections>
                             </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="QO6-EP-TCl">
+                                <rect key="frame" x="-10" y="-10" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="QO6-EP-TCl" firstAttribute="centerX" secondItem="W3U-ac-5LL" secondAttribute="centerX" id="73X-RW-VQ7"/>
                             <constraint firstItem="37d-tA-MMx" firstAttribute="top" secondItem="Wkj-oU-bl0" secondAttribute="bottom" id="8mV-jT-fxi"/>
+                            <constraint firstItem="QO6-EP-TCl" firstAttribute="centerY" secondItem="W3U-ac-5LL" secondAttribute="centerY" id="CEw-Hf-qrZ"/>
                             <constraint firstItem="Wkj-oU-bl0" firstAttribute="leading" secondItem="W3U-ac-5LL" secondAttribute="leading" id="U2d-AI-neT"/>
                             <constraint firstItem="Wkj-oU-bl0" firstAttribute="top" secondItem="IO3-pJ-NPT" secondAttribute="bottom" id="VMy-2e-NLy"/>
                             <constraint firstAttribute="trailing" secondItem="Wkj-oU-bl0" secondAttribute="trailing" id="h3q-m2-4Ki"/>
@@ -1666,9 +1671,12 @@
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="Wkj-oU-bl0"/>
+                                <exclude reference="QO6-EP-TCl"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="8mV-jT-fxi"/>
+                                <exclude reference="73X-RW-VQ7"/>
+                                <exclude reference="CEw-Hf-qrZ"/>
                                 <exclude reference="U2d-AI-neT"/>
                                 <exclude reference="VMy-2e-NLy"/>
                                 <exclude reference="h3q-m2-4Ki"/>
@@ -1677,9 +1685,12 @@
                         <variation key="widthClass=compact">
                             <mask key="subviews">
                                 <include reference="Wkj-oU-bl0"/>
+                                <include reference="QO6-EP-TCl"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="8mV-jT-fxi"/>
+                                <include reference="73X-RW-VQ7"/>
+                                <include reference="CEw-Hf-qrZ"/>
                                 <include reference="U2d-AI-neT"/>
                                 <include reference="VMy-2e-NLy"/>
                                 <include reference="h3q-m2-4Ki"/>
@@ -1691,6 +1702,7 @@
                     </tabBarItem>
                     <navigationItem key="navigationItem" id="p99-5y-bDX"/>
                     <connections>
+                        <outlet property="main_loader" destination="QO6-EP-TCl" id="peY-jH-iHH"/>
                         <outlet property="tableView" destination="Wkj-oU-bl0" id="N82-px-WuG"/>
                         <segue destination="cf5-lv-Mm7" kind="show" identifier="userProfile" id="ckc-bH-DVq"/>
                     </connections>

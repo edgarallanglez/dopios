@@ -10,6 +10,7 @@ import UIKit
 
 class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, TTTAttributedLabelDelegate {
     
+    @IBOutlet var main_loader: UIActivityIndicatorView!
     var newsfeed = [NewsfeedNote]()
     var cachedImages: [String: UIImage] = [:]
     var refreshControl: UIRefreshControl!
@@ -98,6 +99,7 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
         let nib = UINib(nibName: "NewsfeedCell", bundle: nil)
         tableView.registerNib(nib, forCellReuseIdentifier: "NewsfeedCell")
         
+        main_loader.alpha = 0
         
         getNewsfeedActivity()
         
@@ -114,6 +116,8 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
         tableView.addInfiniteScrollWithHandler { [weak self] (scrollView) -> Void in
             if !self!.newsfeed.isEmpty { self!.getNewsfeedActivityWithOffset() }
         }
+        tableView.alpha = 0
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -129,7 +133,8 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
         newsfeedTemporary.removeAll(keepCapacity: false)
         cachedImages.removeAll(keepCapacity: false)
         
-        
+        Utilities.fadeInViewAnimation(main_loader, delay: 0, duration: 0.5)
+
         NewsfeedController.getAllFriendsTakingCouponsWithSuccess(success: { (friendsData) -> Void in
             let json = JSON(data: friendsData)
             
@@ -151,9 +156,16 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
                 let branch_name =  subJson["branch_name"].string
                 let total_likes =  subJson["total_likes"].int
                 let user_like =  subJson["user_like"].int
-                let date =  subJson["used_date"].string
+                let date =  subJson["used_date"].string!
+                var formatedDate =  subJson["used_date"].string!
+                
+                let separators = NSCharacterSet(charactersInString: "T+")
+                let parts = formatedDate.componentsSeparatedByCharactersInSet(separators)
+                formatedDate = "\(parts[0]) \(parts[1])"
 
-                let model = NewsfeedNote(client_coupon_id:client_coupon_id,friend_id: friend_id, user_id: user_id, branch_id: branch_id, coupon_name: name, branch_name: branch_name, names: names, surnames: surnames, user_image: main_image, company_id: company_id, branch_image: logo, total_likes:total_likes,user_like: user_like, date:date)
+                let model = NewsfeedNote(client_coupon_id:client_coupon_id,friend_id: friend_id, user_id: user_id, branch_id: branch_id, coupon_name: name, branch_name: branch_name, names: names, surnames: surnames, user_image: main_image, company_id: company_id, branch_image: logo, total_likes:total_likes,user_like: user_like, date:date, formatedDate: formatedDate)
+                
+                print(model.date)
                 
                 self.newsfeedTemporary.append(model)
                 
@@ -165,6 +177,10 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
                 
                 self.tableView.reloadData()
                 self.refreshControl.endRefreshing()
+                
+                Utilities.fadeOutViewAnimation(self.main_loader, delay: 0, duration: 0.3)
+
+
                 
                 Utilities.fadeInFromBottomAnimation(self.tableView, delay: 0, duration: 1, yPosition: 20)
                 
@@ -178,6 +194,7 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
         failure: { (error) -> Void in
             dispatch_async(dispatch_get_main_queue(), {
                 self.refreshControl.endRefreshing()
+                Utilities.fadeOutViewAnimation(self.main_loader, delay: 0, duration: 0.3)
             })
         })
 
@@ -191,7 +208,12 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
         
         var firstNewsfeed = self.newsfeed.first as NewsfeedNote!
         
-        NewsfeedController.getAllFriendsTakingCouponsOffsetWithSuccess(firstNewsfeed.date, offset:offset, success: { (friendsData) -> Void in
+        let params:[String: AnyObject] = [
+            "offset" : String(stringInterpolationSegment: offset),
+            "used_date" : firstNewsfeed.formatedDate]
+        
+        
+        NewsfeedController.getAllFriendsTakingCouponsOffsetWithSuccess(params, success: { (friendsData) -> Void in
             let json = JSON(data: friendsData)
             
             for (index, subJson): (String, JSON) in json["data"] {
@@ -214,7 +236,8 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
                 let user_like =  subJson["user_like"].int
                 let date =  subJson["used_date"].string
                 
-                let model = NewsfeedNote(client_coupon_id:client_coupon_id,friend_id: friend_id, user_id: user_id, branch_id: branch_id, coupon_name: name, branch_name: branch_name, names: names, surnames: surnames, user_image: main_image, company_id: company_id, branch_image: logo, total_likes:total_likes,user_like: user_like, date:date)
+                
+                let model = NewsfeedNote(client_coupon_id:client_coupon_id,friend_id: friend_id, user_id: user_id, branch_id: branch_id, coupon_name: name, branch_name: branch_name, names: names, surnames: surnames, user_image: main_image, company_id: company_id, branch_image: logo, total_likes:total_likes,user_like: user_like, date:date, formatedDate: "")
                 
                 self.newsfeedTemporary.append(model)
                 
