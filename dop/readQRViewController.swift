@@ -179,7 +179,7 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                             navigation_controller.setAlert("success", alert_title: "¡Felicidades!", alert_description: "Has redimido tu promoción con éxito en \(name!)")
                         }
                         modal.presentAnimated(true, completionHandler: nil)
-                        self.coupon.available = self.coupon.available - 1
+                        self.coupon?.available = (self.coupon?.available)! - 1
                     }
                     
                     print(json)

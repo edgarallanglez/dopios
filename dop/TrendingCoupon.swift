@@ -13,7 +13,8 @@ class TrendingCoupon: UIView, ModalDelegate {
     @IBOutlet var descriptionLbl: UILabel!
     @IBOutlet var logo: UIImageView!
     @IBOutlet var likes: UILabel!
-    
+    @IBOutlet weak var takeCouponButton: UIButton!
+    @IBOutlet weak var takeView: UIView!
     @IBOutlet var heartView: UIView!
     @IBOutlet var heart: UIImageView!
     var viewController: UIViewController?
@@ -21,6 +22,7 @@ class TrendingCoupon: UIView, ModalDelegate {
     
     func loadItem(coupon: Coupon, viewController: UIViewController) {
         heartView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "likeCoupon:"))
+        takeView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "setTakeCoupon:"))
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "tapCoupon:"))
         self.coupon = coupon
         
@@ -94,7 +96,7 @@ class TrendingCoupon: UIView, ModalDelegate {
         self.coupon.setUserLike(0, total_likes: totalLikes)
     }
     
-    func tapCoupon(sender:UITapGestureRecognizer){
+    func tapCoupon(sender: UITapGestureRecognizer){
         //self.viewController!.performSegueWithIdentifier("couponDetail", sender: self)
         let modal: ModalViewController = ModalViewController(currentView: self.viewController!, type: ModalViewControllerType.CouponDetail)
         
@@ -122,6 +124,51 @@ class TrendingCoupon: UIView, ModalDelegate {
         self.viewController = view
         self.frame.origin = CGPointMake(x,y)
     }
+    
+    func setTakeCoupon(sender: UITapGestureRecognizer) {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyyMMdd"
+        let folioDate = dateFormatter.stringFromDate(NSDate())
+        dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
+        let date = dateFormatter.stringFromDate(NSDate())
+        
+        let params:[String: AnyObject] = [
+            "coupon_id" : self.coupon.id,
+            "branch_id": self.coupon.branch_id,
+            "taken_date" : date,
+            "folio_date": folioDate,
+            "latitude": User.coordinate.latitude ?? 0,
+            "longitude": User.coordinate.longitude ?? 0 ]
+        
+        
+        CouponController.takeCouponWithSuccess(params,
+            success: { (data) -> Void in
+                dispatch_async(dispatch_get_main_queue(), {
+                    let json = JSON(data: data)
+                    print(json)
+                    
+                    self.takeCouponButton.transform = CGAffineTransformMakeScale(0.1, 0.1)
+                    UIView.animateWithDuration(0.8,
+                        delay: 0,
+                        usingSpringWithDamping: 0.2,
+                        initialSpringVelocity: 6.0,
+                        options: UIViewAnimationOptions.AllowUserInteraction,
+                        animations: { self.takeCouponButton.transform = CGAffineTransformIdentity }, completion: nil)
+                    
+                    self.takeCouponButton.tintColor = Utilities.dopColor
+                })
+                
+            },
+            failure: { (error) -> Void in
+                dispatch_async(dispatch_get_main_queue(), {
+                    print(error)
+                })
+            }
+        )
+        
+        print(date)
+    }
+
 
     func pressActionButton(modal: ModalViewController) {
         if modal.action_type == "profile" {
