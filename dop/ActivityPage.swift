@@ -22,7 +22,7 @@ class ActivityPage: UITableViewController, TTTAttributedLabelDelegate {
     var activity_array = [NewsfeedNote]()
     var frame_width: CGFloat!
     var parent_view: UserProfileStickyController!
-    var offset = 5
+    var offset = 6
     
     var new_data: Bool = false
     var added_values: Int = 0
@@ -34,6 +34,8 @@ class ActivityPage: UITableViewController, TTTAttributedLabelDelegate {
         let nib = UINib(nibName: "RewardsActivityCell", bundle: nil)
         self.tableView.registerNib(nib, forCellReuseIdentifier: "RewardsActivityCell")
         self.tableView.rowHeight = 140
+        
+
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -101,6 +103,7 @@ class ActivityPage: UITableViewController, TTTAttributedLabelDelegate {
     
     
     func getActivity() {
+
         UserProfileController.getAllTakingCouponsWithSuccess(parent_view.user_id, limit: 6, success: { (data) -> Void in
             let json = JSON(data: data)
             
@@ -123,8 +126,13 @@ class ActivityPage: UITableViewController, TTTAttributedLabelDelegate {
                 let total_likes =  subJson["total_likes"].int!
                 let user_like =  subJson["user_like"].int
                 let date =  subJson["used_date"].string
+                var formatedDate =  subJson["used_date"].string!
                 
-                let model = NewsfeedNote(client_coupon_id:client_coupon_id,friend_id: friend_id, user_id: user_id, branch_id: branch_id, coupon_name: name, branch_name: branch_name, names: names, surnames: surnames, user_image: main_image, company_id: company_id, branch_image: logo, total_likes:total_likes,user_like: user_like, date: date, formatedDate: "")
+                let separators = NSCharacterSet(charactersInString: "T+")
+                let parts = formatedDate.componentsSeparatedByCharactersInSet(separators)
+                formatedDate = "\(parts[0]) \(parts[1])"
+                
+                let model = NewsfeedNote(client_coupon_id:client_coupon_id,friend_id: friend_id, user_id: user_id, branch_id: branch_id, coupon_name: name, branch_name: branch_name, names: names, surnames: surnames, user_image: main_image, company_id: company_id, branch_image: logo, total_likes:total_likes,user_like: user_like, date: date, formatedDate: formatedDate)
                 
                 self.activity_array.append(model)
             }
@@ -144,7 +152,14 @@ class ActivityPage: UITableViewController, TTTAttributedLabelDelegate {
     
     func reloadWithOffset(parent_scroll: UICollectionView) {
         if activity_array.count != 0 {
-            UserProfileController.getAllTakingCouponsOffsetWithSuccess(self.activity_array[0].client_coupon_id, user_id: parent_view.user_id, offset: offset, success: { (data) -> Void in
+                let firstNewsfeed = self.activity_array.first as NewsfeedNote!
+
+                let params:[String: AnyObject] = [
+                    "offset" : String(stringInterpolationSegment: offset),
+                    "used_date" : firstNewsfeed.formatedDate,
+                    "user_id": parent_view.user_id]
+            
+            UserProfileController.getAllTakingCouponsOffsetWithSuccess(params, success: { (data) -> Void in
                 let json = JSON(data: data)
                 
                 self.new_data = false
@@ -178,9 +193,10 @@ class ActivityPage: UITableViewController, TTTAttributedLabelDelegate {
                 }
                 
                 dispatch_async(dispatch_get_main_queue(), {
-                    self.reload()
+
                     if self.new_data { self.offset += self.added_values }
                     parent_scroll.finishInfiniteScroll()
+                    self.reload()
                     
                 });
                 },

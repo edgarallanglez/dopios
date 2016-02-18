@@ -8,8 +8,9 @@
 
 import UIKit
 
-class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationControllerDelegate {
-    var notificationButton: NotificationButton!
+class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationControllerDelegate, NotificationBadgeDelegate {
+    
+    var notificationButton: UIBarButtonItem!
     var vc: SearchViewController!
     var vcNot: NotificationViewController!
     var searchBar: UISearchBar = UISearchBar()
@@ -21,10 +22,12 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
     
     var cancelSearchButton:UIBarButtonItem!
     
+    var badgeDelegate: NotificationBadgeDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        notificationButton = NotificationButton(image: UIImage(named: "notification"), style: UIBarButtonItemStyle.Plain, target: self, action: "notification")
+        notificationButton = UIBarButtonItem(image: UIImage(named: "notification"), style: UIBarButtonItemStyle.Plain, target: self, action: "notification")
         
         
         self.navigationItem.rightBarButtonItem = notificationButton
@@ -157,12 +160,13 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
         super.didReceiveMemoryWarning()
     }
     func notification() {
-       vcNot.navigationController?.hidesBottomBarWhenPushed = true
-       self.navigationController?.pushViewController(vcNot, animated: true)
-        //self.navigationController!.pushViewController(self.storyboard!.instantiateViewControllerWithIdentifier("Notifications") as UIViewController, animated: true)
-        //self.navigationController?.hidesBottomBarWhenPushed = true
+        let tabbar = self.tabBarController as! TabbarController!
+        self.navigationController?.pushViewController(tabbar.vcNot, animated: true)
+        self.notificationButton.image = UIImage(named: "notification")
+
+       /*vcNot.navigationController?.hidesBottomBarWhenPushed = true
+       self.navigationController?.pushViewController(vcNot, animated: true)*/
         
-        //self.performSegueWithIdentifier("notificationView", sender: nil)
     }
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return .LightContent
@@ -217,7 +221,10 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
             searchBar.resignFirstResponder()
             
         }
+        
     }
-
+    func setBadge(){
+        print("HEY")
+    }
     
 }
