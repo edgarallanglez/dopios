@@ -44,8 +44,8 @@ class TrendingCoupon: UIView, ModalDelegate {
     
     func likeCoupon(sender: UITapGestureRecognizer){
         let params:[String: AnyObject] = [
-            "coupon_id" : String(stringInterpolationSegment: coupon.id),
-            "date" : "2015-01-01"]
+            "coupon_id" : coupon.id,
+            "date" : "2015-01-01" ]
         
         var liked: Bool
         
@@ -91,13 +91,12 @@ class TrendingCoupon: UIView, ModalDelegate {
     
     func removeCouponLike() {
         self.heart.tintColor = UIColor.lightGrayColor()
-        let totalLikes = (Int(self.likes.text!))! - 1
-        self.likes.text = String(stringInterpolationSegment: totalLikes)
-        self.coupon.setUserLike(0, total_likes: totalLikes)
+        let total_likes = (Int(self.likes.text!))! - 1
+        self.likes.text = String(total_likes)
+        self.coupon.setUserLike(0, total_likes: total_likes)
     }
     
     func tapCoupon(sender: UITapGestureRecognizer){
-        //self.viewController!.performSegueWithIdentifier("couponDetail", sender: self)
         let modal: ModalViewController = ModalViewController(currentView: self.viewController!, type: ModalViewControllerType.CouponDetail)
         
         dispatch_async(dispatch_get_main_queue()) {
@@ -105,10 +104,6 @@ class TrendingCoupon: UIView, ModalDelegate {
                 let navigationController = vc as! SimpleModalViewController
                 navigationController.coupon = self.coupon
             }
-            //modal.definesPresentationContext = true
-           // modal.modalPresentationStyle = .FullScreen
-            //self.viewController?.modalPresentationStyle = .FullScreen
-            //self.viewController?.navigationController?.modalPresentationStyle = .FullScreen
            
             modal.presentAnimated(true, completionHandler: nil)
             modal.delegate = self

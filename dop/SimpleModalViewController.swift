@@ -300,7 +300,7 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapVie
             animations: {
                 sender.transform = CGAffineTransformIdentity
             }, completion: nil)
-        sender.setImage(UIImage(named: "take-coupon"), forState: .Normal)
+        sender.tintColor = Utilities.dopColor
     }
     
     func likeCoupon(sender: UIGestureRecognizer) {
