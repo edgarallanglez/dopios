@@ -42,20 +42,6 @@ class NavigationController: UINavigationController{
         // Dispose of any resources that can be recreated.
     }
     
-    func getNotification(packet:SocketIOPacket) {
-        print("NOTIFICATION")
-       
-        /*var alert = UIAlertController(title: "Alert", message: packet.data, preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
-        
-        self.presentViewController(alert, animated: true, completion: nil)*/
-
-        
-    }
-    
-   /* func search(){
-        //self.performSegueWithIdentifier("searchView", sender: self)
-    }*/
 
 
     /*

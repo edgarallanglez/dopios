@@ -174,7 +174,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
             let actualX = branchesScroll.frame.size.width * CGFloat(index)
             let margin:CGFloat = 20.0
             
-            let branchNameLbl: UILabel = UILabel(frame: CGRectMake(margin+actualX, 80, scrollWidth / 2, 75))
+            let branchNameLbl: UILabel = UILabel(frame: CGRectMake(margin+actualX, 80, scrollWidth-80, 75))
             branchNameLbl.alpha = 0
             branchNameLbl.textColor = UIColor.whiteColor()
             branchNameLbl.font = UIFont(name: "Montserrat-Regular", size: 26)

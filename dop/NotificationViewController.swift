@@ -23,6 +23,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     let limit:Int = 11
     var refreshControl: UIRefreshControl!
     var cachedImages: [String: UIImage] = [:]
+    var newNotification: Bool = false
     
     override func viewDidLoad() {
         
@@ -62,7 +63,9 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
-        notification_table.reloadData()
+        if newNotification {
+           getNotifications()
+        }
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return notifications.count

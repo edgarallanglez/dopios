@@ -103,7 +103,7 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
         
         getNewsfeedActivity()
         
-        self.offset = self.limit - 1
+        self.offset = self.limit
         
         // Set custom indicator
         self.tableView.infiniteScrollIndicatorView = CustomInfiniteIndicator(frame: CGRectMake(0, 0, 24, 24))
@@ -187,7 +187,7 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
                 print("Printed")
                 print(json)
                 
-                self.offset = self.limit - 1
+                self.offset = self.limit
             });
         },
             

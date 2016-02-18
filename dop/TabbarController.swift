@@ -7,12 +7,22 @@
 //
 
 import UIKit
-
-class TabbarController: UITabBarController, NotificationDelegate {
+@objc protocol NotificationBadgeDelegate{
+    optional func setBadge()
+}
+class TabbarController: UITabBarController, SocketIODelegate, NotificationBadgeDelegate {
     
+    var badgeDelegate: NotificationBadgeDelegate?
     var lastSelected = 0
+    
+    let socketIO : SocketIO = SocketIO()
+    
+    var vcNot: NotificationViewController!
+
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        
         
         /*  var DynamicView=UIView(frame: CGRectMake(0, 0, self.view.bounds.size.width, 49))
         DynamicView.backgroundColor=UIColor.greenColor()
@@ -23,6 +33,8 @@ class TabbarController: UITabBarController, NotificationDelegate {
         self.tabBar.viewForBaselineLayout()?.sendSubviewToBack(DynamicView)
         
         */
+        vcNot = self.storyboard!.instantiateViewControllerWithIdentifier("Notifications") as! NotificationViewController
+
         
         self.tabBar.opaque = false
         self.tabBar.translucent = false
@@ -35,7 +47,17 @@ class TabbarController: UITabBarController, NotificationDelegate {
         
         self.navigationController?.navigationBar.hidden = true
         
+        self.startListening()
+       /* let notificationButton = NotificationButton(image: UIImage(named: "notification"), style: UIBarButtonItemStyle.Plain, target: self, action: "notification")
         
+        
+        self.navigationItem.rightBarButtonItem = notificationButton
+        
+        notificationButton.delegate = self
+        notificationButton.startListening()*/
+        
+        
+
         
     /*self.navigationController?.navigationBar.setBackgroundImage(UIImage(named:"topbarBackground"), forBarMetrics: .Default)
         
@@ -117,15 +139,6 @@ class TabbarController: UITabBarController, NotificationDelegate {
         let destinationViewController = nav.topViewController as! SearchViewController*/
         
     }
-    
-    func getNotification(packet:SocketIOPacket) {
-        print("NOTIFICATION")
-        var alert = UIAlertController(title: "Alert", message: packet.data, preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
-
-        self.presentViewController(alert, animated: true, completion: nil)
-
-    }
 
     override func tabBar(tabBar: UITabBar, didSelectItem item: UITabBarItem) {
         let currentSelected = self.selectedIndex
@@ -134,9 +147,43 @@ class TabbarController: UITabBarController, NotificationDelegate {
         }
         lastSelected = currentSelected
     }
+    
+    //NOTIFICATIONS
+    
+    func getNotification(packet:SocketIOPacket) {
+        let navController = self.selectedViewController as! UINavigationController
+        self.badgeDelegate?.setBadge!()
+        if(navController.viewControllers.last is BaseViewController){
+            let currentVC = navController.viewControllers.last as! BaseViewController
+            currentVC.notificationButton.image = UIImage(named: "notification-badge")
+            
+        }
 
-   
-
-  
+    }
+    func startListening(){
+        socketIO.delegate = self
+        socketIO.useSecure = true
+        socketIO.connectToHost("inmoon.com.mx", onPort: 443, withParams: nil, withNamespace: "/app")
+        
+        
+    }
+    func socketIODidConnect(socket: SocketIO) {
+        print("socket.io connected.")
+        socketIO.sendEvent("join room", withData: User.userToken)
+        //socketIO.sendEvent("notification", withData: User.userToken)
+    }
+    func socketIO(socket: SocketIO, didReceiveEvent packet: SocketIOPacket) {
+        print("didReceiveEvent >>> data: %@", packet.dataAsJSON())
+        
+        if(packet.name == "my response"){
+            //socketIO.sendMessage("hello back!", withAcknowledge: cb)
+        }
+        if(packet.name == "notification"){
+            self.getNotification(packet)
+        }
+    }
+    func socketIODidDisconnect(socket: SocketIO!, disconnectedWithError error: NSError!) {
+        socketIO.connectToHost("inmoon.com.mx", onPort: 443, withParams: nil, withNamespace: "/app")
+    }
 
 }
