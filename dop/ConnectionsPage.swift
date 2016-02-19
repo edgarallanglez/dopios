@@ -16,6 +16,8 @@ class ConnectionsPage: UITableViewController {
     var delegate: ConnectionsPageDelegate?
     
     var parent_view: UserProfileStickyController!
+    var parent_page_controller: UserPaginationViewController!
+    
     var cached_images: [String: UIImage] = [:]
     var connection_array = [ConnectionModel]()
     var offset = 5
@@ -25,17 +27,16 @@ class ConnectionsPage: UITableViewController {
     override func viewDidLoad() {
         self.tableView.alwaysBounceVertical = false
         self.tableView.scrollEnabled = false
-//        self.view.translatesAutoresizingMaskIntoConstraints = false
         self.tableView.rowHeight = 60
         
     }
     
     override func viewDidAppear(animated: Bool) {
-        if connection_array.count == 0 { getConnections() } else { setFrame() }
+        if connection_array.count == 0 { getConnections() }
+        else { reload() }
     }
     
     func setFrame() {
-        //self.tableView.frame.size.height = self.tableView.contentSize.height
         delegate?.resizeConnectionsSize!(self.tableView.contentSize.height)
     }
     
@@ -95,10 +96,12 @@ class ConnectionsPage: UITableViewController {
     }
     
     func reload() {
-        self.tableView.reloadData()
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-            self.setFrame()
-        })
+        if self.parent_page_controller.index == 2 {
+            self.tableView.reloadData()
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.setFrame()
+            })
+        }
     }
     
     func reloadWithOffset(parent_scroll: UICollectionView) {
@@ -157,6 +160,10 @@ class ConnectionsPage: UITableViewController {
 
             }
         }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        self.view.layoutIfNeeded()
     }
     
 }

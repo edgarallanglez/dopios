@@ -155,6 +155,7 @@ class BranchRankingViewController: UITableViewController {
     }
     
     func reloadWithOffset(parent_scroll: UICollectionView) {
+        parent_scroll.finishInfiniteScroll()
     }
 }
 

@@ -18,6 +18,7 @@ class BadgesPage: UICollectionViewController {
     @IBOutlet var badgeCollectionView: UICollectionView!
     
     var parent_view: UserProfileStickyController!
+    var parent_page_controller: UserPaginationViewController!
     
     var cached_images: [String: UIImage] = [:]
     var badge_array: [BadgeModel] = [BadgeModel]()
@@ -37,7 +38,9 @@ class BadgesPage: UICollectionViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
-        if badge_array.count == 0 { getBadges() } else { setFrame() }
+        if badge_array.count == 0 { getBadges() }
+        else { reload() }
+        
     }
     
     func setFrame() {
@@ -58,7 +61,7 @@ class BadgesPage: UICollectionViewController {
         
         let cell: BadgeCollectionCell = collectionView.dequeueReusableCellWithReuseIdentifier("badgeCell", forIndexPath: indexPath) as! BadgeCollectionCell
         
-        if(!badge_array.isEmpty){
+        if !badge_array.isEmpty {
             let model = self.badge_array[indexPath.row]
             
             cell.loadItem(model)
@@ -131,10 +134,12 @@ class BadgesPage: UICollectionViewController {
     }
     
     func reload() {
-        self.badgeCollectionView.reloadData()
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-            self.setFrame()
-        })
+        if self.parent_page_controller.index == 1 {
+            self.badgeCollectionView.reloadData()
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.setFrame()
+            })
+        }
     }
     
     func reloadWithOffset(parent_scroll: UICollectionView) {
@@ -176,7 +181,10 @@ class BadgesPage: UICollectionViewController {
                     })
             })
         } else { parent_scroll.finishInfiniteScroll() }
-
         
     }
+//    override func viewDidLayoutSubviews() {
+//        self.collectionView?.setContentOffset(CGPointZero, animated: true)
+////        self.view.layoutIfNeeded()
+//    }
 }

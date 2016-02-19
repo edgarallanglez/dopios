@@ -132,16 +132,19 @@ class UserPaginationViewController: UICollectionViewCell, UIPageViewControllerDa
             let viewController = parentViewController.storyboard!.instantiateViewControllerWithIdentifier("ActivityPage") as! ActivityPage
             viewController.delegate = self
             viewController.parent_view = self.parentViewController
+            viewController.parent_page_controller = self
             return viewController
         case 1:
             let viewController = parentViewController.storyboard!.instantiateViewControllerWithIdentifier("BadgesPage") as! BadgesPage
             viewController.delegate = self
             viewController.parent_view = self.parentViewController
+            viewController.parent_page_controller = self
             return viewController
         case 2:
             let viewController = parentViewController.storyboard!.instantiateViewControllerWithIdentifier("ConnectionsPage") as! ConnectionsPage
             viewController.delegate = self
             viewController.parent_view = self.parentViewController
+            viewController.parent_page_controller = self
             return viewController
             
         default:

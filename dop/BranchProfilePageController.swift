@@ -176,8 +176,8 @@ class BranchProfilePageController: UICollectionViewCell, UIPageViewControllerDat
     func launchInfiniteScroll(parent_scroll: UICollectionView) {
         let viewController = branchPageViewController.viewControllers!.first!
         switch viewController.title! {
-//        case "aboutPage": parent_scroll.finishInfiniteScroll()//let currentController = viewController as! BranchAboutViewController
-        //currentController.reloadWithOffset(parent_scroll)
+        case "aboutPage": let currentController = viewController as! BranchAboutViewController
+        currentController.reloadWithOffset(parent_scroll)
             
         case "campaignPage": let currentController = viewController as! BranchCampaignCollectionViewController
         currentController.reloadWithOffset(parent_scroll)

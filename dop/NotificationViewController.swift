@@ -241,8 +241,8 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                         
                         self.notification_table.finishInfiniteScroll()
                         
-                        if(newData){
-                            self.offset+=addedValues
+                        if newData {
+                            self.offset += addedValues
                         }
                         
                         /*UIView.animateWithDuration(0.3, animations: {

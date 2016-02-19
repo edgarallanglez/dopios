@@ -214,6 +214,7 @@ class BranchCampaignCollectionViewController: UICollectionViewController, ModalD
     }
 
     func reloadWithOffset(parent_scroll: UICollectionView) {
+        parent_scroll.finishInfiniteScroll()
     }
     
     func pressActionButton(modal: ModalViewController) {

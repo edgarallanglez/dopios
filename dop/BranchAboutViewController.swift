@@ -125,7 +125,11 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
                 })
         })
     }
-
+    
+    func reloadWithOffset(parent_scroll: UICollectionView) {
+        parent_scroll.finishInfiniteScroll()
+    }
+    
     override func viewDidLayoutSubviews() {
         self.view.frame.size.width = UIScreen.mainScreen().bounds.width
     }

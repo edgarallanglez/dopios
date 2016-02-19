@@ -62,14 +62,14 @@ class BranchProfileStickyController: UICollectionViewController, BranchPaginatio
         
         self.collectionView?.delegate = self
         
-        self.collectionView!.infiniteScrollIndicatorView = CustomInfiniteIndicator(frame: CGRectMake(0, 0, 24, 24))
-        self.collectionView!.infiniteScrollIndicatorMargin = 40
-        
-        self.collectionView!.addInfiniteScrollWithHandler { [weak self] (scrollView) -> Void in
-            if self!.segmented_controller?.selectedIndex != 0 {
-                self?.infiniteScroll()
-            } else { self?.collectionView?.finishInfiniteScroll() }
-        }
+//        self.collectionView!.infiniteScrollIndicatorView = CustomInfiniteIndicator(frame: CGRectMake(0, 0, 24, 24))
+//        self.collectionView!.infiniteScrollIndicatorMargin = 40
+//        
+//        self.collectionView!.addInfiniteScrollWithHandler { [weak self] (scrollView) -> Void in
+//            if self!.segmented_controller?.selectedIndex != 0 {
+//                self?.infiniteScroll()
+//            } else { self?.collectionView?.finishInfiniteScroll() }
+//        }
     }
     
     // Cells
@@ -137,15 +137,16 @@ class BranchProfileStickyController: UICollectionViewController, BranchPaginatio
     
     func setupIndex(index: Int) {
         delegate?.setPage!(index)
+        self.collectionView?.setContentOffset(CGPointZero, animated: false)
     }
     
     func infiniteScroll() {
         delegate?.launchInfiniteScroll!(self.collectionView!)
-//        if person.privacy_status == 1 { self.collectionView!.finishInfiniteScroll() }
     }
     
     func setSegmentedIndex(index: Int) {
         self.segmented_controller!.selectedIndex = index
+        self.collectionView?.setContentOffset(CGPointZero, animated: false)
     }
     
     func setFollowButton(branch: Branch) {

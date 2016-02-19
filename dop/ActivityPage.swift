@@ -22,6 +22,7 @@ class ActivityPage: UITableViewController, TTTAttributedLabelDelegate {
     var activity_array = [NewsfeedNote]()
     var frame_width: CGFloat!
     var parent_view: UserProfileStickyController!
+    var parent_page_controller: UserPaginationViewController!
     var offset = 6
     
     var new_data: Bool = false
@@ -34,13 +35,12 @@ class ActivityPage: UITableViewController, TTTAttributedLabelDelegate {
         let nib = UINib(nibName: "RewardsActivityCell", bundle: nil)
         self.tableView.registerNib(nib, forCellReuseIdentifier: "RewardsActivityCell")
         self.tableView.rowHeight = 140
-        
-
     }
     
     override func viewDidAppear(animated: Bool) {
-        if activity_array.count == 0 { getActivity() } else {
-            setFrame()
+        if activity_array.count == 0 { getActivity() }
+        else {
+            reload()
             let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("default_view")!
             cell.hidden = false
         }
@@ -211,10 +211,12 @@ class ActivityPage: UITableViewController, TTTAttributedLabelDelegate {
     }
     
     func reload() {
-        self.tableView.reloadData()
-        dispatch_async(dispatch_get_main_queue(), {
-            self.setFrame()
-        });
+        if self.parent_page_controller.index == 0 {
+            self.tableView.reloadData()
+            dispatch_async(dispatch_get_main_queue(), {
+                self.setFrame()
+            });
+        }
     }
     
     func downloadImage(url: NSURL, cell: RewardsActivityCell) {
@@ -223,6 +225,10 @@ class ActivityPage: UITableViewController, TTTAttributedLabelDelegate {
                 cell.user_image.image = UIImage(data: data!)
             }
         }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        self.view.layoutIfNeeded()
     }
     
 }

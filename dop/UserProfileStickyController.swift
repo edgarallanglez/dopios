@@ -54,12 +54,12 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
         checkForProfile()
         //setupProfileDetail()
         
-        self.collectionView!.infiniteScrollIndicatorView = CustomInfiniteIndicator(frame: CGRectMake(0, 0, 24, 24))
-        self.collectionView!.infiniteScrollIndicatorMargin = 40
-
-        self.collectionView!.addInfiniteScrollWithHandler { [weak self] (scrollView) -> Void in
-            self?.infiniteScroll()
-        }
+//        self.collectionView!.infiniteScrollIndicatorView = CustomInfiniteIndicator(frame: CGRectMake(0, 0, 24, 24))
+//        self.collectionView!.infiniteScrollIndicatorMargin = 40
+//
+//        self.collectionView!.addInfiniteScrollWithHandler { [weak self] (scrollView) -> Void in
+//            self?.infiniteScroll()
+//        }
     }
     
     // Cells
@@ -128,7 +128,7 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
         return UICollectionReusableView()
         
     }
-    func checkForProfile(){
+    func checkForProfile() {
         if person == nil{
             UserProfileController.getUserProfile(user_id, success: { (profileData) -> Void in
                 let json = JSON(data: profileData)
@@ -190,6 +190,7 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
     
     func setupIndex(index: Int) {
         delegate?.setPage!(index)
+        self.collectionView?.setContentOffset(CGPointZero, animated: false)
     }
     
     func infiniteScroll() {
@@ -199,6 +200,7 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
     
     func setSegmentedIndex(index: Int) {
         self.segmented_controller!.selectedIndex = index
+        self.collectionView?.setContentOffset(CGPointZero, animated: false)
     }
 }
 
