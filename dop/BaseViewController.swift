@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationControllerDelegate, NotificationBadgeDelegate {
+class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationControllerDelegate {
     
     var notificationButton: UIBarButtonItem!
     var vc: SearchViewController!
@@ -22,10 +22,11 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
     
     var cancelSearchButton:UIBarButtonItem!
     
-    var badgeDelegate: NotificationBadgeDelegate?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "setBadge", name: "newNotification", object: nil)
+
         
         notificationButton = UIBarButtonItem(image: UIImage(named: "notification"), style: UIBarButtonItemStyle.Plain, target: self, action: "notification")
         
@@ -190,6 +191,13 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
 
 
     }
+    override func viewWillAppear(animated: Bool) {
+        if User.newNotification {
+            self.notificationButton.image = UIImage(named: "notification-badge")
+        }else{
+            self.notificationButton.image = UIImage(named: "notification")
+        }
+    }
     
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(true)
@@ -224,7 +232,8 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
         
     }
     func setBadge(){
-        print("HEY")
+        self.notificationButton.image = UIImage(named: "notification-badge")
+        User.newNotification = true
     }
-    
+
 }

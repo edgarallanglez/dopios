@@ -74,6 +74,7 @@
             <string>Montserrat-Light</string>
             <string>Montserrat-Light</string>
             <string>Montserrat-Light</string>
+            <string>Montserrat-Light</string>
         </mutableArray>
         <mutableArray key="Montserrat-Regular.otf">
             <string>Montserrat-Regular</string>
@@ -1824,12 +1825,15 @@
                                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                     </variation>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zCk-dx-XBm">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zCk-dx-XBm">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="8IS-Ht-FMR"/>
                                                         <constraint firstAttribute="width" constant="40" id="KhK-03-Gnl"/>
                                                     </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
                                                     <variation key="default">
                                                         <mask key="constraints">
                                                             <exclude reference="8IS-Ht-FMR"/>
@@ -2286,7 +2290,9 @@
                     <tabBarItem key="tabBarItem" title="" image="settings" id="l6G-Dj-rO7">
                         <inset key="imageInsets" minX="0.0" minY="5" maxX="0.0" maxY="-5"/>
                     </tabBarItem>
-                    <navigationItem key="navigationItem" id="g4t-eP-7Je"/>
+                    <navigationItem key="navigationItem" id="g4t-eP-7Je">
+                        <barButtonItem key="backBarButtonItem" title=" " id="Qnz-7X-2bj"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="configIcon" destination="agh-2q-TAH" id="qWO-PC-nM8"/>
                         <outlet property="friendsIcon" destination="jrC-hp-qlY" id="Mi3-qp-hz7"/>
@@ -5815,11 +5821,46 @@
                                     <outlet property="delegate" destination="3Xa-r8-h36" id="8uy-IL-c6V"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cH0-Rz-liy">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <color key="backgroundColor" red="0.98431372549999996" green="0.1333333333" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="165" id="o5I-bL-WwL"/>
+                                    <constraint firstAttribute="height" constant="30" id="u5Z-bm-zLj"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="15"/>
+                                <state key="normal" title="Nueva notificación"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="o5I-bL-WwL"/>
+                                        <exclude reference="u5Z-bm-zLj"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="167" y="100" width="164" height="30"/>
+                                    <mask key="constraints">
+                                        <include reference="o5I-bL-WwL"/>
+                                        <include reference="u5Z-bm-zLj"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="pressNotificationButton:" destination="3Xa-r8-h36" eventType="touchUpInside" id="gZh-jZ-8H3"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="cH0-Rz-liy" firstAttribute="top" secondItem="NHT-Ra-8PJ" secondAttribute="bottom" constant="40" id="1Sd-3u-Crk">
+                                <variation key="widthClass=compact" constant="10"/>
+                            </constraint>
                             <constraint firstItem="Chu-fQ-Sej" firstAttribute="leading" secondItem="t7s-yY-NR2" secondAttribute="leading" id="7vW-uL-W07"/>
                             <constraint firstItem="sDB-nV-JR4" firstAttribute="top" secondItem="Chu-fQ-Sej" secondAttribute="bottom" id="DBj-0l-8wm"/>
+                            <constraint firstItem="cH0-Rz-liy" firstAttribute="centerX" secondItem="t7s-yY-NR2" secondAttribute="centerX" id="ImV-kB-E6K"/>
                             <constraint firstItem="Chu-fQ-Sej" firstAttribute="top" secondItem="NHT-Ra-8PJ" secondAttribute="bottom" id="Ysf-Cj-x3x"/>
                             <constraint firstItem="uiu-gU-CjU" firstAttribute="centerY" secondItem="t7s-yY-NR2" secondAttribute="centerY" id="asD-ny-E6O"/>
                             <constraint firstAttribute="trailing" secondItem="Chu-fQ-Sej" secondAttribute="trailing" id="g5Q-02-Qa9"/>
@@ -5829,35 +5870,44 @@
                             <mask key="subviews">
                                 <exclude reference="uiu-gU-CjU"/>
                                 <exclude reference="Chu-fQ-Sej"/>
+                                <exclude reference="cH0-Rz-liy"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="DBj-0l-8wm"/>
-                                <exclude reference="asD-ny-E6O"/>
-                                <exclude reference="n4Q-Tr-0cS"/>
                                 <exclude reference="7vW-uL-W07"/>
                                 <exclude reference="Ysf-Cj-x3x"/>
                                 <exclude reference="g5Q-02-Qa9"/>
+                                <exclude reference="1Sd-3u-Crk"/>
+                                <exclude reference="ImV-kB-E6K"/>
+                                <exclude reference="asD-ny-E6O"/>
+                                <exclude reference="n4Q-Tr-0cS"/>
+                                <exclude reference="DBj-0l-8wm"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
                                 <include reference="uiu-gU-CjU"/>
                                 <include reference="Chu-fQ-Sej"/>
+                                <include reference="cH0-Rz-liy"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="DBj-0l-8wm"/>
-                                <include reference="asD-ny-E6O"/>
-                                <include reference="n4Q-Tr-0cS"/>
                                 <include reference="7vW-uL-W07"/>
                                 <include reference="Ysf-Cj-x3x"/>
                                 <include reference="g5Q-02-Qa9"/>
+                                <include reference="1Sd-3u-Crk"/>
+                                <include reference="ImV-kB-E6K"/>
+                                <include reference="asD-ny-E6O"/>
+                                <include reference="n4Q-Tr-0cS"/>
+                                <include reference="DBj-0l-8wm"/>
                             </mask>
                         </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="zlJ-s8-PeD"/>
-                    <navigationItem key="navigationItem" id="Tr0-4S-niY"/>
+                    <navigationItem key="navigationItem" id="Tr0-4S-niY">
+                        <barButtonItem key="backBarButtonItem" title=" " id="Eh3-6Z-emh"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="mainLoader" destination="uiu-gU-CjU" id="wfG-op-sjK"/>
+                        <outlet property="notificationButton" destination="cH0-Rz-liy" id="iVv-Hy-Q3t"/>
                         <outlet property="notification_table" destination="Chu-fQ-Sej" id="yfM-Hu-57d"/>
                         <segue destination="cf5-lv-Mm7" kind="show" identifier="userProfile" id="fpu-8Z-7Bb"/>
                     </connections>
@@ -5888,10 +5938,10 @@
             </objects>
             <point key="canvasLocation" x="-528" y="978"/>
         </scene>
-        <!--User Profile Sticky Controller-->
+        <!-- -->
         <scene sceneID="aIp-0N-4pa">
             <objects>
-                <collectionViewController storyboardIdentifier="UserProfileStickyController" id="cf5-lv-Mm7" customClass="UserProfileStickyController" customModule="dop" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="UserProfileStickyController" title=" " id="cf5-lv-Mm7" customClass="UserProfileStickyController" customModule="dop" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="LZJ-9o-NLy">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -7451,7 +7501,8 @@
                                                         <exclude reference="n7Q-fo-IVJ"/>
                                                     </mask>
                                                 </variation>
-                                                <variation key="widthClass=compact">
+                                                <variation key="widthClass=compact" misplaced="YES">
+                                                    <rect key="frame" x="31" y="17" width="40" height="16"/>
                                                     <mask key="constraints">
                                                         <exclude reference="n7Q-fo-IVJ"/>
                                                     </mask>
@@ -7770,11 +7821,11 @@
         <image name="twitter-logo" width="42" height="42"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="TKt-eX-Ulp"/>
         <segue reference="8iK-Yr-WEc"/>
         <segue reference="njR-gH-Wm2"/>
+        <segue reference="hgi-kp-Ocz"/>
         <segue reference="H7K-TF-KnO"/>
-        <segue reference="ckc-bH-DVq"/>
-        <segue reference="TKt-eX-Ulp"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

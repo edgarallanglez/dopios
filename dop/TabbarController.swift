@@ -7,12 +7,10 @@
 //
 
 import UIKit
-@objc protocol NotificationBadgeDelegate{
-    optional func setBadge()
-}
-class TabbarController: UITabBarController, SocketIODelegate, NotificationBadgeDelegate {
+import AVFoundation
+
+class TabbarController: UITabBarController, SocketIODelegate {
     
-    var badgeDelegate: NotificationBadgeDelegate?
     var lastSelected = 0
     
     let socketIO : SocketIO = SocketIO()
@@ -152,13 +150,9 @@ class TabbarController: UITabBarController, SocketIODelegate, NotificationBadgeD
     
     func getNotification(packet:SocketIOPacket) {
         let navController = self.selectedViewController as! UINavigationController
-        self.badgeDelegate?.setBadge!()
-        if(navController.viewControllers.last is BaseViewController){
-            let currentVC = navController.viewControllers.last as! BaseViewController
-            currentVC.notificationButton.image = UIImage(named: "notification-badge")
-            
-        }
-
+        
+        NSNotificationCenter.defaultCenter().postNotificationName("newNotification", object: nil)
+        AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
     }
     func startListening(){
         socketIO.delegate = self
