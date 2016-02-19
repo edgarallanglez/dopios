@@ -12,6 +12,7 @@ import UIKit
 
 
 class NotificationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, TTTAttributedLabelDelegate {
+    @IBOutlet var notificationButton: UIButton!
 
     
     @IBOutlet var mainLoader: UIActivityIndicatorView!
@@ -23,14 +24,14 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     let limit:Int = 11
     var refreshControl: UIRefreshControl!
     var cachedImages: [String: UIImage] = [:]
-    var newNotification: Bool = false
+
     
     override func viewDidLoad() {
         
         self.title = "Notificaciones"
  
         notification_table.alpha = 0
-        
+   
         self.refreshControl = UIRefreshControl()
         self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         self.notification_table.addSubview(refreshControl)
@@ -50,9 +51,15 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                 self!.getNotificationsWithOffset() //offset
             //}
         }
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "showNotificationButton", name: "newNotification", object: nil)
 
         getNotifications()
         
+    }
+    @IBAction func pressNotificationButton(sender: AnyObject) {
+        //notification_table.setContentOffset(CGPointMake(0, 0), animated: true)
+        self.getNotifications()
+        Utilities.fadeOutViewAnimation(self.notificationButton, delay: 0, duration: 0.5)
     }
     func refresh(sender:AnyObject){
         getNotifications()
@@ -63,9 +70,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
-        if newNotification {
-           getNotifications()
-        }
+        User.newNotification = false
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return notifications.count
@@ -138,7 +143,9 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     func getNotifications() {
         notificationsTemporary.removeAll(keepCapacity: false)
         cachedImages.removeAll(keepCapacity: false)
-
+        
+        Utilities.fadeInViewAnimation(self.mainLoader, delay: 0, duration: 0.3)
+        
         NotificationController.getNotificationsWithSuccess(
             success: { (couponsData) -> Void in
                 let json = JSON(data: couponsData)
@@ -185,6 +192,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                     
                     //Utilities.fadeInViewAnimation(self.notification_table, delay: 0, duration: 1)
                     Utilities.fadeInFromBottomAnimation(self.notification_table, delay: 0, duration: 1, yPosition: 20)
+                    self.notification_table.setContentOffset(CGPointMake(0, 0), animated: true)
                 });
             },
             failure: { (error) -> Void in
@@ -282,6 +290,9 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                 })
         })
 
+    }
+    func showNotificationButton(){
+        Utilities.fadeInFromBottomAnimation(notificationButton, delay: 0, duration: 1, yPosition: 20)
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let selectedItem = notifications[indexPath.row]
