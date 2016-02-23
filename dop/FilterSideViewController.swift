@@ -11,6 +11,8 @@ import UIKit
 class FilterSideViewController: UIViewController {
     @IBOutlet weak var filterSegmented: FilterSegmentedControl!
     
+    static var open: Bool = false
+    
     //food outlets
     @IBOutlet weak var alitasAndBoneless: UISwitch!
     @IBOutlet weak var bistro: UISwitch!
@@ -52,10 +54,12 @@ class FilterSideViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         UIApplication.sharedApplication().statusBarStyle = .Default
+        FilterSideViewController.open = true
     }
     
     override func viewWillDisappear(animated: Bool) {
         UIApplication.sharedApplication().statusBarStyle = .LightContent
+        FilterSideViewController.open = false
     }
     override func viewDidLoad() {
         self.foodCategoriesArray = [alitasAndBoneless,

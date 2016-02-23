@@ -20,17 +20,7 @@ class TabbarController: UITabBarController, SocketIODelegate {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
-        
-        /*  var DynamicView=UIView(frame: CGRectMake(0, 0, self.view.bounds.size.width, 49))
-        DynamicView.backgroundColor=UIColor.greenColor()
-        DynamicView.alpha = 0.5
-        
-        
-        self.tabBar.viewForBaselineLayout()?.addSubview(DynamicView)
-        self.tabBar.viewForBaselineLayout()?.sendSubviewToBack(DynamicView)
-        
-        */
+
         vcNot = self.storyboard!.instantiateViewControllerWithIdentifier("Notifications") as! NotificationViewController
 
         
@@ -46,36 +36,7 @@ class TabbarController: UITabBarController, SocketIODelegate {
         self.navigationController?.navigationBar.hidden = true
         
         self.startListening()
-       /* let notificationButton = NotificationButton(image: UIImage(named: "notification"), style: UIBarButtonItemStyle.Plain, target: self, action: "notification")
-        
-        
-        self.navigationItem.rightBarButtonItem = notificationButton
-        
-        notificationButton.delegate = self
-        notificationButton.startListening()*/
-        
-        
 
-        
-    /*self.navigationController?.navigationBar.setBackgroundImage(UIImage(named:"topbarBackground"), forBarMetrics: .Default)
-        
-        var backgroundLayer = Utilities.Colors
-        
-
-        self.navigationController?.navigationBar.titleTextAttributes = [
-            NSForegroundColorAttributeName: UIColor.whiteColor()
-        ]
-        
-        
-        
-    
-        self.navigationController?.navigationBar.translucent = false
-        
-        self.navigationItem.backBarButtonItem?.setTitleTextAttributes( [NSForegroundColorAttributeName: UIColor.whiteColor()], forState: UIControlState.Normal)
-       */
-        
-        //let imagen:UIImage = UIImage(named: "tabButtonn")!
-        //addCenterButtonWithImage(imagen)
         
         UIApplication.sharedApplication().statusBarStyle = .LightContent
         
@@ -108,16 +69,6 @@ class TabbarController: UITabBarController, SocketIODelegate {
         
     }
     
-    func notification() {
-        self.navigationController!.pushViewController(self.storyboard!.instantiateViewControllerWithIdentifier("Notifications") as UIViewController, animated: true)
-        self.navigationController?.hidesBottomBarWhenPushed = false
-        
-    }
-    
-    func search(){
-        //self.performSegueWithIdentifier("searchView", sender: self)
-    }
-    
     func pressed(sender: UIButton!) {
         self.selectedIndex = 2
     }
@@ -131,11 +82,8 @@ class TabbarController: UITabBarController, SocketIODelegate {
         let barViewControllers = segue.destinationViewController 
         barViewControllers.hidesBottomBarWhenPushed = false
         
-        
         self.hidesBottomBarWhenPushed = false
-        /*let nav = barViewControllers.viewControllers![2] as! UINavigationController
-        let destinationViewController = nav.topViewController as! SearchViewController*/
-        
+
     }
 
     override func tabBar(tabBar: UITabBar, didSelectItem item: UITabBarItem) {
@@ -144,13 +92,15 @@ class TabbarController: UITabBarController, SocketIODelegate {
             self.navigationController?.popToRootViewControllerAnimated(true)
         }
         lastSelected = currentSelected
+        
+        if(FilterSideViewController.open == true){
+            self.revealViewController().revealToggleAnimated(true)
+        }
     }
     
     //NOTIFICATIONS
     
     func getNotification(packet:SocketIOPacket) {
-        let navController = self.selectedViewController as! UINavigationController
-        
         NSNotificationCenter.defaultCenter().postNotificationName("newNotification", object: nil)
         AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
     }
