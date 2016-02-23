@@ -74,7 +74,7 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
         searchView = UIView(frame: CGRectMake(0,0,self.view.frame.width,self.view.frame.height))
         
         //Add blur view to search view
-        var blurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.ExtraLight))
+        let blurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.ExtraLight))
         blurView.frame = searchView.bounds
         
         vc.view.addSubview(blurView)
@@ -207,8 +207,6 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
         if(searchViewIsOpen){
             searchViewIsSegue = true
             
-            print("SEGMENTED INDEX \(vc.searchSegmentedController.selectedIndex)")
-            
             let object_id = notification.object as! Int
             
             if vc.searchSegmentedController.selectedIndex == 0 {
@@ -216,14 +214,12 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
                 viewControllerToPresent.branch_id = object_id
                 self.navigationController?.pushViewController(viewControllerToPresent, animated: true)
                 
-                print("B")
             }
             if vc.searchSegmentedController.selectedIndex == 1 {
                 let viewControllerToPresent = self.storyboard!.instantiateViewControllerWithIdentifier("UserProfileStickyController") as! UserProfileStickyController
                 viewControllerToPresent.user_id = object_id
                 self.navigationController?.pushViewController(viewControllerToPresent, animated: true)
                 
-                print("USER PROFILE")
             }
             
             searchBar.resignFirstResponder()
