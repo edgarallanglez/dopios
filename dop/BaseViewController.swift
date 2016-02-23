@@ -216,7 +216,7 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
                 viewControllerToPresent.branch_id = object_id
                 self.navigationController?.pushViewController(viewControllerToPresent, animated: true)
                 
-                print("BRANCH PROFILE")
+                print("B")
             }
             if vc.searchSegmentedController.selectedIndex == 1 {
                 let viewControllerToPresent = self.storyboard!.instantiateViewControllerWithIdentifier("UserProfileStickyController") as! UserProfileStickyController

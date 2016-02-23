@@ -9,7 +9,7 @@
 import Foundation
 import MapKit
 
-class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MKMapViewDelegate {
+class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MKMapViewDelegate, UIScrollViewDelegate {
     
  
     @IBOutlet weak var currentLocationLbl: UIButton!
@@ -25,11 +25,23 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
     
     var currentAnnotationView: MapPinCallout?
     
+    var mainLoader: CustomInfiniteIndicator?
+    
+    let regionRadius: CLLocationDistance = 1000
+    
     override func viewDidLoad() {
         Utilities.filterArray.removeAll()
         nearbyMap.delegate = self
 //        topBorder.layer.borderWidth = (1.0 / UIScreen.mainScreen.scale) / 2
         
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        
+        mainLoader = CustomInfiniteIndicator(frame: CGRectMake(screenSize.width/2-12, screenSize.height/2-61, 24, 24))
+        
+        self.view.addSubview(mainLoader!)
+        mainLoader?.hidden = false
+        mainLoader?.alpha = 0
+        mainLoader?.startAnimating()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "getNearestBranches", name: "filtersChanged", object: nil)
         
         locationManager = CLLocationManager()
@@ -40,7 +52,7 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
         User.coordinate = locationManager.location!.coordinate
         if (self.revealViewController() != nil) {
             filterSidebarButton = UIBarButtonItem(image: UIImage(named: "filter"), style: UIBarButtonItemStyle.Plain, target: self.revealViewController(), action: "revealToggle:")
-            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+            self.nearbyMap.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "tapMap"))
             self.navigationItem.leftBarButtonItem = filterSidebarButton
         }
         
@@ -48,6 +60,8 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
         currentLocationLbl.setImage(locationArrow.image, forState: UIControlState.Normal)
         currentLocationLbl.tintColor = Utilities.dopColor
         currentLocationLbl.backgroundColor = UIColor.whiteColor()
+        
+        
         
         getNearestBranches()
         super.viewDidLoad()
@@ -58,8 +72,17 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
     override func viewDidAppear(animated: Bool) {
         setMapAtCurrent()
     }
+    func tapMap(){
+        if(FilterSideViewController.open == true){
+            self.revealViewController().revealToggleAnimated(true)
+        }
+    }
+    func mapView(mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
+        if(FilterSideViewController.open == true){
+            self.revealViewController().revealToggleAnimated(true)
+        }
+    }
     
-    let regionRadius: CLLocationDistance = 1000
     
     func centerMapOnLocation(location: CLLocation) {
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate,
@@ -95,7 +118,7 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
             "radio": 15,
             "filterArray": filterArray
         ]
-        print(params, terminator: "")
+        Utilities.fadeInViewAnimation(self.mainLoader!, delay: 0, duration: 0.3)
         NearbyMapController.getNearestBranches(params, success: {(branchesData) -> Void in
             let json = JSON(data: branchesData)
             print(json)
@@ -120,10 +143,14 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
                     }
                     self.annotationArray.append(dropPin)
                     self.nearbyMap.addAnnotation(dropPin)
+                    
+                    Utilities.fadeOutViewAnimation(self.mainLoader!, delay: 0, duration: 0.3)
+
                 }
             }
             },
             failure:{(branchesData)-> Void in
+                Utilities.fadeOutViewAnimation(self.mainLoader!, delay: 0, duration: 0.3)
         })
     }
     
@@ -200,5 +227,5 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
         
         nearbyMap.setCenterCoordinate(controlPointCoordinate, animated: true)
     }
-
+    
 }

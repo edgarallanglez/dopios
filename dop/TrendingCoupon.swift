@@ -173,7 +173,6 @@ class TrendingCoupon: UIView, ModalDelegate {
             modal.dismissAnimated(true, completionHandler: { (modal) -> Void in
                 self.viewController!.navigationController?.pushViewController(view_controller, animated: true)
             })
-            viewController?.hidesBottomBarWhenPushed = false
         }
         
         if modal.action_type == "redeem" {
@@ -184,9 +183,10 @@ class TrendingCoupon: UIView, ModalDelegate {
             viewController?.hidesBottomBarWhenPushed = true
 
             modal.dismissAnimated(true, completionHandler:{ (modal) -> Void in
-                self.viewController!.navigationController?.pushViewController(view_controller, animated: true)
+                self.viewController!.hidesBottomBarWhenPushed = true
+            self.viewController!.navigationController?.pushViewController(view_controller, animated: true)
+                self.viewController!.hidesBottomBarWhenPushed = false
             })
-            viewController?.hidesBottomBarWhenPushed = false
         }
     }
     
