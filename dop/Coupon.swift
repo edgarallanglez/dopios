@@ -23,8 +23,9 @@ class Coupon: NSObject {
     let banner: String
     let categoryId: Int
     var available: Int
+    var taken: Bool!
 
-    init(id: Int?, name: String?, description: String?, limit: String?, exp: String?, logo: String? ,branch_id:Int?, company_id: Int?, total_likes: Int?, user_like: Int?, latitude: Double, longitude: Double, banner: String, category_id: Int, available: Int) {
+    init(id: Int?, name: String?, description: String?, limit: String?, exp: String?, logo: String? ,branch_id:Int?, company_id: Int?, total_likes: Int?, user_like: Int?, latitude: Double, longitude: Double, banner: String, category_id: Int, available: Int, taken: Bool) {
         
         self.id = id ?? 0
         self.name = name ?? ""
@@ -40,6 +41,7 @@ class Coupon: NSObject {
         self.banner = banner
         self.categoryId = category_id
         self.available = available
+        self.taken = taken
     }
     
     func setUserLike(user_like: Int!,total_likes: Int!){

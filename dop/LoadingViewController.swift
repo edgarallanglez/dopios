@@ -45,7 +45,7 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
     
     
     func getFBUserData() {
-        let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, email, birthday"])
+        let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, middle_name, last_name, email, birthday"])
         graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
             
             if ((error) != nil) {
@@ -59,7 +59,7 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
         
                 let params:[String: String] = [
                     "facebook_key" : json["id"].string!,
-                    "names" : json["name"].string!,
+                    "names" : "\(json["first_name"].string!) \(json["middle_name"])",
                     "surnames": json["last_name"].string!,
                     "birth_date" : birthday,
                     "email": userEmail,

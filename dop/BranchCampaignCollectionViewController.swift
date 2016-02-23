@@ -26,9 +26,10 @@ class BranchCampaignCollectionViewController: UICollectionViewController, ModalD
     var refreshControl: UIRefreshControl!
     
     
-    let limit:Int = 6
-    var offset:Int = 0
-    
+    let limit: Int = 6
+    var offset = 5
+    var new_data: Bool = false
+    var added_values: Int = 0
     var branch_id: Int?
     var index: Int = 1
     
@@ -164,8 +165,8 @@ class BranchCampaignCollectionViewController: UICollectionViewController, ModalD
         })
         
         CouponController.getAllCouponsByBranchWithSuccess(parent_view.branch_id,
-            success: { (couponsData) -> Void in
-                let json = JSON(data: couponsData)
+            success: { (data) -> Void in
+                let json = JSON(data: data)
                 
                 print(json)
                 for (_, subJson): (String, JSON) in json["data"]{
@@ -186,7 +187,7 @@ class BranchCampaignCollectionViewController: UICollectionViewController, ModalD
                     let available = subJson["available"].int!
                     
                     
-                    let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: category_id, available: available)
+                    let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: category_id, available: available, taken: false)
                     
                     self.coupons.append(model)
                 }
@@ -214,7 +215,50 @@ class BranchCampaignCollectionViewController: UICollectionViewController, ModalD
     }
 
     func reloadWithOffset(parent_scroll: UICollectionView) {
-        parent_scroll.finishInfiniteScroll()
+        
+        CouponController.getAllCouponsByBranchOffsetWithSuccess(self.selected_coupon.id, offset: self.offset, branch_id: self.branch_id!, success: { (data) -> Void in
+            let json = JSON(data: data)
+            
+            print(json)
+            self.new_data = false
+            self.added_values = 0
+            for (_, subJson): (String, JSON) in json["data"]{
+                let coupon_id = subJson["coupon_id"].int
+                let coupon_name = subJson["name"].string
+                let coupon_description = subJson["description"].string
+                let coupon_limit = subJson["limit"].string
+                let coupon_exp = "2015-09-30"
+                let coupon_logo = subJson["logo"].string
+                let branch_id = subJson["branch_id"].int
+                let company_id = subJson["company_id"].int
+                let total_likes = subJson["total_likes"].int
+                let user_like = subJson["user_like"].int
+                let latitude = subJson["latitude"].double!
+                let longitude = subJson["longitude"].double!
+                let banner = subJson["banner"].string ?? ""
+                let category_id = subJson["category_id"].int!
+                let available = subJson["available"].int!
+                
+                
+                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: category_id, available: available, taken: false)
+                
+                self.coupons.append(model)
+                self.new_data = true
+                self.added_values++
+            }
+            
+            dispatch_async(dispatch_get_main_queue(), {
+                self.reload()
+                if self.new_data { self.offset += self.added_values }
+                parent_scroll.finishInfiniteScroll()
+                
+            });
+            },
+            
+            failure: { (error) -> Void in
+                parent_scroll.finishInfiniteScroll()
+        })
+        
     }
     
     func pressActionButton(modal: ModalViewController) {

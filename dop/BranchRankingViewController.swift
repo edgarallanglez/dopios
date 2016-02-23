@@ -107,43 +107,44 @@ class BranchRankingViewController: UITableViewController {
         })
     }
     
-//    func reloadWithOffset(parent_scroll: UICollectionView) {
-//        if connection_array.count != 0 {
-//            UserProfileController.getAllBranchesFollowedOffsetWithSuccess(parent_view.user_id, last_branch: connection_array.first!.branch_follower_id, offset: offset, success: { (data) -> Void in
-//                let json = JSON(data: data)
-//                
-//                self.new_data = false
-//                self.added_values = 0
-//                
-//                for (_, subJson): (String, JSON) in json["data"] {
-//                    let name = subJson["name"].string!
-//                    let company_id = subJson["company_id"].int ?? 0
-//                    let branch_id =  subJson["branch_id" ].int!
-//                    let logo =  subJson["logo"].string
-//                    let banner = subJson["banner"].string ?? ""
-//                    let branch_follower_id = subJson["branch_follower_id"].int!
-//                    
-//                    let model = ConnectionModel(branch_id: branch_id, name: name, company_id: company_id, banner: banner, logo: logo, branch_follower_id: branch_follower_id)
-//                    
-//                    self.connection_array.append(model)
-//                    self.new_data = true
-//                    self.added_values++
-//                }
-//                
-//                dispatch_async(dispatch_get_main_queue(), {
-//                    self.reload()
-//                    if self.new_data { self.offset += self.added_values }
-//                    parent_scroll.finishInfiniteScroll()
-//                });
-//                },
-//                
-//                failure: { (error) -> Void in
-//                    dispatch_async(dispatch_get_main_queue(), {
-//                        parent_scroll.finishInfiniteScroll()
-//                    })
-//            })
-//        } else { parent_scroll.finishInfiniteScroll() }
-//    }
+    func reloadWithOffset(parent_scroll: UICollectionView) {
+        if ranking_array.count != 0 {
+            BranchProfileController.getBranchProfileRankingOffsetWithSuccess(ranking_array.last!.user_id, branch_id: self.parent_view.branch_id, offset: offset, success: { (data) -> Void in
+                let json = JSON(data: data)
+                
+                for (_, subJson): (String, JSON) in json["data"] {
+                    let names = subJson["names"].string!
+                    let surnames = subJson["surnames"].string!
+                    let facebook_key = subJson["facebook_key"].string!
+                    let user_id = subJson["user_id"].int!
+                    let company_id = subJson["company_id"].int ?? 0
+                    //                let branch_id =  subJson["branch_id" ].int!
+                    let birth_date = subJson["birth_date"].string!
+                    let privacy_status = subJson["privacy_status"].int!
+                    let main_image = subJson["main_image"].string!
+                    let total_used = subJson["total_used"].int!
+                    
+                    let model = PeopleModel(names: names, surnames: surnames, user_id: user_id, birth_date: birth_date, facebook_key: facebook_key, privacy_status: privacy_status, main_image: main_image, total_used: total_used)
+                    
+                    self.ranking_array.append(model)
+                    self.new_data = true
+                    self.added_values++
+                }
+                
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.reload()
+                    if self.new_data { self.offset += self.added_values }
+                    parent_scroll.finishInfiniteScroll()
+                });
+                },
+                
+                failure: { (error) -> Void in
+                    dispatch_async(dispatch_get_main_queue(), {
+                        parent_scroll.finishInfiniteScroll()
+                    })
+            })
+        } else { parent_scroll.finishInfiniteScroll() }
+    }
     
     func downloadImage(model: PeopleModel, cell: PeopleCell) {
         let url = NSURL(string: model.main_image)
@@ -154,8 +155,5 @@ class BranchRankingViewController: UITableViewController {
         }
     }
     
-    func reloadWithOffset(parent_scroll: UICollectionView) {
-        parent_scroll.finishInfiniteScroll()
-    }
 }
 

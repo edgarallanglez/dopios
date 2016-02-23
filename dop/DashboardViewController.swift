@@ -262,8 +262,9 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                     let banner = subJson["banner"].string ?? ""
 //                    let categoryId = subJson["category_id"].int!
                     let available = subJson["available"].int!
+//                    let taken = subJson["taken"].bool!
                 
-                    let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: 1, available: available)
+                    let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: 1, available: available, taken: false)
                 
                     self.trending.append(model)
                 }
@@ -339,7 +340,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                 //                    let categoryId = subJson["category_id"].int!
                 let available = subJson["available"].int!
                 
-                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: 1, available: available)
+                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: 1, available: available, taken: false)
                 
                 self.almost_expired.append(model)
             }
@@ -417,7 +418,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                 //                    let categoryId = subJson["category_id"].int!
                 let available = subJson["available"].int!
                 
-                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: 1, available: available)
+                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: 1, available: available, taken: false)
                 
                 self.nearest.append(model)
             }
