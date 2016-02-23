@@ -53,4 +53,15 @@ class BranchProfileController {
             }
         })
     }
+    
+    class func getBranchProfileRankingOffsetWithSuccess(last_ranked_id: Int, branch_id: Int, offset: Int, success: ((data: NSData!) -> Void), failure: ((data: NSError?) -> Void)) {
+        let url = "\(Utilities.dopURL)company/branch/\(branch_id)/ranking/\(offset)/\(last_ranked_id)/get"
+        Utilities.loadDataFromURL(NSURL(string: url)!, completion: {(data, error) -> Void in
+            if let urlData = data {
+                success(data: urlData)
+            } else {
+                failure(data: error)
+            }
+        })
+    }
 }

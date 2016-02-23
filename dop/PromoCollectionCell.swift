@@ -172,6 +172,10 @@ class PromoCollectionCell: UICollectionViewCell, FBSDKSharingDelegate {
         
         print(date)
     }
-//
+    
+    func setTakeButtonState(state: Bool) {
+        if state { self.take_coupon_btn.tintColor = Utilities.dopColor }
+        else { self.take_coupon_btn.tintColor = UIColor.darkGrayColor() }
+    }
 
 }

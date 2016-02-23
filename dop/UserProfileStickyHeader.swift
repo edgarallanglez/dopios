@@ -33,7 +33,7 @@ class UserProfileStickyHeader: UIView {
         user_image.layer.cornerRadius = user_image.frame.width / 2
         user_image.layer.masksToBounds = true
         
-        user_name.text = self.parent_view.user_name
+        user_name.text = self.parent_view.person?.names
         if (parent_view.person?.is_friend != nil) { setFollowingButton() }
         
     }

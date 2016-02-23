@@ -118,7 +118,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
         if (!coupons.isEmpty) {
             let model = self.coupons[indexPath.row]
             cell.loadItem(model, viewController: self)
-        
+            cell.setTakeButtonState(model.taken)
             let imageUrl = NSURL(string: "\(Utilities.dopImagesURL)\(model.company_id)/\(model.logo)")
             
             let identifier = "Cell\(indexPath.row)"
@@ -230,9 +230,9 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                     let banner = subJson["banner"].string ?? ""
                     let category_id = subJson["category_id"].int!
                     let available = subJson["available"].int!
+                    let taken = subJson["taken"].bool!
                     
-                    
-                    let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: category_id, available: available)
+                    let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: category_id, available: available, taken: taken)
                 
                     self.coupons.append(model)
                 }
@@ -296,9 +296,10 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                     let banner = subJson["banner"].string ?? ""
                     let category_id = subJson["category_id"].int!
                     let available = subJson["available"].int!
+                    let taken = subJson["taken"].bool!
                     
                     
-                    let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: category_id, available: available)
+                    let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: category_id, available: available, taken: taken)
                     
                     self.coupons.append(model)
                     
@@ -361,8 +362,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                     let category_id = subJson["category_id"].int!
                     let available = subJson["available"].int!
                     
-                    
-                    let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: category_id, available: available)
+                    let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: category_id, available: available, taken: true)
                     
                     self.coupons.append(model)
                 }
@@ -425,8 +425,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                     let category_id = subJson["category_id"].int!
                     let available = subJson["available"].int!
                     
-                    
-                    let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: category_id, available: available)
+                    let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: category_id, available: available, taken: true)
                     
                     self.coupons.append(model)
                     

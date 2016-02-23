@@ -163,7 +163,10 @@ class TrendingCoupon: UIView, ModalDelegate {
         
         print(date)
     }
-
+    
+    func setTakeButtonState() {
+        self.takeCouponButton.tintColor = Utilities.dopColor
+    }
 
     func pressActionButton(modal: ModalViewController) {
         if modal.action_type == "profile" {

@@ -101,17 +101,13 @@ class MoreMenuViewController: UITableViewController {
 
     }
     
-    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "userProfile" {
             let destination_view = segue.destinationViewController as! UserProfileStickyController
             destination_view.user_image = UIImageView(image: userImage.image)
             destination_view.user_id = User.user_id
             destination_view.person = PeopleModel(names: User.userName, surnames: User.userSurnames, user_id: User.user_id, birth_date: "1991-08-20", facebook_key: "", privacy_status: 0, main_image: User.userImageUrl, is_friend: false)
-            
         }
     }
-    
-
     
 }
