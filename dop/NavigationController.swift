@@ -24,14 +24,13 @@ class NavigationController: UINavigationController{
         ]
     
         
-        
         self.navigationBar.setBackgroundImage(UIImage(named:"topbarBackground"), forBarMetrics: .Default)
         
         self.navigationBar.translucent = false
         
         self.navigationItem.backBarButtonItem?.setTitleTextAttributes( [NSForegroundColorAttributeName: UIColor.whiteColor()], forState: UIControlState.Normal)
    
-        
+
         UIApplication.sharedApplication().statusBarStyle = .LightContent
   
     }

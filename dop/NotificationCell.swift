@@ -30,11 +30,8 @@ class NotificationCell: UITableViewCell {
         let launcher_name = "\(notification.launcher_name) \(notification.launcher_surnames)"
         let newsfeed_Activity = "\(notification.newsfeed_activity)"
         
-        
-        
         if(notification.type == "newsfeed"){
             let notification_text = "A \(launcher_name) le a gustado tu actividad en \(newsfeed_Activity)"
-            
             title.text = notification_text
             let nsString = notification_text as NSString
             let launcher_range = nsString.rangeOfString(launcher_name)
@@ -42,30 +39,24 @@ class NotificationCell: UITableViewCell {
             let segue = NSURL(string: "userProfile")!
             title.addLinkToURL(segue, withRange: launcher_range)
             title.addLinkToURL(segue, withRange: newsfeed_activity_range)
-            
-           /*let notification_text = "A \(notification.launcher_name) \(notification.launcher_surnames) le a gustado tu actividad en \(notification.newsfeed_activity)"
-            let name_lenght = notification.launcher_name.characters.count + notification.launcher_surnames.characters.count + 1
-            string_format = NSMutableAttributedString(string: notification_text as String)
-            string_format.addAttribute(NSForegroundColorAttributeName, value: Utilities.dopColor, range: NSRange(location:2,length:name_lenght))
-            self.title.attributedText = string_format */
-            
-        
         }
         if(notification.type == "friend"){
-            /*let notification_text = "\(notification.launcher_name) \(notification.launcher_surnames) te envió una solicitud de amistad"
-            let name_lenght = notification.launcher_name.characters.count + notification.launcher_surnames.characters.count + 1
-            string_format = NSMutableAttributedString(string: notification_text as String)
-            string_format.addAttribute(NSForegroundColorAttributeName, value: Utilities.dopColor, range: NSRange(location:0,length:name_lenght))
-            self.title.attributedText = string_format*/
+            var notification_text = ""
             
-            let notification_text = "A \(launcher_name) te envió una solicitud de amistad"
+            if(notification.friendship_status == 0 ){
+                notification_text = "\(launcher_name) quiere seguirte"
+            }
+            if(notification.friendship_status == 1 && notification.launcher_id == User.user_id){
+                notification_text = "Ahora sigues a \(launcher_name)"
+            }else{
+                notification_text = "\(launcher_name) te esta siguiendo"
+            }
             
             title.text = notification_text
             let nsString = notification_text as NSString
             let launcher_range = nsString.rangeOfString(launcher_name)
             let segue = NSURL(string: "userProfile")!
             title.addLinkToURL(segue, withRange: launcher_range)
-            
         }
         if(notification.read == false){
             notification_view.backgroundColor = Utilities.lightGrayColor
@@ -77,7 +68,7 @@ class NotificationCell: UITableViewCell {
         }
         
         self.date_label.text = Utilities.friendlyDate(notification.date)
-
+        
         self.notification = notification
         
 

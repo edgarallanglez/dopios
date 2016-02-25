@@ -16,20 +16,17 @@ class MapPinCallout: UIView {
     var info_label: UILabel?
     var button: UIButton?
 
-    override func hitTest(var point: CGPoint, withEvent event: UIEvent?) -> UIView? {
+    override func hitTest(let point: CGPoint, withEvent event: UIEvent?) -> UIView? {
         let viewPoint = superview?.convertPoint(point, toView: self) ?? point
         
-        let isInsideView = pointInside(viewPoint, withEvent: event)
+        _ = pointInside(viewPoint, withEvent: event)
         
-        var view = super.hitTest(viewPoint, withEvent: event)
-        
+        let view = super.hitTest(viewPoint, withEvent: event)
 
-        
         return view
     }
     override init (frame : CGRect) {
         super.init(frame : frame)
-
         
         self.frame = CGRectMake(-130, -72, 330, 64)
         
@@ -41,20 +38,19 @@ class MapPinCallout: UIView {
         self.addSubview(triangle)
 
         
+        let inset = (self.frame.size.height - 30)/2
         
         button = UIButton(frame: CGRectMake(self.frame.width-30, 0, 30, self.frame.height))
-        button!.backgroundColor = UIColor.redColor()
-        //button!.addTarget(self, action: "goToBranchProfile:", forControlEvents: .TouchUpInside)
-        
+        button!.setImage(UIImage(named:"arrow-right"), forState: .Normal)
+        button?.imageEdgeInsets = UIEdgeInsets(top: inset , left: 0, bottom: inset, right: 0)
+        button?.tintColor = Utilities.dopColor
+        button!.backgroundColor = UIColor.whiteColor()
         
         branch_image = UIImageView(frame: CGRectMake(0, 0, self.frame.height, self.frame.height))
         
-
         branch_image?.contentMode = .ScaleAspectFill
         branch_image?.layer.masksToBounds = true
         self.addSubview(branch_image!)
-        
-        
         
         name_label = UILabel(frame: CGRectMake(self.frame.height+15, 5, self.frame.width-self.frame.height-45,20))
         name_label!.font = UIFont(name: "Montserrat-Regular", size: 16.0)
@@ -72,7 +68,6 @@ class MapPinCallout: UIView {
         self.addSubview(info_label!)
         
         self.addSubview(button!)
-
     }
     
     convenience init (name: String, address: String, info: String, logo: String) {
@@ -81,7 +76,6 @@ class MapPinCallout: UIView {
         name_label!.text = name
         address_label!.text = address
         info_label!.text = info
-        
         
     }
     

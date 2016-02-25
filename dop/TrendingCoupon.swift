@@ -37,7 +37,6 @@ class TrendingCoupon: UIView, ModalDelegate {
     }
     
     func viewDidAppear(){
-        print("USER LIKE ES \(coupon.user_like)")
         self.likes.text = String(coupon.total_likes)
         if coupon.user_like == 1 { self.heart.tintColor = Utilities.dopColor } else { self.heart.tintColor = UIColor.lightGrayColor() }
     }
