@@ -35,7 +35,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         self.refreshControl = UIRefreshControl()
         self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         self.notification_table.addSubview(refreshControl)
-        
+
         
         // Set custom indicator
         self.notification_table.infiniteScrollIndicatorView = CustomInfiniteIndicator(frame: CGRectMake(0, 0, 24, 24))
@@ -161,6 +161,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                     let read = subJson["read"].bool ?? false
                     let date = subJson["notification_date"].string ?? ""
                     let company_id = subJson["company_id"].int ?? 0
+                    let object_id = subJson["object_id"].int ?? 0
 
                     var image:String
                     if(subJson["user_image"]==nil){
@@ -171,7 +172,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                    
                     
                     
-                    let model = Notification(type: type, notification_id: notification_id, launcher_id: launcher_id, launcher_name: launcher_name, launcher_surnames: launcher_surnames, newsfeed_activity: newsfeed_activity, friendship_status: friendship_status,read: read, date: date, image_name: image, company_id: company_id)
+                    let model = Notification(type: type, notification_id: notification_id, launcher_id: launcher_id, launcher_name: launcher_name, launcher_surnames: launcher_surnames, newsfeed_activity: newsfeed_activity, friendship_status: friendship_status,read: read, date: date, image_name: image, company_id: company_id, object_id: object_id)
                     
                     self.notificationsTemporary.append(model)
                     
@@ -224,6 +225,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                     let read = subJson["read"].bool ?? false
                     let date = subJson["notification_date"].string ?? ""
                     let company_id = subJson["company_id"].int ?? 0
+                    let object_id = subJson["object_id"].int ?? 0
                     
                     var image:String
                     if(subJson["user_image"]==nil){
@@ -232,7 +234,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                         image = subJson["user_image"].string!
                     }
                     
-                    let model = Notification(type: type, notification_id: notification_id, launcher_id: launcher_id, launcher_name: launcher_name, launcher_surnames: launcher_surnames, newsfeed_activity: newsfeed_activity, friendship_status: friendship_status,read: read, date:date, image_name: image, company_id: company_id)
+                    let model = Notification(type: type, notification_id: notification_id, launcher_id: launcher_id, launcher_name: launcher_name, launcher_surnames: launcher_surnames, newsfeed_activity: newsfeed_activity, friendship_status: friendship_status,read: read, date:date, image_name: image, company_id: company_id, object_id: object_id)
                     
                     
                     self.notificationsTemporary.append(model)
@@ -298,60 +300,25 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         let selectedItem = notifications[indexPath.row]
         let itemId = selectedItem.notification_id
         
-        
-        
         let cell: NotificationCell = tableView.cellForRowAtIndexPath(indexPath) as! NotificationCell
         
-        
+        let params:[String: AnyObject] = [
+            "notification_id" : selectedItem.notification_id,
+            "friends_id": selectedItem.object_id]
+        print(selectedItem.object_id)
         if(selectedItem.type == "friend"){
-            self.performSegueWithIdentifier("userProfile", sender: cell)
-        }
+            FriendsController.acceptFriendWithSuccess(params, success: {(friendsData) -> Void in
+                    dispatch_async(dispatch_get_main_queue(), {
+                        print("Aceptado")
+                    })
+                }, failure: { (error) -> Void in
+                    dispatch_async(dispatch_get_main_queue(), {
+                        print("Error")
+                    })
+            })
         if(selectedItem.type == "newsfeed"){
-            self.performSegueWithIdentifier("userProfile", sender: cell)
         }
     }
-    
-    func attributedLabel(label: TTTAttributedLabel!, didSelectLinkWithURL url: NSURL!) {
-        let segue = "\(url)"
-        
-        
-        
-        self.performSegueWithIdentifier(segue, sender: self)
     }
 
-    func attributedLabel(label: TTTAttributedLabel!, didLongPressLinkWithURL url: NSURL!, atPoint point: CGPoint) {
-        let segue = "\(url)"
-    
-        self.performSegueWithIdentifier(segue, sender: self)
-
-    }
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-//        if let cell = sender as? NotificationCell {
-//            let i = notification_table.indexPathForCell(cell)!.row
-//            let model = self.notifications[i]
-//            
-//            self.readNotification(model)
-//            
-//            if segue.identifier == "userProfile" {
-//
-//                
-//                let view = segue.destinationViewController as! UserProfileViewController
-//                view.userId = model.launcher_id
-//                
-//                var people:PeopleModel = PeopleModel(names: "Jose Eduardo", surnames: "Quintero Gutierrez!", user_id: model.launcher_id, birth_date: "", facebook_key: "", privacy_status: 0, main_image: "", is_friend: true)
-//                
-//                view.person = people
-//                //view.userImage = self.cachedImages["Cell\(i)"]
-//            }
-//        }
-        if segue.identifier == "userProfile" {
-            let view = segue.destinationViewController as! UserProfileStickyController
-            view.user_id = 5
-
-            var people: PeopleModel = PeopleModel(names: "Jose Eduardo", surnames: "Quintero Gutierrez!", user_id: 5, birth_date: "", facebook_key: "", privacy_status: 0, main_image: "", is_friend: true)
-
-            view.person = people
-        }
-    }
 }

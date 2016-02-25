@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="wsr-0B-cyM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="wsr-0B-cyM">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -5712,11 +5712,12 @@
                                                         <constraint firstItem="GoN-yo-jrk" firstAttribute="leading" secondItem="oCf-0F-Ii8" secondAttribute="trailing" constant="12" id="1sd-Es-u2A"/>
                                                         <constraint firstItem="h5Y-nv-kak" firstAttribute="centerY" secondItem="o8K-zg-9by" secondAttribute="centerY" id="78a-Sj-hG8"/>
                                                         <constraint firstAttribute="bottom" secondItem="oCf-0F-Ii8" secondAttribute="bottom" constant="23" id="DDp-qL-xnT"/>
+                                                        <constraint firstItem="GoN-yo-jrk" firstAttribute="top" secondItem="h5Y-nv-kak" secondAttribute="bottom" constant="3" id="Fqt-ga-9k7"/>
                                                         <constraint firstAttribute="bottom" secondItem="oCf-0F-Ii8" secondAttribute="bottom" constant="23" id="LNG-A4-Eow"/>
                                                         <constraint firstItem="GoN-yo-jrk" firstAttribute="top" secondItem="o8K-zg-9by" secondAttribute="top" constant="44" id="Mfo-Fp-wY0">
                                                             <variation key="widthClass=compact" constant="43"/>
                                                         </constraint>
-                                                        <constraint firstItem="h5Y-nv-kak" firstAttribute="top" secondItem="o8K-zg-9by" secondAttribute="top" constant="8" id="Wrl-N5-WF8">
+                                                        <constraint firstItem="h5Y-nv-kak" firstAttribute="bottom" secondItem="o8K-zg-9by" secondAttribute="top" constant="8" id="Wrl-N5-WF8">
                                                             <variation key="widthClass=compact" constant="6"/>
                                                         </constraint>
                                                         <constraint firstItem="oCf-0F-Ii8" firstAttribute="leading" secondItem="o8K-zg-9by" secondAttribute="leading" constant="20" id="aiE-ES-f3J"/>
@@ -5738,8 +5739,6 @@
                                                             <exclude reference="GoN-yo-jrk"/>
                                                         </mask>
                                                         <mask key="constraints">
-                                                            <exclude reference="1sd-Es-u2A"/>
-                                                            <exclude reference="Mfo-Fp-wY0"/>
                                                             <exclude reference="DDp-qL-xnT"/>
                                                             <exclude reference="LNG-A4-Eow"/>
                                                             <exclude reference="aiE-ES-f3J"/>
@@ -5755,6 +5754,9 @@
                                                             <exclude reference="ouq-Nr-BZs"/>
                                                             <exclude reference="yRJ-He-XqM"/>
                                                             <exclude reference="zeM-LX-ldV"/>
+                                                            <exclude reference="1sd-Es-u2A"/>
+                                                            <exclude reference="Fqt-ga-9k7"/>
+                                                            <exclude reference="Mfo-Fp-wY0"/>
                                                         </mask>
                                                     </variation>
                                                     <variation key="widthClass=compact" misplaced="YES">
@@ -5763,8 +5765,6 @@
                                                             <include reference="GoN-yo-jrk"/>
                                                         </mask>
                                                         <mask key="constraints">
-                                                            <include reference="1sd-Es-u2A"/>
-                                                            <include reference="Mfo-Fp-wY0"/>
                                                             <exclude reference="DDp-qL-xnT"/>
                                                             <exclude reference="LNG-A4-Eow"/>
                                                             <exclude reference="aiE-ES-f3J"/>
@@ -5773,13 +5773,16 @@
                                                             <include reference="fKv-8W-Sme"/>
                                                             <exclude reference="y8J-u2-X1J"/>
                                                             <exclude reference="78a-Sj-hG8"/>
-                                                            <include reference="Wrl-N5-WF8"/>
+                                                            <exclude reference="Wrl-N5-WF8"/>
                                                             <exclude reference="dFR-9c-mza"/>
                                                             <include reference="gsI-b8-ixJ"/>
                                                             <exclude reference="htW-bn-Oj3"/>
                                                             <exclude reference="ouq-Nr-BZs"/>
                                                             <include reference="yRJ-He-XqM"/>
                                                             <exclude reference="zeM-LX-ldV"/>
+                                                            <include reference="1sd-Es-u2A"/>
+                                                            <include reference="Fqt-ga-9k7"/>
+                                                            <include reference="Mfo-Fp-wY0"/>
                                                         </mask>
                                                     </variation>
                                                 </view>
@@ -7820,10 +7823,10 @@
         <image name="twitter-logo" width="42" height="42"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="TKt-eX-Ulp"/>
-        <segue reference="8iK-Yr-WEc"/>
         <segue reference="njR-gH-Wm2"/>
-        <segue reference="hgi-kp-Ocz"/>
+        <segue reference="8iK-Yr-WEc"/>
+        <segue reference="fpu-8Z-7Bb"/>
+        <segue reference="TKt-eX-Ulp"/>
         <segue reference="H7K-TF-KnO"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
