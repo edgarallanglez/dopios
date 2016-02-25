@@ -46,7 +46,7 @@ class NotificationCell: UITableViewCell {
             if(notification.friendship_status == 0 ){
                 notification_text = "\(launcher_name) quiere seguirte"
             }
-            if(notification.friendship_status == 1 && notification.launcher_id == User.user_id){
+            if(notification.friendship_status == 1 && notification.launcher_friend == User.user_id){
                 notification_text = "Ahora sigues a \(launcher_name)"
             }else{
                 notification_text = "\(launcher_name) te esta siguiendo"

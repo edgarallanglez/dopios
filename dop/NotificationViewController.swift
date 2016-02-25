@@ -162,6 +162,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                     let date = subJson["notification_date"].string ?? ""
                     let company_id = subJson["company_id"].int ?? 0
                     let object_id = subJson["object_id"].int ?? 0
+                    let launcher_friend = subJson["launcher_friend"].int ?? 0
 
                     var image:String
                     if(subJson["user_image"]==nil){
@@ -172,7 +173,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                    
                     
                     
-                    let model = Notification(type: type, notification_id: notification_id, launcher_id: launcher_id, launcher_name: launcher_name, launcher_surnames: launcher_surnames, newsfeed_activity: newsfeed_activity, friendship_status: friendship_status,read: read, date: date, image_name: image, company_id: company_id, object_id: object_id)
+                    let model = Notification(type: type, notification_id: notification_id, launcher_id: launcher_id, launcher_name: launcher_name, launcher_surnames: launcher_surnames, newsfeed_activity: newsfeed_activity, friendship_status: friendship_status,read: read, date: date, image_name: image, company_id: company_id, object_id: object_id, launcher_friend: launcher_friend)
                     
                     self.notificationsTemporary.append(model)
                     
@@ -226,7 +227,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                     let date = subJson["notification_date"].string ?? ""
                     let company_id = subJson["company_id"].int ?? 0
                     let object_id = subJson["object_id"].int ?? 0
-                    
+                    let launcher_friend = subJson["launcher_friend"].int ?? 0
                     var image:String
                     if(subJson["user_image"]==nil){
                         image = subJson["branch_image"].string!
@@ -234,7 +235,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                         image = subJson["user_image"].string!
                     }
                     
-                    let model = Notification(type: type, notification_id: notification_id, launcher_id: launcher_id, launcher_name: launcher_name, launcher_surnames: launcher_surnames, newsfeed_activity: newsfeed_activity, friendship_status: friendship_status,read: read, date:date, image_name: image, company_id: company_id, object_id: object_id)
+                    let model = Notification(type: type, notification_id: notification_id, launcher_id: launcher_id, launcher_name: launcher_name, launcher_surnames: launcher_surnames, newsfeed_activity: newsfeed_activity, friendship_status: friendship_status,read: read, date:date, image_name: image, company_id: company_id, object_id: object_id, launcher_friend: launcher_friend)
                     
                     
                     self.notificationsTemporary.append(model)
