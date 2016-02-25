@@ -148,7 +148,7 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
                 //if (!User.activeSession) {
                     self.performSegueWithIdentifier("showDashboard", sender: self)
                     User.activeSession = true
-                    self.firstTime=false
+                    self.firstTime = false
                 //}
             })
         },

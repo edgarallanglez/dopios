@@ -56,6 +56,7 @@ class UserProfileStickyHeader: UIView {
                         
                 })
             })
+            
             },
             failure: { (data) -> Void in
                 dispatch_async(dispatch_get_main_queue(), {})

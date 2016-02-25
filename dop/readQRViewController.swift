@@ -183,7 +183,18 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                     }
                     
                     print(json)
-                    print("Éxito")
+                    if json["reward"]["badges"].count != 0 {
+                        let badges = json["reward"]["badges"].array!
+                        let badge_name: String = badges[0]["name"].string!
+                        print(badge_name)
+//                        let modal: ModalViewController = ModalViewController(currentView: self, type: ModalViewControllerType.AlertModal)
+//                        
+//                        modal.willPresentCompletionHandler = { vc in
+//                            let navigation_controller = vc as! AlertModalViewController
+//                            navigation_controller.setAlert("success", alert_title: "¡Felicidades!", alert_description: "Has desbloqueado una medalla \(badge_name)")
+//                        }
+//                        modal.presentAnimated(true, completionHandler: nil)
+                    }
                 })
             },
             failure: { (error) -> Void in

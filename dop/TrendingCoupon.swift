@@ -154,6 +154,7 @@ class TrendingCoupon: UIView, ModalDelegate {
                 })
                 
             },
+            
             failure: { (error) -> Void in
                 dispatch_async(dispatch_get_main_queue(), {
                     print(error)

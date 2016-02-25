@@ -142,7 +142,7 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
                     let main_image = subJson["main_image"].string!
                     //let total_used = subJson["total_used"].int!
                     
-                    let model = PeopleModel(names:names, surnames: surnames, user_id: user_id, birth_date: birth_date, facebook_key: facebook_key, privacy_status: privacy_status, main_image: main_image, is_friend: true)
+                    let model = PeopleModel(names:names, surnames: surnames, user_id: user_id, birth_date: birth_date, facebook_key: facebook_key, privacy_status: privacy_status, main_image: main_image)
     
 
                     self.person = model
