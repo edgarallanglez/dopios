@@ -303,11 +303,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         self.searchScrollView.setContentOffset(CGPointMake(x, 0), animated: true)
         
     }
-    
-    func socketIO(socket: SocketIO, didReceiveResponse packet: SocketIOPacket) {
-        NSLog("didReceiveEvent >>> data: %@", packet.data)
-    }
-    
+
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         /*if let cell = sender as? SearchCell {
