@@ -19,7 +19,7 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
     @IBOutlet var qr_image: UIImageView!
     var qr_detected:Bool = false
     var loader:CustomInfiniteIndicator?
-    
+    var alert_array = [AlertModel]()
     var coupon_id:Int?
     var coupon: Coupon!
     var branch_id:Int?
@@ -137,7 +137,11 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                             
                             modal.willPresentCompletionHandler = { vc in
                                 let navigation_controller = vc as! AlertModalViewController
-                                navigation_controller.setAlert("error", alert_title: "¡Oops!", alert_description: "Ha ocurrido un error, al parecer el QR no es el correcto")
+                                
+                                self.alert_array.append(AlertModel(alert_title: "¡Oops!", alert_image: "error", alert_description: "Ha ocurrido un error, al parecer el QR no es el correcto"))
+                                
+                                navigation_controller.setAlert(self.alert_array)
+                    
                             }
                             modal.presentAnimated(true, completionHandler: nil)
 
@@ -176,24 +180,22 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                     dispatch_async(dispatch_get_main_queue()) {
                         modal.willPresentCompletionHandler = { vc in
                             let navigation_controller = vc as! AlertModalViewController
-                            navigation_controller.setAlert("success", alert_title: "¡Felicidades!", alert_description: "Has redimido tu promoción con éxito en \(name!)")
+                            
+                            self.alert_array.append(AlertModel(alert_title: "¡Felicidades!", alert_image: "success", alert_description: "Has redimido tu promoción con éxito en \(name!)"))
+                            
+                            if json["reward"]["badges"].count != 0 {
+                                let badges = json["reward"]["badges"].array!
+                                let badge_name: String = badges[0]["name"].string!
+                                print(badge_name)
+                                
+                                self.alert_array.append(AlertModel(alert_title: "¡Felicidades!", alert_image: "\(badge_name)", alert_description: "Has desbloqueado una nueva medalla \(badge_name)"))
+                            }
+                            
+                            navigation_controller.setAlert(self.alert_array)
+                            
                         }
                         modal.presentAnimated(true, completionHandler: nil)
                         self.coupon?.available = (self.coupon?.available)! - 1
-                    }
-                    
-                    print(json)
-                    if json["reward"]["badges"].count != 0 {
-                        let badges = json["reward"]["badges"].array!
-                        let badge_name: String = badges[0]["name"].string!
-                        print(badge_name)
-//                        let modal: ModalViewController = ModalViewController(currentView: self, type: ModalViewControllerType.AlertModal)
-//                        
-//                        modal.willPresentCompletionHandler = { vc in
-//                            let navigation_controller = vc as! AlertModalViewController
-//                            navigation_controller.setAlert("success", alert_title: "¡Felicidades!", alert_description: "Has desbloqueado una medalla \(badge_name)")
-//                        }
-//                        modal.presentAnimated(true, completionHandler: nil)
                     }
                 })
             },
@@ -203,7 +205,10 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                     
                     modal.willPresentCompletionHandler = { vc in
                         let navigation_controller = vc as! AlertModalViewController
-                        navigation_controller.setAlert("error", alert_title: "¡Oops!", alert_description: "Ha ocurrido un error, al parecer es nuestra culpa :(")
+                    
+                        self.alert_array.append(AlertModel(alert_title: "¡Oops!", alert_image: "error", alert_description: "Ha ocurrido un error, al parecer es nuestra culpa :("))
+                        
+                        navigation_controller.setAlert(self.alert_array)
                     }
                     modal.presentAnimated(true, completionHandler: nil)
                 })

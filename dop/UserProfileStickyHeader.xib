@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Montserrat-Light.otf">
@@ -23,6 +23,16 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uqg-Ob-bwT">
                             <rect key="frame" x="0.0" y="40" width="600" height="170"/>
                             <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lbv-Hy-g5Y" userLabel="Progress" customClass="KAProgressLabel">
+                                    <rect key="frame" x="243" y="-4" width="115" height="110"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="112" id="MT6-Bo-Gas"/>
+                                        <constraint firstAttribute="width" constant="112" id="aUu-Ps-Aor"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bN2-Qt-6WJ">
                                     <rect key="frame" x="250" y="0.0" width="100" height="100"/>
                                     <constraints>
@@ -42,8 +52,8 @@
                                                 <rect key="frame" x="112" y="0.0" width="16" height="21"/>
                                             </variation>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Golden Boy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xgu-zQ-ePn">
-                                            <rect key="frame" x="75" y="23" width="91" height="20"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nivel Dios" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xgu-zQ-ePn">
+                                            <rect key="frame" x="82" y="23" width="77" height="20"/>
                                             <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="16"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
@@ -79,9 +89,11 @@
                                 <constraint firstAttribute="bottom" secondItem="qXm-zD-d2Y" secondAttribute="bottom" id="8iL-yb-wPQ"/>
                                 <constraint firstItem="qXm-zD-d2Y" firstAttribute="centerX" secondItem="uqg-Ob-bwT" secondAttribute="centerX" id="DZh-3a-lcX"/>
                                 <constraint firstAttribute="height" constant="170" id="Zjb-V4-6Uw"/>
+                                <constraint firstItem="bN2-Qt-6WJ" firstAttribute="centerX" secondItem="lbv-Hy-g5Y" secondAttribute="centerX" id="aMG-qh-1za"/>
                                 <constraint firstItem="qXm-zD-d2Y" firstAttribute="centerY" secondItem="uqg-Ob-bwT" secondAttribute="centerY" id="dlf-wO-N17"/>
                                 <constraint firstItem="bN2-Qt-6WJ" firstAttribute="centerY" secondItem="uqg-Ob-bwT" secondAttribute="centerY" id="sxl-he-ZIv"/>
                                 <constraint firstItem="bN2-Qt-6WJ" firstAttribute="centerX" secondItem="uqg-Ob-bwT" secondAttribute="centerX" id="v0Q-JQ-8FC"/>
+                                <constraint firstItem="bN2-Qt-6WJ" firstAttribute="centerY" secondItem="lbv-Hy-g5Y" secondAttribute="centerY" id="w5X-bT-gsJ"/>
                             </constraints>
                             <variation key="default">
                                 <mask key="constraints">
@@ -159,12 +171,13 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="exp_progress" destination="lbv-Hy-g5Y" id="u9l-hY-DFd"/>
                 <outlet property="follow_button" destination="6UK-3R-cJG" id="41K-VS-a7E"/>
                 <outlet property="follow_button_width" destination="08H-25-xid" id="aIW-VZ-d8N"/>
                 <outlet property="user_image" destination="bN2-Qt-6WJ" id="tRX-gV-aMp"/>
                 <outlet property="user_name" destination="ySU-hf-cmp" id="byZ-rp-RIh"/>
             </connections>
-            <point key="canvasLocation" x="395" y="153.5"/>
+            <point key="canvasLocation" x="395" y="153"/>
         </view>
     </objects>
     <resources>

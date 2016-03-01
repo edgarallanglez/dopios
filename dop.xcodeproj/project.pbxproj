@@ -33,6 +33,8 @@
 		6DBBB1451C35987B002AFB57 /* ConnectionsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBBB1441C35987B002AFB57 /* ConnectionsPage.swift */; };
 		6DBBB14E1C359A07002AFB57 /* ConnectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBBB14D1C359A07002AFB57 /* ConnectionCell.swift */; };
 		6DBBB1501C35B9A0002AFB57 /* ConnectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBBB14F1C35B9A0002AFB57 /* ConnectionModel.swift */; };
+		6DC2A4AC1C84B8C0006E47D6 /* KAProgressLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DC2A4A91C84B8C0006E47D6 /* KAProgressLabel.m */; };
+		6DC2A4AD1C84B8C0006E47D6 /* TPPropertyAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DC2A4AB1C84B8C0006E47D6 /* TPPropertyAnimation.m */; };
 		6DD3B2221C24862A00BEE129 /* TrophyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD3B2211C24862A00BEE129 /* TrophyTableViewController.swift */; };
 		6DD3B2241C24864000BEE129 /* BadgeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD3B2231C24864000BEE129 /* BadgeCell.swift */; };
 		6DD56C071C32EC9B006636F4 /* BadgeCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD56C061C32EC9B006636F4 /* BadgeCollectionCell.swift */; };
@@ -44,7 +46,7 @@
 		9D1205741BDEBF16009EEBAE /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D12056B1BDEBEF9009EEBAE /* CryptoSwift.framework */; };
 		9D1205751BDEBF60009EEBAE /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D12056B1BDEBEF9009EEBAE /* CryptoSwift.framework */; };
 		9D1205761BDEBF60009EEBAE /* CryptoSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9D12056B1BDEBEF9009EEBAE /* CryptoSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		9D1B5F851C1A1030003F28E5 /* AlertClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1B5F841C1A1030003F28E5 /* AlertClass.swift */; };
+		9D1B5F851C1A1030003F28E5 /* AlertModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1B5F841C1A1030003F28E5 /* AlertModel.swift */; };
 		9D2BDFE41B9DF524003F1260 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0FE26D01B9A4D12004EB402 /* SearchController.swift */; };
 		9D2CEA2B1BFCE4BD0088B6BC /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D2CEA281BFCE4BD0088B6BC /* FBSDKCoreKit.framework */; };
 		9D2CEA2C1BFCE4BD0088B6BC /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D2CEA291BFCE4BD0088B6BC /* FBSDKLoginKit.framework */; };
@@ -337,6 +339,10 @@
 		6DBBB1441C35987B002AFB57 /* ConnectionsPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionsPage.swift; sourceTree = "<group>"; };
 		6DBBB14D1C359A07002AFB57 /* ConnectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionCell.swift; sourceTree = "<group>"; };
 		6DBBB14F1C35B9A0002AFB57 /* ConnectionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionModel.swift; sourceTree = "<group>"; };
+		6DC2A4A81C84B8C0006E47D6 /* KAProgressLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KAProgressLabel.h; sourceTree = "<group>"; };
+		6DC2A4A91C84B8C0006E47D6 /* KAProgressLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KAProgressLabel.m; sourceTree = "<group>"; };
+		6DC2A4AA1C84B8C0006E47D6 /* TPPropertyAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPPropertyAnimation.h; sourceTree = "<group>"; };
+		6DC2A4AB1C84B8C0006E47D6 /* TPPropertyAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPPropertyAnimation.m; sourceTree = "<group>"; };
 		6DD3B2211C24862A00BEE129 /* TrophyTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrophyTableViewController.swift; sourceTree = "<group>"; };
 		6DD3B2231C24864000BEE129 /* BadgeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadgeCell.swift; sourceTree = "<group>"; };
 		6DD56C061C32EC9B006636F4 /* BadgeCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadgeCollectionCell.swift; sourceTree = "<group>"; };
@@ -346,7 +352,7 @@
 		9D0DB4721B17DE5A0009FE6C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		9D0E43D01BF55F8200BA17D7 /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		9D1205621BDEBEF8009EEBAE /* CryptoSwift.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CryptoSwift.xcodeproj; path = CryptoSwift/CryptoSwift.xcodeproj; sourceTree = "<group>"; };
-		9D1B5F841C1A1030003F28E5 /* AlertClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertClass.swift; sourceTree = "<group>"; };
+		9D1B5F841C1A1030003F28E5 /* AlertModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertModel.swift; sourceTree = "<group>"; };
 		9D2CEA281BFCE4BD0088B6BC /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = Facebook/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		9D2CEA291BFCE4BD0088B6BC /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = Facebook/FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		9D2CEA2A1BFCE4BD0088B6BC /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = Facebook/FBSDKShareKit.framework; sourceTree = "<group>"; };
@@ -664,6 +670,17 @@
 			name = StickyHeader;
 			sourceTree = "<group>";
 		};
+		6DC2A4A01C84B8AB006E47D6 /* KAProgress */ = {
+			isa = PBXGroup;
+			children = (
+				6DC2A4A81C84B8C0006E47D6 /* KAProgressLabel.h */,
+				6DC2A4A91C84B8C0006E47D6 /* KAProgressLabel.m */,
+				6DC2A4AA1C84B8C0006E47D6 /* TPPropertyAnimation.h */,
+				6DC2A4AB1C84B8C0006E47D6 /* TPPropertyAnimation.m */,
+			);
+			name = KAProgress;
+			sourceTree = "<group>";
+		};
 		6DE6AC2D1C626C0A001C295D /* UserProfileSticky */ = {
 			isa = PBXGroup;
 			children = (
@@ -862,7 +879,8 @@
 		9DC271321C07766D00C6F825 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				9D1B5F841C1A1030003F28E5 /* AlertClass.swift */,
+				6DC2A4A01C84B8AB006E47D6 /* KAProgress */,
+				9D1B5F841C1A1030003F28E5 /* AlertModel.swift */,
 				A01D17CA1C2B29EE002FC5F2 /* MZFormSheetController */,
 				A0995E421C29D9D900C4F802 /* TTTAttributedLabel */,
 				A0AE939A1AF8041A00D02315 /* Bridging-Header.h */,
@@ -1177,7 +1195,7 @@
 				TargetAttributes = {
 					9D3326081AF7ED1C00498801 = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = QX6AA77Z42;
+						DevelopmentTeam = WKZMSRYE62;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1345,6 +1363,7 @@
 				A0646AF31C2C773A00527B90 /* ModalButton.swift in Sources */,
 				A01D77D81BDAB94C00AA8FE2 /* SocketIO.m in Sources */,
 				9DC9218A1B9F8D4900241FFD /* UIScrollView+InfiniteScroll.h in Sources */,
+				6DC2A4AC1C84B8C0006E47D6 /* KAProgressLabel.m in Sources */,
 				9DC9218B1B9F8D4900241FFD /* UIScrollView+InfiniteScroll.m in Sources */,
 				9D2BDFE41B9DF524003F1260 /* SearchController.swift in Sources */,
 				9DBB7A401B968437005700B9 /* UIImage+ImageEffects.h in Sources */,
@@ -1356,6 +1375,7 @@
 				A04CC2121BBDBB16001AF7E0 /* ToExpireCoupon.swift in Sources */,
 				A04D388F1BC7366600E578F0 /* NearestCoupon.swift in Sources */,
 				9D7FA0781BBC4FF000EAEC36 /* SettingsViewController.swift in Sources */,
+				6DC2A4AD1C84B8C0006E47D6 /* TPPropertyAnimation.m in Sources */,
 				6DD56C071C32EC9B006636F4 /* BadgeCollectionCell.swift in Sources */,
 				6D81DF171C4EA7490068168D /* BranchProfileStickySectionHeader.swift in Sources */,
 				A0EC05991B7D1C69003CADB2 /* SWRevealViewController.m in Sources */,
@@ -1403,7 +1423,7 @@
 				9DB327CC1B863C77006BF882 /* MoreMenuController.swift in Sources */,
 				A0EB97B21B051F02005112EF /* LoginController.swift in Sources */,
 				9D01E7F21C0D0F8A006A1F21 /* FriendSegmentedController.swift in Sources */,
-				9D1B5F851C1A1030003F28E5 /* AlertClass.swift in Sources */,
+				9D1B5F851C1A1030003F28E5 /* AlertModel.swift in Sources */,
 				A009A7E31C6B9DBC001C384D /* MapPinCallout.swift in Sources */,
 				6D81DF151C4EA7340068168D /* BranchProfileStickyHeader.swift in Sources */,
 				6D5C957E1C2B2AD70017B166 /* UserPaginationViewController.swift in Sources */,
@@ -1636,7 +1656,7 @@
 					Security,
 					"-licucore",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.iminceduardoqu.dop;
+				PRODUCT_BUNDLE_IDENTIFIER = com.iminced.dop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "dop/Bridging-Header.h";
@@ -1674,7 +1694,7 @@
 					Security,
 					"-licucore",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.iminceduardoqu.dop;
+				PRODUCT_BUNDLE_IDENTIFIER = com.iminced.dop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "dop/Bridging-Header.h";

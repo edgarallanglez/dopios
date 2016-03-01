@@ -15,6 +15,7 @@ class UserProfileStickyHeader: UIView {
     @IBOutlet weak var user_image: UIImageView!
     @IBOutlet weak var user_name: UILabel!
     @IBOutlet weak var follow_button: UIButton!
+    @IBOutlet weak var exp_progress: KAProgressLabel!
     
     var parent_view: UserProfileStickyController!
     var user_id: Int!
@@ -35,7 +36,7 @@ class UserProfileStickyHeader: UIView {
         
         user_name.text = self.parent_view.person?.names
         if (parent_view.person?.is_friend != nil) { setFollowingButton() }
-        
+        setProgressBar()
     }
     
     @IBAction func followUnfollow(sender: UIButton) {
@@ -85,4 +86,15 @@ class UserProfileStickyHeader: UIView {
             }
         }
     }
+    
+    func setProgressBar () {
+        exp_progress.startDegree = 0
+        exp_progress.progressColor = Utilities.dopColor
+        exp_progress.trackColor = Utilities.lightGrayColor
+        exp_progress.trackWidth = 2.2
+        exp_progress.progressWidth = 2
+        
+        exp_progress.setEndDegree(100, timing: TPPropertyAnimationTimingEaseInEaseOut, duration: 1.5, delay: 0)
+    }
+    
 }
