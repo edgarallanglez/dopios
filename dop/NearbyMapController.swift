@@ -19,21 +19,21 @@ class NearbyMapController {
 //            }
 //        })
 //    }
-    
+    private var downloadTask: NSURLSessionDownloadTask?
+
     class func getNearestBranches(params:[String:AnyObject], success succeed: ((branchesData: NSData!) -> Void),failure errorFound: ((branchesData: NSError?) -> Void)) {
         let latitude: AnyObject! = params["latitude"]
         let longitude: AnyObject! = params["longitude"]
         let radio: AnyObject! = params["radio"]
         print(latitude, longitude, radio)
         let url = "\(Utilities.dopURL)company/branch/nearest/?latitude=\(latitude)&longitude=\(longitude)&radio=\(radio)"
-        Utilities.sendDataToURL(NSURL(string: url)!, method:"POST", params: params, completion:{(data, error) -> Void in
-            if let urlData = data {
-                succeed(branchesData: urlData)
-            }else{
-                errorFound(branchesData: error)
-            }
-        })
-    }
 
-    
+        Utilities.sendDataToURL(NSURL(string: url)!, method: "POST", params: params, completion:{(data, error) -> Void in
+                if let urlData = data {
+                    succeed(branchesData: urlData)
+                }else{
+                    errorFound(branchesData: error)
+                }
+            })
+    }
 }

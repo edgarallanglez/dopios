@@ -35,10 +35,10 @@ class TabbarController: UITabBarController, SocketIODelegate {
         
         self.navigationController?.navigationBar.hidden = true
         
-        self.startListening()
-
-        
+        //self.startListening()
+        self.startSocketListener()
         UIApplication.sharedApplication().statusBarStyle = .LightContent
+        
         
     }
     
@@ -98,6 +98,28 @@ class TabbarController: UITabBarController, SocketIODelegate {
         }
     }
     
+    //NOTIFICATIONS SOCKET IO 2
+    func startSocketListener(){
+        SocketIOManager.sharedInstance.establishConnection()
+        
+        SocketIOManager.sharedInstance.connectToServerWithNickname(User.userToken, completionHandler: { (notification) -> Void in
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                if notification != nil {
+                    print("YESSSSS")
+                }
+            })
+        })
+        SocketIOManager.sharedInstance.getNotification { (info) -> Void in
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                print("NOTIFICATION")
+                NSNotificationCenter.defaultCenter().postNotificationName("newNotification", object: nil)
+                AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+            })
+        }
+    }
+    
+    
+    
     //NOTIFICATIONS
     
     func getNotification(packet:SocketIOPacket) {
@@ -128,6 +150,8 @@ class TabbarController: UITabBarController, SocketIODelegate {
     }
     func socketIODidDisconnect(socket: SocketIO!, disconnectedWithError error: NSError!) {
         socketIO.connectToHost("inmoon.com.mx", onPort: 443, withParams: nil, withNamespace: "/app")
+    
     }
+    
 
 }
