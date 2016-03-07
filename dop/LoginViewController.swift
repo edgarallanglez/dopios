@@ -156,7 +156,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
                 
                 let params:[String: String] = [
                     "facebook_key" : json["id"].string!,
-                    "names" : "\(json["name"].string!) \(middle_name)",
+                    "names" : "\(json["first_name"].string!) \(middle_name)",
                     "surnames": json["last_name"].string!,
                     "birth_date" : birthday,
                     "email": userEmail,
