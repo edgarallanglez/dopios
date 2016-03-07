@@ -14,11 +14,11 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
 //
     @IBOutlet weak var loginView: FBSDKLoginButton!
     var loginManager: FBSDKLoginManager = FBSDKLoginManager()
-    var firstTime:Bool = true
+    var firstTime: Bool = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        validateSession()
+        //validateSession()
     }
     
     func validateSession() {
@@ -27,14 +27,7 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
         if (FBSDKAccessToken.currentAccessToken() != nil) {
             self.getFBUserData()
         } else {
-            loginManager.logInWithReadPermissions(["public_profile", "email", "user_friends", "user_birthday"], fromViewController: self, handler: { (result, error) -> Void in
-                if (error == nil) {
-                    let fbLoginResult : FBSDKLoginManagerLoginResult = result
-                    if(fbLoginResult.grantedPermissions.contains("email")) {
-                        self.getFBUserData()
-                    }
-                }
-            })
+            self.performSegueWithIdentifier("showLogin", sender: self)
         }
     }
     
@@ -86,9 +79,10 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
     }
     
     override func viewDidAppear(animated: Bool) {
-        //loginViewShowingLoggedOutUser(fbLoginView)
-        if(!firstTime){
+        if (FBSDKAccessToken.currentAccessToken() == nil) {
             self.performSegueWithIdentifier("showLogin", sender: self)
+        } else {
+            validateSession()
         }
         
     }
@@ -120,7 +114,7 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
 
     // Social login Call
     func socialLogin(type: String, params: [String:String]!){
-        print("\(Utilities.dopURL)user/login/"+type)
+        print("\(Utilities.dopURL)user/login/" + type)
         
         LoginController.loginWithSocial("\(Utilities.dopURL)user/login/" + type, params: params,
         success:{ (loginData) -> Void in

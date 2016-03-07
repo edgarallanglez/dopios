@@ -19,7 +19,9 @@ class BranchProfileTopView: UIView {
     var branch_id: Int!
     var parent_view: BranchProfileStickyController!
     var branch: Branch!
-
+    var alert_array = [AlertModel]()
+    
+    
     @IBAction func followBranch(sender: AnyObject) {
         
         let params:[String: AnyObject] = [
@@ -45,7 +47,16 @@ class BranchProfileTopView: UIView {
             },
             failure: { (error) -> Void in
                 dispatch_async(dispatch_get_main_queue(), {
-                    print(error)
+                    let modal: ModalViewController = ModalViewController(currentView: self.parent_view, type: ModalViewControllerType.AlertModal)
+                    
+                    modal.willPresentCompletionHandler = { vc in
+                        let navigation_controller = vc as! AlertModalViewController
+                        
+                        self.alert_array.append(AlertModel(alert_title: "¡Oops!", alert_image: "error", alert_description: "Ha ocurrido un error, al parecer es nuestra culpa :("))
+                        
+                        navigation_controller.setAlert(self.alert_array)
+                    }
+                    modal.presentAnimated(true, completionHandler: nil)
                 })
         })
 
@@ -62,6 +73,7 @@ class BranchProfileTopView: UIView {
         self.parent_view = viewController
         self.branch_name.text = self.parent_view.coupon?.name
         if parent_view.coupon != nil { downloadImage(parent_view.coupon) }
+        self.follow_button.layer.borderColor = Utilities.dopColor.CGColor
     }
     
     func setFollowingButton() {

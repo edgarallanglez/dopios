@@ -80,8 +80,10 @@ class BranchRankingViewController: UITableViewController {
                 let privacy_status = subJson["privacy_status"].int!
                 let main_image = subJson["main_image"].string!
                 let total_used = subJson["total_used"].int!
+                let level = subJson["level"].int ?? 0
+                let exp = subJson["exp"].double ?? 0
                 
-                let model = PeopleModel(names: names, surnames: surnames, user_id: user_id, birth_date: birth_date, facebook_key: facebook_key, privacy_status: privacy_status, main_image: main_image, total_used: total_used)
+                let model = PeopleModel(names: names, surnames: surnames, user_id: user_id, birth_date: birth_date, facebook_key: facebook_key, privacy_status: privacy_status, main_image: main_image, total_used: total_used, level: level, exp: exp)
                 
                 self.ranking_array.append(model)
             }
@@ -123,8 +125,10 @@ class BranchRankingViewController: UITableViewController {
                     let privacy_status = subJson["privacy_status"].int!
                     let main_image = subJson["main_image"].string!
                     let total_used = subJson["total_used"].int!
+                    let level = subJson["level"].int!
+                    let exp = subJson["exp"].double!
                     
-                    let model = PeopleModel(names: names, surnames: surnames, user_id: user_id, birth_date: birth_date, facebook_key: facebook_key, privacy_status: privacy_status, main_image: main_image, total_used: total_used)
+                    let model = PeopleModel(names: names, surnames: surnames, user_id: user_id, birth_date: birth_date, facebook_key: facebook_key, privacy_status: privacy_status, main_image: main_image, total_used: total_used, level: level, exp: exp)
                     
                     self.ranking_array.append(model)
                     self.new_data = true

@@ -16,16 +16,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
+//    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+//        // Override point for customization after application launch.
+//        
+//        let settings = UIUserNotificationSettings(forTypes: UIUserNotificationType.Alert, categories: nil)
+//        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
+//        UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
+//        
+//        
+//        return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+//    }
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        
-        let settings = UIUserNotificationSettings(forTypes: UIUserNotificationType.Alert, categories: nil)
-        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
-        UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
-        
-        
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
+    
     
     func application(application: UIApplication,
         openURL url: NSURL,

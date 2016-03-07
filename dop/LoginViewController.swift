@@ -27,59 +27,12 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
         super.viewDidLoad()
 
         UIApplication.sharedApplication().statusBarStyle = .Default
-        
-//        let signIn = GPPSignIn.sharedInstance();
-//        signIn.shouldFetchGooglePlusUser = true;
-//        signIn.clientID = kClientId;
-//        signIn.scopes = [kGTLAuthScopePlusLogin,kGTLAuthScopePlusUserinfoEmail];
-//        signIn.trySilentAuthentication();
-//        signIn.delegate = self;
-        
-        
-        
+
         locationManager = CLLocationManager()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
-        
-//        dopLogo.image = UIImage(named: "dopLogo.png")
-        
-        let border = CALayer()
-        let border2 = CALayer()
-        let width = CGFloat(1.0)
-        
-        border.borderColor = UIColor.lightGrayColor().CGColor
-        border.frame = CGRect(x: 0, y: passField.frame.size.height - width, width:  passField.frame.size.width, height: passField.frame.size.height)
-        border.borderWidth = width
-        
-        border2.borderColor = UIColor.lightGrayColor().CGColor
-        border2.frame = CGRect(x: 0, y: userNameField.frame.size.height - width, width:  userNameField.frame.size.width, height: userNameField.frame.size.height)
-        border2.borderWidth = width
-        
-        let profileIcon = UIImageView(image: UIImage(named: "profileIcon.png"))
-        profileIcon.image = profileIcon.image?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-        profileIcon.tintColor = UIColor.lightGrayColor()
-        userNameField.layer.addSublayer(border)
-        userNameField.layer.masksToBounds = true
-        userNameField.leftView = profileIcon
-        userNameField.leftView!.frame = CGRectMake(5, 13, 55, 30);
-        userNameField.leftView!.contentMode = UIViewContentMode.ScaleAspectFit
-        userNameField.leftViewMode = UITextFieldViewMode.Always
-        
-        view.addSubview(profileIcon)
-        
-        let lockIcon = UIImageView(image: UIImage(named: "lockIcon.png"))
-        lockIcon.image = lockIcon.image?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-        lockIcon.tintColor = UIColor.lightGrayColor()
-        passField.layer.addSublayer(border2)
-        passField.layer.masksToBounds = true
-        passField.leftView = lockIcon
-        passField.leftView!.frame = CGRectMake(5, 13, 57, 30);
-        passField.leftView!.contentMode = UIViewContentMode.ScaleAspectFit
-        passField.leftViewMode = UITextFieldViewMode.Always
-
-        view.addSubview(lockIcon)
         
         self.fbLoginView.delegate = self
         self.fbLoginView.readPermissions = ["public_profile", "email", "user_friends", "user_birthday"]

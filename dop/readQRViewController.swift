@@ -129,7 +129,7 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                     //captureSession?.stopRunning()
                     self.qr_detected = true
                     
-                    if let qrInt =  Int(metadataObj.stringValue){
+                    if let qrInt =  Int(metadataObj.stringValue) {
                         if(qrInt == self.branch_id){
                             self.sendQR(qrInt)
                         } else {
@@ -147,7 +147,19 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
 
                         }
                     } else {
-                        print("Código Erroneo")
+                        dispatch_async(dispatch_get_main_queue(), {
+                            let modal: ModalViewController = ModalViewController(currentView: self, type: ModalViewControllerType.AlertModal)
+                            
+                            modal.willPresentCompletionHandler = { vc in
+                                let navigation_controller = vc as! AlertModalViewController
+                                
+                                self.alert_array.append(AlertModel(alert_title: "¡Oops!", alert_image: "error", alert_description: "Ha ocurrido un error, al parecer el QR no es válido :("))
+                                
+                                navigation_controller.setAlert(self.alert_array)
+                            }
+                            modal.presentAnimated(true, completionHandler: nil)
+                        })
+
                     }
                 }
             }
@@ -174,6 +186,7 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                     
                     let json = JSON(data: couponsData)
                     let name = json["data"]["name"].string
+                    print(json)
 
                     let modal: ModalViewController = ModalViewController(currentView: self, type: ModalViewControllerType.AlertModal)
                     

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -71,14 +71,16 @@
                                 <constraint firstAttribute="bottom" secondItem="j1t-e9-jfI" secondAttribute="bottom" constant="5" id="SEI-Wi-Tky"/>
                             </constraints>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vnf-zr-owF">
-                            <rect key="frame" x="498" y="247" width="87" height="28"/>
-                            <color key="backgroundColor" red="0.98431372549999996" green="0.1333333333" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vnf-zr-owF">
+                            <rect key="frame" x="560" y="250" width="25" height="25"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="87" id="wuu-jp-C9X"/>
+                                <constraint firstAttribute="height" constant="25" id="E2P-O1-iaU"/>
+                                <constraint firstAttribute="width" constant="25" id="wuu-jp-C9X"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="13"/>
-                            <state key="normal" title="SEGUIR">
+                            <inset key="contentEdgeInsets" minX="3" minY="3" maxX="3" maxY="3"/>
+                            <state key="normal" image="follow-icon">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -87,6 +89,9 @@
                                     <integer key="value" value="3"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                    <integer key="value" value="1"/>
+                                </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                             <variation key="widthClass=compact" fixedFrame="YES">
                                 <rect key="frame" x="170" y="175" width="87" height="30"/>
@@ -128,4 +133,7 @@
             <point key="canvasLocation" x="230" y="33.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="follow-icon" width="66" height="66"/>
+    </resources>
 </document>

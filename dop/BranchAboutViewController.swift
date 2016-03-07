@@ -37,6 +37,12 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
         self.view.frame.size.width = UIScreen.mainScreen().bounds.width
         self.view.frame.size.height = 350
         getBranchProfile()
+        
+        if self.branch_location_map != nil {
+            let tap = UITapGestureRecognizer(target: self, action: Selector("pressMap:"))
+            self.branch_location_map.addGestureRecognizer(tap)
+        }
+
     }
     
     
@@ -134,4 +140,55 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
         self.view.frame.size.width = UIScreen.mainScreen().bounds.width
     }
     
+    func pressMap(sender: UITapGestureRecognizer){
+        //If Google Maps is installed...
+        if UIApplication.sharedApplication().canOpenURL(NSURL(string: "comgooglemaps://")!) {
+            let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+            
+            let googleMaps = UIAlertAction(title: "Google Maps", style: .Default, handler: {
+                (alert: UIAlertAction!) -> Void in
+                self.openGoogleMaps()
+            })
+            let appleMaps = UIAlertAction(title: "Apple Maps", style: .Default, handler: {
+                (alert: UIAlertAction!) -> Void in
+                self.openAppleMaps()
+            })
+            
+            let cancelAction = UIAlertAction(title: "Cancelar", style: .Cancel, handler: {
+                (alert: UIAlertAction!) -> Void in
+            })
+            
+            optionMenu.addAction(googleMaps)
+            optionMenu.addAction(appleMaps)
+            optionMenu.addAction(cancelAction)
+            
+            self.presentViewController(optionMenu, animated: true, completion: nil)
+        } else {
+            self.openAppleMaps()
+        }
+    }
+    
+    func openGoogleMaps(){
+        let customURL = "comgooglemaps://?daddr=\(self.branch_pin!.coordinate.latitude),\(self.branch_pin!.coordinate.longitude)&directionsmode=driving"
+        
+        UIApplication.sharedApplication().openURL(NSURL(string: customURL)!)
+    }
+    
+    func openAppleMaps() {
+        
+        let latitute:CLLocationDegrees =  (self.branch_pin!.coordinate.latitude)
+        let longitute:CLLocationDegrees =  (self.branch_pin!.coordinate.longitude)
+        
+        let regionDistance:CLLocationDistance = 10000
+        let coordinates = CLLocationCoordinate2DMake(latitute, longitute)
+        let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
+        let options = [
+            MKLaunchOptionsMapCenterKey: NSValue(MKCoordinate: regionSpan.center),
+            MKLaunchOptionsMapSpanKey: NSValue(MKCoordinateSpan: regionSpan.span)
+        ]
+        let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
+        let mapItem = MKMapItem(placemark: placemark)
+        //mapItem.name = "\(self.coupon!.name)"
+        mapItem.openInMapsWithLaunchOptions(options)
+    }
 }

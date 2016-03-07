@@ -17,8 +17,8 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var friendSegmentedController: FriendSegmentedController!
     
     var current_table: String = "all"
-    var friends = [Friend]()
-    var following = [Friend]()
+    var friends = [PeopleModel]()
+    var following = [PeopleModel]()
     var cachedImages: [String: UIImage] = [:]
     var cachedFollowingImages: [String: UIImage] = [:]
     
@@ -36,7 +36,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCellWithIdentifier("FriendCell") as! FriendCell;
-        var model: Friend
+        var model: PeopleModel
         if tableView == self.tableView { model = self.friends[indexPath.row] } else { model = self.following[indexPath.row] }
         
         let imageUrl = NSURL(string: model.main_image)
@@ -122,8 +122,10 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
                     let birth_date = subJson["birth_date"].string!
                     let privacy_status = subJson["privacy_status"].int
                     let facebook_key = subJson["facebook_key"].string ?? ""
+                    let level = subJson["level"].int!
+                    let exp = subJson["exp"].double!
                     
-                    let model = Friend(friend_id: friend_id, user_id: user_id, names: user_name, surnames: user_surnames, main_image: main_image, friend: friend, birth_date: birth_date, privacy_status: privacy_status, facebook_key: facebook_key)
+                    let model = PeopleModel(friend_id: friend_id, user_id: user_id, names: user_name, surnames: user_surnames, main_image: main_image, is_friend: friend, birth_date: birth_date, privacy_status: privacy_status, facebook_key: facebook_key, level: level, exp: exp)
                     
                     self.friends.append(model)
                 }
@@ -154,8 +156,11 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
                     let birth_date = subJson["birth_date"].string!
                     let privacy_status = subJson["privacy_status"].int
                     let facebook_key = subJson["facebook_key"].string ?? ""
+                    let level = subJson["level"].int!
+                    let exp = subJson["exp"].double!
                     
-                    let model = Friend(friend_id: friend_id, user_id: user_id, names: user_name, surnames: user_surnames, main_image: main_image, friend: friend, birth_date: birth_date, privacy_status: privacy_status, facebook_key: facebook_key)
+                    
+                    let model = PeopleModel(friend_id: friend_id, user_id: user_id, names: user_name, surnames: user_surnames, main_image: main_image, is_friend: friend, birth_date: birth_date, privacy_status: privacy_status, facebook_key: facebook_key, level: level, exp: exp)
                     
                     self.following.append(model)
                 }
@@ -212,7 +217,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let cell = sender as? FriendCell {
             
-            var model: Friend
+            var model: PeopleModel
             if current_table == "all" {
                 let i = self.tableView.indexPathForCell(cell)!.row
                 model = self.friends[i]
@@ -226,8 +231,10 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
                 view.user_id = model.user_id
                 view.user_image_path = model.main_image
                 view.user_image = cell.user_image
-                let person = PeopleModel(names: model.names, surnames: model.surnames, user_id: model.user_id, birth_date: model.birth_date, facebook_key: model.facebook_key, privacy_status: model.privacy_status, main_image: model.main_image, is_friend: model.friend)
-                view.person = person
+//                let person = PeopleModel(names:  surnames: , user_id: , birth_date: model.birth_date, facebook_key: model.facebook_key, privacy_status: model.privacy_status, main_image: model.main_image, is_friend: model.is_friend)
+//                
+//                PeopleModel(names: model.names, surnames: model.surnames, user_id: model.user_id, birth_date: <#T##String?#>, facebook_key: <#T##String?#>, privacy_status: <#T##Int#>, main_image: <#T##String?#>, is_friend: <#T##Bool#>, level: <#T##Int#>, exp: <#T##Double#>)
+                view.person = model
                 view.user_name = model.names
             }
         }

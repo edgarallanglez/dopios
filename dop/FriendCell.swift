@@ -14,7 +14,7 @@ class FriendCell: UITableViewCell {
     @IBOutlet var user_image: UIImageView!
     @IBOutlet weak var setFollowButton: UIButton!
     
-    var person: Friend!
+    var person: PeopleModel!
     
 //    @IBOutlet weak var getProfileButton: UIButton!
     
@@ -24,10 +24,10 @@ class FriendCell: UITableViewCell {
         
     }
     
-    func loadItem(person: Friend, viewController: UIViewController) {
+    func loadItem(person: PeopleModel, viewController: UIViewController) {
         self.person = person
         
-        if person.friend {
+        if person.is_friend! {
             self.setFollowButton.backgroundColor = Utilities.dopColor
             self.setFollowButton.setTitle("SIGUIENDO", forState: UIControlState.Normal)
             self.setFollowButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
@@ -59,7 +59,7 @@ class FriendCell: UITableViewCell {
                             self.setFollowButton.setTitle("SEGUIENDO", forState: UIControlState.Normal)
                             self.setFollowButton.layer.borderColor = Utilities.dopColor.CGColor
                             self.setFollowButton.setTitleColor(Utilities.dopColor, forState: UIControlState.Normal)
-                            self.person.friend = false
+                            self.person.is_friend = false
                         }, completion: { (Bool) in
                             
                     })
@@ -78,7 +78,7 @@ class FriendCell: UITableViewCell {
     
     @IBAction func setFollow(sender: UIButton) {
         
-        if !person.friend {
+        if !person.is_friend! {
             let params:[String: AnyObject] = [
                 "user_two_id": self.friend_id
             ]
@@ -92,7 +92,7 @@ class FriendCell: UITableViewCell {
                         //                    self.follow_button_width.constant = CGFloat(100)
     //                    self.view.layoutIfNeeded()
                         }, completion: { (Bool) in
-                            self.person.friend = true
+                            self.person.is_friend = true
                             self.setFollowButton.setTitle("DEJAR DE SEGUIR", forState: UIControlState.Normal)
                             self.setFollowButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
                     })

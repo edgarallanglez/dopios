@@ -77,7 +77,7 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         var cell: UICollectionViewCell!
         if self.person != nil {
-            if self.person?.privacy_status == 0 || User.user_id == self.person.user_id {
+            if self.person?.privacy_status == 0 || User.user_id == self.person.user_id || self.person.is_friend == true {
                 let custom_cell = collectionView.dequeueReusableCellWithReuseIdentifier("page_identifier", forIndexPath: indexPath) as! UserPaginationViewController
                 
                 custom_cell.delegate = self
@@ -129,6 +129,7 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
         
     }
     func checkForProfile() {
+        print(Constanst.Levels["1"])
         if person == nil{
             UserProfileController.getUserProfile(user_id, success: { (profileData) -> Void in
                 let json = JSON(data: profileData)
@@ -140,10 +141,11 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
                     let birth_date = subJson["birth_date"].string!
                     let privacy_status = subJson["privacy_status"].int!
                     let main_image = subJson["main_image"].string!
+                    let level = subJson["level"].int!
+                    let exp = subJson["exp"].double!
                     //let total_used = subJson["total_used"].int!
                     
-                    let model = PeopleModel(names:names, surnames: surnames, user_id: user_id, birth_date: birth_date, facebook_key: facebook_key, privacy_status: privacy_status, main_image: main_image)
-    
+                    let model = PeopleModel(names: names, surnames: surnames, user_id: user_id, birth_date: birth_date, facebook_key: facebook_key, privacy_status: privacy_status, main_image: main_image, level: level, exp: exp)
 
                     self.person = model
                 }

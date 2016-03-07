@@ -22,6 +22,7 @@
 		6D81DF1E1C4EABF90068168D /* BranchAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D81DF1D1C4EABF90068168D /* BranchAboutViewController.swift */; };
 		6D81DF201C4EAC480068168D /* BranchCampaignCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D81DF1F1C4EAC480068168D /* BranchCampaignCollectionViewController.swift */; };
 		6D81DF221C4EAC720068168D /* BranchRankingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D81DF211C4EAC720068168D /* BranchRankingViewController.swift */; };
+		6D8D326A1C89EDDA00DA0DBD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8D32691C89EDDA00DA0DBD /* Constants.swift */; };
 		6D9080D51C319EED00DA3072 /* UserProfileStickyHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9080D41C319EED00DA3072 /* UserProfileStickyHeader.swift */; };
 		6D9080DE1C319FF600DA3072 /* UserProfileStickyHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D9080DD1C319FF600DA3072 /* UserProfileStickyHeader.xib */; };
 		6D9F5A111C208894005D0EBE /* BadgeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9F5A101C208894005D0EBE /* BadgeController.swift */; };
@@ -348,6 +349,7 @@
 		6D81DF1D1C4EABF90068168D /* BranchAboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BranchAboutViewController.swift; sourceTree = "<group>"; };
 		6D81DF1F1C4EAC480068168D /* BranchCampaignCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BranchCampaignCollectionViewController.swift; sourceTree = "<group>"; };
 		6D81DF211C4EAC720068168D /* BranchRankingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BranchRankingViewController.swift; sourceTree = "<group>"; };
+		6D8D32691C89EDDA00DA0DBD /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		6D9080D41C319EED00DA3072 /* UserProfileStickyHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileStickyHeader.swift; sourceTree = "<group>"; };
 		6D9080DD1C319FF600DA3072 /* UserProfileStickyHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserProfileStickyHeader.xib; sourceTree = "<group>"; };
 		6D9F5A101C208894005D0EBE /* BadgeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadgeController.swift; sourceTree = "<group>"; };
@@ -938,6 +940,7 @@
 				A060F7871B717DB9009D6ADB /* UIImage+ImageEffects.h */,
 				A060F7881B717DB9009D6ADB /* UIImage+ImageEffects.m */,
 				A0EB97AF1B05131E005112EF /* Utilities.swift */,
+				6D8D32691C89EDDA00DA0DBD /* Constants.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -1527,6 +1530,7 @@
 				6D134AC31C2B6C5C00EDD5E4 /* BadgesPage.swift in Sources */,
 				A01D17EB1C2B2BFB002FC5F2 /* NSInvocation+Copy.m in Sources */,
 				A01D17E01C2B2A15002FC5F2 /* UIViewController+TargetViewController.m in Sources */,
+				6D8D326A1C89EDDA00DA0DBD /* Constants.swift in Sources */,
 				A060F78E1B72B475009D6ADB /* CouponDetailView.swift in Sources */,
 				A082F48A1B1920F8001C8C52 /* NewsfeedCell.swift in Sources */,
 				A09AB4E51AFA880E004287F7 /* Coupon.swift in Sources */,
