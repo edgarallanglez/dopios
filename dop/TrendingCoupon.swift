@@ -30,16 +30,23 @@ class TrendingCoupon: UIView, ModalDelegate {
         self.descriptionLbl.text = coupon.couponDescription
         self.viewController = viewController
         if coupon.user_like == 1 { self.heart.tintColor = Utilities.dopColor } else { self.heart.tintColor = UIColor.lightGrayColor() }
+        if coupon.taken == true { self.takeCouponButton.tintColor = Utilities.dopColor } else { self.takeCouponButton.tintColor = UIColor.darkGrayColor() }
+        
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: "updateLikeAndTaken:",
+            name: "takenOrLikeStatus",
+            object: nil)
     }
     
     init() {
         super.init(frame: CGRect(x: 0, y: 0, width: 180, height: 230))
     }
     
-    func viewDidAppear(){
+/*    func viewDidAppear(){
         self.likes.text = String(coupon.total_likes)
         if coupon.user_like == 1 { self.heart.tintColor = Utilities.dopColor } else { self.heart.tintColor = UIColor.lightGrayColor() }
-    }
+    }*/
     
     func likeCoupon(sender: UITapGestureRecognizer){
         let params:[String: AnyObject] = [
@@ -118,21 +125,44 @@ class TrendingCoupon: UIView, ModalDelegate {
         self.viewController = view
         self.frame.origin = CGPointMake(x,y)
     }
+    func setCouponTaken() {
+        self.takeCouponButton.transform = CGAffineTransformMakeScale(0.1, 0.1)
+        UIView.animateWithDuration(0.8,
+            delay: 0,
+            usingSpringWithDamping: 0.2,
+            initialSpringVelocity: 6.0,
+            options: UIViewAnimationOptions.AllowUserInteraction,
+            animations: {
+                self.takeCouponButton.transform = CGAffineTransformIdentity
+            }, completion: nil)
+        
+        self.takeCouponButton.tintColor = Utilities.dopColor
+        self.coupon.taken = true
+    }
     
+    func removeCouponTaken() {
+        self.takeCouponButton.tintColor = UIColor.darkGrayColor()
+        self.coupon.taken = false
+
+    }
     func setTakeCoupon(sender: UITapGestureRecognizer) {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyyMMdd"
-        let folioDate = dateFormatter.stringFromDate(NSDate())
-        dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
-        let date = dateFormatter.stringFromDate(NSDate())
         
         let params:[String: AnyObject] = [
             "coupon_id" : self.coupon.id,
             "branch_id": self.coupon.branch_id,
-            "taken_date" : date,
-            "folio_date": folioDate,
             "latitude": User.coordinate.latitude ?? 0,
             "longitude": User.coordinate.longitude ?? 0 ]
+        
+        var taken: Bool
+        
+        
+        if self.takeCouponButton.tintColor == UIColor.darkGrayColor() {
+            self.setCouponTaken()
+            taken = true
+        } else {
+            self.removeCouponTaken()
+            taken = false
+        }
         
         
         CouponController.takeCouponWithSuccess(params,
@@ -140,28 +170,18 @@ class TrendingCoupon: UIView, ModalDelegate {
                 dispatch_async(dispatch_get_main_queue(), {
                     let json = JSON(data: data)
                     print(json)
-                    
-                    self.takeCouponButton.transform = CGAffineTransformMakeScale(0.1, 0.1)
-                    UIView.animateWithDuration(0.8,
-                        delay: 0,
-                        usingSpringWithDamping: 0.2,
-                        initialSpringVelocity: 6.0,
-                        options: UIViewAnimationOptions.AllowUserInteraction,
-                        animations: { self.takeCouponButton.transform = CGAffineTransformIdentity }, completion: nil)
-                    
-                    self.takeCouponButton.tintColor = Utilities.dopColor
                 })
                 
             },
             
             failure: { (error) -> Void in
                 dispatch_async(dispatch_get_main_queue(), {
-                    print(error)
+                    if taken { self.removeCouponTaken() }
+                    else { self.setCouponTaken() }
                 })
             }
         )
         
-        print(date)
     }
     
     func setTakeButtonState() {
@@ -192,6 +212,31 @@ class TrendingCoupon: UIView, ModalDelegate {
             })
         }
     }
+    func updateLikeAndTaken(notification:NSNotification){
+        
+        let object = notification.object as! [String: AnyObject]
+        
+        let type = object["type"] as! String
+        let status = object["status"] as! Bool
+        let coupon_id = object["coupon_id"] as! Int
+        
+        if(coupon_id == self.coupon.id){
+            if(status == false){
+                if(type == "take"){
+                    self.removeCouponTaken()
+                }else{
+                    self.removeCouponLike()
+                }
+            }else{
+                if(type == "take"){
+                    self.setCouponTaken()
+                }else{
+                    self.setCouponLike()
+                }
+            }
+        }
+    }
+
     
 }
 

@@ -14,7 +14,7 @@ import UIKit
     optional func launchInfiniteScroll(parent_scroll: UICollectionView)
 }
 
-class UserProfileStickyController: UICollectionViewController, UserPaginationDelegate, SegmentedControlDelegate {
+class UserProfileStickyController: UICollectionViewController, UserPaginationDelegate, SegmentedControlDelegate, UISearchBarDelegate {
     var delegate: SetSegmentedPageDelegate?
     var new_height: CGFloat!
     var frame_width: CGFloat!
@@ -28,12 +28,23 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
     var page_index: Int!
     var segmented_controller: UserProfileSegmentedController?
     
+    var notificationButton: UIBarButtonItem!
+    var vc: SearchViewController!
+    var vcNot: NotificationViewController!
+    var searchBar: UISearchBar = UISearchBar()
+    var searchView: UIView!
+    var searchViewIsOpen: Bool = false
+    var searchViewIsSegue: Bool = false
+    
+    var cancelSearchButton:UIBarButtonItem!
+    
     private var layout : CSStickyHeaderFlowLayout? {
         return self.collectionView?.collectionViewLayout as? CSStickyHeaderFlowLayout
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.collectionView?.alwaysBounceVertical = true
         self.view.backgroundColor = UIColor.whiteColor()
         self.frame_width = self.collectionView!.frame.width
@@ -52,14 +63,78 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
         
         //self.collectionView?.delegate = self
         checkForProfile()
-        //setupProfileDetail()
         
-//        self.collectionView!.infiniteScrollIndicatorView = CustomInfiniteIndicator(frame: CGRectMake(0, 0, 24, 24))
-//        self.collectionView!.infiniteScrollIndicatorMargin = 40
-//
-//        self.collectionView!.addInfiniteScrollWithHandler { [weak self] (scrollView) -> Void in
-//            self?.infiniteScroll()
-//        }
+        drawBar();
+        
+    }
+    override func viewDidAppear(animated: Bool) {
+        if User.newNotification {
+            self.notificationButton.image = UIImage(named: "notification-badge")
+        }else{
+            self.notificationButton.image = UIImage(named: "notification")
+        }
+        
+        searchBar.alpha = 0
+        Utilities.fadeInViewAnimation(searchBar, delay: 0, duration: 0.5)
+        self.navigationItem.titleView = searchBar
+    }
+    func drawBar(){
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "setBadge", name: "newNotification", object: nil)
+
+        notificationButton = UIBarButtonItem(image: UIImage(named: "notification"), style: UIBarButtonItemStyle.Plain, target: self, action: "notification")
+        
+        self.navigationItem.rightBarButtonItem = notificationButton
+        
+        vc  = self.storyboard!.instantiateViewControllerWithIdentifier("SearchView") as! SearchViewController
+        
+        vcNot = self.storyboard!.instantiateViewControllerWithIdentifier("Notifications") as! NotificationViewController
+        
+        
+        searchBar.delegate = self
+        
+        
+
+        searchBar.tintColor = UIColor.whiteColor()
+        searchBar.searchBarStyle = UISearchBarStyle.Minimal
+        searchBar.placeholder = "Buscar"
+        
+        
+        
+        for subView in self.searchBar.subviews{
+            for subsubView in subView.subviews{
+                if let textField = subsubView as? UITextField{
+                    textField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("Buscar", comment: ""), attributes: [NSForegroundColorAttributeName: Utilities.extraLightGrayColor])
+                    textField.textColor = UIColor.whiteColor()
+                    
+                }
+            }
+        }
+        
+        
+
+        searchView = UIView(frame: CGRectMake(0,0,self.view.frame.width,self.view.frame.height))
+        
+        //Add blur view to search view
+        let blurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.ExtraLight))
+        blurView.frame = searchView.bounds
+        
+        vc.view.addSubview(blurView)
+        
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: "cancelSearch")
+        blurView.addGestureRecognizer(gestureRecognizer)
+        
+        //vc.searchScrollView.hidden = true
+        vc.searchScrollView.hidden = true
+        
+        
+        cancelSearchButton = UIBarButtonItem(title: "Cancelar", style: .Plain, target: self, action: "cancelSearch")
+        
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: "presentView:",
+            name: "performSegue",
+            object: nil)
+
     }
     
     // Cells
@@ -201,6 +276,104 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
     func setSegmentedIndex(index: Int) {
         self.segmented_controller!.selectedIndex = index
         self.collectionView?.setContentOffset(CGPointZero, animated: false)
+    }
+    
+    func presentView(notification:NSNotification){
+        if(searchViewIsOpen){
+            searchViewIsSegue = true
+            
+            let object_id = notification.object as! Int
+            
+            if vc.searchSegmentedController.selectedIndex == 0 {
+                let viewControllerToPresent = self.storyboard!.instantiateViewControllerWithIdentifier("BranchProfileStickyController") as! BranchProfileStickyController
+                viewControllerToPresent.branch_id = object_id
+                self.navigationController?.pushViewController(viewControllerToPresent, animated: true)
+                
+            }
+            if vc.searchSegmentedController.selectedIndex == 1 {
+                let viewControllerToPresent = self.storyboard!.instantiateViewControllerWithIdentifier("UserProfileStickyController") as! UserProfileStickyController
+                viewControllerToPresent.user_id = object_id
+                self.navigationController?.pushViewController(viewControllerToPresent, animated: true)
+                
+            }
+            
+            searchBar.resignFirstResponder()
+            
+        }
+        
+    }
+    
+    func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
+        if(searchViewIsOpen == false){
+            self.navigationItem.rightBarButtonItem = cancelSearchButton
+            
+            searchView.layer.masksToBounds = true
+            self.view.addSubview(searchView)
+            Utilities.fadeInFromBottomAnimation(searchView, delay: 0, duration: 0.7, yPosition: 20)
+            
+            searchView.addSubview(vc.view)
+            vc.searchBar = self.searchBar
+            
+            searchViewIsOpen = true
+        }
+        return true
+    }
+    func cancelSearch(){
+        if(searchViewIsOpen == true){
+            searchView.removeFromSuperview()
+            searchBar.resignFirstResponder()
+            searchViewIsOpen = false
+            self.navigationItem.rightBarButtonItem = notificationButton
+            searchBar.text = ""
+            vc.searchScrollView.hidden = true
+            vc.peopleFiltered.removeAll()
+            vc.peopleTableView.reloadData()
+            vc.filtered.removeAll()
+            vc.tableView.reloadData()
+        }
+    }
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        if(searchViewIsOpen == true && vc.searchScrollView.hidden == true){
+            vc.searchScrollView.hidden = false
+            Utilities.slideFromBottomAnimation(vc.searchScrollView, delay: 0, duration: 0.5, yPosition: 600)
+        }
+        
+        if(searchText.characters.count == 0){
+            vc.searchScrollView.hidden = true
+        }else{
+            vc.searchText = searchText
+            vc.searchTimer()
+        }
+    }
+    
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        vc.searchActive = false;
+        vc.timer?.invalidate()
+        
+        if(vc.searchText != ""){
+            vc.search()
+            searchBar.resignFirstResponder()
+        }
+    }
+    
+    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+        vc.searchActive = false;
+    }
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        vc.searchActive = false;
+    }
+    func setBadge(){
+        self.notificationButton.image = UIImage(named: "notification-badge")
+    }
+    func notification() {
+        let tabbar = self.tabBarController as! TabbarController!
+        self.navigationController?.pushViewController(tabbar.vcNot, animated: true)
+        self.notificationButton.image = UIImage(named: "notification")
+        
+        /*vcNot.navigationController?.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(vcNot, animated: true)*/
+        
     }
 }
 

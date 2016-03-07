@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="wsr-0B-cyM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="wsr-0B-cyM">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -5945,13 +5945,13 @@
             <objects>
                 <collectionViewController storyboardIdentifier="UserProfileStickyController" title=" " id="cf5-lv-Mm7" customClass="UserProfileStickyController" customModule="dop" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="LZJ-9o-NLy">
-                        <rect key="frame" x="0.0" y="0.0" width="400" height="1200"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <collectionViewLayout key="collectionViewLayout" id="G8Z-EP-wAC" customClass="CSStickyHeaderFlowLayout"/>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="page_identifier" id="pw3-sZ-d3k" customClass="UserPaginationViewController" customModule="dop" customModuleProvider="target">
-                                <rect key="frame" x="21" y="64" width="359" height="266"/>
+                                <rect key="frame" x="121" y="64" width="359" height="266"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="359" height="266"/>
@@ -5963,7 +5963,7 @@
                                 <size key="customSize" width="359" height="266"/>
                             </collectionViewCell>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" reuseIdentifier="locked_identifier" id="Hh8-cv-CFQ">
-                                <rect key="frame" x="21" y="340" width="359" height="266"/>
+                                <rect key="frame" x="121" y="340" width="359" height="266"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="359" height="266"/>
@@ -7096,7 +7096,8 @@
                                         <exclude reference="aP2-Cd-m5h"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact">
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="125" y="129" width="150" height="150"/>
                                     <mask key="constraints">
                                         <include reference="PqF-i2-N3J"/>
                                         <include reference="aP2-Cd-m5h"/>
@@ -7108,12 +7109,18 @@
                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="18"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="50" y="284" width="300" height="21"/>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oaU-8L-mX3">
                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="29"/>
                                 <color key="textColor" red="0.98431372549999996" green="0.1333333333" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="188" y="45" width="25" height="34"/>
+                                </variation>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -7647,6 +7654,7 @@
                                 <exclude reference="Xt2-Z2-TC9"/>
                                 <exclude reference="voV-CS-PWG"/>
                                 <exclude reference="AMH-X9-2Ee"/>
+                                <exclude reference="aPw-5w-o63"/>
                                 <exclude reference="OmF-gh-XO6"/>
                                 <exclude reference="ZKX-O7-IKI"/>
                                 <exclude reference="ax9-av-fNP"/>
@@ -7656,7 +7664,6 @@
                                 <exclude reference="d9f-Co-TEr"/>
                                 <exclude reference="fm8-C9-eOg"/>
                                 <exclude reference="99i-wc-5RN"/>
-                                <exclude reference="aPw-5w-o63"/>
                                 <exclude reference="rbM-St-gAE"/>
                                 <exclude reference="97s-oR-KcC"/>
                                 <exclude reference="SZB-GB-3qX"/>
@@ -7690,6 +7697,7 @@
                                 <include reference="Xt2-Z2-TC9"/>
                                 <include reference="voV-CS-PWG"/>
                                 <include reference="AMH-X9-2Ee"/>
+                                <include reference="aPw-5w-o63"/>
                                 <include reference="OmF-gh-XO6"/>
                                 <include reference="ZKX-O7-IKI"/>
                                 <include reference="ax9-av-fNP"/>
@@ -7699,7 +7707,6 @@
                                 <include reference="d9f-Co-TEr"/>
                                 <include reference="fm8-C9-eOg"/>
                                 <include reference="99i-wc-5RN"/>
-                                <include reference="aPw-5w-o63"/>
                                 <include reference="rbM-St-gAE"/>
                                 <include reference="97s-oR-KcC"/>
                                 <include reference="SZB-GB-3qX"/>
@@ -7732,6 +7739,7 @@
                         <outlet property="likes_label" destination="rAy-Bp-yo9" id="4OK-qY-pPH"/>
                         <outlet property="loader" destination="VSk-iK-QFW" id="NCo-AN-eLH"/>
                         <outlet property="map" destination="986-GH-7Oh" id="j3N-ry-Lv9"/>
+                        <outlet property="takeCouponButton" destination="MUv-jZ-HjO" id="f7c-jD-OU4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yg9-Pa-DPG" userLabel="First Responder" sceneMemberID="firstResponder"/>
