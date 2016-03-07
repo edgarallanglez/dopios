@@ -44,7 +44,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
-        User.coordinate = locationManager.location!.coordinate
+        //User.coordinate = locationManager.location!.coordinate
         
         
 
