@@ -42,6 +42,12 @@ class PromoCollectionCell: UICollectionViewCell, FBSDKSharingDelegate {
         } else {
             self.heart.tintColor = UIColor.lightGrayColor()
         }
+        
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: "updateLikeAndTaken:",
+            name: "takenOrLikeStatus",
+            object: nil)
     }
     
     
@@ -129,20 +135,44 @@ class PromoCollectionCell: UICollectionViewCell, FBSDKSharingDelegate {
         self.coupon.setUserLike(0, total_likes: totalLikes)
     }
     
-    @IBAction func setTakeCoupon(sender: UIButton) {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyyMMdd"
-        let folioDate = dateFormatter.stringFromDate(NSDate())
-        dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
-        let date = dateFormatter.stringFromDate(NSDate())
+    func setCouponTaken() {
+        self.take_coupon_btn.transform = CGAffineTransformMakeScale(0.1, 0.1)
+        UIView.animateWithDuration(0.8,
+            delay: 0,
+            usingSpringWithDamping: 0.2,
+            initialSpringVelocity: 6.0,
+            options: UIViewAnimationOptions.AllowUserInteraction,
+            animations: {
+                self.take_coupon_btn.transform = CGAffineTransformIdentity
+            }, completion: nil)
         
+        self.take_coupon_btn.tintColor = Utilities.dopColor
+        self.coupon.taken = true
+    }
+    
+    func removeCouponTaken() {
+        self.take_coupon_btn.tintColor = UIColor.darkGrayColor()
+        self.coupon.taken = false
+        
+    }
+    
+    @IBAction func setTakeCoupon(sender: UIButton) {
         let params:[String: AnyObject] = [
-            "coupon_id" : self.coupon_id,
-            "branch_id": self.branch_id,
-            "taken_date" : date,
-            "folio_date": folioDate,
+            "coupon_id" : self.coupon.id,
+            "branch_id": self.coupon.branch_id,
             "latitude": User.coordinate.latitude ?? 0,
             "longitude": User.coordinate.longitude ?? 0 ]
+        
+        var taken: Bool
+        
+        
+        if self.take_coupon_btn.tintColor == UIColor.darkGrayColor() {
+            self.setCouponTaken()
+            taken = true
+        } else {
+            self.removeCouponTaken()
+            taken = false
+        }
         
         
         CouponController.takeCouponWithSuccess(params,
@@ -150,32 +180,48 @@ class PromoCollectionCell: UICollectionViewCell, FBSDKSharingDelegate {
                 dispatch_async(dispatch_get_main_queue(), {
                     let json = JSON(data: data)
                     print(json)
-                    
-                    self.take_coupon_btn.transform = CGAffineTransformMakeScale(0.1, 0.1)
-                    UIView.animateWithDuration(0.8,
-                        delay: 0,
-                        usingSpringWithDamping: 0.2,
-                        initialSpringVelocity: 6.0,
-                        options: UIViewAnimationOptions.AllowUserInteraction,
-                        animations: { self.take_coupon_btn.transform = CGAffineTransformIdentity }, completion: nil)
-                    
-                    self.take_coupon_btn.tintColor = Utilities.dopColor
                 })
-
+                
             },
+            
             failure: { (error) -> Void in
                 dispatch_async(dispatch_get_main_queue(), {
-                    print(error)
+                    if taken { self.removeCouponTaken() }
+                    else { self.setCouponTaken() }
                 })
             }
         )
-        
-        print(date)
+
     }
     
     func setTakeButtonState(state: Bool) {
         if state { self.take_coupon_btn.tintColor = Utilities.dopColor }
         else { self.take_coupon_btn.tintColor = UIColor.darkGrayColor() }
+    }
+    
+    func updateLikeAndTaken(notification:NSNotification){
+        
+        let object = notification.object as! [String: AnyObject]
+        
+        let type = object["type"] as! String
+        let status = object["status"] as! Bool
+        let coupon_id = object["coupon_id"] as! Int
+        
+        if(coupon_id == self.coupon.id){
+            if(status == false){
+                if(type == "take"){
+                    self.removeCouponTaken()
+                }else{
+                    self.removeCouponLike()
+                }
+            }else{
+                if(type == "take"){
+                    self.setCouponTaken()
+                }else{
+                    self.setCouponLike()
+                }
+            }
+        }
     }
 
 }

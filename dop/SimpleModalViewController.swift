@@ -12,6 +12,7 @@ import MapKit
 class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapViewDelegate {
     @IBOutlet var heart: UIImageView!
     @IBOutlet var heartView: UIView!
+    @IBOutlet var takeCouponButton: UIButton!
     @IBOutlet var description_title: UILabel!
     @IBOutlet var branch_title: UIButton!
     @IBOutlet var description_separator: UIView!
@@ -73,6 +74,7 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapVie
             map.addGestureRecognizer(tap)
         }
         
+
         normalAttrdict = [NSFontAttributeName:UIFont(name: "Montserrat-Light",size: 16.0)!,NSForegroundColorAttributeName: UIColor.lightGrayColor()]
         highlightAttrdict = [NSFontAttributeName:UIFont(name: "Montserrat-Light",size: 16.0)!, NSForegroundColorAttributeName: Utilities.dopColor]
         
@@ -125,6 +127,8 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapVie
             self.likes_label.text = String(coupon!.total_likes)
             if coupon!.user_like == 1 { self.heart.tintColor = Utilities.dopColor } else { self.heart.tintColor = UIColor.lightGrayColor() }
             
+            if coupon.taken == true { self.takeCouponButton.tintColor = Utilities.dopColor } else { self.takeCouponButton.tintColor = UIColor.darkGrayColor() }
+            
             Utilities.fadeInFromBottomAnimation(self.branch_title, delay: 0, duration: 0.5, yPosition: 30)
             Utilities.fadeInFromBottomAnimation(self.category_label, delay: 0, duration: 0.5, yPosition: 30)
             
@@ -136,6 +140,11 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapVie
     }
   
     func setCouponLike() {
+        let params:[String: AnyObject] = [
+            "coupon_id" : self.coupon.id,
+            "status": true,
+            "type": "like"]
+        
         heart.transform = CGAffineTransformMakeScale(0.1, 0.1)
         UIView.animateWithDuration(0.8,
             delay: 0,
@@ -150,13 +159,56 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapVie
         let totalLikes = (self.coupon?.total_likes)! + 1
         self.likes_label.text = String(stringInterpolationSegment: totalLikes)
         self.coupon!.setUserLike(1, total_likes: totalLikes)
+        
+        NSNotificationCenter.defaultCenter().postNotificationName("takenOrLikeStatus", object: params)
     }
     
     func removeCouponLike() {
+        let params:[String: AnyObject] = [
+            "coupon_id" : self.coupon.id,
+            "status": false,
+            "type": "like"]
+        
         self.heart.tintColor = UIColor.lightGrayColor()
         let totalLikes = (self.coupon?.total_likes)! - 1
         self.likes_label.text = String(stringInterpolationSegment: totalLikes)
         self.coupon!.setUserLike(0, total_likes: totalLikes)
+        
+        NSNotificationCenter.defaultCenter().postNotificationName("takenOrLikeStatus", object: params)
+
+    }
+    func setCouponTaken() {
+        let params:[String: AnyObject] = [
+            "coupon_id" : self.coupon.id,
+            "status": true,
+            "type": "take"]
+        
+        self.takeCouponButton.transform = CGAffineTransformMakeScale(0.1, 0.1)
+        UIView.animateWithDuration(0.8,
+            delay: 0,
+            usingSpringWithDamping: 0.2,
+            initialSpringVelocity: 6.0,
+            options: UIViewAnimationOptions.AllowUserInteraction,
+            animations: {
+                self.takeCouponButton.transform = CGAffineTransformIdentity
+            }, completion: nil)
+        
+        self.takeCouponButton.tintColor = Utilities.dopColor
+        self.coupon.taken = true
+        
+        NSNotificationCenter.defaultCenter().postNotificationName("takenOrLikeStatus", object: params)
+    }
+    
+    func removeCouponTaken() {
+        let params:[String: AnyObject] = [
+            "coupon_id" : self.coupon.id,
+            "status": false,
+            "type": "take"]
+        
+        self.takeCouponButton.tintColor = UIColor.darkGrayColor()
+        self.coupon.taken = false
+        NSNotificationCenter.defaultCenter().postNotificationName("takenOrLikeStatus", object: params)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -291,16 +343,40 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapVie
     }
     
     @IBAction func setTakeCoupon(sender: UIButton) {
-        sender.transform = CGAffineTransformMakeScale(0.1, 0.1)
-        UIView.animateWithDuration(0.8,
-            delay: 0,
-            usingSpringWithDamping: 0.2,
-            initialSpringVelocity: 6.0,
-            options: UIViewAnimationOptions.AllowUserInteraction,
-            animations: {
-                sender.transform = CGAffineTransformIdentity
-            }, completion: nil)
-        sender.tintColor = Utilities.dopColor
+        let params:[String: AnyObject] = [
+            "coupon_id" : self.coupon.id,
+            "branch_id": self.coupon.branch_id,
+            "latitude": User.coordinate.latitude ?? 0,
+            "longitude": User.coordinate.longitude ?? 0 ]
+        
+        var taken: Bool
+        
+        
+        if self.takeCouponButton.tintColor == UIColor.darkGrayColor() {
+            self.setCouponTaken()
+            taken = true
+        } else {
+            self.removeCouponTaken()
+            taken = false
+        }
+        
+        
+        CouponController.takeCouponWithSuccess(params,
+            success: { (data) -> Void in
+                dispatch_async(dispatch_get_main_queue(), {
+                    let json = JSON(data: data)
+                    print(json)
+                })
+                
+            },
+            
+            failure: { (error) -> Void in
+                dispatch_async(dispatch_get_main_queue(), {
+                    if taken { self.removeCouponTaken() }
+                    else { self.setCouponTaken() }
+                })
+            }
+        )
     }
     
     func likeCoupon(sender: UIGestureRecognizer) {

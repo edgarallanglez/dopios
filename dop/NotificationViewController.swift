@@ -161,10 +161,10 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                     let object_id = subJson["object_id"].int ?? 0
                     let launcher_friend = subJson["launcher_friend"].int ?? 0
                     let image = subJson["user_image"].string!
-                   
+                    let branch_id = subJson["branch_id"].int ?? 0
                     
                     
-                    let model = Notification(type: type, notification_id: notification_id, launcher_id: launcher_id, launcher_name: launcher_name, launcher_surnames: launcher_surnames, newsfeed_activity: newsfeed_activity, friendship_status: friendship_status,read: read, date: date, image_name: image, company_id: company_id, object_id: object_id, launcher_friend: launcher_friend)
+                    let model = Notification(type: type, notification_id: notification_id, launcher_id: launcher_id, launcher_name: launcher_name, launcher_surnames: launcher_surnames, newsfeed_activity: newsfeed_activity, friendship_status: friendship_status,read: read, date: date, image_name: image, company_id: company_id, object_id: object_id, launcher_friend: launcher_friend, branch_id: branch_id)
                     
                     self.notificationsTemporary.append(model)
                     
@@ -220,8 +220,9 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                     let object_id = subJson["object_id"].int ?? 0
                     let launcher_friend = subJson["launcher_friend"].int ?? 0
                     let image = subJson["user_image"].string!
-                    
-                    let model = Notification(type: type, notification_id: notification_id, launcher_id: launcher_id, launcher_name: launcher_name, launcher_surnames: launcher_surnames, newsfeed_activity: newsfeed_activity, friendship_status: friendship_status,read: read, date:date, image_name: image, company_id: company_id, object_id: object_id, launcher_friend: launcher_friend)
+                    let branch_id = subJson["branch_id"].int ?? 0
+
+                    let model = Notification(type: type, notification_id: notification_id, launcher_id: launcher_id, launcher_name: launcher_name, launcher_surnames: launcher_surnames, newsfeed_activity: newsfeed_activity, friendship_status: friendship_status,read: read, date:date, image_name: image, company_id: company_id, object_id: object_id, launcher_friend: launcher_friend, branch_id: branch_id)
                     
                     
                     self.notificationsTemporary.append(model)
@@ -293,19 +294,36 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             "notification_id" : selectedItem.notification_id,
             "friends_id": selectedItem.object_id]
         print(selectedItem.object_id)
-        if(selectedItem.type == "friend"){
-            FriendsController.acceptFriendWithSuccess(params, success: {(friendsData) -> Void in
-                    dispatch_async(dispatch_get_main_queue(), {
-                        print("Aceptado")
-                    })
-                }, failure: { (error) -> Void in
-                    dispatch_async(dispatch_get_main_queue(), {
-                        print("Error")
-                    })
-            })
-        if(selectedItem.type == "newsfeed"){
+            if(selectedItem.type == "friend"){
+                FriendsController.acceptFriendWithSuccess(params, success: {(friendsData) -> Void in
+                        dispatch_async(dispatch_get_main_queue(), {
+                            print("Aceptado")
+                        })
+                    }, failure: { (error) -> Void in
+                        dispatch_async(dispatch_get_main_queue(), {
+                            print("Error")
+                        })
+                })
+            if(selectedItem.type == "newsfeed"){
+            }
         }
     }
+    func attributedLabel(label: TTTAttributedLabel!, didSelectLinkWithURL url: NSURL!) {
+        let splitter = String(url).componentsSeparatedByString(":")
+        let segue: String = splitter[0]
+        let object_id: Int = Int(splitter[1])!
+        
+        if segue == "userProfile" {
+            let view_controller = self.storyboard!.instantiateViewControllerWithIdentifier("UserProfileStickyController") as! UserProfileStickyController
+            view_controller.user_id = object_id
+            self.navigationController?.pushViewController(view_controller, animated: true)
+        }
+        if segue == "branchProfile" {
+            let view_controller = self.storyboard!.instantiateViewControllerWithIdentifier("BranchProfileStickyController") as! BranchProfileStickyController
+            view_controller.branch_id = object_id
+            self.navigationController?.pushViewController(view_controller, animated: true)
+        }
     }
+
 
 }

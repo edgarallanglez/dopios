@@ -22,8 +22,9 @@ class Notification:NSObject{
     var company_id: Int
     var object_id: Int
     var launcher_friend: Int
+    var branch_id: Int
 
-    init(type:String!, notification_id:Int!, launcher_id:Int!, launcher_name: String!, launcher_surnames: String!, newsfeed_activity:String!, friendship_status:Int!, read:Bool, date:String!, image_name:String!, company_id: Int!, object_id: Int!, launcher_friend: Int!) {
+    init(type:String!, notification_id:Int!, launcher_id:Int!, launcher_name: String!, launcher_surnames: String!, newsfeed_activity:String!, friendship_status:Int!, read:Bool, date:String!, image_name:String!, company_id: Int!, object_id: Int!, launcher_friend: Int!, branch_id: Int!) {
         self.type = type ?? ""
         self.notification_id = notification_id ?? 0
         self.launcher_id = launcher_id ?? 0
@@ -37,5 +38,6 @@ class Notification:NSObject{
         self.company_id = company_id ?? 0
         self.object_id = object_id ?? 0
         self.launcher_friend = launcher_friend ?? 0
+        self.branch_id = branch_id ?? 0
     }
 }

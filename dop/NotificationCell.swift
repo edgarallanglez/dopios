@@ -36,26 +36,27 @@ class NotificationCell: UITableViewCell {
             let nsString = notification_text as NSString
             let launcher_range = nsString.rangeOfString(launcher_name)
             let newsfeed_activity_range = nsString.rangeOfString(newsfeed_Activity)
-            let segue = NSURL(string: "userProfile")!
+            let segue = NSURL(string: "userProfile:\(notification.launcher_id)")!
+            let branch_segue = NSURL(string: "branchProfile:\(notification.branch_id)")
             title.addLinkToURL(segue, withRange: launcher_range)
-            title.addLinkToURL(segue, withRange: newsfeed_activity_range)
+            title.addLinkToURL(branch_segue, withRange: newsfeed_activity_range)
         }
         if(notification.type == "friend"){
             var notification_text = ""
             
-            if(notification.friendship_status == 0 ){
-                notification_text = "\(launcher_name) quiere seguirte"
-            }
             if(notification.friendship_status == 1 && notification.launcher_friend == User.user_id){
                 notification_text = "Ahora sigues a \(launcher_name)"
             }else{
                 notification_text = "\(launcher_name) te esta siguiendo"
             }
+            if(notification.friendship_status == 0 ){
+                notification_text = "\(launcher_name) quiere seguirte"
+            }
             
             title.text = notification_text
             let nsString = notification_text as NSString
             let launcher_range = nsString.rangeOfString(launcher_name)
-            let segue = NSURL(string: "userProfile")!
+            let segue = NSURL(string: "userProfile:\(notification.launcher_id)")!
             title.addLinkToURL(segue, withRange: launcher_range)
         }
         if(notification.read == false){
