@@ -50,6 +50,7 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
         locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
         User.coordinate = locationManager.location!.coordinate
+        
         if (self.revealViewController() != nil) {
             filterSidebarButton = UIBarButtonItem(image: UIImage(named: "filter"), style: UIBarButtonItemStyle.Plain, target: self.revealViewController(), action: "revealToggle:")
             self.nearbyMap.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "tapMap"))
@@ -72,15 +73,12 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
     override func viewDidAppear(animated: Bool) {
         setMapAtCurrent()
     }
-    func tapMap(){
-        if(FilterSideViewController.open == true){
-            self.revealViewController().revealToggleAnimated(true)
-        }
+    func tapMap() {
+        if FilterSideViewController.open == true { self.revealViewController().revealToggleAnimated(true) }
     }
+    
     func mapView(mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
-        if(FilterSideViewController.open == true){
-            self.revealViewController().revealToggleAnimated(true)
-        }
+        if FilterSideViewController.open == true { self.revealViewController().revealToggleAnimated(true) }
     }
     
     

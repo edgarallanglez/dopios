@@ -13,6 +13,7 @@ import JWTDecode
 class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationManagerDelegate {
 
 
+    @IBOutlet weak var MD_spinner: MMMaterialDesignSpinner!
     @IBOutlet weak var fbLoginView: FBSDKLoginButton!
     @IBOutlet weak var passField: UITextField!
     @IBOutlet weak var userNameField: UITextField!
@@ -25,7 +26,9 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.MD_spinner.lineWidth = 3
+        self.MD_spinner.startAnimating()
+        self.MD_spinner.alpha = 0
         UIApplication.sharedApplication().statusBarStyle = .Default
 
         locationManager = CLLocationManager()
@@ -41,6 +44,8 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
             // User is already logged in, do work such as go to next view controller.
             self.getFBUserData()
         }
+        
+        
         
     }
     override func didReceiveMemoryWarning() {
@@ -187,7 +192,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
     // Social login Call
     func socialLogin(type: String, params: [String:String]!){
         print("\(Utilities.dopURL)user/login/"+type)
-        
+        Utilities.fadeInFromBottomAnimation(self.MD_spinner, delay: 0, duration: 1, yPosition: 5)
         LoginController.loginWithSocial("\(Utilities.dopURL)user/login/" + type, params: params,
             success:{ (loginData) -> Void in
                 User.loginType = type
