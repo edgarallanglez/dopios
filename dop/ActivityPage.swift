@@ -28,6 +28,8 @@ class ActivityPage: UITableViewController, TTTAttributedLabelDelegate {
     var new_data: Bool = false
     var added_values: Int = 0
     
+    var loader: UIActivityIndicatorView!
+    
     override func viewDidLoad() {
         self.tableView.alwaysBounceVertical = false
         self.tableView.scrollEnabled = false
@@ -35,6 +37,15 @@ class ActivityPage: UITableViewController, TTTAttributedLabelDelegate {
         let nib = UINib(nibName: "RewardsActivityCell", bundle: nil)
         self.tableView.registerNib(nib, forCellReuseIdentifier: "RewardsActivityCell")
         self.tableView.rowHeight = 140
+        
+        loader = UIActivityIndicatorView(frame: CGRectMake(100,100,80,80))
+        self.view.addSubview(loader)
+        self.view.backgroundColor = UIColor.redColor()
+        loader.center = self.view.center
+        loader.startAnimating()
+        let view:UIView = UIView(frame: CGRectMake(50,50,50,50))
+        self.view.addSubview(view)
+        view.backgroundColor = UIColor.blueColor()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -44,6 +55,7 @@ class ActivityPage: UITableViewController, TTTAttributedLabelDelegate {
             let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("default_view")!
             cell.hidden = false
         }
+        
     }
     
     func setFrame() {

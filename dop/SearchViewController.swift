@@ -175,12 +175,12 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func searchTimer(){
-        if(searchText.length == 1){
+  /*      if(searchText.length == 1){
             search()
-        }else{
+        }else{*/
             timer?.invalidate()
-            timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "timeOut", userInfo: nil, repeats: false)
-        }
+            timer = NSTimer.scheduledTimerWithTimeInterval(0.7, target: self, selector: "timeOut", userInfo: nil, repeats: false)
+        //}
     }
     
     
