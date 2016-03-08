@@ -43,6 +43,9 @@ class ActivityPage: UITableViewController, TTTAttributedLabelDelegate {
         self.view.backgroundColor = UIColor.redColor()
         loader.center = self.view.center
         loader.startAnimating()
+        
+
+        
         let view:UIView = UIView(frame: CGRectMake(50,50,50,50))
         self.view.addSubview(view)
         view.backgroundColor = UIColor.blueColor()
