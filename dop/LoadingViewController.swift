@@ -16,9 +16,12 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
     var loginManager: FBSDKLoginManager = FBSDKLoginManager()
     var firstTime: Bool = true
 
+    @IBOutlet var loader: MMMaterialDesignSpinner!
     override func viewDidLoad() {
         super.viewDidLoad()
         //validateSession()
+        loader.startAnimating()
+        loader.lineWidth = 3.0
     }
     
     func validateSession() {
