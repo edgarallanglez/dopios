@@ -15,7 +15,7 @@ class LoginController {
         Utilities.sendDataToURL(NSURL(string: url)!, method:"POST", params: params, completion: {(data, error) -> Void in
             if let urlData = data {
                 succeed(loginData: urlData)
-            }else{
+            } else {
                 errorFound(loginData: error)
             }
         })
