@@ -89,7 +89,7 @@ import UIKit
         
         for index in 1...items.count {
             
-            let label = UILabel(frame: CGRectMake(0, 0, 70, 40))
+            let label = UILabel(frame: CGRectMake(0, 0, 70, 50))
             label.text = items[index - 1]
             label.backgroundColor = UIColor.clearColor()
             label.textAlignment = .Center
@@ -111,7 +111,7 @@ import UIKit
         selectFrame.size.width = newWidth
         thumbView.frame = selectFrame
         let background = thumbColor
-        background.frame = CGRectMake(0, 37, newWidth, 3)
+        background.frame = CGRectMake(0, 47, newWidth, 3)
         thumbView.layer.insertSublayer(background, atIndex: 0)
         //        thumbView.layer.cornerRadius = thumbView.frame.height / 2
         

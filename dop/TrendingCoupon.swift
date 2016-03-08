@@ -207,7 +207,7 @@ class TrendingCoupon: UIView, ModalDelegate {
 
             modal.dismissAnimated(true, completionHandler:{ (modal) -> Void in
                 self.viewController!.hidesBottomBarWhenPushed = true
-            self.viewController!.navigationController?.pushViewController(view_controller, animated: true)
+                self.viewController!.navigationController?.pushViewController(view_controller, animated: true)
                 self.viewController!.hidesBottomBarWhenPushed = false
             })
         }

@@ -49,7 +49,7 @@ class AlertModalViewController: UIViewController {
             }
         } else {
             self.mz_dismissFormSheetControllerAnimated(true, completionHandler: nil)
-            navigationController?.popViewControllerAnimated(true)
+            self.navigationController?.popViewControllerAnimated(true)
         }
     }
     
