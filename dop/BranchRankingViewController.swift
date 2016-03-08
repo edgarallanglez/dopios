@@ -23,12 +23,24 @@ class BranchRankingViewController: UITableViewController {
     var new_data: Bool = false
     var added_values: Int = 0
     
+    var loader: MMMaterialDesignSpinner!
+    
     override func viewDidLoad() {
         self.tableView.alwaysBounceVertical = false
         self.tableView.scrollEnabled = false
         //        self.view.translatesAutoresizingMaskIntoConstraints = false
         self.tableView.rowHeight = 60
         
+        setupLoader()
+    }
+    
+    func setupLoader(){
+        loader = MMMaterialDesignSpinner(frame: CGRectMake(0,70,50,50))
+        loader.center.x = self.view.center.x
+        loader.lineWidth = 3.0
+        loader.startAnimating()
+        loader.tintColor = Utilities.dopColor
+        self.view.addSubview(loader)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -92,12 +104,14 @@ class BranchRankingViewController: UITableViewController {
                 self.ranking_array.sortInPlace({ $0.total_used > $1.total_used })
                 self.reload()
                 Utilities.fadeInFromBottomAnimation(self.tableView, delay: 0, duration: 1, yPosition: 20)
+                Utilities.fadeOutViewAnimation(self.loader, delay: 0, duration: 0.3)
+
             });
             },
             
             failure: { (error) -> Void in
                 dispatch_async(dispatch_get_main_queue(), {
-                    //                    self.refreshControl.endRefreshing()
+                    Utilities.fadeOutViewAnimation(self.loader, delay: 0, duration: 0.3)
                 })
         })
     }

@@ -17,6 +17,7 @@ protocol AboutPageDelegate {
 class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     var delegate: AboutPageDelegate?
     
+    @IBOutlet var contentView: UIView!
     @IBOutlet weak var branch_location_map: MKMapView!
     @IBOutlet weak var branch_description: UITextView!
     @IBOutlet weak var pin_icon: UIImageView!
@@ -25,8 +26,10 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
     var parent_view: BranchProfileStickyController!
     var branch_pin: CLLocation!
     let regions_radius: CLLocationDistance = 500
+    var loader: MMMaterialDesignSpinner!
     
     override func viewDidLoad() {
+        setupLoader()
 //        branch_description.text = description
         pin_icon.image = pin_icon.image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
         pin_icon.tintColor = UIColor.lightGrayColor()
@@ -43,8 +46,17 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
             self.branch_location_map.addGestureRecognizer(tap)
         }
 
+        
     }
     
+    func setupLoader(){
+        loader = MMMaterialDesignSpinner(frame: CGRectMake(0,70,50,50))
+        loader.center.x = self.view.center.x
+        loader.lineWidth = 3.0
+        loader.startAnimating()
+        loader.tintColor = Utilities.dopColor
+        self.view.addSubview(loader)
+    }
     
 //    override func viewWillAppear(animated: Bool) {
 //        delegate?.resizeAboutView!(330)
@@ -119,7 +131,9 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
                 }
                 
                 self.branch_location_map.addAnnotation(drop_pin)
-                Utilities.fadeInFromBottomAnimation(self.view, delay: 0, duration: 1, yPosition: 20)
+                Utilities.fadeInFromBottomAnimation(self.contentView, delay: 0, duration: 1, yPosition: 20)
+                
+                Utilities.fadeOutViewAnimation(self.loader, delay: 0, duration: 0.3)
 
                 self.delegate!.setFollow(model)
             })
@@ -128,6 +142,8 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
             failure: { (error) -> Void in
                 dispatch_async(dispatch_get_main_queue(), {
                     print(error)
+                    Utilities.fadeOutViewAnimation(self.loader, delay: 0, duration: 0.3)
+
                 })
         })
     }
