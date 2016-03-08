@@ -28,6 +28,7 @@ class ActivityPage: UITableViewController, TTTAttributedLabelDelegate {
     var new_data: Bool = false
     var added_values: Int = 0
     
+    var loader: MMMaterialDesignSpinner!
     
     override func viewDidLoad() {
         self.tableView.alwaysBounceVertical = false
@@ -37,11 +38,16 @@ class ActivityPage: UITableViewController, TTTAttributedLabelDelegate {
         self.tableView.registerNib(nib, forCellReuseIdentifier: "RewardsActivityCell")
         self.tableView.rowHeight = 140
         
-
-        //let loader
-        let loader:UIView = UIView(frame: CGRectMake(50,50,50,50))
-        self.view.addSubview(view)
-        view.backgroundColor = UIColor.blueColor()
+        setupLoader()
+        
+    }
+    func setupLoader(){
+        loader = MMMaterialDesignSpinner(frame: CGRectMake(0,70,50,50))
+        loader.center.x = self.view.center.x
+        loader.lineWidth = 3.0
+        loader.startAnimating()
+        loader.tintColor = Utilities.dopColor
+        self.view.addSubview(loader)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -147,13 +153,16 @@ class ActivityPage: UITableViewController, TTTAttributedLabelDelegate {
             
             dispatch_async(dispatch_get_main_queue(), {
                 self.reload()
+                
                 Utilities.fadeInFromBottomAnimation(self.tableView, delay: 0, duration: 1, yPosition: 20)
+                Utilities.fadeOutViewAnimation(self.loader, delay: 0, duration: 0.3)
+                
             });
             },
             
             failure: { (error) -> Void in
                 dispatch_async(dispatch_get_main_queue(), {
-                    //                    self.refreshControl.endRefreshing()
+                    Utilities.fadeOutViewAnimation(self.loader, delay: 0, duration: 0.3)
                 })
         })
     }
