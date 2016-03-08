@@ -15,6 +15,7 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
     @IBOutlet weak var loginView: FBSDKLoginButton!
     var loginManager: FBSDKLoginManager = FBSDKLoginManager()
     var firstTime: Bool = true
+    var alert_array = [AlertModel]()
 
     @IBOutlet var loader: MMMaterialDesignSpinner!
     override func viewDidLoad() {
@@ -150,6 +151,19 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
             })
         },
         failure:{ (error) -> Void in
+//            dispatch_async(dispatch_get_main_queue(), {
+//                let modal: ModalViewController = ModalViewController(currentView: self, type: ModalViewControllerType.AlertModal)
+//                
+//                modal.willPresentCompletionHandler = { vc in
+//                    let navigation_controller = vc as! AlertModalViewController
+//                    
+//                    self.alert_array.append(AlertModel(alert_title: "¡Oops!", alert_image: "error", alert_description: "Ha ocurrido un error :("))
+//                    
+//                    navigation_controller.setAlert(self.alert_array)
+//                }
+//                modal.presentAnimated(true, completionHandler: nil)
+//            })
+            
             let alert = UIAlertController(title: "Oops!", message:"Oops! Parece que hubo un error", preferredStyle: .Alert)
             let action = UIAlertAction(title: "Reintentar", style: .Default) { _ in
                 self.validateSession()

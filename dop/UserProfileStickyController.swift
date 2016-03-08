@@ -38,7 +38,7 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
     
     var cancelSearchButton:UIBarButtonItem!
     
-    private var layout : CSStickyHeaderFlowLayout? {
+    private var layout: CSStickyHeaderFlowLayout? {
         return self.collectionView?.collectionViewLayout as? CSStickyHeaderFlowLayout
     }
     
@@ -70,7 +70,7 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
     override func viewDidAppear(animated: Bool) {
         if User.newNotification {
             self.notificationButton.image = UIImage(named: "notification-badge")
-        }else{
+        } else {
             self.notificationButton.image = UIImage(named: "notification")
         }
         

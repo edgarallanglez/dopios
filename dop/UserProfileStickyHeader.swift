@@ -111,7 +111,7 @@ class UserProfileStickyHeader: UIView {
     
     func setProgressBar () {
         exp_progress.startDegree = 0
-        exp_progress.progressColor = Utilities.dopColor
+        exp_progress.progressColor = UIColor(red: 33.0/255.0, green: 150.0/255.0, blue: 243.0/255.0, alpha: 1.0)
         exp_progress.trackColor = Utilities.lightGrayColor
         exp_progress.trackWidth = 2.2
         exp_progress.progressWidth = 2
