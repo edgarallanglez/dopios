@@ -28,6 +28,7 @@ class BadgesPage: UICollectionViewController {
     var offset = 5
     var new_data: Bool = false
     var added_values: Int = 0
+    var loader:MMMaterialDesignSpinner!
     
     override func viewDidLoad() {
         self.collectionView!.scrollEnabled = false
@@ -35,6 +36,15 @@ class BadgesPage: UICollectionViewController {
         
         frame_width = self.badgeCollectionView.frame.size.width
         cell_size = ((self.frame_width ) / 3) - 9
+        setupLoader()
+    }
+    func setupLoader(){
+        loader = MMMaterialDesignSpinner(frame: CGRectMake(0,70,50,50))
+        loader.center.x = self.view.center.x
+        loader.lineWidth = 3.0
+        loader.startAnimating()
+        loader.tintColor = Utilities.dopColor
+        self.view.addSubview(loader)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -124,11 +134,12 @@ class BadgesPage: UICollectionViewController {
                 dispatch_async(dispatch_get_main_queue(), {
                     self.reload()
                     Utilities.fadeInFromBottomAnimation((self.collectionView)!, delay: 0, duration: 1, yPosition: 20)
+                    Utilities.fadeOutViewAnimation(self.loader, delay: 0, duration: 0.3)
                 });
             },
             failure: { (error) -> Void in
                 dispatch_async(dispatch_get_main_queue(), {
-                    
+                    Utilities.fadeOutViewAnimation(self.loader, delay: 0, duration: 0.3)
                 })
         })
     }
