@@ -18,7 +18,7 @@ enum ModalViewControllerType: String {
 }
 
 class ModalViewController: MZFormSheetController {
-    var delegate:ModalDelegate? = nil
+    var delegate:ModalDelegate?
     var type: ModalViewControllerType?
     var simple_modal : SimpleModalViewController?
     var parent_view: UIViewController!

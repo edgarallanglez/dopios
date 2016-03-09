@@ -64,6 +64,8 @@ class UserProfileStickyHeader: UIView {
         ]
         
         UserProfileController.followFriendWithSuccess(params, success: { (data) -> Void in
+            let json: JSON = JSON(data: data)
+            print(json)
             dispatch_async(dispatch_get_main_queue(), {
                 UIButton.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
                     self.follow_button.setImage(nil, forState: UIControlState.Normal)
@@ -72,7 +74,11 @@ class UserProfileStickyHeader: UIView {
                     self.follow_button_width.constant = CGFloat(100)
                     self.layoutIfNeeded()
                     }, completion: { (Bool) in
-                        self.follow_button.setTitle("SIGUIENDO", forState: UIControlState.Normal)
+                        switch json["data"]["operation_id"].int! {
+                            case 0: self.follow_button.setTitle("ENVIADO", forState: UIControlState.Normal)
+                            case 1: self.follow_button.setTitle("SIGUIENDO", forState: UIControlState.Normal)
+                        default: break
+                        }
                         
                 })
             })

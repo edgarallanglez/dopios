@@ -22,7 +22,6 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
     override func viewDidLoad() {
         super.viewDidLoad()
         self.modal = ModalViewController(currentView: self, type: ModalViewControllerType.AlertModal)
-        self.modal.delegate = self
         loader.startAnimating()
         loader.lineWidth = 3.0
     }
@@ -162,6 +161,7 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
                     navigation_controller.setAlert(self.alert_array)
                 }
                 self.modal.presentAnimated(true, completionHandler: nil)
+                self.modal.delegate = self
             })
             
 //            let alert = UIAlertController(title: "Oops!", message:"Oops! Parece que hubo un error", preferredStyle: .Alert)
@@ -174,6 +174,7 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
     }
     
     func pressActionButton(modal: ModalViewController) {
+        print("entre")
         self.validateSession()
     }
 }
