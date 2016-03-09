@@ -47,8 +47,11 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
         
         getCoupons()
         
-        // Set custom indicator
-        self.CouponsCollectionView.infiniteScrollIndicatorView = CustomInfiniteIndicator(frame: CGRectMake(0, 0, 24, 24))
+        let loader:MMMaterialDesignSpinner = MMMaterialDesignSpinner(frame: CGRectMake(0,0,24,24))
+        
+        loader.lineWidth = 2.0        
+        self.CouponsCollectionView.infiniteScrollIndicatorView = loader
+        self.CouponsCollectionView.infiniteScrollIndicatorView?.tintColor = Utilities.dopColor
         
         // Set custom indicator margin
         //CouponsCollectionView.infiniteScrollIndicatorMargin = 49
