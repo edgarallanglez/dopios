@@ -95,18 +95,21 @@ class CouponDetailViewController: BaseViewController, UITableViewDelegate, UITab
         } else {
             imageUrl = NSURL(string: "\(Utilities.dopImagesURL)\(companyId)/\(self.banner)")
         }
-        Utilities.getDataFromUrl(imageUrl!) { photo in
-            dispatch_async(dispatch_get_main_queue()) {
-                let imageData: NSData = NSData(data: photo!)
-                
-                customView.branch_cover.image = UIImage(data: imageData)!
-
-                if(customView.branch_cover.image == nil){
-                    customView.backgroundColor = UIColor.redColor()
+        Utilities.downloadImage(imageUrl, completion: {(data, error) -> Void in
+            if let image = data{
+                dispatch_async(dispatch_get_main_queue()) {
+                    let imageData: NSData = NSData(data: image)
+                    
+                    customView.branch_cover.image = UIImage(data: imageData)!
+                    
+                    if(customView.branch_cover.image == nil){
+                        customView.backgroundColor = UIColor.redColor()
+                    }
                 }
+            }else{
+                print("Error")
             }
-        }
-
+        })
     }
     
     func setBranchAnnotation () {
@@ -141,27 +144,30 @@ class CouponDetailViewController: BaseViewController, UITableViewDelegate, UITab
         } else {
             cell.user_image.alpha = 0
             print("Entro al segundo")
-            Utilities.getDataFromUrl(imageUrl!) { data in
-                dispatch_async(dispatch_get_main_queue()) {
-                    
-//                    print("Finished downloading \"\(imageUrl!.lastPathComponent!.stringByDeletingPathExtension)\".")
-                    
-                    var cell_image : UIImage = UIImage()
-                    cell_image = UIImage ( data: data!)!
-                    
-                    if tableView.indexPathForCell(cell)?.section == indexPath.section{
-                        self.cachedImages[identifier] = cell_image
+            
+            Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
+                if let image = data{
+                    dispatch_async(dispatch_get_main_queue()) {
                         
-                        let cell_image_saved : UIImage = self.cachedImages[identifier]!
+                        var cell_image : UIImage = UIImage()
+                        cell_image = UIImage ( data: image)!
                         
-                        cell.user_image.image = cell_image_saved
-                        
-                        UIView.animateWithDuration(0.5, animations: {
-                            cell.user_image.alpha = 1
-                        })
+                        if tableView.indexPathForCell(cell)?.section == indexPath.section{
+                            self.cachedImages[identifier] = cell_image
+                            
+                            let cell_image_saved : UIImage = self.cachedImages[identifier]!
+                            
+                            cell.user_image.image = cell_image_saved
+                            
+                            UIView.animateWithDuration(0.5, animations: {
+                                cell.user_image.alpha = 1
+                            })
+                        }
                     }
+                }else{
+                    print("Error")
                 }
-            }
+            })
         }
 
         

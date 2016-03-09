@@ -127,12 +127,7 @@ class Utilities {
         
         task.resume()
     }
-    class func getDataFromUrl(urL:NSURL, completion: ((data: NSData?) -> Void)) {
-        NSURLSession.sharedSession().dataTaskWithURL(urL) { (data, response, error) in
-            completion(data: NSData(data: data!))
-            }.resume()
-    }
-    
+
     class func downloadImage(urL:NSURL, completion: (data: NSData?,error: NSError?) -> Void) {
         
         NSURLSession.sharedSession().dataTaskWithURL(urL, completionHandler: { (data: NSData? , response: NSURLResponse?, error: NSError?) -> Void in

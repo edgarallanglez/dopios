@@ -314,14 +314,17 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
 
                         let imageUrl = NSURL(string: "\(Utilities.dopImagesURL)\(coupon.company_id)/\(coupon.logo)")
                         coupon_box.logo.alpha = 0
-                        
-                        Utilities.getDataFromUrl(imageUrl!) { photo in
-                            dispatch_async(dispatch_get_main_queue()) {
-                                let imageData: NSData = NSData(data: photo!)
-                                coupon_box.logo.image = UIImage(data: imageData)
-                                Utilities.fadeInViewAnimation(coupon_box.logo, delay:0, duration:1)
+                        Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
+                            if let image = data{
+                                dispatch_async(dispatch_get_main_queue()) {
+                                    let imageData: NSData = NSData(data: image)
+                                    coupon_box.logo.image = UIImage(data: imageData)
+                                    Utilities.fadeInViewAnimation(coupon_box.logo, delay:0, duration:1)
+                                }
+                            }else{
+                                print("Error")
                             }
-                        }
+                        })
                         
                         coupon_box.loadItem(coupon, viewController: self)
                         Utilities.applyPlainShadow(coupon_box)

@@ -186,14 +186,21 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
             
                 print("\(imageUrl!)")
                 mapPin.calloutView?.branch_image!.alpha = 0
-                Utilities.getDataFromUrl(imageUrl!) { photo in
-                    dispatch_async(dispatch_get_main_queue()) {
-                        let imageData: NSData = NSData(data: photo!)
-                        mapPin.calloutView?.branch_image!.image = UIImage(data: imageData)
-                        Utilities.fadeInViewAnimation((mapPin.calloutView?.branch_image)!, delay:0, duration:1)
-                        
+            
+                Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
+                    if let image = data{
+                        dispatch_async(dispatch_get_main_queue()) {
+                            let imageData: NSData = NSData(data: image)
+                            mapPin.calloutView?.branch_image!.image = UIImage(data: imageData)
+                            Utilities.fadeInViewAnimation((mapPin.calloutView?.branch_image)!, delay:0, duration:1)
+                            
+                        }
+                    }else{
+                        print("Error")
                     }
-                }
+                })
+                
+
                 updatePinPosition(mapPin)
         }
         

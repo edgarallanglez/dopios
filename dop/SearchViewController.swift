@@ -133,22 +133,27 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
                         
                     } else {
                         cell.user_image.alpha = 0
-                        Utilities.getDataFromUrl(imageUrl!) { data in
-                            dispatch_async(dispatch_get_main_queue()) {
-                                let cell_image: UIImage? = UIImage(data: data!)
-                                
-                                if tableView.indexPathForCell(cell)?.row == indexPath.row {
-                                    if cell_image == nil { self.cachedImages[identifier] = UIImage(named: "dopLogo") }
-                                    else { self.cachedImages[identifier] = cell_image }
-                    
-                                    cell.user_image.image = self.cachedImages[identifier]!
-                                    UIView.animateWithDuration(0.5, animations: {
-                                        cell.user_image.alpha = 1
-                                        cell.user_name.alpha = 1
-                                    })
+                        Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
+                            if let image = data{
+                                dispatch_async(dispatch_get_main_queue()) {
+                                    let cell_image: UIImage? = UIImage(data: image)
+                                    
+                                    if tableView.indexPathForCell(cell)?.row == indexPath.row {
+                                        if cell_image == nil { self.cachedImages[identifier] = UIImage(named: "dopLogo") }
+                                        else { self.cachedImages[identifier] = cell_image }
+                                        
+                                        cell.user_image.image = self.cachedImages[identifier]!
+                                        UIView.animateWithDuration(0.5, animations: {
+                                            cell.user_image.alpha = 1
+                                            cell.user_name.alpha = 1
+                                        })
+                                    }
                                 }
+                            }else{
+                                print("Error")
                             }
-                        }
+                        })
+                    
                     }
                     ////////
                     

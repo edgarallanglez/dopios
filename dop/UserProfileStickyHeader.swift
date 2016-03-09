@@ -102,12 +102,17 @@ class UserProfileStickyHeader: UIView {
     }
     
     func downloadImage(url: NSURL) {
-        Utilities.getDataFromUrl(url) { data in
-            dispatch_async(dispatch_get_main_queue()) {
-                self.user_image?.image = UIImage(data: data!)
-                self.setProgressBar()
+        Utilities.downloadImage(url, completion: {(data, error) -> Void in
+            if let image = data{
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.user_image?.image = UIImage(data: image)
+                    self.setProgressBar()
+                }
+                
+            }else{
+                print("Error")
             }
-        }
+        })
     }
     
     func setProgressBar () {

@@ -258,11 +258,16 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
     }
     
     func downloadImage(url: NSURL) {
-        Utilities.getDataFromUrl(url) { data in
-            dispatch_async(dispatch_get_main_queue()) {
-                self.user_image?.image = UIImage(data: data!)
+        Utilities.downloadImage(url, completion: {(data, error) -> Void in
+            if let image = data{
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.user_image?.image = UIImage(data: image)
+                }
+
+            }else{
+                print("Error")
             }
-        }
+        })
     }
     
     func setupIndex(index: Int) {

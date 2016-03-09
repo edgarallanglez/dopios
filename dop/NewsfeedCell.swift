@@ -143,11 +143,16 @@ class NewsfeedCell: UITableViewCell {
     }
     
     func downloadImage(url: NSURL) {
-        Utilities.getDataFromUrl(url) { data in
-            dispatch_async(dispatch_get_main_queue()) {
-                self.branch_logo.image = UIImage(data: data!)
+        Utilities.downloadImage(url, completion: {(data, error) -> Void in
+            if let image = data{
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.branch_logo.image = UIImage(data: image)
+                }
+            }else{
+                print("Error")
             }
-        }
+        })
+
     }
     
 }

@@ -123,21 +123,25 @@ class BranchCampaignCollectionViewController: UICollectionViewController, ModalD
                 
             } else {
                 //cell.branch_banner.alpha = 0
-                Utilities.getDataFromUrl(imageUrl!) { photo in
-                    dispatch_async(dispatch_get_main_queue()) {
-                        var imageData : UIImage = UIImage()
-                        imageData = UIImage(data: photo!)!
-                        if self.collection_view.indexPathForCell(cell)?.row == indexPath.row {
-                            self.cachedImages[identifier] = imageData
-                            let image_saved : UIImage = self.cachedImages[identifier]!
-                            cell.branch_banner.image = image_saved
-                            
-                            UIView.animateWithDuration(0.5, animations: {
-                                cell.branch_banner.alpha = 1
-                            })
+                Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
+                    if let image = data{
+                        dispatch_async(dispatch_get_main_queue()) {
+                            var imageData : UIImage = UIImage()
+                            imageData = UIImage(data: image)!
+                            if self.collection_view.indexPathForCell(cell)?.row == indexPath.row {
+                                self.cachedImages[identifier] = imageData
+                                let image_saved : UIImage = self.cachedImages[identifier]!
+                                cell.branch_banner.image = image_saved
+                                
+                                UIView.animateWithDuration(0.5, animations: {
+                                    cell.branch_banner.alpha = 1
+                                })
+                            }
                         }
+                    }else{
+                        print("Error")
                     }
-                }
+                })
             }
             Utilities.applyPlainShadow(cell)
             cell.layer.masksToBounds = false

@@ -90,48 +90,65 @@ class BranchProfileTopView: UIView {
     }
     
     func downloadImage(model: Coupon) {
-        let logo_url = NSURL(string: "\(Utilities.dopImagesURL)\(model.company_id)/\(model.logo)")
-        Utilities.getDataFromUrl(logo_url!) { data in
-            dispatch_async(dispatch_get_main_queue()) {
-                self.branch_logo.image = UIImage(data: data!)
-                self.branch_logo.layer.cornerRadius = self.branch_logo.frame.width / 2
-                Utilities.fadeInFromBottomAnimation(self.branch_logo, delay: 0, duration: 1, yPosition: 1)
+        let imageUrl = NSURL(string: "\(Utilities.dopImagesURL)\(model.company_id)/\(model.logo)")
+        Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
+            if let image = data{
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.branch_logo.image = UIImage(data: image)
+                    self.branch_logo.layer.cornerRadius = self.branch_logo.frame.width / 2
+                    Utilities.fadeInFromBottomAnimation(self.branch_logo, delay: 0, duration: 1, yPosition: 1)
+                }            }else{
+                print("Error")
             }
-        }
+        })
         
         if !model.banner.isEmpty {
             let banner_url = NSURL(string: "\(Utilities.dopImagesURL)\(model.company_id)/\(model.banner)")
-            Utilities.getDataFromUrl(banner_url!) { data in
-                dispatch_async(dispatch_get_main_queue()) {
-                    self.branch_banner.image = UIImage(data: data!)!.applyLightEffect()
-                    self.branch_name.textColor = UIColor.whiteColor()
-                    self.branch_name.shadowColor = UIColor.darkGrayColor()
-                    Utilities.fadeInFromBottomAnimation(self.branch_banner, delay: 0, duration: 0.8, yPosition: 2)
+            
+            Utilities.downloadImage(banner_url!, completion: {(data, error) -> Void in
+                if let image = data{
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.branch_banner.image = UIImage(data: image)!.applyLightEffect()
+                        self.branch_name.textColor = UIColor.whiteColor()
+                        self.branch_name.shadowColor = UIColor.darkGrayColor()
+                        Utilities.fadeInFromBottomAnimation(self.branch_banner, delay: 0, duration: 0.8, yPosition: 2)
+                    }
+                }else{
+                    print("Error")
                 }
-            }
+            })
         }
     }
     
     func downloadImage(model: Branch) {
-        let logo_url = NSURL(string: "\(Utilities.dopImagesURL)\(model.company_id!)/\(model.logo!)")
-        Utilities.getDataFromUrl(logo_url!) { data in
-            dispatch_async(dispatch_get_main_queue()) {
-                self.branch_logo.image = UIImage(data: data!)
-                self.branch_logo.layer.cornerRadius = self.branch_logo.frame.width / 2
-                Utilities.fadeInFromBottomAnimation(self.branch_logo, delay: 0, duration: 1, yPosition: 1)
+        let imageUrl = NSURL(string: "\(Utilities.dopImagesURL)\(model.company_id!)/\(model.logo!)")
+        Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
+            if let image = data{
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.branch_logo.image = UIImage(data: image)
+                    self.branch_logo.layer.cornerRadius = self.branch_logo.frame.width / 2
+                    Utilities.fadeInFromBottomAnimation(self.branch_logo, delay: 0, duration: 1, yPosition: 1)
+                }
+            }else{
+                print("Error")
             }
-        }
+        })
+        
         
         if !model.banner!.isEmpty {
             let banner_url = NSURL(string: "\(Utilities.dopImagesURL)\(model.company_id!)/\(model.banner!)")
-            Utilities.getDataFromUrl(banner_url!) { data in
-                dispatch_async(dispatch_get_main_queue()) {
-                    self.branch_banner.image = UIImage(data: data!)!.applyLightEffect()
-                    self.branch_name.textColor = UIColor.whiteColor()
-                    self.branch_name.shadowColor = UIColor.darkGrayColor()
-                    Utilities.fadeInFromBottomAnimation(self.branch_banner, delay: 0, duration: 0.8, yPosition: 2)
+            Utilities.downloadImage(banner_url!, completion: {(data, error) -> Void in
+                if let image = data{
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.branch_banner.image = UIImage(data: image)!.applyLightEffect()
+                        self.branch_name.textColor = UIColor.whiteColor()
+                        self.branch_name.shadowColor = UIColor.darkGrayColor()
+                        Utilities.fadeInFromBottomAnimation(self.branch_banner, delay: 0, duration: 0.8, yPosition: 2)
+                    }
+                }else{
+                    print("Error")
                 }
-            }
+            })
         }
     }
     

@@ -46,15 +46,19 @@ class TrophyTableViewController: UITableViewController {
                 let cell_image_saved : UIImage = self.cached_images[identifier]!
                 cell.badge_image.image = cell_image_saved
             } else {
-                Utilities.getDataFromUrl(imageUrl!) { photo in
-                    dispatch_async(dispatch_get_main_queue()) {
-                        let imageData: NSData = NSData(data: photo!)
-                        cell.badge_image.image = UIImage(data: imageData)
-                        UIView.animateWithDuration(0.5, animations: {
-                            //alpha = 1
-                        })
+                Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
+                    if let image = data{
+                        dispatch_async(dispatch_get_main_queue()) {
+                            let imageData: NSData = NSData(data: image)
+                            cell.badge_image.image = UIImage(data: imageData)
+                            UIView.animateWithDuration(0.5, animations: {
+                                //alpha = 1
+                            })
+                        }
+                    }else{
+                        print("Error")
                     }
-                }
+                })
             }
             
             if !model.earned { cell.backgroundColor = Utilities.lightGrayColor }

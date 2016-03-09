@@ -237,11 +237,15 @@ class ActivityPage: UITableViewController, TTTAttributedLabelDelegate {
     }
     
     func downloadImage(url: NSURL, cell: RewardsActivityCell) {
-        Utilities.getDataFromUrl(url) { data in
-            dispatch_async(dispatch_get_main_queue()) {
-                cell.user_image.image = UIImage(data: data!)
+        Utilities.downloadImage(url, completion: {(data, error) -> Void in
+            if let image = data{
+                dispatch_async(dispatch_get_main_queue()){
+                    cell.user_image.image = UIImage(data: image)
+                }
+            }else{
+                print("Error")
             }
-        }
+        })
     }
     
     override func viewDidLayoutSubviews() {
