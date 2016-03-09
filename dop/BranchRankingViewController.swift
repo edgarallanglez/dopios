@@ -166,11 +166,17 @@ class BranchRankingViewController: UITableViewController {
     
     func downloadImage(model: PeopleModel, cell: PeopleCell) {
         let url = NSURL(string: model.main_image)
-        Utilities.getDataFromUrl(url!) { data in
-            dispatch_async(dispatch_get_main_queue()) {
-                cell.user_image.image = UIImage(data: data!)
+        cell.user_image.alpha = 0
+        Utilities.downloadImage(url!, completion: {(data, error) -> Void in
+            if let image = data{
+                dispatch_async(dispatch_get_main_queue()) {
+                    cell.user_image.image = UIImage(data: image)
+                    Utilities.fadeInViewAnimation(cell.user_image, delay: 0, duration: 1)
+                }
+            }else{
+                print("Error")
             }
-        }
+        })
     }
     
 }

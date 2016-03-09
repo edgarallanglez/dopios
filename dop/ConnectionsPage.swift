@@ -161,15 +161,20 @@ class ConnectionsPage: UITableViewController {
     
     func downloadImage(model: ConnectionModel, cell: ConnectionCell) {
         let url = NSURL(string: "\(Utilities.dopImagesURL)\(model.company_id)/\(model.logo!)")!
-        Utilities.getDataFromUrl(url) { data in
-            dispatch_async(dispatch_get_main_queue()) {
-                cell.connection_image.image = UIImage(data: data!)
-                UIView.animateWithDuration(0.5, animations: {
-                    cell.hidden = false
-                })
-
+        Utilities.downloadImage(url, completion: {(data, error) -> Void in
+            if let image = data{
+                dispatch_async(dispatch_get_main_queue()) {
+                    cell.connection_image.image = UIImage(data: image)
+                    UIView.animateWithDuration(0.5, animations: {
+                        cell.hidden = false
+                    })
+                    
+                }
+            }else{
+                print("Error")
             }
-        }
+        })
+
     }
     
     override func viewDidLayoutSubviews() {

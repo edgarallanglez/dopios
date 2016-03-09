@@ -53,22 +53,27 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
             } else {
                 cell.user_image.alpha = 0
                 cell.username_button.alpha = 0
-                Utilities.getDataFromUrl(imageUrl!) { data in
-                    dispatch_async(dispatch_get_main_queue()) {
-                        var cell_image : UIImage = UIImage()
-                        cell_image = UIImage (data: data!)!
-            
-                        if tableView.indexPathForCell(cell)?.row == indexPath.row {
-                            self.cachedImages[identifier] = cell_image
-                            let cell_image_saved : UIImage = self.cachedImages[identifier]!
-                            cell.user_image.image = cell_image_saved
-                            UIView.animateWithDuration(0.5, animations: {
-                                cell.user_image.alpha = 1
-                                cell.username_button.alpha = 1
-                            })
+                Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
+                    if let image = data{
+                        dispatch_async(dispatch_get_main_queue()) {
+                            var cell_image : UIImage = UIImage()
+                            cell_image = UIImage (data: image)!
+                            
+                            if tableView.indexPathForCell(cell)?.row == indexPath.row {
+                                self.cachedImages[identifier] = cell_image
+                                let cell_image_saved : UIImage = self.cachedImages[identifier]!
+                                cell.user_image.image = cell_image_saved
+                                UIView.animateWithDuration(0.5, animations: {
+                                    cell.user_image.alpha = 1
+                                    cell.username_button.alpha = 1
+                                })
+                            }
                         }
+                    }else{
+                        print("Error")
                     }
-                }
+                })
+
             }
         }
         
