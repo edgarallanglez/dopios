@@ -55,7 +55,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
             } else {
                 cell.user_image.alpha = 1
 
-                Utilities.getDataFromUrl(imageUrl!) { data in
+                Utilities.getDataFromUrl(imageUrl!) { data, error in
                     dispatch_async(dispatch_get_main_queue()) {
                         var cell_image : UIImage = UIImage()
                         cell_image = UIImage (data: data!)!
@@ -80,7 +80,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
             } else {
                 cell.user_image.alpha = 1
                 
-                Utilities.getDataFromUrl(imageUrl!) { data in
+                Utilities.getDataFromUrl(imageUrl!) { data, error in
                     dispatch_async(dispatch_get_main_queue()) {
                         var cell_image : UIImage = UIImage()
                         cell_image = UIImage (data: data!)!

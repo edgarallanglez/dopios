@@ -95,7 +95,7 @@ class CouponDetailViewController: BaseViewController, UITableViewDelegate, UITab
         } else {
             imageUrl = NSURL(string: "\(Utilities.dopImagesURL)\(companyId)/\(self.banner)")
         }
-        Utilities.getDataFromUrl(imageUrl!) { photo in
+        Utilities.getDataFromUrl(imageUrl!) { photo, error in
             dispatch_async(dispatch_get_main_queue()) {
                 let imageData: NSData = NSData(data: photo!)
                 
@@ -141,7 +141,7 @@ class CouponDetailViewController: BaseViewController, UITableViewDelegate, UITab
         } else {
             cell.user_image.alpha = 0
             print("Entro al segundo")
-            Utilities.getDataFromUrl(imageUrl!) { data in
+            Utilities.getDataFromUrl(imageUrl!) { data, error in
                 dispatch_async(dispatch_get_main_queue()) {
                     
 //                    print("Finished downloading \"\(imageUrl!.lastPathComponent!.stringByDeletingPathExtension)\".")

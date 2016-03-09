@@ -10,7 +10,7 @@ import UIKit
 import JWTDecode
 import FBSDKLoginKit
 
-class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationManagerDelegate, ModalDelegate {
+class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationManagerDelegate, ModalDelegate,AlertDelegate {
 //
     @IBOutlet weak var loginView: FBSDKLoginButton!
     var loginManager: FBSDKLoginManager = FBSDKLoginManager()
@@ -174,7 +174,7 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
         })
     }
     
-    func pressActionButton(modal: ModalViewController) {
+    func pressAlertButton(modal: ModalViewController) {
         print("entre")
         self.validateSession()
     }
