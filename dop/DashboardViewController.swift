@@ -206,22 +206,27 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
             let imageView: UIImageView = UIImageView(frame: CGRectMake(actualX, 0, scrollWidth, scrollHeight))
             imageView.alpha = 0
         
-            //let imageUrl = NSURL(string: "\(Utilities.dopImagesURL)\(branch.company_id!)/\(branch.banner!)")
+            let imageUrl = NSURL(string: "\(Utilities.dopImagesURL)\(branch.company_id!)/\(branch.banner!)")
             
-            let imageUrl = NSURL(string: "http://axeetech.com/wp-content/uploads/2014/09/458791.jpg")
+            //let imageUrl = NSURL(string: "http://axeetech.com/wp-content/uploads/2014/09/458791.jpg")
             print("\(Utilities.dopImagesURL)\(branch.company_id!)/\(branch.banner!)")
             
-            Utilities.getDataFromUrl(imageUrl!) { photo in
-                dispatch_async(dispatch_get_main_queue()) {
-                    let imageData: NSData = NSData(data: photo!)
-                    imageView.image = UIImage(data: imageData)
-                    if imageView.image == nil { imageView.backgroundColor = Utilities.dopColor }
-        
-                    Utilities.fadeInFromBottomAnimation(imageView, delay: 0, duration: 1, yPosition: 20)
-                    Utilities.fadeInFromBottomAnimation(branchNameLbl, delay: 0.8, duration: 1, yPosition: 20)
-                    Utilities.fadeOutViewAnimation(progressIcon, delay: 0, duration: 0.5)
+            Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
+                if let image = data{
+                    dispatch_async(dispatch_get_main_queue()) {
+                        let imageData: NSData = NSData(data: image)
+                        imageView.image = UIImage(data: imageData)
+                        if imageView.image == nil { imageView.backgroundColor = Utilities.dopColor }
+                        
+                        Utilities.fadeInFromBottomAnimation(imageView, delay: 0, duration: 1, yPosition: 20)
+                        Utilities.fadeInFromBottomAnimation(branchNameLbl, delay: 0.8, duration: 1, yPosition: 20)
+                        Utilities.fadeOutViewAnimation(progressIcon, delay: 0, duration: 0.5)
+                    }
+                }else{
+                    print("Error")
                 }
-            }
+            })
+
             
             imageView.contentMode = UIViewContentMode.ScaleAspectFill
             imageView.tag = branch.id
