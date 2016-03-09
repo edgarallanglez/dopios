@@ -27,6 +27,10 @@ class Utilities {
         return UIColor( red: 251.0/255.0 , green: 34.0/255.0 , blue: 111.0/255.0, alpha:1.0)
     }
     
+    class var dop_detail_color: UIColor {
+        return UIColor( red: 33.0/255.0 , green: 150.0/255.0 , blue: 243.0/255.0, alpha:1.0)
+    }
+    
     class var lightGrayColor: UIColor {
         return UIColor( red: 243.0/255.0 , green: 243.0/255.0 , blue: 243.0/255.0, alpha:1.0)
     }

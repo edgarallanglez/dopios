@@ -10,15 +10,21 @@ import UIKit
 import JWTDecode
 import FBSDKLoginKit
 
-class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationManagerDelegate {
+class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationManagerDelegate, ModalDelegate {
 //
     @IBOutlet weak var loginView: FBSDKLoginButton!
     var loginManager: FBSDKLoginManager = FBSDKLoginManager()
     var firstTime: Bool = true
+    var alert_array = [AlertModel]()
+    var modal: ModalViewController!
 
+    @IBOutlet var loader: MMMaterialDesignSpinner!
     override func viewDidLoad() {
         super.viewDidLoad()
-        //validateSession()
+        self.modal = ModalViewController(currentView: self, type: ModalViewControllerType.AlertModal)
+        self.modal.delegate = self
+        loader.startAnimating()
+        loader.lineWidth = 3.0
     }
     
     func validateSession() {
@@ -148,13 +154,27 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
             })
         },
         failure:{ (error) -> Void in
-            let alert = UIAlertController(title: "Oops!", message:"Oops! Parece que hubo un error", preferredStyle: .Alert)
-            let action = UIAlertAction(title: "Reintentar", style: .Default) { _ in
-                self.validateSession()
-            }
-            alert.addAction(action)
-            self.presentViewController(alert, animated: true){}
+            dispatch_async(dispatch_get_main_queue(), {
+                self.modal.willPresentCompletionHandler = { vc in
+                    let navigation_controller = vc as! AlertModalViewController
+                    
+                    self.alert_array.append(AlertModel(alert_title: "¡Oops!", alert_image: "error", alert_description: "Ha ocurrido un error :("))
+                    
+                    navigation_controller.setAlert(self.alert_array)
+                }
+                self.modal.presentAnimated(true, completionHandler: nil)
+            })
+            
+//            let alert = UIAlertController(title: "Oops!", message:"Oops! Parece que hubo un error", preferredStyle: .Alert)
+//            let action = UIAlertAction(title: "Reintentar", style: .Default) { _ in
+//                self.validateSession()
+//            }
+//            alert.addAction(action)
+//            self.presentViewController(alert, animated: true){}
         })
     }
     
+    func pressActionButton(modal: ModalViewController) {
+        self.validateSession()
+    }
 }

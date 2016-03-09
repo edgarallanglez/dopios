@@ -33,6 +33,8 @@ class BranchCampaignCollectionViewController: UICollectionViewController, ModalD
     var branch_id: Int?
     var index: Int = 1
     
+    var loader: MMMaterialDesignSpinner!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.collectionView!.scrollEnabled = false
@@ -43,6 +45,16 @@ class BranchCampaignCollectionViewController: UICollectionViewController, ModalD
         self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         self.collection_view.addSubview(refreshControl)
         
+        setupLoader()
+    }
+    
+    func setupLoader(){
+        loader = MMMaterialDesignSpinner(frame: CGRectMake(0,70,50,50))
+        loader.center.x = self.view.center.x
+        loader.lineWidth = 3.0
+        loader.startAnimating()
+        loader.tintColor = Utilities.dopColor
+        self.view.addSubview(loader)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -198,10 +210,8 @@ class BranchCampaignCollectionViewController: UICollectionViewController, ModalD
                     self.refreshControl.endRefreshing()
                     self.offset = self.limit - 1
                     Utilities.fadeInFromBottomAnimation((self.collectionView)!, delay: 0, duration: 1, yPosition: 20)
-                    UIView.animateWithDuration(0.3, animations: {
-                        //self.CouponsCollectionView.alpha = 1
-                        
-                    })
+                    Utilities.fadeOutViewAnimation(self.loader, delay: 0, duration: 0.3)
+
                     
                 });
             },
@@ -209,7 +219,7 @@ class BranchCampaignCollectionViewController: UICollectionViewController, ModalD
             failure: { (error) -> Void in
                 dispatch_async(dispatch_get_main_queue(), {
                     self.refreshControl.endRefreshing()
-                    print("Error")
+                    Utilities.fadeOutViewAnimation(self.loader, delay: 0, duration: 0.3)
                 })
         })
     }

@@ -105,15 +105,17 @@ class UserProfileStickyHeader: UIView {
         Utilities.getDataFromUrl(url) { data in
             dispatch_async(dispatch_get_main_queue()) {
                 self.user_image?.image = UIImage(data: data!)
+                self.setProgressBar()
             }
         }
     }
     
     func setProgressBar () {
+        exp_progress.alpha = 1
         exp_progress.startDegree = 0
-        exp_progress.progressColor = Utilities.dopColor
+        exp_progress.progressColor = UIColor(red: 33.0/255.0, green: 150.0/255.0, blue: 243.0/255.0, alpha: 1.0)
         exp_progress.trackColor = Utilities.lightGrayColor
-        exp_progress.trackWidth = 2.2
+        exp_progress.trackWidth = 4
         exp_progress.progressWidth = 2
         percent = (((user_exp - min_exp) / (level_up - min_exp)))
         progress = 360 * percent

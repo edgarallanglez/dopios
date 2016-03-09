@@ -49,7 +49,7 @@ import UIKit
         }
     }
     
-    @IBInspectable var font : UIFont! = UIFont.systemFontOfSize(12) {
+    @IBInspectable var font : UIFont! = UIFont.systemFontOfSize(10) {
         didSet {
             setFont()
         }
@@ -89,11 +89,11 @@ import UIKit
         
         for index in 1...items.count {
             
-            let label = UILabel(frame: CGRectMake(0, 0, 70, 40))
+            let label = UILabel(frame: CGRectMake(0, 0, 70, 50))
             label.text = items[index - 1]
             label.backgroundColor = UIColor.clearColor()
             label.textAlignment = .Center
-            label.font = UIFont(name: "Montserrat-Light", size: 15)
+            label.font = UIFont(name: "Montserrat-Light", size: 13)
             label.textColor = index == 1 ? selectedLabelColor : unselectedLabelColor
             label.translatesAutoresizingMaskIntoConstraints = false
             self.addSubview(label)
