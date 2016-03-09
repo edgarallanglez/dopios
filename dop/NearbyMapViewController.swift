@@ -9,7 +9,7 @@
 import Foundation
 import MapKit
 
-class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MKMapViewDelegate, UIScrollViewDelegate {
+class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MKMapViewDelegate, ModalDelegate, UIScrollViewDelegate {
     
  
     @IBOutlet weak var currentLocationLbl: UIButton!
@@ -24,8 +24,9 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
     var filterSidebarButton: UIBarButtonItem = UIBarButtonItem()
     
     var currentAnnotationView: MapPinCallout?
-    
     var spinner: MMMaterialDesignSpinner!
+    var alert_array = [AlertModel]()
+    var modal: ModalViewController!
     
     let regionRadius: CLLocationDistance = 1000
     
@@ -154,6 +155,18 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
             },
             failure:{(branchesData)-> Void in
                 Utilities.fadeOutViewAnimation(self.spinner!, delay: 0, duration: 0.3)
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.modal = ModalViewController(currentView: self, type: ModalViewControllerType.AlertModal)
+                    self.modal.willPresentCompletionHandler = { vc in
+                        let navigation_controller = vc as! AlertModalViewController
+                        navigation_controller.dismiss_button.setTitle("REINTENTAR", forState: .Normal)
+                        self.alert_array.append(AlertModel(alert_title: "¡Oops!", alert_image: "error", alert_description: "Ha ocurrido un error :("))
+                        
+                        navigation_controller.setAlert(self.alert_array)
+                    }
+                    self.modal.presentAnimated(true, completionHandler: nil)
+                    self.modal.delegate = self
+                })
         })
     }
     
@@ -236,6 +249,14 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
         let controlPointCoordinate = nearbyMap.convertPoint(controlPoint, toCoordinateFromView: nearbyMap)
         
         nearbyMap.setCenterCoordinate(controlPointCoordinate, animated: true)
+    }
+    
+    func pressActionButton(modal: ModalViewController) {
+        modal.dismissAnimated(true, completionHandler: { (modal) -> Void in
+            dispatch_async(dispatch_get_main_queue(), {
+                self.getNearestBranches()
+            })
+        })
     }
     
 }
