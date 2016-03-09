@@ -105,8 +105,11 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
         
         self.offset = self.limit
         
-        // Set custom indicator
-        self.tableView.infiniteScrollIndicatorView = CustomInfiniteIndicator(frame: CGRectMake(0, 0, 24, 24))
+        let loader:MMMaterialDesignSpinner = MMMaterialDesignSpinner(frame: CGRectMake(0,0,24,24))
+        loader.lineWidth = 2.0
+        self.tableView.infiniteScrollIndicatorView = loader
+        self.tableView.infiniteScrollIndicatorView?.tintColor = Utilities.dopColor
+        
         
         // Set custom indicator margin
         tableView.infiniteScrollIndicatorMargin = 40

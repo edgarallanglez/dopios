@@ -11,11 +11,11 @@ import QuartzCore
 
 class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UIScrollViewDelegate {
     
-    @IBOutlet var mainLoader: UIActivityIndicatorView!
     @IBOutlet weak var menuButton: UIBarButtonItem!
 
     @IBOutlet var trendingPageControl: UIPageControl!
     @IBOutlet var nearestPageControl: UIPageControl!
+    @IBOutlet var mainLoader: MMMaterialDesignSpinner!
     @IBOutlet var toExpirePageControl: UIPageControl!
     @IBOutlet var nearestContainer: UIView!
     @IBOutlet var nearestScroll: UIScrollView!
@@ -40,11 +40,15 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
     var obtained_location: Bool = false
     var updater: CADisplayLink? = nil
     var firstCallToUpdater: Bool = true
+    var trendingLoader: MMMaterialDesignSpinner!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         mainLoader.startAnimating()
+        mainLoader.tintColor = Utilities.dopColor
+        mainLoader.lineWidth = 3.0
+        
         mainScroll.contentSize = CGSizeMake(mainScroll.frame.size.width, 4500)
         mainScroll.delegate = self
         
@@ -150,7 +154,11 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                 Utilities.fadeInFromBottomAnimation(self.branchesScroll, delay: 0, duration: 1, yPosition: 40)
                 Utilities.fadeInFromBottomAnimation(self.pageControlContainer, delay:0.3, duration:0.3, yPosition: 10)
                 
-                if self.view.subviews.contains(self.mainLoader) { self.mainLoader.removeFromSuperview() }
+                if self.view.subviews.contains(self.mainLoader) {
+                    self.mainLoader.removeFromSuperview()
+                    Utilities.fadeInViewAnimation(self.trendingLoader, delay:0, duration:0.3)
+                
+                }
             });
         },
         failure: { (error) -> Void in
@@ -183,15 +191,24 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
             branchNameLbl.layer.shadowOpacity = 0.6
             branchNameLbl.layer.shadowRadius = 1
             
-            let progressIcon = UIActivityIndicatorView(frame: CGRectMake(actualX + ((branchesScroll.frame.size.width / 2) - (30 / 2)), (branchesScroll.frame.size.height / 2) - (30 / 2), 30, 30))
-            progressIcon.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+            
+            let progressIcon = MMMaterialDesignSpinner(frame: CGRectMake(actualX + ((branchesScroll.frame.size.width / 2) - (30 / 2)), (branchesScroll.frame.size.height / 2) - (30 / 2), 30, 30))
+            
+            /*let progressIcon = UIActivityIndicatorView(frame: CGRectMake(actualX + ((branchesScroll.frame.size.width / 2) - (30 / 2)), (branchesScroll.frame.size.height / 2) - (30 / 2), 30, 30))
+            progressIcon.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray*/
+            
+            progressIcon.lineWidth = 2.0
+            progressIcon.tintColor = Utilities.dopColor
             progressIcon.startAnimating()
+            
+            
             
             let imageView: UIImageView = UIImageView(frame: CGRectMake(actualX, 0, scrollWidth, scrollHeight))
             imageView.alpha = 0
         
-            let imageUrl = NSURL(string: "\(Utilities.dopImagesURL)\(branch.company_id!)/\(branch.banner!)")
+            //let imageUrl = NSURL(string: "\(Utilities.dopImagesURL)\(branch.company_id!)/\(branch.banner!)")
             
+            let imageUrl = NSURL(string: "http://axeetech.com/wp-content/uploads/2014/09/458791.jpg")
             print("\(Utilities.dopImagesURL)\(branch.company_id!)/\(branch.banner!)")
             
             Utilities.getDataFromUrl(imageUrl!) { photo in
@@ -239,6 +256,15 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
     }
     
     func getTrendingCoupons() {
+        
+        trendingLoader = MMMaterialDesignSpinner(frame: CGRectMake(0, self.trendingContainer.frame.origin.y + trendingContainer.frame.size.height, 30, 30))
+        trendingLoader.center.x = self.mainScroll.center.x
+        trendingLoader.startAnimating()
+        trendingLoader.lineWidth = 2.0
+        trendingLoader.tintColor = Utilities.dopColor
+        trendingLoader.alpha = 0
+        self.mainScroll.addSubview(trendingLoader)
+        
         trending = [Coupon]()
         trendingScroll.layer.masksToBounds = false
         trendingScroll.subviews.forEach({ $0.removeFromSuperview() })
@@ -302,7 +328,13 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                     self.trendingPageControl.numberOfPages = self.trending.count/2
                     self.trendingScroll.contentSize = CGSizeMake(CGFloat(trendingScroll_size), self.trendingScroll.frame.size.height)
                     Utilities.fadeInFromBottomAnimation(self.trendingContainer, delay: 0, duration: 1, yPosition: 30)
-                    if self.view.subviews.contains(self.mainLoader) { self.mainLoader.removeFromSuperview() }
+                    if self.trendingLoader.alpha>0{
+                        Utilities.fadeOutViewAnimation(self.trendingLoader, delay:0, duration:0.3)
+
+                    }
+                    if self.view.subviews.contains(self.mainLoader) {
+                        self.mainLoader.removeFromSuperview()
+                    }
                 });
             },
             
@@ -447,7 +479,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                 self.nearestScroll.contentSize = CGSizeMake(CGFloat(trendingScroll_size), self.nearestScroll.frame.size.height)
                 
                 Utilities.fadeInFromBottomAnimation(self.nearestContainer, delay:0, duration:1, yPosition: 20)
-
+                
             });
 
             },

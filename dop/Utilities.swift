@@ -127,10 +127,17 @@ class Utilities {
         
         task.resume()
     }
-    class func getDataFromUrl(urL:NSURL, completion: ((data: NSData?) -> Void)) {
+    class func getDataFromUrl(urL:NSURL, completion: ((data: NSData?,error: NSError?) -> Void)) {
+        
         NSURLSession.sharedSession().dataTaskWithURL(urL) { (data, response, error) in
-            completion(data: NSData(data: data!))
-            }.resume()
+            
+            if let responseError = error{
+                completion(data: nil, error: responseError)
+            }else{
+                completion(data: NSData(data: data!),error: nil)
+            }
+        }.resume()
+
     }
     
     //FRIENDLY DATE FUNCTION

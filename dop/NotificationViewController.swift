@@ -37,8 +37,15 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         self.notification_table.addSubview(refreshControl)
 
         
+        let loader:MMMaterialDesignSpinner = MMMaterialDesignSpinner(frame: CGRectMake(0,0,24,24))
+        
+        loader.lineWidth = 2.0
+        self.notification_table.infiniteScrollIndicatorView = loader
+        self.notification_table.infiniteScrollIndicatorView?.tintColor = Utilities.dopColor
+        
+        
         // Set custom indicator
-        self.notification_table.infiniteScrollIndicatorView = CustomInfiniteIndicator(frame: CGRectMake(0, 0, 24, 24))
+        //self.notification_table.infiniteScrollIndicatorView = CustomInfiniteIndicator(frame: CGRectMake(0, 0, 24, 24))
         
         // Set custom indicator margin
         notification_table.infiniteScrollIndicatorMargin = 10
