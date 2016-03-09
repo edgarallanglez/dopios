@@ -123,7 +123,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                 
             } else {
                 cell.notification_image.alpha=0
-                Utilities.getDataFromUrl(imageUrl) { photo, error in
+                Utilities.getDataFromUrl(imageUrl) { photo in
                     dispatch_async(dispatch_get_main_queue()) {
                         let imageData : NSData = NSData(data:photo!)
                         if tableView.indexPathForCell(cell)?.row == indexPath.row {

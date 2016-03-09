@@ -166,7 +166,7 @@ class BranchRankingViewController: UITableViewController {
     
     func downloadImage(model: PeopleModel, cell: PeopleCell) {
         let url = NSURL(string: model.main_image)
-        Utilities.getDataFromUrl(url!) { data, error in
+        Utilities.getDataFromUrl(url!) { data in
             dispatch_async(dispatch_get_main_queue()) {
                 cell.user_image.image = UIImage(data: data!)
             }

@@ -87,7 +87,7 @@ class ModalViewController: MZFormSheetController {
         }
 
         if simple_modal?.action_button != nil { simple_modal!.action_button.addTarget(self, action: "pressed:", forControlEvents: .TouchUpInside) }
-        if alert_modal?.dismiss_button != nil { simple_modal!.action_button.addTarget(self, action: "pressed:", forControlEvents: .TouchUpInside) }
+        if alert_modal?.dismiss_button != nil { alert_modal!.dismiss_button.addTarget(self, action: "pressed:", forControlEvents: .TouchUpInside) }
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {

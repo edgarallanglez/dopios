@@ -141,7 +141,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                 
             } else {
                 //cell.branch_banner.alpha = 0
-                Utilities.getDataFromUrl(imageUrl!) { photo, error in
+                Utilities.getDataFromUrl(imageUrl!) { photo in
                     dispatch_async(dispatch_get_main_queue()) {
                         var imageData : UIImage = UIImage()
                         imageData = UIImage(data: photo!)!

@@ -53,7 +53,7 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
             } else {
                 cell.user_image.alpha = 0
                 cell.username_button.alpha = 0
-                Utilities.getDataFromUrl(imageUrl!) { data, error in
+                Utilities.getDataFromUrl(imageUrl!) { data in
                     dispatch_async(dispatch_get_main_queue()) {
                         var cell_image : UIImage = UIImage()
                         cell_image = UIImage (data: data!)!
