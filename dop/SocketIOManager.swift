@@ -20,6 +20,7 @@ class SocketIOManager: NSObject {
         
         socket.on("connect") {data, ack in
             self.socket.emit("joinRoom", User.userToken)
+            print(data)
         }
         
         socket.on("disconnect") {data, ack in
