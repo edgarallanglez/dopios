@@ -46,8 +46,7 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
         graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
             
             if ((error) != nil) {
-                // Process error
-                print("Error: \(error)")
+                self.triggerAlert()
             } else {
                 let json: JSON = JSON(result)
                 let userEmail = json["email"].string ?? ""
@@ -153,18 +152,22 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
         },
         failure:{ (error) -> Void in
             dispatch_async(dispatch_get_main_queue(), {
-                self.modal = ModalViewController(currentView: self, type: ModalViewControllerType.AlertModal)
-                self.modal.willPresentCompletionHandler = { vc in
-                    let navigation_controller = vc as! AlertModalViewController
-                    navigation_controller.dismiss_button.setTitle("REINTENTAR", forState: .Normal)
-                    self.alert_array.append(AlertModel(alert_title: "¡Oops!", alert_image: "error", alert_description: "Ha ocurrido un error :("))
-                    
-                    navigation_controller.setAlert(self.alert_array)
-                }
-                self.modal.presentAnimated(true, completionHandler: nil)
-                self.modal.delegate = self
+                self.triggerAlert()
             })
         })
+    }
+    
+    func triggerAlert() {
+        self.modal = ModalViewController(currentView: self, type: ModalViewControllerType.AlertModal)
+        self.modal.willPresentCompletionHandler = { vc in
+            let navigation_controller = vc as! AlertModalViewController
+            navigation_controller.dismiss_button.setTitle("REINTENTAR", forState: .Normal)
+            self.alert_array.append(AlertModel(alert_title: "¡Oops!", alert_image: "error", alert_description: "Ha ocurrido un error :("))
+            
+            navigation_controller.setAlert(self.alert_array)
+        }
+        self.modal.presentAnimated(true, completionHandler: nil)
+        self.modal.delegate = self
     }
     
     func pressActionButton(modal: ModalViewController) {
