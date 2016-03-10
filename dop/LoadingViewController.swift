@@ -21,8 +21,6 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
     @IBOutlet var loader: MMMaterialDesignSpinner!
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.modal = ModalViewController(currentView: self, type: ModalViewControllerType.AlertModal)
-        self.modal.delegate = self
         loader.startAnimating()
         loader.lineWidth = 3.0
     }
@@ -155,26 +153,26 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
         },
         failure:{ (error) -> Void in
             dispatch_async(dispatch_get_main_queue(), {
+                self.modal = ModalViewController(currentView: self, type: ModalViewControllerType.AlertModal)
                 self.modal.willPresentCompletionHandler = { vc in
                     let navigation_controller = vc as! AlertModalViewController
-                    
+                    navigation_controller.dismiss_button.setTitle("REINTENTAR", forState: .Normal)
                     self.alert_array.append(AlertModel(alert_title: "¡Oops!", alert_image: "error", alert_description: "Ha ocurrido un error :("))
                     
                     navigation_controller.setAlert(self.alert_array)
                 }
                 self.modal.presentAnimated(true, completionHandler: nil)
+                self.modal.delegate = self
             })
-            
-//            let alert = UIAlertController(title: "Oops!", message:"Oops! Parece que hubo un error", preferredStyle: .Alert)
-//            let action = UIAlertAction(title: "Reintentar", style: .Default) { _ in
-//                self.validateSession()
-//            }
-//            alert.addAction(action)
-//            self.presentViewController(alert, animated: true){}
         })
     }
     
     func pressActionButton(modal: ModalViewController) {
-        self.validateSession()
+        modal.dismissAnimated(true, completionHandler: { (modal) -> Void in
+              dispatch_async(dispatch_get_main_queue(), {
+                self.validateSession()
+              })
+        })
+
     }
 }

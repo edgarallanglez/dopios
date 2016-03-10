@@ -8,7 +8,12 @@
 
 import UIKit
 
+@objc protocol AlertDelegate {
+    func pressAlertButton(modal: AlertModalViewController)
+}
+
 class AlertModalViewController: UIViewController {
+    var delegate: AlertDelegate?
     
     @IBOutlet weak var alert_title: UILabel!
     @IBOutlet weak var alert_image: UIImageView!
@@ -51,6 +56,8 @@ class AlertModalViewController: UIViewController {
             self.mz_dismissFormSheetControllerAnimated(true, completionHandler: nil)
             self.navigationController?.popViewControllerAnimated(true)
         }
+        
+        self.delegate?.pressAlertButton(self)
     }
     
     func setNextAlert(model: AlertModel) {

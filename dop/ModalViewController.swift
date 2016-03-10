@@ -18,7 +18,7 @@ enum ModalViewControllerType: String {
 }
 
 class ModalViewController: MZFormSheetController {
-    var delegate:ModalDelegate? = nil
+    var delegate: ModalDelegate?
     var type: ModalViewControllerType?
     var simple_modal : SimpleModalViewController?
     var parent_view: UIViewController!
@@ -50,6 +50,7 @@ class ModalViewController: MZFormSheetController {
         self.type = type
         self.parent_view = presentedFormSheetViewController
         var simple_modal : SimpleModalViewController!
+        var alert_modal: AlertModalViewController!
         
         switch type {
             case .Share: simple_modal = presentedFormSheetViewController.storyboard?.instantiateViewControllerWithIdentifier("ShareModal") as? SimpleModalViewController
@@ -75,7 +76,7 @@ class ModalViewController: MZFormSheetController {
                 simple_modal.heartView.addGestureRecognizer(gesture)
 
             
-            case .AlertModal: let alert_modal = presentedFormSheetViewController.storyboard?.instantiateViewControllerWithIdentifier("AlertModal") as? AlertModalViewController
+            case .AlertModal: alert_modal = presentedFormSheetViewController.storyboard?.instantiateViewControllerWithIdentifier("AlertModal") as? AlertModalViewController
                 super.init(viewController: alert_modal!)
             
                 let width = UIScreen.mainScreen().bounds.width - 60
@@ -86,6 +87,7 @@ class ModalViewController: MZFormSheetController {
         }
 
         if simple_modal?.action_button != nil { simple_modal!.action_button.addTarget(self, action: "pressed:", forControlEvents: .TouchUpInside) }
+        if alert_modal?.dismiss_button != nil { alert_modal!.dismiss_button.addTarget(self, action: "pressed:", forControlEvents: .TouchUpInside) }
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
