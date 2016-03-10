@@ -10,7 +10,8 @@ import UIKit
 
 class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, TTTAttributedLabelDelegate {
     
-    @IBOutlet var main_loader: UIActivityIndicatorView!
+    
+    @IBOutlet var main_loader: MMMaterialDesignSpinner!
     var newsfeed = [NewsfeedNote]()
     var cachedImages: [String: UIImage] = [:]
     var refreshControl: UIRefreshControl!
@@ -106,6 +107,9 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
         
         main_loader.alpha = 0
         
+        main_loader.tintColor = Utilities.dopColor
+        main_loader.lineWidth = 3.0
+        
         getNewsfeedActivity()
         
         self.offset = self.limit
@@ -138,6 +142,8 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
     }
     
     func getNewsfeedActivity() {
+        main_loader.startAnimating()
+
         newsfeedTemporary.removeAll(keepCapacity: false)
         cachedImages.removeAll(keepCapacity: false)
         
@@ -188,6 +194,7 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
                 
                 Utilities.fadeOutViewAnimation(self.main_loader, delay: 0, duration: 0.3)
 
+                self.main_loader.stopAnimating()
 
                 
                 Utilities.fadeInFromBottomAnimation(self.tableView, delay: 0, duration: 1, yPosition: 20)

@@ -10,11 +10,16 @@ import UIKit
 
 class LoadingCell: UITableViewCell {
 
+    @IBOutlet var loading_indicator: MMMaterialDesignSpinner!
     @IBOutlet var label: UILabel!
-    @IBOutlet var loading_indicator: UIActivityIndicatorView!
+
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        loading_indicator.startAnimating()
+        loading_indicator.tintColor = Utilities.dopColor
+        loading_indicator.lineWidth = 2.0
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

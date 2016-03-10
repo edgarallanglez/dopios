@@ -41,7 +41,10 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
     var updater: CADisplayLink? = nil
     var firstCallToUpdater: Bool = true
     var trendingLoader: MMMaterialDesignSpinner!
+    var toexpireLoader: MMMaterialDesignSpinner!
+    var nearestLoader: MMMaterialDesignSpinner!
     
+    var firstTime: Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -63,9 +66,6 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
         toExpireContainer.alpha = 0
         nearestContainer.alpha = 0
         
-        getToExpireCoupons()
-        getTrendingCoupons()
-        getTopBranches()
         
         locationManager = CLLocationManager()
         locationManager.delegate = self
@@ -80,18 +80,75 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
         self.setNeedsStatusBarAppearanceUpdate()
 
         Utilities.printFonts()
+        
+        setupLoaders()
+        
     }
     
+    func setupLoaders(){
+        trendingLoader = MMMaterialDesignSpinner(frame: CGRectMake(0, 0, 30, 30))
+        trendingLoader.startAnimating()
+        trendingLoader.lineWidth = 2.0
+        trendingLoader.alpha = 0
+        trendingLoader.tintColor = Utilities.dopColor
+        
+        toexpireLoader = MMMaterialDesignSpinner(frame: CGRectMake(0, 0, 30, 30))
+        toexpireLoader.startAnimating()
+        toexpireLoader.lineWidth = 2.0
+        toexpireLoader.tintColor = Utilities.dopColor
+        
+        nearestLoader = MMMaterialDesignSpinner(frame: CGRectMake(0, 0, 30, 30))
+        nearestLoader.startAnimating()
+        nearestLoader.lineWidth = 2.0
+        nearestLoader.tintColor = Utilities.dopColor
+
+        self.getTopBranches()
+
+    }
     
 
     override func viewDidAppear(animated: Bool) {
         if (updater) != nil { updater!.paused = false }
+        
+        trendingLoader.center.x = self.mainScroll.center.x
+        trendingLoader.center.y = self.trendingContainer.center.y
+        self.mainScroll.addSubview(trendingLoader)
+        
+        toexpireLoader.center.x = self.mainScroll.center.x
+        toexpireLoader.center.y = self.toExpireContainer.center.y
+        self.mainScroll.addSubview(toexpireLoader)
+        
+        nearestLoader.center.x = self.mainScroll.center.x
+        nearestLoader.center.y = self.nearestContainer.center.y
+        self.mainScroll.addSubview(nearestLoader)
+
+
+        if firstTime==false{
+            firstTime = true
+            self.getTrendingCoupons()
+            self.getToExpireCoupons()
+        }
+        
+        
+
     }
     
     func refresh(sender:AnyObject) {
         getToExpireCoupons()
         getTrendingCoupons()
+        getNearestCoupons()
         refreshControl.endRefreshing()
+        
+        trendingLoader.alpha = 1
+        toexpireLoader.alpha = 1
+        nearestLoader.alpha = 1
+        self.trendingContainer.alpha = 0
+        self.toExpireContainer.alpha = 0
+        self.nearestContainer.alpha = 0
+        
+        trendingLoader.startAnimating()
+        toexpireLoader.startAnimating()
+        nearestLoader.startAnimating()
     }
 
     override func didReceiveMemoryWarning() {
@@ -220,7 +277,10 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                         
                         Utilities.fadeInFromBottomAnimation(imageView, delay: 0, duration: 1, yPosition: 20)
                         Utilities.fadeInFromBottomAnimation(branchNameLbl, delay: 0.8, duration: 1, yPosition: 20)
-                        Utilities.fadeOutViewAnimation(progressIcon, delay: 0, duration: 0.5)
+                        Utilities.fadeOutToBottomWithRemoveAnimation(progressIcon, delay: 0, duration: 0.5, yPosition: 0, completion: { (value) -> Void in
+                            progressIcon.removeFromSuperview()
+                        })
+
                     }
                 }else{
                     print("Error")
@@ -259,16 +319,8 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
 
         if firstCallToUpdater { firstCallToUpdater = false }
     }
-    
+
     func getTrendingCoupons() {
-        
-        trendingLoader = MMMaterialDesignSpinner(frame: CGRectMake(0, self.trendingContainer.frame.origin.y + trendingContainer.frame.size.height, 30, 30))
-        trendingLoader.center.x = self.mainScroll.center.x
-        trendingLoader.startAnimating()
-        trendingLoader.lineWidth = 2.0
-        trendingLoader.tintColor = Utilities.dopColor
-        trendingLoader.alpha = 0
-        self.mainScroll.addSubview(trendingLoader)
         
         trending = [Coupon]()
         trendingScroll.layer.masksToBounds = false
@@ -338,6 +390,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                     Utilities.fadeInFromBottomAnimation(self.trendingContainer, delay: 0, duration: 1, yPosition: 30)
                     if self.trendingLoader.alpha>0{
                         Utilities.fadeOutViewAnimation(self.trendingLoader, delay:0, duration:0.3)
+                        self.trendingLoader.stopAnimating()
 
                     }
                     if self.view.subviews.contains(self.mainLoader) {
@@ -356,6 +409,8 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
     
     func getToExpireCoupons() {
         almost_expired = [Coupon]()
+        
+        self.mainScroll.addSubview(toexpireLoader)
 
         toExpireScroll.subviews.forEach({ $0.removeFromSuperview() })
 
@@ -410,7 +465,9 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                 self.toExpireScroll.contentSize = CGSizeMake(CGFloat(trendingScroll_size), self.toExpireScroll.frame.size.height)
                 
                 Utilities.fadeInFromBottomAnimation(self.toExpireContainer, delay:0, duration:1, yPosition: 20)
-
+                
+                Utilities.fadeOutViewAnimation(self.toexpireLoader, delay:0, duration:0.3)
+                self.toexpireLoader.stopAnimating()
             });
             },
             
@@ -487,7 +544,10 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                 self.nearestScroll.contentSize = CGSizeMake(CGFloat(trendingScroll_size), self.nearestScroll.frame.size.height)
                 
                 Utilities.fadeInFromBottomAnimation(self.nearestContainer, delay:0, duration:1, yPosition: 20)
-                
+               
+                Utilities.fadeOutViewAnimation(self.nearestLoader, delay:0, duration:0.3)
+                self.nearestLoader.stopAnimating()
+
             });
 
             },
