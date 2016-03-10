@@ -10,7 +10,7 @@ import UIKit
 
 class PromoViewController: BaseViewController, UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIAlertViewDelegate, UIDocumentInteractionControllerDelegate, ModalDelegate {
     
-    @IBOutlet var mainLoader: UIActivityIndicatorView!
+    @IBOutlet var mainLoader: MMMaterialDesignSpinner!
     @IBOutlet weak var CouponsCollectionView: UICollectionView!    
     @IBOutlet weak var emptyMessage: UILabel!
     @IBOutlet weak var promoSegmentedController: PromoSegmentedController!
@@ -44,6 +44,10 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
         self.CouponsCollectionView.contentInset = UIEdgeInsetsMake(0,0,49,0)
         
         mainLoader.alpha = 0
+        
+        mainLoader.tintColor = Utilities.dopColor
+        mainLoader.lineWidth = 3.0
+        mainLoader.startAnimating()
         
         getCoupons()
         
@@ -205,16 +209,15 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
     }
 
     func getCoupons() {
-        offset = 0
-        coupons.removeAll(keepCapacity: false)
-        cachedImages.removeAll(keepCapacity: false)
-        
-        Utilities.fadeInViewAnimation(mainLoader, delay: 0, duration: 0.3)
-        
-        UIView.animateWithDuration(0.3, animations: {
-            //self.CouponsCollectionView.alpha = 0
+        dispatch_async(dispatch_get_main_queue(), {
+
+            self.offset = 0
+            self.coupons.removeAll(keepCapacity: false)
+            self.cachedImages.removeAll(keepCapacity: false)
+            
+            Utilities.fadeInViewAnimation(self.mainLoader, delay: 0, duration: 0.3)
+            
         })
-        
         CouponController.getAllCouponsWithSuccess(limit,
             success: { (couponsData) -> Void in
                 let json = JSON(data: couponsData)
@@ -340,13 +343,12 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
     }
     
     func getTakenCoupons() {
-        offset = 0
-        UIView.animateWithDuration(0.3, animations: {
-            //self.CouponsCollectionView.alpha = 0
+        dispatch_async(dispatch_get_main_queue(), {
+            self.offset = 0
+            self.coupons.removeAll()
+            self.cachedImages.removeAll(keepCapacity: false)
+            Utilities.fadeInViewAnimation(self.mainLoader, delay: 0, duration: 0.5)
         })
-        coupons.removeAll()
-        cachedImages.removeAll(keepCapacity: false)
-        Utilities.fadeInViewAnimation(mainLoader, delay: 0, duration: 0.5)
         
         CouponController.getAllTakenCouponsWithSuccess(limit,
             success: { (couponsData) -> Void in

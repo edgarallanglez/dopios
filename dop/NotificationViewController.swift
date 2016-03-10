@@ -15,7 +15,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet var notificationButton: UIButton!
 
     
-    @IBOutlet var mainLoader: UIActivityIndicatorView!
+    @IBOutlet var mainLoader: MMMaterialDesignSpinner!
     @IBOutlet var notification_table: UITableView!
     let socketIO : SocketIO = SocketIO()
     var notifications = [Notification]()
@@ -60,6 +60,9 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         }
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "showNotificationButton", name: "newNotification", object: nil)
 
+        mainLoader.startAnimating()
+        mainLoader.tintColor = Utilities.dopColor
+        mainLoader.lineWidth = 3.0
         getNotifications()
         
     }
