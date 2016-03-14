@@ -78,9 +78,6 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
         self.mainScroll.addSubview(refreshControl)
 
         self.setNeedsStatusBarAppearanceUpdate()
-
-        Utilities.printFonts()
-        
         setupLoaders()
         
     }

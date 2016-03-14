@@ -37,7 +37,7 @@ class SearchController: NSObject {
         Utilities.sendDataToURL(NSURL(string: url_people)!, method:"POST", params: params, completion:{(data, error) -> Void in
             if let urlData = data {
                 succeed(friendsData: urlData)
-            }else{
+            } else {
                 errorFound(friendsData: error)
             }
         })

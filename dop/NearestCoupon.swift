@@ -32,6 +32,7 @@ class NearestCoupon: UIView, ModalDelegate {
     }
     
     func tapCoupon(sender:UITapGestureRecognizer){
+        setViewCount()
         let modal: ModalViewController = ModalViewController(currentView: self.viewController!, type: ModalViewControllerType.CouponDetail)
         
         dispatch_async(dispatch_get_main_queue()) {
@@ -67,5 +68,17 @@ class NearestCoupon: UIView, ModalDelegate {
             viewController?.hidesBottomBarWhenPushed = false
             modal.dismissAnimated(true, completionHandler: nil)
         }
+    }
+    
+    func setViewCount() {
+        let params: [String: AnyObject] = ["coupon_id": self.coupon.id]
+        CouponController.viewCouponWithSuccess(params, success: { (couponsData) -> Void in
+            let json: JSON = JSON(couponsData)
+            print(json)
+            },
+            failure: { (couponsData) -> Void in
+                print("couponsData")
+            }
+        )
     }
 }

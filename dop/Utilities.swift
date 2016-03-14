@@ -31,6 +31,14 @@ class Utilities {
         return UIColor( red: 33.0/255.0 , green: 150.0/255.0 , blue: 243.0/255.0, alpha:1.0)
     }
     
+    class var dop_gold_color: UIColor {
+        return UIColor( red: 255.0/255.0 , green: 222.0/255.0 , blue: 121.0/255.0, alpha:1.0)
+    }
+    
+    class var dop_bronze_color: UIColor {
+        return UIColor( red: 236.0/255.0 , green: 144.0/255.0 , blue: 71.0/255.0, alpha:1.0)
+    }
+    
     class var lightGrayColor: UIColor {
         return UIColor( red: 243.0/255.0 , green: 243.0/255.0 , blue: 243.0/255.0, alpha:1.0)
     }
@@ -167,12 +175,19 @@ class Utilities {
         layer.shadowRadius = 4
     }
     
+    class func applyMaterialDesignShadow(button: UIButton) {
+        button.layer.shadowColor = UIColor.darkGrayColor().CGColor
+        button.layer.shadowOffset = CGSize(width: 4, height: 4)
+        button.layer.shadowOpacity = 0.5
+        button.layer.shadowRadius = 4
+    }
+    
     class func applySolidShadow(view: UIView) {
         let layer = view.layer
         
         layer.shadowColor = UIColor.lightGrayColor().CGColor
         layer.shadowOffset = CGSize(width: 0, height: 3)
-        layer.shadowOpacity = 0.5
+        layer.shadowOpacity = 0.6
         layer.shadowRadius = 1
     }
     
@@ -271,16 +286,24 @@ class Utilities {
         }), completion: nil)
     }
     
+    //spinner loader for buttons
     
-    //PRINT FONTS
-    class func printFonts(){
-        let fontFamilyNames = UIFont.familyNames()
-        for familyName in fontFamilyNames {
-            print("------------------------------")
-            print("Font Family Name = [\(familyName)]")
-            let names = UIFont.fontNamesForFamilyName(familyName as! String)
-            print("Font Names = [\(names)]")
-        }
+    class func setButtonSpinner(sender: UIButton, spinner: MMMaterialDesignSpinner, spinner_size: CGFloat, spinner_width: CGFloat, spinner_color: UIColor) {
+        let x = (sender.frame.width / 2) - (spinner_size / 2)
+        let y = (sender.frame.height / 2) - (spinner_size / 2)
+        spinner.frame = CGRectMake(x, y, spinner_size, spinner_size)
+        spinner.lineWidth = spinner_width
+        spinner.startAnimating()
+        spinner.tintColor = spinner_color
+        sender.addSubview(spinner)
+    }
+    
+    // Material Design Button
+    
+    class func setMaterialDesignButton(button: UIButton, button_size: CGFloat) {
+        button.frame = CGRectMake(button.frame.origin.x, button.frame.origin.y, button_size, button_size)
+        button.layer.cornerRadius = button.frame.width / 2
+        self.applyMaterialDesignShadow(button)
     }
 }
 

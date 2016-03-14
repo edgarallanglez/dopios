@@ -11,7 +11,6 @@ import UIKit
 class SettingsViewController: UITableViewController {
     
     @IBOutlet var configTableView: UITableView!
-    @IBOutlet weak var facebook_connect: UIButton!
     @IBOutlet weak var twitter_connect: UIButton!
     @IBOutlet weak var privacy_switch: UISwitch!
 
@@ -24,11 +23,7 @@ class SettingsViewController: UITableViewController {
     override func viewDidLoad() {
         if User.privacy_status == 1 { privacy_switch.setOn(true, animated: true) }
         
-        if((FBSDKAccessToken.currentAccessToken()) != nil) {
-            facebook_connect.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-            facebook_connect.backgroundColor = Utilities.dopColor
-            facebook_connect.setTitle("DESCONECTAR", forState: UIControlState.Normal)
-        }
+        if((FBSDKAccessToken.currentAccessToken()) != nil) {        }
     }
 
     @IBAction func setUserPrivacy(sender: UISwitch) {

@@ -23,8 +23,8 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uqg-Ob-bwT">
                             <rect key="frame" x="0.0" y="40" width="600" height="170"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lbv-Hy-g5Y" userLabel="Progress" customClass="KAProgressLabel">
-                                    <rect key="frame" x="245" y="-2" width="112" height="105"/>
+                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lbv-Hy-g5Y" userLabel="Progress" customClass="KAProgressLabel">
+                                    <rect key="frame" x="244" y="-6" width="112" height="112"/>
                                     <color key="tintColor" red="0.12941176469999999" green="0.58823529409999997" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="112" id="MT6-Bo-Gas"/>
@@ -106,27 +106,21 @@
                                 </mask>
                             </variation>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6UK-3R-cJG">
-                            <rect key="frame" x="555" y="205" width="25" height="25"/>
+                        <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6UK-3R-cJG">
+                            <rect key="frame" x="530" y="180" width="50" height="50"/>
+                            <color key="backgroundColor" red="0.12941176469999999" green="0.58823529409999997" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="25" id="08H-25-xid"/>
-                                <constraint firstAttribute="height" constant="25" id="AkF-s2-Uez"/>
+                                <constraint firstAttribute="width" constant="50" id="08H-25-xid"/>
+                                <constraint firstAttribute="height" constant="50" id="AkF-s2-Uez"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="13"/>
-                            <color key="tintColor" red="0.98431372549999996" green="0.1333333333" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
-                            <inset key="contentEdgeInsets" minX="3" minY="3" maxX="3" maxY="3"/>
-                            <size key="titleShadowOffset" width="2.2250738585072014e-308" height="0.0"/>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <inset key="contentEdgeInsets" minX="18" minY="18" maxX="18" maxY="18"/>
+                            <size key="titleShadowOffset" width="5" height="5"/>
                             <state key="normal" image="follow-icon">
                                 <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                    <integer key="value" value="1"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                    <integer key="value" value="3"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
                             <variation key="widthClass=compact">
                                 <mask key="constraints">
                                     <include reference="08H-25-xid"/>
@@ -141,21 +135,11 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="uqg-Ob-bwT" secondAttribute="trailing" id="7pf-cY-uxX"/>
-                        <constraint firstItem="uqg-Ob-bwT" firstAttribute="top" secondItem="fO9-f1-imB" secondAttribute="top" id="AwG-yv-0y8"/>
                         <constraint firstAttribute="bottom" secondItem="6UK-3R-cJG" secondAttribute="bottom" constant="20" id="Quh-H4-scj"/>
                         <constraint firstAttribute="trailing" secondItem="6UK-3R-cJG" secondAttribute="trailing" constant="20" id="UqB-4t-QP6"/>
-                        <constraint firstItem="uqg-Ob-bwT" firstAttribute="centerX" secondItem="fO9-f1-imB" secondAttribute="centerX" id="ZZe-9o-g1V"/>
                         <constraint firstItem="uqg-Ob-bwT" firstAttribute="centerY" secondItem="fO9-f1-imB" secondAttribute="centerY" id="cHN-6g-Cq3"/>
                         <constraint firstItem="uqg-Ob-bwT" firstAttribute="leading" secondItem="fO9-f1-imB" secondAttribute="leading" id="jnN-bq-fdh"/>
-                        <constraint firstAttribute="bottom" secondItem="uqg-Ob-bwT" secondAttribute="bottom" id="o7B-F3-yVN"/>
                     </constraints>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="AwG-yv-0y8"/>
-                            <exclude reference="ZZe-9o-g1V"/>
-                            <exclude reference="o7B-F3-yVN"/>
-                        </mask>
-                    </variation>
                     <variation key="widthClass=compact">
                         <mask key="subviews">
                             <include reference="6UK-3R-cJG"/>
@@ -183,6 +167,6 @@
         </view>
     </objects>
     <resources>
-        <image name="follow-icon" width="66" height="66"/>
+        <image name="follow-icon" width="42" height="42"/>
     </resources>
 </document>
