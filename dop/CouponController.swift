@@ -21,9 +21,16 @@ class CouponController {
         })
     }
     
-    class func getAllCouponsOffsetWithSuccess(coupon_id:Int,offset:Int,success succeed: ((couponsData: NSData!) -> Void),failure errorFound: ((couponsData: NSError?) -> Void)) {
-        let url = "\(Utilities.dopURL)coupon/all/for/user/offset/get/?offset=\(offset)&coupon_id=\(coupon_id)"
-        Utilities.loadDataFromURL(NSURL(string: url)!, completion:{(data, error) -> Void in
+    class func getAllCouponsOffsetWithSuccess(start_date: String,offset: Int,success succeed: ((couponsData: NSData!) -> Void),failure errorFound: ((couponsData: NSError?) -> Void)) {
+        let url = "\(Utilities.dopURL)coupon/all/for/user/offset/get"
+
+        let params:[String: AnyObject] = [
+            "offset" : String(stringInterpolationSegment: offset),
+            "start_date" : String(start_date)]
+        
+        print(start_date)
+        print(offset)
+        Utilities.sendDataToURL(NSURL(string: url)!, method:"POST", params: params, completion:{(data, error) -> Void in
             if let urlData = data {
                 succeed(couponsData: urlData)
             }else{
@@ -68,9 +75,14 @@ class CouponController {
         })
     }
     
-    class func getAllTakenCouponsOffsetWithSuccess(coupon_id:Int,offset:Int,success succeed: ((couponsData: NSData!) -> Void),failure errorFound: ((couponsData: NSError?) -> Void)) {
-        let url = "\(Utilities.dopURL)coupon/all/taken/for/user/offset/get/?offset=\(offset)&coupon_id=\(coupon_id)"
-        Utilities.loadDataFromURL(NSURL(string: url)!, completion:{(data, error) -> Void in
+    class func getAllTakenCouponsOffsetWithSuccess(taken_date: String,offset:Int,success succeed: ((couponsData: NSData!) -> Void),failure errorFound: ((couponsData: NSError?) -> Void)) {
+        let url = "\(Utilities.dopURL)coupon/all/taken/for/user/offset/get"
+  
+        let params:[String: AnyObject] = [
+            "offset" : String(stringInterpolationSegment: offset),
+            "taken_date" : String(taken_date)]
+
+        Utilities.sendDataToURL(NSURL(string: url)!, method:"POST", params: params, completion:{(data, error) -> Void in
             if let urlData = data {
                 succeed(couponsData: urlData)
             }else{

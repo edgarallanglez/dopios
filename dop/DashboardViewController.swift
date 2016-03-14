@@ -277,7 +277,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                         
                         Utilities.fadeInFromBottomAnimation(imageView, delay: 0, duration: 1, yPosition: 20)
                         Utilities.fadeInFromBottomAnimation(branchNameLbl, delay: 0.8, duration: 1, yPosition: 20)
-                        Utilities.fadeOutToBottomWithRemoveAnimation(progressIcon, delay: 0, duration: 0.5, yPosition: 0, completion: { (value) -> Void in
+                        Utilities.fadeOutToBottomWithCompletion(progressIcon, delay: 0, duration: 0.5, yPosition: 0, completion: { (value) -> Void in
                             progressIcon.removeFromSuperview()
                         })
 

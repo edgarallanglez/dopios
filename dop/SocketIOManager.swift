@@ -19,8 +19,8 @@ class SocketIOManager: NSObject {
     func establishConnection() {
         
         socket.on("connect") {data, ack in
+            print("COnectado a \(data)")
             self.socket.emit("joinRoom", User.userToken)
-            print(data)
         }
         
         socket.on("disconnect") {data, ack in
@@ -32,6 +32,10 @@ class SocketIOManager: NSObject {
         
         socket.on("reconnect_attempt") { data, ack in
             print("Reconectado")
+        }
+        
+        socket.on("joined") { data, ack in
+            print("JOined \(data)")
         }
         
         self.socket.onAny{print("got event: \($0.event) with items \($0.items)")}

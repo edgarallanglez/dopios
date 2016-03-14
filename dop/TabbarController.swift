@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class TabbarController: UITabBarController, SocketIODelegate {
+class TabbarController: UITabBarController {
     
     var lastSelected = 0
     
@@ -116,42 +116,13 @@ class TabbarController: UITabBarController, SocketIODelegate {
                 AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
             })
         }
-    }
-    
-    
-    
-    //NOTIFICATIONS
-    
-    func getNotification(packet:SocketIOPacket) {
-        NSNotificationCenter.defaultCenter().postNotificationName("newNotification", object: nil)
-        AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
-    }
-    func startListening(){
-        socketIO.delegate = self
-        socketIO.useSecure = true
-        socketIO.connectToHost("inmoon.com.mx", onPort: 443, withParams: nil, withNamespace: "/app")
-        
-        
-    }
-    func socketIODidConnect(socket: SocketIO) {
-        print("socket.io connected.")
-        socketIO.sendEvent("join room", withData: User.userToken)
-        //socketIO.sendEvent("notification", withData: User.userToken)
-    }
-    func socketIO(socket: SocketIO, didReceiveEvent packet: SocketIOPacket) {
-        print("didReceiveEvent >>> data: %@", packet.dataAsJSON())
-        
-        if(packet.name == "my response"){
-            //socketIO.sendMessage("hello back!", withAcknowledge: cb)
-        }
-        if(packet.name == "notification"){
-            self.getNotification(packet)
+        SocketIOManager.sharedInstance.getNotification { (info) -> Void in
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                print("JOINED TO ROOM")
+            })
         }
     }
-    func socketIODidDisconnect(socket: SocketIO!, disconnectedWithError error: NSError!) {
-        socketIO.connectToHost("inmoon.com.mx", onPort: 443, withParams: nil, withNamespace: "/app")
     
-    }
     
 
 }
