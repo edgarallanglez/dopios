@@ -88,7 +88,7 @@ class MapPinCallout: UIView {
         return CGRectContainsPoint(bounds, point)
     }
     override func removeFromSuperview() {
-        Utilities.fadeOutToBottomWithRemoveAnimation(self, delay: 0, duration: 0.5, yPosition: 5, completion: {(result: Bool)in
+        Utilities.fadeOutToBottomWithCompletion(self, delay: 0, duration: 0.5, yPosition: 5, completion: {(result: Bool)in
                 self.frame.origin.y = -72
                 super.removeFromSuperview()
             })

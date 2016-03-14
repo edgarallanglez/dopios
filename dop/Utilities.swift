@@ -250,7 +250,7 @@ class Utilities {
             view.frame.origin.y -= yPosition
         })
     }
-    class func fadeOutToBottomWithRemoveAnimation(view:UIView, delay:NSTimeInterval, duration:NSTimeInterval, yPosition:CGFloat, completion: (value: Bool) -> Void){
+    class func fadeOutToBottomWithCompletion(view:UIView, delay:NSTimeInterval, duration:NSTimeInterval, yPosition:CGFloat, completion: (value: Bool) -> Void){
         let finalYPosition = view.frame.origin.y + yPosition
         
         UIView.animateWithDuration(duration, delay: delay, usingSpringWithDamping: 1, initialSpringVelocity: 2, options: .CurveEaseInOut, animations: ({

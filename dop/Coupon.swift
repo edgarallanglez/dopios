@@ -24,6 +24,8 @@ class Coupon: NSObject {
     let categoryId: Int
     var available: Int
     var taken: Bool!
+    var taken_date: String!
+    var start_date: String!
 
     init(id: Int?, name: String?, description: String?, limit: String?, exp: String?, logo: String? ,branch_id:Int?, company_id: Int?, total_likes: Int?, user_like: Int?, latitude: Double, longitude: Double, banner: String, category_id: Int, available: Int, taken: Bool) {
         
@@ -42,6 +44,46 @@ class Coupon: NSObject {
         self.categoryId = category_id
         self.available = available
         self.taken = taken
+    }
+    init(id: Int?, name: String?, description: String?, limit: String?, exp: String?, logo: String? ,branch_id:Int?, company_id: Int?, total_likes: Int?, user_like: Int?, latitude: Double, longitude: Double, banner: String, category_id: Int, available: Int, taken: Bool, start_date: String) {
+        
+        self.id = id ?? 0
+        self.name = name ?? ""
+        self.couponDescription = description ?? ""
+        self.limit = limit ?? ""
+        self.exp = exp ?? ""
+        self.logo = logo ?? ""
+        self.branch_id = branch_id ?? 0
+        self.company_id = company_id ?? 0
+        self.total_likes = total_likes ?? 0
+        self.user_like = user_like ?? 0
+        self.location = CLLocationCoordinate2DMake(latitude, longitude) ?? CLLocationCoordinate2DMake(0.0, 0.0)
+        self.banner = banner
+        self.categoryId = category_id
+        self.available = available
+        self.taken = taken
+        self.start_date = start_date
+    }
+    
+    init(id: Int?, name: String?, description: String?, limit: String?, exp: String?, logo: String? ,branch_id:Int?, company_id: Int?, total_likes: Int?, user_like: Int?, latitude: Double, longitude: Double, banner: String, category_id: Int, available: Int, taken: Bool, taken_date: String){
+        
+        self.id = id ?? 0
+        self.name = name ?? ""
+        self.couponDescription = description ?? ""
+        self.limit = limit ?? ""
+        self.exp = exp ?? ""
+        self.logo = logo ?? ""
+        self.branch_id = branch_id ?? 0
+        self.company_id = company_id ?? 0
+        self.total_likes = total_likes ?? 0
+        self.user_like = user_like ?? 0
+        self.location = CLLocationCoordinate2DMake(latitude, longitude) ?? CLLocationCoordinate2DMake(0.0, 0.0)
+        self.banner = banner
+        self.categoryId = category_id
+        self.available = available
+        self.taken = taken
+        self.taken_date = taken_date
+        
     }
     
     func setUserLike(user_like: Int!,total_likes: Int!){

@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "dop/PromoViewController.swift"
-            timestampString = "479321095.079842"
+            timestampString = "479436930.200199"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "290"
-            endingLineNumber = "290"
+            startingLineNumber = "381"
+            endingLineNumber = "381"
             landmarkName = "getCouponsWithOffset()"
             landmarkType = "5">
          </BreakpointContent>
@@ -234,11 +234,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "dop/PromoViewController.swift"
-            timestampString = "479321095.079842"
+            timestampString = "479436930.200199"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "549"
-            endingLineNumber = "549"
+            startingLineNumber = "651"
+            endingLineNumber = "651"
             landmarkName = "pressActionButton(_:)"
             landmarkType = "5">
             <Locations>
@@ -250,11 +250,11 @@
                   moduleName = "dop"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Eduardo/Desktop/dopios/dop/PromoViewController.swift"
-                  timestampString = "479321369.762687"
+                  timestampString = "479419722.025853"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "549"
-                  endingLineNumber = "549"
+                  startingLineNumber = "626"
+                  endingLineNumber = "626"
                   offsetFromSymbolStart = "7008">
                </Location>
                <Location
@@ -265,11 +265,11 @@
                   moduleName = "dop"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Eduardo/Desktop/dopios/dop/PromoViewController.swift"
-                  timestampString = "479321369.762914"
+                  timestampString = "479419722.026234"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "549"
-                  endingLineNumber = "549"
+                  startingLineNumber = "626"
+                  endingLineNumber = "626"
                   offsetFromSymbolStart = "7052">
                </Location>
             </Locations>
@@ -486,7 +486,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "dop/Utilities.swift"
@@ -495,6 +495,70 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "134"
             endingLineNumber = "134"
+            landmarkName = "downloadImage(_:completion:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "dop/CouponController.swift"
+            timestampString = "479431227.9245"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
+            landmarkName = "getAllTakenCouponsOffsetWithSuccess(_:offset:success:failure:)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static dop.CouponController.getAllTakenCouponsOffsetWithSuccess (dop.CouponController.Type)(Swift.String, offset : Swift.Int, success : (couponsData : Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.NSData&gt;) -&gt; (), failure : (couponsData : Swift.Optional&lt;__ObjC.NSError&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "dop"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Eduardo/Desktop/dopios/dop/CouponController.swift"
+                  timestampString = "479419447.188748"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "78"
+                  endingLineNumber = "78"
+                  offsetFromSymbolStart = "668">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static dop.CouponController.(getAllTakenCouponsOffsetWithSuccess (dop.CouponController.Type) -&gt; (Swift.String, offset : Swift.Int, success : (couponsData : Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.NSData&gt;) -&gt; (), failure : (couponsData : Swift.Optional&lt;__ObjC.NSError&gt;) -&gt; ()) -&gt; ()).(closure #1)"
+                  moduleName = "dop"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Eduardo/Desktop/dopios/dop/CouponController.swift"
+                  timestampString = "479419447.189074"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "79"
+                  endingLineNumber = "79"
+                  offsetFromSymbolStart = "28">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "dop/Utilities.swift"
+            timestampString = "479418262.704738"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "135"
+            endingLineNumber = "135"
             landmarkName = "downloadImage(_:completion:)"
             landmarkType = "5">
          </BreakpointContent>

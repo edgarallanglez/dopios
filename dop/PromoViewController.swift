@@ -15,15 +15,21 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
     @IBOutlet weak var emptyMessage: UILabel!
     @IBOutlet weak var promoSegmentedController: PromoSegmentedController!
 
+    @IBOutlet var myCouponsCollectionView: UICollectionView!
     private let reuseIdentifier = "PromoCell"
     var coupons = [Coupon]()
     var cachedImages: [String: UIImage] = [:]
-    var refreshControl: UIRefreshControl!
     
+    var myCoupons = [Coupon]()
+    var myCouponsCachedImages: [String: UIImage] = [:]
+    
+    var refreshControl: UIRefreshControl!
+    var myCouponsRefreshControl: UIRefreshControl!
     var showing_modal:Bool = false
     
-    let limit:Int = 6
-    var offset:Int = 0
+    let limit: Int = 6
+    var offset: Int = 0
+    var offset_mycoupons: Int = 0
     
     var documentController:UIDocumentInteractionController!
     
@@ -34,28 +40,42 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
         
         self.title = ""
         offset = limit - 1
+        offset_mycoupons = limit - 1
 
         
+        self.myCouponsCollectionView.hidden = true
+        self.myCouponsCollectionView.alpha = 0
+        
         self.refreshControl = UIRefreshControl()
+        self.myCouponsRefreshControl = UIRefreshControl()
         
         self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
-        self.CouponsCollectionView.addSubview(refreshControl)
+        self.myCouponsRefreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         
+        self.CouponsCollectionView.addSubview(refreshControl)
+        self.myCouponsCollectionView.addSubview(myCouponsRefreshControl)
+
         self.CouponsCollectionView.contentInset = UIEdgeInsetsMake(0,0,49,0)
+        self.myCouponsCollectionView.contentInset = UIEdgeInsetsMake(0,0,49,0)
         
         mainLoader.alpha = 0
         
         mainLoader.tintColor = Utilities.dopColor
         mainLoader.lineWidth = 3.0
         mainLoader.startAnimating()
-        
+
+
         getCoupons()
         
         let loader:MMMaterialDesignSpinner = MMMaterialDesignSpinner(frame: CGRectMake(0,0,24,24))
         
-        loader.lineWidth = 2.0        
+        loader.lineWidth = 2.0
+        
         self.CouponsCollectionView.infiniteScrollIndicatorView = loader
         self.CouponsCollectionView.infiniteScrollIndicatorView?.tintColor = Utilities.dopColor
+        
+        self.myCouponsCollectionView.infiniteScrollIndicatorView = loader
+        self.myCouponsCollectionView.infiniteScrollIndicatorView?.tintColor = Utilities.dopColor
         
         // Set custom indicator margin
         //CouponsCollectionView.infiniteScrollIndicatorMargin = 49
@@ -63,12 +83,13 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
         // Add infinite scroll handler
         CouponsCollectionView.addInfiniteScrollWithHandler { [weak self] (scrollView) -> Void in
                 if(!self!.coupons.isEmpty){
-                    if self!.promoSegmentedController.selectedIndex == 1 {
-                        self!.getTakenCouponsWithOffset()
-                    } else {
-                        self!.getCouponsWithOffset()
-                    }
+                    self!.getCouponsWithOffset()
                 }
+        }
+        myCouponsCollectionView.addInfiniteScrollWithHandler { [weak self] (scrollView) -> Void in
+            if(!self!.myCoupons.isEmpty){
+                self!.getTakenCouponsWithOffset()
+            }
         }
         
         
@@ -80,10 +101,14 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
         leftSwipe.direction = .Left
         
         
-        CouponsCollectionView.addGestureRecognizer(rightSwipe)
         CouponsCollectionView.addGestureRecognizer(leftSwipe)
+        myCouponsCollectionView.addGestureRecognizer(rightSwipe)
         CouponsCollectionView.alpha = 0
         
+        
+        let flowLayout = PromoCollectionViewLayout()
+        self.CouponsCollectionView?.setCollectionViewLayout(flowLayout, animated: true)
+
 
     }
     
@@ -116,61 +141,108 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
     }
 
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return coupons.count
+        if promoSegmentedController.selectedIndex == 1 {
+            return myCoupons.count
+        }else{
+            return coupons.count
+        }
     }
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! PromoCollectionCell
-        
-        if (!coupons.isEmpty) {
-            let model = self.coupons[indexPath.row]
-            cell.loadItem(model, viewController: self)
-            cell.setTakeButtonState(model.taken)
-            let imageUrl = NSURL(string: "\(Utilities.dopImagesURL)\(model.company_id)/\(model.logo)")
-            
-            let identifier = "Cell\(indexPath.row)"
-        
-            cell.backgroundColor = UIColor.whiteColor()
-            cell.heart.image = cell.heart.image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-            //cell.viewForBaselineLayout()?.alpha = 0
-            cell.branch_banner.alpha=0
-            
-            
-            if (self.cachedImages[identifier] != nil){
-                let cell_image_saved : UIImage = self.cachedImages[identifier]!
-                cell.branch_banner.image = cell_image_saved
-                UIView.animateWithDuration(0.5, animations: {
-                    cell.branch_banner.alpha = 1
-                })
+        if promoSegmentedController.selectedIndex == 0 {
+            if (!coupons.isEmpty) {
+                let model = self.coupons[indexPath.row]
+                cell.loadItem(model, viewController: self)
+                cell.setTakeButtonState(model.taken)
+                let imageUrl = NSURL(string: "\(Utilities.dopImagesURL)\(model.company_id)/\(model.logo)")
                 
-            } else {
-                //cell.branch_banner.alpha = 0
-                Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
-                    if let image = data{
-                        dispatch_async(dispatch_get_main_queue()) {
-                            var imageData : UIImage = UIImage()
-                            imageData = UIImage(data: image)!
-                            if self.CouponsCollectionView.indexPathForCell(cell)?.row == indexPath.row {
-                                self.cachedImages[identifier] = imageData
-                                let image_saved : UIImage = self.cachedImages[identifier]!
-                                cell.branch_banner.image = image_saved
-                                
-                                UIView.animateWithDuration(0.5, animations: {
-                                    cell.branch_banner.alpha = 1
-                                })
+                let identifier = "Cell\(indexPath.row)"
+            
+                cell.backgroundColor = UIColor.whiteColor()
+                cell.heart.image = cell.heart.image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+                //cell.viewForBaselineLayout()?.alpha = 0
+                cell.branch_banner.alpha=0
+                
+                
+                if (self.cachedImages[identifier] != nil){
+                    let cell_image_saved : UIImage = self.cachedImages[identifier]!
+                    cell.branch_banner.image = cell_image_saved
+                    UIView.animateWithDuration(0.5, animations: {
+                        cell.branch_banner.alpha = 1
+                    })
+                    
+                } else {
+                    //cell.branch_banner.alpha = 0
+                    Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
+                        if let image = data{
+                            dispatch_async(dispatch_get_main_queue()) {
+                                var imageData : UIImage = UIImage()
+                                imageData = UIImage(data: image)!
+                                if self.CouponsCollectionView.indexPathForCell(cell)?.row == indexPath.row {
+                                    self.cachedImages[identifier] = imageData
+                                    let image_saved : UIImage = self.cachedImages[identifier]!
+                                    cell.branch_banner.image = image_saved
+                                    
+                                    UIView.animateWithDuration(0.5, animations: {
+                                        cell.branch_banner.alpha = 1
+                                    })
+                                }
                             }
+                        }else{
+                            print("Error")
                         }
-                    }else{
-                        print("Error")
-                    }
-                })
+                    })
+                }
+            
             }
-        
-         /*   UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseInOut, animations: {
-                //cell.viewForBaselineLayout()?.alpha = 1
-                }, completion: { finished in
+        }else{
+            if (!myCoupons.isEmpty) {
+                let model = self.myCoupons[indexPath.row]
+                cell.loadItem(model, viewController: self)
+                cell.setTakeButtonState(model.taken)
+                let imageUrl = NSURL(string: "\(Utilities.dopImagesURL)\(model.company_id)/\(model.logo)")
                 
-            })*/
+                let identifier = "Cell\(indexPath.row)"
+                
+                cell.backgroundColor = UIColor.whiteColor()
+                cell.heart.image = cell.heart.image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+                //cell.viewForBaselineLayout()?.alpha = 0
+                cell.branch_banner.alpha=0
+                
+                
+                if (self.myCouponsCachedImages[identifier] != nil){
+                    let cell_image_saved : UIImage = self.myCouponsCachedImages[identifier]!
+                    cell.branch_banner.image = cell_image_saved
+                    UIView.animateWithDuration(0.5, animations: {
+                        cell.branch_banner.alpha = 1
+                    })
+                    
+                } else {
+                    //cell.branch_banner.alpha = 0
+                    Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
+                        if let image = data{
+                            dispatch_async(dispatch_get_main_queue()) {
+                                var imageData : UIImage = UIImage()
+                                imageData = UIImage(data: image)!
+                                if self.myCouponsCollectionView.indexPathForCell(cell)?.row == indexPath.row {
+                                    self.myCouponsCachedImages[identifier] = imageData
+                                    let image_saved : UIImage = self.myCouponsCachedImages[identifier]!
+                                    cell.branch_banner.image = image_saved
+                                    
+                                    UIView.animateWithDuration(0.5, animations: {
+                                        cell.branch_banner.alpha = 1
+                                    })
+                                }
+                            }
+                        }else{
+                            print("Error")
+                        }
+                    })
+                }
+                
+            }
         }
         return cell
     }
@@ -183,20 +255,52 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
         return size
     }
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        //if(showing_modal == false){
-            let cell = self.CouponsCollectionView.cellForItemAtIndexPath(indexPath)
+
+//        collectionView.performBatchUpdates({ () -> Void in
+//            //Array of the data which you need to deleted from collection view
+//            let indexPaths = [NSIndexPath]()
+//            //Delete those entery from the data base.
+//            
+//            //TODO: Delete the information from database
+//            self.coupons.removeAtIndex(indexPath.row)
+//            self.CouponsCollectionView.deleteItemsAtIndexPaths([indexPath])
+//            
+//        }, completion:nil)
+        
+        let cell: UICollectionViewCell!
+        
+        if promoSegmentedController.selectedIndex == 0 {
+            cell = self.CouponsCollectionView.cellForItemAtIndexPath(indexPath)
             selected_coupon = self.coupons[indexPath.row] as Coupon
-            
-            let modal:ModalViewController = ModalViewController(currentView: self, type: ModalViewControllerType.CouponDetail)
-            modal.willPresentCompletionHandler = { vc in
-                let navigationController = vc as! SimpleModalViewController
-                navigationController.coupon = self.selected_coupon
-            }
-            modal.delegate = self
-            modal.presentAnimated(true, completionHandler: nil)
-        //}
+        } else {
+            cell = self.myCouponsCollectionView.cellForItemAtIndexPath(indexPath)
+            selected_coupon = self.myCoupons[indexPath.row] as Coupon
+        }
+    
+        let modal:ModalViewController = ModalViewController(currentView: self, type: ModalViewControllerType.CouponDetail)
+        modal.willPresentCompletionHandler = { vc in
+            let navigationController = vc as! SimpleModalViewController
+            navigationController.coupon = self.selected_coupon
+        }
+        
+        setViewCount(selected_coupon.id)
+        modal.delegate = self
+        modal.presentAnimated(true, completionHandler: nil)
+        
         
      
+    }
+
+    func setViewCount(coupon_id: Int) {
+        let params: [String: AnyObject] = ["coupon_id": coupon_id]
+        CouponController.viewCouponWithSuccess(params, success: { (couponsData) -> Void in
+            let json: JSON = JSON(couponsData)
+            print(json)
+            },
+            failure: { (couponsData) -> Void in
+                print("couponsData")
+            }
+        )
     }
 
     override func didReceiveMemoryWarning() {
@@ -209,17 +313,21 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
     }
 
     func getCoupons() {
-        dispatch_async(dispatch_get_main_queue(), {
 
-            self.offset = 0
-            self.coupons.removeAll(keepCapacity: false)
-            self.cachedImages.removeAll(keepCapacity: false)
-            
-            Utilities.fadeInViewAnimation(self.mainLoader, delay: 0, duration: 0.3)
-            
-        })
+        self.offset = 0
+        
+        
+        self.CouponsCollectionView.hidden = false
+        self.view.bringSubviewToFront(self.mainLoader)
+        Utilities.fadeInViewAnimation(self.mainLoader, delay: 0, duration: 0.3)
+        
         CouponController.getAllCouponsWithSuccess(limit,
             success: { (couponsData) -> Void in
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.coupons.removeAll(keepCapacity: false)
+                    self.cachedImages.removeAll(keepCapacity: false)
+                })
+                
                 let json = JSON(data: couponsData)
             
                 for (_, subJson): (String, JSON) in json["data"]{
@@ -241,26 +349,27 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                     let category_id = subJson["category_id"].int!
                     let available = subJson["available"].int!
                     let taken = subJson["taken"].bool!
+                    let start_date = subJson["start_date"].string!
                     
-                    let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: category_id, available: available, taken: taken)
+                    let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: category_id, available: available, taken: taken, start_date: start_date)
                 
                     self.coupons.append(model)
                 }
                 
                 dispatch_async(dispatch_get_main_queue(), {
+                    
+                    
                     self.CouponsCollectionView.reloadData()
+                    self.CouponsCollectionView.contentOffset = CGPointMake(0,0)
                     self.emptyMessage.hidden = true
                     //self.CouponsCollectionView.alwaysBounceVertical = true
                     self.refreshControl.endRefreshing()
-                    self.offset = self.limit - 1
-                    
-                    Utilities.fadeOutViewAnimation(self.mainLoader, delay: 0, duration: 0.3)
-                    Utilities.fadeInFromBottomAnimation(self.CouponsCollectionView, delay: 0, duration: 1, yPosition: 20)
-                    
-                    UIView.animateWithDuration(0.3, animations: {
-                        //self.CouponsCollectionView.alpha = 1
-                    })
+                    self.offset = 6
 
+                    Utilities.fadeOutViewAnimation(self.mainLoader, delay: 0, duration: 0.3)
+                    Utilities.fadeInFromBottomAnimation(self.CouponsCollectionView, delay: 0, duration: 0.25, yPosition: 20)
+                    
+                    
                 });
             },
             
@@ -271,7 +380,6 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                     
                 })
             })
-        
 
         }
     
@@ -282,11 +390,8 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
         
         let firstCoupon = self.coupons.first as Coupon!
         
-        UIView.animateWithDuration(0.3, animations: {
-            //self.CouponsCollectionView.alpha = 0
-        })
         
-        CouponController.getAllCouponsOffsetWithSuccess(firstCoupon.id, offset: offset,
+        CouponController.getAllCouponsOffsetWithSuccess(firstCoupon.start_date, offset: offset,
             success: { (couponsData) -> Void in
                 let json = JSON(data: couponsData)
                 
@@ -307,9 +412,9 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                     let category_id = subJson["category_id"].int!
                     let available = subJson["available"].int!
                     let taken = subJson["taken"].bool!
+                    let start_date = subJson["start_date"].string!
                     
-                    
-                    let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: category_id, available: available, taken: taken)
+                    let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: category_id, available: available, taken: taken, start_date: start_date)
                     
                     self.coupons.append(model)
                     
@@ -343,15 +448,18 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
     }
     
     func getTakenCoupons() {
-        dispatch_async(dispatch_get_main_queue(), {
-            self.offset = 0
-            self.coupons.removeAll()
-            self.cachedImages.removeAll(keepCapacity: false)
-            Utilities.fadeInViewAnimation(self.mainLoader, delay: 0, duration: 0.5)
-        })
-        
+        self.offset_mycoupons = 0
+       
+        self.myCouponsCollectionView.hidden = false
+        self.view.bringSubviewToFront(self.mainLoader)
+        Utilities.fadeInViewAnimation(self.mainLoader, delay: 0, duration: 0.5)
+    
         CouponController.getAllTakenCouponsWithSuccess(limit,
             success: { (couponsData) -> Void in
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.myCoupons.removeAll()
+                    self.myCouponsCachedImages.removeAll(keepCapacity: false)
+                })
                 let json = JSON(data: couponsData)
                 
                 for (_, subJson): (String, JSON) in json["data"]{
@@ -370,33 +478,33 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                     let banner = subJson["banner"].string ?? ""
                     let category_id = subJson["category_id"].int!
                     let available = subJson["available"].int!
+                    var taken_date =  subJson["taken_date"].string!
                     
-                    let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: category_id, available: available, taken: true)
+                    let separators = NSCharacterSet(charactersInString: "T+")
+                    let parts = taken_date.componentsSeparatedByCharactersInSet(separators)
+                    taken_date = "\(parts[0]) \(parts[1])"
                     
-                    self.coupons.append(model)
+                    let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: category_id, available: available, taken: true, taken_date: taken_date)
+                    
+                    self.myCoupons.append(model)
                 }
+                print(json)
                 
                 dispatch_async(dispatch_get_main_queue(), {
-                    self.CouponsCollectionView.reloadData()
+                    self.myCouponsCollectionView.reloadData()
                     self.emptyMessage.hidden = true
-                    //self.CouponsCollectionView.alwaysBounceVertical = true
+                    self.CouponsCollectionView.contentOffset = CGPointMake(0,0)
                     self.refreshControl.endRefreshing()
-                    self.offset = self.limit - 1
-                    
-                    Utilities.fadeInFromBottomAnimation(self.CouponsCollectionView, delay: 0, duration: 1, yPosition: 20)
+                    self.offset_mycoupons = 6
+                    Utilities.fadeInFromBottomAnimation(self.myCouponsCollectionView, delay: 0, duration: 0.25, yPosition: 20)
                     Utilities.fadeOutViewAnimation(self.mainLoader, delay: 0, duration: 0.3)
-
-                    UIView.animateWithDuration(0.3, animations: {
-                        //self.CouponsCollectionView.alpha = 1
-                        
-                    })
                     
                 });
             },
             
             failure: { (error) -> Void in
                 dispatch_async(dispatch_get_main_queue(), {
-                    self.CouponsCollectionView.reloadData()
+                    self.myCouponsCollectionView.reloadData()
                     self.emptyMessage.hidden = false
                     self.refreshControl.endRefreshing()
                     Utilities.fadeOutViewAnimation(self.mainLoader, delay: 0, duration: 0.3)
@@ -411,9 +519,10 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
         var newData:Bool = false
         var addedValues:Int = 0
         
-        let firstCoupon = self.coupons.first as Coupon!
+        let firstCoupon = self.myCoupons.first as Coupon!
         
-        CouponController.getAllTakenCouponsOffsetWithSuccess(firstCoupon.id,offset: offset,
+    
+        CouponController.getAllTakenCouponsOffsetWithSuccess(firstCoupon.taken_date,offset: offset_mycoupons,
             success: { (couponsData) -> Void in
                 let json = JSON(data: couponsData)
                 
@@ -436,19 +545,19 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                     
                     let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: category_id, available: available, taken: true)
                     
-                    self.coupons.append(model)
+                    self.myCoupons.append(model)
                     
                     newData = true
                     addedValues++
                     
                 }
                 dispatch_async(dispatch_get_main_queue(), {
-                    self.CouponsCollectionView.reloadData()
+                    self.myCouponsCollectionView.reloadData()
                     //self.CouponsCollectionView.alwaysBounceVertical = true
-                    self.CouponsCollectionView.finishInfiniteScroll()
+                    self.myCouponsCollectionView.finishInfiniteScroll()
                     
                     if(newData){
-                        self.offset+=addedValues
+                        self.offset_mycoupons+=addedValues
                     }
                     /*if(addedValues<6 || !newData){
                     self.CouponsCollectionView.removeInfiniteScroll()
@@ -457,7 +566,8 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
             },
             failure: { (error) -> Void in
                 dispatch_async(dispatch_get_main_queue(), {
-                    self.CouponsCollectionView.finishInfiniteScroll()
+                    print(error)
+                    self.myCouponsCollectionView.finishInfiniteScroll()
                 })
         })
     }
@@ -485,7 +595,13 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
     }
     
     @IBAction func setPromoCollectionView(sender: PromoSegmentedController) {
-        Utilities.fadeOutViewAnimation(self.CouponsCollectionView, delay: 0, duration: 0.3)
+        /*Utilities.fadeOutViewAnimation(self.CouponsCollectionView, delay: 0, duration: 0.3)
+        Utilities.fadeOutViewAnimation(self.myCouponsCollectionView, delay: 0, duration: 0.3)
+        */
+        CouponsCollectionView.alpha = 0
+        myCouponsCollectionView.alpha = 0
+        self.CouponsCollectionView.hidden = true
+        self.myCouponsCollectionView.hidden = true
         
         switch promoSegmentedController.selectedIndex {
             case 0:
