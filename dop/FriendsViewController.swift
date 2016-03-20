@@ -245,7 +245,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
                 view.user_image = cell.user_image
                 view.person = model
                 view.is_friend = model.is_friend
-                view.operation_id = model.operation_id
+                view.operation_id = model.operation_id!
                 view.user_name = model.names
             }
         }

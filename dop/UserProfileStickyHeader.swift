@@ -35,7 +35,8 @@ class UserProfileStickyHeader: UIView {
         self.parent_view = parent_view_controller
         self.user_id = self.parent_view.user_id
         
-        if User.user_id == self.parent_view.user_id { self.follow_button.hidden = true }
+        if User.user_id == self.parent_view.user_id { self.follow_button.alpha = 0 }
+//        else { self.follow_button.alpha = 1 }
         Utilities.setMaterialDesignButton(self.follow_button, button_size: 50)
         
         if parent_view.person != nil {
@@ -143,23 +144,35 @@ class UserProfileStickyHeader: UIView {
                 self.follow_button.contentEdgeInsets = UIEdgeInsetsMake(16, 16, 16, 16)
                 self.follow_button.backgroundColor = Utilities.dopColor
                 self.layoutIfNeeded()
-                Utilities.fadeInFromBottomAnimation(self.follow_button, delay: 0, duration: 0.5, yPosition: 0)
+                Utilities.fadeInFromBottomAnimation(self.follow_button, delay: 0, duration: 0.7, yPosition: 0)
                 }, completion: { (Bool) in
                     
                     
             })
-        } else if self.parent_view.operation_id == 0 {
+        } else if self.parent_view.operation_id == 0 && self.user_id != User.user_id {
             UIButton.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
                 self.follow_button.setImage(UIImage(named: "clock-icon"), forState: UIControlState.Normal)
                 self.follow_button.contentEdgeInsets = UIEdgeInsetsMake(16, 16, 16, 16)
                 self.follow_button.backgroundColor = Utilities.dopColor
                 self.layoutIfNeeded()
-                 Utilities.fadeInFromBottomAnimation(self.follow_button, delay: 0, duration: 0.5, yPosition: 0)
+                 Utilities.fadeInFromBottomAnimation(self.follow_button, delay: 0, duration: 0.7, yPosition: 0)
                 }, completion: { (Bool) in
                     
                     
             })
-        } else { Utilities.fadeInFromBottomAnimation(self.follow_button, delay: 0, duration: 0.5, yPosition: 0) }
+        } else if self.parent_view.operation_id == 4 {
+            UIButton.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
+                self.follow_button.setImage(UIImage(named: "follow-icon"), forState: UIControlState.Normal)
+                self.follow_button.contentEdgeInsets = UIEdgeInsetsMake(18, 18, 18, 18)
+                self.follow_button.backgroundColor = Utilities.dop_detail_color
+                self.layoutIfNeeded()
+                Utilities.fadeInFromBottomAnimation(self.follow_button, delay: 0, duration: 0.7, yPosition: 0)
+                }, completion: { (Bool) in
+                    
+                    
+            })
+            
+        } else if self.user_id != User.user_id { Utilities.fadeInFromBottomAnimation(self.follow_button, delay: 0, duration: 0.7, yPosition: 0) }
     }
     
     func downloadImage(url: NSURL) {

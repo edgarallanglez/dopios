@@ -136,7 +136,7 @@ class BranchProfileTopView: UIView {
                         self.branch_name.shadowColor = UIColor.darkGrayColor()
                         Utilities.fadeInFromBottomAnimation(self.branch_banner, delay: 0, duration: 0.8, yPosition: 2)
                     }
-                }else{
+                } else {
                     print("Error")
                 }
             })

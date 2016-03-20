@@ -172,8 +172,8 @@ class BranchCampaignCollectionViewController: UICollectionViewController, ModalD
     }
     
     func getCoupons() {
-        coupons.removeAll(keepCapacity: false)
-        cachedImages.removeAll(keepCapacity: false)
+        coupons.removeAll()
+        cachedImages.removeAll()
         
         
         UIView.animateWithDuration(0.3, animations: {

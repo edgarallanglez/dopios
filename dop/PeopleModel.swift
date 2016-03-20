@@ -61,7 +61,7 @@ class PeopleModel: NSObject {
     }
     
     // ranked by used people constructor
-    init(names: String!, surnames: String!, user_id: Int!, birth_date: String?, facebook_key: String?, privacy_status: Int, main_image: String?, total_used: Int, level: Int, exp: Double, operation_id: Int!) {
+    init(names: String!, surnames: String!, user_id: Int!, birth_date: String?, facebook_key: String?, privacy_status: Int, main_image: String?, total_used: Int, level: Int, exp: Double, is_friend: Bool! ,operation_id: Int!) {
         
         self.names = names
         self.surnames = surnames
@@ -70,7 +70,7 @@ class PeopleModel: NSObject {
         self.facebook_key = facebook_key ?? ""
         self.privacy_status = privacy_status
         self.main_image = main_image ?? ""
-        self.is_friend = nil
+        self.is_friend = is_friend
         self.total_used = total_used
         self.level = level
         self.exp = exp

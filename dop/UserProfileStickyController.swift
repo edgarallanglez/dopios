@@ -25,7 +25,7 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
     var user_image: UIImageView!
     var user_image_path: String = ""
     var is_friend: Bool!
-    var operation_id: Int!
+    var operation_id: Int = 0
     var person: PeopleModel!
     var page_index: Int!
     var segmented_controller: UserProfileSegmentedController?
@@ -37,7 +37,7 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
     var searchView: UIView!
     var searchViewIsOpen: Bool = false
     var searchViewIsSegue: Bool = false
-    var cancelSearchButton:UIBarButtonItem!
+    var cancelSearchButton: UIBarButtonItem!
     
     private var layout: CSStickyHeaderFlowLayout? {
         return self.collectionView?.collectionViewLayout as? CSStickyHeaderFlowLayout
@@ -289,7 +289,8 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
         if(searchViewIsOpen){
             searchViewIsSegue = true
             
-            let object_id = notification.object as! Int
+            let params = notification.object as! NSDictionary
+            let object_id = params["id"] as! Int
             
             if vc.searchSegmentedController.selectedIndex == 0 {
                 let viewControllerToPresent = self.storyboard!.instantiateViewControllerWithIdentifier("BranchProfileStickyController") as! BranchProfileStickyController
@@ -300,6 +301,8 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
             if vc.searchSegmentedController.selectedIndex == 1 {
                 let viewControllerToPresent = self.storyboard!.instantiateViewControllerWithIdentifier("UserProfileStickyController") as! UserProfileStickyController
                 viewControllerToPresent.user_id = object_id
+                viewControllerToPresent.is_friend = params["is_friend"] as! Bool
+                viewControllerToPresent.operation_id = params["operation_id"] as! Int
                 self.navigationController?.pushViewController(viewControllerToPresent, animated: true)
                 
             }

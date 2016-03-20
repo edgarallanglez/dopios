@@ -56,6 +56,15 @@ class BranchRankingViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        let model: PeopleModel = ranking_array[indexPath.row]
+        
+        let view_controller = self.storyboard!.instantiateViewControllerWithIdentifier("UserProfileStickyController") as! UserProfileStickyController
+        view_controller.user_id = model.user_id
+        view_controller.is_friend = model.is_friend
+        view_controller.operation_id = model.operation_id!
+        view_controller.person = model
+        self.parent_view.navigationController?.pushViewController(view_controller, animated: true)
+
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -95,8 +104,9 @@ class BranchRankingViewController: UITableViewController {
                 let level = subJson["level"].int ?? 0
                 let exp = subJson["exp"].double ?? 0
                 let operation_id = subJson["operation_id"].int ?? 5
+                let is_friend = subJson["is_friend"].bool!
                 
-                let model = PeopleModel(names: names, surnames: surnames, user_id: user_id, birth_date: birth_date, facebook_key: facebook_key, privacy_status: privacy_status, main_image: main_image, total_used: total_used, level: level, exp: exp, operation_id: operation_id)
+                let model = PeopleModel(names: names, surnames: surnames, user_id: user_id, birth_date: birth_date, facebook_key: facebook_key, privacy_status: privacy_status, main_image: main_image, total_used: total_used, level: level, exp: exp, is_friend: is_friend, operation_id: operation_id)
                 
                 self.ranking_array.append(model)
             }
@@ -143,8 +153,9 @@ class BranchRankingViewController: UITableViewController {
                     let level = subJson["level"].int!
                     let exp = subJson["exp"].double!
                     let operation_id = subJson["operation_id"].int ?? 5
+                    let is_friend = subJson["is_friend"].bool!
                     
-                    let model = PeopleModel(names: names, surnames: surnames, user_id: user_id, birth_date: birth_date, facebook_key: facebook_key, privacy_status: privacy_status, main_image: main_image, total_used: total_used, level: level, exp: exp, operation_id: operation_id)
+                    let model = PeopleModel(names: names, surnames: surnames, user_id: user_id, birth_date: birth_date, facebook_key: facebook_key, privacy_status: privacy_status, main_image: main_image, total_used: total_used, level: level, exp: exp, is_friend: is_friend, operation_id: operation_id)
                     
                     self.ranking_array.append(model)
                     self.new_data = true
@@ -181,6 +192,5 @@ class BranchRankingViewController: UITableViewController {
             }
         })
     }
-    
 }
 
