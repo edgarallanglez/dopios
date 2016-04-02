@@ -93,7 +93,7 @@ class BranchRankingViewController: UITableViewController {
             for (_, subJson): (String, JSON) in json["data"] {
                 let names = subJson["names"].string!
                 let surnames = subJson["surnames"].string!
-                let facebook_key = subJson["facebook_key"].string!
+                let facebook_key = subJson["facebook_key"].string ?? "No Facebook Key"
                 let user_id = subJson["user_id"].int!
                 let company_id = subJson["company_id"].int ?? 0
 //                let branch_id =  subJson["branch_id" ].int!
