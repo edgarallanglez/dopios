@@ -26,7 +26,7 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
     }
     
     func validateSession() {
-        self.loginView.readPermissions = ["public_profile", "email", "user_friends", "user_birthday"]
+        self.loginView.readPermissions = ["public_profile", "email", "user_friends", "user_birthday", "gender"]
         self.loginView.delegate = self
         if (FBSDKAccessToken.currentAccessToken() != nil) {
             self.getFBUserData()
@@ -42,7 +42,7 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
     
     
     func getFBUserData() {
-        let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, middle_name, last_name, email, birthday"])
+        let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, middle_name, last_name, email, birthday, gender"])
         graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
             
             if ((error) != nil) {
@@ -52,6 +52,7 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
                 let userEmail = json["email"].string ?? ""
                 let birthday = json["birthday"].string ?? "2015-01-01"
                 let middle_name = json["middle_name"].string ?? ""
+                let gender = json["gender"].string ?? ""
                 print("\(birthday )")
         
                 let params:[String: String] = [
@@ -60,6 +61,7 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
                     "surnames": json["last_name"].string!,
                     "birth_date" : birthday,
                     "email": userEmail,
+                    "gender": gender,
                     "main_image":"https://graph.facebook.com/\(json["id"].string!)/picture?type=large"]
                 
                 self.socialLogin("facebook", params: params)

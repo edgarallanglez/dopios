@@ -37,8 +37,8 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tvf-aj-Usd">
                             <rect key="frame" x="0.0" y="58" width="600" height="170"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j1t-e9-jfI">
-                                    <rect key="frame" x="293" y="137" width="14" height="28"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j1t-e9-jfI">
+                                    <rect key="frame" x="290" y="138" width="20" height="27"/>
                                     <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="23"/>
                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
@@ -71,27 +71,23 @@
                                 <constraint firstAttribute="bottom" secondItem="j1t-e9-jfI" secondAttribute="bottom" constant="5" id="SEI-Wi-Tky"/>
                             </constraints>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vnf-zr-owF">
-                            <rect key="frame" x="560" y="250" width="25" height="25"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vnf-zr-owF">
+                            <rect key="frame" x="535" y="225" width="50" height="50"/>
+                            <color key="backgroundColor" red="0.12941176469999999" green="0.58823529409999997" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="25" id="E2P-O1-iaU"/>
-                                <constraint firstAttribute="width" constant="25" id="wuu-jp-C9X"/>
+                                <constraint firstAttribute="width" constant="50" id="aeD-5f-88C"/>
+                                <constraint firstAttribute="height" constant="50" id="x39-6j-OwQ"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="13"/>
-                            <inset key="contentEdgeInsets" minX="3" minY="3" maxX="3" maxY="3"/>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <inset key="contentEdgeInsets" minX="18" minY="18" maxX="18" maxY="18"/>
+                            <size key="titleShadowOffset" width="5" height="5"/>
                             <state key="normal" image="follow-icon">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                    <integer key="value" value="3"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                    <integer key="value" value="1"/>
-                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="NO"/>
                             </userDefinedRuntimeAttributes>
                             <variation key="widthClass=compact" fixedFrame="YES">
                                 <rect key="frame" x="170" y="175" width="87" height="30"/>
@@ -128,12 +124,12 @@
                 <outlet property="branch_logo" destination="ph0-mH-WMX" id="AXF-rg-V4F"/>
                 <outlet property="branch_name" destination="j1t-e9-jfI" id="0MU-k1-o65"/>
                 <outlet property="follow_button" destination="vnf-zr-owF" id="Z1m-rv-ipT"/>
-                <outlet property="follow_button_width" destination="wuu-jp-C9X" id="ud0-pi-A9b"/>
+                <outlet property="follow_button_width" destination="aeD-5f-88C" id="UQK-Se-z7M"/>
             </connections>
             <point key="canvasLocation" x="230" y="33.5"/>
         </view>
     </objects>
     <resources>
-        <image name="follow-icon" width="66" height="66"/>
+        <image name="follow-icon" width="42" height="42"/>
     </resources>
 </document>

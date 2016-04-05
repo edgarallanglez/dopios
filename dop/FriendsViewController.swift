@@ -134,8 +134,9 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
                     let facebook_key = subJson["facebook_key"].string ?? ""
                     let level = subJson["level"].int!
                     let exp = subJson["exp"].double!
+                    let operation_id = subJson["operation_id"].int ?? 5
                     
-                    let model = PeopleModel(friend_id: friend_id, user_id: user_id, names: user_name, surnames: user_surnames, main_image: main_image, is_friend: friend, birth_date: birth_date, privacy_status: privacy_status, facebook_key: facebook_key, level: level, exp: exp)
+                    let model = PeopleModel(friend_id: friend_id, user_id: user_id, names: user_name, surnames: user_surnames, main_image: main_image, is_friend: friend, birth_date: birth_date, privacy_status: privacy_status, facebook_key: facebook_key, level: level, exp: exp, operation_id: operation_id)
                     
                     self.friends.append(model)
                 }
@@ -168,9 +169,10 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
                     let facebook_key = subJson["facebook_key"].string ?? ""
                     let level = subJson["level"].int!
                     let exp = subJson["exp"].double!
+                    let operation_id = subJson["operation_id"].int ?? 5
                     
                     
-                    let model = PeopleModel(friend_id: friend_id, user_id: user_id, names: user_name, surnames: user_surnames, main_image: main_image, is_friend: friend, birth_date: birth_date, privacy_status: privacy_status, facebook_key: facebook_key, level: level, exp: exp)
+                    let model = PeopleModel(friend_id: friend_id, user_id: user_id, names: user_name, surnames: user_surnames, main_image: main_image, is_friend: friend, birth_date: birth_date, privacy_status: privacy_status, facebook_key: facebook_key, level: level, exp: exp, operation_id: operation_id)
                     
                     self.following.append(model)
                 }
@@ -241,10 +243,9 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
                 view.user_id = model.user_id
                 view.user_image_path = model.main_image
                 view.user_image = cell.user_image
-//                let person = PeopleModel(names:  surnames: , user_id: , birth_date: model.birth_date, facebook_key: model.facebook_key, privacy_status: model.privacy_status, main_image: model.main_image, is_friend: model.is_friend)
-//                
-//                PeopleModel(names: model.names, surnames: model.surnames, user_id: model.user_id, birth_date: <#T##String?#>, facebook_key: <#T##String?#>, privacy_status: <#T##Int#>, main_image: <#T##String?#>, is_friend: <#T##Bool#>, level: <#T##Int#>, exp: <#T##Double#>)
                 view.person = model
+                view.is_friend = model.is_friend
+                view.operation_id = model.operation_id!
                 view.user_name = model.names
             }
         }

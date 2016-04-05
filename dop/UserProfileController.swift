@@ -83,6 +83,17 @@ class UserProfileController: NSObject {
         })
     }
     
+    class func unfollowFriendWithSuccess(params: [String:AnyObject], success succeed: ((data: NSData!) -> Void), failure errorFound: ((data: NSError?) -> Void)) {
+        let url = "\(Utilities.dopURL)user/friends/unfollow"
+        Utilities.sendDataToURL(NSURL(string: url)!, method:"POST", params: params, completion:{(data, error) -> Void in
+            if let urlData = data {
+                succeed(data: urlData)
+            }else{
+                errorFound(data: error)
+            }
+        })
+    }
+    
     class func getAllBranchesFollowedWithSuccess(user_id: Int, success succeed: ((data: NSData!) -> Void), failure errorFound: ((data: NSError?) -> Void)) {
         let url = "\(Utilities.dopURL)company/branch/\(user_id)/following/get"
         Utilities.loadDataFromURL(NSURL(string: url)!, completion:{(data, error) -> Void in

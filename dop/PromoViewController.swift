@@ -255,38 +255,52 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
         return size
     }
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+
+//        collectionView.performBatchUpdates({ () -> Void in
+//            //Array of the data which you need to deleted from collection view
+//            let indexPaths = [NSIndexPath]()
+//            //Delete those entery from the data base.
+//            
+//            //TODO: Delete the information from database
+//            self.coupons.removeAtIndex(indexPath.row)
+//            self.CouponsCollectionView.deleteItemsAtIndexPaths([indexPath])
+//            
+//        }, completion:nil)
         
-        collectionView.performBatchUpdates({ () -> Void in
-            //Array of the data which you need to deleted from collection view
-            let indexPaths = [NSIndexPath]()
-            //Delete those entery from the data base.
-            
-            //TODO: Delete the information from database
-            self.coupons.removeAtIndex(indexPath.row)
-            self.CouponsCollectionView.deleteItemsAtIndexPaths([indexPath])
-            
-        }, completion:nil)
-        
-        /*let cell:UICollectionViewCell!
+        let cell: UICollectionViewCell!
         
         if promoSegmentedController.selectedIndex == 0 {
             cell = self.CouponsCollectionView.cellForItemAtIndexPath(indexPath)
             selected_coupon = self.coupons[indexPath.row] as Coupon
-        }else{
+        } else {
             cell = self.myCouponsCollectionView.cellForItemAtIndexPath(indexPath)
             selected_coupon = self.myCoupons[indexPath.row] as Coupon
         }
+    
+        let modal:ModalViewController = ModalViewController(currentView: self, type: ModalViewControllerType.CouponDetail)
+        modal.willPresentCompletionHandler = { vc in
+            let navigationController = vc as! SimpleModalViewController
+            navigationController.coupon = self.selected_coupon
+        }
         
-            let modal:ModalViewController = ModalViewController(currentView: self, type: ModalViewControllerType.CouponDetail)
-            modal.willPresentCompletionHandler = { vc in
-                let navigationController = vc as! SimpleModalViewController
-                navigationController.coupon = self.selected_coupon
-            }
-            modal.delegate = self
-            modal.presentAnimated(true, completionHandler: nil)
-        }*/
+        setViewCount(selected_coupon.id)
+        modal.delegate = self
+        modal.presentAnimated(true, completionHandler: nil)
+        
         
      
+    }
+
+    func setViewCount(coupon_id: Int) {
+        let params: [String: AnyObject] = ["coupon_id": coupon_id]
+        CouponController.viewCouponWithSuccess(params, success: { (couponsData) -> Void in
+            let json: JSON = JSON(couponsData)
+            print(json)
+            },
+            failure: { (couponsData) -> Void in
+                print("couponsData")
+            }
+        )
     }
 
     override func didReceiveMemoryWarning() {

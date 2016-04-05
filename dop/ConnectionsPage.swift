@@ -51,6 +51,12 @@ class ConnectionsPage: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
+        let model: ConnectionModel = self.connection_array[indexPath.row]
+        let view_controller = self.storyboard!.instantiateViewControllerWithIdentifier("BranchProfileStickyController") as! BranchProfileStickyController
+        view_controller.branch_id = model.branch_id
+        //var rootViewController = self.window!.rootViewController as UINavigationController
+        self.parent_view.navigationController?.pushViewController(view_controller, animated: true)
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -180,5 +186,14 @@ class ConnectionsPage: UITableViewController {
     override func viewDidLayoutSubviews() {
         self.view.layoutIfNeeded()
     }
+    
+//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+//        if let cell = sender as? ConnectionCell {
+//            let i = tableView.indexPathForCell(cell)!.row
+//            let model = self.connection_array[i]
+//            let destination_view = segue.destinationViewController as! BranchProfileStickyController
+//            destination_view.branch_id = model.branch_id
+//        }
+//    }
     
 }

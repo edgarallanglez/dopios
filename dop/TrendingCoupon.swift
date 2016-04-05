@@ -103,6 +103,8 @@ class TrendingCoupon: UIView, ModalDelegate {
     }
     
     func tapCoupon(sender: UITapGestureRecognizer){
+        
+        setViewCount()
         let modal: ModalViewController = ModalViewController(currentView: self.viewController!, type: ModalViewControllerType.CouponDetail)
         
         dispatch_async(dispatch_get_main_queue()) {
@@ -145,6 +147,7 @@ class TrendingCoupon: UIView, ModalDelegate {
         self.coupon.taken = false
 
     }
+    
     func setTakeCoupon(sender: UITapGestureRecognizer) {
         
         let params:[String: AnyObject] = [
@@ -235,6 +238,18 @@ class TrendingCoupon: UIView, ModalDelegate {
                 }
             }
         }
+    }
+    
+    func setViewCount() {
+        let params: [String: AnyObject] = ["coupon_id": self.coupon.id]
+        CouponController.viewCouponWithSuccess(params, success: { (couponsData) -> Void in
+            let json: JSON = JSON(couponsData)
+            print(json)
+            },
+            failure: { (couponsData) -> Void in
+                print("couponsData")
+            }
+        )
     }
 
     

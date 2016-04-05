@@ -203,11 +203,12 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
         super.viewDidDisappear(true)
     }
     
-    func presentView(notification:NSNotification){
+    func presentView(notification: NSNotification){
         if(searchViewIsOpen){
             searchViewIsSegue = true
             
-            let object_id = notification.object as! Int
+            let params = notification.object as! NSDictionary
+            let object_id = params["id"] as! Int
             
             if vc.searchSegmentedController.selectedIndex == 0 {
                 let viewControllerToPresent = self.storyboard!.instantiateViewControllerWithIdentifier("BranchProfileStickyController") as! BranchProfileStickyController
@@ -218,6 +219,8 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
             if vc.searchSegmentedController.selectedIndex == 1 {
                 let viewControllerToPresent = self.storyboard!.instantiateViewControllerWithIdentifier("UserProfileStickyController") as! UserProfileStickyController
                 viewControllerToPresent.user_id = object_id
+                viewControllerToPresent.is_friend = params["is_friend"] as! Bool
+                viewControllerToPresent.operation_id = params["operation_id"] as! Int
                 self.navigationController?.pushViewController(viewControllerToPresent, animated: true)
                 
             }

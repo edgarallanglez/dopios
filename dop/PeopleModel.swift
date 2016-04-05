@@ -21,6 +21,7 @@ class PeopleModel: NSObject {
     var is_friend: Bool?
     let total_used: Int?
     let friend_id: Int?
+    var operation_id: Int?
     
     // simple people constructor
     init(names: String!, surnames: String!, user_id: Int!, birth_date: String?, facebook_key: String?, privacy_status: Int, main_image: String?, level: Int, exp: Double) {
@@ -37,10 +38,11 @@ class PeopleModel: NSObject {
         self.is_friend = nil
         self.total_used = nil
         self.friend_id = nil
+        self.operation_id = nil
     }
     
     // friend people constructor
-    init(names: String!, surnames: String!, user_id: Int!, birth_date: String?, facebook_key: String?, privacy_status: Int, main_image: String?, is_friend: Bool, level: Int, exp: Double) {
+    init(names: String!, surnames: String!, user_id: Int!, birth_date: String?, facebook_key: String?, privacy_status: Int, main_image: String?, is_friend: Bool, level: Int, exp: Double, operation_id: Int!) {
         
         self.names = names
         self.surnames = surnames
@@ -54,10 +56,12 @@ class PeopleModel: NSObject {
         self.exp = exp
         self.total_used = nil
         self.friend_id = nil
+        self.operation_id = operation_id
+
     }
     
     // ranked by used people constructor
-    init(names: String!, surnames: String!, user_id: Int!, birth_date: String?, facebook_key: String?, privacy_status: Int, main_image: String?, total_used: Int, level: Int, exp: Double) {
+    init(names: String!, surnames: String!, user_id: Int!, birth_date: String?, facebook_key: String?, privacy_status: Int, main_image: String?, total_used: Int, level: Int, exp: Double, is_friend: Bool! ,operation_id: Int!) {
         
         self.names = names
         self.surnames = surnames
@@ -66,14 +70,15 @@ class PeopleModel: NSObject {
         self.facebook_key = facebook_key ?? ""
         self.privacy_status = privacy_status
         self.main_image = main_image ?? ""
-        self.is_friend = nil
+        self.is_friend = is_friend
         self.total_used = total_used
         self.level = level
         self.exp = exp
         self.friend_id = nil
+        self.operation_id = operation_id
     }
     
-    init(friend_id: Int!, user_id: Int!,names: String!, surnames: String!, main_image: String!, is_friend: Bool, birth_date: String!, privacy_status: Int!, facebook_key: String!, level: Int, exp: Double) {
+    init(friend_id: Int!, user_id: Int!,names: String!, surnames: String!, main_image: String!, is_friend: Bool, birth_date: String!, privacy_status: Int!, facebook_key: String!, level: Int, exp: Double, operation_id: Int!) {
         self.friend_id = friend_id ?? 0
         self.user_id = user_id
         self.names = names ?? ""
@@ -86,5 +91,6 @@ class PeopleModel: NSObject {
         self.level = level
         self.exp = exp
         self.total_used = nil
+        self.operation_id = operation_id
     }
 }

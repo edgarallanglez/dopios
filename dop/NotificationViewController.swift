@@ -8,9 +8,6 @@
 
 import UIKit
 
-
-
-
 class NotificationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, TTTAttributedLabelDelegate {
     @IBOutlet var notificationButton: UIButton!
 

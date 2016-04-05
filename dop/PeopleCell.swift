@@ -12,6 +12,7 @@ class PeopleCell: UITableViewCell {
     
     @IBOutlet weak var user_image: UIImageView!
     @IBOutlet weak var user_name: UILabel!
+    @IBOutlet weak var ranking_position: KAProgressLabel!
 
     
     var viewController: UIViewController?
@@ -33,6 +34,23 @@ class PeopleCell: UITableViewCell {
 
         self.viewController = viewController
         
+    }
+    
+    func setRankingPosition(index: Int) {
+        ranking_position.trackWidth = 0
+        ranking_position.alpha = 1
+        ranking_position.startDegree = 0
+        
+        switch index {
+            case 0: ranking_position.progressColor = Utilities.dop_gold_color
+            case 1: ranking_position.progressColor = UIColor.grayColor()
+            case 2: ranking_position.progressColor = Utilities.dop_bronze_color
+        default: break
+        }
+        
+        ranking_position.progressWidth = 2
+ 
+        ranking_position.setEndDegree(CGFloat(360), timing: TPPropertyAnimationTimingEaseInEaseOut, duration: 1.5, delay: 0)
     }
     
 }

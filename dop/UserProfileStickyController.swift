@@ -24,6 +24,8 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
     var user_name: String!
     var user_image: UIImageView!
     var user_image_path: String = ""
+    var is_friend: Bool!
+    var operation_id: Int = 0
     var person: PeopleModel!
     var page_index: Int!
     var segmented_controller: UserProfileSegmentedController?
@@ -35,8 +37,7 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
     var searchView: UIView!
     var searchViewIsOpen: Bool = false
     var searchViewIsSegue: Bool = false
-    
-    var cancelSearchButton:UIBarButtonItem!
+    var cancelSearchButton: UIBarButtonItem!
     
     private var layout: CSStickyHeaderFlowLayout? {
         return self.collectionView?.collectionViewLayout as? CSStickyHeaderFlowLayout
@@ -100,8 +101,8 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
         
         
         
-        for subView in self.searchBar.subviews{
-            for subsubView in subView.subviews{
+        for subView in self.searchBar.subviews {
+            for subsubView in subView.subviews {
                 if let textField = subsubView as? UITextField{
                     textField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("Buscar", comment: ""), attributes: [NSForegroundColorAttributeName: Utilities.extraLightGrayColor])
                     textField.textColor = UIColor.whiteColor()
@@ -159,7 +160,9 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
                 custom_cell.setPaginator(self)
                 self.new_height = custom_cell.dynamic_height
                 return custom_cell
-            } else { cell = collectionView.dequeueReusableCellWithReuseIdentifier("locked_identifier", forIndexPath: indexPath) }
+            } else { cell = collectionView.dequeueReusableCellWithReuseIdentifier("locked_identifier", forIndexPath: indexPath)
+                cell.alpha = 1
+            }
         } else { cell = collectionView.dequeueReusableCellWithReuseIdentifier("locked_identifier", forIndexPath: indexPath) }
         
         return cell
@@ -204,8 +207,6 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
         
     }
     func checkForProfile() {
-        print(Constanst.Levels["1"])
-    
         UserProfileController.getUserProfile(user_id, success: { (profileData) -> Void in
             let json = JSON(data: profileData)
             for (_, subJson): (String, JSON) in json["data"] {
@@ -221,12 +222,11 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
                 //let total_used = subJson["total_used"].int!
                 
                 let model = PeopleModel(names: names, surnames: surnames, user_id: user_id, birth_date: birth_date, facebook_key: facebook_key, privacy_status: privacy_status, main_image: main_image, level: level, exp: exp)
-
+                model.is_friend = self.is_friend
                 self.person = model
             }
             
             dispatch_async(dispatch_get_main_queue(), {
-                print("Person name \(self.person.names)")
                 self.setupProfileDetail()
                 
             })
@@ -285,11 +285,12 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
         self.collectionView?.setContentOffset(CGPointZero, animated: false)
     }
     
-    func presentView(notification:NSNotification){
+    func presentView(notification: NSNotification){
         if(searchViewIsOpen){
             searchViewIsSegue = true
             
-            let object_id = notification.object as! Int
+            let params = notification.object as! NSDictionary
+            let object_id = params["id"] as! Int
             
             if vc.searchSegmentedController.selectedIndex == 0 {
                 let viewControllerToPresent = self.storyboard!.instantiateViewControllerWithIdentifier("BranchProfileStickyController") as! BranchProfileStickyController
@@ -300,6 +301,8 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
             if vc.searchSegmentedController.selectedIndex == 1 {
                 let viewControllerToPresent = self.storyboard!.instantiateViewControllerWithIdentifier("UserProfileStickyController") as! UserProfileStickyController
                 viewControllerToPresent.user_id = object_id
+                viewControllerToPresent.is_friend = params["is_friend"] as! Bool
+                viewControllerToPresent.operation_id = params["operation_id"] as! Int
                 self.navigationController?.pushViewController(viewControllerToPresent, animated: true)
                 
             }

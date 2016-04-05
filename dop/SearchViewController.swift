@@ -252,11 +252,12 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
                         let facebook_key = subJson["facebok_key"].string ?? ""
                         let privacy_status = subJson["privacy_status"].int!
                         let main_image = subJson["main_image"].string!
-                        let isFriend = subJson["friend"].bool!
+                        let is_friend = subJson["friend"].bool!
                         let level = subJson["level"].int!
                         let exp = subJson["exp"].double!
+                        let operation_id = subJson["operation_id"].int ?? 5
                         
-                        let model = PeopleModel(names: names, surnames: surnames, user_id: user_id, birth_date: birth_date, facebook_key: facebook_key, privacy_status: privacy_status, main_image: main_image, is_friend: isFriend, level: level, exp: exp)
+                        let model = PeopleModel(names: names, surnames: surnames, user_id: user_id, birth_date: birth_date, facebook_key: facebook_key, privacy_status: privacy_status, main_image: main_image, is_friend: is_friend, level: level, exp: exp, operation_id: operation_id)
                         
                         self.peopleFiltered.append(model)
                     }
@@ -282,17 +283,18 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if(!searching){
-            
+            var params = [String: AnyObject]()
             if(tableView == self.tableView && filtered.count>0){
                  let model = self.filtered[indexPath.row]
-                
-                NSNotificationCenter.defaultCenter().postNotificationName("performSegue", object: model.id)
+                params = ["id": model.id]
+                 NSNotificationCenter.defaultCenter().postNotificationName("performSegue", object: params)
 
-            }else
-                if(peopleFiltered.count > 0){
-                 let model = self.peopleFiltered[indexPath.row] 
-                NSNotificationCenter.defaultCenter().postNotificationName("performSegue", object: model.user_id)
-
+            } else if peopleFiltered.count > 0 {
+                let model = self.peopleFiltered[indexPath.row]
+                params = ["id": model.user_id,
+                          "is_friend": model.is_friend!,
+                          "operation_id": model.operation_id! ]
+                NSNotificationCenter.defaultCenter().postNotificationName("performSegue", object: params)
             }
         }
     }
@@ -313,28 +315,28 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
 
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        /*if let cell = sender as? SearchCell {
-            let i = tableView.indexPathForCell(cell)!.row
-            
-            if segue.identifier == "branchProfile" {
-                let model = self.filtered[i]
-                let view = segue.destinationViewController as! BranchProfileStickyController
-                view.branch_id = model.id
-            }
-        }
-        
-        if let cell = sender as? PeopleCell {
-            let i = peopleTableView.indexPathForCell(cell)!.row
-            
-            if segue.identifier == "userProfile" {
-                let model = self.peopleFiltered[i]
-                let view = segue.destinationViewController as! UserProfileStickyController
-                view.user_id = model.user_id
-                view.person = model
-                //view.user_image.image = self.cachedImages["Cell\(i)"]
-            }
-        }*/
-    }
+//        if let cell = sender as? SearchCell {
+//            let i = tableView.indexPathForCell(cell)!.row
+//            
+//            if segue.identifier == "branchProfile" {
+//                let model = self.filtered[i]
+//                let view = segue.destinationViewController as! BranchProfileStickyController
+//                view.branch_id = model.id
+//            }
+//        }
+//        
+//        if let cell = sender as? PeopleCell {
+//            let i = peopleTableView.indexPathForCell(cell)!.row
+//            
+//            if segue.identifier == "userProfile" {
+//                let model = self.peopleFiltered[i]
+//                let view = segue.destinationViewController as! UserProfileStickyController
+//                view.user_id = model.user_id
+//                view.person = model
+//                view.user_image.image = self.cachedImages["Cell\(i)"]
+//            }
+//        }
+   }
     
 
 }
