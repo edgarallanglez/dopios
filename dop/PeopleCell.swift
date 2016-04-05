@@ -45,7 +45,8 @@ class PeopleCell: UITableViewCell {
             case 0: ranking_position.progressColor = Utilities.dop_gold_color
             case 1: ranking_position.progressColor = UIColor.grayColor()
             case 2: ranking_position.progressColor = Utilities.dop_bronze_color
-        default: break
+        default: ranking_position.progressColor = UIColor.whiteColor()
+        
         }
         
         ranking_position.progressWidth = 2

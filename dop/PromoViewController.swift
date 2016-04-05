@@ -349,7 +349,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                     let category_id = subJson["category_id"].int!
                     let available = subJson["available"].int!
                     let taken = subJson["taken"].bool!
-                    let start_date = subJson["start_date"].string!
+                    let start_date = subJson["start_date"].string ?? ""
                     
                     let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: category_id, available: available, taken: taken, start_date: start_date)
                 
