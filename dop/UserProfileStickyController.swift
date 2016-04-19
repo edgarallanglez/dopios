@@ -65,9 +65,14 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
         //self.collectionView?.delegate = self
         checkForProfile()
         
-        drawBar();
+        drawBar()
         
     }
+    
+    override func viewDidDisappear(animated: Bool) {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
     override func viewDidAppear(animated: Bool) {
         if User.newNotification {
             self.notificationButton.image = UIImage(named: "notification-badge")
@@ -328,6 +333,7 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
         }
         return true
     }
+    
     func cancelSearch(){
         if(searchViewIsOpen == true){
             searchView.removeFromSuperview()
@@ -342,6 +348,7 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
             vc.tableView.reloadData()
         }
     }
+    
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         if(searchViewIsOpen == true && vc.searchScrollView.hidden == true){
             vc.searchScrollView.hidden = false

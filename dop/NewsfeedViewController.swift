@@ -17,6 +17,7 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
     var refreshControl: UIRefreshControl!
     
     var newsfeedTemporary = [NewsfeedNote]()
+    var people_array = [PeopleModel]()
     
     let limit:Int = 6
     var offset:Int = 0
@@ -153,13 +154,13 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
             let json = JSON(data: friendsData)
             
             for (index, subJson): (String, JSON) in json["data"] {
-                let client_coupon_id = subJson["clients_coupon_id"].int
-                let friend_id = subJson["friends_id"].string
-                let exchange_date = subJson["exchange_date"].string
-                let main_image = subJson["main_image"].string
-                let names = subJson["names"].string
+                var client_coupon_id = subJson["clients_coupon_id"].int
+                var friend_id = subJson["friends_id"].string
+                var exchange_date = subJson["exchange_date"].string
+                var main_image = subJson["main_image"].string
+                var names = subJson["names"].string
                 let company_id = subJson["company_id"].int ?? 0
-                let longitude = subJson["longitude"].string
+                var longitude = subJson["longitude"].string
                 let latitude = subJson["latitude"].string
                 let branch_id =  subJson["branch_id" ].int
                 let coupon_id =  subJson["coupon_id"].string
@@ -170,16 +171,23 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
                 let branch_name =  subJson["branch_name"].string
                 let total_likes =  subJson["total_likes"].int
                 let user_like =  subJson["user_like"].int
-                let date =  subJson["used_date"].string!
-                var formatedDate =  subJson["used_date"].string!
+                let date =  subJson["used_date"].string
+                let level = subJson["level"].int ?? 0
+                let exp = subJson["exp"].double ?? 0
+                let is_friend = subJson["is_friend"].bool!
+                let operation_id = subJson["operation_id"].int ?? 5
+                let privacy_status = subJson["privacy_status"].int ?? 0
+                var formated_date = subJson["used_date"].string!
+                
+                let person_model = PeopleModel(names: names, surnames: surnames, user_id: user_id, birth_date: "", facebook_key: "", privacy_status: privacy_status, main_image: main_image, is_friend: is_friend, level: level, exp: exp, operation_id: operation_id)
+                
+                self.people_array.append(person_model)
                 
                 let separators = NSCharacterSet(charactersInString: "T+")
-                let parts = formatedDate.componentsSeparatedByCharactersInSet(separators)
-                formatedDate = "\(parts[0]) \(parts[1])"
+                let parts = formated_date.componentsSeparatedByCharactersInSet(separators)
+                formated_date = "\(parts[0]) \(parts[1])"
 
-                let model = NewsfeedNote(client_coupon_id:client_coupon_id,friend_id: friend_id, user_id: user_id, branch_id: branch_id, coupon_name: name, branch_name: branch_name, names: names, surnames: surnames, user_image: main_image, company_id: company_id, branch_image: logo, total_likes:total_likes,user_like: user_like, date:date, formatedDate: formatedDate)
-                
-                print(model.date)
+                let model = NewsfeedNote(client_coupon_id:client_coupon_id,friend_id: friend_id, user_id: user_id, branch_id: branch_id, coupon_name: name, branch_name: branch_name, names: names, surnames: surnames, user_image: main_image, company_id: company_id, branch_image: logo, total_likes:total_likes,user_like: user_like, date:date, formatedDate: formated_date)
                 
                 self.newsfeedTemporary.append(model)
                 
@@ -250,9 +258,17 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
                 let total_likes =  subJson["total_likes"].int
                 let user_like =  subJson["user_like"].int
                 let date =  subJson["used_date"].string
+                let level = subJson["level"].int ?? 0
+                let exp = subJson["exp"].double ?? 0
+                let is_friend = subJson["is_friend"].bool!
+                let operation_id = subJson["operation_id"].int ?? 5
+                let privacy_status = subJson["privacy_status"].int ?? 0
                 
+                let person_model = PeopleModel(names: names, surnames: surnames, user_id: user_id, birth_date: "", facebook_key: "", privacy_status: privacy_status, main_image: main_image, is_friend: is_friend, level: level, exp: exp, operation_id: operation_id)
                 
-                let model = NewsfeedNote(client_coupon_id:client_coupon_id,friend_id: friend_id, user_id: user_id, branch_id: branch_id, coupon_name: name, branch_name: branch_name, names: names, surnames: surnames, user_image: main_image, company_id: company_id, branch_image: logo, total_likes:total_likes,user_like: user_like, date:date, formatedDate: "")
+                self.people_array.append(person_model)
+                
+                let model = NewsfeedNote(client_coupon_id: client_coupon_id, friend_id: friend_id, user_id: user_id, branch_id: branch_id, coupon_name: name, branch_name: branch_name, names: names, surnames: surnames, user_image: main_image, company_id: company_id, branch_image: logo, total_likes:total_likes,user_like: user_like, date:date, formatedDate: "")
                 
                 self.newsfeedTemporary.append(model)
                 
@@ -293,21 +309,30 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
             cell.layoutMargins = UIEdgeInsetsZero
         }
     }
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let cell = sender as? NewsfeedCell {
-
-            let i = tableView.indexPathForCell(cell)!.row
-            let model = self.newsfeed[i]
-
-            if segue.identifier == "userProfile" {
-                let vc = segue.destinationViewController as! UserProfileStickyController
-                vc.user_id = model.user_id
-                vc.user_image_path = model.user_image
-            }
-        }
-    }
+//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+//        if let cell = sender as? NewsfeedCell {
+//
+//            let i = tableView.indexPathForCell(cell)!.row
+//            let model = self.newsfeed[i]
+//
+//            if segue.identifier == "userProfile" {
+//                let vc = segue.destinationViewController as! UserProfileStickyController
+//                vc.user_id = model.user_id
+//                vc.user_image_path = model.user_image
+//            }
+//        }
+//    }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let person: PeopleModel = self.people_array[indexPath.row]
+        
+        
+        let view_controller = self.storyboard!.instantiateViewControllerWithIdentifier("UserProfileStickyController") as! UserProfileStickyController
+        view_controller.user_id = person.user_id
+        view_controller.is_friend = person.is_friend
+        view_controller.operation_id = person.operation_id!
+        view_controller.person = person
+        self.navigationController?.pushViewController(view_controller, animated: true)
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
     }
 

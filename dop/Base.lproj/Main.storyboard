@@ -252,6 +252,9 @@
                                     <constraint firstAttribute="centerX" secondItem="4x1-vM-hMg" secondAttribute="centerX" id="nPQ-n6-Wy2"/>
                                     <constraint firstAttribute="bottom" secondItem="4x1-vM-hMg" secondAttribute="bottom" id="ynl-hu-f2a"/>
                                 </constraints>
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="45" y="660" width="510" height="80"/>
+                                </variation>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="dop" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FO2-gI-3Ta">
                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
@@ -268,6 +271,9 @@
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="vsO-2Q-CNK" secondAttribute="height" multiplier="1:1" id="67t-Cx-tgy"/>
                                 </constraints>
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="180" y="120" width="240" height="240"/>
+                                </variation>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KTv-yl-i6u" customClass="MMMaterialDesignSpinner">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
@@ -282,7 +288,8 @@
                                         <exclude reference="nwB-ex-ibG"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact">
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="270" y="500" width="60" height="60"/>
                                     <mask key="constraints">
                                         <include reference="BTB-FK-QwB"/>
                                         <include reference="nwB-ex-ibG"/>
@@ -1823,7 +1830,6 @@
                     <connections>
                         <outlet property="main_loader" destination="VCY-2h-5fF" id="9FE-Pn-ydy"/>
                         <outlet property="tableView" destination="Wkj-oU-bl0" id="N82-px-WuG"/>
-                        <segue destination="cf5-lv-Mm7" kind="show" identifier="userProfile" id="ckc-bH-DVq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o4o-23-0wi" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4172,7 +4178,7 @@
                         <viewControllerLayoutGuide type="bottom" id="aDA-EY-rA8"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="sgE-PX-xd1">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="487"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No has tomado ninguna promoción aún" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YXf-Z9-RcB">
@@ -4702,10 +4708,10 @@
                                 <exclude reference="1Rc-5J-I71"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="3zq-4j-Jsp"/>
-                                <exclude reference="8u5-LV-oNE"/>
                                 <exclude reference="RQV-zU-8EE"/>
                                 <exclude reference="utk-QQ-0ll"/>
+                                <exclude reference="3zq-4j-Jsp"/>
+                                <exclude reference="8u5-LV-oNE"/>
                                 <exclude reference="1L5-Tf-Hm4"/>
                                 <exclude reference="HuT-cu-VV6"/>
                                 <exclude reference="hPL-ni-j66"/>
@@ -4731,10 +4737,10 @@
                                 <include reference="1Rc-5J-I71"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="3zq-4j-Jsp"/>
-                                <include reference="8u5-LV-oNE"/>
                                 <include reference="RQV-zU-8EE"/>
                                 <include reference="utk-QQ-0ll"/>
+                                <include reference="3zq-4j-Jsp"/>
+                                <include reference="8u5-LV-oNE"/>
                                 <include reference="1L5-Tf-Hm4"/>
                                 <include reference="HuT-cu-VV6"/>
                                 <include reference="hPL-ni-j66"/>
@@ -5610,7 +5616,7 @@
                                                     <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="ks7-cx-eSi">
                                                         <rect key="frame" x="20" y="20" width="39" height="37"/>
                                                         <color key="pageIndicatorTintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <color key="currentPageIndicatorTintColor" red="0.85098039219999999" green="0.015686274510000001" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="currentPageIndicatorTintColor" red="0.98431372549999996" green="0.1333333333" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
                                                     </pageControl>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -5919,10 +5925,10 @@
             </objects>
             <point key="canvasLocation" x="-564" y="1778"/>
         </scene>
-        <!--Notification View Controller-->
+        <!-- -->
         <scene sceneID="IEy-1X-rJT">
             <objects>
-                <viewController restorationIdentifier="NotificationsView" storyboardIdentifier="Notifications" title="Notification View Controller" hidesBottomBarWhenPushed="YES" id="3Xa-r8-h36" customClass="NotificationViewController" customModule="dop" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="NotificationsView" storyboardIdentifier="Notifications" title=" " hidesBottomBarWhenPushed="YES" id="3Xa-r8-h36" customClass="NotificationViewController" customModule="dop" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="NHT-Ra-8PJ"/>
                         <viewControllerLayoutGuide type="bottom" id="sDB-nV-JR4"/>
@@ -6252,18 +6258,18 @@
             </objects>
             <point key="canvasLocation" x="-528" y="978"/>
         </scene>
-        <!--UserProfileStickyController-->
+        <!--User Profile Sticky Controller-->
         <scene sceneID="aIp-0N-4pa">
             <objects>
-                <collectionViewController storyboardIdentifier="UserProfileStickyController" title="UserProfileStickyController" id="cf5-lv-Mm7" customClass="UserProfileStickyController" customModule="dop" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="UserProfileStickyController" id="cf5-lv-Mm7" customClass="UserProfileStickyController" customModule="dop" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="LZJ-9o-NLy">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="400" height="1200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <collectionViewLayout key="collectionViewLayout" id="G8Z-EP-wAC" customClass="CSStickyHeaderFlowLayout"/>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="page_identifier" id="pw3-sZ-d3k" customClass="UserPaginationViewController" customModule="dop" customModuleProvider="target">
-                                <rect key="frame" x="121" y="64" width="359" height="266"/>
+                                <rect key="frame" x="21" y="64" width="359" height="266"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="359" height="266"/>
@@ -6275,7 +6281,7 @@
                                 <size key="customSize" width="359" height="266"/>
                             </collectionViewCell>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="scaleAspectFit" reuseIdentifier="locked_identifier" id="Hh8-cv-CFQ">
-                                <rect key="frame" x="121" y="340" width="359" height="266"/>
+                                <rect key="frame" x="21" y="340" width="359" height="266"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="359" height="266"/>
@@ -8115,9 +8121,9 @@
     <inferredMetricsTieBreakers>
         <segue reference="8iK-Yr-WEc"/>
         <segue reference="njR-gH-Wm2"/>
-        <segue reference="Y2I-Nl-h09"/>
+        <segue reference="H7K-TF-KnO"/>
+        <segue reference="6GU-eX-p2e"/>
         <segue reference="AaG-PG-nLf"/>
-        <segue reference="jnx-ks-uxV"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

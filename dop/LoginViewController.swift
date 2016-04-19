@@ -38,7 +38,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
         locationManager.startUpdatingLocation()
         
         self.fbLoginView.delegate = self
-        self.fbLoginView.readPermissions = ["public_profile", "email", "user_friends", "user_birthday"]
+        self.fbLoginView.readPermissions = ["public_profile", "email", "user_friends", "user_birthday", "gender"]
         
         if (FBSDKAccessToken.currentAccessToken() != nil) {
             // User is already logged in, do work such as go to next view controller.
@@ -147,7 +147,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
     }
     
     func getFBUserData() {
-        let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, first_name, middle_name,last_name, email, birthday"])
+        let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, first_name, middle_name,last_name, email, birthday, gender"])
         graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
             let json: JSON = JSON(result)
             if ((error) != nil) {
@@ -158,6 +158,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
                 let birthday = json["birthday"].string ?? "2015-01-01"
                 let middle_name = json["middle_name"].string ?? ""
                 let first_name = json["first_name"].string ?? ""
+                let gender = json["gender"].string ?? ""
                 let names = "\(first_name) \(middle_name)"
                 print("\(birthday )")
                 
@@ -167,6 +168,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
                     "surnames": json["last_name"].string!,
                     "birth_date" : birthday,
                     "email": userEmail,
+                    "gender": gender,
                     "main_image":"https://graph.facebook.com/\(json["id"].string!)/picture?type=large"]
                 
                 self.socialLogin("facebook", params: params)

@@ -31,9 +31,7 @@ class PeopleCell: UITableViewCell {
     func loadItem(person: PeopleModel, viewController: UIViewController) {
         user_name.text = "\(person.names) \(person.surnames)"
 //        user_image.image = person.main_image
-
         self.viewController = viewController
-        
     }
     
     func setRankingPosition(index: Int) {
@@ -50,7 +48,6 @@ class PeopleCell: UITableViewCell {
         }
         
         ranking_position.progressWidth = 2
- 
         ranking_position.setEndDegree(CGFloat(360), timing: TPPropertyAnimationTimingEaseInEaseOut, duration: 1.5, delay: 0)
     }
     
