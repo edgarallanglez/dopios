@@ -4702,10 +4702,10 @@
                                 <exclude reference="1Rc-5J-I71"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="3zq-4j-Jsp"/>
-                                <exclude reference="8u5-LV-oNE"/>
                                 <exclude reference="RQV-zU-8EE"/>
                                 <exclude reference="utk-QQ-0ll"/>
+                                <exclude reference="3zq-4j-Jsp"/>
+                                <exclude reference="8u5-LV-oNE"/>
                                 <exclude reference="1L5-Tf-Hm4"/>
                                 <exclude reference="HuT-cu-VV6"/>
                                 <exclude reference="hPL-ni-j66"/>
@@ -4731,10 +4731,10 @@
                                 <include reference="1Rc-5J-I71"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="3zq-4j-Jsp"/>
-                                <include reference="8u5-LV-oNE"/>
                                 <include reference="RQV-zU-8EE"/>
                                 <include reference="utk-QQ-0ll"/>
+                                <include reference="3zq-4j-Jsp"/>
+                                <include reference="8u5-LV-oNE"/>
                                 <include reference="1L5-Tf-Hm4"/>
                                 <include reference="HuT-cu-VV6"/>
                                 <include reference="hPL-ni-j66"/>
@@ -5610,7 +5610,7 @@
                                                     <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="ks7-cx-eSi">
                                                         <rect key="frame" x="20" y="20" width="39" height="37"/>
                                                         <color key="pageIndicatorTintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <color key="currentPageIndicatorTintColor" red="0.85098039219999999" green="0.015686274510000001" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="currentPageIndicatorTintColor" red="0.98431372549999996" green="0.1333333333" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
                                                     </pageControl>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -5919,10 +5919,10 @@
             </objects>
             <point key="canvasLocation" x="-564" y="1778"/>
         </scene>
-        <!--Notification View Controller-->
+        <!-- -->
         <scene sceneID="IEy-1X-rJT">
             <objects>
-                <viewController restorationIdentifier="NotificationsView" storyboardIdentifier="Notifications" title="Notification View Controller" hidesBottomBarWhenPushed="YES" id="3Xa-r8-h36" customClass="NotificationViewController" customModule="dop" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="NotificationsView" storyboardIdentifier="Notifications" title=" " hidesBottomBarWhenPushed="YES" id="3Xa-r8-h36" customClass="NotificationViewController" customModule="dop" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="NHT-Ra-8PJ"/>
                         <viewControllerLayoutGuide type="bottom" id="sDB-nV-JR4"/>
@@ -6257,13 +6257,13 @@
             <objects>
                 <collectionViewController storyboardIdentifier="UserProfileStickyController" title="UserProfileStickyController" id="cf5-lv-Mm7" customClass="UserProfileStickyController" customModule="dop" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="LZJ-9o-NLy">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="400" height="1200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <collectionViewLayout key="collectionViewLayout" id="G8Z-EP-wAC" customClass="CSStickyHeaderFlowLayout"/>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="page_identifier" id="pw3-sZ-d3k" customClass="UserPaginationViewController" customModule="dop" customModuleProvider="target">
-                                <rect key="frame" x="121" y="64" width="359" height="266"/>
+                                <rect key="frame" x="21" y="64" width="359" height="266"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="359" height="266"/>
@@ -6275,7 +6275,7 @@
                                 <size key="customSize" width="359" height="266"/>
                             </collectionViewCell>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="scaleAspectFit" reuseIdentifier="locked_identifier" id="Hh8-cv-CFQ">
-                                <rect key="frame" x="121" y="340" width="359" height="266"/>
+                                <rect key="frame" x="21" y="340" width="359" height="266"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="359" height="266"/>
@@ -8113,11 +8113,11 @@
         <image name="twitter-logo" width="42" height="42"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Y2I-Nl-h09"/>
-        <segue reference="njR-gH-Wm2"/>
         <segue reference="8iK-Yr-WEc"/>
-        <segue reference="jnx-ks-uxV"/>
-        <segue reference="TKt-eX-Ulp"/>
+        <segue reference="njR-gH-Wm2"/>
+        <segue reference="Y2I-Nl-h09"/>
+        <segue reference="AaG-PG-nLf"/>
+        <segue reference="fpu-8Z-7Bb"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>
