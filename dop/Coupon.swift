@@ -90,4 +90,8 @@ class Coupon: NSObject {
         self.user_like = user_like
         self.total_likes = total_likes
     }
+    func setTakenCoupons(user_take: Bool!, available: Int!){
+        self.taken = user_take
+        self.available = available
+    }
 }

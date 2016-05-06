@@ -17,12 +17,16 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
     var firstTime: Bool = true
     var alert_array = [AlertModel]()
     var modal: ModalViewController!
+    
+    var notification: [String: AnyObject] = [:]
 
     @IBOutlet var loader: MMMaterialDesignSpinner!
     override func viewDidLoad() {
         super.viewDidLoad()
         loader.startAnimating()
         loader.lineWidth = 3.0
+        
+        
     }
     
     func validateSession() {
@@ -62,7 +66,9 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
                     "birth_date" : birthday,
                     "email": userEmail,
                     "gender": gender,
-                    "main_image":"https://graph.facebook.com/\(json["id"].string!)/picture?type=large"]
+                    "main_image":"https://graph.facebook.com/\(json["id"].string!)/picture?type=large",
+                    "device_os": "ios",
+                    "device_token" : User.deviceToken]
                 
                 self.socialLogin("facebook", params: params)
             }
@@ -146,6 +152,7 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
             
             dispatch_async(dispatch_get_main_queue(), {
                 //if (!User.activeSession) {
+                //if(notification != nil){
                     self.performSegueWithIdentifier("showDashboard", sender: self)
                     User.activeSession = true
                     self.firstTime = false

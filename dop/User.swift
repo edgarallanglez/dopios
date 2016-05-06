@@ -20,4 +20,5 @@ class User: NSObject, CLLocationManagerDelegate {
     static var userSurnames = ""
     static var coordinate: CLLocationCoordinate2D = CLLocationCoordinate2D()
     static var newNotification: Bool = false
+    static var deviceToken: String = ""
 }

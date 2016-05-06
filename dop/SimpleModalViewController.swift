@@ -173,15 +173,11 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapVie
         let totalLikes = (self.coupon?.total_likes)! - 1
         self.likes_label.text = String(stringInterpolationSegment: totalLikes)
         self.coupon!.setUserLike(0, total_likes: totalLikes)
-        
         NSNotificationCenter.defaultCenter().postNotificationName("takenOrLikeStatus", object: params)
 
     }
     func setCouponTaken() {
-        let params:[String: AnyObject] = [
-            "coupon_id" : self.coupon.id,
-            "status": true,
-            "type": "take"]
+       
         
         self.takeCouponButton.transform = CGAffineTransformMakeScale(0.1, 0.1)
         UIView.animateWithDuration(0.8,
@@ -195,7 +191,13 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapVie
         
         self.takeCouponButton.tintColor = Utilities.dopColor
         self.coupon.taken = true
+        self.coupon.available -= 1
+        self.available_coupon.text = "\(self.coupon.available)"
         
+        let params:[String: AnyObject] = [
+            "coupon_id" : self.coupon.id,
+            "status": true,
+            "type": "take"]
         NSNotificationCenter.defaultCenter().postNotificationName("takenOrLikeStatus", object: params)
     }
     
@@ -207,6 +209,10 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapVie
         
         self.takeCouponButton.tintColor = UIColor.darkGrayColor()
         self.coupon.taken = false
+        self.coupon.available += 1
+        self.available_coupon.text = "\(self.coupon.available)"
+        
+        
         NSNotificationCenter.defaultCenter().postNotificationName("takenOrLikeStatus", object: params)
         
     }
@@ -351,7 +357,6 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapVie
         
         var taken: Bool
         
-        
         if self.takeCouponButton.tintColor == UIColor.darkGrayColor() {
             self.setCouponTaken()
             taken = true
@@ -360,11 +365,16 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapVie
             taken = false
         }
         
-        
         CouponController.takeCouponWithSuccess(params,
             success: { (data) -> Void in
                 dispatch_async(dispatch_get_main_queue(), {
                     let json = JSON(data: data)
+                    self.coupon.available = json["total"].int!
+                    self.available_coupon.text = "\(self.coupon.available)"
+                    
+                    
+                NSNotificationCenter.defaultCenter().postNotificationName("updateAvailable", object: self.coupon.available)
+
                     print(json)
                 })
                 
@@ -372,8 +382,8 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapVie
             
             failure: { (error) -> Void in
                 dispatch_async(dispatch_get_main_queue(), {
-                    if taken { self.removeCouponTaken() }
-                    else { self.setCouponTaken() }
+                    if taken {  self.coupon.available += 1; self.removeCouponTaken(); }
+                    else {  self.coupon.available -= 1; self.setCouponTaken(); }
                 })
             }
         )

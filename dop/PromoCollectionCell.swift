@@ -126,6 +126,8 @@ class PromoCollectionCell: UICollectionViewCell, FBSDKSharingDelegate {
         let totalLikes = (Int(self.likes.text!))! + 1
         self.likes.text = String(stringInterpolationSegment: totalLikes)
         self.coupon.setUserLike(1, total_likes: totalLikes)
+        
+
     }
 
     func removeCouponLike() {
@@ -133,6 +135,7 @@ class PromoCollectionCell: UICollectionViewCell, FBSDKSharingDelegate {
         let totalLikes = (Int(self.likes.text!))! - 1
         self.likes.text = String(stringInterpolationSegment: totalLikes)
         self.coupon.setUserLike(0, total_likes: totalLikes)
+        
     }
     
     func setCouponTaken() {
@@ -148,12 +151,47 @@ class PromoCollectionCell: UICollectionViewCell, FBSDKSharingDelegate {
         
         self.take_coupon_btn.tintColor = Utilities.dopColor
         self.coupon.taken = true
+        //self.coupon.setTakenCoupons(true, available: self.coupon.available-1)
+        self.coupon.available -= 1
+        
+        let params:[String: AnyObject] = [
+            "coupon_id" : self.coupon.id,
+            "status": true,
+            "type": "take"]
+        NSNotificationCenter.defaultCenter().postNotificationName("takenOrLikeStatus", object: params)
     }
     
     func removeCouponTaken() {
         self.take_coupon_btn.tintColor = UIColor.darkGrayColor()
         self.coupon.taken = false
+        //self.coupon.setTakenCoupons(false, available: self.coupon.available+1)
+        self.coupon.available += 1
         
+        let params:[String: AnyObject] = [
+            "coupon_id" : self.coupon.id,
+            "status": false,
+            "type": "take"]
+        NSNotificationCenter.defaultCenter().postNotificationName("takenOrLikeStatus", object: params)
+    }
+    
+    func setCouponTakenNotification() {
+        self.take_coupon_btn.transform = CGAffineTransformMakeScale(0.1, 0.1)
+        UIView.animateWithDuration(0.8,
+                                   delay: 0,
+                                   usingSpringWithDamping: 0.2,
+                                   initialSpringVelocity: 6.0,
+                                   options: UIViewAnimationOptions.AllowUserInteraction,
+                                   animations: {
+                                    self.take_coupon_btn.transform = CGAffineTransformIdentity
+            }, completion: nil)
+        
+        self.take_coupon_btn.tintColor = Utilities.dopColor
+        self.coupon.taken = true
+    }
+    
+    func removeCouponTakenNotification() {
+        self.take_coupon_btn.tintColor = UIColor.darkGrayColor()
+        self.coupon.taken = false
     }
     
     @IBAction func setTakeCoupon(sender: UIButton) {
@@ -211,18 +249,26 @@ class PromoCollectionCell: UICollectionViewCell, FBSDKSharingDelegate {
         if(coupon_id == self.coupon.id){
             if(status == false){
                 if(type == "take"){
-                    self.removeCouponTaken()
+                    self.removeCouponTakenNotification()
                 }else{
                     self.removeCouponLike()
                 }
             }else{
                 if(type == "take"){
-                    self.setCouponTaken()
+                    self.setCouponTakenNotification()
                 }else{
                     self.setCouponLike()
                 }
             }
         }
     }
+    func refreshAvailable(notification:NSNotification){
+        print("Available refresh!")
+        let object = notification.object as! Int
+        
+        self.coupon.available = object;
+        
+    }
+
 
 }
