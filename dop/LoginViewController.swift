@@ -169,7 +169,9 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
                     "birth_date" : birthday,
                     "email": userEmail,
                     "gender": gender,
-                    "main_image":"https://graph.facebook.com/\(json["id"].string!)/picture?type=large"]
+                    "main_image":"https://graph.facebook.com/\(json["id"].string!)/picture?type=large",
+                    "device_os": "ios",
+                    "device_token" : User.deviceToken]
                 
                 self.socialLogin("facebook", params: params)
             }
@@ -207,6 +209,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
                 User.userImageUrl =  params["main_image"]!
                 User.userName =  params["names"]!
                 User.userSurnames =  params["surnames"]!
+                
                 do {
                     let payload = try decode(User.userToken)
                     User.user_id = payload.body["id"]! as! Int

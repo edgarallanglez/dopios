@@ -37,6 +37,12 @@ class TrendingCoupon: UIView, ModalDelegate {
             selector: "updateLikeAndTaken:",
             name: "takenOrLikeStatus",
             object: nil)
+        
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: "refreshAvailable:",
+            name: "updateAvailable",
+            object: nil)
     }
     
     init() {
@@ -140,12 +146,44 @@ class TrendingCoupon: UIView, ModalDelegate {
         
         self.takeCouponButton.tintColor = Utilities.dopColor
         self.coupon.taken = true
+        self.coupon.available -= 1
+        
+        let params:[String: AnyObject] = [
+            "coupon_id" : self.coupon.id,
+            "status": true,
+            "type": "take"]
+        NSNotificationCenter.defaultCenter().postNotificationName("takenOrLikeStatus", object: params)
     }
     
     func removeCouponTaken() {
         self.takeCouponButton.tintColor = UIColor.darkGrayColor()
         self.coupon.taken = false
-
+        self.coupon.available += 1
+        
+        let params:[String: AnyObject] = [
+            "coupon_id" : self.coupon.id,
+            "status": false,
+            "type": "take"]
+        NSNotificationCenter.defaultCenter().postNotificationName("takenOrLikeStatus", object: params)
+    }
+    func setCouponTakenNotification() {
+        self.takeCouponButton.transform = CGAffineTransformMakeScale(0.1, 0.1)
+        UIView.animateWithDuration(0.8,
+                                   delay: 0,
+                                   usingSpringWithDamping: 0.2,
+                                   initialSpringVelocity: 6.0,
+                                   options: UIViewAnimationOptions.AllowUserInteraction,
+                                   animations: {
+                                    self.takeCouponButton.transform = CGAffineTransformIdentity
+            }, completion: nil)
+        
+        self.takeCouponButton.tintColor = Utilities.dopColor
+        self.coupon.taken = true
+    }
+    
+    func removeCouponTakenNotification() {
+        self.takeCouponButton.tintColor = UIColor.darkGrayColor()
+        self.coupon.taken = false
     }
     
     func setTakeCoupon(sender: UITapGestureRecognizer) {
@@ -172,7 +210,11 @@ class TrendingCoupon: UIView, ModalDelegate {
             success: { (data) -> Void in
                 dispatch_async(dispatch_get_main_queue(), {
                     let json = JSON(data: data)
-                    print(json)
+                    
+                    print(json["total"])
+                    self.coupon.available = json["total"].int!
+                    
+                NSNotificationCenter.defaultCenter().postNotificationName("updateAvailable", object: self.coupon.available)
                 })
                 
             },
@@ -222,17 +264,18 @@ class TrendingCoupon: UIView, ModalDelegate {
         let type = object["type"] as! String
         let status = object["status"] as! Bool
         let coupon_id = object["coupon_id"] as! Int
+
         
         if(coupon_id == self.coupon.id){
             if(status == false){
                 if(type == "take"){
-                    self.removeCouponTaken()
+                    self.removeCouponTakenNotification()
                 }else{
                     self.removeCouponLike()
                 }
             }else{
                 if(type == "take"){
-                    self.setCouponTaken()
+                    self.setCouponTakenNotification()
                 }else{
                     self.setCouponLike()
                 }
@@ -250,6 +293,13 @@ class TrendingCoupon: UIView, ModalDelegate {
                 print("couponsData")
             }
         )
+    }
+    func refreshAvailable(notification:NSNotification){
+        print("Available refresh!")
+        let object = notification.object as! Int
+        
+        self.coupon.available = object;
+        
     }
 
     

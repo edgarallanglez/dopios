@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
+    
 //    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 //        // Override point for customization after application launch.
 //        
@@ -28,7 +29,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //    }
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        registerForPushNotifications(application)
+        
+        if let notification = launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey] as? [String: AnyObject] {
+            // 2
+            let aps = notification["aps"] as! [String: AnyObject]
+            
+            print(notification)
+            
+            // 3
+            (window?.rootViewController as? LoadingViewController)?.notification = aps
+        }
+
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
     
@@ -77,6 +90,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             localNotification.alertBody = "Movie Count : \(1)"
             localNotification.fireDate = NSDate(timeIntervalSinceNow: 1)
             UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
+    }
+    
+    func registerForPushNotifications(application: UIApplication) {
+        let notificationSettings = UIUserNotificationSettings(
+            forTypes: [.Badge, .Sound, .Alert], categories: nil)
+        
+        application.registerUserNotificationSettings(notificationSettings)
+    }
+    
+    func application(application: UIApplication, didRegisterUserNotificationSettings notificationSettings: UIUserNotificationSettings) {
+        
+        if (notificationSettings.types == UIUserNotificationType.None) {
+            
+        }
+            
+        else{
+            
+            application.registerForRemoteNotifications()
+        }
+        
+        
+    }
+
+
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        let tokenChars = UnsafePointer<CChar>(deviceToken.bytes)
+        var tokenString = ""
+        
+        for i in 0..<deviceToken.length {
+            tokenString += String(format: "%02.2hhx", arguments: [tokenChars[i]])
+        }
+        
+        User.deviceToken = tokenString
+        print("Device Token:", tokenString)
+    }
+    
+    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+        print("Failed to register:", error)
+    }
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+        let aps = userInfo["aps"] as! [String: AnyObject]
+        print(userInfo)
     }
 
 
