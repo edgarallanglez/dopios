@@ -284,7 +284,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if(!searching){
             var params = [String: AnyObject]()
-            if(tableView == self.tableView && filtered.count>0){
+            if(tableView == self.tableView && filtered.count > 0){
                  let model = self.filtered[indexPath.row]
                 params = ["id": model.id]
                  NSNotificationCenter.defaultCenter().postNotificationName("performSegue", object: params)

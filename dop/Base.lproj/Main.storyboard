@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="wsr-0B-cyM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="wsr-0B-cyM">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -252,6 +252,9 @@
                                     <constraint firstAttribute="centerX" secondItem="4x1-vM-hMg" secondAttribute="centerX" id="nPQ-n6-Wy2"/>
                                     <constraint firstAttribute="bottom" secondItem="4x1-vM-hMg" secondAttribute="bottom" id="ynl-hu-f2a"/>
                                 </constraints>
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="45" y="660" width="510" height="80"/>
+                                </variation>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="dop" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FO2-gI-3Ta">
                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
@@ -268,6 +271,9 @@
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="vsO-2Q-CNK" secondAttribute="height" multiplier="1:1" id="67t-Cx-tgy"/>
                                 </constraints>
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="180" y="120" width="240" height="240"/>
+                                </variation>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KTv-yl-i6u" customClass="MMMaterialDesignSpinner">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
@@ -282,7 +288,8 @@
                                         <exclude reference="nwB-ex-ibG"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact">
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="270" y="500" width="60" height="60"/>
                                     <mask key="constraints">
                                         <include reference="BTB-FK-QwB"/>
                                         <include reference="nwB-ex-ibG"/>
@@ -1823,7 +1830,6 @@
                     <connections>
                         <outlet property="main_loader" destination="VCY-2h-5fF" id="9FE-Pn-ydy"/>
                         <outlet property="tableView" destination="Wkj-oU-bl0" id="N82-px-WuG"/>
-                        <segue destination="cf5-lv-Mm7" kind="show" identifier="userProfile" id="ckc-bH-DVq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o4o-23-0wi" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -6252,10 +6258,10 @@
             </objects>
             <point key="canvasLocation" x="-528" y="978"/>
         </scene>
-        <!--UserProfileStickyController-->
+        <!--User Profile Sticky Controller-->
         <scene sceneID="aIp-0N-4pa">
             <objects>
-                <collectionViewController storyboardIdentifier="UserProfileStickyController" title="UserProfileStickyController" id="cf5-lv-Mm7" customClass="UserProfileStickyController" customModule="dop" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="UserProfileStickyController" id="cf5-lv-Mm7" customClass="UserProfileStickyController" customModule="dop" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="LZJ-9o-NLy">
                         <rect key="frame" x="0.0" y="0.0" width="400" height="1200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -8115,9 +8121,9 @@
     <inferredMetricsTieBreakers>
         <segue reference="8iK-Yr-WEc"/>
         <segue reference="njR-gH-Wm2"/>
-        <segue reference="Y2I-Nl-h09"/>
+        <segue reference="H7K-TF-KnO"/>
+        <segue reference="6GU-eX-p2e"/>
         <segue reference="AaG-PG-nLf"/>
-        <segue reference="fpu-8Z-7Bb"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>
