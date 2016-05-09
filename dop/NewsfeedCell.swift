@@ -20,17 +20,18 @@ class NewsfeedCell: UITableViewCell {
     @IBOutlet var likes: UILabel!
     @IBOutlet var heartView: UIView!
     
-    var viewController:UIViewController?
+    var viewController: NewsfeedViewController?
     
     var newsfeedNote: NewsfeedNote?
+    var index: Int!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
     
-    func loadItem(newsfeed_note: NewsfeedNote, viewController: UIViewController) {
-
+    func loadItem(newsfeed_note: NewsfeedNote, viewController: NewsfeedViewController, index: Int!) {
+        self.index = index
         let newsfeed_activity = "\(newsfeed_note.branch_name.uppercaseString)"
     
         downloadImage(NSURL(string: "\(Utilities.dopImagesURL)\(newsfeed_note.company_id)/\(newsfeed_note.branch_image)")!)
@@ -104,7 +105,7 @@ class NewsfeedCell: UITableViewCell {
     
     
     func goToUserProfile(_: UIButton!){
-        self.viewController!.performSegueWithIdentifier("userProfile", sender: self)
+        self.viewController!.goToUserProfile(self.index)
     }
     
     func goToBranchProfile(sender: UIGestureRecognizer!){
