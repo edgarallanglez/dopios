@@ -174,7 +174,7 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
                 let date =  subJson["used_date"].string
                 let level = subJson["level"].int ?? 0
                 let exp = subJson["exp"].double ?? 0
-                let is_friend = subJson["is_friend"].bool!
+                let is_friend = subJson["is_friend"].bool ?? false
                 let operation_id = subJson["operation_id"].int ?? 5
                 let privacy_status = subJson["privacy_status"].int ?? 0
                 var formated_date = subJson["used_date"].string!
@@ -260,7 +260,7 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
                 let date =  subJson["used_date"].string
                 let level = subJson["level"].int ?? 0
                 let exp = subJson["exp"].double ?? 0
-                let is_friend = subJson["is_friend"].bool!
+                let is_friend = subJson["is_friend"].bool ?? false
                 let operation_id = subJson["operation_id"].int ?? 5
                 let privacy_status = subJson["privacy_status"].int ?? 0
                 

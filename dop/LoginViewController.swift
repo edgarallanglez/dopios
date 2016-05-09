@@ -20,12 +20,20 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
     @IBOutlet weak var dopLogo: UIImageView!
     @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var fbButton: UIButton!
+    @IBOutlet weak var flat_city_image: UIImageView!
     
+    @IBOutlet weak var dop_logo_y_constraint: NSLayoutConstraint!
     var kClientId = "517644806961-ocmqel4aloa86mtsn5jsmmuvi3fcdpln.apps.googleusercontent.com";
     var locationManager: CLLocationManager!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let background = Utilities.Colors
+        background.frame = self.view.bounds
+        self.view.layer.insertSublayer(background, atIndex: 0)
+        Utilities.slideFromBottomAnimation(self.dopLogo, delay: 0, duration: 1.5, yPosition: 700)
+        self.fbButton.alpha = 0
         self.MD_spinner.lineWidth = 3
         self.MD_spinner.startAnimating()
         self.MD_spinner.alpha = 0
@@ -44,10 +52,15 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
             // User is already logged in, do work such as go to next view controller.
             self.getFBUserData()
         }
-        
-        
-        
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        self.dop_logo_y_constraint.constant = -200
+        UIView.animateWithDuration(0.8) { self.view.layoutIfNeeded() }
+        Utilities.slideFromBottomAnimation(flat_city_image, delay: 0.4, duration: 1.5, yPosition: 700)
+        Utilities.fadeInViewAnimation(self.fbButton, delay: 1, duration: 0.7)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }

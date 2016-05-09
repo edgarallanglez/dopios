@@ -47,7 +47,7 @@ class Utilities {
         return UIColor( red: 250.0/255.0 , green: 250.0/255.0 , blue: 250.0/255.0, alpha:1.0)
     }
     
-    class var Colors:CAGradientLayer {
+    class var Colors: CAGradientLayer {
         let colorBottom = UIColor(red: 217.0/255.0, green: 4.0/255.0, blue: 121.0/255.0, alpha: 1.0).CGColor
         let colorTop = UIColor(red: 248.0/255.0, green: 20.0/255.0, blue: 90.0/255.0, alpha: 1.0).CGColor
         
@@ -55,10 +55,11 @@ class Utilities {
         
         gl = CAGradientLayer()
         gl.colors = [ colorTop, colorBottom]
-        gl.locations = [ 0.0, 1.0]
+        gl.locations = [ 0.0, 1.0 ]
         
         return gl
     }
+    
     class var DarkColors:CAGradientLayer {
         let colorBottom = UIColor(red: 201.0/255.0, green: 4.0/255.0, blue: 107.0/255.0, alpha: 1.0).CGColor
         let colorTop = UIColor(red: 207.0/255.0, green: 17.0/255.0, blue: 74.0/255.0, alpha: 1.0).CGColor
@@ -280,7 +281,7 @@ class Utilities {
     class func slideFromBottomAnimation(view: UIView, delay: NSTimeInterval, duration: NSTimeInterval, yPosition: CGFloat){
         let finalYPosition = view.frame.origin.y
         view.frame.origin.y += yPosition
-        
+        view.alpha = 1
         UIView.animateWithDuration(duration, delay: delay, usingSpringWithDamping: 1, initialSpringVelocity: 2, options: .CurveEaseInOut, animations: ({
             view.frame.origin.y = finalYPosition
         }), completion: nil)

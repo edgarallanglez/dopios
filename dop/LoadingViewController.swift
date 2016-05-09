@@ -23,6 +23,9 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
     @IBOutlet var loader: MMMaterialDesignSpinner!
     override func viewDidLoad() {
         super.viewDidLoad()
+        let background = Utilities.Colors
+        background.frame = self.view.bounds
+        self.view.layer.insertSublayer(background, atIndex: 0)
         loader.startAnimating()
         loader.lineWidth = 3.0
         
