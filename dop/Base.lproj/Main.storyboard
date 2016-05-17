@@ -219,7 +219,7 @@
                                     <rect key="frame" x="99" y="-83" width="26" height="88"/>
                                 </variation>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="dop_logo_outline" translatesAutoresizingMaskIntoConstraints="NO" id="vsO-2Q-CNK">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="dop_logo_outline" translatesAutoresizingMaskIntoConstraints="NO" id="vsO-2Q-CNK">
                                 <rect key="frame" x="180" y="60" width="240" height="240"/>
                                 <color key="tintColor" red="0.98431372549999996" green="0.1333333333" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -250,8 +250,7 @@
                                         <exclude reference="nwB-ex-ibG"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="270" y="491" width="60" height="60"/>
+                                <variation key="widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="BTB-FK-QwB"/>
                                         <include reference="nwB-ex-ibG"/>
@@ -261,21 +260,20 @@
                             <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Login_flat_city" translatesAutoresizingMaskIntoConstraints="NO" id="5pG-dC-ONW">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="5pG-dC-ONW" secondAttribute="height" multiplier="15:9" id="aSs-hW-LxA"/>
+                                    <constraint firstAttribute="width" secondItem="5pG-dC-ONW" secondAttribute="height" multiplier="2.9" id="aSs-hW-LxA"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="aSs-hW-LxA"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="391" width="600" height="360"/>
+                                <variation key="widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="aSs-hW-LxA"/>
                                     </mask>
                                 </variation>
                             </imageView>
-                            <view contentMode="center" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ugN-9a-zrS" userLabel="LoginButtonView">
+                            <view alpha="0.0" contentMode="center" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ugN-9a-zrS" userLabel="LoginButtonView">
                                 <rect key="frame" x="41" y="665" width="518" height="80"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4x1-vM-hMg">
@@ -296,6 +294,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
+                                <color key="backgroundColor" red="0.47058823529411764" green="0.15686274509803921" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="centerY" secondItem="4x1-vM-hMg" secondAttribute="centerY" id="0Q6-pA-Vle"/>
@@ -305,28 +304,23 @@
                                     <constraint firstAttribute="centerX" secondItem="4x1-vM-hMg" secondAttribute="centerX" id="nPQ-n6-Wy2"/>
                                     <constraint firstAttribute="bottom" secondItem="4x1-vM-hMg" secondAttribute="bottom" id="ynl-hu-f2a"/>
                                 </constraints>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="45" y="651" width="510" height="80"/>
-                                </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <color key="tintColor" red="0.98431372549999996" green="0.1333333333" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="KTv-yl-i6u" firstAttribute="top" secondItem="vsO-2Q-CNK" secondAttribute="bottom" constant="20" id="1KY-zs-rLP"/>
+                            <constraint firstItem="ugN-9a-zrS" firstAttribute="top" secondItem="5pG-dC-ONW" secondAttribute="bottom" id="2F5-z7-Pud"/>
                             <constraint firstItem="KTv-yl-i6u" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="3zY-34-ubK"/>
                             <constraint firstAttribute="centerX" secondItem="vsO-2Q-CNK" secondAttribute="centerX" id="6OK-fc-l8J"/>
                             <constraint firstAttribute="centerX" secondItem="ugN-9a-zrS" secondAttribute="centerX" id="C2a-oR-dsB"/>
                             <constraint firstItem="vsO-2Q-CNK" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" id="FxH-94-Spd"/>
                             <constraint firstItem="5pG-dC-ONW" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="JCb-yc-Hc8"/>
-                            <constraint firstItem="ugN-9a-zrS" firstAttribute="height" secondItem="kh9-bI-dsS" secondAttribute="height" multiplier="0.1" id="ceI-2s-p5r"/>
-                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="5pG-dC-ONW" secondAttribute="bottom" id="dGO-pt-59o"/>
-                            <constraint firstItem="ugN-9a-zrS" firstAttribute="top" secondItem="KTv-yl-i6u" secondAttribute="bottom" constant="100" id="eNW-Ug-9Gm"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="ugN-9a-zrS" secondAttribute="trailing" constant="25" id="eSO-q9-14d"/>
+                            <constraint firstItem="ugN-9a-zrS" firstAttribute="height" secondItem="kh9-bI-dsS" secondAttribute="height" multiplier="0.17" id="ceI-2s-p5r"/>
+                            <constraint firstAttribute="trailing" secondItem="ugN-9a-zrS" secondAttribute="trailing" id="eSO-q9-14d"/>
                             <constraint firstAttribute="trailing" secondItem="5pG-dC-ONW" secondAttribute="trailing" id="hSE-Td-xYg"/>
-                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="ugN-9a-zrS" secondAttribute="bottom" constant="20" id="rTq-he-4BA"/>
-                            <constraint firstItem="vsO-2Q-CNK" firstAttribute="width" secondItem="kh9-bI-dsS" secondAttribute="width" multiplier="0.4" id="t2D-Ca-6kB"/>
-                            <constraint firstItem="ugN-9a-zrS" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="25" id="vmf-R1-50W"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="ugN-9a-zrS" secondAttribute="bottom" id="rTq-he-4BA"/>
+                            <constraint firstItem="ugN-9a-zrS" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="vmf-R1-50W"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
@@ -339,8 +333,7 @@
                                 <exclude reference="FxH-94-Spd"/>
                                 <exclude reference="1KY-zs-rLP"/>
                                 <exclude reference="3zY-34-ubK"/>
-                                <exclude reference="eNW-Ug-9Gm"/>
-                                <exclude reference="dGO-pt-59o"/>
+                                <exclude reference="2F5-z7-Pud"/>
                                 <exclude reference="rTq-he-4BA"/>
                             </mask>
                         </variation>
@@ -353,11 +346,9 @@
                                 <include reference="JCb-yc-Hc8"/>
                                 <include reference="hSE-Td-xYg"/>
                                 <include reference="FxH-94-Spd"/>
-                                <exclude reference="t2D-Ca-6kB"/>
                                 <include reference="1KY-zs-rLP"/>
                                 <include reference="3zY-34-ubK"/>
-                                <exclude reference="eNW-Ug-9Gm"/>
-                                <include reference="dGO-pt-59o"/>
+                                <include reference="2F5-z7-Pud"/>
                                 <include reference="rTq-he-4BA"/>
                             </mask>
                         </variation>
@@ -366,6 +357,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="800"/>
                     <connections>
+                        <outlet property="LoginButtonView" destination="ugN-9a-zrS" id="Juh-qH-Ids"/>
                         <outlet property="MD_spinner" destination="KTv-yl-i6u" id="3ch-gs-uQU"/>
                         <outlet property="dopLogo" destination="vsO-2Q-CNK" id="EpU-qR-r5K"/>
                         <outlet property="dop_logo_y_constraint" destination="FxH-94-Spd" id="Yh1-VG-ocd"/>
@@ -6284,13 +6276,13 @@
             <objects>
                 <collectionViewController storyboardIdentifier="UserProfileStickyController" id="cf5-lv-Mm7" customClass="UserProfileStickyController" customModule="dop" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="LZJ-9o-NLy">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="400" height="1200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <collectionViewLayout key="collectionViewLayout" id="G8Z-EP-wAC" customClass="CSStickyHeaderFlowLayout"/>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="page_identifier" id="pw3-sZ-d3k" customClass="UserPaginationViewController" customModule="dop" customModuleProvider="target">
-                                <rect key="frame" x="121" y="64" width="359" height="266"/>
+                                <rect key="frame" x="21" y="64" width="359" height="266"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="359" height="266"/>
@@ -6302,7 +6294,7 @@
                                 <size key="customSize" width="359" height="266"/>
                             </collectionViewCell>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="scaleAspectFit" reuseIdentifier="locked_identifier" id="Hh8-cv-CFQ">
-                                <rect key="frame" x="121" y="340" width="359" height="266"/>
+                                <rect key="frame" x="21" y="340" width="359" height="266"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="359" height="266"/>
@@ -8090,7 +8082,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Login_flat_city" width="967" height="587"/>
+        <image name="Login_flat_city" width="967" height="333"/>
         <image name="add-person" width="32" height="32"/>
         <image name="arrow-right" width="42" height="42"/>
         <image name="clock-icon" width="30" height="30"/>
