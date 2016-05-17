@@ -40,7 +40,7 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
             cell.newsfeed_description.linkAttributes = [NSForegroundColorAttributeName: Utilities.dopColor]
             cell.newsfeed_description.enabledTextCheckingTypes = NSTextCheckingType.Link.rawValue
             cell.newsfeed_description.delegate = self
-            cell.loadItem(model, viewController: self)
+            cell.loadItem(model, viewController: self, index: indexPath.row)
             
 
             let imageUrl = NSURL(string: model.user_image)
@@ -174,7 +174,7 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
                 let date =  subJson["used_date"].string
                 let level = subJson["level"].int ?? 0
                 let exp = subJson["exp"].double ?? 0
-                let is_friend = subJson["is_friend"].bool!
+                let is_friend = subJson["is_friend"].bool ?? false
                 let operation_id = subJson["operation_id"].int ?? 5
                 let privacy_status = subJson["privacy_status"].int ?? 0
                 var formated_date = subJson["used_date"].string!
@@ -260,7 +260,7 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
                 let date =  subJson["used_date"].string
                 let level = subJson["level"].int ?? 0
                 let exp = subJson["exp"].double ?? 0
-                let is_friend = subJson["is_friend"].bool!
+                let is_friend = subJson["is_friend"].bool ?? false
                 let operation_id = subJson["operation_id"].int ?? 5
                 let privacy_status = subJson["privacy_status"].int ?? 0
                 
@@ -322,6 +322,17 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
 //            }
 //        }
 //    }
+    func goToUserProfile(index: Int!) {
+        let person: PeopleModel = self.people_array[index]
+        
+        
+        let view_controller = self.storyboard!.instantiateViewControllerWithIdentifier("UserProfileStickyController") as! UserProfileStickyController
+        view_controller.user_id = person.user_id
+        view_controller.is_friend = person.is_friend
+        view_controller.operation_id = person.operation_id!
+        view_controller.person = person
+        self.navigationController?.pushViewController(view_controller, animated: true)
+    }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let person: PeopleModel = self.people_array[indexPath.row]

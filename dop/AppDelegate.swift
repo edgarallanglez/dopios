@@ -10,6 +10,7 @@ import UIKit
 //import TwitterKit
 import Fabric
 import FBSDKLoginKit
+import AVFoundation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -36,10 +37,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // 2
             let aps = notification["aps"] as! [String: AnyObject]
             
-            print(notification)
+            let notification_data = notification["data"] as! [String: AnyObject]
             
+            User.newestNotification = notification_data
             // 3
-            (window?.rootViewController as? LoadingViewController)?.notification = aps
+            (window?.rootViewController as? LoadingViewController)?.notification = notification_data
         }
 
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
@@ -62,7 +64,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidEnterBackground(application: UIApplication) {
-        SocketIOManager.sharedInstance.closeConnection()
+        //SocketIOManager.sharedInstance.closeConnection()
     }
 
     func applicationWillEnterForeground(application: UIApplication) {
@@ -70,7 +72,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidBecomeActive(application: UIApplication) {
-        SocketIOManager.sharedInstance.establishConnection()
+        //SocketIOManager.sharedInstance.establishConnection()
     }
 
     func applicationWillTerminate(application: UIApplication) {
@@ -131,7 +133,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
         let aps = userInfo["aps"] as! [String: AnyObject]
-        print(userInfo)
+        
+        let notification = userInfo["data"] as! [String: AnyObject]
+        print(notification)
+        
+        NSNotificationCenter.defaultCenter().postNotificationName("newNotification", object: nil)
+        AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
     }
 
 

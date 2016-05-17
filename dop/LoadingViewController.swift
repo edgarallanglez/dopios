@@ -23,6 +23,9 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
     @IBOutlet var loader: MMMaterialDesignSpinner!
     override func viewDidLoad() {
         super.viewDidLoad()
+        let background = Utilities.Colors
+        background.frame = self.view.bounds
+        self.view.layer.insertSublayer(background, atIndex: 0)
         loader.startAnimating()
         loader.lineWidth = 3.0
         
@@ -149,14 +152,10 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
                 print("Failed to decode JWT: \(error)")
             }
             
-            
             dispatch_async(dispatch_get_main_queue(), {
-                //if (!User.activeSession) {
-                //if(notification != nil){
-                    self.performSegueWithIdentifier("showDashboard", sender: self)
-                    User.activeSession = true
-                    self.firstTime = false
-                //}
+                self.performSegueWithIdentifier("showDashboard", sender: self.notification)
+                User.activeSession = true
+                self.firstTime = false
             })
         },
         failure:{ (error) -> Void in

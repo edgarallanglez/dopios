@@ -133,7 +133,7 @@ class CouponDetailViewController: BaseViewController, UITableViewDelegate, UITab
         
         let cell:NewsfeedCell = tableView.dequeueReusableCellWithIdentifier("NewsfeedCell", forIndexPath: indexPath) as! NewsfeedCell
         let model = self.newsfeed[indexPath.row]
-        cell.loadItem(model,viewController:self)
+        cell.loadItem(model,viewController: self as! NewsfeedViewController, index: indexPath.row)
         let imageUrl = NSURL(string: model.user_image)
         let identifier = "Cell\(indexPath.row)"
         

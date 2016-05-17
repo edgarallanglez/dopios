@@ -13,7 +13,7 @@ class TabbarController: UITabBarController {
     
     var lastSelected = 0
     
-    let socketIO : SocketIO = SocketIO()
+    //let socketIO : SocketIO = SocketIO()
     
     var vcNot: NotificationViewController!
 
@@ -36,7 +36,7 @@ class TabbarController: UITabBarController {
         self.navigationController?.navigationBar.hidden = true
         
         //self.startListening()
-        self.startSocketListener()
+        //self.startSocketListener()
         UIApplication.sharedApplication().statusBarStyle = .LightContent
         
         
@@ -99,7 +99,7 @@ class TabbarController: UITabBarController {
     }
     
     //NOTIFICATIONS SOCKET IO 2
-    func startSocketListener(){
+    /*func startSocketListener(){
         SocketIOManager.sharedInstance.establishConnection()
         
         SocketIOManager.sharedInstance.connectToServerWithNickname(User.userToken, completionHandler: { (notification) -> Void in
@@ -121,7 +121,7 @@ class TabbarController: UITabBarController {
                 print("JOINED TO ROOM")
             })
         }
-    }
+    }*/
     
     
 

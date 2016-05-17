@@ -180,6 +180,7 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
     
     func navigationController(navigationController: UINavigationController, didShowViewController viewController: UIViewController, animated: Bool) {
         viewController.viewDidAppear(true)
+        
     }
 
     func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
@@ -192,6 +193,8 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
 
     }
     override func viewWillAppear(animated: Bool) {
+        
+        
         if User.newNotification {
             self.notificationButton.image = UIImage(named: "notification-badge")
         }else{

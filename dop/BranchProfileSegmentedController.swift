@@ -116,7 +116,6 @@ import UIKit
         //        thumbView.layer.cornerRadius = thumbView.frame.height / 2
         
         displayNewSelectedIndex()
-        
     }
     
     override func beginTrackingWithTouch(touch: UITouch, withEvent event: UIEvent?) -> Bool {
