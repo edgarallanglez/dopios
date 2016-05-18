@@ -19,6 +19,8 @@ class NotificationCell: UITableViewCell {
     var viewController:UIViewController?
     var notification:Notification?
     
+    @IBOutlet var decline_btn: UIButton!
+    @IBOutlet var accept_btn: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -30,7 +32,12 @@ class NotificationCell: UITableViewCell {
         let launcher_name = "\(notification.launcher_name) \(notification.launcher_surnames)"
         let newsfeed_Activity = "\(notification.newsfeed_activity)"
         
+        decline_btn.hidden = true
+        accept_btn.hidden = true
+
+        
         if(notification.type == "newsfeed"){
+            
             let notification_text = "A \(launcher_name) le ha gustado tu actividad en \(newsfeed_Activity)"
             title.text = notification_text
             let nsString = notification_text as NSString
@@ -51,6 +58,9 @@ class NotificationCell: UITableViewCell {
             }
             if(notification.friendship_status == 0 ){
                 notification_text = "\(launcher_name) quiere seguirte"
+                decline_btn.hidden = false
+                accept_btn.hidden = false
+
             }
             
             title.text = notification_text
@@ -71,11 +81,27 @@ class NotificationCell: UITableViewCell {
         self.date_label.text = Utilities.friendlyDate(notification.date)
         
         self.notification = notification
-        
-
     }
 
+    @IBAction func declineFriend(sender: AnyObject) {
+        
+    }
 
+    @IBAction func acceptFriend(sender: AnyObject) {
+        let params:[String: AnyObject] = [
+            "notification_id" : self.notification!.notification_id,
+            "friends_id": self.notification!.object_id]
+
+            FriendsController.acceptFriendWithSuccess(params, success: {(friendsData) -> Void in
+                dispatch_async(dispatch_get_main_queue(), {
+                    print("Aceptado")
+                })
+                }, failure: { (error) -> Void in
+                    dispatch_async(dispatch_get_main_queue(), {
+                        print("Error")
+                    })
+            })
+    }
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
