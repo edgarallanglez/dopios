@@ -316,6 +316,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                         })
                 })
             if(selectedItem.type == "newsfeed"){
+                
             }
         }
     }

@@ -80,6 +80,9 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
         self.setNeedsStatusBarAppearanceUpdate()
         setupLoaders()
         
+        
+        
+        
     }
     
     func setupLoaders(){
@@ -124,6 +127,10 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
             firstTime = true
             self.getTrendingCoupons()
             self.getToExpireCoupons()
+            
+            if(User.newestNotification["object_id"] != nil){
+                notification()
+            }
         }
         
         
@@ -259,7 +266,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
             
             let imageView: UIImageView = UIImageView(frame: CGRectMake(actualX, 0, scrollWidth, scrollHeight))
             imageView.alpha = 0
-        
+            imageView.layer.masksToBounds = true;
             let imageUrl = NSURL(string: "\(Utilities.dopImagesURL)\(branch.company_id!)/\(branch.banner!)")
             
             //let imageUrl = NSURL(string: "http://axeetech.com/wp-content/uploads/2014/09/458791.jpg")

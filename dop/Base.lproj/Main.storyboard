@@ -267,7 +267,8 @@
                                         <exclude reference="aSs-hW-LxA"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact">
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="457" width="600" height="207"/>
                                     <mask key="constraints">
                                         <include reference="aSs-hW-LxA"/>
                                     </mask>
@@ -276,7 +277,7 @@
                             <view alpha="0.0" contentMode="center" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ugN-9a-zrS" userLabel="LoginButtonView">
                                 <rect key="frame" x="41" y="665" width="518" height="80"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4x1-vM-hMg">
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4x1-vM-hMg">
                                         <rect key="frame" x="0.0" y="0.0" width="510" height="80"/>
                                         <fontDescription key="fontDescription" name="SFUIDisplay-Thin" family="SF UI Display" pointSize="24"/>
                                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -304,6 +305,9 @@
                                     <constraint firstAttribute="centerX" secondItem="4x1-vM-hMg" secondAttribute="centerX" id="nPQ-n6-Wy2"/>
                                     <constraint firstAttribute="bottom" secondItem="4x1-vM-hMg" secondAttribute="bottom" id="ynl-hu-f2a"/>
                                 </constraints>
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="664" width="600" height="136"/>
+                                </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -330,9 +334,9 @@
                             <mask key="constraints">
                                 <exclude reference="JCb-yc-Hc8"/>
                                 <exclude reference="hSE-Td-xYg"/>
-                                <exclude reference="FxH-94-Spd"/>
                                 <exclude reference="1KY-zs-rLP"/>
                                 <exclude reference="3zY-34-ubK"/>
+                                <exclude reference="FxH-94-Spd"/>
                                 <exclude reference="2F5-z7-Pud"/>
                                 <exclude reference="rTq-he-4BA"/>
                             </mask>
@@ -345,9 +349,9 @@
                             <mask key="constraints">
                                 <include reference="JCb-yc-Hc8"/>
                                 <include reference="hSE-Td-xYg"/>
-                                <include reference="FxH-94-Spd"/>
                                 <include reference="1KY-zs-rLP"/>
                                 <include reference="3zY-34-ubK"/>
+                                <include reference="FxH-94-Spd"/>
                                 <include reference="2F5-z7-Pud"/>
                                 <include reference="rTq-he-4BA"/>
                             </mask>
@@ -1839,7 +1843,9 @@
                     <tabBarItem key="tabBarItem" title="" image="megaphone" id="GGq-MD-JNo">
                         <inset key="imageInsets" minX="0.0" minY="5" maxX="0.0" maxY="-5"/>
                     </tabBarItem>
-                    <navigationItem key="navigationItem" id="p99-5y-bDX"/>
+                    <navigationItem key="navigationItem" id="p99-5y-bDX">
+                        <barButtonItem key="backBarButtonItem" title=" " id="YiP-G7-npv"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="main_loader" destination="VCY-2h-5fF" id="9FE-Pn-ydy"/>
                         <outlet property="tableView" destination="Wkj-oU-bl0" id="N82-px-WuG"/>
@@ -3196,10 +3202,10 @@
             </objects>
             <point key="canvasLocation" x="16.5" y="5400"/>
         </scene>
-        <!--Friends View Controller-->
+        <!-- -->
         <scene sceneID="RfR-7j-HkT">
             <objects>
-                <viewController id="qEh-Kq-WbW" customClass="FriendsViewController" customModule="dop" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title=" " id="qEh-Kq-WbW" customClass="FriendsViewController" customModule="dop" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7eo-Ht-ubk"/>
                         <viewControllerLayoutGuide type="bottom" id="dGc-e1-qsu"/>
@@ -3502,6 +3508,7 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="gDE-x7-FdO">
+                        <barButtonItem key="backBarButtonItem" title=" " id="7rN-Aj-cbq"/>
                         <barButtonItem key="rightBarButtonItem" image="add-person" id="WVk-1U-P1q">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
@@ -6271,10 +6278,10 @@
             </objects>
             <point key="canvasLocation" x="-528" y="978"/>
         </scene>
-        <!--User Profile Sticky Controller-->
+        <!-- -->
         <scene sceneID="aIp-0N-4pa">
             <objects>
-                <collectionViewController storyboardIdentifier="UserProfileStickyController" id="cf5-lv-Mm7" customClass="UserProfileStickyController" customModule="dop" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="UserProfileStickyController" title=" " id="cf5-lv-Mm7" customClass="UserProfileStickyController" customModule="dop" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="LZJ-9o-NLy">
                         <rect key="frame" x="0.0" y="0.0" width="400" height="1200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -6293,7 +6300,7 @@
                                 <edgeInsets key="layoutMargins" top="8" left="0.0" bottom="8" right="0.0"/>
                                 <size key="customSize" width="359" height="266"/>
                             </collectionViewCell>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="scaleAspectFit" reuseIdentifier="locked_identifier" id="Hh8-cv-CFQ">
+                            <collectionViewCell hidden="YES" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="scaleAspectFit" reuseIdentifier="locked_identifier" id="Hh8-cv-CFQ">
                                 <rect key="frame" x="21" y="340" width="359" height="266"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -8133,11 +8140,11 @@
         <image name="twitter-logo" width="42" height="42"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="njR-gH-Wm2"/>
         <segue reference="8iK-Yr-WEc"/>
-        <segue reference="NZR-gR-mOn"/>
-        <segue reference="Y2I-Nl-h09"/>
+        <segue reference="H7K-TF-KnO"/>
+        <segue reference="jnx-ks-uxV"/>
         <segue reference="AaG-PG-nLf"/>
-        <segue reference="fpu-8Z-7Bb"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

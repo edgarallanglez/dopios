@@ -36,17 +36,15 @@ class UserProfileStickyHeader: UIView {
         self.user_id = self.parent_view.user_id
         
         if User.user_id == self.parent_view.user_id { self.follow_button.alpha = 0 }
-//        else { self.follow_button.alpha = 1 }
         Utilities.setMaterialDesignButton(self.follow_button, button_size: 50)
         
         if parent_view.person != nil {
             
-            if parent_view.user_image?.image != nil {
-                user_image.image = parent_view_controller.user_image.image
-            } else { downloadImage(NSURL(string: parent_view_controller.person.main_image)!) }
+            if parent_view.user_image?.image != nil { user_image.image = parent_view_controller.user_image.image }
+            else { downloadImage(NSURL(string: parent_view_controller.person.main_image)!) }
             
             self.user_exp = parent_view.person.exp
-            current_level = (self.parent_view.person?.level!)!
+            current_level = (self.parent_view.person?.level ?? 0)!
             self.min_exp = Constanst.Levels["\(current_level)"].double!
             self.level_up = Constanst.Levels["\(current_level + 1)"].double!
             setProgressBar()
@@ -64,9 +62,7 @@ class UserProfileStickyHeader: UIView {
     @IBAction func followUnfollow(sender: UIButton) {
         self.follow_button.setImage(nil, forState: UIControlState.Normal)
         
-        let params:[String: AnyObject] = [
-            "user_two_id": self.user_id
-        ]
+        let params:[String: AnyObject] = [ "user_two_id": self.user_id ]
         
         Utilities.setButtonSpinner(self.follow_button, spinner: self.spinner, spinner_size: 18, spinner_width: 1.5, spinner_color: UIColor.whiteColor() )
         Utilities.fadeInViewAnimation(self.spinner, delay: 0, duration: 0.3)

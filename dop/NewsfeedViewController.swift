@@ -280,9 +280,7 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
                 self.tableView.finishInfiniteScroll()
                 
                 print(json)
-                if(newData){
-                    self.offset+=addedValues
-                }
+                if newData { self.offset+=addedValues }
 
             });
             },
@@ -296,15 +294,11 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
     }
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         
-        if(cell.respondsToSelector(Selector("setSeparatorInset:"))){
-            cell.separatorInset = UIEdgeInsetsZero
-        }
-        if(cell.respondsToSelector(Selector("setPreservesSuperviewLayoutMargins:"))){
+        if cell.respondsToSelector(Selector("setSeparatorInset:")) { cell.separatorInset = UIEdgeInsetsZero }
+        if cell.respondsToSelector(Selector("setPreservesSuperviewLayoutMargins:")) {
             cell.preservesSuperviewLayoutMargins = false
         }
-        if(cell.respondsToSelector(Selector("setLayoutMargins:"))){
-            cell.layoutMargins = UIEdgeInsetsZero
-        }
+        if cell.respondsToSelector(Selector("setLayoutMargins:")) { cell.layoutMargins = UIEdgeInsetsZero }
     }
 //    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 //        if let cell = sender as? NewsfeedCell {
@@ -322,7 +316,6 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
     func goToUserProfile(index: Int!) {
         let person: PeopleModel = self.people_array[index]
         
-        
         let view_controller = self.storyboard!.instantiateViewControllerWithIdentifier("UserProfileStickyController") as! UserProfileStickyController
         view_controller.user_id = person.user_id
         view_controller.is_friend = person.is_friend
@@ -333,7 +326,6 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let person: PeopleModel = self.people_array[indexPath.row]
-        
         
         let view_controller = self.storyboard!.instantiateViewControllerWithIdentifier("UserProfileStickyController") as! UserProfileStickyController
         view_controller.user_id = person.user_id

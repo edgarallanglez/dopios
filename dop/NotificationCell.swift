@@ -31,7 +31,7 @@ class NotificationCell: UITableViewCell {
         let newsfeed_Activity = "\(notification.newsfeed_activity)"
         
         if(notification.type == "newsfeed"){
-            let notification_text = "A \(launcher_name) le a gustado tu actividad en \(newsfeed_Activity)"
+            let notification_text = "A \(launcher_name) le ha gustado tu actividad en \(newsfeed_Activity)"
             title.text = notification_text
             let nsString = notification_text as NSString
             let launcher_range = nsString.rangeOfString(launcher_name)
