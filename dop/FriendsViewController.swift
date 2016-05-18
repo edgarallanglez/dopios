@@ -189,6 +189,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBAction func setPeopleTarget(sender: FriendSegmentedController) {
         switch sender.selectedIndex {
         case 0:
+            self.current_table = "all"
 //            tableView.reloadData()
             print("holis")
         case 1:
@@ -247,6 +248,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
                 view.is_friend = model.is_friend
                 view.operation_id = model.operation_id!
                 view.user_name = model.names
+                view.navigationItem.backBarButtonItem?.title = ""
             }
         }
     }

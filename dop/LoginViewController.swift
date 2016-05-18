@@ -21,8 +21,9 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
     @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var fbButton: UIButton!
     @IBOutlet weak var flat_city_image: UIImageView!
-    
+    @IBOutlet weak var LoginButtonView: UIView!
     @IBOutlet weak var dop_logo_y_constraint: NSLayoutConstraint!
+    
     var kClientId = "517644806961-ocmqel4aloa86mtsn5jsmmuvi3fcdpln.apps.googleusercontent.com";
     var locationManager: CLLocationManager!
     
@@ -58,6 +59,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
         self.dop_logo_y_constraint.constant = -200
         UIView.animateWithDuration(0.8) { self.view.layoutIfNeeded() }
         Utilities.slideFromBottomAnimation(flat_city_image, delay: 0.4, duration: 1.5, yPosition: 700)
+        Utilities.slideFromBottomAnimation(self.LoginButtonView, delay: 0.4, duration: 1.5, yPosition: 700)
         Utilities.fadeInViewAnimation(self.fbButton, delay: 1, duration: 0.7)
     }
     

@@ -41,9 +41,7 @@ class MoreMenuViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if (indexPath.section == 2) {
-            setActionSheet()
-        }
+        if  indexPath.section == 2 { setActionSheet() }
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
 
@@ -54,11 +52,11 @@ class MoreMenuViewController: UITableViewController {
     func getUserImage() {
         let url: NSURL = NSURL(string: User.userImageUrl)!
         Utilities.downloadImage(url, completion: {(data, error) -> Void in
-            if let image = data{
+            if let image = data {
                 dispatch_async(dispatch_get_main_queue()) {
                     self.userImage.image = UIImage(data: image)
                 }
-            }else{
+            } else {
                 print("Error")
             }
         })

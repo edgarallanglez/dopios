@@ -19,8 +19,8 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
     var newsfeedTemporary = [NewsfeedNote]()
     var people_array = [PeopleModel]()
     
-    let limit:Int = 6
-    var offset:Int = 0
+    let limit: Int = 6
+    var offset: Int = 0
     
     @IBOutlet var tableView: UITableView!
     
@@ -33,7 +33,7 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell:NewsfeedCell = tableView.dequeueReusableCellWithIdentifier("NewsfeedCell", forIndexPath: indexPath) as! NewsfeedCell
+        let cell: NewsfeedCell = tableView.dequeueReusableCellWithIdentifier("NewsfeedCell", forIndexPath: indexPath) as! NewsfeedCell
         
         if !newsfeed.isEmpty {
             let model = self.newsfeed[indexPath.row]
@@ -46,7 +46,7 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
             let imageUrl = NSURL(string: model.user_image)
             let identifier = "Cell\(indexPath.row)"
         
-            if (self.cachedImages[identifier] != nil){
+            if  self.cachedImages[identifier] != nil {
                 let cell_image_saved : UIImage = self.cachedImages[identifier]!
                 cell.user_image.image = cell_image_saved
                 cell.user_image.alpha = 1
@@ -71,11 +71,10 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
                                 })
                             }
                         }
-                    }else{
+                    } else {
                         print("Error")
                     }
                 })
-
             }
         }
         
@@ -129,8 +128,8 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
         tableView.addInfiniteScrollWithHandler { [weak self] (scrollView) -> Void in
             if !self!.newsfeed.isEmpty { self!.getNewsfeedActivityWithOffset() }
         }
-        tableView.alpha = 0
         
+        tableView.alpha = 0
     }
     
     override func didReceiveMemoryWarning() {
@@ -174,7 +173,7 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
                 let date =  subJson["used_date"].string
                 let level = subJson["level"].int ?? 0
                 let exp = subJson["exp"].double ?? 0
-                let is_friend = subJson["is_friend"].bool ?? false
+                let is_friend = subJson["is_friend"].bool ?? true
                 let operation_id = subJson["operation_id"].int ?? 5
                 let privacy_status = subJson["privacy_status"].int ?? 0
                 var formated_date = subJson["used_date"].string!
@@ -190,9 +189,8 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
                 let model = NewsfeedNote(client_coupon_id:client_coupon_id,friend_id: friend_id, user_id: user_id, branch_id: branch_id, coupon_name: name, branch_name: branch_name, names: names, surnames: surnames, user_image: main_image, company_id: company_id, branch_image: logo, total_likes:total_likes,user_like: user_like, date:date, formatedDate: formated_date)
                 
                 self.newsfeedTemporary.append(model)
-                
-
             }
+            
             dispatch_async(dispatch_get_main_queue(), {
                 self.newsfeed.removeAll()
                 self.newsfeed = self.newsfeedTemporary
@@ -201,9 +199,7 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
                 self.refreshControl.endRefreshing()
                 
                 Utilities.fadeOutViewAnimation(self.main_loader, delay: 0, duration: 0.3)
-
                 self.main_loader.stopAnimating()
-
                 
                 Utilities.fadeInFromBottomAnimation(self.tableView, delay: 0, duration: 1, yPosition: 20)
                 
@@ -226,14 +222,15 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
     
     func getNewsfeedActivityWithOffset() {
         
-        var newData:Bool = false
-        var addedValues:Int = 0
+        var newData: Bool = false
+        var addedValues: Int = 0
         
         var firstNewsfeed = self.newsfeed.first as NewsfeedNote!
         
         let params:[String: AnyObject] = [
-            "offset" : String(stringInterpolationSegment: offset),
-            "used_date" : firstNewsfeed.formatedDate]
+            "offset": String(stringInterpolationSegment: offset),
+            "used_date": firstNewsfeed.formatedDate
+        ]
         
         
         NewsfeedController.getAllFriendsTakingCouponsOffsetWithSuccess(params, success: { (friendsData) -> Void in
@@ -260,7 +257,7 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
                 let date =  subJson["used_date"].string
                 let level = subJson["level"].int ?? 0
                 let exp = subJson["exp"].double ?? 0
-                let is_friend = subJson["is_friend"].bool ?? false
+                let is_friend = subJson["is_friend"].bool ?? true
                 let operation_id = subJson["operation_id"].int ?? 5
                 let privacy_status = subJson["privacy_status"].int ?? 0
                 
@@ -283,9 +280,7 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
                 self.tableView.finishInfiniteScroll()
                 
                 print(json)
-                if(newData){
-                    self.offset+=addedValues
-                }
+                if newData { self.offset+=addedValues }
 
             });
             },
@@ -299,15 +294,11 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
     }
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         
-        if(cell.respondsToSelector(Selector("setSeparatorInset:"))){
-            cell.separatorInset = UIEdgeInsetsZero
-        }
-        if(cell.respondsToSelector(Selector("setPreservesSuperviewLayoutMargins:"))){
+        if cell.respondsToSelector(Selector("setSeparatorInset:")) { cell.separatorInset = UIEdgeInsetsZero }
+        if cell.respondsToSelector(Selector("setPreservesSuperviewLayoutMargins:")) {
             cell.preservesSuperviewLayoutMargins = false
         }
-        if(cell.respondsToSelector(Selector("setLayoutMargins:"))){
-            cell.layoutMargins = UIEdgeInsetsZero
-        }
+        if cell.respondsToSelector(Selector("setLayoutMargins:")) { cell.layoutMargins = UIEdgeInsetsZero }
     }
 //    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 //        if let cell = sender as? NewsfeedCell {
@@ -325,7 +316,6 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
     func goToUserProfile(index: Int!) {
         let person: PeopleModel = self.people_array[index]
         
-        
         let view_controller = self.storyboard!.instantiateViewControllerWithIdentifier("UserProfileStickyController") as! UserProfileStickyController
         view_controller.user_id = person.user_id
         view_controller.is_friend = person.is_friend
@@ -336,7 +326,6 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let person: PeopleModel = self.people_array[indexPath.row]
-        
         
         let view_controller = self.storyboard!.instantiateViewControllerWithIdentifier("UserProfileStickyController") as! UserProfileStickyController
         view_controller.user_id = person.user_id

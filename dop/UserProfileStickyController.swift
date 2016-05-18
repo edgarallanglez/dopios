@@ -45,11 +45,12 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        let backButton = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: navigationController, action: nil)
         
         self.collectionView?.alwaysBounceVertical = true
         self.view.backgroundColor = UIColor.whiteColor()
         self.frame_width = self.collectionView!.frame.width
-//
+        //self.navigationItem.leftBarButtonItem!.title = ""
         // Setup Cell
         let estimationHeight = true ? 20 : 21
         self.layout!.estimatedItemSize = CGSize(width: self.frame_width, height: CGFloat(estimationHeight))
@@ -63,55 +64,48 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
         self.layout?.headerReferenceSize = CGSizeMake(320, 40)
         
         //self.collectionView?.delegate = self
-        checkForProfile()
         
         drawBar()
         
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewWillDisappear(animated: Bool) {
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
+    override func viewWillAppear(animated: Bool) {
+        navigationItem.titleView = UIView()
+    }
+    
     override func viewDidAppear(animated: Bool) {
-        if User.newNotification {
-            self.notificationButton.image = UIImage(named: "notification-badge")
-        } else {
-            self.notificationButton.image = UIImage(named: "notification")
-        }
-        
+        navigationItem.titleView = UIView()
+        if User.newNotification { self.notificationButton.image = UIImage(named: "notification-badge") }
+        else { self.notificationButton.image = UIImage(named: "notification") }
+        checkForProfile()
         searchBar.alpha = 0
         Utilities.fadeInViewAnimation(searchBar, delay: 0, duration: 0.5)
         self.navigationItem.titleView = searchBar
     }
-    func drawBar(){
+    
+    func drawBar() {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "setBadge", name: "newNotification", object: nil)
 
         notificationButton = UIBarButtonItem(image: UIImage(named: "notification"), style: UIBarButtonItemStyle.Plain, target: self, action: "notification")
         
         self.navigationItem.rightBarButtonItem = notificationButton
-        
         vc  = self.storyboard!.instantiateViewControllerWithIdentifier("SearchView") as! SearchViewController
-        
         vcNot = self.storyboard!.instantiateViewControllerWithIdentifier("Notifications") as! NotificationViewController
-        
-        
+    
         searchBar.delegate = self
-        
-        
-
         searchBar.tintColor = UIColor.whiteColor()
         searchBar.searchBarStyle = UISearchBarStyle.Minimal
         searchBar.placeholder = "Buscar"
         
-        
-        
         for subView in self.searchBar.subviews {
             for subsubView in subView.subviews {
-                if let textField = subsubView as? UITextField{
+                if let textField = subsubView as? UITextField {
                     textField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("Buscar", comment: ""), attributes: [NSForegroundColorAttributeName: Utilities.extraLightGrayColor])
                     textField.textColor = UIColor.whiteColor()
-                    
                 }
             }
         }
@@ -167,6 +161,7 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
                 return custom_cell
             } else { cell = collectionView.dequeueReusableCellWithReuseIdentifier("locked_identifier", forIndexPath: indexPath)
                 cell.alpha = 1
+                cell.hidden = false
             }
         } else { cell = collectionView.dequeueReusableCellWithReuseIdentifier("locked_identifier", forIndexPath: indexPath) }
         
@@ -249,29 +244,19 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
         
         if self.user_id == User.user_id {
             user_name = "\(User.userName)"
-            if self.user_image == nil {
-                self.downloadImage(NSURL(string: User.userImageUrl)!)
-            }
-        } else if person.privacy_status == 0 {
-            user_name = "\(person.names) \(person.surnames)"
-            //            userProfileSegmentedController.items.removeLast()
-        } else if person.privacy_status == 1 {
-            user_name = "\(person.names) \(person.surnames)"
-//            private_view.hidden = false
-        }
-        self.collectionView?.reloadData()
+            if self.user_image == nil { self.downloadImage(NSURL(string: User.userImageUrl)!) }
+            self.collectionView?.reloadData()
+        } else if person.privacy_status == 0 { user_name = "\(person.names) \(person.surnames)" }
+          else if person.privacy_status == 1 { user_name = "\(person.names) \(person.surnames)" }
     }
     
     func downloadImage(url: NSURL) {
         Utilities.downloadImage(url, completion: {(data, error) -> Void in
-            if let image = data{
+            if let image = data {
                 dispatch_async(dispatch_get_main_queue()) {
                     self.user_image?.image = UIImage(data: image)
                 }
-
-            }else{
-                print("Error")
-            }
+            } else { print("Error") }
         })
     }
     
@@ -291,7 +276,7 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
     }
     
     func presentView(notification: NSNotification){
-        if(searchViewIsOpen){
+        if searchViewIsOpen {
             searchViewIsSegue = true
             
             let params = notification.object as! NSDictionary
@@ -303,6 +288,7 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
                 self.navigationController?.pushViewController(viewControllerToPresent, animated: true)
                 
             }
+            
             if vc.searchSegmentedController.selectedIndex == 1 {
                 let viewControllerToPresent = self.storyboard!.instantiateViewControllerWithIdentifier("UserProfileStickyController") as! UserProfileStickyController
                 viewControllerToPresent.user_id = object_id
@@ -311,15 +297,14 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
                 self.navigationController?.pushViewController(viewControllerToPresent, animated: true)
                 
             }
-            
+    
             searchBar.resignFirstResponder()
-            
         }
         
     }
     
     func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
-        if(searchViewIsOpen == false){
+        if !searchViewIsOpen {
             self.navigationItem.rightBarButtonItem = cancelSearchButton
             
             searchView.layer.masksToBounds = true
@@ -334,8 +319,8 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
         return true
     }
     
-    func cancelSearch(){
-        if(searchViewIsOpen == true){
+    func cancelSearch() {
+        if searchViewIsOpen {
             searchView.removeFromSuperview()
             searchBar.resignFirstResponder()
             searchViewIsOpen = false
@@ -350,14 +335,13 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        if(searchViewIsOpen == true && vc.searchScrollView.hidden == true){
+        if (searchViewIsOpen == true && vc.searchScrollView.hidden == true) {
             vc.searchScrollView.hidden = false
             Utilities.slideFromBottomAnimation(vc.searchScrollView, delay: 0, duration: 0.5, yPosition: 600)
         }
         
-        if(searchText.characters.count == 0){
-            vc.searchScrollView.hidden = true
-        }else{
+        if searchText.characters.count == 0 { vc.searchScrollView.hidden = true }
+        else {
             vc.searchText = searchText
             vc.searchTimer()
         }
@@ -367,7 +351,7 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
         vc.searchActive = false;
         vc.timer?.invalidate()
         
-        if(vc.searchText != ""){
+        if vc.searchText != "" {
             vc.search()
             searchBar.resignFirstResponder()
         }
@@ -380,9 +364,11 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         vc.searchActive = false;
     }
-    func setBadge(){
+    
+    func setBadge() {
         self.notificationButton.image = UIImage(named: "notification-badge")
     }
+    
     func notification() {
         let tabbar = self.tabBarController as! TabbarController!
         self.navigationController?.pushViewController(tabbar.vcNot, animated: true)

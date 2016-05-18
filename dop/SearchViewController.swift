@@ -64,24 +64,15 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if(!searching) {
+        if !searching {
             if tableView == self.tableView {
-                if filtered.count == 0{
-                    return 1
-                }else{
-                    return filtered.count
-                }
-            }else{
-                if peopleFiltered.count == 0{
-                    return 1
-                }else{
-                    return peopleFiltered.count
-                }
+                if filtered.count == 0 { return 1 }
+                else { return filtered.count }
+            } else {
+                if peopleFiltered.count == 0 { return 1 }
+                else { return peopleFiltered.count }
             }
-
-        } else {
-            return 1
-        }
+        } else { return 1 }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -96,7 +87,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
                     cell.selectionStyle = UITableViewCellSelectionStyle.None
                     
                     return (cell)
-                }else{
+                } else {
                     let cell = tableView.dequeueReusableCellWithIdentifier("loadingCell") as! LoadingCell;
                     cell.label.text = "No se encontraron resultados"
                     cell.selectionStyle = UITableViewCellSelectionStyle.None
@@ -194,7 +185,6 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         peopleFiltered.removeAll()
         cachedImages.removeAll()
         
-        
         let latitude = User.coordinate.latitude
         let longitude = User.coordinate.longitude
         let params: [String:AnyObject] = [
@@ -202,8 +192,8 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
             "latitude": latitude,
             "longitude":longitude
         ]
-        searching = true
         
+        searching = true
         
         if self.searchSegmentedController.selectedIndex == 0 {
             tableView.reloadData()
@@ -215,9 +205,10 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
                     for (_, subJson): (String, JSON) in json["data"] {
                         var distance:Double = 0.0
                         
-                        if(subJson["distance"]){
+                        if (subJson["distance"]) {
                              distance = Utilities.roundValue(subJson["distance"].double!,numberOfPlaces: 1.0)
                         }
+                        
                         let name = subJson["name"].string!
                         let branch_id = subJson["branch_id"].int
                         let model = Branch(id: branch_id, name: name, distance: distance)
