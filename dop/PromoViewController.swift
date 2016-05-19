@@ -30,6 +30,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
     let limit: Int = 6
     var offset: Int = 0
     var offset_mycoupons: Int = 0
+    var little_size: Bool = false
     
     var documentController:UIDocumentInteractionController!
     
@@ -37,7 +38,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        if UIScreen.mainScreen().bounds.width == 320 { self.little_size = true }
         self.title = ""
         offset = limit - 1
         offset_mycoupons = limit - 1
@@ -249,7 +250,9 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
   
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        var width = (UIScreen.mainScreen().bounds.width / 2) - 20
+        var width: CGFloat = CGFloat(0)
+        if self.little_size { width = CGFloat(255) }
+        else { width = (UIScreen.mainScreen().bounds.width / 2) - 20 }
         let size = CGSizeMake(width, 230)
         
         return size

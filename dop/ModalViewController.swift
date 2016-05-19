@@ -67,9 +67,14 @@ class ModalViewController: MZFormSheetController {
             
             case .CouponDetail: simple_modal = presentedFormSheetViewController.storyboard?.instantiateViewControllerWithIdentifier("CouponDetailModal") as? SimpleModalViewController
                 super.init(viewController: simple_modal!)
-            
+            var height: CGFloat = CGFloat(0)
+                if UIScreen.mainScreen().bounds.width == 320 {
+                    simple_modal.setLittleSize()
+                    height = (UIScreen.mainScreen().bounds.height / 3) * 2.4
+                } else { height = (UIScreen.mainScreen().bounds.height / 3) * 2.16 }
                 let width = UIScreen.mainScreen().bounds.width - 30
-                self.presentedFormSheetSize = CGSizeMake(width, 530)
+                
+                self.presentedFormSheetSize = CGSizeMake(width, height)
                 simple_modal.branch_title.addTarget(self, action: "toBranch", forControlEvents: .TouchUpInside)
                 
                 let gesture = UITapGestureRecognizer(target: self, action: "likeCoupon:")

@@ -36,7 +36,7 @@ class NotificationCell: UITableViewCell {
         accept_btn.hidden = true
 
         
-        if(notification.type == "newsfeed"){
+        if notification.type == "newsfeed" {
             
             let notification_text = "A \(launcher_name) le ha gustado tu actividad en \(newsfeed_Activity)"
             title.text = notification_text
@@ -48,19 +48,19 @@ class NotificationCell: UITableViewCell {
             title.addLinkToURL(segue, withRange: launcher_range)
             title.addLinkToURL(branch_segue, withRange: newsfeed_activity_range)
         }
-        if(notification.type == "friend"){
+        if notification.type == "friend" {
             var notification_text = ""
-            
-            if(notification.friendship_status == 1 && notification.launcher_friend == User.user_id){
+
+            if notification.friendship_status == 1 && notification.launcher_friend == User.user_id {
                 notification_text = "Ahora sigues a \(launcher_name)"
-            }else{
+            } else {
                 notification_text = "\(launcher_name) te esta siguiendo"
             }
-            if(notification.friendship_status == 0 ){
+            
+            if notification.friendship_status == 0 {
                 notification_text = "\(launcher_name) quiere seguirte"
                 decline_btn.hidden = false
                 accept_btn.hidden = false
-
             }
             
             title.text = notification_text
@@ -69,17 +69,16 @@ class NotificationCell: UITableViewCell {
             let segue = NSURL(string: "userProfile:\(notification.launcher_id)")!
             title.addLinkToURL(segue, withRange: launcher_range)
         }
-        if(notification.read == false){
+        
+        if !notification.read {
             notification_view.backgroundColor = Utilities.lightGrayColor
             self.contentView.backgroundColor = Utilities.lightGrayColor
-
-        }else{
+        } else {
             notification_view.backgroundColor = UIColor.whiteColor()
             self.contentView.backgroundColor = UIColor.whiteColor()
         }
         
         self.date_label.text = Utilities.friendlyDate(notification.date)
-        
         self.notification = notification
     }
 

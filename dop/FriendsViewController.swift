@@ -248,7 +248,6 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
                 view.is_friend = model.is_friend
                 view.operation_id = model.operation_id!
                 view.user_name = model.names
-                view.navigationItem.backBarButtonItem?.title = ""
             }
         }
     }

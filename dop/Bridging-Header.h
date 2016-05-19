@@ -8,8 +8,6 @@
 
 #ifndef dop_Bridging_h
 #define dop_Bridging_h
-#import <GooglePlus/GooglePlus.h>
-#import <GoogleOpenSource/GoogleOpenSource.h>
 #endif
 
 #import <FBSDKCoreKit/FBSDKCoreKit.h>

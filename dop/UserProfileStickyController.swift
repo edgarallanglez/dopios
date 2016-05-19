@@ -73,12 +73,7 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
-    override func viewWillAppear(animated: Bool) {
-        navigationItem.titleView = UIView()
-    }
-    
     override func viewDidAppear(animated: Bool) {
-        navigationItem.titleView = UIView()
         if User.newNotification { self.notificationButton.image = UIImage(named: "notification-badge") }
         else { self.notificationButton.image = UIImage(named: "notification") }
         checkForProfile()

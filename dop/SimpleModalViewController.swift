@@ -31,6 +31,9 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapVie
     @IBOutlet weak var available_coupon: UILabel!
     @IBOutlet weak var likes_label: UILabel!
     
+    @IBOutlet weak var map_heigth: NSLayoutConstraint!
+    @IBOutlet weak var heart_button_width: NSLayoutConstraint!
+    @IBOutlet weak var take_button_width: NSLayoutConstraint!
     @IBOutlet var map: MKMapView!
     var map_loaded: Bool = false
     
@@ -346,6 +349,16 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapVie
         }
         
         self.map.addAnnotation(drop_pin)
+    }
+    
+    func setLittleSize() {
+        self.heart_button_width.constant = 18
+        self.take_button_width.constant = 22
+        self.map_heigth.constant = 110
+        self.branch_title.titleLabel!.font = UIFont(name: "Montserrat-Regular", size: 22)
+        self.description_title.font = UIFont(name: "Montserrat-Regular", size: 15)
+        self.coupon_description.font = UIFont(name: "Montserrat-Regular", size: 14)
+
     }
     
     @IBAction func setTakeCoupon(sender: UIButton) {
