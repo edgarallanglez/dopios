@@ -24,7 +24,7 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
     var user_name: String!
     var user_image: UIImageView!
     var user_image_path: String = ""
-    var is_friend: Bool!
+    var is_friend: Bool?
     var operation_id: Int = 0
     var person: PeopleModel!
     var page_index: Int!
@@ -64,7 +64,7 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
         self.layout?.headerReferenceSize = CGSizeMake(320, 40)
         
         //self.collectionView?.delegate = self
-        
+        checkForProfile()
         drawBar()
         
     }
@@ -76,10 +76,14 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
     override func viewDidAppear(animated: Bool) {
         if User.newNotification { self.notificationButton.image = UIImage(named: "notification-badge") }
         else { self.notificationButton.image = UIImage(named: "notification") }
-        checkForProfile()
-        searchBar.alpha = 0
-        Utilities.fadeInViewAnimation(searchBar, delay: 0, duration: 0.5)
-        self.navigationItem.titleView = searchBar
+        if !self.isMovingToParentViewController() { setSearchObserver() }
+        else {
+            searchBar.alpha = 0
+            Utilities.fadeInViewAnimation(searchBar, delay: 0, duration: 0.5)
+            self.navigationItem.titleView = searchBar
+        }
+        
+
     }
     
     func drawBar() {
@@ -124,14 +128,17 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
         
         cancelSearchButton = UIBarButtonItem(title: "Cancelar", style: .Plain, target: self, action: "cancelSearch")
         
+        setSearchObserver()
+
+    }
+    
+    func setSearchObserver() {
         NSNotificationCenter.defaultCenter().addObserver(
             self,
             selector: "presentView:",
             name: "performSegue",
             object: nil)
-
     }
-    
     // Cells
     func resizeView(new_height: CGFloat) {
         var size_changed = false
@@ -223,7 +230,6 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
             
             dispatch_async(dispatch_get_main_queue(), {
                 self.setupProfileDetail()
-                
             })
             },
             failure: { (error) -> Void in
@@ -241,8 +247,13 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
             user_name = "\(User.userName)"
             if self.user_image == nil { self.downloadImage(NSURL(string: User.userImageUrl)!) }
             self.collectionView?.reloadData()
-        } else if person.privacy_status == 0 { user_name = "\(person.names) \(person.surnames)" }
-          else if person.privacy_status == 1 { user_name = "\(person.names) \(person.surnames)" }
+            self.person.is_friend = true
+        }
+        user_name = "\(person.names) \(person.surnames)"
+        if person.privacy_status == 1 && !person.is_friend! {
+            user_name = "\(person.names) \(person.surnames)"
+            self.collectionView?.reloadData()
+        }
     }
     
     func downloadImage(url: NSURL) {
