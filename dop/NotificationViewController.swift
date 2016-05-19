@@ -177,7 +177,9 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                     
                     let model = Notification(type: type, notification_id: notification_id, launcher_id: launcher_id, launcher_name: launcher_name, launcher_surnames: launcher_surnames, newsfeed_activity: newsfeed_activity, friendship_status: friendship_status,read: read, date: date, image_name: image, company_id: company_id, object_id: object_id, launcher_friend: launcher_friend, branch_id: branch_id)
                     
-                    self.notificationsTemporary.append(model)
+                    if(friendship_status<2){
+                        self.notificationsTemporary.append(model)
+                    }
                     
                 }
                 
@@ -235,8 +237,9 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
 
                     let model = Notification(type: type, notification_id: notification_id, launcher_id: launcher_id, launcher_name: launcher_name, launcher_surnames: launcher_surnames, newsfeed_activity: newsfeed_activity, friendship_status: friendship_status,read: read, date:date, image_name: image, company_id: company_id, object_id: object_id, launcher_friend: launcher_friend, branch_id: branch_id)
                     
-                    
-                    self.notificationsTemporary.append(model)
+                    if(friendship_status<2){
+                        self.notificationsTemporary.append(model)
+                    }
                     
                     newData = true
                     addedValues++
@@ -297,7 +300,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let selectedItem = notifications[indexPath.row]
-        let itemId = selectedItem.notification_id
+        /*let itemId = selectedItem.notification_id
         
         let cell: NotificationCell = tableView.cellForRowAtIndexPath(indexPath) as! NotificationCell
         
@@ -318,7 +321,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             if(selectedItem.type == "newsfeed"){
                 
             }
-        }
+        }*/
     }
     func attributedLabel(label: TTTAttributedLabel!, didSelectLinkWithURL url: NSURL!) {
         let splitter = String(url).componentsSeparatedByString(":")

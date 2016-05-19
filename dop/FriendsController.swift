@@ -53,6 +53,17 @@ class FriendsController: NSObject {
             }
         })
     }
+    class func declineFriendWithSuccess(params:[String:AnyObject], success: ((friendsData: NSData!) -> Void), failure errorFound: ((friendsData: NSError?) -> Void)) {
+        let url = "\(Utilities.dopURL)user/friends/decline"
+        print(url)
+        Utilities.sendDataToURL(NSURL(string: url)!, method:"PUT", params: params, completion:{(data, error) -> Void in
+            if let urlData = data {
+                success(friendsData: urlData)
+            } else {
+                errorFound(friendsData: error)
+            }
+        })
+    }
     class func getAllFollowingWithSuccess(success succeed: ((friendsData: NSData!) -> Void), failure errorFound: ((friendsData: NSError?) -> Void)) {
         let url = "\(Utilities.dopURL)user/following/get"
         Utilities.loadDataFromURL(NSURL(string: url)!, completion:{(data, error) -> Void in

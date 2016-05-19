@@ -60,14 +60,18 @@ class NotificationCell: UITableViewCell {
                 notification_text = "\(launcher_name) quiere seguirte"
                 decline_btn.hidden = false
                 accept_btn.hidden = false
+        
 
             }
+            
             
             title.text = notification_text
             let nsString = notification_text as NSString
             let launcher_range = nsString.rangeOfString(launcher_name)
             let segue = NSURL(string: "userProfile:\(notification.launcher_id)")!
             title.addLinkToURL(segue, withRange: launcher_range)
+            
+    
         }
         if(notification.read == false){
             notification_view.backgroundColor = Utilities.lightGrayColor
@@ -84,7 +88,19 @@ class NotificationCell: UITableViewCell {
     }
 
     @IBAction func declineFriend(sender: AnyObject) {
+        let params:[String: AnyObject] = [
+            "notification_id" : self.notification!.notification_id,
+            "friends_id": self.notification!.object_id]
         
+        FriendsController.declineFriendWithSuccess(params, success: {(friendsData) -> Void in
+            dispatch_async(dispatch_get_main_queue(), {
+                print("Rechazado")
+            })
+            }, failure: { (error) -> Void in
+                dispatch_async(dispatch_get_main_queue(), {
+                    print("Error")
+                })
+        })
     }
 
     @IBAction func acceptFriend(sender: AnyObject) {
@@ -94,7 +110,7 @@ class NotificationCell: UITableViewCell {
 
             FriendsController.acceptFriendWithSuccess(params, success: {(friendsData) -> Void in
                 dispatch_async(dispatch_get_main_queue(), {
-                    print("Aceptado")
+                    
                 })
                 }, failure: { (error) -> Void in
                     dispatch_async(dispatch_get_main_queue(), {
