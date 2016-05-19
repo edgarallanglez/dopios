@@ -66,9 +66,6 @@
 		9D0DB4711B17D2DB0009FE6C /* NearbyMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0DB4701B17D2DB0009FE6C /* NearbyMapViewController.swift */; };
 		9D0DB4731B17DE5A0009FE6C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D0DB4721B17DE5A0009FE6C /* MapKit.framework */; };
 		9D0E43D11BF55F8200BA17D7 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0E43D01BF55F8200BA17D7 /* SettingsController.swift */; };
-		9D1205741BDEBF16009EEBAE /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D12056B1BDEBEF9009EEBAE /* CryptoSwift.framework */; };
-		9D1205751BDEBF60009EEBAE /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D12056B1BDEBEF9009EEBAE /* CryptoSwift.framework */; };
-		9D1205761BDEBF60009EEBAE /* CryptoSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9D12056B1BDEBEF9009EEBAE /* CryptoSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9D1B5F851C1A1030003F28E5 /* AlertModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1B5F841C1A1030003F28E5 /* AlertModel.swift */; };
 		9D2BDFE41B9DF524003F1260 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0FE26D01B9A4D12004EB402 /* SearchController.swift */; };
 		9D2CEA2B1BFCE4BD0088B6BC /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D2CEA281BFCE4BD0088B6BC /* FBSDKCoreKit.framework */; };
@@ -148,9 +145,6 @@
 		A05592AB1BDB1C5E0041E20D /* libc++.dylib in Resources */ = {isa = PBXBuildFile; fileRef = A05592A51BDB19B70041E20D /* libc++.dylib */; };
 		A0578C521B0D64AD0033B5BD /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0578C4E1B0D64AD0033B5BD /* Fabric.framework */; };
 		A0578C551B0D64AD0033B5BD /* TwitterCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0578C511B0D64AD0033B5BD /* TwitterCore.framework */; };
-		A0578C5F1B0E40D30033B5BD /* GoogleOpenSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0578C5C1B0E40D30033B5BD /* GoogleOpenSource.framework */; };
-		A0578C601B0E40D30033B5BD /* GooglePlus.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A0578C5D1B0E40D30033B5BD /* GooglePlus.bundle */; };
-		A0578C611B0E40D30033B5BD /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0578C5E1B0E40D30033B5BD /* GooglePlus.framework */; };
 		A0578C641B0E7D2B0033B5BD /* UserProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0578C621B0E7D2B0033B5BD /* UserProfileController.swift */; };
 		A05F782F1B503A4E00371708 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A05F782E1B503A4E00371708 /* Social.framework */; };
 		A05F78311B505DED00371708 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A05F78301B505DED00371708 /* Accounts.framework */; };
@@ -245,48 +239,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		9D12056A1BDEBEF9009EEBAE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9D1205621BDEBEF8009EEBAE /* CryptoSwift.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 754BE45519693E190098E6F3;
-			remoteInfo = "CryptoSwift iOS";
-		};
-		9D12056C1BDEBEF9009EEBAE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9D1205621BDEBEF8009EEBAE /* CryptoSwift.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 5596BDBB1BC8F220007E38D5;
-			remoteInfo = "CryptoSwift watchOS";
-		};
-		9D12056E1BDEBEF9009EEBAE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9D1205621BDEBEF8009EEBAE /* CryptoSwift.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 75D614BF1BD844F2001358B2;
-			remoteInfo = "CryptoSwift tvOS";
-		};
-		9D1205701BDEBEF9009EEBAE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9D1205621BDEBEF8009EEBAE /* CryptoSwift.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 75DF77721BC8EB59006E9520;
-			remoteInfo = "CryptoSwift OSX";
-		};
-		9D1205721BDEBEF9009EEBAE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9D1205621BDEBEF8009EEBAE /* CryptoSwift.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 754BE46019693E190098E6F3;
-			remoteInfo = CryptoSwiftTests;
-		};
-		9D1205771BDEBF60009EEBAE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9D1205621BDEBEF8009EEBAE /* CryptoSwift.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 754BE45419693E190098E6F3;
-			remoteInfo = "CryptoSwift iOS";
-		};
 		9D33261F1AF7ED1C00498801 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9D3326011AF7ED1C00498801 /* Project object */;
@@ -339,7 +291,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				9D3919231BDFEB89002229EB /* JWTDecode.framework in Embed Frameworks */,
-				9D1205761BDEBF60009EEBAE /* CryptoSwift.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -421,7 +372,6 @@
 		9D0DB4701B17D2DB0009FE6C /* NearbyMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyMapViewController.swift; sourceTree = "<group>"; };
 		9D0DB4721B17DE5A0009FE6C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		9D0E43D01BF55F8200BA17D7 /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
-		9D1205621BDEBEF8009EEBAE /* CryptoSwift.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CryptoSwift.xcodeproj; path = CryptoSwift/CryptoSwift.xcodeproj; sourceTree = "<group>"; };
 		9D1B5F841C1A1030003F28E5 /* AlertModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertModel.swift; sourceTree = "<group>"; };
 		9D2CEA281BFCE4BD0088B6BC /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = Facebook/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		9D2CEA291BFCE4BD0088B6BC /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = Facebook/FBSDKLoginKit.framework; sourceTree = "<group>"; };
@@ -523,9 +473,6 @@
 		A05592A51BDB19B70041E20D /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = "libc++.dylib"; sourceTree = "<group>"; };
 		A0578C4E1B0D64AD0033B5BD /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		A0578C511B0D64AD0033B5BD /* TwitterCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterCore.framework; sourceTree = "<group>"; };
-		A0578C5C1B0E40D30033B5BD /* GoogleOpenSource.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleOpenSource.framework; path = dop/GoogleOpenSource.framework; sourceTree = "<group>"; };
-		A0578C5D1B0E40D30033B5BD /* GooglePlus.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GooglePlus.bundle; path = dop/GooglePlus.bundle; sourceTree = "<group>"; };
-		A0578C5E1B0E40D30033B5BD /* GooglePlus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GooglePlus.framework; path = dop/GooglePlus.framework; sourceTree = "<group>"; };
 		A0578C621B0E7D2B0033B5BD /* UserProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileController.swift; sourceTree = "<group>"; };
 		A05F782E1B503A4E00371708 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		A05F78301B505DED00371708 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
@@ -635,20 +582,16 @@
 				9D3919211BDFEB83002229EB /* JWTDecode.framework in Frameworks */,
 				9D2CEA2C1BFCE4BD0088B6BC /* FBSDKLoginKit.framework in Frameworks */,
 				9D2CEA2B1BFCE4BD0088B6BC /* FBSDKCoreKit.framework in Frameworks */,
-				9D1205741BDEBF16009EEBAE /* CryptoSwift.framework in Frameworks */,
 				A0EC059D1B7D1FD5003CADB2 /* UIKit.framework in Frameworks */,
 				A0EC059B1B7D1ED1003CADB2 /* CoreGraphics.framework in Frameworks */,
 				A05F78311B505DED00371708 /* Accounts.framework in Frameworks */,
 				A05F782F1B503A4E00371708 /* Social.framework in Frameworks */,
 				9D2CEA2D1BFCE4BD0088B6BC /* FBSDKShareKit.framework in Frameworks */,
-				9D1205751BDEBF60009EEBAE /* CryptoSwift.framework in Frameworks */,
 				A0EB97E41B0BA7DD005112EF /* AddressBook.framework in Frameworks */,
-				A0578C5F1B0E40D30033B5BD /* GoogleOpenSource.framework in Frameworks */,
 				A0EB97E21B0BA7D5005112EF /* AssetsLibrary.framework in Frameworks */,
 				9D3919221BDFEB89002229EB /* JWTDecode.framework in Frameworks */,
 				9D0DB4731B17DE5A0009FE6C /* MapKit.framework in Frameworks */,
 				A0EB97E01B0BA7CE005112EF /* CoreData.framework in Frameworks */,
-				A0578C611B0E40D30033B5BD /* GooglePlus.framework in Frameworks */,
 				A05592A71BDB19B70041E20D /* libc++.dylib in Frameworks */,
 				A0578C551B0D64AD0033B5BD /* TwitterCore.framework in Frameworks */,
 				A0578C521B0D64AD0033B5BD /* Fabric.framework in Frameworks */,
@@ -683,15 +626,11 @@
 				9D2CEA271BFCE41D0088B6BC /* Facebook */,
 				A08D13F91BFBB86100A19AAF /* NSDateTimeAgo.bundle */,
 				9D3919121BDFEB67002229EB /* JWTDecode.xcodeproj */,
-				9D1205621BDEBEF8009EEBAE /* CryptoSwift.xcodeproj */,
 				A0EC059C1B7D1FD5003CADB2 /* UIKit.framework */,
 				A0EC059A1B7D1ED1003CADB2 /* CoreGraphics.framework */,
 				A05F78301B505DED00371708 /* Accounts.framework */,
 				A05F782E1B503A4E00371708 /* Social.framework */,
 				9D0DB4721B17DE5A0009FE6C /* MapKit.framework */,
-				A0578C5C1B0E40D30033B5BD /* GoogleOpenSource.framework */,
-				A0578C5D1B0E40D30033B5BD /* GooglePlus.bundle */,
-				A0578C5E1B0E40D30033B5BD /* GooglePlus.framework */,
 				A0578C4E1B0D64AD0033B5BD /* Fabric.framework */,
 				A0578C511B0D64AD0033B5BD /* TwitterCore.framework */,
 				A0EB97E31B0BA7DD005112EF /* AddressBook.framework */,
@@ -852,18 +791,6 @@
 				A009A7E61C6BBAF6001C384D /* TriangeView.swift */,
 			);
 			name = Nearby;
-			sourceTree = "<group>";
-		};
-		9D1205631BDEBEF8009EEBAE /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				9D12056B1BDEBEF9009EEBAE /* CryptoSwift.framework */,
-				9D12056D1BDEBEF9009EEBAE /* CryptoSwift.framework */,
-				9D12056F1BDEBEF9009EEBAE /* CryptoSwift.framework */,
-				9D1205711BDEBEF9009EEBAE /* CryptoSwift.framework */,
-				9D1205731BDEBEF9009EEBAE /* CryptoSwiftTests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		9D2CEA271BFCE41D0088B6BC /* Facebook */ = {
@@ -1321,7 +1248,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				9D1205781BDEBF60009EEBAE /* PBXTargetDependency */,
 				9D3919251BDFEB89002229EB /* PBXTargetDependency */,
 			);
 			name = dop;
@@ -1392,10 +1318,6 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 9D1205631BDEBEF8009EEBAE /* Products */;
-					ProjectRef = 9D1205621BDEBEF8009EEBAE /* CryptoSwift.xcodeproj */;
-				},
-				{
 					ProductGroup = 9D3919131BDFEB67002229EB /* Products */;
 					ProjectRef = 9D3919121BDFEB67002229EB /* JWTDecode.xcodeproj */;
 				},
@@ -1409,41 +1331,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		9D12056B1BDEBEF9009EEBAE /* CryptoSwift.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = CryptoSwift.framework;
-			remoteRef = 9D12056A1BDEBEF9009EEBAE /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		9D12056D1BDEBEF9009EEBAE /* CryptoSwift.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = CryptoSwift.framework;
-			remoteRef = 9D12056C1BDEBEF9009EEBAE /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		9D12056F1BDEBEF9009EEBAE /* CryptoSwift.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = CryptoSwift.framework;
-			remoteRef = 9D12056E1BDEBEF9009EEBAE /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		9D1205711BDEBEF9009EEBAE /* CryptoSwift.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = CryptoSwift.framework;
-			remoteRef = 9D1205701BDEBEF9009EEBAE /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		9D1205731BDEBEF9009EEBAE /* CryptoSwiftTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = CryptoSwiftTests.xctest;
-			remoteRef = 9D1205721BDEBEF9009EEBAE /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		9D39191A1BDFEB67002229EB /* JWTDecode.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -1519,7 +1406,6 @@
 				6D9770001CDBB97B000C0670 /* SF-UI-Text-Medium.otf in Resources */,
 				6D976FFA1CDBB97B000C0670 /* SF-UI-Text-Bold.otf in Resources */,
 				A08D13FA1BFBB86100A19AAF /* NSDateTimeAgo.bundle in Resources */,
-				A0578C601B0E40D30033B5BD /* GooglePlus.bundle in Resources */,
 				9D42966D1BBEFE17000B4A21 /* RewardsActivityCell.xib in Resources */,
 				6D9770051CDBB97B000C0670 /* SF-UI-Text-SemiboldItalic.otf in Resources */,
 				9DA3C8961B90C117000D40F2 /* Images.xcassets in Resources */,
@@ -1709,11 +1595,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		9D1205781BDEBF60009EEBAE /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "CryptoSwift iOS";
-			targetProxy = 9D1205771BDEBF60009EEBAE /* PBXContainerItemProxy */;
-		};
 		9D3326201AF7ED1C00498801 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 9D3326081AF7ED1C00498801 /* dop */;
@@ -1875,7 +1756,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.halley.dop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "ece59f5e-e542-4574-9b38-67a195f1baa3";
 				SWIFT_OBJC_BRIDGING_HEADER = "dop/Bridging-Header.h";
 			};
 			name = Debug;
@@ -1913,7 +1794,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.halley.dop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "ece59f5e-e542-4574-9b38-67a195f1baa3";
 				SWIFT_OBJC_BRIDGING_HEADER = "dop/Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
