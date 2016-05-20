@@ -108,7 +108,9 @@ class BranchRankingViewController: UITableViewController {
                 
                 let model = PeopleModel(names: names, surnames: surnames, user_id: user_id, birth_date: birth_date, facebook_key: facebook_key, privacy_status: privacy_status, main_image: main_image, total_used: total_used, level: level, exp: exp, is_friend: is_friend, operation_id: operation_id)
                 
-                self.ranking_array.append(model)
+                if model.total_used != 0 {
+                    self.ranking_array.append(model)
+                }
             }
             
             dispatch_async(dispatch_get_main_queue(), {

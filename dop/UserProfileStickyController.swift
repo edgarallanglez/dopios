@@ -38,6 +38,7 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
     var searchViewIsOpen: Bool = false
     var searchViewIsSegue: Bool = false
     var cancelSearchButton: UIBarButtonItem!
+    var reload: Bool = false
     
     private var layout: CSStickyHeaderFlowLayout? {
         return self.collectionView?.collectionViewLayout as? CSStickyHeaderFlowLayout
@@ -45,12 +46,11 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        let backButton = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: navigationController, action: nil)
         
         self.collectionView?.alwaysBounceVertical = true
         self.view.backgroundColor = UIColor.whiteColor()
         self.frame_width = self.collectionView!.frame.width
-        //self.navigationItem.leftBarButtonItem!.title = ""
+        
         // Setup Cell
         let estimationHeight = true ? 20 : 21
         self.layout!.estimatedItemSize = CGSize(width: self.frame_width, height: CGFloat(estimationHeight))
@@ -108,8 +108,6 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
                 }
             }
         }
-        
-        
 
         searchView = UIView(frame: CGRectMake(0,0,self.view.frame.width,self.view.frame.height))
         
@@ -127,8 +125,7 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
         
         
         cancelSearchButton = UIBarButtonItem(title: "Cancelar", style: .Plain, target: self, action: "cancelSearch")
-        
-        setSearchObserver()
+        //setSearchObserver()
 
     }
     
@@ -154,6 +151,7 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         var cell: UICollectionViewCell!
         if self.person != nil {
+            self.reload = false
             if self.person?.privacy_status == 0 || User.user_id == self.person.user_id || self.person.is_friend == true {
                 let custom_cell = collectionView.dequeueReusableCellWithReuseIdentifier("page_identifier", forIndexPath: indexPath) as! UserPaginationViewController
                 
@@ -165,7 +163,10 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
                 cell.alpha = 1
                 cell.hidden = false
             }
-        } else { cell = collectionView.dequeueReusableCellWithReuseIdentifier("locked_identifier", forIndexPath: indexPath) }
+        } else {
+            cell = collectionView.dequeueReusableCellWithReuseIdentifier("locked_identifier", forIndexPath: indexPath)
+            self.reload = true
+        }
         
         return cell
     }
@@ -208,6 +209,7 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
         return UICollectionReusableView()
         
     }
+    
     func checkForProfile() {
         UserProfileController.getUserProfile(user_id, success: { (profileData) -> Void in
             let json = JSON(data: profileData)
@@ -249,11 +251,14 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
             self.collectionView?.reloadData()
             self.person.is_friend = true
         }
+        
         user_name = "\(person.names) \(person.surnames)"
         if person.privacy_status == 1 && !person.is_friend! {
             user_name = "\(person.names) \(person.surnames)"
             self.collectionView?.reloadData()
         }
+        
+        if self.reload { self.collectionView?.reloadData() }
     }
     
     func downloadImage(url: NSURL) {
@@ -281,7 +286,7 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
         self.collectionView?.setContentOffset(CGPointZero, animated: false)
     }
     
-    func presentView(notification: NSNotification){
+    func presentView(notification: NSNotification) {
         if searchViewIsOpen {
             searchViewIsSegue = true
             
