@@ -21,7 +21,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     let limit:Int = 11
     var refreshControl: UIRefreshControl!
     var cachedImages: [String: UIImage] = [:]
-
+    var notificationButtonPressed: Bool = false
     
     override func viewDidLoad() {
         
@@ -65,11 +65,17 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     }
     @IBAction func pressNotificationButton(sender: AnyObject) {
         //notification_table.setContentOffset(CGPointMake(0, 0), animated: true)
-        self.getNotifications()
+        notificationButtonPressed = true
+        if(refreshControl.refreshing == false){
+            self.getNotifications()
+        }
         Utilities.fadeOutViewAnimation(self.notificationButton, delay: 0, duration: 0.5)
     }
     func refresh(sender:AnyObject){
-        getNotifications()
+        Utilities.fadeOutViewAnimation(self.notificationButton, delay: 0, duration: 0.5)
+        if(refreshControl.refreshing == false && notificationButtonPressed == false){
+            getNotifications()
+        }
     }
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
@@ -195,7 +201,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                     self.refreshControl.endRefreshing()
 
                     Utilities.fadeOutViewAnimation(self.mainLoader, delay: 0, duration: 0.3)
-                    
+                    self.notificationButtonPressed = false
                     //Utilities.fadeInViewAnimation(self.notification_table, delay: 0, duration: 1)
                     Utilities.fadeInFromBottomAnimation(self.notification_table, delay: 0, duration: 1, yPosition: 20)
                     self.notification_table.setContentOffset(CGPointMake(0, 0), animated: true)

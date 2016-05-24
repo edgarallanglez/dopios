@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
+class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, ModalDelegate{
     var captureSession:AVCaptureSession?
     var videoPreviewLayer:AVCaptureVideoPreviewLayer?
     var qrCodeFrameView:UIView?
@@ -23,6 +23,7 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
     var coupon_id:Int?
     var coupon: Coupon!
     var branch_id:Int?
+    var spinner: MMMaterialDesignSpinner!
     
     override func viewDidLoad() {
         
@@ -32,9 +33,16 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
         self.navigationController!.navigationBar.shadowImage = UIImage()
         self.navigationController!.navigationBar.translucent = true*/
 
-        loader = CustomInfiniteIndicator(frame: CGRectMake(self.view.frame.size.width/2-20, self.view.frame.size.height/2-20, 40, 40))
+        
+        spinner = MMMaterialDesignSpinner(frame: CGRectMake(0, 0, 50, 50))
+        spinner.center.x = self.view.center.x
+        spinner.center.y = self.view.center.y
+        spinner.layer.cornerRadius = spinner.frame.width / 2
+        spinner.lineWidth = 3.0
+        spinner.startAnimating()
+        spinner.tintColor = Utilities.dopColor
+        spinner.backgroundColor = UIColor.whiteColor()
 
-        loader!.alpha = 0
         
         let input: AnyObject?
         
@@ -84,14 +92,14 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
             view.addSubview(qrCodeFrameView!)
             view.bringSubviewToFront(qrCodeFrameView!)
             
-            view.addSubview(loader!)
-            
+            self.view.addSubview(spinner)
+            spinner.alpha = 0
+
             //view.bringSubviewToFront(blurView)
             //blurView.bringSubviewToFront(loader!)
             
             
-            loader?.startAnimating()
-            
+
            print("EL CODIGO ES \(branch_id)")
         }
         
@@ -131,10 +139,10 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                     
                     if let qrInt =  Int(metadataObj.stringValue) {
                         if(qrInt == self.branch_id){
+                            
                             self.sendQR(qrInt)
                         } else {
                             let modal: ModalViewController = ModalViewController(currentView: self, type: ModalViewControllerType.AlertModal)
-                            
                             modal.willPresentCompletionHandler = { vc in
                                 let navigation_controller = vc as! AlertModalViewController
                                 
@@ -149,7 +157,7 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                     } else {
                         dispatch_async(dispatch_get_main_queue(), {
                             let modal: ModalViewController = ModalViewController(currentView: self, type: ModalViewControllerType.AlertModal)
-                            
+                            modal.delegate = self
                             modal.willPresentCompletionHandler = { vc in
                                 let navigation_controller = vc as! AlertModalViewController
                                 
@@ -167,7 +175,10 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
     }
     
     func sendQR(qr_code:Int){
-        
+        Utilities.fadeInViewAnimation(self.spinner, delay: 0, duration: 0.3)
+        Utilities.fadeOutViewAnimation(self.qr_image, delay: 0, duration: 0.3)
+        spinner?.startAnimating()
+
         /*UIView.animateWithDuration(0.6, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
                 self.loader!.alpha = 1
             }, completion: nil)*/
@@ -191,6 +202,8 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                     let modal: ModalViewController = ModalViewController(currentView: self, type: ModalViewControllerType.AlertModal)
                     
                     dispatch_async(dispatch_get_main_queue()) {
+                        Utilities.fadeOutViewAnimation(self.spinner, delay: 0, duration: 0.3)
+
                         modal.willPresentCompletionHandler = { vc in
                             let navigation_controller = vc as! AlertModalViewController
                             
@@ -214,6 +227,8 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
             },
             failure: { (error) -> Void in
                 dispatch_async(dispatch_get_main_queue(), {
+                    Utilities.fadeOutViewAnimation(self.spinner, delay: 0, duration: 0.3)
+
                     let modal: ModalViewController = ModalViewController(currentView: self, type: ModalViewControllerType.AlertModal)
                     
                     modal.willPresentCompletionHandler = { vc in
@@ -229,7 +244,14 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
         )
     }
 
-
+    func pressActionButton(modal: ModalViewController) {
+        modal.didDismissCompletionHandler = { vc in
+            Utilities.fadeInViewAnimation(self.qr_image, delay: 0, duration: 0.3)
+            self.qr_detected = false
+        }
+        
+        
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
