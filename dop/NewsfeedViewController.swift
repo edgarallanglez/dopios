@@ -153,6 +153,7 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
             let json = JSON(data: friendsData)
             
             for (index, subJson): (String, JSON) in json["data"] {
+                print(subJson)
                 var client_coupon_id = subJson["clients_coupon_id"].int
                 var friend_id = subJson["friends_id"].string
                 var exchange_date = subJson["exchange_date"].string
@@ -270,7 +271,7 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
                 self.newsfeedTemporary.append(model)
                 
                 newData = true
-                addedValues++
+                addedValues += 1
             }
             dispatch_async(dispatch_get_main_queue(), {
                 self.newsfeed.removeAll()

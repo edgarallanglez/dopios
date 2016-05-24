@@ -39,6 +39,7 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
     var searchViewIsSegue: Bool = false
     var cancelSearchButton: UIBarButtonItem!
     var reload: Bool = false
+    var loaded: Int = 0
     
     private var layout: CSStickyHeaderFlowLayout? {
         return self.collectionView?.collectionViewLayout as? CSStickyHeaderFlowLayout
@@ -67,23 +68,24 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
         checkForProfile()
         drawBar()
         
+        if !self.isMovingToParentViewController() { setSearchObserver() }
     }
     
     override func viewWillDisappear(animated: Bool) {
         NSNotificationCenter.defaultCenter().removeObserver(self)
+        loaded = 0
     }
     
     override func viewDidAppear(animated: Bool) {
         if User.newNotification { self.notificationButton.image = UIImage(named: "notification-badge") }
         else { self.notificationButton.image = UIImage(named: "notification") }
-        if !self.isMovingToParentViewController() { setSearchObserver() }
-        else {
+        if self.isMovingToParentViewController() {
             searchBar.alpha = 0
             Utilities.fadeInViewAnimation(searchBar, delay: 0, duration: 0.5)
             self.navigationItem.titleView = searchBar
         }
-        
-
+        if searchViewIsOpen && loaded < 1 { setSearchObserver() }
+        loaded += 1
     }
     
     func drawBar() {
@@ -108,7 +110,7 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
                 }
             }
         }
-
+        
         searchView = UIView(frame: CGRectMake(0,0,self.view.frame.width,self.view.frame.height))
         
         //Add blur view to search view
@@ -122,8 +124,6 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
         
         //vc.searchScrollView.hidden = true
         vc.searchScrollView.hidden = true
-        
-        
         cancelSearchButton = UIBarButtonItem(title: "Cancelar", style: .Plain, target: self, action: "cancelSearch")
         //setSearchObserver()
 
