@@ -154,7 +154,7 @@ class BranchProfileTopView: UIView {
                     self.branch_logo.layer.cornerRadius = self.branch_logo.frame.width / 2
                     Utilities.fadeInFromBottomAnimation(self.branch_logo, delay: 0, duration: 1, yPosition: 1)
                 }
-            }else{
+            } else {
                 print("Error")
             }
         })

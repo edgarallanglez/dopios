@@ -24,7 +24,7 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
     var user_name: String!
     var user_image: UIImageView!
     var user_image_path: String = ""
-    var is_friend: Bool!
+    var is_friend: Bool?
     var operation_id: Int = 0
     var person: PeopleModel!
     var page_index: Int!
@@ -38,6 +38,7 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
     var searchViewIsOpen: Bool = false
     var searchViewIsSegue: Bool = false
     var cancelSearchButton: UIBarButtonItem!
+    var reload: Bool = false
     
     private var layout: CSStickyHeaderFlowLayout? {
         return self.collectionView?.collectionViewLayout as? CSStickyHeaderFlowLayout
@@ -45,12 +46,11 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        let backButton = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: navigationController, action: nil)
         
         self.collectionView?.alwaysBounceVertical = true
         self.view.backgroundColor = UIColor.whiteColor()
         self.frame_width = self.collectionView!.frame.width
-        //self.navigationItem.leftBarButtonItem!.title = ""
+        
         // Setup Cell
         let estimationHeight = true ? 20 : 21
         self.layout!.estimatedItemSize = CGSize(width: self.frame_width, height: CGFloat(estimationHeight))
@@ -64,7 +64,7 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
         self.layout?.headerReferenceSize = CGSizeMake(320, 40)
         
         //self.collectionView?.delegate = self
-        
+        checkForProfile()
         drawBar()
         
     }
@@ -76,10 +76,14 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
     override func viewDidAppear(animated: Bool) {
         if User.newNotification { self.notificationButton.image = UIImage(named: "notification-badge") }
         else { self.notificationButton.image = UIImage(named: "notification") }
-        checkForProfile()
-        searchBar.alpha = 0
-        Utilities.fadeInViewAnimation(searchBar, delay: 0, duration: 0.5)
-        self.navigationItem.titleView = searchBar
+        if !self.isMovingToParentViewController() { setSearchObserver() }
+        else {
+            searchBar.alpha = 0
+            Utilities.fadeInViewAnimation(searchBar, delay: 0, duration: 0.5)
+            self.navigationItem.titleView = searchBar
+        }
+        
+
     }
     
     func drawBar() {
@@ -104,8 +108,6 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
                 }
             }
         }
-        
-        
 
         searchView = UIView(frame: CGRectMake(0,0,self.view.frame.width,self.view.frame.height))
         
@@ -123,15 +125,17 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
         
         
         cancelSearchButton = UIBarButtonItem(title: "Cancelar", style: .Plain, target: self, action: "cancelSearch")
-        
+        //setSearchObserver()
+
+    }
+    
+    func setSearchObserver() {
         NSNotificationCenter.defaultCenter().addObserver(
             self,
             selector: "presentView:",
             name: "performSegue",
             object: nil)
-
     }
-    
     // Cells
     func resizeView(new_height: CGFloat) {
         var size_changed = false
@@ -147,6 +151,7 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         var cell: UICollectionViewCell!
         if self.person != nil {
+            self.reload = false
             if self.person?.privacy_status == 0 || User.user_id == self.person.user_id || self.person.is_friend == true {
                 let custom_cell = collectionView.dequeueReusableCellWithReuseIdentifier("page_identifier", forIndexPath: indexPath) as! UserPaginationViewController
                 
@@ -158,7 +163,10 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
                 cell.alpha = 1
                 cell.hidden = false
             }
-        } else { cell = collectionView.dequeueReusableCellWithReuseIdentifier("locked_identifier", forIndexPath: indexPath) }
+        } else {
+            cell = collectionView.dequeueReusableCellWithReuseIdentifier("locked_identifier", forIndexPath: indexPath)
+            self.reload = true
+        }
         
         return cell
     }
@@ -201,6 +209,7 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
         return UICollectionReusableView()
         
     }
+    
     func checkForProfile() {
         UserProfileController.getUserProfile(user_id, success: { (profileData) -> Void in
             let json = JSON(data: profileData)
@@ -223,7 +232,6 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
             
             dispatch_async(dispatch_get_main_queue(), {
                 self.setupProfileDetail()
-                
             })
             },
             failure: { (error) -> Void in
@@ -241,8 +249,16 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
             user_name = "\(User.userName)"
             if self.user_image == nil { self.downloadImage(NSURL(string: User.userImageUrl)!) }
             self.collectionView?.reloadData()
-        } else if person.privacy_status == 0 { user_name = "\(person.names) \(person.surnames)" }
-          else if person.privacy_status == 1 { user_name = "\(person.names) \(person.surnames)" }
+            self.person.is_friend = true
+        }
+        
+        user_name = "\(person.names) \(person.surnames)"
+        if person.privacy_status == 1 && !person.is_friend! {
+            user_name = "\(person.names) \(person.surnames)"
+            self.collectionView?.reloadData()
+        }
+        
+        if self.reload { self.collectionView?.reloadData() }
     }
     
     func downloadImage(url: NSURL) {
@@ -270,7 +286,7 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
         self.collectionView?.setContentOffset(CGPointZero, animated: false)
     }
     
-    func presentView(notification: NSNotification){
+    func presentView(notification: NSNotification) {
         if searchViewIsOpen {
             searchViewIsSegue = true
             

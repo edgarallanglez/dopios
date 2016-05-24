@@ -26,7 +26,7 @@ class UserProfileStickyHeader: UIView {
     var user_exp: Double!
     var min_exp: Double!
     var level_up: Double!
-    var current_level: Int!
+    var current_level: Int = 0
     var spinner: MMMaterialDesignSpinner = MMMaterialDesignSpinner()
     var following = false
     
