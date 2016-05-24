@@ -124,6 +124,17 @@ class CouponController {
         })
     }
     
+    class func getAvailables(coupon_id: Int, success succeed: ((couponsData: NSData!) -> Void),failure errorFound: ((couponsData: NSError?) -> Void)) {
+        let url = "\(Utilities.dopURL)coupon/available/\(coupon_id)"
+        Utilities.loadDataFromURL(NSURL(string: url)!, completion:{(data, error) -> Void in
+            if let urlData = data {
+                succeed(couponsData: urlData)
+            }else{
+                errorFound(couponsData: error)
+            }
+        })
+    }
+    
     class func getPeopleTakingSpecificCouponWithSuccess(params:[String:AnyObject], success succeed: ((couponsData: NSData!) -> Void),failure errorFound: ((couponsData: NSError?) -> Void)) {
         let url = "\(Utilities.dopURL)coupon/used/get/bycoupon"
         Utilities.sendDataToURL(NSURL(string: url)!, method:"POST", params: params, completion:{(data, error) -> Void in

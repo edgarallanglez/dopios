@@ -436,9 +436,10 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                 let longitude = subJson["longitude"].double!
                 let banner = subJson["banner"].string ?? ""
                 //                    let categoryId = subJson["category_id"].int!
+                let taken = subJson["taken"].bool ?? false
                 let available = subJson["available"].int!
                 
-                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: 1, available: available, taken: false)
+                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: 1, available: available, taken: taken)
                 
                 self.almost_expired.append(model)
             }
@@ -501,6 +502,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
         
         DashboardController.getNearestCoupons(params, success: {(branchesData) -> Void in
             let json = JSON(data: branchesData)
+            
             for (_, subJson): (String, JSON) in json["data"]{
                 let coupon_id = subJson["coupon_id"].int
                 let coupon_name = subJson["name"].string
@@ -517,8 +519,10 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                 let banner = subJson["banner"].string ?? ""
                 //                    let categoryId = subJson["category_id"].int!
                 let available = subJson["available"].int!
+                let taken = subJson["taken"].bool ?? false
+
                 
-                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: 1, available: available, taken: false)
+                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: 1, available: available, taken: taken)
                 
                 self.nearest.append(model)
             }

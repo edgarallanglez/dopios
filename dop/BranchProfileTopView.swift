@@ -128,17 +128,19 @@ class BranchProfileTopView: UIView {
         if !model.banner.isEmpty {
             let banner_url = NSURL(string: "\(Utilities.dopImagesURL)\(model.company_id)/\(model.banner)")
             
+            
             Utilities.downloadImage(banner_url!, completion: {(data, error) -> Void in
-                if let image = data{
+                if let getImage = UIImage(data: data!) {
                     dispatch_async(dispatch_get_main_queue()) {
-                        self.branch_banner.image = UIImage(data: image)!.applyLightEffect()
+                        self.branch_banner.image = getImage.applyLightEffect()
                         self.branch_name.textColor = UIColor.whiteColor()
                         self.branch_name.shadowColor = UIColor.darkGrayColor()
-                        Utilities.fadeInFromBottomAnimation(self.branch_banner, delay: 0, duration: 0.8, yPosition: 2)
+                        Utilities.fadeInFromBottomAnimation(self.branch_banner, delay: 0, duration: 0.8, yPosition: 4)
                     }
-                } else {
+                }else{
                     print("Error")
                 }
+                
             })
         }
     }
@@ -161,7 +163,15 @@ class BranchProfileTopView: UIView {
         if !model.banner!.isEmpty {
             let banner_url = NSURL(string: "\(Utilities.dopImagesURL)\(model.company_id!)/\(model.banner!)")
             Utilities.downloadImage(banner_url!, completion: {(data, error) -> Void in
-                if let image = data {
+                dispatch_async(dispatch_get_main_queue()) {
+                    if (error != nil){
+                        self.branch_banner.image = UIImage(data: data!)!.applyLightEffect()
+                        self.branch_name.textColor = UIColor.whiteColor()
+                        self.branch_name.shadowColor = UIColor.darkGrayColor()
+                        Utilities.fadeInFromBottomAnimation(self.branch_banner, delay: 0, duration: 0.8, yPosition: 4)
+                    }
+                }
+                /*if let image = data {
                     dispatch_async(dispatch_get_main_queue()) {
                         self.branch_banner.image = UIImage(data: image)!.applyLightEffect()
                         self.branch_name.textColor = UIColor.whiteColor()
@@ -170,7 +180,7 @@ class BranchProfileTopView: UIView {
                     }
                 } else {
                     print("Error")
-                }
+                }*/
             })
         }
     }

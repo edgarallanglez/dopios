@@ -53,23 +53,21 @@ class NotificationCell: UITableViewCell {
 
             if notification.friendship_status == 1 && notification.launcher_friend == User.user_id {
                 notification_text = "Ahora sigues a \(launcher_name)"
-            } else {
+            }
+            if notification.friendship_status == 1 && notification.launcher_friend != User.user_id {
                 notification_text = "\(launcher_name) te esta siguiendo"
             }
-
             if notification.friendship_status == 0 {
                 notification_text = "\(launcher_name) quiere seguirte"
                 decline_btn.hidden = false
                 accept_btn.hidden = false
             }
 
-
             title.text = notification_text
             let nsString = notification_text as NSString
             let launcher_range = nsString.rangeOfString(launcher_name)
             let segue = NSURL(string: "userProfile:\(notification.launcher_id)")!
             title.addLinkToURL(segue, withRange: launcher_range)
-
 
         }
 
@@ -90,14 +88,14 @@ class NotificationCell: UITableViewCell {
             "notification_id" : self.notification!.notification_id,
             "friends_id": self.notification!.object_id]
 
-        FriendsController.declineFriendWithSuccess(params, success: {(friendsData) -> Void in
+            FriendsController.declineFriendWithSuccess(params, success: {(friendsData) -> Void in
             dispatch_async(dispatch_get_main_queue(), {
                 print("Rechazado")
             })
             }, failure: { (error) -> Void in
                 dispatch_async(dispatch_get_main_queue(), {
                     print("Error")
-                })
+            })
         })
     }
 
@@ -108,12 +106,12 @@ class NotificationCell: UITableViewCell {
 
             FriendsController.acceptFriendWithSuccess(params, success: {(friendsData) -> Void in
                 dispatch_async(dispatch_get_main_queue(), {
-
+                        print("Aceptado")
                 })
                 }, failure: { (error) -> Void in
                     dispatch_async(dispatch_get_main_queue(), {
                         print("Error")
-                    })
+                })
             })
     }
     override func setSelected(selected: Bool, animated: Bool) {

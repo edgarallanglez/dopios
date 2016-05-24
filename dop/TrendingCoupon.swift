@@ -106,6 +106,7 @@ class TrendingCoupon: UIView, ModalDelegate {
         let total_likes = (Int(self.likes.text!))! - 1
         self.likes.text = String(total_likes)
         self.coupon.setUserLike(0, total_likes: total_likes)
+        
     }
     
     func tapCoupon(sender: UITapGestureRecognizer){
@@ -153,6 +154,8 @@ class TrendingCoupon: UIView, ModalDelegate {
             "status": true,
             "type": "take"]
         NSNotificationCenter.defaultCenter().postNotificationName("takenOrLikeStatus", object: params)
+        self.coupon.setTakenCoupons(true, available: self.coupon.available)
+
     }
     
     func removeCouponTaken() {
@@ -165,6 +168,8 @@ class TrendingCoupon: UIView, ModalDelegate {
             "status": false,
             "type": "take"]
         NSNotificationCenter.defaultCenter().postNotificationName("takenOrLikeStatus", object: params)
+        self.coupon.setTakenCoupons(false, available: self.coupon.available)
+
     }
     func setCouponTakenNotification() {
         self.takeCouponButton.transform = CGAffineTransformMakeScale(0.1, 0.1)
@@ -179,11 +184,15 @@ class TrendingCoupon: UIView, ModalDelegate {
         
         self.takeCouponButton.tintColor = Utilities.dopColor
         self.coupon.taken = true
+        
+        print("Total es \(self.coupon.available)")
     }
     
     func removeCouponTakenNotification() {
         self.takeCouponButton.tintColor = UIColor.darkGrayColor()
         self.coupon.taken = false
+        
+        print("Total es \(self.coupon.available)")
     }
     
     func setTakeCoupon(sender: UITapGestureRecognizer) {
@@ -214,7 +223,7 @@ class TrendingCoupon: UIView, ModalDelegate {
                     print(json["total"])
                     self.coupon.available = json["total"].int!
                     
-                NSNotificationCenter.defaultCenter().postNotificationName("updateAvailable", object: self.coupon.available)
+                    
                 })
                 
             },

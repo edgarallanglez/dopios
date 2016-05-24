@@ -32,6 +32,13 @@ class ToExpireCoupon: UIView, ModalDelegate {
         self.coupon = coupon
         self.descriptionLbl.text = coupon.couponDescription
         self.viewController = viewController
+        
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: "updateLikeAndTaken:",
+            name: "takenOrLikeStatus",
+            object: nil)
+        
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -89,5 +96,33 @@ class ToExpireCoupon: UIView, ModalDelegate {
             }
         )
     }
+    
+    func updateLikeAndTaken(notification:NSNotification){
+        
+        let object = notification.object as! [String: AnyObject]
+        
+        let type = object["type"] as! String
+        let status = object["status"] as! Bool
+        let coupon_id = object["coupon_id"] as! Int
+        
+        
+        if(coupon_id == self.coupon.id){
+            if(status == false){
+                if(type == "take"){
+                    self.coupon.taken = false
+                }else{
+                    self.coupon.user_like = 0
+                }
+            }else{
+                if(type == "take"){
+                    self.coupon.taken = true
+                }else{
+                    self.coupon.user_like = 1
+                }
+            }
+        }
+    }
+
+    
 
 }

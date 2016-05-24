@@ -31,6 +31,7 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapVie
     @IBOutlet weak var available_coupon: UILabel!
     @IBOutlet weak var likes_label: UILabel!
     
+    @IBOutlet var available_coupon_info: UILabel!
     @IBOutlet weak var map_heigth: NSLayoutConstraint!
     @IBOutlet weak var heart_button_width: NSLayoutConstraint!
     @IBOutlet weak var take_button_width: NSLayoutConstraint!
@@ -43,6 +44,7 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapVie
     var highlightAttrdict: [String:AnyObject]?
     var currentAttribute : [String:AnyObject]?
     
+    @IBOutlet var available_loader: UIActivityIndicatorView!
     @IBOutlet var loader: UIActivityIndicatorView!
     //
     var coupon: Coupon!
@@ -75,6 +77,12 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapVie
         if((map) != nil){
             let tap = UITapGestureRecognizer(target: self, action: Selector("pressMap:"))
             map.addGestureRecognizer(tap)
+        }
+        
+        if((available_coupon) != nil){
+            available_coupon.alpha = 0
+            available_coupon_info.alpha = 0
+            available_loader.startAnimating()
         }
         
 
@@ -116,7 +124,6 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapVie
     override func viewDidAppear(animated: Bool) {
         if(coupon != nil){
             self.branch_title.setTitle(self.coupon?.name.uppercaseString, forState: .Normal)
-            self.available_coupon.text = String(self.coupon!.available)
             self.category_label.text = "Cafeteria".uppercaseString
             self.map.delegate = self
             self.centerMapOnLocation((self.coupon?.location)!)
@@ -135,11 +142,34 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapVie
             Utilities.fadeInFromBottomAnimation(self.branch_title, delay: 0, duration: 0.5, yPosition: 30)
             Utilities.fadeInFromBottomAnimation(self.category_label, delay: 0, duration: 0.5, yPosition: 30)
             
+            
+            getAvailables()
+            
         }
         
         if action_button != nil { action_button.layoutIfNeeded() }
         if cancel_button != nil { cancel_button.layoutIfNeeded() }
         self.heartView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "likeCoupon:"))
+    }
+    func getAvailables(){
+        CouponController.getAvailables(self.coupon.id,
+                success: { (couponsData) -> Void in
+                    dispatch_async(dispatch_get_main_queue(), {
+                        let json = JSON(data: couponsData)
+                        self.coupon.available = json["available"].int!
+                        self.available_coupon.text = String(self.coupon!.available)
+                        
+                        self.available_coupon.alpha = 1
+                        self.available_coupon_info.alpha = 1
+                        self.available_loader.alpha = 0
+                        self.available_loader.startAnimating()
+                })
+            },
+                failure: { (error) -> Void in
+                    dispatch_async(dispatch_get_main_queue(), {
+                            print("Error")
+                })
+        })
     }
   
     func setCouponLike() {
@@ -196,7 +226,7 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapVie
         self.coupon.taken = true
         self.coupon.available -= 1
         self.available_coupon.text = "\(self.coupon.available)"
-        
+        self.coupon.setTakenCoupons(true, available: self.coupon.available)
         let params:[String: AnyObject] = [
             "coupon_id" : self.coupon.id,
             "status": true,
@@ -214,7 +244,7 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapVie
         self.coupon.taken = false
         self.coupon.available += 1
         self.available_coupon.text = "\(self.coupon.available)"
-        
+        self.coupon.setTakenCoupons(false, available: self.coupon.available)
         
         NSNotificationCenter.defaultCenter().postNotificationName("takenOrLikeStatus", object: params)
         
@@ -373,6 +403,11 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapVie
         if self.takeCouponButton.tintColor == UIColor.darkGrayColor() {
             self.setCouponTaken()
             taken = true
+            takeCouponButton.enabled = false
+            available_coupon.alpha = 0
+            available_coupon_info.alpha = 0
+            available_loader.alpha = 1
+            available_loader.startAnimating()
         } else {
             self.removeCouponTaken()
             taken = false
@@ -385,8 +420,13 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapVie
                     self.coupon.available = json["total"].int!
                     self.available_coupon.text = "\(self.coupon.available)"
                     
+                    self.takeCouponButton.enabled = true
+                    self.available_coupon.alpha = 1
+                    self.available_coupon_info.alpha = 1
+                    self.available_loader.alpha = 0
+                    self.available_loader.stopAnimating()
                     
-                NSNotificationCenter.defaultCenter().postNotificationName("updateAvailable", object: self.coupon.available)
+                
 
                     print(json)
                 })
