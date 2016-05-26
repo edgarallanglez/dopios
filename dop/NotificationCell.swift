@@ -48,22 +48,21 @@ class NotificationCell: UITableViewCell {
             title.addLinkToURL(segue, withRange: launcher_range)
             title.addLinkToURL(branch_segue, withRange: newsfeed_activity_range)
         }
+        
         if notification.type == "friend" {
             var notification_text = ""
 
-            if notification.operation_id == 1 && notification.launcher_id == User.user_id {
-                notification_text = "Ahora sigues a \(launcher_name)"
+            switch notification.operation_id {
+                case 0:
+                    notification_text = "\(launcher_name) quiere seguirte"
+                    decline_btn.hidden = false
+                    accept_btn.hidden = false
+                case 1:
+                    if notification.catcher_id == User.user_id { notification_text = "\(launcher_name) te esta siguiendo" }
+                    else { notification_text = "Ahora sigues a \(launcher_name)" }
+            default: print(notification.operation_id)
             }
             
-            if notification.operation_id == 1 && notification.launcher_id != User.user_id {
-                notification_text = "\(launcher_name) te esta siguiendo"
-            }
-            
-            if notification.operation_id == 0 && notification.launcher_id != User.user_id {
-                notification_text = "\(launcher_name) quiere seguirte"
-                decline_btn.hidden = false
-                accept_btn.hidden = false
-            }
             
 //            if notification.operation_id == 0 && notification.launcher_friend == User.user_id {
 //                notification_text = "\(launcher_name) quiere seguirte"
