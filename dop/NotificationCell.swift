@@ -57,7 +57,7 @@ class NotificationCell: UITableViewCell {
             if notification.friendship_status == 1 && notification.launcher_friend != User.user_id {
                 notification_text = "\(launcher_name) te esta siguiendo"
             }
-            if notification.friendship_status == 0 {
+            if notification.friendship_status == 0 && notification.launcher_friend == User.user_id {
                 notification_text = "\(launcher_name) quiere seguirte"
                 decline_btn.hidden = false
                 accept_btn.hidden = false
@@ -71,12 +71,17 @@ class NotificationCell: UITableViewCell {
 
         }
 
-        if !notification.read {
+        /*if !notification.read {
             notification_view.backgroundColor = Utilities.lightGrayColor
             self.contentView.backgroundColor = Utilities.lightGrayColor
         } else {
             notification_view.backgroundColor = UIColor.whiteColor()
             self.contentView.backgroundColor = UIColor.whiteColor()
+        }*/
+        
+        if notification.friendship_status>=2{
+            notification_view.backgroundColor = Utilities.dopColor
+            self.contentView.backgroundColor = Utilities.dopColor
         }
 
         self.date_label.text = Utilities.friendlyDate(notification.date)

@@ -73,8 +73,9 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     }
     func refresh(sender:AnyObject){
         Utilities.fadeOutViewAnimation(self.notificationButton, delay: 0, duration: 0.5)
-        if(refreshControl.refreshing == false && notificationButtonPressed == false){
+        if(notificationButtonPressed == false){
             getNotifications()
+            print("entro")
         }
     }
     override func viewDidAppear(animated: Bool) {
@@ -116,6 +117,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             
             let color = cell.contentView.backgroundColor
             cell.backgroundColor = color
+            
             
             
             cell.notification_image.layer.cornerRadius = cell.notification_image.frame.width/2
@@ -183,9 +185,9 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                     
                     let model = Notification(type: type, notification_id: notification_id, launcher_id: launcher_id, launcher_name: launcher_name, launcher_surnames: launcher_surnames, newsfeed_activity: newsfeed_activity, friendship_status: friendship_status,read: read, date: date, image_name: image, company_id: company_id, object_id: object_id, launcher_friend: launcher_friend, branch_id: branch_id)
                     
-                    if(friendship_status<2){
-                        self.notificationsTemporary.append(model)
-                    }
+                    
+                    self.notificationsTemporary.append(model)
+                    
                     
                 }
                 
@@ -243,9 +245,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
 
                     let model = Notification(type: type, notification_id: notification_id, launcher_id: launcher_id, launcher_name: launcher_name, launcher_surnames: launcher_surnames, newsfeed_activity: newsfeed_activity, friendship_status: friendship_status,read: read, date:date, image_name: image, company_id: company_id, object_id: object_id, launcher_friend: launcher_friend, branch_id: branch_id)
                     
-                    if(friendship_status<2){
-                        self.notificationsTemporary.append(model)
-                    }
+                    self.notificationsTemporary.append(model)
                     
                     newData = true
                     addedValues++
@@ -344,6 +344,10 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             view_controller.branch_id = object_id
             self.navigationController?.pushViewController(view_controller, animated: true)
         }
+    }
+    override func viewDidDisappear(animated: Bool) {
+        self.refreshControl.endRefreshing()
+        print("disappear")
     }
 
 

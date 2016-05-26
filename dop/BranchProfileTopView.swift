@@ -130,13 +130,10 @@ class BranchProfileTopView: UIView {
             
             
             Utilities.downloadImage(banner_url!, completion: {(data, error) -> Void in
-                if let image = UIImage(data: data!) {
+                if var image = UIImage(data: data!) {
+                    image = image.applyLightEffect()
                     dispatch_async(dispatch_get_main_queue()) {
                         self.branch_banner.image = image
-
-                        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 10)) {
-                            self.branch_banner.image?.applyLightEffect()
-                        }
                         self.branch_name.textColor = UIColor.whiteColor()
                         self.branch_name.shadowColor = UIColor.darkGrayColor()
                         Utilities.fadeInFromBottomAnimation(self.branch_banner, delay: 0, duration: 0.8, yPosition: 4)

@@ -336,5 +336,9 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
         self.navigationController?.pushViewController(view_controller, animated: true)
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
     }
+    
+    override func viewDidDisappear(animated: Bool) {
+        self.refreshControl.endRefreshing()
+    }
 
 }
