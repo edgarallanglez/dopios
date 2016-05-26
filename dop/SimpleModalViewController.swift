@@ -417,6 +417,7 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapVie
             success: { (data) -> Void in
                 dispatch_async(dispatch_get_main_queue(), {
                     let json = JSON(data: data)
+                    print(json)
                     self.coupon.available = json["total"].int!
                     self.available_coupon.text = "\(self.coupon.available)"
                     
@@ -426,15 +427,26 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapVie
                     self.available_loader.alpha = 0
                     self.available_loader.stopAnimating()
                     
-                
+                    if(json["message"].string=="agotado"){
+                        let params:[String: AnyObject] = [
+                            "coupon_id" : self.coupon.id,
+                            "status": false,
+                            "type": "take"]
+                        
+                        self.takeCouponButton.enabled = false
+                        self.takeCouponButton.tintColor = UIColor.darkGrayColor()
+                        self.coupon.taken = false
+                        self.coupon.setTakenCoupons(false, available: self.coupon.available)
+                        NSNotificationCenter.defaultCenter().postNotificationName("takenOrLikeStatus", object: params)
+                    }
 
-                    print(json)
                 })
                 
             },
             
             failure: { (error) -> Void in
                 dispatch_async(dispatch_get_main_queue(), {
+                    
                     if taken {  self.coupon.available += 1; self.removeCouponTaken(); }
                     else {  self.coupon.available -= 1; self.setCouponTaken(); }
                 })

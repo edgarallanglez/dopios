@@ -103,7 +103,7 @@ class BranchCampaignCollectionViewController: UICollectionViewController, ModalD
         if (!coupons.isEmpty) {
             let model = self.coupons[indexPath.row]
             cell.loadItem(model, viewController: self)
-            
+            cell.setTakeButtonState(model.taken)
             let imageUrl = NSURL(string: "\(Utilities.dopImagesURL)\(model.company_id)/\(model.logo)")
             
             let identifier = "Cell\(indexPath.row)"

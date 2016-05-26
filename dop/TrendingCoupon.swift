@@ -219,9 +219,13 @@ class TrendingCoupon: UIView, ModalDelegate {
             success: { (data) -> Void in
                 dispatch_async(dispatch_get_main_queue(), {
                     let json = JSON(data: data)
-                    
-                    print(json["total"])
                     self.coupon.available = json["total"].int!
+
+                    if(json["message"].string=="agotado"){
+                        self.takeCouponButton.hidden = true
+                        self.removeCouponTaken()
+                    
+                    }
                     
                     
                 })

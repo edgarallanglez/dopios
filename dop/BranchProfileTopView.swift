@@ -114,9 +114,9 @@ class BranchProfileTopView: UIView {
     func downloadImage(model: Coupon) {
         let imageUrl = NSURL(string: "\(Utilities.dopImagesURL)\(model.company_id)/\(model.logo)")
         Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
-            if let image = data{
+            if let image = UIImage(data: data!) {
                 dispatch_async(dispatch_get_main_queue()) {
-                    self.branch_logo.image = UIImage(data: image)
+                    self.branch_logo.image = image
                     self.branch_logo.layer.cornerRadius = self.branch_logo.frame.width / 2
                     Utilities.fadeInFromBottomAnimation(self.branch_logo, delay: 0, duration: 1, yPosition: 1)
                 }
@@ -130,9 +130,10 @@ class BranchProfileTopView: UIView {
             
             
             Utilities.downloadImage(banner_url!, completion: {(data, error) -> Void in
-                if let getImage = UIImage(data: data!) {
+                if var image = UIImage(data: data!) {
+                    image = image.applyLightEffect()
                     dispatch_async(dispatch_get_main_queue()) {
-                        self.branch_banner.image = getImage.applyLightEffect()
+                        self.branch_banner.image = image
                         self.branch_name.textColor = UIColor.whiteColor()
                         self.branch_name.shadowColor = UIColor.darkGrayColor()
                         Utilities.fadeInFromBottomAnimation(self.branch_banner, delay: 0, duration: 0.8, yPosition: 4)
@@ -165,7 +166,8 @@ class BranchProfileTopView: UIView {
             Utilities.downloadImage(banner_url!, completion: {(data, error) -> Void in
                 dispatch_async(dispatch_get_main_queue()) {
                     if (error != nil){
-                        self.branch_banner.image = UIImage(data: data!)!.applyLightEffect()
+                        self.branch_banner.image = UIImage(data: data!)!
+         
                         self.branch_name.textColor = UIColor.whiteColor()
                         self.branch_name.shadowColor = UIColor.darkGrayColor()
                         Utilities.fadeInFromBottomAnimation(self.branch_banner, delay: 0, duration: 0.8, yPosition: 4)

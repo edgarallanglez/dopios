@@ -30,7 +30,7 @@ class NotificationCell: UITableViewCell {
         var string_format = NSMutableAttributedString()
 
         let launcher_name = "\(notification.launcher_name) \(notification.launcher_surnames)"
-        let newsfeed_Activity = "\(notification.newsfeed_activity)"
+        let newsfeed_Activity = "\(notification.branches_name)"
 
         decline_btn.hidden = true
         accept_btn.hidden = true
@@ -51,17 +51,24 @@ class NotificationCell: UITableViewCell {
         if notification.type == "friend" {
             var notification_text = ""
 
-            if notification.friendship_status == 1 && notification.launcher_friend == User.user_id {
+            if notification.operation_id == 1 && notification.launcher_id == User.user_id {
                 notification_text = "Ahora sigues a \(launcher_name)"
             }
-            if notification.friendship_status == 1 && notification.launcher_friend != User.user_id {
+            
+            if notification.operation_id == 1 && notification.launcher_id != User.user_id {
                 notification_text = "\(launcher_name) te esta siguiendo"
             }
-            if notification.friendship_status == 0 {
+            
+            if notification.operation_id == 0 && notification.launcher_id != User.user_id {
                 notification_text = "\(launcher_name) quiere seguirte"
                 decline_btn.hidden = false
                 accept_btn.hidden = false
             }
+            
+//            if notification.operation_id == 0 && notification.launcher_friend == User.user_id {
+//                notification_text = "\(launcher_name) quiere seguirte"
+//
+//            }
 
             title.text = notification_text
             let nsString = notification_text as NSString
@@ -71,12 +78,17 @@ class NotificationCell: UITableViewCell {
 
         }
 
-        if !notification.read {
+        /*if !notification.read {
             notification_view.backgroundColor = Utilities.lightGrayColor
             self.contentView.backgroundColor = Utilities.lightGrayColor
         } else {
             notification_view.backgroundColor = UIColor.whiteColor()
             self.contentView.backgroundColor = UIColor.whiteColor()
+        }*/
+        
+        if notification.operation_id>=2{
+            notification_view.backgroundColor = Utilities.dopColor
+            self.contentView.backgroundColor = Utilities.dopColor
         }
 
         self.date_label.text = Utilities.friendlyDate(notification.date)

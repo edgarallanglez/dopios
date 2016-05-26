@@ -356,7 +356,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                     self.CouponsCollectionView.contentOffset = CGPointMake(0,0)
                     self.emptyMessage.hidden = true
                     //self.CouponsCollectionView.alwaysBounceVertical = true
-                    self.refreshControl.endRefreshing()
+                    self.myCouponsRefreshControl.endRefreshing()
                     self.offset = 6
 
                     Utilities.fadeOutViewAnimation(self.mainLoader, delay: 0, duration: 0.3)
@@ -368,7 +368,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
             
             failure: { (error) -> Void in
                 dispatch_async(dispatch_get_main_queue(), {
-                    self.refreshControl.endRefreshing()
+                    self.myCouponsRefreshControl.endRefreshing()
                     Utilities.fadeOutViewAnimation(self.mainLoader, delay: 0, duration: 0.3)
                     
                 })
@@ -438,6 +438,11 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                     self.CouponsCollectionView.finishInfiniteScroll()
                 })
         })
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        self.myCouponsRefreshControl.endRefreshing()
+        self.refreshControl.endRefreshing()
     }
     
     func getTakenCoupons() {
