@@ -253,11 +253,12 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
         }
         
         user_name = "\(person.names) \(person.surnames)"
-        if person.privacy_status == 1 && !person.is_friend! {
-            user_name = "\(person.names) \(person.surnames)"
-            self.collectionView?.reloadData()
+        if person != nil {
+            if person.privacy_status == 1 && !person.is_friend! {
+                user_name = "\(person.names) \(person.surnames)"
+                self.collectionView?.reloadData()
+            }
         }
-        
         if self.reload { self.collectionView?.reloadData() }
     }
     
