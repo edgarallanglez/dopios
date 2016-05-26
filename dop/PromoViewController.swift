@@ -56,8 +56,8 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
         self.CouponsCollectionView.addSubview(refreshControl)
         self.myCouponsCollectionView.addSubview(myCouponsRefreshControl)
 
-        self.CouponsCollectionView.contentInset = UIEdgeInsetsMake(0,0,49,0)
-        self.myCouponsCollectionView.contentInset = UIEdgeInsetsMake(0,0,49,0)
+        self.CouponsCollectionView.contentInset = UIEdgeInsetsMake(0, 0, 49, 0)
+        self.myCouponsCollectionView.contentInset = UIEdgeInsetsMake(0, 0, 49, 0)
         
         mainLoader.alpha = 0
         
@@ -87,6 +87,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                     self!.getCouponsWithOffset()
                 }
         }
+        
         myCouponsCollectionView.addInfiniteScrollWithHandler { [weak self] (scrollView) -> Void in
             if(!self!.myCoupons.isEmpty){
                 self!.getTakenCouponsWithOffset()
@@ -95,10 +96,10 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
         
         
         
-        let rightSwipe = UISwipeGestureRecognizer(target: self, action: Selector("swipe:"))
+        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(PromoViewController.swipe(_:)))
         rightSwipe.direction = .Right
         
-        let leftSwipe = UISwipeGestureRecognizer(target: self, action: Selector("swipe:"))
+        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(PromoViewController.swipe(_:)))
         leftSwipe.direction = .Left
         
         
@@ -113,15 +114,10 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
 
     }
     
-    func swipe(sender: UISwipeGestureRecognizer){
-        if(sender.direction == .Right){
-            promoSegmentedController.selectedIndex = 0
-            
-        }
-        if(sender.direction == .Left){
-            promoSegmentedController.selectedIndex = 1
-            
-        }
+    func swipe(sender: UISwipeGestureRecognizer) {
+        if sender.direction == .Right { promoSegmentedController.selectedIndex = 0 }
+        if sender.direction == .Left { promoSegmentedController.selectedIndex = 1 }
+        
         setPromoCollectionView(promoSegmentedController)
     }
     
@@ -130,11 +126,8 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
     }
     
     func refresh(sender:AnyObject) {
-        if promoSegmentedController.selectedIndex == 1 {
-            getTakenCoupons()
-        } else {
-            getCoupons()
-        }
+        if promoSegmentedController.selectedIndex == 1 { getTakenCoupons() }
+        else { getCoupons() }
     }
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -142,11 +135,8 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
     }
 
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if promoSegmentedController.selectedIndex == 1 {
-            return myCoupons.count
-        }else{
-            return coupons.count
-        }
+        if promoSegmentedController.selectedIndex == 1 { return myCoupons.count }
+        else { return coupons.count }
     }
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -198,7 +188,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                 }
             
             }
-        }else{
+        } else {
             if (!myCoupons.isEmpty) {
                 let model = self.myCoupons[indexPath.row]
                 cell.loadItem(model, viewController: self)
@@ -213,7 +203,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                 cell.branch_banner.alpha=0
                 
                 
-                if (self.myCouponsCachedImages[identifier] != nil){
+                if self.myCouponsCachedImages[identifier] != nil {
                     let cell_image_saved : UIImage = self.myCouponsCachedImages[identifier]!
                     cell.branch_banner.image = cell_image_saved
                     UIView.animateWithDuration(0.5, animations: {
@@ -237,7 +227,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                                     })
                                 }
                             }
-                        }else{
+                        } else {
                             print("Error")
                         }
                     })
@@ -270,7 +260,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
 //            
 //        }, completion:nil)
         
-        let cell: UICollectionViewCell!
+        var cell: UICollectionViewCell!
         
         if promoSegmentedController.selectedIndex == 0 {
             cell = self.CouponsCollectionView.cellForItemAtIndexPath(indexPath)
@@ -496,7 +486,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                 dispatch_async(dispatch_get_main_queue(), {
                     self.myCouponsCollectionView.reloadData()
                     self.emptyMessage.hidden = true
-                    self.CouponsCollectionView.contentOffset = CGPointMake(0,0)
+                    self.CouponsCollectionView.contentOffset = CGPointMake(0, 0)
                     self.refreshControl.endRefreshing()
                     self.offset_mycoupons = 6
                     Utilities.fadeInFromBottomAnimation(self.myCouponsCollectionView, delay: 0, duration: 0.25, yPosition: 20)
@@ -555,13 +545,11 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                     
                 }
                 dispatch_async(dispatch_get_main_queue(), {
-                    self.myCouponsCollectionView.reloadData()
                     //self.CouponsCollectionView.alwaysBounceVertical = true
                     self.myCouponsCollectionView.finishInfiniteScroll()
+                    self.myCouponsCollectionView.reloadData()
                     
-                    if(newData){
-                        self.offset_mycoupons+=addedValues
-                    }
+                    if newData { self.offset_mycoupons+=addedValues }
                     /*if(addedValues<6 || !newData){
                     self.CouponsCollectionView.removeInfiniteScroll()
                     }*/
