@@ -233,7 +233,7 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
             "used_date": firstNewsfeed.formatedDate
         ]
         
-        
+        print("La fecha es \(firstNewsfeed.formatedDate)")
         NewsfeedController.getAllFriendsTakingCouponsOffsetWithSuccess(params, success: { (friendsData) -> Void in
             let json = JSON(data: friendsData)
             
