@@ -30,6 +30,7 @@ class NotificationCell: UITableViewCell {
         var string_format = NSMutableAttributedString()
 
         let launcher_name = "\(notification.launcher_name) \(notification.launcher_surnames)"
+        let catcher_name = "\(notification.catcher_name) \(notification.catcher_surnames)"
         let newsfeed_Activity = "\(notification.branches_name)"
 
         decline_btn.hidden = true
@@ -59,7 +60,7 @@ class NotificationCell: UITableViewCell {
                     accept_btn.hidden = false
                 case 1:
                     if notification.catcher_id == User.user_id { notification_text = "\(launcher_name) te esta siguiendo" }
-                    else { notification_text = "Ahora sigues a \(launcher_name)" }
+                    else { notification_text = "Ahora sigues a \(catcher_name)" }
             default: print(notification.operation_id)
             }
             

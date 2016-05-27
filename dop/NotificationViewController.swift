@@ -106,7 +106,8 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
 
             var imageUrl: NSURL
             let identifier = "Cell\(indexPath.row)"
-            imageUrl = NSURL(string: "\(model.image_name)")!
+            if model.catcher_id != User.user_id { imageUrl = NSURL(string: "\(model.catcher_image)")! }
+            else { imageUrl = NSURL(string: "\(model.launcher_image)")! }
 
             let color = cell.contentView.backgroundColor
             cell.backgroundColor = color
@@ -163,17 +164,20 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                     let catcher_id = subJson["catcher_id"].int ?? 0
                     let launcher_name = subJson["launcher_name"].string ?? ""
                     let launcher_surnames = subJson["launcher_surnames"].string ?? ""
+                    let catcher_name = subJson["launcher_name"].string ?? ""
+                    let catcher_surnames = subJson["launcher_surnames"].string ?? ""
                     let branches_name = subJson["branches_name"].string ?? ""
                     let operation_id = subJson["operation_id"].int ?? 0
                     let read = subJson["read"].bool ?? false
                     let date = subJson["notification_date"].string ?? ""
                     let company_id = subJson["company_id"].int ?? 0
                     let object_id = subJson["object_id"].int ?? 0
-                    let image = subJson["user_image"].string!
+                    let catcher_image = subJson["catcher_image"].string!
+                    let launcher_image = subJson["launcher_image"].string!
                     let branch_id = subJson["branch_id"].int ?? 0
 
 
-                    let model = Notification(type: type, notification_id: notification_id, launcher_id: launcher_id, catcher_id: catcher_id, launcher_name: launcher_name, launcher_surnames: launcher_surnames, branches_name: branches_name, operation_id: operation_id, read: read, date: date, image_name: image, company_id: company_id, object_id: object_id, branch_id: branch_id)
+                    let model = Notification(type: type, notification_id: notification_id, launcher_id: launcher_id, catcher_id: catcher_id, launcher_name: launcher_name, launcher_surnames: launcher_surnames,  catcher_name: catcher_name, catcher_surnames: catcher_surnames, branches_name: branches_name, operation_id: operation_id, read: read, date: date, launcher_image: launcher_image, catcher_image: catcher_image, company_id: company_id, object_id: object_id, branch_id: branch_id)
 
                     self.notificationsTemporary.append(model)
                 }
@@ -221,16 +225,20 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                     let catcher_id = subJson["catcher_id"].int ?? 0
                     let launcher_name = subJson["launcher_name"].string ?? ""
                     let launcher_surnames = subJson["launcher_surnames"].string ?? ""
+                    let catcher_name = subJson["launcher_name"].string ?? ""
+                    let catcher_surnames = subJson["launcher_surnames"].string ?? ""
                     let branches_name = subJson["branches_name"].string ?? ""
                     let operation_id = subJson["operation_id"].int ?? 0
                     let read = subJson["read"].bool ?? false
                     let date = subJson["notification_date"].string ?? ""
                     let company_id = subJson["company_id"].int ?? 0
                     let object_id = subJson["object_id"].int ?? 0
-                    let image = subJson["user_image"].string!
+                    let catcher_image = subJson["catcher_image"].string!
+                    let launcher_image = subJson["launcher_image"].string!
                     let branch_id = subJson["branch_id"].int ?? 0
-
-                    let model = Notification(type: type, notification_id: notification_id, launcher_id: launcher_id, catcher_id: catcher_id, launcher_name: launcher_name, launcher_surnames: launcher_surnames, branches_name: branches_name, operation_id: operation_id, read: read, date: date, image_name: image, company_id: company_id, object_id: object_id, branch_id: branch_id)
+                    
+                    
+                    let model = Notification(type: type, notification_id: notification_id, launcher_id: launcher_id, catcher_id: catcher_id, launcher_name: launcher_name, launcher_surnames: launcher_surnames,  catcher_name: catcher_name, catcher_surnames: catcher_surnames, branches_name: branches_name, operation_id: operation_id, read: read, date: date, launcher_image: launcher_image, catcher_image: catcher_image, company_id: company_id, object_id: object_id, branch_id: branch_id)
                     
                     self.notificationsTemporary.append(model)
 
