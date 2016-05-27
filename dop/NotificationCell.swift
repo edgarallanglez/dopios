@@ -114,7 +114,7 @@ class NotificationCell: UITableViewCell {
     @IBAction func acceptFriend(sender: AnyObject) {
         let params:[String: AnyObject] = [
             "notification_id" : self.notification!.notification_id,
-            "friends_id": self.notification!.object_id]
+            "friends_id": self.notification!.object_id ]
 
             FriendsController.acceptFriendWithSuccess(params, success: {(friendsData) -> Void in
                 dispatch_async(dispatch_get_main_queue(), {
