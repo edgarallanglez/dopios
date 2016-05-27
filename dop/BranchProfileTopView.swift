@@ -164,14 +164,16 @@ class BranchProfileTopView: UIView {
         if !model.banner!.isEmpty {
             let banner_url = NSURL(string: "\(Utilities.dopImagesURL)\(model.company_id!)/\(model.banner!)")
             Utilities.downloadImage(banner_url!, completion: {(data, error) -> Void in
-                dispatch_async(dispatch_get_main_queue()) {
-                    if (error != nil){
-                        self.branch_banner.image = UIImage(data: data!)!
-         
+                if var image = UIImage(data: data!) {
+                    image = image.applyLightEffect()
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.branch_banner.image = image
                         self.branch_name.textColor = UIColor.whiteColor()
                         self.branch_name.shadowColor = UIColor.darkGrayColor()
                         Utilities.fadeInFromBottomAnimation(self.branch_banner, delay: 0, duration: 0.8, yPosition: 4)
                     }
+                }else{
+                    print("Error")
                 }
                 /*if let image = data {
                     dispatch_async(dispatch_get_main_queue()) {
