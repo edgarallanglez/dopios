@@ -90,6 +90,9 @@ class BranchCampaignCollectionViewController: UICollectionViewController, ModalD
             let navigationController = vc as! SimpleModalViewController
             navigationController.coupon = self.selected_coupon
         }
+        print(selected_coupon.id)
+        
+        setViewCount(selected_coupon.id)
         modal.delegate = self
         modal.presentAnimated(true, completionHandler: nil)
         //}
@@ -276,22 +279,33 @@ class BranchCampaignCollectionViewController: UICollectionViewController, ModalD
         })
         
     }
+    func setViewCount(coupon_id: Int) {
+        let params: [String: AnyObject] = ["coupon_id": coupon_id]
+        CouponController.viewCouponWithSuccess(params, success: { (couponsData) -> Void in
+            let json: JSON = JSON(couponsData)
+            print(json)
+            },
+                                               failure: { (couponsData) -> Void in
+                                                print("couponsData")
+            }
+        )
+    }
+    
+    //MODAL DELEGATE
     
     func pressActionButton(modal: ModalViewController) {
+        print("Press action button")
+        
         if modal.action_type == "profile" {
-            let view_controller = self.storyboard!.instantiateViewControllerWithIdentifier("BranchProfileStickyController") as! BranchProfileStickyController
-            view_controller.branch_id = self.selected_coupon.branch_id
-            view_controller.coupon = self.selected_coupon
-            self.navigationController?.pushViewController(view_controller, animated: true)
-            self.hidesBottomBarWhenPushed = false
             modal.dismissAnimated(true, completionHandler: nil)
         }
         if modal.action_type == "redeem" {
+            print("Redeeeeeem")
             let view_controller  = self.storyboard!.instantiateViewControllerWithIdentifier("readQRView") as! readQRViewController
             view_controller.coupon_id = self.selected_coupon.id
             view_controller.branch_id = self.selected_coupon.branch_id
             self.hidesBottomBarWhenPushed = true
-            self.navigationController?.pushViewController(view_controller, animated: true)
+            self.parent_view.navigationController?.pushViewController(view_controller, animated: true)
             self.hidesBottomBarWhenPushed = false
             modal.dismissAnimated(true, completionHandler: nil)
         }

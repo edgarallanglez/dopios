@@ -96,8 +96,10 @@ class BranchProfileTopView: UIView {
         self.branch_name.text = self.parent_view.coupon?.name
         if parent_view.coupon != nil { downloadImage(parent_view.coupon) }
         Utilities.setMaterialDesignButton(self.follow_button, button_size: 50)
+
         
     }
+
     
     func setFollowingButton() {
         UIButton.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
@@ -112,6 +114,9 @@ class BranchProfileTopView: UIView {
     }
     
     func downloadImage(model: Coupon) {
+        
+        print("categoria %d", model.categoryId)
+        
         let imageUrl = NSURL(string: "\(Utilities.dopImagesURL)\(model.company_id)/\(model.logo)")
         Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
             if let image = UIImage(data: data!) {
@@ -147,6 +152,9 @@ class BranchProfileTopView: UIView {
     }
     
     func downloadImage(model: Branch) {
+        if model.adults_only == true {
+            print("ADULTS ONLYYYYY")
+        }
         let imageUrl = NSURL(string: "\(Utilities.dopImagesURL)\(model.company_id!)/\(model.logo!)")
         Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
             if let image = data{

@@ -16,6 +16,9 @@ struct Branch {
     let location: CLLocationCoordinate2D?
     let following: Bool?
     let distance:String?
+    let about: String?
+    let phone: String?
+    let adults_only: Bool?
     
     init(id: Int?, name: String?,  logo: String? ,banner: String?, company_id: Int?, latitude: Double, longitude: Double, following: Bool) {
         self.id = id ?? 0
@@ -25,8 +28,11 @@ struct Branch {
         self.location = CLLocationCoordinate2DMake(latitude, longitude) ?? CLLocationCoordinate2DMake(0.0, 0.0)
         self.following = following
         
+        self.about = nil
+        self.phone = nil
         self.distance = nil
         self.logo = nil
+        self.adults_only = nil
     }
     
     init(id: Int?, name: String?, banner: String?, company_id: Int?) {
@@ -39,6 +45,9 @@ struct Branch {
         self.location = nil
         self.logo = nil
         self.following = nil
+        self.about = nil
+        self.phone = nil
+        self.adults_only = nil
     }
     
     init(id: Int?, name: String?, distance: Double!) {
@@ -52,15 +61,21 @@ struct Branch {
         self.company_id = nil
         self.location = nil
         self.following = nil
+        self.about = nil
+        self.phone = nil
+        self.adults_only = nil
     }
     
-    init(id: Int?, name: String?, banner: String?, company_id: Int?, logo: String!, following: Bool!) {
+    init(id: Int?, name: String?, banner: String?, company_id: Int?, logo: String!, following: Bool!, about: String?, phone: String?, adults_only: Bool?) {
         self.id = id ?? 0
         self.name = name ?? ""
         self.banner = banner ?? ""
         self.company_id = company_id ?? 0
         self.logo = logo
         self.following = following
+        self.about = about
+        self.phone = phone
+        self.adults_only = adults_only
         
         self.distance = nil
         self.location = nil

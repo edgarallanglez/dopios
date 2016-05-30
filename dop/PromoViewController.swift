@@ -269,6 +269,8 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
             cell = self.myCouponsCollectionView.cellForItemAtIndexPath(indexPath)
             selected_coupon = self.myCoupons[indexPath.row] as Coupon
         }
+        
+    
     
         let modal:ModalViewController = ModalViewController(currentView: self, type: ModalViewControllerType.CouponDetail)
         modal.willPresentCompletionHandler = { vc in
