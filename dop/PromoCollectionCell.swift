@@ -269,6 +269,7 @@ class PromoCollectionCell: UICollectionViewCell, FBSDKSharingDelegate {
         self.coupon.available = object;
         
     }
-
+    
+   
 
 }

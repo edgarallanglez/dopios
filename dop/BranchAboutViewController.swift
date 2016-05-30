@@ -111,9 +111,11 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
             let company_id = json["company_id"].int
             let banner = json["banner"].string
             let logo = json["logo"].string!
+            let about = json["about"].string ?? ""
+            let phone = json["phone"].string ?? ""
+            let adults_only = json["adults_only"].bool ?? false
             
-            
-            let model = Branch(id: branch_id, name: branch_name, banner: banner, company_id: company_id, logo: logo, following: following)
+            let model = Branch(id: branch_id, name: branch_name, banner: banner, company_id: company_id, logo: logo, following: following, about: about, phone: phone, adults_only: adults_only)
             
             
             self.branch_pin = CLLocation(latitude: latitude!, longitude: longitude!)
@@ -129,13 +131,17 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
                     case 3: drop_pin.typeOfAnnotation = "marker-entertainment-icon"
                 default: break
                 }
-                
+                self.branch_description.text = model.about
                 self.branch_location_map.addAnnotation(drop_pin)
                 Utilities.fadeInFromBottomAnimation(self.contentView, delay: 0, duration: 1, yPosition: 20)
                 
                 Utilities.fadeOutViewAnimation(self.loader, delay: 0, duration: 0.3)
 
                 self.delegate!.setFollow(model)
+                
+                if model.adults_only == true{
+                    
+                }
             })
             
             },
