@@ -223,6 +223,7 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
                 let main_image = subJson["main_image"].string!
                 let level = subJson["level"].int!
                 let exp = subJson["exp"].double!
+                let is_friend = subJson["is_friend"].bool!
                 //let total_used = subJson["total_used"].int!
                 
                 let model = PeopleModel(names: names, surnames: surnames, user_id: user_id, birth_date: birth_date, facebook_key: facebook_key, privacy_status: privacy_status, main_image: main_image, level: level, exp: exp)
@@ -249,16 +250,17 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
             user_name = "\(User.userName)"
             if self.user_image == nil { self.downloadImage(NSURL(string: User.userImageUrl)!) }
             self.collectionView?.reloadData()
-            self.person.is_friend = true
+            //self.person.is_friend = true
         }
         
         user_name = "\(person.names) \(person.surnames)"
-        if person != nil {
+        if person != nil && person.is_friend != nil {
             if person.privacy_status == 1 && !person.is_friend! {
                 user_name = "\(person.names) \(person.surnames)"
                 self.collectionView?.reloadData()
             }
         }
+        
         if self.reload { self.collectionView?.reloadData() }
     }
     

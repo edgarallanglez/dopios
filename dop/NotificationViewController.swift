@@ -148,14 +148,14 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     }
 
     func getNotifications() {
-        notificationsTemporary.removeAll(keepCapacity: false)
-        cachedImages.removeAll(keepCapacity: false)
+        notificationsTemporary.removeAll()
+        cachedImages.removeAll()
 
         Utilities.fadeInViewAnimation(self.mainLoader, delay: 0, duration: 0.3)
 
         NotificationController.getNotificationsWithSuccess(
-            success: { (couponsData) -> Void in
-                let json = JSON(data: couponsData)
+            success: { (data) -> Void in
+                let json = JSON(data: data)
                 print(json)
                 for (_, subJson): (String, JSON) in json["data"]{
                     let type = subJson["type"].string ?? ""
@@ -164,8 +164,8 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                     let catcher_id = subJson["catcher_id"].int ?? 0
                     let launcher_name = subJson["launcher_name"].string ?? ""
                     let launcher_surnames = subJson["launcher_surnames"].string ?? ""
-                    let catcher_name = subJson["launcher_name"].string ?? ""
-                    let catcher_surnames = subJson["launcher_surnames"].string ?? ""
+                    let catcher_name = subJson["catcher_name"].string ?? ""
+                    let catcher_surnames = subJson["catcher_surnames"].string ?? ""
                     let branches_name = subJson["branches_name"].string ?? ""
                     let operation_id = subJson["operation_id"].int ?? 0
                     let read = subJson["read"].bool ?? false
@@ -175,11 +175,14 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                     let catcher_image = subJson["catcher_image"].string!
                     let launcher_image = subJson["launcher_image"].string!
                     let branch_id = subJson["branch_id"].int ?? 0
+                    let is_friend = subJson["is_friend"].bool!
 
 
-                    let model = Notification(type: type, notification_id: notification_id, launcher_id: launcher_id, catcher_id: catcher_id, launcher_name: launcher_name, launcher_surnames: launcher_surnames,  catcher_name: catcher_name, catcher_surnames: catcher_surnames, branches_name: branches_name, operation_id: operation_id, read: read, date: date, launcher_image: launcher_image, catcher_image: catcher_image, company_id: company_id, object_id: object_id, branch_id: branch_id)
-
-                    self.notificationsTemporary.append(model)
+                    let model = Notification(type: type, notification_id: notification_id, launcher_id: launcher_id, catcher_id: catcher_id, launcher_name: launcher_name, launcher_surnames: launcher_surnames,  catcher_name: catcher_name, catcher_surnames: catcher_surnames, branches_name: branches_name, operation_id: operation_id, read: read, date: date, launcher_image: launcher_image, catcher_image: catcher_image, company_id: company_id, object_id: object_id, branch_id: branch_id, is_friend: is_friend)
+                    
+                    if !(model.launcher_id == User.user_id && model.type == "friend" && model.operation_id == 0) {
+                        self.notificationsTemporary.append(model)
+                    }
                 }
 
                 dispatch_async(dispatch_get_main_queue(), {
@@ -225,8 +228,8 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                     let catcher_id = subJson["catcher_id"].int ?? 0
                     let launcher_name = subJson["launcher_name"].string ?? ""
                     let launcher_surnames = subJson["launcher_surnames"].string ?? ""
-                    let catcher_name = subJson["launcher_name"].string ?? ""
-                    let catcher_surnames = subJson["launcher_surnames"].string ?? ""
+                    let catcher_name = subJson["catcher_name"].string ?? ""
+                    let catcher_surnames = subJson["catcher_surnames"].string ?? ""
                     let branches_name = subJson["branches_name"].string ?? ""
                     let operation_id = subJson["operation_id"].int ?? 0
                     let read = subJson["read"].bool ?? false
@@ -236,9 +239,10 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                     let catcher_image = subJson["catcher_image"].string!
                     let launcher_image = subJson["launcher_image"].string!
                     let branch_id = subJson["branch_id"].int ?? 0
+                    let is_friend = subJson["is_friend"].bool!
                     
                     
-                    let model = Notification(type: type, notification_id: notification_id, launcher_id: launcher_id, catcher_id: catcher_id, launcher_name: launcher_name, launcher_surnames: launcher_surnames,  catcher_name: catcher_name, catcher_surnames: catcher_surnames, branches_name: branches_name, operation_id: operation_id, read: read, date: date, launcher_image: launcher_image, catcher_image: catcher_image, company_id: company_id, object_id: object_id, branch_id: branch_id)
+                    let model = Notification(type: type, notification_id: notification_id, launcher_id: launcher_id, catcher_id: catcher_id, launcher_name: launcher_name, launcher_surnames: launcher_surnames,  catcher_name: catcher_name, catcher_surnames: catcher_surnames, branches_name: branches_name, operation_id: operation_id, read: read, date: date, launcher_image: launcher_image, catcher_image: catcher_image, company_id: company_id, object_id: object_id, branch_id: branch_id, is_friend: is_friend)
                     
                     self.notificationsTemporary.append(model)
 
@@ -322,10 +326,12 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         let splitter = String(url).componentsSeparatedByString(":")
         let segue: String = splitter[0]
         let object_id: Int = Int(splitter[1])!
+        let is_friend: Bool = (splitter[2] as NSString!).boolValue
 
         if segue == "userProfile" {
             let view_controller = self.storyboard!.instantiateViewControllerWithIdentifier("UserProfileStickyController") as! UserProfileStickyController
             view_controller.user_id = object_id
+            view_controller.is_friend = is_friend
             self.navigationController?.pushViewController(view_controller, animated: true)
         }
 

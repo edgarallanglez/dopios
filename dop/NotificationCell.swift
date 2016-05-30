@@ -26,7 +26,7 @@ class NotificationCell: UITableViewCell {
         // Initialization code
     }
 
-    func loadItem(notification:Notification, viewController:UIViewController) {
+    func loadItem(notification: Notification, viewController:UIViewController) {
         var string_format = NSMutableAttributedString()
 
         let launcher_name = "\(notification.launcher_name) \(notification.launcher_surnames)"
@@ -44,7 +44,7 @@ class NotificationCell: UITableViewCell {
             let nsString = notification_text as NSString
             let launcher_range = nsString.rangeOfString(launcher_name)
             let newsfeed_activity_range = nsString.rangeOfString(newsfeed_Activity)
-            let segue = NSURL(string: "userProfile:\(notification.launcher_id)")!
+            let segue = NSURL(string: "userProfile:\(notification.launcher_id):\(notification.is_friend)")!
             let branch_segue = NSURL(string: "branchProfile:\(notification.branch_id)")
             title.addLinkToURL(segue, withRange: launcher_range)
             title.addLinkToURL(branch_segue, withRange: newsfeed_activity_range)
@@ -59,23 +59,24 @@ class NotificationCell: UITableViewCell {
                     decline_btn.hidden = false
                     accept_btn.hidden = false
                 case 1:
-                    if notification.catcher_id == User.user_id { notification_text = "\(launcher_name) te esta siguiendo" }
-                    else { notification_text = "Ahora sigues a \(catcher_name)" }
+                    if notification.catcher_id == User.user_id {
+                        notification_text = "\(launcher_name) te esta siguiendo"
+                        let nsString = notification_text as NSString
+                        let launcher_range = nsString.rangeOfString(launcher_name)
+                        let segue = NSURL(string: "userProfile:\(notification.launcher_id):\(notification.is_friend)")!
+                        title.text = notification_text
+                        title.addLinkToURL(segue, withRange: launcher_range)
+                    }
+                    else {
+                        notification_text = "Ahora sigues a \(catcher_name)"
+                        let nsString = notification_text as NSString
+                        let catcher_range = nsString.rangeOfString(catcher_name)
+                        let segue = NSURL(string: "userProfile:\(notification.catcher_id):\(notification.is_friend)")!
+                        title.text = notification_text
+                        title.addLinkToURL(segue, withRange: catcher_range)
+                    }
             default: print(notification.operation_id)
             }
-            
-            
-//            if notification.operation_id == 0 && notification.launcher_friend == User.user_id {
-//                notification_text = "\(launcher_name) quiere seguirte"
-//
-//            }
-
-            title.text = notification_text
-            let nsString = notification_text as NSString
-            let launcher_range = nsString.rangeOfString(launcher_name)
-            let segue = NSURL(string: "userProfile:\(notification.launcher_id)")!
-            title.addLinkToURL(segue, withRange: launcher_range)
-
         }
 
         /*if !notification.read {
