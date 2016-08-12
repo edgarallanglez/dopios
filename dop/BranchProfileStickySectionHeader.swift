@@ -30,7 +30,7 @@ class BranchProfileStickySectionHeader: UICollectionReusableView {
         self.addSubview(segmented_controller)
         segmented_controller.frame = self.bounds
         segmented_controller.sendActionsForControlEvents(UIControlEvents.TouchUpInside)
-        segmented_controller.addTarget(self, action: "setSegmentedController", forControlEvents: UIControlEvents.ValueChanged)
+        segmented_controller.addTarget(self, action: #selector(BranchProfileStickySectionHeader.setSegmentedController), forControlEvents: UIControlEvents.ValueChanged)
         
     }
     

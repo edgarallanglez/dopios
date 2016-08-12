@@ -42,7 +42,7 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
         getBranchProfile()
         
         if self.branch_location_map != nil {
-            let tap = UITapGestureRecognizer(target: self, action: Selector("pressMap:"))
+            let tap = UITapGestureRecognizer(target: self, action: #selector(BranchAboutViewController.pressMap(_:)))
             self.branch_location_map.addGestureRecognizer(tap)
         }
 

@@ -42,7 +42,7 @@ class BranchCampaignCollectionViewController: UICollectionViewController, ModalD
         
         self.refreshControl = UIRefreshControl()
         
-        self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        self.refreshControl.addTarget(self, action: #selector(BranchCampaignCollectionViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
         self.collection_view.addSubview(refreshControl)
         
         setupLoader()
@@ -263,7 +263,7 @@ class BranchCampaignCollectionViewController: UICollectionViewController, ModalD
                 
                 self.coupons.append(model)
                 self.new_data = true
-                self.added_values++
+                self.added_values += 1
             }
             
             dispatch_async(dispatch_get_main_queue(), {
@@ -300,14 +300,32 @@ class BranchCampaignCollectionViewController: UICollectionViewController, ModalD
             modal.dismissAnimated(true, completionHandler: nil)
         }
         if modal.action_type == "redeem" {
-            print("Redeeeeeem")
-            let view_controller  = self.storyboard!.instantiateViewControllerWithIdentifier("readQRView") as! readQRViewController
-            view_controller.coupon_id = self.selected_coupon.id
-            view_controller.branch_id = self.selected_coupon.branch_id
-            self.hidesBottomBarWhenPushed = true
-            self.parent_view.navigationController?.pushViewController(view_controller, animated: true)
-            self.hidesBottomBarWhenPushed = false
-            modal.dismissAnimated(true, completionHandler: nil)
+            if selected_coupon.available>0 {
+                let view_controller  = self.storyboard!.instantiateViewControllerWithIdentifier("readQRView") as! readQRViewController
+                view_controller.coupon_id = self.selected_coupon.id
+                view_controller.branch_id = self.selected_coupon.branch_id
+                self.hidesBottomBarWhenPushed = true
+                self.parent_view.navigationController?.pushViewController(view_controller, animated: true)
+                //self.hidesBottomBarWhenPushed = false
+                modal.dismissAnimated(true, completionHandler: nil)
+            }else{
+                let error_modal: ModalViewController = ModalViewController(currentView: self, type: ModalViewControllerType.AlertModal)
+                error_modal.willPresentCompletionHandler = { vc in
+                    let navigation_controller = vc as! AlertModalViewController
+                    
+                    var alert_array = [AlertModel]()
+                    
+                    alert_array.append(AlertModel(alert_title: "¡Oops!", alert_image: "error", alert_description: "Esta promoción se ha terminado :("))
+                    
+                    navigation_controller.setAlert(alert_array)
+                }
+                
+                modal.dismissAnimated(true, completionHandler: { (modal) -> Void in
+                    error_modal.presentAnimated(true, completionHandler: nil)
+                    
+                })
+            }
+
         }
 //        if modal.action_type == "share" {
 //            let YourImage:UIImage = UIImage(named: "starbucks_banner.jpg")!

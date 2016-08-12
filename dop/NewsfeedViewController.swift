@@ -55,11 +55,14 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
             } else {
                 cell.user_image.alpha = 0
                 cell.username_button.alpha = 0
+                UIView.animateWithDuration(0.5, animations: {
+                    cell.username_button.alpha = 1
+                })
                 Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
-                    if let image = data{
+                    if let image = UIImage(data: data!) {
                         dispatch_async(dispatch_get_main_queue()) {
                             var cell_image : UIImage = UIImage()
-                            cell_image = UIImage (data: image)!
+                            cell_image = image
                             
                             if tableView.indexPathForCell(cell)?.row == indexPath.row {
                                 self.cachedImages[identifier] = cell_image
@@ -99,7 +102,7 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
         super.viewDidLoad()
         
         self.refreshControl = UIRefreshControl()
-        self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        self.refreshControl.addTarget(self, action: #selector(NewsfeedViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
         self.tableView.addSubview(refreshControl)
         
         let nib = UINib(nibName: "NewsfeedCell", bundle: nil)
@@ -154,11 +157,11 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
             
             for (index, subJson): (String, JSON) in json["data"] {
                 print(subJson)
-                var client_coupon_id = subJson["clients_coupon_id"].int
-                var friend_id = subJson["friends_id"].string
+                let client_coupon_id = subJson["clients_coupon_id"].int
+                let friend_id = subJson["friends_id"].string
                 var exchange_date = subJson["exchange_date"].string
-                var main_image = subJson["main_image"].string
-                var names = subJson["names"].string
+                let main_image = subJson["main_image"].string
+                let names = subJson["names"].string
                 let company_id = subJson["company_id"].int ?? 0
                 var longitude = subJson["longitude"].string
                 let latitude = subJson["latitude"].string
@@ -226,7 +229,7 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
         var newData: Bool = false
         var addedValues: Int = 0
         
-        var firstNewsfeed = self.newsfeed.first as NewsfeedNote!
+        let firstNewsfeed = self.newsfeed.first as NewsfeedNote!
         
         let params:[String: AnyObject] = [
             "offset": String(stringInterpolationSegment: offset),
@@ -238,11 +241,11 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
             let json = JSON(data: friendsData)
             
             for (index, subJson): (String, JSON) in json["data"] {
-                var client_coupon_id = subJson["clients_coupon_id"].int
-                var friend_id = subJson["friends_id"].string
+                let client_coupon_id = subJson["clients_coupon_id"].int
+                let friend_id = subJson["friends_id"].string
                 var exchange_date = subJson["exchange_date"].string
-                var main_image = subJson["main_image"].string
-                var names = subJson["names"].string
+                let main_image = subJson["main_image"].string
+                let names = subJson["names"].string
                 let company_id = subJson["company_id"].int ?? 0
                 var longitude = subJson["longitude"].string
                 let latitude = subJson["latitude"].string

@@ -42,14 +42,17 @@ class RewardsActivityCell: UITableViewCell {
         let newsfeed_activity_range = ns_string.rangeOfString(newsfeed_activity)
         let segue = NSURL(string: "branchProfile:\(model.branch_id)")!
         
+        self.moment.text = Utilities.friendlyDate(model.date)
+
+        
         activity_description.addLinkToURL(segue, withRange: newsfeed_activity_range)
         
         self.branch_image.tag = model.branch_id
-        self.branch_image.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "goToBranchProfile:"))
+        self.branch_image.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(RewardsActivityCell.goToBranchProfile(_:))))
         
 //        self.moment.text = Utilities.friendlyDate(model.date)
         
-        self.heartView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "likeActivity:"))
+        self.heartView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(RewardsActivityCell.likeActivity(_:))))
         
         
         self.total_likes.text = String(model.total_likes)
@@ -63,9 +66,9 @@ class RewardsActivityCell: UITableViewCell {
     
     func downloadImage(url: NSURL) {
         Utilities.downloadImage(url, completion: {(data, error) -> Void in
-            if let image = data{
+            if let image = UIImage(data: data!) {
                 dispatch_async(dispatch_get_main_queue()) {
-                    self.branch_image.image = UIImage(data: image)
+                    self.branch_image.image = image
                 }
             }else{
                 print("Error")

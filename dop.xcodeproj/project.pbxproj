@@ -128,12 +128,6 @@
 		A01D17E21C2B2A98002FC5F2 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A01D17E11C2B2A98002FC5F2 /* Accelerate.framework */; };
 		A01D17EA1C2B2BFB002FC5F2 /* MZAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = A01D17E71C2B2BFB002FC5F2 /* MZAppearance.m */; };
 		A01D17EB1C2B2BFB002FC5F2 /* NSInvocation+Copy.m in Sources */ = {isa = PBXBuildFile; fileRef = A01D17E91C2B2BFB002FC5F2 /* NSInvocation+Copy.m */; };
-		A01D77CC1BDAB93D00AA8FE2 /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A01D77CB1BDAB93D00AA8FE2 /* SRWebSocket.m */; };
-		A01D77D81BDAB94C00AA8FE2 /* SocketIO.m in Sources */ = {isa = PBXBuildFile; fileRef = A01D77CE1BDAB94C00AA8FE2 /* SocketIO.m */; };
-		A01D77D91BDAB94C00AA8FE2 /* SocketIOPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = A01D77D01BDAB94C00AA8FE2 /* SocketIOPacket.m */; };
-		A01D77DA1BDAB94C00AA8FE2 /* SocketIOJSONSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = A01D77D21BDAB94C00AA8FE2 /* SocketIOJSONSerialization.m */; };
-		A01D77DB1BDAB94C00AA8FE2 /* SocketIOTransportWebsocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A01D77D51BDAB94C00AA8FE2 /* SocketIOTransportWebsocket.m */; };
-		A01D77DC1BDAB94C00AA8FE2 /* SocketIOTransportXHR.m in Sources */ = {isa = PBXBuildFile; fileRef = A01D77D71BDAB94C00AA8FE2 /* SocketIOTransportXHR.m */; };
 		A04CC2101BBD968E001AF7E0 /* ToExpireCoupon.xib in Resources */ = {isa = PBXBuildFile; fileRef = A04CC20F1BBD968E001AF7E0 /* ToExpireCoupon.xib */; };
 		A04CC2121BBDBB16001AF7E0 /* ToExpireCoupon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04CC2111BBDBB16001AF7E0 /* ToExpireCoupon.swift */; };
 		A04D388D1BC7361900E578F0 /* NearestCoupon.xib in Resources */ = {isa = PBXBuildFile; fileRef = A04D388C1BC7361900E578F0 /* NearestCoupon.xib */; };
@@ -179,28 +173,7 @@
 		A09AB4E21AF99136004287F7 /* CouponController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09AB4E01AF99136004287F7 /* CouponController.swift */; };
 		A09AB4E31AF99136004287F7 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09AB4E11AF99136004287F7 /* SwiftyJSON.swift */; };
 		A09AB4E51AFA880E004287F7 /* Coupon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09AB4E41AFA880E004287F7 /* Coupon.swift */; };
-		A0A06CC01C860EF300701C8F /* SocketAckEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A06CAB1C860EF300701C8F /* SocketAckEmitter.swift */; };
-		A0A06CC11C860EF300701C8F /* SocketAckManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A06CAC1C860EF300701C8F /* SocketAckManager.swift */; };
-		A0A06CC21C860EF300701C8F /* SocketAnyEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A06CAD1C860EF300701C8F /* SocketAnyEvent.swift */; };
-		A0A06CC31C860EF300701C8F /* SocketClientSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A06CAE1C860EF300701C8F /* SocketClientSpec.swift */; };
-		A0A06CC41C860EF300701C8F /* SocketEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A06CAF1C860EF300701C8F /* SocketEngine.swift */; };
-		A0A06CC51C860EF300701C8F /* SocketEngineClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A06CB01C860EF300701C8F /* SocketEngineClient.swift */; };
-		A0A06CC61C860EF300701C8F /* SocketEnginePacketType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A06CB11C860EF300701C8F /* SocketEnginePacketType.swift */; };
-		A0A06CC71C860EF300701C8F /* SocketEnginePollable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A06CB21C860EF300701C8F /* SocketEnginePollable.swift */; };
-		A0A06CC81C860EF300701C8F /* SocketEngineSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A06CB31C860EF300701C8F /* SocketEngineSpec.swift */; };
-		A0A06CC91C860EF300701C8F /* SocketEngineWebsocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A06CB41C860EF300701C8F /* SocketEngineWebsocket.swift */; };
-		A0A06CCA1C860EF300701C8F /* SocketEventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A06CB51C860EF300701C8F /* SocketEventHandler.swift */; };
-		A0A06CCB1C860EF300701C8F /* SocketIOClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A06CB61C860EF300701C8F /* SocketIOClient.swift */; };
-		A0A06CCC1C860EF300701C8F /* SocketIOClientOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A06CB71C860EF300701C8F /* SocketIOClientOption.swift */; };
-		A0A06CCD1C860EF300701C8F /* SocketIOClientStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A06CB81C860EF300701C8F /* SocketIOClientStatus.swift */; };
-		A0A06CCE1C860EF300701C8F /* SocketLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A06CB91C860EF300701C8F /* SocketLogger.swift */; };
-		A0A06CCF1C860EF300701C8F /* SocketPacket.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A06CBA1C860EF300701C8F /* SocketPacket.swift */; };
-		A0A06CD01C860EF300701C8F /* SocketParsable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A06CBB1C860EF300701C8F /* SocketParsable.swift */; };
-		A0A06CD11C860EF300701C8F /* SocketStringReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A06CBC1C860EF300701C8F /* SocketStringReader.swift */; };
-		A0A06CD21C860EF300701C8F /* SocketTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A06CBD1C860EF300701C8F /* SocketTypes.swift */; };
 		A0A06CD31C860EF300701C8F /* SwiftRegex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A06CBE1C860EF300701C8F /* SwiftRegex.swift */; };
-		A0A06CD41C860EF300701C8F /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A06CBF1C860EF300701C8F /* WebSocket.swift */; };
-		A0A06CD61C860F2500701C8F /* SocketIOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A06CD51C860F2500701C8F /* SocketIOManager.swift */; };
 		A0B6EA551C31BB82003F17DF /* ModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B6EA541C31BB82003F17DF /* ModalViewController.swift */; };
 		A0B6EA5F1C32FB2E003F17DF /* ErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0B6EA5E1C32FB2E003F17DF /* ErrorView.xib */; };
 		A0BB9BB91B13E4F1000BA261 /* FriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BB9BB71B13E4F1000BA261 /* FriendCell.swift */; };
@@ -1286,6 +1259,7 @@
 					9D3326081AF7ED1C00498801 = {
 						CreatedOnToolsVersion = 6.3.1;
 						DevelopmentTeam = MRH6222N58;
+						LastSwiftMigration = 0800;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1301,6 +1275,7 @@
 					9D33261D1AF7ED1C00498801 = {
 						CreatedOnToolsVersion = 6.3.1;
 						DevelopmentTeam = QX6AA77Z42;
+						LastSwiftMigration = 0800;
 						TestTargetID = 9D3326081AF7ED1C00498801;
 					};
 				};
@@ -1435,12 +1410,10 @@
 				A01D17DE1C2B2A15002FC5F2 /* MZFormSheetTransition.m in Sources */,
 				A0FB84381C03F5780099B2F4 /* readQRController.swift in Sources */,
 				A0646AF31C2C773A00527B90 /* ModalButton.swift in Sources */,
-				A01D77D81BDAB94C00AA8FE2 /* SocketIO.m in Sources */,
 				9DC9218A1B9F8D4900241FFD /* UIScrollView+InfiniteScroll.h in Sources */,
 				6DC2A4AC1C84B8C0006E47D6 /* KAProgressLabel.m in Sources */,
 				9DC9218B1B9F8D4900241FFD /* UIScrollView+InfiniteScroll.m in Sources */,
 				9D2BDFE41B9DF524003F1260 /* SearchController.swift in Sources */,
-				A0A06CC61C860EF300701C8F /* SocketEnginePacketType.swift in Sources */,
 				9DBB7A401B968437005700B9 /* UIImage+ImageEffects.h in Sources */,
 				9D697C7A1B5EF13000D786AA /* iconfonts-fontawesome.swift in Sources */,
 				6DBBB1501C35B9A0002AFB57 /* ConnectionModel.swift in Sources */,
@@ -1452,14 +1425,11 @@
 				9D7FA0781BBC4FF000EAEC36 /* SettingsViewController.swift in Sources */,
 				6DC2A4AD1C84B8C0006E47D6 /* TPPropertyAnimation.m in Sources */,
 				6DD56C071C32EC9B006636F4 /* BadgeCollectionCell.swift in Sources */,
-				A0A06CC51C860EF300701C8F /* SocketEngineClient.swift in Sources */,
 				6D81DF171C4EA7490068168D /* BranchProfileStickySectionHeader.swift in Sources */,
 				A0EC05991B7D1C69003CADB2 /* SWRevealViewController.m in Sources */,
 				A012554D1C939C920037E812 /* PromoCollectionViewLayout.swift in Sources */,
 				6D134AC11C2B6B4600EDD5E4 /* ActivityPage.swift in Sources */,
-				A01D77DC1BDAB94C00AA8FE2 /* SocketIOTransportXHR.m in Sources */,
 				A065EB321BA8E60A003B7390 /* DashboardController.swift in Sources */,
-				A0A06CCC1C860EF300701C8F /* SocketIOClientOption.swift in Sources */,
 				A0A06CD31C860EF300701C8F /* SwiftRegex.swift in Sources */,
 				A01D17DD1C2B2A15002FC5F2 /* MZFormSheetSegue.m in Sources */,
 				6D34641F1C6AC611003621EA /* AlertModalViewController.swift in Sources */,
@@ -1470,10 +1440,8 @@
 				A060F7861B702FAC009D6ADB /* CouponDetailViewController.swift in Sources */,
 				A0C3AC2E1B9525D5005636E7 /* CustomInfiniteIndicator.swift in Sources */,
 				A0DF72931B13AEBF006EE8F4 /* FriendsController.swift in Sources */,
-				A01D77DA1BDAB94C00AA8FE2 /* SocketIOJSONSerialization.m in Sources */,
 				6D9F5A111C208894005D0EBE /* BadgeController.swift in Sources */,
 				6D81DF1E1C4EABF90068168D /* BranchAboutViewController.swift in Sources */,
-				A0A06CC91C860EF300701C8F /* SocketEngineWebsocket.swift in Sources */,
 				9D30F9071BD5B19600D225D5 /* SearchSegmentedController.swift in Sources */,
 				9DCE5CDF1BDAEF9100A425FB /* NotificationViewController.swift in Sources */,
 				6D9F5A1A1C209306005D0EBE /* RewardsViewController.swift in Sources */,
@@ -1482,22 +1450,18 @@
 				6D81DF201C4EAC480068168D /* BranchCampaignCollectionViewController.swift in Sources */,
 				6DD3B2241C24864000BEE129 /* BadgeCell.swift in Sources */,
 				A0646AE91C2C649700527B90 /* SimpleModalViewController.swift in Sources */,
-				A0A06CD11C860EF300701C8F /* SocketStringReader.swift in Sources */,
 				9DF8F0751BD7F37E009D80EB /* PeopleCell.swift in Sources */,
 				A0DF72911B13A66C006EE8F4 /* FriendsViewController.swift in Sources */,
 				6D9F5A1E1C209626005D0EBE /* BadgeModel.swift in Sources */,
 				A0662A361BA0CEF5006D6278 /* LoadingCell.swift in Sources */,
 				A06B357C1B9F667D003C90EF /* NearbyBranch.swift in Sources */,
 				6DBBB1451C35987B002AFB57 /* ConnectionsPage.swift in Sources */,
-				A01D77DB1BDAB94C00AA8FE2 /* SocketIOTransportWebsocket.m in Sources */,
 				6D5C95711C2B049A0017B166 /* UserProfileStickyController.swift in Sources */,
-				A0A06CCB1C860EF300701C8F /* SocketIOClient.swift in Sources */,
 				A0F1E0291BF272BD0092C1F4 /* NavigationController.swift in Sources */,
 				A0EC05B41B7D622A003CADB2 /* LoadingViewController.swift in Sources */,
 				A0B6EA551C31BB82003F17DF /* ModalViewController.swift in Sources */,
 				A086ACDF1BB09496003133BA /* Branch.swift in Sources */,
 				9DB907DE1B8E25A000A40FE0 /* FilterSideViewController.swift in Sources */,
-				A0A06CC21C860EF300701C8F /* SocketAnyEvent.swift in Sources */,
 				6DBB43971C29C4E5001FEDAF /* CSStickyHeaderFlowLayout.m in Sources */,
 				6D9F5A1C1C2094ED005D0EBE /* RewardsSegmentedController.swift in Sources */,
 				9DB6121A1B192FCC004B8DB8 /* NearbyMapController.swift in Sources */,
@@ -1511,8 +1475,6 @@
 				A009A7E31C6B9DBC001C384D /* MapPinCallout.swift in Sources */,
 				6D81DF151C4EA7340068168D /* BranchProfileStickyHeader.swift in Sources */,
 				6D5C957E1C2B2AD70017B166 /* UserPaginationViewController.swift in Sources */,
-				A0A06CC81C860EF300701C8F /* SocketEngineSpec.swift in Sources */,
-				A0A06CD61C860F2500701C8F /* SocketIOManager.swift in Sources */,
 				A09AB4E21AF99136004287F7 /* CouponController.swift in Sources */,
 				A0EB97B01B05131E005112EF /* Utilities.swift in Sources */,
 				A0578C641B0E7D2B0033B5BD /* UserProfileController.swift in Sources */,
@@ -1520,9 +1482,6 @@
 				9D3326111AF7ED1C00498801 /* LoginViewController.swift in Sources */,
 				A09732E11BDBF712006F9378 /* NotificationButton.swift in Sources */,
 				A009A7D81C6A6D7B001C384D /* MapPin.swift in Sources */,
-				A0A06CD21C860EF300701C8F /* SocketTypes.swift in Sources */,
-				A0A06CC71C860EF300701C8F /* SocketEnginePollable.swift in Sources */,
-				A0A06CCF1C860EF300701C8F /* SocketPacket.swift in Sources */,
 				A0F1E0321BF3D3000092C1F4 /* BaseViewController.swift in Sources */,
 				A086ACE31BB383A4003133BA /* TrendingCoupon.swift in Sources */,
 				6DD3B2221C24862A00BEE129 /* TrophyTableViewController.swift in Sources */,
@@ -1533,25 +1492,19 @@
 				A060F78E1B72B475009D6ADB /* CouponDetailView.swift in Sources */,
 				A082F48A1B1920F8001C8C52 /* NewsfeedCell.swift in Sources */,
 				A09AB4E51AFA880E004287F7 /* Coupon.swift in Sources */,
-				A0A06CCE1C860EF300701C8F /* SocketLogger.swift in Sources */,
 				9D33260F1AF7ED1C00498801 /* AppDelegate.swift in Sources */,
 				9D0DB4711B17D2DB0009FE6C /* NearbyMapViewController.swift in Sources */,
 				A060F7821B70184F009D6ADB /* PromoCollectionCell.swift in Sources */,
 				A0DF72951B13E262006EE8F4 /* Friend.swift in Sources */,
 				6DBBB14E1C359A07002AFB57 /* ConnectionCell.swift in Sources */,
 				A009A7E71C6BBAF6001C384D /* TriangeView.swift in Sources */,
-				A0A06CCD1C860EF300701C8F /* SocketIOClientStatus.swift in Sources */,
-				A0A06CC31C860EF300701C8F /* SocketClientSpec.swift in Sources */,
 				A01A39BE1BDF0EB700F231F5 /* Notification.swift in Sources */,
 				A082F4831B18CEE6001C8C52 /* NewsfeedViewController.swift in Sources */,
 				9D0E43D11BF55F8200BA17D7 /* SettingsController.swift in Sources */,
 				6DEE480C1C28628400C7F5FB /* MedalTableViewController.swift in Sources */,
 				6D81DF1C1C4EA8370068168D /* BranchProfileSegmentedController.swift in Sources */,
-				A01D77D91BDAB94C00AA8FE2 /* SocketIOPacket.m in Sources */,
-				A0A06CCA1C860EF300701C8F /* SocketEventHandler.swift in Sources */,
 				9DACBBF91BA8CE0200CAEECB /* FilterSegmentedControl.swift in Sources */,
 				9DE55C441BB07C0A005F9776 /* PromoSegmentedController.swift in Sources */,
-				A0A06CD41C860EF300701C8F /* WebSocket.swift in Sources */,
 				A01D17DC1C2B2A15002FC5F2 /* MZFormSheetController.m in Sources */,
 				A01D17EA1C2B2BFB002FC5F2 /* MZAppearance.m in Sources */,
 				9D9C9C911BB2155B00D9F986 /* Annotation.swift in Sources */,
@@ -1559,8 +1512,6 @@
 				A0F7E9201AFAE48500A4F0F2 /* CouponCell.swift in Sources */,
 				A0FCF9D81B98D59200BB4537 /* SearchViewController.swift in Sources */,
 				A060F7891B717DB9009D6ADB /* UIImage+ImageEffects.m in Sources */,
-				A0A06CD01C860EF300701C8F /* SocketParsable.swift in Sources */,
-				A0A06CC41C860EF300701C8F /* SocketEngine.swift in Sources */,
 				9D42966F1BBEFE37000B4A21 /* RewardsActivityCell.swift in Sources */,
 				A060F77A1B6C4CA3009D6ADB /* TabbarController.swift in Sources */,
 				9DB3DABB1B73C28A004AC0F1 /* BranchProfileTopView.swift in Sources */,
@@ -1569,13 +1520,10 @@
 				A09AB4E31AF99136004287F7 /* SwiftyJSON.swift in Sources */,
 				A0EB97AD1B03E16A005112EF /* User.swift in Sources */,
 				A01D17DB1C2B2A15002FC5F2 /* MZFormSheetBackgroundWindowViewController.m in Sources */,
-				A0A06CC11C860EF300701C8F /* SocketAckManager.swift in Sources */,
 				A01A39BC1BDF0D8C00F231F5 /* NotificationController.swift in Sources */,
-				A01D77CC1BDAB93D00AA8FE2 /* SRWebSocket.m in Sources */,
 				9DB327CE1B863C84006BF882 /* MoreMenuViewController.swift in Sources */,
 				A09AB4DB1AF95A26004287F7 /* DashboardViewController.swift in Sources */,
 				A01A39BA1BDF050800F231F5 /* NotificationCell.swift in Sources */,
-				A0A06CC01C860EF300701C8F /* SocketAckEmitter.swift in Sources */,
 				A01D17DA1C2B2A15002FC5F2 /* MZFormSheetBackgroundWindow.m in Sources */,
 				A06B35791B9F5D9F003C90EF /* SearchCell.swift in Sources */,
 				A01D17DF1C2B2A15002FC5F2 /* UIImage+Additional.m in Sources */,
@@ -1758,6 +1706,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "dop/Bridging-Header.h";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -1797,6 +1746,7 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "dop/Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};
@@ -1819,6 +1769,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.inmoon.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 2.3;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/dop.app/dop";
 			};
 			name = Debug;
@@ -1838,6 +1789,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.inmoon.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 2.3;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/dop.app/dop";
 			};
 			name = Release;

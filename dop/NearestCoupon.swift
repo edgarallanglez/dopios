@@ -25,14 +25,14 @@ class NearestCoupon: UIView, ModalDelegate {
     }
     
     func loadItem(coupon: Coupon, viewController: UIViewController) {
-        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "tapCoupon:"))
+        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(NearestCoupon.tapCoupon(_:))))
         self.coupon = coupon
         self.descriptionLbl.text = coupon.couponDescription
         self.viewController = viewController
         
         NSNotificationCenter.defaultCenter().addObserver(
             self,
-            selector: "updateLikeAndTaken:",
+            selector: #selector(NearestCoupon.updateLikeAndTaken(_:)),
             name: "takenOrLikeStatus",
             object: nil)
     }
@@ -66,13 +66,37 @@ class NearestCoupon: UIView, ModalDelegate {
         }
         
         if modal.action_type == "redeem" {
-            let view_controller  = viewController!.storyboard!.instantiateViewControllerWithIdentifier("readQRView") as! readQRViewController
-            view_controller.coupon_id = self.coupon.id
-            view_controller.branch_id = self.coupon.branch_id
-            viewController?.hidesBottomBarWhenPushed = true
-            viewController!.navigationController?.pushViewController(view_controller, animated: true)
-            viewController?.hidesBottomBarWhenPushed = false
-            modal.dismissAnimated(true, completionHandler: nil)
+            if coupon.available>0{
+                let view_controller  = viewController!.storyboard!.instantiateViewControllerWithIdentifier("readQRView") as! readQRViewController
+                view_controller.coupon_id = self.coupon.id
+                view_controller.coupon = self.coupon
+                view_controller.branch_id = self.coupon.branch_id
+                
+                viewController?.hidesBottomBarWhenPushed = true
+                
+                modal.dismissAnimated(true, completionHandler:{ (modal) -> Void in
+                    self.viewController!.hidesBottomBarWhenPushed = true
+                    self.viewController!.navigationController?.pushViewController(view_controller, animated: true)
+                    self.viewController!.hidesBottomBarWhenPushed = false
+                })
+            }else{
+                let error_modal: ModalViewController = ModalViewController(currentView: self.viewController!, type: ModalViewControllerType.AlertModal)
+                error_modal.willPresentCompletionHandler = { vc in
+                    let navigation_controller = vc as! AlertModalViewController
+                    
+                    var alert_array = [AlertModel]()
+                    
+                    alert_array.append(AlertModel(alert_title: "¡Oops!", alert_image: "error", alert_description: "Esta promoción se ha terminado :("))
+                    
+                    navigation_controller.setAlert(alert_array)
+                }
+                
+                modal.dismissAnimated(true, completionHandler: { (modal) -> Void in
+                    error_modal.presentAnimated(true, completionHandler: nil)
+                    
+                })
+                
+            }
         }
     }
     

@@ -64,7 +64,7 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
         self.collectionView?.registerClass(UserProfileSectionHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "sectionHeader")
         self.layout?.headerReferenceSize = CGSizeMake(320, 40)
         
-        //self.collectionView?.delegate = self
+        self.collectionView?.delegate = self
         checkForProfile()
         drawBar()
         
@@ -89,9 +89,9 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
     }
     
     func drawBar() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "setBadge", name: "newNotification", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(UserProfileStickyController.setBadge), name: "newNotification", object: nil)
 
-        notificationButton = UIBarButtonItem(image: UIImage(named: "notification"), style: UIBarButtonItemStyle.Plain, target: self, action: "notification")
+        notificationButton = UIBarButtonItem(image: UIImage(named: "notification"), style: UIBarButtonItemStyle.Plain, target: self, action: #selector(UserProfileStickyController.notification))
         
         self.navigationItem.rightBarButtonItem = notificationButton
         vc  = self.storyboard!.instantiateViewControllerWithIdentifier("SearchView") as! SearchViewController
@@ -119,12 +119,12 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
         
         vc.view.addSubview(blurView)
         
-        let gestureRecognizer = UITapGestureRecognizer(target: self, action: "cancelSearch")
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UserProfileStickyController.cancelSearch))
         blurView.addGestureRecognizer(gestureRecognizer)
         
         //vc.searchScrollView.hidden = true
         vc.searchScrollView.hidden = true
-        cancelSearchButton = UIBarButtonItem(title: "Cancelar", style: .Plain, target: self, action: "cancelSearch")
+        cancelSearchButton = UIBarButtonItem(title: "Cancelar", style: .Plain, target: self, action: #selector(UserProfileStickyController.cancelSearch))
         //setSearchObserver()
 
     }
@@ -132,7 +132,7 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
     func setSearchObserver() {
         NSNotificationCenter.defaultCenter().addObserver(
             self,
-            selector: "presentView:",
+            selector: #selector(UserProfileStickyController.presentView(_:)),
             name: "performSegue",
             object: nil)
     }
@@ -223,6 +223,7 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
                 let main_image = subJson["main_image"].string!
                 let level = subJson["level"].int!
                 let exp = subJson["exp"].double!
+                let is_friend = subJson["is_friend"].bool!
                 //let total_used = subJson["total_used"].int!
                 
                 let model = PeopleModel(names: names, surnames: surnames, user_id: user_id, birth_date: birth_date, facebook_key: facebook_key, privacy_status: privacy_status, main_image: main_image, level: level, exp: exp)
@@ -249,24 +250,25 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
             user_name = "\(User.userName)"
             if self.user_image == nil { self.downloadImage(NSURL(string: User.userImageUrl)!) }
             self.collectionView?.reloadData()
-            self.person.is_friend = true
+            //self.person.is_friend = true
         }
         
         user_name = "\(person.names) \(person.surnames)"
-        if person != nil {
+        if person != nil && person.is_friend != nil {
             if person.privacy_status == 1 && !person.is_friend! {
                 user_name = "\(person.names) \(person.surnames)"
                 self.collectionView?.reloadData()
             }
         }
+        
         if self.reload { self.collectionView?.reloadData() }
     }
     
     func downloadImage(url: NSURL) {
         Utilities.downloadImage(url, completion: {(data, error) -> Void in
-            if let image = data {
+            if let image = UIImage(data: data!) {
                 dispatch_async(dispatch_get_main_queue()) {
-                    self.user_image?.image = UIImage(data: image)
+                    self.user_image?.image = image
                 }
             } else { print("Error") }
         })

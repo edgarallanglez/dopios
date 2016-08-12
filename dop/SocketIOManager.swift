@@ -52,7 +52,7 @@ class SocketIOManager: NSObject {
     }
     func getNotification(completionHandler: (info: [String: AnyObject]) -> Void) {
         socket.on("notification") { (dataArray, socketAck) -> Void in
-            var messageDictionary = [String: AnyObject]()
+            let messageDictionary = [String: AnyObject]()
             completionHandler(info: messageDictionary)
         }
     }

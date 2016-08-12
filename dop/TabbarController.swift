@@ -38,8 +38,6 @@ class TabbarController: UITabBarController {
         //self.startListening()
         //self.startSocketListener()
         UIApplication.sharedApplication().statusBarStyle = .LightContent
-        
-        
     }
     
 
@@ -51,7 +49,6 @@ class TabbarController: UITabBarController {
     func addCenterButtonWithImage(buttonImage:UIImage){
         let button : UIButton = UIButton(type: UIButtonType.Custom)
         
-        
         button.frame = CGRectMake(0,0, 57,57)
         button.backgroundColor = UIColor.clearColor()
         
@@ -62,10 +59,9 @@ class TabbarController: UITabBarController {
         
         
         self.view.addSubview(button)
-        button.addTarget(self, action: "pressed:", forControlEvents: UIControlEvents.TouchUpInside)
+        button.addTarget(self, action: #selector(TabbarController.pressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
 
         self.view.bringSubviewToFront(button)
- 
         
     }
     

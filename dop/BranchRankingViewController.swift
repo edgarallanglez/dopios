@@ -161,7 +161,7 @@ class BranchRankingViewController: UITableViewController {
                     
                     self.ranking_array.append(model)
                     self.new_data = true
-                    self.added_values++
+                    self.added_values += 1
                 }
                 
                 dispatch_async(dispatch_get_main_queue(), {

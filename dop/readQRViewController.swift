@@ -62,7 +62,7 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
             // Initialize the captureSession object.
             captureSession = AVCaptureSession()
             // Set the input device on the capture session.
-            captureSession?.addInput(input as! AVCaptureInput)
+            captureSession?.addInput(input )
             
             // Initialize a AVCaptureMetadataOutput object and set it as the output device to the capture session.
             captureMetadataOutput = AVCaptureMetadataOutput()
@@ -196,34 +196,54 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                 dispatch_async(dispatch_get_main_queue(), {
                     
                     let json = JSON(data: couponsData)
-                    let name = json["data"]["name"].string
                     print(json)
-
-                    let modal: ModalViewController = ModalViewController(currentView: self, type: ModalViewControllerType.AlertModal)
-                    
-                    dispatch_async(dispatch_get_main_queue()) {
-                        Utilities.fadeOutViewAnimation(self.spinner, delay: 0, duration: 0.3)
-
-                        modal.willPresentCompletionHandler = { vc in
-                            let navigation_controller = vc as! AlertModalViewController
-                            
-                            self.alert_array.append(AlertModel(alert_title: "¡Felicidades!", alert_image: "success", alert_description: "Has redimido tu promoción con éxito en \(name!)"))
-                            
-                            if json["reward"]["badges"].count != 0 {
-                                let badges = json["reward"]["badges"].array!
-                                let badge_name: String = badges[0]["name"].string!
-                                print(badge_name)
+                    if let message = json["message"].string {
+                            Utilities.fadeOutViewAnimation(self.spinner, delay: 0, duration: 0.3)
+                            let error_modal: ModalViewController = ModalViewController(currentView: self, type: ModalViewControllerType.AlertModal)
+                            error_modal.willPresentCompletionHandler = { vc in
+                                let navigation_controller = vc as! AlertModalViewController
                                 
-                                self.alert_array.append(AlertModel(alert_title: "¡Felicidades!", alert_image: "\(badge_name)", alert_description: "Has desbloqueado una nueva medalla \(badge_name)"))
+                                var alert_array = [AlertModel]()
+                                
+                                alert_array.append(AlertModel(alert_title: "¡Oops!", alert_image: "error", alert_description: "Esta promoción se ha terminado :("))
+                                
+                                navigation_controller.setAlert(alert_array)
                             }
-                            
-                            navigation_controller.setAlert(self.alert_array)
-                            
+                             error_modal.presentAnimated(true, completionHandler: nil)
+                        
+                        
+                    }else{
+                        let name = json["data"]["name"].string
+                        print(json)
+
+                        let modal: ModalViewController = ModalViewController(currentView: self, type: ModalViewControllerType.AlertModal)
+                        
+                        dispatch_async(dispatch_get_main_queue()) {
+                            Utilities.fadeOutViewAnimation(self.spinner, delay: 0, duration: 0.3)
+
+                            modal.willPresentCompletionHandler = { vc in
+                                let navigation_controller = vc as! AlertModalViewController
+                                
+                                
+                                self.alert_array.append(AlertModel(alert_title: "¡Felicidades!", alert_image: "success", alert_description: "Has redimido tu promoción con éxito en \(name!)"))
+                                
+                                if json["reward"]["badges"].count != 0 {
+                                    let badges = json["reward"]["badges"].array!
+                                    let badge_name: String = badges[0]["name"].string!
+                                    print(badge_name)
+                                    
+                                    self.alert_array.append(AlertModel(alert_title: "¡Felicidades!", alert_image: "\(badge_name)", alert_description: "Has desbloqueado una nueva medalla \(badge_name)"))
+                                }
+                                
+                                navigation_controller.setAlert(self.alert_array)
+                                
+                            }
+                            modal.presentAnimated(true, completionHandler: nil)
+                            self.coupon?.available = (self.coupon?.available)! - 1
                         }
-                        modal.presentAnimated(true, completionHandler: nil)
-                        self.coupon?.available = (self.coupon?.available)! - 1
                     }
                 })
+                
             },
             failure: { (error) -> Void in
                 dispatch_async(dispatch_get_main_queue(), {
@@ -241,7 +261,9 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                     modal.presentAnimated(true, completionHandler: nil)
                 })
             }
+    
         )
+        
     }
 
     func pressActionButton(modal: ModalViewController) {

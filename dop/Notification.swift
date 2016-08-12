@@ -26,16 +26,17 @@ class Notification:NSObject{
     var company_id: Int
     var object_id: Int
     var branch_id: Int
+    var is_friend: Bool
 
-    init(type: String!, notification_id: Int!, launcher_id: Int!, catcher_id: Int!, launcher_name: String!, launcher_surnames: String!, catcher_name: String!, catcher_surnames: String!, branches_name: String!, operation_id: Int!, read: Bool, date: String!, launcher_image: String!, catcher_image: String!, company_id: Int!, object_id: Int!, branch_id: Int!) {
+    init(type: String!, notification_id: Int!, launcher_id: Int!, catcher_id: Int!, launcher_name: String!, launcher_surnames: String!, catcher_name: String!, catcher_surnames: String!, branches_name: String!, operation_id: Int!, read: Bool, date: String!, launcher_image: String!, catcher_image: String!, company_id: Int!, object_id: Int!, branch_id: Int!, is_friend:Bool!) {
         
         self.type = type ?? ""
         self.notification_id = notification_id ?? 0
         self.launcher_id = launcher_id ?? 0
         self.launcher_name = launcher_name ?? ""
         self.launcher_surnames = launcher_surnames ?? ""
-        self.catcher_name = launcher_name ?? ""
-        self.catcher_surnames = launcher_surnames ?? ""
+        self.catcher_name = catcher_name ?? ""
+        self.catcher_surnames = catcher_surnames ?? ""
         self.branches_name = branches_name ?? ""
         self.operation_id = operation_id ?? 0
         self.read = read ?? false
@@ -46,5 +47,6 @@ class Notification:NSObject{
         self.object_id = object_id ?? 0
         self.branch_id = branch_id ?? 0
         self.catcher_id = catcher_id ?? 0
+        self.is_friend = is_friend
     }
 }

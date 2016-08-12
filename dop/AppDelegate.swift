@@ -87,7 +87,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     }
     func getData() -> Void{
-            var localNotification:UILocalNotification = UILocalNotification()
+            let localNotification:UILocalNotification = UILocalNotification()
             localNotification.alertAction = "Testing notifications on iOS8"
             localNotification.alertBody = "Movie Count : \(1)"
             localNotification.fireDate = NSDate(timeIntervalSinceNow: 1)

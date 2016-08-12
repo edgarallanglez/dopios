@@ -32,7 +32,7 @@ class PromoCollectionCell: UICollectionViewCell, FBSDKSharingDelegate {
         self.branch_id = coupon.branch_id
         self.coupon_id = coupon.id
         //self.shareButton.setBackgroundImage(UIImage(named: "share-icon"), forState: UIControlState.Normal)
-        let gesture = UITapGestureRecognizer(target: self, action: "likeCoupon:")
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(PromoCollectionCell.likeCoupon(_:)))
         heartView.addGestureRecognizer(gesture)
         self.coupon = coupon
         self.likes.text = String(coupon.total_likes)
@@ -45,7 +45,7 @@ class PromoCollectionCell: UICollectionViewCell, FBSDKSharingDelegate {
         
         NSNotificationCenter.defaultCenter().addObserver(
             self,
-            selector: "updateLikeAndTaken:",
+            selector: #selector(PromoCollectionCell.updateLikeAndTaken(_:)),
             name: "takenOrLikeStatus",
             object: nil)
     }

@@ -50,7 +50,7 @@ class AlertModalViewController: UIViewController {
         if self.alert_flag > 1 {
             for model in alert_array {
                 if model != alert_array.first { self.setNextAlert(model) }
-                self.alert_flag!--
+                self.alert_flag! -= 1
             }
         } else {
             self.mz_dismissFormSheetControllerAnimated(true, completionHandler: nil)

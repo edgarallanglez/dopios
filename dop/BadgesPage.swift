@@ -84,10 +84,9 @@ class BadgesPage: UICollectionViewController {
                 cell.badge_image.image = cell_image_saved
             } else {
                 Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
-                    if let image = data{
+                    if let image = UIImage(data: data!) {
                         dispatch_async(dispatch_get_main_queue()){
-                            let imageData: NSData = NSData(data: image)
-                            cell.badge_image.image = UIImage(data: imageData)
+                            cell.badge_image.image = image
                         }
                     }else{
                         print("Error")
@@ -177,7 +176,7 @@ class BadgesPage: UICollectionViewController {
                         
                         self.badge_array.append(model)
                         self.new_data = true
-                        self.added_values++
+                        self.added_values += 1
                     }
                     
                     dispatch_async(dispatch_get_main_queue(), {

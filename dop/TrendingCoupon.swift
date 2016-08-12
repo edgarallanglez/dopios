@@ -21,9 +21,9 @@ class TrendingCoupon: UIView, ModalDelegate {
     var coupon: Coupon!
     
     func loadItem(coupon: Coupon, viewController: UIViewController) {
-        heartView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "likeCoupon:"))
-        takeView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "setTakeCoupon:"))
-        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "tapCoupon:"))
+        heartView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(TrendingCoupon.likeCoupon(_:))))
+        takeView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(TrendingCoupon.setTakeCoupon(_:))))
+        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(TrendingCoupon.tapCoupon(_:))))
         self.coupon = coupon
         
         self.likes.text = String(coupon.total_likes)
@@ -34,13 +34,13 @@ class TrendingCoupon: UIView, ModalDelegate {
         
         NSNotificationCenter.defaultCenter().addObserver(
             self,
-            selector: "updateLikeAndTaken:",
+            selector: #selector(TrendingCoupon.updateLikeAndTaken(_:)),
             name: "takenOrLikeStatus",
             object: nil)
         
         NSNotificationCenter.defaultCenter().addObserver(
             self,
-            selector: "refreshAvailable:",
+            selector: #selector(TrendingCoupon.refreshAvailable(_:)),
             name: "updateAvailable",
             object: nil)
     }
@@ -257,17 +257,38 @@ class TrendingCoupon: UIView, ModalDelegate {
         }
         
         if modal.action_type == "redeem" {
-            let view_controller  = viewController!.storyboard!.instantiateViewControllerWithIdentifier("readQRView") as! readQRViewController
-            view_controller.coupon_id = self.coupon.id
-            view_controller.coupon = self.coupon
-            view_controller.branch_id = self.coupon.branch_id
-            viewController?.hidesBottomBarWhenPushed = true
+            
+            if coupon.available>0{
+                let view_controller  = viewController!.storyboard!.instantiateViewControllerWithIdentifier("readQRView") as! readQRViewController
+                view_controller.coupon_id = self.coupon.id
+                view_controller.coupon = self.coupon
+                view_controller.branch_id = self.coupon.branch_id
+                
+                viewController?.hidesBottomBarWhenPushed = true
 
-            modal.dismissAnimated(true, completionHandler:{ (modal) -> Void in
-                self.viewController!.hidesBottomBarWhenPushed = true
-                self.viewController!.navigationController?.pushViewController(view_controller, animated: true)
-                self.viewController!.hidesBottomBarWhenPushed = false
-            })
+                modal.dismissAnimated(true, completionHandler:{ (modal) -> Void in
+                    self.viewController!.hidesBottomBarWhenPushed = true
+                    self.viewController!.navigationController?.pushViewController(view_controller, animated: true)
+                    self.viewController!.hidesBottomBarWhenPushed = false
+                })
+            }else{
+                let error_modal: ModalViewController = ModalViewController(currentView: self.viewController!, type: ModalViewControllerType.AlertModal)
+                error_modal.willPresentCompletionHandler = { vc in
+                        let navigation_controller = vc as! AlertModalViewController
+                        
+                        var alert_array = [AlertModel]()
+                        
+                        alert_array.append(AlertModel(alert_title: "¡Oops!", alert_image: "error", alert_description: "Esta promoción se ha terminado :("))
+                        
+                        navigation_controller.setAlert(alert_array)
+                    }
+
+                modal.dismissAnimated(true, completionHandler: { (modal) -> Void in
+                    error_modal.presentAnimated(true, completionHandler: nil)
+
+                })
+
+            }
         }
     }
     func updateLikeAndTaken(notification:NSNotification){

@@ -14,21 +14,21 @@ protocol NotificationDelegate {
 
 class NotificationButton: UIBarButtonItem, SocketIODelegate {
     var delegate:NotificationDelegate? = nil
-    let socketIO : SocketIO = SocketIO()
+    //let socketIO : SocketIO = SocketIO()
     
     func startListening(){
-        if let delegate = self.delegate {
-            socketIO.delegate = self
-            socketIO.useSecure = true
+        /*if let delegate = self.delegate {
+            //socketIO.delegate = self
+            //socketIO.useSecure = true
             
-            socketIO.connectToHost("inmoon.com.mx", onPort: 443, withParams: nil, withNamespace: "/app")
+            //socketIO.connectToHost("inmoon.com.mx", onPort: 443, withParams: nil, withNamespace: "/app")
 
-        }
+        }*/
         
     }
-    func socketIODidConnect(socket: SocketIO) {
+    /*func socketIODidConnect(socket: SocketIO) {
         print("socket.io connected.")
-        socketIO.sendEvent("join room", withData: User.userToken)
+        //socketIO.sendEvent("join room", withData: User.userToken)
         //socketIO.sendEvent("notification", withData: User.userToken)
     }
     
@@ -41,16 +41,11 @@ class NotificationButton: UIBarButtonItem, SocketIODelegate {
         if(packet.name == "notification"){
              self.delegate?.getNotification(packet)
         }
-        /*let cb: SocketIOCallback = { argsData in
-            let response: [NSObject : AnyObject] = argsData as! [NSObject : AnyObject]
-            print("ack arrived: %@", response)
-            self.socketIO.disconnectForced()
-            
-        }*/
+
     }
     func socketIODidDisconnect(socket: SocketIO!, disconnectedWithError error: NSError!) {
         socketIO.connectToHost("inmoon.com.mx", onPort: 443, withParams: nil, withNamespace: "/app")
-    }
+    }*/
     
     override init() {
         super.init()

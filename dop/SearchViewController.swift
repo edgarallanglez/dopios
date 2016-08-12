@@ -125,9 +125,9 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
                     } else {
                         cell.user_image.alpha = 0
                         Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
-                            if let image = data{
+                            if let image = UIImage(data: data!) {
                                 dispatch_async(dispatch_get_main_queue()) {
-                                    let cell_image: UIImage? = UIImage(data: image)
+                                    let cell_image: UIImage? = image
                                     
                                     if tableView.indexPathForCell(cell)?.row == indexPath.row {
                                         if cell_image == nil { self.cachedImages[identifier] = UIImage(named: "dopLogo") }
@@ -175,7 +175,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
             search()
         }else{*/
             timer?.invalidate()
-            timer = NSTimer.scheduledTimerWithTimeInterval(0.7, target: self, selector: "timeOut", userInfo: nil, repeats: false)
+            timer = NSTimer.scheduledTimerWithTimeInterval(0.7, target: self, selector: #selector(SearchViewController.timeOut), userInfo: nil, repeats: false)
         //}
     }
     

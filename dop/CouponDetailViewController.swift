@@ -42,7 +42,7 @@ class CouponDetailViewController: BaseViewController, UITableViewDelegate, UITab
         let nib = UINib(nibName: "NewsfeedCell", bundle: nil)
         tableView.registerNib(nib, forCellReuseIdentifier: "NewsfeedCell")
         
-        customView = (NSBundle.mainBundle().loadNibNamed("CouponDetailView", owner: self, options: nil)[0] as? CouponDetailView)!
+        customView = (NSBundle.mainBundle().loadNibNamed("CouponDetailView", owner: self, options: nil)![0] as? CouponDetailView)!
         customView.alpha = 0
         customView.layer.borderWidth = 0;
         
@@ -146,12 +146,11 @@ class CouponDetailViewController: BaseViewController, UITableViewDelegate, UITab
             print("Entro al segundo")
             
             Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
-                if let image = data{
+                if let image = UIImage(data: data!) {
                     dispatch_async(dispatch_get_main_queue()) {
                         
                         var cell_image : UIImage = UIImage()
-                        cell_image = UIImage ( data: image)!
-                        
+                        cell_image = image
                         if tableView.indexPathForCell(cell)?.section == indexPath.section{
                             self.cachedImages[identifier] = cell_image
                             
