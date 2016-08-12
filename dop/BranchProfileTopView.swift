@@ -96,8 +96,6 @@ class BranchProfileTopView: UIView {
         self.branch_name.text = self.parent_view.coupon?.name
         if parent_view.coupon != nil { downloadImage(parent_view.coupon) }
         Utilities.setMaterialDesignButton(self.follow_button, button_size: 50)
-
-        
     }
 
     

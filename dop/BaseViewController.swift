@@ -25,10 +25,10 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "setBadge", name: "newNotification", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(BaseViewController.setBadge), name: "newNotification", object: nil)
 
         
-        notificationButton = UIBarButtonItem(image: UIImage(named: "notification"), style: UIBarButtonItemStyle.Plain, target: self, action: "notification")
+        notificationButton = UIBarButtonItem(image: UIImage(named: "notification"), style: UIBarButtonItemStyle.Plain, target: self, action: #selector(BaseViewController.notification))
         
         
         self.navigationItem.rightBarButtonItem = notificationButton
@@ -65,7 +65,7 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
         self.navigationController?.delegate = self
         
         
-        errorView = (NSBundle.mainBundle().loadNibNamed("ErrorView", owner: self, options: nil)[0] as? UIView)!
+        errorView = (NSBundle.mainBundle().loadNibNamed("ErrorView", owner: self, options: nil)![0] as? UIView)!
         
         
         errorView.frame.size.width = self.view.frame.width
@@ -79,18 +79,18 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
         
         vc.view.addSubview(blurView)
         
-        let gestureRecognizer = UITapGestureRecognizer(target: self, action: "cancelSearch")
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(BaseViewController.cancelSearch))
         blurView.addGestureRecognizer(gestureRecognizer)
         
         //vc.searchScrollView.hidden = true
         vc.searchScrollView.hidden = true
         
         
-        cancelSearchButton = UIBarButtonItem(title: "Cancelar", style: .Plain, target: self, action: "cancelSearch")
+        cancelSearchButton = UIBarButtonItem(title: "Cancelar", style: .Plain, target: self, action: #selector(BaseViewController.cancelSearch))
         
         NSNotificationCenter.defaultCenter().addObserver(
             self,
-            selector: "presentView:",
+            selector: #selector(BaseViewController.presentView(_:)),
             name: "performSegue",
             object: nil)
     }

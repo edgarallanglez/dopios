@@ -61,9 +61,9 @@ class ModalViewController: MZFormSheetController {
                 simple_modal!.title_label.text = "Compartir"
                 simple_modal!.action_button.titleLabel!.text = "Compartir"
                 simple_modal!.share_text.contentInset = UIEdgeInsetsMake(0,-5,0,0)
-                simple_modal!.twitter_button.addTarget(self, action: "tintButton:", forControlEvents: .TouchUpInside)
-                simple_modal!.facebook_button.addTarget(self, action: "tintButton:", forControlEvents: .TouchUpInside)
-                simple_modal!.instagram_button.addTarget(self, action: "tintButton:", forControlEvents: .TouchUpInside)
+                simple_modal!.twitter_button.addTarget(self, action: #selector(ModalViewController.tintButton(_:)), forControlEvents: .TouchUpInside)
+                simple_modal!.facebook_button.addTarget(self, action: #selector(ModalViewController.tintButton(_:)), forControlEvents: .TouchUpInside)
+                simple_modal!.instagram_button.addTarget(self, action: #selector(ModalViewController.tintButton(_:)), forControlEvents: .TouchUpInside)
             
             case .CouponDetail: simple_modal = presentedFormSheetViewController.storyboard?.instantiateViewControllerWithIdentifier("CouponDetailModal") as? SimpleModalViewController
                 super.init(viewController: simple_modal!)
@@ -75,9 +75,9 @@ class ModalViewController: MZFormSheetController {
                 let width = UIScreen.mainScreen().bounds.width - 30
                 
                 self.presentedFormSheetSize = CGSizeMake(width, height)
-                simple_modal.branch_title.addTarget(self, action: "toBranch", forControlEvents: .TouchUpInside)
+                simple_modal.branch_title.addTarget(self, action: #selector(ModalViewController.toBranch), forControlEvents: .TouchUpInside)
                 
-                let gesture = UITapGestureRecognizer(target: self, action: "likeCoupon:")
+                let gesture = UITapGestureRecognizer(target: self, action: #selector(ModalViewController.likeCoupon(_:)))
                 simple_modal.heartView.addGestureRecognizer(gesture)
 
             
@@ -91,8 +91,8 @@ class ModalViewController: MZFormSheetController {
         default: super.init(viewController: simple_modal!)
         }
 
-        if simple_modal?.action_button != nil { simple_modal!.action_button.addTarget(self, action: "pressed:", forControlEvents: .TouchUpInside) }
-        if alert_modal?.dismiss_button != nil { alert_modal!.dismiss_button.addTarget(self, action: "pressed:", forControlEvents: .TouchUpInside) }
+        if simple_modal?.action_button != nil { simple_modal!.action_button.addTarget(self, action: #selector(ModalViewController.pressed(_:)), forControlEvents: .TouchUpInside) }
+        if alert_modal?.dismiss_button != nil { alert_modal!.dismiss_button.addTarget(self, action: #selector(ModalViewController.pressed(_:)), forControlEvents: .TouchUpInside) }
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {

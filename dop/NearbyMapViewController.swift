@@ -48,7 +48,7 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
         self.view.addSubview(spinner)
         spinner?.startAnimating()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "getNearestBranches", name: "filtersChanged", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(NearbyMapViewController.getNearestBranches), name: "filtersChanged", object: nil)
         
         locationManager = CLLocationManager()
         locationManager.delegate = self
@@ -58,8 +58,8 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
         User.coordinate = locationManager.location!.coordinate
         
         if (self.revealViewController() != nil) {
-            filterSidebarButton = UIBarButtonItem(image: UIImage(named: "filter"), style: UIBarButtonItemStyle.Plain, target: self.revealViewController(), action: "revealToggle:")
-            self.nearbyMap.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "tapMap"))
+            filterSidebarButton = UIBarButtonItem(image: UIImage(named: "filter"), style: UIBarButtonItemStyle.Plain, target: self.revealViewController(), action: #selector(SWRevealViewController.revealToggle(_:)))
+            self.nearbyMap.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(NearbyMapViewController.tapMap)))
             self.navigationItem.leftBarButtonItem = filterSidebarButton
         }
         
@@ -199,18 +199,16 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
                 mapPin.calloutView?.address_label!.text = annotation.subtitle!
                 mapPin.calloutView?.info_label!.text = "A \(annotation.distance!) km de tu ubicación actual"
                 mapPin.calloutView?.button!.tag = annotation.branch_id!
-                mapPin.calloutView?.button!.addTarget(self, action: "goToBranchProfile:", forControlEvents: .TouchUpInside)
+                mapPin.calloutView?.button!.addTarget(self, action: #selector(NearbyMapViewController.goToBranchProfile(_:)), forControlEvents: .TouchUpInside)
                 let imageUrl = NSURL(string: "\(Utilities.dopImagesURL)\(annotation.company_id!)/\(annotation.logo!)")
             
                 print("\(imageUrl!)")
                 mapPin.calloutView?.branch_image!.alpha = 0
             
                 Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
-                    if let image = data{
+                    if let image = UIImage(data: data!) {
                         dispatch_async(dispatch_get_main_queue()) {
-                            let imageData: NSData = NSData(data: image)
-                            mapPin.calloutView?.branch_image!.image = UIImage(data: imageData)
-                            Utilities.fadeInViewAnimation((mapPin.calloutView?.branch_image)!, delay:0, duration:1)
+                            mapPin.calloutView?.branch_image!.image = image;                            Utilities.fadeInViewAnimation((mapPin.calloutView?.branch_image)!, delay:0, duration:1)
                             
                         }
                     }else{

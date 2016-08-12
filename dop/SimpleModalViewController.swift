@@ -55,19 +55,19 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapVie
         super.viewDidLoad()
         
         if((cancel_button) != nil){
-            cancel_button.addTarget(self, action: "buttonPressed:", forControlEvents: UIControlEvents.TouchDown)
-            cancel_button.addTarget(self, action: "buttonReleased:", forControlEvents: UIControlEvents.TouchDragOutside)
-            cancel_button.addTarget(self, action: "cancelTouched:", forControlEvents: UIControlEvents.TouchUpInside)
+            cancel_button.addTarget(self, action: #selector(SimpleModalViewController.buttonPressed(_:)), forControlEvents: UIControlEvents.TouchDown)
+            cancel_button.addTarget(self, action: #selector(SimpleModalViewController.buttonReleased(_:)), forControlEvents: UIControlEvents.TouchDragOutside)
+            cancel_button.addTarget(self, action: #selector(SimpleModalViewController.cancelTouched(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         }
         
         if((action_button) != nil){
-            action_button.addTarget(self, action: "buttonPressed:", forControlEvents: UIControlEvents.TouchDown)
-            action_button.addTarget(self, action: "buttonReleased:", forControlEvents: UIControlEvents.TouchDragOutside)
-            action_button.addTarget(self, action: "actionTouched:", forControlEvents: UIControlEvents.TouchUpInside)
+            action_button.addTarget(self, action: #selector(SimpleModalViewController.buttonPressed(_:)), forControlEvents: UIControlEvents.TouchDown)
+            action_button.addTarget(self, action: #selector(SimpleModalViewController.buttonReleased(_:)), forControlEvents: UIControlEvents.TouchDragOutside)
+            action_button.addTarget(self, action: #selector(SimpleModalViewController.actionTouched(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         }
         
         if((close_button) != nil){
-            close_button.addTarget(self, action: "closePressed:", forControlEvents: .TouchDown)
+            close_button.addTarget(self, action: #selector(SimpleModalViewController.closePressed(_:)), forControlEvents: .TouchDown)
         }
         
         if((share_text) != nil){
@@ -75,7 +75,7 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapVie
         }
         
         if((map) != nil){
-            let tap = UITapGestureRecognizer(target: self, action: Selector("pressMap:"))
+            let tap = UITapGestureRecognizer(target: self, action: #selector(SimpleModalViewController.pressMap(_:)))
             map.addGestureRecognizer(tap)
         }
         
@@ -149,7 +149,7 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapVie
         
         if action_button != nil { action_button.layoutIfNeeded() }
         if cancel_button != nil { cancel_button.layoutIfNeeded() }
-        self.heartView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "likeCoupon:"))
+        self.heartView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(SimpleModalViewController.likeCoupon(_:))))
     }
     func getAvailables(){
         CouponController.getAvailables(self.coupon.id,

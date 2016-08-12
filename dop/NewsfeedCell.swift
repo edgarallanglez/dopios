@@ -51,16 +51,16 @@ class NewsfeedCell: UITableViewCell {
         self.user_image.layer.cornerRadius = self.user_image.frame.width / 2
         self.user_image.alpha = 0
         self.username_button.setTitle(newsfeed_note.names.uppercaseString, forState: UIControlState.Normal)
-        self.username_button.addTarget(self, action: "goToUserProfile:", forControlEvents: UIControlEvents.TouchUpInside)
-        self.user_image.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "goToUserProfile:"))
+        self.username_button.addTarget(self, action: #selector(NewsfeedCell.goToUserProfile(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        self.user_image.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(NewsfeedCell.goToUserProfile(_:))))
         self.branch_logo.tag = newsfeed_note.branch_id
-        self.branch_logo.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "goToBranchProfile:"))
+        self.branch_logo.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(NewsfeedCell.goToBranchProfile(_:))))
         self.viewController = viewController
         self.date_label.text = Utilities.friendlyDate(newsfeed_note.date)
         
         self.newsfeedNote = newsfeed_note
         
-        let gesture = UITapGestureRecognizer(target: self, action: "likeActivity:")
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(NewsfeedCell.likeActivity(_:)))
         heartView.addGestureRecognizer(gesture)
         
         
@@ -145,9 +145,9 @@ class NewsfeedCell: UITableViewCell {
     
     func downloadImage(url: NSURL) {
         Utilities.downloadImage(url, completion: {(data, error) -> Void in
-            if let image = data{
+            if let image = UIImage(data: data!) {
                 dispatch_async(dispatch_get_main_queue()) {
-                    self.branch_logo.image = UIImage(data: image)
+                    self.branch_logo.image = image
                 }
             }else{
                 print("Error")

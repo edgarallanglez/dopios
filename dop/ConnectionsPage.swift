@@ -140,7 +140,7 @@ class ConnectionsPage: UITableViewController {
                     
                     self.connection_array.append(model)
                     self.new_data = true
-                    self.added_values++
+                    self.added_values += 1
                 }
                 
                 dispatch_async(dispatch_get_main_queue(), {
@@ -168,9 +168,9 @@ class ConnectionsPage: UITableViewController {
     func downloadImage(model: ConnectionModel, cell: ConnectionCell) {
         let url = NSURL(string: "\(Utilities.dopImagesURL)\(model.company_id)/\(model.logo!)")!
         Utilities.downloadImage(url, completion: {(data, error) -> Void in
-            if let image = data{
+            if let image = UIImage(data: data!) {
                 dispatch_async(dispatch_get_main_queue()) {
-                    cell.connection_image.image = UIImage(data: image)
+                    cell.connection_image.image = image
                     UIView.animateWithDuration(0.5, animations: {
                         cell.hidden = false
                     })

@@ -50,8 +50,8 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
         self.refreshControl = UIRefreshControl()
         self.myCouponsRefreshControl = UIRefreshControl()
         
-        self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
-        self.myCouponsRefreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        self.refreshControl.addTarget(self, action: #selector(PromoViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        self.myCouponsRefreshControl.addTarget(self, action: #selector(PromoViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
         
         self.CouponsCollectionView.addSubview(refreshControl)
         self.myCouponsCollectionView.addSubview(myCouponsRefreshControl)
@@ -96,7 +96,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
         
         
         
-        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(PromoViewController.swipe(_:)))
+        /*let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(PromoViewController.swipe(_:)))
         rightSwipe.direction = .Right
         
         let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(PromoViewController.swipe(_:)))
@@ -104,7 +104,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
         
         
         CouponsCollectionView.addGestureRecognizer(leftSwipe)
-        myCouponsCollectionView.addGestureRecognizer(rightSwipe)
+        myCouponsCollectionView.addGestureRecognizer(rightSwipe)*/
         CouponsCollectionView.alpha = 0
         
         
@@ -167,10 +167,10 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                 } else {
                     //cell.branch_banner.alpha = 0
                     Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
-                        if let image = data{
+                        if let image = UIImage(data: data!) {
                             dispatch_async(dispatch_get_main_queue()) {
                                 var imageData : UIImage = UIImage()
-                                imageData = UIImage(data: image)!
+                                imageData = image
                                 if self.CouponsCollectionView.indexPathForCell(cell)?.row == indexPath.row {
                                     self.cachedImages[identifier] = imageData
                                     let image_saved : UIImage = self.cachedImages[identifier]!
@@ -213,10 +213,10 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                 } else {
                     //cell.branch_banner.alpha = 0
                     Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
-                        if let image = data{
+                        if let image = UIImage(data: data!) {
                             dispatch_async(dispatch_get_main_queue()) {
                                 var imageData : UIImage = UIImage()
-                                imageData = UIImage(data: image)!
+                                imageData = image
                                 if self.myCouponsCollectionView.indexPathForCell(cell)?.row == indexPath.row {
                                     self.myCouponsCachedImages[identifier] = imageData
                                     let image_saved : UIImage = self.myCouponsCachedImages[identifier]!
@@ -414,7 +414,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                     self.coupons.append(model)
                     
                     newData = true
-                    addedValues++
+                    addedValues += 1
                     
                 }
                 dispatch_async(dispatch_get_main_queue(), {
@@ -548,7 +548,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                     self.myCoupons.append(model)
                     
                     newData = true
-                    addedValues++
+                    addedValues += 1
                     
                 }
                 dispatch_async(dispatch_get_main_queue(), {
@@ -625,13 +625,33 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
             modal.dismissAnimated(true, completionHandler: nil)
         }
         if modal.action_type == "redeem" {
-            let view_controller  = self.storyboard!.instantiateViewControllerWithIdentifier("readQRView") as! readQRViewController
-            view_controller.coupon_id = self.selected_coupon.id
-            view_controller.branch_id = self.selected_coupon.branch_id
-            self.hidesBottomBarWhenPushed = true
-            self.navigationController?.pushViewController(view_controller, animated: true)
-            self.hidesBottomBarWhenPushed = false
-            modal.dismissAnimated(true, completionHandler: nil)
+            if(selected_coupon.available>0){
+                let view_controller  = self.storyboard!.instantiateViewControllerWithIdentifier("readQRView") as! readQRViewController
+                view_controller.coupon_id = self.selected_coupon.id
+                view_controller.branch_id = self.selected_coupon.branch_id
+                self.hidesBottomBarWhenPushed = true
+                self.navigationController?.pushViewController(view_controller, animated: true)
+                self.hidesBottomBarWhenPushed = false
+                modal.dismissAnimated(true, completionHandler: nil)
+            }else{
+                let error_modal: ModalViewController = ModalViewController(currentView: self, type: ModalViewControllerType.AlertModal)
+                error_modal.willPresentCompletionHandler = { vc in
+                    let navigation_controller = vc as! AlertModalViewController
+                    
+                    var alert_array = [AlertModel]()
+                    
+                    alert_array.append(AlertModel(alert_title: "¡Oops!", alert_image: "error", alert_description: "Esta promoción se ha terminado :("))
+                    
+                    navigation_controller.setAlert(alert_array)
+                }
+                
+                modal.dismissAnimated(true, completionHandler: { (modal) -> Void in
+                    error_modal.presentAnimated(true, completionHandler: nil)
+                    
+                })
+            }
+            
+            
         }
         if modal.action_type == "share" {
             let YourImage:UIImage = UIImage(named: "starbucks_banner.jpg")!
@@ -647,13 +667,13 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                 let documentsURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
 
                 let writePath = NSURL(fileURLWithPath: NSTemporaryDirectory()).URLByAppendingPathComponent("/insta.igo")
-                if(!imageData!.writeToFile(writePath.path!, atomically: true)){
+                if(!imageData!.writeToFile(writePath!.path!, atomically: true)){
                     //Fail to write.
                     return
                 } else{
                     //Safe to post
                     
-                    let fileURL = NSURL(fileURLWithPath: writePath.path!)
+                    let fileURL = NSURL(fileURLWithPath: writePath!.path!)
                     self.documentController = UIDocumentInteractionController(URL: fileURL)
                     self.documentController.UTI = "com.instagram.exclusivegram"
                     self.documentController.delegate = self

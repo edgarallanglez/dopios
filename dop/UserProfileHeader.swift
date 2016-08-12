@@ -17,7 +17,7 @@ class UserProfileHeader: UICollectionReusableView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.clipsToBounds = true
-        user_profile = (NSBundle.mainBundle().loadNibNamed("UserProfileStickyHeader", owner: self, options: nil)[0] as? UserProfileStickyHeader)!
+        user_profile = (NSBundle.mainBundle().loadNibNamed("UserProfileStickyHeader", owner: self, options: nil)![0] as? UserProfileStickyHeader)!
         
         self.addSubview(user_profile)
     }

@@ -56,10 +56,10 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
                 cell.user_image.alpha = 1
 
                 Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
-                    if let image = data{
+                    if let image = UIImage(data: data!) {
                         dispatch_async(dispatch_get_main_queue()) {
                             var cell_image : UIImage = UIImage()
-                            cell_image = UIImage (data: image)!
+                            cell_image = image
                             
                             if tableView.indexPathForCell(cell)?.row == indexPath.row {
                                 self.cachedImages[identifier] = cell_image
@@ -86,10 +86,10 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
                 cell.user_image.alpha = 1
                 
                 Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
-                    if let image = data{
+                    if let image = UIImage(data: data!) {
                         dispatch_async(dispatch_get_main_queue()) {
                             var cell_image : UIImage = UIImage()
-                            cell_image = UIImage (data: image)!
+                            cell_image = image
                             
                             if tableView.indexPathForCell(cell)?.row == indexPath.row {
                                 self.cachedFollowingImages[identifier] = cell_image

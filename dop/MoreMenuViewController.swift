@@ -52,9 +52,9 @@ class MoreMenuViewController: UITableViewController {
     func getUserImage() {
         let url: NSURL = NSURL(string: User.userImageUrl)!
         Utilities.downloadImage(url, completion: {(data, error) -> Void in
-            if let image = data {
+            if let image = UIImage(data: data!) {
                 dispatch_async(dispatch_get_main_queue()) {
-                    self.userImage.image = UIImage(data: image)
+                    self.userImage.image = image
                 }
             } else {
                 print("Error")

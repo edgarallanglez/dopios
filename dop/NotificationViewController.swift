@@ -14,7 +14,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
 
     @IBOutlet var mainLoader: MMMaterialDesignSpinner!
     @IBOutlet var notification_table: UITableView!
-    let socketIO : SocketIO = SocketIO()
+    //let socketIO : SocketIO = SocketIO()
     var notifications = [Notification]()
     var notificationsTemporary = [Notification]()
     var offset:Int = 0
@@ -123,11 +123,10 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             } else {
                 cell.notification_image.alpha = 0
                 Utilities.downloadImage(imageUrl, completion: {(data, error) -> Void in
-                    if let image = data{
+                    if let image = UIImage(data: data!) {
                         dispatch_async(dispatch_get_main_queue()) {
-                            let imageData: NSData = NSData(data: image)
                             if tableView.indexPathForCell(cell)?.row == indexPath.row {
-                                self.cachedImages[identifier] = UIImage(data: imageData)
+                                self.cachedImages[identifier] = image
                                 //self.cachedImages[identifier] = imageData
                                 let image_saved : UIImage = self.cachedImages[identifier]!
                                 cell.notification_image.image = image_saved
@@ -215,7 +214,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         var newData:Bool = false
         var addedValues:Int = 0
 
-        var firstNotification = self.notifications.first as Notification!
+        let firstNotification = self.notifications.first as Notification!
 
         NotificationController.getNotificationsOffsetWithSuccess(firstNotification.notification_id, offset:offset,
             success: { (couponsData) -> Void in

@@ -62,7 +62,7 @@ public final class SocketIOClient: NSObject, SocketEngineClient, SocketParsable 
         self.options = options
         self.socketURL = socketURL
         
-        if socketURL.absoluteString.hasPrefix("https://") {
+        if socketURL.absoluteString!.hasPrefix("https://") {
             self.options.insertIgnore(.Secure(true))
         }
         
@@ -102,13 +102,13 @@ public final class SocketIOClient: NSObject, SocketEngineClient, SocketParsable 
         self.init(socketURL: socketURL, options: options?.toSocketOptionsSet() ?? [])
     }
 
-    @available(*, deprecated=5.3, message="Please use the NSURL based init")
+    @available(*, deprecated = 5.3, message = "Please use the NSURL based init")
     public convenience init(socketURLString: String, options: Set<SocketIOClientOption> = []) {
         guard let url = NSURL(string: socketURLString) else { fatalError("Incorrect url") }
         self.init(socketURL: url, options: options)
     }
     
-    @available(*, deprecated=5.3, message="Please use the NSURL based init")
+    @available(*, deprecated = 5.3, message = "Please use the NSURL based init")
     public convenience init(socketURLString: String, options: NSDictionary?) {
         guard let url = NSURL(string: socketURLString) else { fatalError("Incorrect url") }
         self.init(socketURL: url, options: options?.toSocketOptionsSet() ?? [])
@@ -132,7 +132,7 @@ public final class SocketIOClient: NSObject, SocketEngineClient, SocketParsable 
         reconnectTimer = nil
     }
 
-    @available(*, deprecated=5.3, message="Please use disconnect()")
+    @available(*, deprecated = 5.3, message = "Please use disconnect()")
     public func close() {
         disconnect()
     }
@@ -424,7 +424,7 @@ public final class SocketIOClient: NSObject, SocketEngineClient, SocketParsable 
         anyHandler = handler
     }
 
-    @available(*, deprecated=5.3, message="Please use one of the connect methods)")
+    @available(*, deprecated = 5.3, message = "Please use one of the connect methods)")
     public func open() {
         connect()
     }
@@ -467,7 +467,7 @@ public final class SocketIOClient: NSObject, SocketEngineClient, SocketParsable 
 
             dispatch_async(dispatch_get_main_queue()) {
                 self.reconnectTimer = NSTimer.scheduledTimerWithTimeInterval(Double(self.reconnectWait),
-                    target: self, selector: "_tryReconnect", userInfo: nil, repeats: true)
+                    target: self, selector: #selector(SocketIOClient._tryReconnect), userInfo: nil, repeats: true)
             }
         }
     }

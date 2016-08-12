@@ -87,9 +87,9 @@ class BranchProfileStickyController: UICollectionViewController, BranchPaginatio
         self.navigationItem.titleView = searchBar
     }
     func drawBar(){
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "setBadge", name: "newNotification", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(BranchProfileStickyController.setBadge), name: "newNotification", object: nil)
         
-        notificationButton = UIBarButtonItem(image: UIImage(named: "notification"), style: UIBarButtonItemStyle.Plain, target: self, action: "notification")
+        notificationButton = UIBarButtonItem(image: UIImage(named: "notification"), style: UIBarButtonItemStyle.Plain, target: self, action: #selector(BranchProfileStickyController.notification))
         
         self.navigationItem.rightBarButtonItem = notificationButton
         
@@ -128,18 +128,18 @@ class BranchProfileStickyController: UICollectionViewController, BranchPaginatio
         
         vc.view.addSubview(blurView)
         
-        let gestureRecognizer = UITapGestureRecognizer(target: self, action: "cancelSearch")
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(BranchProfileStickyController.cancelSearch))
         blurView.addGestureRecognizer(gestureRecognizer)
         
         //vc.searchScrollView.hidden = true
         vc.searchScrollView.hidden = true
         
         
-        cancelSearchButton = UIBarButtonItem(title: "Cancelar", style: .Plain, target: self, action: "cancelSearch")
+        cancelSearchButton = UIBarButtonItem(title: "Cancelar", style: .Plain, target: self, action: #selector(BranchProfileStickyController.cancelSearch))
         
         NSNotificationCenter.defaultCenter().addObserver(
             self,
-            selector: "presentView:",
+            selector: #selector(BranchProfileStickyController.presentView(_:)),
             name: "performSegue",
             object: nil)
         

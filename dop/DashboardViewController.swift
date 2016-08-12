@@ -74,7 +74,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
         locationManager.startUpdatingLocation()
         
         self.refreshControl = UIRefreshControl()
-        self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        self.refreshControl.addTarget(self, action: #selector(DashboardViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
         self.mainScroll.addSubview(refreshControl)
 
         self.setNeedsStatusBarAppearanceUpdate()
@@ -231,7 +231,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
 
     }
     func reloadBranchCarousel(){
-        updater = CADisplayLink(target: self, selector: Selector("changePage"))
+        updater = CADisplayLink(target: self, selector: #selector(DashboardViewController.changePage))
         updater!.frameInterval = 300
         updater!.addToRunLoop(NSRunLoop.currentRunLoop(), forMode: NSRunLoopCommonModes)
         
@@ -295,7 +295,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
             imageView.contentMode = UIViewContentMode.ScaleAspectFill
             imageView.tag = branch.id
             imageView.userInteractionEnabled = true
-            imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "performSegueToBranch:"))
+            imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(DashboardViewController.performSegueToBranch(_:))))
         
             branchesScroll.addSubview(imageView)
             branchesScroll.addSubview(branchNameLbl)
@@ -362,7 +362,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                     
                     for (index, coupon) in self.trending.enumerate() {
                         let coupon_box: TrendingCoupon = NSBundle.mainBundle().loadNibNamed("TrendingCoupon", owner: self, options:
-                        nil)[0] as! TrendingCoupon
+                        nil)![0] as! TrendingCoupon
         
                         var position = 0
                         position = positionX + ((margin + couponWidth) * index)
@@ -371,10 +371,9 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                         let imageUrl = NSURL(string: "\(Utilities.dopImagesURL)\(coupon.company_id)/\(coupon.logo)")
                         coupon_box.logo.alpha = 0
                         Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
-                            if let image = data{
+                            if let image = UIImage(data: data!) {
                                 dispatch_async(dispatch_get_main_queue()) {
-                                    let imageData: NSData = NSData(data: image)
-                                    coupon_box.logo.image = UIImage(data: imageData)
+                                    coupon_box.logo.image = image
                                     Utilities.fadeInViewAnimation(coupon_box.logo, delay:0, duration:1)
                                 }
                             }else{
@@ -451,7 +450,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                 
                 for (index, coupon) in self.almost_expired.enumerate() {
                     let coupon_box: ToExpireCoupon = NSBundle.mainBundle().loadNibNamed("ToExpireCoupon", owner: self, options:
-                        nil)[0] as! ToExpireCoupon
+                        nil)![0] as! ToExpireCoupon
                     
                     var position = 0
                     position = positionX+((margin+couponWidth)*index)
@@ -534,7 +533,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                 
                 for (index, coupon) in self.nearest.enumerate() {
                     let coupon_box:NearestCoupon = NSBundle.mainBundle().loadNibNamed("NearestCoupon", owner: self, options:
-                        nil)[0] as! NearestCoupon
+                        nil)![0] as! NearestCoupon
                     
                     var position = 0
                     position = positionX+((margin + couponWidth) * index)

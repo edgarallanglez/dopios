@@ -16,7 +16,7 @@ class BranchProfileStickyHeader: UICollectionReusableView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.clipsToBounds = true
-        branch_profile = (NSBundle.mainBundle().loadNibNamed("BranchProfileTopView", owner: self, options: nil)[0] as? BranchProfileTopView)!
+        branch_profile = (NSBundle.mainBundle().loadNibNamed("BranchProfileTopView", owner: self, options: nil)![0] as? BranchProfileTopView)!
         
         self.addSubview(branch_profile)
     }
