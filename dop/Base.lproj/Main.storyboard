@@ -5579,8 +5579,7 @@
                                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UEg-Ao-iwA">
                                                             <frame key="frameInset" minX="337" minY="38" width="30" height="30"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <state key="normal" title="A">
-                                                                <color key="titleColor" red="0.27690547704696655" green="0.89371538162231445" blue="0.43138182163238525" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <state key="normal" backgroundImage="accept">
                                                             </state>
                                                             <connections>
                                                                 <action selector="acceptFriend:" destination="7g5-Sp-GuZ" eventType="touchUpInside" id="PCe-qg-yl8"/>
@@ -5589,8 +5588,7 @@
                                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q8t-eo-sTg">
                                                             <frame key="frameInset" minX="308" minY="38" width="30" height="30"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <state key="normal" title="C">
-                                                                <color key="titleColor" red="0.61455802800000003" green="0.081553781180000007" blue="0.2800147852" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <state key="normal" backgroundImage="reject">
                                                             </state>
                                                             <connections>
                                                                 <action selector="declineFriend:" destination="7g5-Sp-GuZ" eventType="touchUpInside" id="wXe-E6-Ukn"/>

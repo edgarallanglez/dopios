@@ -430,6 +430,7 @@
 		A01D77D51BDAB94C00AA8FE2 /* SocketIOTransportWebsocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketIOTransportWebsocket.m; sourceTree = "<group>"; };
 		A01D77D61BDAB94C00AA8FE2 /* SocketIOTransportXHR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketIOTransportXHR.h; sourceTree = "<group>"; };
 		A01D77D71BDAB94C00AA8FE2 /* SocketIOTransportXHR.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketIOTransportXHR.m; sourceTree = "<group>"; };
+		A037294F1D5E2EB600B6906A /* dop.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = dop.entitlements; sourceTree = "<group>"; };
 		A04CC20F1BBD968E001AF7E0 /* ToExpireCoupon.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ToExpireCoupon.xib; sourceTree = "<group>"; };
 		A04CC2111BBDBB16001AF7E0 /* ToExpireCoupon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToExpireCoupon.swift; sourceTree = "<group>"; };
 		A04CC2181BC2EF10001AF7E0 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
@@ -800,6 +801,7 @@
 		9D33260B1AF7ED1C00498801 /* dop */ = {
 			isa = PBXGroup;
 			children = (
+				A037294F1D5E2EB600B6906A /* dop.entitlements */,
 				6D976FD41CDBB957000C0670 /* Resources */,
 				6DBB43851C29C48A001FEDAF /* StickyHeader */,
 				9D33260E1AF7ED1C00498801 /* AppDelegate.swift */,
@@ -1676,6 +1678,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
+				CODE_SIGN_ENTITLEMENTS = dop/dop.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
@@ -1715,6 +1718,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
+				CODE_SIGN_ENTITLEMENTS = dop/dop.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;

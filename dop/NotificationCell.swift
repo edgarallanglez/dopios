@@ -56,8 +56,11 @@ class NotificationCell: UITableViewCell {
             switch notification.operation_id {
                 case 0:
                     notification_text = "\(launcher_name) quiere seguirte"
+
                     decline_btn.hidden = false
                     accept_btn.hidden = false
+                    
+                    break
                 case 1:
                     if notification.catcher_id == User.user_id {
                         notification_text = "\(launcher_name) te esta siguiendo"
@@ -75,6 +78,7 @@ class NotificationCell: UITableViewCell {
                         title.text = notification_text
                         title.addLinkToURL(segue, withRange: catcher_range)
                     }
+                    break
             default: print(notification.operation_id)
             }
         }

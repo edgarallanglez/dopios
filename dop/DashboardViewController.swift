@@ -273,9 +273,10 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
             print("\(Utilities.dopImagesURL)\(branch.company_id!)/\(branch.banner!)")
             
             Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
-                if let image = UIImage(data: data!) {
+                if let image = data{
                     dispatch_async(dispatch_get_main_queue()) {
-                        imageView.image = image
+                        let imageData: NSData = NSData(data: image)
+                        imageView.image = UIImage(data: imageData)
                         if imageView.image == nil { imageView.backgroundColor = Utilities.dopColor }
                         
                         Utilities.fadeInFromBottomAnimation(imageView, delay: 0, duration: 1, yPosition: 20)
