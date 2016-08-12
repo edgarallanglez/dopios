@@ -49,7 +49,7 @@ class NotificationCell: UITableViewCell {
             title.addLinkToURL(segue, withRange: launcher_range)
             title.addLinkToURL(branch_segue, withRange: newsfeed_activity_range)
         }
-        
+
         if notification.type == "friend" {
             var notification_text = ""
 
@@ -57,9 +57,14 @@ class NotificationCell: UITableViewCell {
                 case 0:
                     notification_text = "\(launcher_name) quiere seguirte"
 
+                    let nsString = notification_text as NSString
+                    let launcher_range = nsString.rangeOfString(launcher_name)
+                    let segue = NSURL(string: "userProfile:\(notification.launcher_id):\(notification.is_friend)")!
+                    title.text = notification_text
+                    title.addLinkToURL(segue, withRange: launcher_range)
                     decline_btn.hidden = false
                     accept_btn.hidden = false
-                    
+
                     break
                 case 1:
                     if notification.catcher_id == User.user_id {
@@ -90,11 +95,11 @@ class NotificationCell: UITableViewCell {
             notification_view.backgroundColor = UIColor.whiteColor()
             self.contentView.backgroundColor = UIColor.whiteColor()
         }*/
-        
-        if notification.operation_id>=2{
-            notification_view.backgroundColor = Utilities.dopColor
-            self.contentView.backgroundColor = Utilities.dopColor
-        }
+
+//        if notification.operation_id >= 2{
+//            notification_view.backgroundColor = Utilities.dopColor
+//            self.contentView.backgroundColor = Utilities.dopColor
+//        }
 
         self.date_label.text = Utilities.friendlyDate(notification.date)
         self.notification = notification
