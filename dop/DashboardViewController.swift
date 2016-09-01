@@ -202,12 +202,17 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                 let branch_name = subJson["name"].string
                 let company_id = subJson["company_id"].int
                 let banner = subJson["banner"].string
+                let subcategory_id = subJson["subcategory_id"].int
                 
+                var adults_only = false
+                if(subcategory_id == 25){
+                    adults_only = true
+                }
                 
-                let model = Branch(id: branch_id, name: branch_name, banner: banner, company_id: company_id)
+                let model = Branch(id: branch_id, name: branch_name, banner: banner, company_id: company_id, adults_only: adults_only)
                 self.branches.append(model)
             }
-            
+            print(json)
             dispatch_async(dispatch_get_main_queue(), {
                 self.reloadBranchCarousel()
                 self.pageControl.numberOfPages = self.branches.count
@@ -224,6 +229,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
         },
         failure: { (error) -> Void in
             dispatch_async(dispatch_get_main_queue(), {
+                print("Error banner \(error)")
               //self.view.addSubview(super.errorView)
               //self.errorView.translatesAutoresizingMaskIntoConstraints = false
             })
@@ -272,6 +278,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
             //let imageUrl = NSURL(string: "http://axeetech.com/wp-content/uploads/2014/09/458791.jpg")
             print("\(Utilities.dopImagesURL)\(branch.company_id!)/\(branch.banner!)")
             
+            Utilities.fadeInFromBottomAnimation(branchNameLbl, delay: 0.8, duration: 1, yPosition: 20)
             Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
                 if let image = data{
                     dispatch_async(dispatch_get_main_queue()) {
@@ -280,11 +287,11 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                         if imageView.image == nil { imageView.backgroundColor = Utilities.dopColor }
                         
                         Utilities.fadeInFromBottomAnimation(imageView, delay: 0, duration: 1, yPosition: 20)
-                        Utilities.fadeInFromBottomAnimation(branchNameLbl, delay: 0.8, duration: 1, yPosition: 20)
+                        
                         Utilities.fadeOutToBottomWithCompletion(progressIcon, delay: 0, duration: 0.5, yPosition: 0, completion: { (value) -> Void in
                             progressIcon.removeFromSuperview()
                         })
-
+                        
                     }
                 }else{
                     print("Error")
@@ -300,12 +307,26 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
             branchesScroll.addSubview(imageView)
             branchesScroll.addSubview(branchNameLbl)
             branchesScroll.addSubview(progressIcon)
+            
+            if(branch.adults_only == true){
+                let adultsLabel: UILabel = UILabel(frame: CGRectMake(actualX, 0, scrollWidth-20, 35))
+                adultsLabel.text="+18"
+                adultsLabel.textAlignment = NSTextAlignment.Right
+                adultsLabel.textColor = UIColor.whiteColor()
+                adultsLabel.font = UIFont(name: "Montserrat-Regular", size: 26)
+                adultsLabel.layer.shadowOffset = CGSize(width: 3, height: 3)
+                adultsLabel.layer.shadowOpacity = 0.6
+                adultsLabel.layer.shadowRadius = 1
+                branchesScroll.addSubview(adultsLabel)
+            }
+            
         }
     
         branchesScroll.contentSize = CGSizeMake(branchesScroll.frame.size.width*CGFloat(branches.count), branchesScroll.frame.size.height)
         pageControlContainer.layer.cornerRadius = 4
         pageControlContainer.layer.masksToBounds = true
     }
+
     
     func performSegueToBranch(sender: UIGestureRecognizer) {
         let view_controller = self.storyboard!.instantiateViewControllerWithIdentifier("BranchProfileStickyController") as! BranchProfileStickyController
@@ -342,15 +363,21 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                     let branch_id = subJson["branch_id"].int
                     let company_id = subJson["company_id"].int
                     let total_likes = subJson["total_likes"].int
-                    let user_like = subJson["user_like"].int
+                    let user_like = subJson["user_like"].bool
                     let latitude = subJson["latitude"].double!
                     let longitude = subJson["longitude"].double!
                     let banner = subJson["banner"].string ?? ""
 //                    let categoryId = subJson["category_id"].int!
                     let available = subJson["available"].int!
                     let taken = subJson["taken"].bool!
+                    
+                    let subcategory_id = subJson["subcategory_id"].int
+                    var adult_branch = false
+                    if(subcategory_id == 25){
+                        adult_branch = true
+                    }
                 
-                    let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: 1, available: available, taken: taken)
+                    let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: 1, available: available, taken: taken, adult_branch: adult_branch)
                 
                     self.trending.append(model)
                 }
@@ -430,7 +457,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                 let branch_id = subJson["branch_id"].int
                 let company_id = subJson["company_id"].int
                 let total_likes = subJson["total_likes"].int
-                let user_like = subJson["user_like"].int
+                let user_like = subJson["user_like"].bool
                 let latitude = subJson["latitude"].double!
                 let longitude = subJson["longitude"].double!
                 let banner = subJson["banner"].string ?? ""
@@ -438,7 +465,13 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                 let taken = subJson["taken"].bool ?? false
                 let available = subJson["available"].int!
                 
-                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: 1, available: available, taken: taken)
+                let subcategory_id = subJson["subcategory_id"].int
+                var adult_branch = false
+                if(subcategory_id == 25){
+                    adult_branch = true
+                }
+                
+                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: 1, available: available, taken: taken, adult_branch: adult_branch)
                 
                 self.almost_expired.append(model)
             }
@@ -512,16 +545,22 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                 let branch_id = subJson["branch_id"].int
                 let company_id = subJson["company_id"].int
                 let total_likes = subJson["total_likes"].int
-                let user_like = subJson["user_like"].int
+                let user_like = subJson["user_like"].bool
                 let latitude = subJson["latitude"].double!
                 let longitude = subJson["longitude"].double!
                 let banner = subJson["banner"].string ?? ""
                 //                    let categoryId = subJson["category_id"].int!
                 let available = subJson["available"].int!
                 let taken = subJson["taken"].bool ?? false
+                
+                let subcategory_id = subJson["subcategory_id"].int
+                var adult_branch = false
+                if(subcategory_id == 25){
+                    adult_branch = true
+                }
 
                 
-                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: 1, available: available, taken: taken)
+                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: 1, available: available, taken: taken, adult_branch: adult_branch)
                 
                 self.nearest.append(model)
             }

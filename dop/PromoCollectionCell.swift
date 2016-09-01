@@ -37,17 +37,40 @@ class PromoCollectionCell: UICollectionViewCell, FBSDKSharingDelegate {
         self.coupon = coupon
         self.likes.text = String(coupon.total_likes)
         self.viewController = viewController
-        if coupon.user_like == 1 {
+        if coupon.user_like == true {
             self.heart.tintColor = Utilities.dopColor
         } else {
             self.heart.tintColor = UIColor.lightGrayColor()
         }
+
         
         NSNotificationCenter.defaultCenter().addObserver(
             self,
             selector: #selector(PromoCollectionCell.updateLikeAndTaken(_:)),
             name: "takenOrLikeStatus",
             object: nil)
+    }
+    @IBAction func share(sender: AnyObject) {
+        let content : FBSDKShareLinkContent = FBSDKShareLinkContent()
+        content.contentURL = NSURL(string: "https://www.halleydevs.io")
+        content.contentTitle = self.coupon.name
+        content.imageURL = NSURL(string: "\(Utilities.dopImagesURL)\(self.coupon.company_id)/\(self.coupon.logo)")
+        content.contentDescription = self.coupon_description?.text
+        FBSDKShareDialog.showFromViewController(self.viewController, withContent: content, delegate: self)
+        
+        
+        /*let dialog: FBSDKShareDialog = FBSDKShareDialog()
+        
+        if UIApplication.sharedApplication().canOpenURL(NSURL(string: "fbauth2://")!) {
+            dialog.mode = FBSDKShareDialogMode.Native
+        }else{
+            dialog.mode = FBSDKShareDialogMode.Native
+        }
+        dialog.shareContent = content
+        dialog.delegate = self
+        dialog.fromViewController = self.viewController
+        dialog.show()*/
+        
     }
     
     
@@ -84,18 +107,16 @@ class PromoCollectionCell: UICollectionViewCell, FBSDKSharingDelegate {
             })
     }
     
-    
     @IBAction func shareCoupon(sender: UIButton) {
-        
         let content : FBSDKShareLinkContent = FBSDKShareLinkContent()
         content.contentURL = NSURL(string: "https://www.inmoon.com.mx")
         content.contentTitle = self.coupon.name
         content.contentDescription = self.coupon_description?.text
         content.imageURL = NSURL(string: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Facebook_Headquarters_Menlo_Park.jpg/2880px-Facebook_Headquarters_Menlo_Park.jpg") //NSURL(string: "\(Utilities.dopImagesURL)\(self.coupon.company_id)/\(self.coupon.logo)")
         
-        //        let dialog: FBSDKShareDialog = FBSDKShareDialog()
+                let dialog: FBSDKShareDialog = FBSDKShareDialog()
         //        dialog.mode = FBSDKShareDialogModeShareSheet
-        
+        dialog.mode = FBSDKShareDialogMode.Browser
         FBSDKShareDialog.showFromViewController(self.viewController, withContent: content, delegate: self)
     }
     
@@ -108,7 +129,7 @@ class PromoCollectionCell: UICollectionViewCell, FBSDKSharingDelegate {
     }
     
     func sharerDidCancel(sharer: FBSDKSharing!) {
-        print("cancel")
+        print("cancel share")
     }
 
     func setCouponLike() {
@@ -125,8 +146,7 @@ class PromoCollectionCell: UICollectionViewCell, FBSDKSharingDelegate {
         self.heart.tintColor = Utilities.dopColor
         let totalLikes = (Int(self.likes.text!))! + 1
         self.likes.text = String(stringInterpolationSegment: totalLikes)
-        self.coupon.setUserLike(1, total_likes: totalLikes)
-        
+        self.coupon.setUserLike(true, total_likes: totalLikes)
 
     }
 
@@ -134,7 +154,7 @@ class PromoCollectionCell: UICollectionViewCell, FBSDKSharingDelegate {
         self.heart.tintColor = UIColor.lightGrayColor()
         let totalLikes = (Int(self.likes.text!))! - 1
         self.likes.text = String(stringInterpolationSegment: totalLikes)
-        self.coupon.setUserLike(0, total_likes: totalLikes)
+        self.coupon.setUserLike(false, total_likes: totalLikes)
         
     }
     

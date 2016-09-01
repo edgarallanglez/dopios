@@ -124,7 +124,7 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapVie
     override func viewDidAppear(animated: Bool) {
         if(coupon != nil){
             self.branch_title.setTitle(self.coupon?.name.uppercaseString, forState: .Normal)
-            self.category_label.text = "Cafeteria".uppercaseString
+            self.category_label.text = "".uppercaseString
             self.map.delegate = self
             self.centerMapOnLocation((self.coupon?.location)!)
             self.setBranchAnnotation()
@@ -135,7 +135,7 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapVie
             coupon_description.alpha = 0
             
             self.likes_label.text = String(coupon!.total_likes)
-            if coupon!.user_like == 1 { self.heart.tintColor = Utilities.dopColor } else { self.heart.tintColor = UIColor.lightGrayColor() }
+            if coupon!.user_like == true { self.heart.tintColor = Utilities.dopColor } else { self.heart.tintColor = UIColor.lightGrayColor() }
             
             if coupon.taken == true { self.takeCouponButton.tintColor = Utilities.dopColor } else { self.takeCouponButton.tintColor = UIColor.darkGrayColor() }
             
@@ -191,7 +191,7 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapVie
         self.heart.tintColor = Utilities.dopColor
         let totalLikes = (self.coupon?.total_likes)! + 1
         self.likes_label.text = String(stringInterpolationSegment: totalLikes)
-        self.coupon!.setUserLike(1, total_likes: totalLikes)
+        self.coupon!.setUserLike(true, total_likes: totalLikes)
         
         NSNotificationCenter.defaultCenter().postNotificationName("takenOrLikeStatus", object: params)
     }
@@ -205,7 +205,7 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapVie
         self.heart.tintColor = UIColor.lightGrayColor()
         let totalLikes = (self.coupon?.total_likes)! - 1
         self.likes_label.text = String(stringInterpolationSegment: totalLikes)
-        self.coupon!.setUserLike(0, total_likes: totalLikes)
+        self.coupon!.setUserLike(false, total_likes: totalLikes)
         NSNotificationCenter.defaultCenter().postNotificationName("takenOrLikeStatus", object: params)
 
     }

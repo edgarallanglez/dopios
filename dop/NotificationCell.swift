@@ -27,23 +27,30 @@ class NotificationCell: UITableViewCell {
     }
 
     func loadItem(notification: Notification, viewController:UIViewController) {
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: #selector(TrendingCoupon.updateLikeAndTaken(_:)),
+            name: "takenOrLikeStatus",
+            object: nil)
+        
+        
         var string_format = NSMutableAttributedString()
 
         let launcher_name = "\(notification.launcher_name) \(notification.launcher_surnames)"
         let catcher_name = "\(notification.catcher_name) \(notification.catcher_surnames)"
-        let newsfeed_Activity = "\(notification.branches_name)"
-
+        let newsfeed_activity = "\(notification.branches_name)"
+        
         decline_btn.hidden = true
         accept_btn.hidden = true
 
 
         if notification.type == "newsfeed" {
 
-            let notification_text = "A \(launcher_name) le ha gustado tu actividad en \(newsfeed_Activity)"
+            let notification_text = "A \(launcher_name) le ha gustado tu actividad en \(newsfeed_activity)"
             title.text = notification_text
             let nsString = notification_text as NSString
             let launcher_range = nsString.rangeOfString(launcher_name)
-            let newsfeed_activity_range = nsString.rangeOfString(newsfeed_Activity)
+            let newsfeed_activity_range = nsString.rangeOfString(newsfeed_activity)
             let segue = NSURL(string: "userProfile:\(notification.launcher_id):\(notification.is_friend)")!
             let branch_segue = NSURL(string: "branchProfile:\(notification.branch_id)")
             title.addLinkToURL(segue, withRange: launcher_range)
@@ -52,7 +59,7 @@ class NotificationCell: UITableViewCell {
 
         if notification.type == "friend" {
             var notification_text = ""
-
+            
             switch notification.operation_id {
                 case 0:
                     notification_text = "\(launcher_name) quiere seguirte"
@@ -111,6 +118,8 @@ class NotificationCell: UITableViewCell {
             "friends_id": self.notification!.object_id]
 
             FriendsController.declineFriendWithSuccess(params, success: {(friendsData) -> Void in
+                NSNotificationCenter.defaultCenter().postNotificationName("refreshTableView", object: nil)
+
             dispatch_async(dispatch_get_main_queue(), {
                 print("Rechazado")
             })
@@ -128,7 +137,7 @@ class NotificationCell: UITableViewCell {
 
             FriendsController.acceptFriendWithSuccess(params, success: {(friendsData) -> Void in
                 dispatch_async(dispatch_get_main_queue(), {
-                        print("Aceptado")
+                    NSNotificationCenter.defaultCenter().postNotificationName("refreshTableView", object: nil)
                 })
                 }, failure: { (error) -> Void in
                     dispatch_async(dispatch_get_main_queue(), {

@@ -57,6 +57,7 @@ class UserProfileStickyHeader: UIView {
         user_level.text = "Nivel \(current_level)"
         
         if (parent_view.person?.is_friend != nil) { setFollowingButton((parent_view.person?.is_friend)!) }
+        
     }
     
     @IBAction func followUnfollow(sender: UIButton) {

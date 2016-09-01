@@ -15,6 +15,7 @@ class RewardsViewController: UIViewController, UIPageViewControllerDataSource, U
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var rewards_segmented_controller: RewardsSegmentedController!
     
+    @IBOutlet var mainLoader: MMMaterialDesignSpinner!
     var index: Int = 0
     
     //news
@@ -30,6 +31,15 @@ class RewardsViewController: UIViewController, UIPageViewControllerDataSource, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: #selector(RewardsViewController.showLoader(_:)),
+            name: "showLoader",
+            object: nil)
+        
+        mainLoader.tintColor = Utilities.dopColor
+        mainLoader.lineWidth = 3.0
         
         self.rewardsPageViewController =  UIPageViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
         
@@ -157,5 +167,13 @@ class RewardsViewController: UIViewController, UIPageViewControllerDataSource, U
         self.rewardsPageViewController.setViewControllers(viewControllers, direction: direction, animated: true, completion: nil)
     }
     
-    
+    func showLoader(notification: NSNotification){
+        let show = notification.object as! Bool
+        
+        if(show == true){
+            mainLoader.startAnimating()
+        }else{
+            mainLoader.stopAnimating()
+        }
+    }
 }

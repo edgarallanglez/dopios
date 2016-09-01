@@ -19,6 +19,18 @@ class LoginController {
                 errorFound(loginData: error)
             }
         })
+        
     }
+    class func getPrivacyInfo(success succeed: ((userData: NSData!) -> Void), failure errorFound:((userData: NSError?) -> Void )) {
+        let url = "\(Utilities.dopURL)user/privacy_status/get"
+        Utilities.loadDataFromURL(NSURL(string: url)!, completion: {(data, error) -> Void in
+            if let urlData = data {
+                succeed(userData: urlData)
+            }else{
+                errorFound(userData: error)
+            }
+        })
+    }
+    
     
 }

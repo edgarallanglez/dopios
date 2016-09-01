@@ -29,7 +29,7 @@ class TrendingCoupon: UIView, ModalDelegate {
         self.likes.text = String(coupon.total_likes)
         self.descriptionLbl.text = coupon.couponDescription
         self.viewController = viewController
-        if coupon.user_like == 1 { self.heart.tintColor = Utilities.dopColor } else { self.heart.tintColor = UIColor.lightGrayColor() }
+        if coupon.user_like == true { self.heart.tintColor = Utilities.dopColor } else { self.heart.tintColor = UIColor.lightGrayColor() }
         if coupon.taken == true { self.takeCouponButton.tintColor = Utilities.dopColor } else { self.takeCouponButton.tintColor = UIColor.darkGrayColor() }
         
         NSNotificationCenter.defaultCenter().addObserver(
@@ -98,14 +98,14 @@ class TrendingCoupon: UIView, ModalDelegate {
         self.heart.tintColor = Utilities.dopColor
         let totalLikes = (Int(self.likes.text!))! + 1
         self.likes.text = String(stringInterpolationSegment: totalLikes)
-        self.coupon.setUserLike(1, total_likes: totalLikes)
+        self.coupon.setUserLike(true, total_likes: totalLikes)
     }
     
     func removeCouponLike() {
         self.heart.tintColor = UIColor.lightGrayColor()
         let total_likes = (Int(self.likes.text!))! - 1
         self.likes.text = String(total_likes)
-        self.coupon.setUserLike(0, total_likes: total_likes)
+        self.coupon.setUserLike(false, total_likes: total_likes)
         
     }
     
@@ -250,6 +250,7 @@ class TrendingCoupon: UIView, ModalDelegate {
         if modal.action_type == "profile" {
             let view_controller = viewController!.storyboard!.instantiateViewControllerWithIdentifier("BranchProfileStickyController") as! BranchProfileStickyController
             view_controller.coupon = self.coupon
+            //view_controller.branch.adults_only = coupon.adult_branch
             view_controller.branch_id = coupon.branch_id
             modal.dismissAnimated(true, completionHandler: { (modal) -> Void in
                 self.viewController!.navigationController?.pushViewController(view_controller, animated: true)
