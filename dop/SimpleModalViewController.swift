@@ -124,7 +124,7 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapVie
     override func viewDidAppear(animated: Bool) {
         if(coupon != nil){
             self.branch_title.setTitle(self.coupon?.name.uppercaseString, forState: .Normal)
-            self.category_label.text = "Cafeteria".uppercaseString
+            self.category_label.text = "Comida".uppercaseString
             self.map.delegate = self
             self.centerMapOnLocation((self.coupon?.location)!)
             self.setBranchAnnotation()
@@ -142,9 +142,7 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapVie
             Utilities.fadeInFromBottomAnimation(self.branch_title, delay: 0, duration: 0.5, yPosition: 30)
             Utilities.fadeInFromBottomAnimation(self.category_label, delay: 0, duration: 0.5, yPosition: 30)
             
-            
             getAvailables()
-            
         }
         
         if action_button != nil { action_button.layoutIfNeeded() }
