@@ -58,7 +58,7 @@ class RewardsActivityCell: UITableViewCell {
         self.total_likes.text = String(model.total_likes)
         self.heart.image = self.heart.image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
         
-        if model.user_like == 1 { self.heart.tintColor = Utilities.dopColor }
+        if model.user_like == true { self.heart.tintColor = Utilities.dopColor }
         else { self.heart.tintColor = UIColor.lightGrayColor() }
         //////////////
     
@@ -126,14 +126,14 @@ class RewardsActivityCell: UITableViewCell {
         self.heart.tintColor = Utilities.dopColor
         let totalLikes = (Int(self.total_likes.text!))!+1
         self.total_likes.text = String(stringInterpolationSegment: totalLikes)
-        self.activity_model!.setUserLike(1,total_likes: totalLikes)
+        self.activity_model!.setUserLike(true,total_likes: totalLikes)
     }
     
     func removeCouponLike() {
         self.heart.tintColor = UIColor.lightGrayColor()
         let totalLikes = (Int(self.total_likes.text!))!-1
         self.total_likes.text = String(stringInterpolationSegment: totalLikes)
-        self.activity_model!.setUserLike(0,total_likes: totalLikes)
+        self.activity_model!.setUserLike(false,total_likes: totalLikes)
     }
     
 }

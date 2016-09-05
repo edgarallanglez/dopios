@@ -60,6 +60,12 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         mainLoader.tintColor = Utilities.dopColor
         mainLoader.lineWidth = 3.0
         getNotifications()
+        
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: #selector(NotificationViewController.refreshTableView(_:)),
+            name: "refreshTableView",
+            object: nil)
 
     }
     @IBAction func pressNotificationButton(sender: AnyObject) {
@@ -325,9 +331,10 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         let splitter = String(url).componentsSeparatedByString(":")
         let segue: String = splitter[0]
         let object_id: Int = Int(splitter[1])!
-        let is_friend: Bool = (splitter[2] as NSString!).boolValue
+        
 
         if segue == "userProfile" {
+            let is_friend: Bool = (splitter[2] as NSString!).boolValue
             let view_controller = self.storyboard!.instantiateViewControllerWithIdentifier("UserProfileStickyController") as! UserProfileStickyController
             view_controller.user_id = object_id
             view_controller.is_friend = is_friend
@@ -343,6 +350,10 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     override func viewDidDisappear(animated: Bool) {
         self.refreshControl.endRefreshing()
         print("disappear")
+    }
+    
+    func refreshTableView(notification: NSNotification){
+        getNotifications()
     }
 
 

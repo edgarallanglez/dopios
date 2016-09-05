@@ -68,6 +68,7 @@ class MedalTableViewController: UITableViewController {
     }
     
     func getMedals() {
+        NSNotificationCenter.defaultCenter().postNotificationName("showLoader", object: true)
         BadgeController.getAllMedalsWithSuccess(
             success: { (data) -> Void in
                 let json = JSON(data: data)
@@ -95,12 +96,13 @@ class MedalTableViewController: UITableViewController {
                 }
                 dispatch_async(dispatch_get_main_queue(), {
                     self.table_view.reloadData()
+                    NSNotificationCenter.defaultCenter().postNotificationName("showLoader", object: false)
                     //self.refreshControl.endRefreshing()
                 });
             },
             failure: { (error) -> Void in
                 dispatch_async(dispatch_get_main_queue(), {
-                    
+                    NSNotificationCenter.defaultCenter().postNotificationName("showLoader", object: false)
             })
         })
         

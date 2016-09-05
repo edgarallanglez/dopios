@@ -40,7 +40,7 @@ class CouponController {
     }
     
     class func getAllCouponsByBranchWithSuccess(branch_id:Int,success succeed: ((couponsData: NSData!) -> Void),failure errorFound: ((couponsData: NSError?) -> Void)) {
-        let url = "\(Utilities.dopURL)coupon/all/for/user/by/branch/get/?branch_id=\(branch_id)"
+        let url = "\(Utilities.dopURL)coupon/all/for/user/by/branch/\(branch_id)/get"
         
         print(url)
         

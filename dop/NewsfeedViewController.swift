@@ -39,13 +39,19 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
             let model = self.newsfeed[indexPath.row]
             cell.newsfeed_description.linkAttributes = [NSForegroundColorAttributeName: Utilities.dopColor]
             cell.newsfeed_description.enabledTextCheckingTypes = NSTextCheckingType.Link.rawValue
+
             cell.newsfeed_description.delegate = self
             cell.loadItem(model, viewController: self, index: indexPath.row)
             
 
             let imageUrl = NSURL(string: model.user_image)
             let identifier = "Cell\(indexPath.row)"
-        
+            
+            
+            
+            
+
+            
             if  self.cachedImages[identifier] != nil {
                 let cell_image_saved : UIImage = self.cachedImages[identifier]!
                 cell.user_image.image = cell_image_saved
@@ -53,16 +59,15 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
                 cell.username_button.alpha = 1
             
             } else {
-                cell.user_image.alpha = 0
                 cell.username_button.alpha = 0
                 UIView.animateWithDuration(0.5, animations: {
                     cell.username_button.alpha = 1
                 })
                 Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
-                    if let image = UIImage(data: data!) {
+                    if let image = data {
                         dispatch_async(dispatch_get_main_queue()) {
                             var cell_image : UIImage = UIImage()
-                            cell_image = image
+                            cell_image = UIImage(data:image)!
                             
                             if tableView.indexPathForCell(cell)?.row == indexPath.row {
                                 self.cachedImages[identifier] = cell_image
@@ -70,7 +75,7 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
                                 cell.user_image.image = cell_image_saved
                                 UIView.animateWithDuration(0.5, animations: {
                                     cell.user_image.alpha = 1
-                                    cell.username_button.alpha = 1
+                                    
                                 })
                             }
                         }
@@ -173,7 +178,7 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
                 let name =  subJson["name"].string
                 let branch_name =  subJson["branch_name"].string
                 let total_likes =  subJson["total_likes"].int
-                let user_like =  subJson["user_like"].int
+                let user_like =  subJson["user_like"].bool
                 let date =  subJson["used_date"].string
                 let level = subJson["level"].int ?? 0
                 let exp = subJson["exp"].double ?? 0
@@ -257,7 +262,7 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
                 let name =  subJson["name"].string
                 let branch_name =  subJson["branch_name"].string
                 let total_likes =  subJson["total_likes"].int
-                let user_like =  subJson["user_like"].int
+                let user_like =  subJson["user_like"].bool
                 let date =  subJson["used_date"].string
                 let level = subJson["level"].int ?? 0
                 let exp = subJson["exp"].double ?? 0

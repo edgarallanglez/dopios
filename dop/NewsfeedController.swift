@@ -30,7 +30,6 @@ class NewsfeedController: NSObject {
                     errorFound(friendsData: error)
                 }
             })
-
     }
     
     class func likeFriendsActivityWithSuccess(params:[String:AnyObject],success succeed: ((friendsData: NSData!) -> Void),failure errorFound: ((friendsData: NSError?) -> Void)) {

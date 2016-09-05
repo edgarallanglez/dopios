@@ -17,6 +17,8 @@ protocol AboutPageDelegate {
 class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     var delegate: AboutPageDelegate?
     
+    @IBOutlet var phone_view: UIView!
+    @IBOutlet var address_view: UIView!
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var branch_location_map: MKMapView!
     @IBOutlet weak var branch_description: UITextView!
@@ -27,7 +29,9 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
     var branch_pin: CLLocation!
     let regions_radius: CLLocationDistance = 500
     var loader: MMMaterialDesignSpinner!
+    @IBOutlet var phone: UILabel!
     
+    @IBOutlet var address: UILabel!
     override func viewDidLoad() {
         setupLoader()
 //        branch_description.text = description
@@ -42,8 +46,10 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
         getBranchProfile()
         
         if self.branch_location_map != nil {
-            let tap = UITapGestureRecognizer(target: self, action: #selector(BranchAboutViewController.pressMap(_:)))
-            self.branch_location_map.addGestureRecognizer(tap)
+            let tap_map = UITapGestureRecognizer(target: self, action: #selector(BranchAboutViewController.pressMap(_:)))
+            let tap_address = UITapGestureRecognizer(target: self, action: #selector(BranchAboutViewController.pressMap(_:)))
+            self.branch_location_map.addGestureRecognizer(tap_map)
+            self.address_view.addGestureRecognizer(tap_address)
         }
 
         
@@ -69,7 +75,6 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
     func setFrame() {
         let dynamic_height: CGFloat = 330
         delegate?.resizeAboutView(dynamic_height)
-
     }
     
     func centerMapOnLocation(location: CLLocation) {
@@ -114,8 +119,9 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
             let about = json["about"].string ?? ""
             let phone = json["phone"].string ?? ""
             let adults_only = json["adults_only"].bool ?? false
-            
-            let model = Branch(id: branch_id, name: branch_name, banner: banner, company_id: company_id, logo: logo, following: following, about: about, phone: phone, adults_only: adults_only)
+            let address = json["address"].string ?? ""
+
+            let model = Branch(id: branch_id, name: branch_name, banner: banner, company_id: company_id, logo: logo, following: following, about: about, phone: phone, adults_only: adults_only, address: address)
             
             
             self.branch_pin = CLLocation(latitude: latitude!, longitude: longitude!)
@@ -123,7 +129,7 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
             self.centerMapOnLocation(self.branch_pin)
             
             dispatch_async(dispatch_get_main_queue(), {
-                let drop_pin = Annotation(coordinate: new_location, title: json["name"].string!, subTitle: "nada", branch_distance: "4.3", branch_id: branch_id, company_id: 0, logo: "")
+                let drop_pin = Annotation(coordinate: new_location, title: json["name"].string!, subTitle: "", branch_distance: "4.3", branch_id: branch_id, company_id: 0, logo: "")
                 
                 switch json["category_id"].int! {
                     case 1: drop_pin.typeOfAnnotation = "marker-food-icon"
@@ -132,7 +138,13 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
                 default: break
                 }
                 self.branch_description.text = model.about
+                self.phone.text = model.phone
                 self.branch_location_map.addAnnotation(drop_pin)
+                self.address.text = model.address
+                
+                
+                self.phone_view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(BranchAboutViewController.callToBranch(_:))))
+
                 Utilities.fadeInFromBottomAnimation(self.contentView, delay: 0, duration: 1, yPosition: 20)
                 
                 Utilities.fadeOutViewAnimation(self.loader, delay: 0, duration: 0.3)
@@ -152,6 +164,9 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
 
                 })
         })
+    }
+    func callToBranch(sender: UITapGestureRecognizer){
+        UIApplication.sharedApplication().openURL(NSURL(string: "tel://\(phone.text!)")!)
     }
     
     func reloadWithOffset(parent_scroll: UICollectionView) {

@@ -20,6 +20,7 @@ class TrophyTableViewController: UITableViewController {
     override func viewDidLoad() {
         getTrophies()
         self.table_view.contentInset = UIEdgeInsetsMake(0, 0, 49, 0)
+        
     }
     
     
@@ -69,6 +70,9 @@ class TrophyTableViewController: UITableViewController {
     }
     
     func getTrophies() {
+        
+        NSNotificationCenter.defaultCenter().postNotificationName("showLoader", object: true)
+
         BadgeController.getAllTrophiesWithSuccess(
             success: { (data) -> Void in
                 let json = JSON(data: data)
@@ -96,12 +100,13 @@ class TrophyTableViewController: UITableViewController {
                 }
                 dispatch_async(dispatch_get_main_queue(), {
                     self.table_view.reloadData()
+                    NSNotificationCenter.defaultCenter().postNotificationName("showLoader", object: false)
                     //self.refreshControl.endRefreshing()
                 });
             },
             failure: { (error) -> Void in
                 dispatch_async(dispatch_get_main_queue(), {
-                    
+                    NSNotificationCenter.defaultCenter().postNotificationName("showLoader", object: false)
                 })
         })
         

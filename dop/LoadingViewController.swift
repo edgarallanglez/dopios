@@ -143,17 +143,31 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
             User.userImageUrl = params["main_image"]!
             User.userName = params["names"]!
             User.userSurnames = params["surnames"]!
+            
+            
             do {
                 let payload = try decode(User.userToken)
                 
                 User.user_id = payload.body["id"]! as! Int
+                
                 
             } catch {
                 print("Failed to decode JWT: \(error)")
             }
             
             dispatch_async(dispatch_get_main_queue(), {
+                
                 self.performSegueWithIdentifier("showDashboard", sender: self.notification)
+                
+                LoginController.getPrivacyInfo(success: { (userData) in
+                    let json = JSON(data: userData)
+                    
+                    print("Privacy status \(json)")
+                    User.privacy_status = json["privacy_status"].int!
+                    User.adult = json["adult"].bool!
+
+                    }, failure: { (userData) in
+                })
                 User.activeSession = true
                 self.firstTime = false
             })

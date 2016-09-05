@@ -14,6 +14,7 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
     var videoPreviewLayer:AVCaptureVideoPreviewLayer?
     var qrCodeFrameView:UIView?
     var captureMetadataOutput:AVCaptureMetadataOutput?
+    @IBOutlet var problems_button: UIButton!
     
     @IBOutlet var qr_instructions_view: UIView!
     @IBOutlet var qr_image: UIImageView!
@@ -34,6 +35,12 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
         self.navigationController!.navigationBar.translucent = true*/
 
         
+        problems_button.layer.borderColor = UIColor.whiteColor().CGColor
+        problems_button.layer.borderWidth = 1.0
+        problems_button.layer.cornerRadius = 3
+        //problems_button.backgroundColor = UIColor.clearColor()
+        
+        
         spinner = MMMaterialDesignSpinner(frame: CGRectMake(0, 0, 50, 50))
         spinner.center.x = self.view.center.x
         spinner.center.y = self.view.center.y
@@ -43,6 +50,8 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
         spinner.tintColor = Utilities.dopColor
         spinner.backgroundColor = UIColor.whiteColor()
 
+        
+        self.title = coupon.name
         
         let input: AnyObject?
         
@@ -105,7 +114,8 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
         
         
         //self.blurViewLeadingConstraint.constant = UIScreen.mainScreen().bounds.size.width
-
+        
+    
         
         self.view.layoutIfNeeded()
         
@@ -147,9 +157,11 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                                 let navigation_controller = vc as! AlertModalViewController
                                 
                                 self.alert_array.append(AlertModel(alert_title: "¡Oops!", alert_image: "error", alert_description: "Ha ocurrido un error, al parecer el QR no es el correcto"))
-                                
                                 navigation_controller.setAlert(self.alert_array)
                     
+                            }
+                            modal.didDismissCompletionHandler = { vc in
+                                self.qr_detected = false
                             }
                             modal.presentAnimated(true, completionHandler: nil)
 
@@ -164,6 +176,9 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                                 self.alert_array.append(AlertModel(alert_title: "¡Oops!", alert_image: "error", alert_description: "Ha ocurrido un error, al parecer el QR no es válido :("))
                                 
                                 navigation_controller.setAlert(self.alert_array)
+                            }
+                            modal.didDismissCompletionHandler = { vc in
+                                self.qr_detected = false
                             }
                             modal.presentAnimated(true, completionHandler: nil)
                         })
@@ -200,14 +215,23 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                     if let message = json["message"].string {
                             Utilities.fadeOutViewAnimation(self.spinner, delay: 0, duration: 0.3)
                             let error_modal: ModalViewController = ModalViewController(currentView: self, type: ModalViewControllerType.AlertModal)
+                        
+                            var error_message = "Esta promoción se ha terminado :("
+                            if let recently_used = json["minutes"].string {
+                                error_message = "Recientemente usaste esta promoción, intenta más tarde"
+                            }
                             error_modal.willPresentCompletionHandler = { vc in
                                 let navigation_controller = vc as! AlertModalViewController
                                 
                                 var alert_array = [AlertModel]()
                                 
-                                alert_array.append(AlertModel(alert_title: "¡Oops!", alert_image: "error", alert_description: "Esta promoción se ha terminado :("))
+                                alert_array.append(AlertModel(alert_title: "¡Oops!", alert_image: "error", alert_description: error_message))
                                 
                                 navigation_controller.setAlert(alert_array)
+                                
+                            }
+                            error_modal.didDismissCompletionHandler = { vc in
+                                self.qr_detected = false
                             }
                              error_modal.presentAnimated(true, completionHandler: nil)
                         
@@ -238,6 +262,12 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                                 navigation_controller.setAlert(self.alert_array)
                                 
                             }
+                            modal.willDismissCompletionHandler = { vc in
+                                let alert_modal = vc as! AlertModalViewController
+                                if alert_modal.alert_flag <= 1 {
+                                    self.navigationController?.popViewControllerAnimated(true)
+                                }
+                            }
                             modal.presentAnimated(true, completionHandler: nil)
                             self.coupon?.available = (self.coupon?.available)! - 1
                         }
@@ -257,6 +287,11 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                         self.alert_array.append(AlertModel(alert_title: "¡Oops!", alert_image: "error", alert_description: "Ha ocurrido un error, al parecer es nuestra culpa :("))
                         
                         navigation_controller.setAlert(self.alert_array)
+                        
+                        modal.didDismissCompletionHandler = { vc in
+                            self.qr_detected = false
+                        }
+                       
                     }
                     modal.presentAnimated(true, completionHandler: nil)
                 })

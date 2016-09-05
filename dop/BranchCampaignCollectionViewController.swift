@@ -96,8 +96,6 @@ class BranchCampaignCollectionViewController: UICollectionViewController, ModalD
         modal.delegate = self
         modal.presentAnimated(true, completionHandler: nil)
         //}
-        
-        
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -198,7 +196,7 @@ class BranchCampaignCollectionViewController: UICollectionViewController, ModalD
                     let branch_id = subJson["branch_id"].int
                     let company_id = subJson["company_id"].int
                     let total_likes = subJson["total_likes"].int
-                    let user_like = subJson["user_like"].int
+                    let user_like = subJson["user_like"].bool
                     let latitude = subJson["latitude"].double!
                     let longitude = subJson["longitude"].double!
                     let banner = subJson["banner"].string ?? ""
@@ -250,7 +248,7 @@ class BranchCampaignCollectionViewController: UICollectionViewController, ModalD
                 let branch_id = subJson["branch_id"].int
                 let company_id = subJson["company_id"].int
                 let total_likes = subJson["total_likes"].int
-                let user_like = subJson["user_like"].int
+                let user_like = subJson["user_like"].bool
                 let latitude = subJson["latitude"].double!
                 let longitude = subJson["longitude"].double!
                 let banner = subJson["banner"].string ?? ""
@@ -302,9 +300,12 @@ class BranchCampaignCollectionViewController: UICollectionViewController, ModalD
         if modal.action_type == "redeem" {
             if selected_coupon.available>0 {
                 let view_controller  = self.storyboard!.instantiateViewControllerWithIdentifier("readQRView") as! readQRViewController
+                view_controller.coupon = self.selected_coupon
                 view_controller.coupon_id = self.selected_coupon.id
                 view_controller.branch_id = self.selected_coupon.branch_id
                 self.hidesBottomBarWhenPushed = true
+                self.parent_view.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.Plain, target:nil, action:nil)
+
                 self.parent_view.navigationController?.pushViewController(view_controller, animated: true)
                 //self.hidesBottomBarWhenPushed = false
                 modal.dismissAnimated(true, completionHandler: nil)
@@ -325,7 +326,6 @@ class BranchCampaignCollectionViewController: UICollectionViewController, ModalD
                     
                 })
             }
-
         }
 //        if modal.action_type == "share" {
 //            let YourImage:UIImage = UIImage(named: "starbucks_banner.jpg")!

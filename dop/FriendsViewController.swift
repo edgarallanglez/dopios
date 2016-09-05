@@ -8,8 +8,9 @@
 
 import UIKit
 
-class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
     
+    @IBOutlet var mainLoader: MMMaterialDesignSpinner!
 
     @IBOutlet weak var friendScrollView: UIScrollView!
     @IBOutlet weak var tableView: UITableView!
@@ -23,8 +24,22 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     var cachedFollowingImages: [String: UIImage] = [:]
     
     override func viewDidLoad() {
+        mainLoader.tintColor = Utilities.dopColor
+        mainLoader.lineWidth = 3.0
+        
+        friendScrollView.scrollEnabled = false
+        
+        
         getAllPeople()
+        
     }
+    /*func scrollViewDidScroll(scrollView: UIScrollView) {
+        let pagenumber = Int(scrollView.contentOffset.x / scrollView.frame.size.width)
+        
+        friendSegmentedController.selectedIndex = pagenumber
+        
+        
+    }*/
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == self.tableView { return friends.count } else { return following.count }
@@ -118,6 +133,9 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     func getAllPeople() {
         friends.removeAll()
         cachedImages.removeAll()
+        
+        mainLoader.startAnimating()
+        
         FriendsController.getAllFriendsWithSuccess(
             success:{ (friendsData) -> Void in
                 let json = JSON(data: friendsData)
@@ -142,10 +160,13 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
                 }
                 
                 dispatch_async(dispatch_get_main_queue(), {
+                    self.mainLoader.stopAnimating()
+
                     self.tableView.reloadData()
                 });
             },
             failure: {(error) -> Void in
+                self.mainLoader.stopAnimating()
                 print(error)
         })
     }
@@ -153,6 +174,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     func getFollowings() {
         following.removeAll()
         cachedFollowingImages.removeAll()
+        mainLoader.startAnimating()
         FriendsController.getAllFollowingWithSuccess(
             success:{ (friendsData) -> Void in
                 let json = JSON(data: friendsData)
@@ -179,10 +201,12 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
                 
                 dispatch_async(dispatch_get_main_queue(), {
                     self.followingTableView.reloadData()
+                    self.mainLoader.stopAnimating()
                 });
             },
             failure: {(error) -> Void in
                 print(error)
+                self.mainLoader.stopAnimating()
         })
     }
     

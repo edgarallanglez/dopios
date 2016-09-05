@@ -135,13 +135,13 @@ class ToExpireCoupon: UIView, ModalDelegate {
                 if(type == "take"){
                     self.coupon.taken = false
                 }else{
-                    self.coupon.user_like = 0
+                    self.coupon.user_like = false
                 }
             }else{
                 if(type == "take"){
                     self.coupon.taken = true
                 }else{
-                    self.coupon.user_like = 1
+                    self.coupon.user_like = true
                 }
             }
         }

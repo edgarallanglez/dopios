@@ -36,6 +36,8 @@ class NewsfeedCell: UITableViewCell {
     
         downloadImage(NSURL(string: "\(Utilities.dopImagesURL)\(newsfeed_note.company_id)/\(newsfeed_note.branch_image)")!)
         
+        //downloadImage(NSURL(string: "\(newsfeed_note.user_image)")!)
+        
         //////////
         let notification_text = "Asistió a \(newsfeed_activity)"
         
@@ -47,9 +49,10 @@ class NewsfeedCell: UITableViewCell {
         newsfeed_description.addLinkToURL(segue, withRange: newsfeed_activity_range)
         //////////////
         
+        self.user_image.alpha = 0
+        self.user_image.layoutIfNeeded()
         self.user_image.layer.masksToBounds = true
         self.user_image.layer.cornerRadius = self.user_image.frame.width / 2
-        self.user_image.alpha = 0
         self.username_button.setTitle(newsfeed_note.names.uppercaseString, forState: UIControlState.Normal)
         self.username_button.addTarget(self, action: #selector(NewsfeedCell.goToUserProfile(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         self.user_image.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(NewsfeedCell.goToUserProfile(_:))))
@@ -67,7 +70,9 @@ class NewsfeedCell: UITableViewCell {
         self.likes.text = String(newsfeed_note.total_likes)
         self.heart.image = self.heart.image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
         
-        if newsfeed_note.user_like == 1 { self.heart.tintColor = Utilities.dopColor }
+    
+        
+        if newsfeed_note.user_like == true { self.heart.tintColor = Utilities.dopColor }
         else { self.heart.tintColor = UIColor.lightGrayColor() }
         
     }
@@ -128,14 +133,14 @@ class NewsfeedCell: UITableViewCell {
         self.heart.tintColor = Utilities.dopColor
         let totalLikes = (Int(self.likes.text!))!+1
         self.likes.text = String(stringInterpolationSegment: totalLikes)
-        self.newsfeedNote!.setUserLike(1,total_likes: totalLikes)
+        self.newsfeedNote!.setUserLike(true,total_likes: totalLikes)
     }
     
     func removeCouponLike() {
         self.heart.tintColor = UIColor.lightGrayColor()
         let totalLikes = (Int(self.likes.text!))!-1
         self.likes.text = String(stringInterpolationSegment: totalLikes)
-        self.newsfeedNote!.setUserLike(0,total_likes: totalLikes)
+        self.newsfeedNote!.setUserLike(false,total_likes: totalLikes)
     }
 
 
@@ -145,9 +150,10 @@ class NewsfeedCell: UITableViewCell {
     
     func downloadImage(url: NSURL) {
         Utilities.downloadImage(url, completion: {(data, error) -> Void in
-            if let image = UIImage(data: data!) {
+            if let image = data{
                 dispatch_async(dispatch_get_main_queue()) {
-                    self.branch_logo.image = image
+                    let imageData: NSData = NSData(data: image)
+                    self.branch_logo.image = UIImage(data: imageData)
                 }
             }else{
                 print("Error")

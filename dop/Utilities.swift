@@ -139,6 +139,8 @@ class Utilities {
 
     class func downloadImage(urL:NSURL, completion: (data: NSData?,error: NSError?) -> Void) {
         
+        
+        
         NSURLSession.sharedSession().dataTaskWithURL(urL, completionHandler: { (data: NSData? , response: NSURLResponse?, error: NSError?) -> Void in
             if let responseError = error {
                 completion(data: nil, error: responseError)

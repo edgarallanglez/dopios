@@ -21,6 +21,7 @@ class BranchProfileTopView: UIView {
     var branch: Branch!
     var alert_array = [AlertModel]()
     var spinner: MMMaterialDesignSpinner = MMMaterialDesignSpinner()
+    var adult_branch: Bool!
     
     
     @IBAction func followBranch(sender: AnyObject) {
@@ -96,6 +97,20 @@ class BranchProfileTopView: UIView {
         self.branch_name.text = self.parent_view.coupon?.name
         if parent_view.coupon != nil { downloadImage(parent_view.coupon) }
         Utilities.setMaterialDesignButton(self.follow_button, button_size: 50)
+        
+        if (parent_view.coupon != nil && parent_view.coupon.adult_branch == true){
+            let adultsLabel: UILabel = UILabel(frame: CGRectMake(0, 0, parent_view.view.frame.width-20, 35))
+            adultsLabel.text="+18"
+            adultsLabel.textAlignment = NSTextAlignment.Right
+            adultsLabel.textColor = UIColor.whiteColor()
+            adultsLabel.font = UIFont(name: "Montserrat-Regular", size: 26)
+            adultsLabel.layer.shadowOffset = CGSize(width: 3, height: 3)
+            adultsLabel.layer.shadowOpacity = 0.6
+            adultsLabel.layer.shadowRadius = 1
+            self.addSubview(adultsLabel)
+        }
+    
+        
     }
 
     
@@ -112,9 +127,6 @@ class BranchProfileTopView: UIView {
     }
     
     func downloadImage(model: Coupon) {
-        
-        print("categoria %d", model.categoryId)
-        
         let imageUrl = NSURL(string: "\(Utilities.dopImagesURL)\(model.company_id)/\(model.logo)")
         Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
             if let image = UIImage(data: data!) {
@@ -150,9 +162,19 @@ class BranchProfileTopView: UIView {
     }
     
     func downloadImage(model: Branch) {
-        if model.adults_only == true {
-            print("ADULTS ONLYYYYY")
+        if (model.adults_only == true){
+            let adultsLabel: UILabel = UILabel(frame: CGRectMake(0, 0, parent_view.view.frame.width-20, 35))
+            adultsLabel.text="+18"
+            adultsLabel.textAlignment = NSTextAlignment.Right
+            adultsLabel.textColor = UIColor.whiteColor()
+            adultsLabel.font = UIFont(name: "Montserrat-Regular", size: 26)
+            adultsLabel.layer.shadowOffset = CGSize(width: 3, height: 3)
+            adultsLabel.layer.shadowOpacity = 0.6
+            adultsLabel.layer.shadowRadius = 1
+            self.addSubview(adultsLabel)
+            
         }
+
         let imageUrl = NSURL(string: "\(Utilities.dopImagesURL)\(model.company_id!)/\(model.logo!)")
         Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
             if let image = data{

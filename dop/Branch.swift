@@ -19,6 +19,7 @@ struct Branch {
     let about: String?
     let phone: String?
     let adults_only: Bool?
+    let address: String?
     
     init(id: Int?, name: String?,  logo: String? ,banner: String?, company_id: Int?, latitude: Double, longitude: Double, following: Bool) {
         self.id = id ?? 0
@@ -33,6 +34,7 @@ struct Branch {
         self.distance = nil
         self.logo = nil
         self.adults_only = nil
+        self.address = nil
     }
     
     init(id: Int?, name: String?, banner: String?, company_id: Int?) {
@@ -48,6 +50,23 @@ struct Branch {
         self.about = nil
         self.phone = nil
         self.adults_only = nil
+        self.address = nil
+    }
+    
+    init(id: Int?, name: String?, banner: String?, company_id: Int?, adults_only: Bool?) {
+        self.id = id ?? 0
+        self.name = name ?? ""
+        self.banner = banner ?? ""
+        self.company_id = company_id ?? 0
+        self.adults_only = adults_only ?? false
+        
+        self.distance = nil
+        self.location = nil
+        self.logo = nil
+        self.following = nil
+        self.about = nil
+        self.phone = nil
+        self.address = nil
     }
     
     init(id: Int?, name: String?, distance: Double!) {
@@ -64,9 +83,10 @@ struct Branch {
         self.about = nil
         self.phone = nil
         self.adults_only = nil
+        self.address = nil
     }
     
-    init(id: Int?, name: String?, banner: String?, company_id: Int?, logo: String!, following: Bool!, about: String?, phone: String?, adults_only: Bool?) {
+    init(id: Int?, name: String?, banner: String?, company_id: Int?, logo: String!, following: Bool!, about: String?, phone: String?, adults_only: Bool?, address: String?) {
         self.id = id ?? 0
         self.name = name ?? ""
         self.banner = banner ?? ""
@@ -76,6 +96,7 @@ struct Branch {
         self.about = about
         self.phone = phone
         self.adults_only = adults_only
+        self.address = address
         
         self.distance = nil
         self.location = nil
