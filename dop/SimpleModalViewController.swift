@@ -9,10 +9,11 @@
 import UIKit
 import MapKit
 
-class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapViewDelegate {
+class SimpleModalViewController: UIViewController, UITextViewDelegate, MKMapViewDelegate, FBSDKSharingDelegate {
     @IBOutlet var heart: UIImageView!
     @IBOutlet var heartView: UIView!
     @IBOutlet var takeCouponButton: UIButton!
+    @IBOutlet var shareButton: UIButton!
     @IBOutlet var description_title: UILabel!
     @IBOutlet var branch_title: UIButton!
     @IBOutlet var description_separator: UIView!
@@ -492,4 +493,37 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate,  MKMapVie
             
         }
     }
+    @IBAction func share(sender: AnyObject) {
+        let content : FBSDKShareLinkContent = FBSDKShareLinkContent()
+        content.contentURL = NSURL(string: "http://www.inmoon.io")
+        content.contentTitle = self.coupon.name
+        content.imageURL = NSURL(string: "\(Utilities.dopImagesURL)\(self.coupon.company_id)/\(self.coupon.logo)")
+        content.contentDescription = self.coupon.couponDescription
+        
+        
+        let dialog: FBSDKShareDialog = FBSDKShareDialog()
+        
+        if UIApplication.sharedApplication().canOpenURL(NSURL(string: "fbauth2://")!) {
+            dialog.mode = FBSDKShareDialogMode.FeedWeb
+        }else{
+            dialog.mode = FBSDKShareDialogMode.FeedWeb
+        }
+        dialog.shareContent = content
+        dialog.delegate = self
+        dialog.fromViewController = self
+        dialog.show()
+        self.mz_dismissFormSheetControllerAnimated(true, completionHandler: nil)
+    }
+    func sharer(sharer: FBSDKSharing!, didFailWithError error: NSError!) {
+        print(error.description)
+    }
+    
+    func sharer(sharer: FBSDKSharing!, didCompleteWithResults results: [NSObject : AnyObject]!) {
+        print(results)
+    }
+    
+    func sharerDidCancel(sharer: FBSDKSharing!) {
+        print("cancel share")
+    }
+    
 }

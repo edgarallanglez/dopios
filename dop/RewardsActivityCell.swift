@@ -52,7 +52,7 @@ class RewardsActivityCell: UITableViewCell {
         
 //        self.moment.text = Utilities.friendlyDate(model.date)
         
-        self.heartView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(RewardsActivityCell.likeActivity(_:))))
+       
         
         
         self.total_likes.text = String(model.total_likes)
@@ -60,6 +60,13 @@ class RewardsActivityCell: UITableViewCell {
         
         if model.user_like == true { self.heart.tintColor = Utilities.dopColor }
         else { self.heart.tintColor = UIColor.lightGrayColor() }
+        
+        if model.private_activity == true {
+            self.heart.image = UIImage(named: "lockIcon")
+            self.total_likes.hidden = true
+        }else{
+             self.heartView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(RewardsActivityCell.likeActivity(_:))))
+        }
         //////////////
     
     }

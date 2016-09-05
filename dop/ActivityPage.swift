@@ -96,6 +96,7 @@ class ActivityPage: UITableViewController, TTTAttributedLabelDelegate {
             custom_cell.activity_description.enabledTextCheckingTypes = NSTextCheckingType.Link.rawValue
             custom_cell.activity_description.delegate = self
             custom_cell.loadItem(model, viewController: self)
+            
             return custom_cell
         } else {
             let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("default_view", forIndexPath: indexPath)
@@ -141,12 +142,13 @@ class ActivityPage: UITableViewController, TTTAttributedLabelDelegate {
                 let user_like =  subJson["user_like"].bool
                 let date =  subJson["used_date"].string
                 var formatedDate =  subJson["used_date"].string!
+                let private_activity = subJson["private"].bool
                 
                 let separators = NSCharacterSet(charactersInString: "T+")
                 let parts = formatedDate.componentsSeparatedByCharactersInSet(separators)
                 formatedDate = "\(parts[0]) \(parts[1])"
                 
-                let model = NewsfeedNote(client_coupon_id:client_coupon_id,friend_id: friend_id, user_id: user_id, branch_id: branch_id, coupon_name: name, branch_name: branch_name, names: names, surnames: surnames, user_image: main_image, company_id: company_id, branch_image: logo, total_likes:total_likes,user_like: user_like, date: date, formatedDate: formatedDate)
+                let model = NewsfeedNote(client_coupon_id:client_coupon_id,friend_id: friend_id, user_id: user_id, branch_id: branch_id, coupon_name: name, branch_name: branch_name, names: names, surnames: surnames, user_image: main_image, company_id: company_id, branch_image: logo, total_likes:total_likes,user_like: user_like, date: date, formatedDate: formatedDate, private_activity: private_activity!)
                 
                 self.activity_array.append(model)
             }
@@ -201,8 +203,9 @@ class ActivityPage: UITableViewController, TTTAttributedLabelDelegate {
                     let total_likes =  subJson["total_likes"].int!
                     let user_like =  subJson["user_like"].bool
                     let date =  subJson["used_date"].string
-                    
-                    let model = NewsfeedNote(client_coupon_id:client_coupon_id,friend_id: friend_id, user_id: user_id, branch_id: branch_id, coupon_name: name, branch_name: branch_name, names: names, surnames: surnames, user_image: main_image, company_id: company_id, branch_image: logo, total_likes:total_likes,user_like: user_like, date:date, formatedDate: "")
+                    let private_activity = subJson["private"].bool
+
+                    let model = NewsfeedNote(client_coupon_id:client_coupon_id,friend_id: friend_id, user_id: user_id, branch_id: branch_id, coupon_name: name, branch_name: branch_name, names: names, surnames: surnames, user_image: main_image, company_id: company_id, branch_image: logo, total_likes:total_likes,user_like: user_like, date:date, formatedDate: "", private_activity: private_activity!)
                     
                     self.activity_array.append(model)
                     self.new_data = true

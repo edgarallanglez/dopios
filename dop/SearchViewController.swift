@@ -243,7 +243,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
                         let facebook_key = subJson["facebok_key"].string ?? ""
                         let privacy_status = subJson["privacy_status"].int!
                         let main_image = subJson["main_image"].string!
-                        let is_friend = subJson["friend"].bool!
+                        let is_friend = subJson["is_friend"].bool!
                         let level = subJson["level"].int!
                         let exp = subJson["exp"].double!
                         let operation_id = subJson["operation_id"].int ?? 5

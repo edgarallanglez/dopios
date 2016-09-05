@@ -15,6 +15,8 @@ import UIKit
 class AlertModalViewController: UIViewController {
     var delegate: AlertDelegate?
     
+    @IBOutlet var share_view: UIView!
+    @IBOutlet var share_activity: UISwitch!
     @IBOutlet weak var alert_title: UILabel!
     @IBOutlet weak var alert_image: UIImageView!
     @IBOutlet weak var alert_description: UILabel!

@@ -52,25 +52,25 @@ class PromoCollectionCell: UICollectionViewCell, FBSDKSharingDelegate {
     }
     @IBAction func share(sender: AnyObject) {
         let content : FBSDKShareLinkContent = FBSDKShareLinkContent()
-        content.contentURL = NSURL(string: "https://www.halleydevs.io")
+        content.contentURL = NSURL(string: "http://www.inmoon.io")
         content.contentTitle = self.coupon.name
         content.imageURL = NSURL(string: "\(Utilities.dopImagesURL)\(self.coupon.company_id)/\(self.coupon.logo)")
         content.contentDescription = self.coupon_description?.text
-        FBSDKShareDialog.showFromViewController(self.viewController, withContent: content, delegate: self)
+        
+        //FBSDKShareDialog.showFromViewController(viewController, withContent: content, delegate: self)
         
         
-        /*let dialog: FBSDKShareDialog = FBSDKShareDialog()
+        let dialog: FBSDKShareDialog = FBSDKShareDialog()
         
         if UIApplication.sharedApplication().canOpenURL(NSURL(string: "fbauth2://")!) {
-            dialog.mode = FBSDKShareDialogMode.Native
+            dialog.mode = FBSDKShareDialogMode.FeedWeb
         }else{
-            dialog.mode = FBSDKShareDialogMode.Native
+            dialog.mode = FBSDKShareDialogMode.FeedWeb
         }
         dialog.shareContent = content
         dialog.delegate = self
         dialog.fromViewController = self.viewController
-        dialog.show()*/
-        
+        dialog.show()
     }
     
     
