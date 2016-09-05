@@ -24,10 +24,11 @@ class NewsfeedNote: NSObject {
     var user_like: Bool
     var date: String
     var formatedDate: String
+    var private_activity: Bool
     
     init(client_coupon_id: Int!,friend_id:String!, user_id:Int!, branch_id:Int!, coupon_name: String!,
          branch_name: String!, names: String!, surnames: String!, user_image: String!, company_id: Int!,
-        branch_image: String!, total_likes:Int!,user_like:Bool!, date:String!, formatedDate:String! ) {
+         branch_image: String!, total_likes:Int!,user_like:Bool!, date:String!, formatedDate:String!, private_activity: Bool ) {
         self.client_coupon_id = client_coupon_id ?? 0
         self.friend_id = friend_id ?? ""
         self.user_id = user_id ?? 0
@@ -43,6 +44,7 @@ class NewsfeedNote: NSObject {
         self.user_like = user_like ?? false
         self.date = date ?? ""
         self.formatedDate = formatedDate ?? ""
+        self.private_activity = private_activity ?? false
     }
     
     func setUserLike(user_like: Bool!,total_likes: Int!){

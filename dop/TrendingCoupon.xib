@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11185.3" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11198.2" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11151.4"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -146,6 +146,7 @@
                 <outlet property="heartView" destination="KVu-8V-pcC" id="G8E-7C-dQs"/>
                 <outlet property="likes" destination="92R-cH-23A" id="HcR-iZ-sxZ"/>
                 <outlet property="logo" destination="9X0-SB-a07" id="Imr-00-WfQ"/>
+                <outlet property="shareView" destination="anz-tR-zE6" id="cOJ-L6-Ggj"/>
                 <outlet property="takeCouponButton" destination="PAJ-ZE-6nL" id="qQA-sl-Rag"/>
                 <outlet property="takeView" destination="oJs-dM-Upw" id="jpY-aC-ViH"/>
             </connections>
@@ -154,7 +155,7 @@
     </objects>
     <resources>
         <image name="coupons-fav" width="30" height="30"/>
-        <image name="heart" width="30" height="30"/>
+        <image name="heart" width="555" height="555"/>
         <image name="share-icon" width="30" height="30"/>
     </resources>
 </document>

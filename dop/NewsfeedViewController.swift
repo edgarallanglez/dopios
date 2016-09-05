@@ -48,10 +48,6 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
             let identifier = "Cell\(indexPath.row)"
             
             
-            
-            
-
-            
             if  self.cachedImages[identifier] != nil {
                 let cell_image_saved : UIImage = self.cachedImages[identifier]!
                 cell.user_image.image = cell_image_saved
@@ -75,7 +71,6 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
                                 cell.user_image.image = cell_image_saved
                                 UIView.animateWithDuration(0.5, animations: {
                                     cell.user_image.alpha = 1
-                                    
                                 })
                             }
                         }
@@ -154,6 +149,8 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
 
         newsfeedTemporary.removeAll(keepCapacity: false)
         cachedImages.removeAll(keepCapacity: false)
+        people_array.removeAll(keepCapacity: false)
+
         
         Utilities.fadeInViewAnimation(main_loader, delay: 0, duration: 0.5)
 
@@ -186,6 +183,7 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
                 let operation_id = subJson["operation_id"].int ?? 5
                 let privacy_status = subJson["privacy_status"].int ?? 0
                 var formated_date = subJson["used_date"].string!
+
                 
                 let person_model = PeopleModel(names: names, surnames: surnames, user_id: user_id, birth_date: "", facebook_key: "", privacy_status: privacy_status, main_image: main_image, is_friend: is_friend, level: level, exp: exp, operation_id: operation_id)
                 
@@ -195,7 +193,7 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
                 let parts = formated_date.componentsSeparatedByCharactersInSet(separators)
                 formated_date = "\(parts[0]) \(parts[1])"
 
-                let model = NewsfeedNote(client_coupon_id:client_coupon_id,friend_id: friend_id, user_id: user_id, branch_id: branch_id, coupon_name: name, branch_name: branch_name, names: names, surnames: surnames, user_image: main_image, company_id: company_id, branch_image: logo, total_likes:total_likes,user_like: user_like, date:date, formatedDate: formated_date)
+                let model = NewsfeedNote(client_coupon_id:client_coupon_id,friend_id: friend_id, user_id: user_id, branch_id: branch_id, coupon_name: name, branch_name: branch_name, names: names, surnames: surnames, user_image: main_image, company_id: company_id, branch_image: logo, total_likes:total_likes,user_like: user_like, date:date, formatedDate: formated_date, private_activity: false)
                 
                 self.newsfeedTemporary.append(model)
             }
@@ -274,7 +272,7 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
                 
                 self.people_array.append(person_model)
                 
-                let model = NewsfeedNote(client_coupon_id: client_coupon_id, friend_id: friend_id, user_id: user_id, branch_id: branch_id, coupon_name: name, branch_name: branch_name, names: names, surnames: surnames, user_image: main_image, company_id: company_id, branch_image: logo, total_likes:total_likes,user_like: user_like, date:date, formatedDate: "")
+                let model = NewsfeedNote(client_coupon_id: client_coupon_id, friend_id: friend_id, user_id: user_id, branch_id: branch_id, coupon_name: name, branch_name: branch_name, names: names, surnames: surnames, user_image: main_image, company_id: company_id, branch_image: logo, total_likes:total_likes,user_like: user_like, date:date, formatedDate: "", private_activity: false)
                 
                 self.newsfeedTemporary.append(model)
                 

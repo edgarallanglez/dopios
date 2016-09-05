@@ -162,6 +162,8 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                             }
                             modal.didDismissCompletionHandler = { vc in
                                 self.qr_detected = false
+                                self.alert_array.removeAll()
+
                             }
                             modal.presentAnimated(true, completionHandler: nil)
 
@@ -179,6 +181,7 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                             }
                             modal.didDismissCompletionHandler = { vc in
                                 self.qr_detected = false
+                                self.alert_array.removeAll()
                             }
                             modal.presentAnimated(true, completionHandler: nil)
                         })
@@ -232,14 +235,17 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                             }
                             error_modal.didDismissCompletionHandler = { vc in
                                 self.qr_detected = false
+                                self.alert_array.removeAll()
                             }
                              error_modal.presentAnimated(true, completionHandler: nil)
                         
                         
                     }else{
                         let name = json["data"]["name"].string
+                        let folio = json["folio"].string
+                        
                         print(json)
-
+                        
                         let modal: ModalViewController = ModalViewController(currentView: self, type: ModalViewControllerType.AlertModal)
                         
                         dispatch_async(dispatch_get_main_queue()) {
@@ -248,6 +254,7 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                             modal.willPresentCompletionHandler = { vc in
                                 let navigation_controller = vc as! AlertModalViewController
                                 
+                                navigation_controller.share_view.hidden = false
                                 
                                 self.alert_array.append(AlertModel(alert_title: "¡Felicidades!", alert_image: "success", alert_description: "Has redimido tu promoción con éxito en \(name!)"))
                                 
@@ -264,6 +271,21 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                             }
                             modal.willDismissCompletionHandler = { vc in
                                 let alert_modal = vc as! AlertModalViewController
+                                
+                                
+                                if alert_modal.share_activity.on == false{
+                                    readQRController.setActivityPrivacy(["folio":folio!], success: { (couponsData) in
+                                         dispatch_async(dispatch_get_main_queue()) {
+                                                print("privacy success")
+                                            }
+                                        }, failure: { (couponsData) in
+                                            dispatch_async(dispatch_get_main_queue()) {
+                                                print("privacy error")
+                                            }
+                                    })
+                                }
+                                self.alert_array.removeAll()
+                                
                                 if alert_modal.alert_flag <= 1 {
                                     self.navigationController?.popViewControllerAnimated(true)
                                 }
@@ -290,6 +312,8 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                         
                         modal.didDismissCompletionHandler = { vc in
                             self.qr_detected = false
+                            self.alert_array.removeAll()
+
                         }
                        
                     }
@@ -305,6 +329,7 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
         modal.didDismissCompletionHandler = { vc in
             Utilities.fadeInViewAnimation(self.qr_image, delay: 0, duration: 0.3)
             self.qr_detected = false
+        
         }
         
         

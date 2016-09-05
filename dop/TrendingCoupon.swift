@@ -8,21 +8,25 @@
 
 import UIKit
 
-class TrendingCoupon: UIView, ModalDelegate {
+class TrendingCoupon: UIView, ModalDelegate, FBSDKSharingDelegate {
     
     @IBOutlet var descriptionLbl: UILabel!
     @IBOutlet var logo: UIImageView!
+    @IBOutlet var shareView: UIView!
     @IBOutlet var likes: UILabel!
     @IBOutlet weak var takeCouponButton: UIButton!
     @IBOutlet weak var takeView: UIView!
     @IBOutlet var heartView: UIView!
     @IBOutlet var heart: UIImageView!
+
     var viewController: UIViewController?
     var coupon: Coupon!
     
     func loadItem(coupon: Coupon, viewController: UIViewController) {
         heartView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(TrendingCoupon.likeCoupon(_:))))
         takeView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(TrendingCoupon.setTakeCoupon(_:))))
+        shareView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(TrendingCoupon.share(_:))))
+
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(TrendingCoupon.tapCoupon(_:))))
         self.coupon = coupon
         
@@ -31,6 +35,7 @@ class TrendingCoupon: UIView, ModalDelegate {
         self.viewController = viewController
         if coupon.user_like == true { self.heart.tintColor = Utilities.dopColor } else { self.heart.tintColor = UIColor.lightGrayColor() }
         if coupon.taken == true { self.takeCouponButton.tintColor = Utilities.dopColor } else { self.takeCouponButton.tintColor = UIColor.darkGrayColor() }
+        
         
         NSNotificationCenter.defaultCenter().addObserver(
             self,
@@ -336,7 +341,38 @@ class TrendingCoupon: UIView, ModalDelegate {
         self.coupon.available = object;
         
     }
-
+    
+    func share(sender: UITapGestureRecognizer) {
+        let content : FBSDKShareLinkContent = FBSDKShareLinkContent()
+        content.contentURL = NSURL(string: "http://www.inmoon.io")
+        content.contentTitle = self.coupon.name
+        content.imageURL = NSURL(string: "\(Utilities.dopImagesURL)\(self.coupon.company_id)/\(self.coupon.logo)")
+        content.contentDescription = self.coupon.couponDescription
+        
+        
+        let dialog: FBSDKShareDialog = FBSDKShareDialog()
+        
+        if UIApplication.sharedApplication().canOpenURL(NSURL(string: "fbauth2://")!) {
+            dialog.mode = FBSDKShareDialogMode.FeedWeb
+        }else{
+            dialog.mode = FBSDKShareDialogMode.FeedWeb
+        }
+        dialog.shareContent = content
+        dialog.delegate = self
+        dialog.fromViewController = self.viewController
+        dialog.show()
+    }
+    func sharer(sharer: FBSDKSharing!, didFailWithError error: NSError!) {
+        print(error.description)
+    }
+    
+    func sharer(sharer: FBSDKSharing!, didCompleteWithResults results: [NSObject : AnyObject]!) {
+        print(results)
+    }
+    
+    func sharerDidCancel(sharer: FBSDKSharing!) {
+        print("cancel share")
+    }
     
 }
 

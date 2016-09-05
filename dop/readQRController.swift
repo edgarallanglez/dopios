@@ -19,4 +19,15 @@ class readQRController{
             }
         })
     }
+    
+    class func setActivityPrivacy(params:[String:AnyObject], success succeed: ((couponsData: NSData!) -> Void) ,failure errorFound: ((couponsData: NSError?) -> Void)){
+        let url = "\(Utilities.dopURL)coupon/user/privacy"
+        Utilities.sendDataToURL(NSURL(string: url)!, method:"POST", params: params, completion:{(data, error) -> Void in
+            if let urlData = data {
+                succeed(couponsData: urlData)
+            }else{
+                errorFound(couponsData: error)
+            }
+        })
+    }
 }
