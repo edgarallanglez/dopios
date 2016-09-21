@@ -88,7 +88,7 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
         
     }
 
-    //  book Delegate Methods
+
     func loginViewShowingLoggedInUser(loginView : FBSDKLoginButton!) {
         print("User Logged In")
     }
@@ -164,7 +164,7 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
                     
                     print("Privacy status \(json)")
                     User.privacy_status = json["privacy_status"].int!
-                    User.adult = json["adult"].bool!
+                    //User.adult = json["adult"].bool!
 
                     }, failure: { (userData) in
                 })

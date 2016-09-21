@@ -71,7 +71,6 @@
 		9D2CEA2B1BFCE4BD0088B6BC /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D2CEA281BFCE4BD0088B6BC /* FBSDKCoreKit.framework */; };
 		9D2CEA2C1BFCE4BD0088B6BC /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D2CEA291BFCE4BD0088B6BC /* FBSDKLoginKit.framework */; };
 		9D2CEA2D1BFCE4BD0088B6BC /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D2CEA2A1BFCE4BD0088B6BC /* FBSDKShareKit.framework */; };
-		9D2CEA2F1BFCE5070088B6BC /* FacebookSDKStrings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9D2CEA2E1BFCE5070088B6BC /* FacebookSDKStrings.bundle */; };
 		9D30F9071BD5B19600D225D5 /* SearchSegmentedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D30F9061BD5B19600D225D5 /* SearchSegmentedController.swift */; };
 		9D33260F1AF7ED1C00498801 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D33260E1AF7ED1C00498801 /* AppDelegate.swift */; };
 		9D3326111AF7ED1C00498801 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3326101AF7ED1C00498801 /* LoginViewController.swift */; };
@@ -135,8 +134,6 @@
 		A04E388A1AFC3549007C7B69 /* starbucks.gif in Resources */ = {isa = PBXBuildFile; fileRef = A04E38891AFC3549007C7B69 /* starbucks.gif */; };
 		A05592A61BDB19B70041E20D /* libc.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A05592A41BDB19B70041E20D /* libc.dylib */; };
 		A05592A71BDB19B70041E20D /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A05592A51BDB19B70041E20D /* libc++.dylib */; };
-		A05592AA1BDB1C5E0041E20D /* libc.dylib in Resources */ = {isa = PBXBuildFile; fileRef = A05592A41BDB19B70041E20D /* libc.dylib */; };
-		A05592AB1BDB1C5E0041E20D /* libc++.dylib in Resources */ = {isa = PBXBuildFile; fileRef = A05592A51BDB19B70041E20D /* libc++.dylib */; };
 		A0578C521B0D64AD0033B5BD /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0578C4E1B0D64AD0033B5BD /* Fabric.framework */; };
 		A0578C551B0D64AD0033B5BD /* TwitterCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0578C511B0D64AD0033B5BD /* TwitterCore.framework */; };
 		A0578C641B0E7D2B0033B5BD /* UserProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0578C621B0E7D2B0033B5BD /* UserProfileController.swift */; };
@@ -164,7 +161,6 @@
 		A086ACDF1BB09496003133BA /* Branch.swift in Sources */ = {isa = PBXBuildFile; fileRef = A086ACDE1BB09496003133BA /* Branch.swift */; };
 		A086ACE11BB2157A003133BA /* TrendingCoupon.xib in Resources */ = {isa = PBXBuildFile; fileRef = A086ACE01BB2157A003133BA /* TrendingCoupon.xib */; };
 		A086ACE31BB383A4003133BA /* TrendingCoupon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A086ACE21BB383A4003133BA /* TrendingCoupon.swift */; };
-		A08D13FA1BFBB86100A19AAF /* NSDateTimeAgo.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A08D13F91BFBB86100A19AAF /* NSDateTimeAgo.bundle */; };
 		A08D13FB1BFBB88F00A19AAF /* NSDateTimeAgo.bundle in Frameworks */ = {isa = PBXBuildFile; fileRef = A08D13F91BFBB86100A19AAF /* NSDateTimeAgo.bundle */; };
 		A08D13FD1BFBB90C00A19AAF /* NSDate+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08D13FC1BFBB90C00A19AAF /* NSDate+Extension.swift */; };
 		A09732E11BDBF712006F9378 /* NotificationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09732E01BDBF712006F9378 /* NotificationButton.swift */; };
@@ -1262,6 +1258,7 @@
 						CreatedOnToolsVersion = 6.3.1;
 						DevelopmentTeam = MRH6222N58;
 						LastSwiftMigration = 0800;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1344,9 +1341,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6D9770041CDBB97B000C0670 /* SF-UI-Text-Semibold.otf in Resources */,
-				A05592AA1BDB1C5E0041E20D /* libc.dylib in Resources */,
 				6D9080DE1C319FF600DA3072 /* UserProfileStickyHeader.xib in Resources */,
-				A05592AB1BDB1C5E0041E20D /* libc++.dylib in Resources */,
 				9D4D298C1B9F50A100CE58A9 /* Montserrat-Light.otf in Resources */,
 				6D976FF51CDBB97B000C0670 /* SF-UI-Display-Medium.otf in Resources */,
 				A04CC2101BBD968E001AF7E0 /* ToExpireCoupon.xib in Resources */,
@@ -1368,7 +1363,6 @@
 				6D976FFB1CDBB97B000C0670 /* SF-UI-Text-BoldItalic.otf in Resources */,
 				9D3326191AF7ED1C00498801 /* LaunchScreen.xib in Resources */,
 				6D976FFE1CDBB97B000C0670 /* SF-UI-Text-Light.otf in Resources */,
-				9D2CEA2F1BFCE5070088B6BC /* FacebookSDKStrings.bundle in Resources */,
 				6D976FF81CDBB97B000C0670 /* SF-UI-Display-Thin.otf in Resources */,
 				6D976FF21CDBB97B000C0670 /* SF-UI-Display-Bold.otf in Resources */,
 				6D976FF11CDBB97B000C0670 /* SF-UI-Display-Black.otf in Resources */,
@@ -1382,7 +1376,6 @@
 				9D9D1FF11B9F4BE3000C1299 /* starbucks_banner.jpg in Resources */,
 				6D9770001CDBB97B000C0670 /* SF-UI-Text-Medium.otf in Resources */,
 				6D976FFA1CDBB97B000C0670 /* SF-UI-Text-Bold.otf in Resources */,
-				A08D13FA1BFBB86100A19AAF /* NSDateTimeAgo.bundle in Resources */,
 				9D42966D1BBEFE17000B4A21 /* RewardsActivityCell.xib in Resources */,
 				6D9770051CDBB97B000C0670 /* SF-UI-Text-SemiboldItalic.otf in Resources */,
 				9DA3C8961B90C117000D40F2 /* Images.xcassets in Resources */,
@@ -1602,8 +1595,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Eduardo Quintero (B78NEMH7GT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Eduardo Quintero (B78NEMH7GT)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Halley Devs, S.A. de C.V. (MRH6222N58)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Halley Devs, S.A. de C.V. (MRH6222N58)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
@@ -1627,7 +1620,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = NO;
-				PROVISIONING_PROFILE = "27954052-b887-42f6-9759-bfaec066ea6f";
+				PROVISIONING_PROFILE = "d13e1b97-5995-4b70-8be5-d8515a236210";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -1650,8 +1643,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Eduardo Quintero (B78NEMH7GT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Eduardo Quintero (B78NEMH7GT)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Halley Devs, S.A. de C.V. (MRH6222N58)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Halley Devs, S.A. de C.V. (MRH6222N58)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
@@ -1669,7 +1662,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "27954052-b887-42f6-9759-bfaec066ea6f";
+				PROVISIONING_PROFILE = "d13e1b97-5995-4b70-8be5-d8515a236210";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1681,8 +1674,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CODE_SIGN_ENTITLEMENTS = dop/dop.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = MRH6222N58;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = YES;
 				ENABLE_BITCODE = NO;
@@ -1710,6 +1704,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.halley.dop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "dop/Bridging-Header.h";
 				SWIFT_VERSION = 2.3;
 			};
@@ -1721,8 +1716,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CODE_SIGN_ENTITLEMENTS = dop/dop.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = MRH6222N58;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = YES;
 				ENABLE_BITCODE = NO;
@@ -1750,6 +1746,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.halley.dop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "dop/Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 2.3;
