@@ -296,6 +296,7 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate, MKMapView
 
         return annotationView
     }
+    
     func pressMap(sender: UITapGestureRecognizer){
         //If Google Maps is installed...
         if UIApplication.sharedApplication().canOpenURL(NSURL(string: "comgooglemaps://")!) {
@@ -323,6 +324,7 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate, MKMapView
             self.openAppleMaps()
         }
     }
+    
     func openGoogleMaps(){
         let customURL = "comgooglemaps://?daddr=\(self.coupon!.location.latitude),\(self.coupon!.location.longitude)&directionsmode=driving"
 

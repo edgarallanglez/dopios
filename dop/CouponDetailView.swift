@@ -27,7 +27,7 @@ class CouponDetailView: UIView, MKMapViewDelegate {
     var viewController: UIViewController?
     let regionRadius: CLLocationDistance = 1000
     
-    var readQRView:readQRViewController?
+    var readQRView: readQRViewController?
     
     @IBAction func triggerSegue(sender: UIButton) {
         self.viewController!.performSegueWithIdentifier("branchProfile", sender: self)

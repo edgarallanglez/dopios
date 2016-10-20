@@ -28,6 +28,7 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
         self.view.layer.insertSublayer(background, atIndex: 0)
         loader.startAnimating()
         loader.lineWidth = 3.0
+        UIApplication.sharedApplication().statusBarStyle = .LightContent
         
         
     }

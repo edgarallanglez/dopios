@@ -29,7 +29,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        UIApplication.sharedApplication().statusBarStyle = .LightContent
         let background = Utilities.Colors
         background.frame = self.view.bounds
         self.view.layer.insertSublayer(background, atIndex: 0)
@@ -38,7 +38,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
         self.MD_spinner.lineWidth = 3
         self.MD_spinner.startAnimating()
         self.MD_spinner.alpha = 0
-        UIApplication.sharedApplication().statusBarStyle = .Default
+//        UIApplication.sharedApplication().statusBarStyle = .Default
 
         locationManager = CLLocationManager()
         locationManager.delegate = self
