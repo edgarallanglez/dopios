@@ -153,12 +153,16 @@ class Utilities {
     }
 
     //FRIENDLY DATE FUNCTION
+
     class func friendlyDate(date:String) -> String{
         let separators = NSCharacterSet(charactersInString: "T.")
         let parts = date.componentsSeparatedByCharactersInSet(separators)
-        let friendly_date = NSDate(dateString: "\(parts[0]) \(parts[1])").timeAgo
-
-        return friendly_date
+        let friendly_date = NSDate(dateString: "\(parts[0]) \(parts[1])")
+        
+        let friendly_date_str = timeAgoSinceDate(friendly_date, numericDates: false)
+        
+        
+        return friendly_date_str
     }
 
 

@@ -43,7 +43,7 @@ class RewardsActivityCell: UITableViewCell {
         let segue = NSURL(string: "branchProfile:\(model.branch_id)")!
         
         self.moment.text = Utilities.friendlyDate(model.date)
-
+        
         
         activity_description.addLinkToURL(segue, withRange: newsfeed_activity_range)
         

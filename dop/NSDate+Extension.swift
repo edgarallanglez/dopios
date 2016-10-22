@@ -31,19 +31,8 @@ func NSDateTimeAgoLocalizedStrings(key: String) -> String {
 
     return NSLocalizedString(key, tableName: "NSDateTimeAgo", bundle: bundle, comment: "")
 }
-extension NSDate
-{
-    convenience
-    init(dateString:String) {
-        let dateStringFormatter = NSDateFormatter()
-        dateStringFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        dateStringFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
-        let d = dateStringFormatter.dateFromString(dateString)!
-        self.init(timeInterval:0, sinceDate:d)
-    }
-}
+
 extension NSDate {
-    
     // shows 1 or two letter abbreviation for units.
     // does not include 'ago' text ... just {value}{unit-abbreviation}
     // does not include interim summary options such as 'Just now'
@@ -85,7 +74,9 @@ extension NSDate {
 
     public var timeAgo: String {
         let components = self.dateComponents()
+        
 
+        print("COMPONENTES \(components)")
         if components.year > 0 {
             if components.year < 2 {
                 return NSDateTimeAgoLocalizedStrings("Hace un año")
