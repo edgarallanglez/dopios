@@ -15,27 +15,27 @@ class SettingsViewController: UITableViewController {
     @IBOutlet weak var privacy_switch: UISwitch!
 
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if (indexPath.section == 2) { setActionSheet() }
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if ((indexPath as NSIndexPath).section == 2) { setActionSheet() }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     override func viewDidLoad() {
         if User.privacy_status == 1 { privacy_switch.setOn(true, animated: true) }
         
-        if((FBSDKAccessToken.currentAccessToken()) != nil) {        }
+        if((FBSDKAccessToken.current()) != nil) {        }
     }
 
-    @IBAction func setUserPrivacy(sender: UISwitch) {
-        let currentState = sender.on
+    @IBAction func setUserPrivacy(_ sender: UISwitch) {
+        let currentState = sender.isOn
         var newState: Int
         
         if currentState { newState = 1 } else { newState = 0 }
-        let params: [String: AnyObject] = [ "privacy_status": newState ]
+        let params: [String: AnyObject] = [ "privacy_status": newState as AnyObject ]
 
         SettingsController.setPrivacyWithSuccess("\(Utilities.dopURL)user/privacy_status/set", params: params,
             success: { (data) -> Void in
-                User.privacy_status = (params["privacy_status"]?.integerValue)!
+                User.privacy_status = (params["privacy_status"]?.intValue)!
             }, failure: { (data) -> Void in
                 sender.setOn(!currentState, animated:true)
         })
@@ -43,15 +43,15 @@ class SettingsViewController: UITableViewController {
     
     
     func setActionSheet() {
-        let actionSheet: UIAlertController = UIAlertController(title: nil, message: "¿Seguro que deseas eliminar tu cuenta?", preferredStyle: .ActionSheet)
+        let actionSheet: UIAlertController = UIAlertController(title: nil, message: "¿Seguro que deseas eliminar tu cuenta?", preferredStyle: .actionSheet)
         
-        let logoutAction = UIAlertAction(title: "Eliminar cuenta", style: .Destructive, handler: {
+        let logoutAction = UIAlertAction(title: "Eliminar cuenta", style: .destructive, handler: {
             (alert: UIAlertAction!) -> Void in
             print("ya se elimino")
         })
         
         //
-        let cancelAction = UIAlertAction(title: "Cancelar", style: .Cancel, handler: {
+        let cancelAction = UIAlertAction(title: "Cancelar", style: .cancel, handler: {
             (alert: UIAlertAction!) -> Void in
             print("Cancelled")
         })
@@ -59,7 +59,7 @@ class SettingsViewController: UITableViewController {
         actionSheet.addAction(logoutAction)
         actionSheet.addAction(cancelAction)
         
-        self.presentViewController(actionSheet, animated: true, completion: nil)
+        self.present(actionSheet, animated: true, completion: nil)
     }
 
     

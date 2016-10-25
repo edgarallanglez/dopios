@@ -21,23 +21,23 @@ class TabbarController: UITabBarController {
         
         super.viewDidLoad()
 
-        vcNot = self.storyboard!.instantiateViewControllerWithIdentifier("Notifications") as! NotificationViewController
+        vcNot = self.storyboard!.instantiateViewController(withIdentifier: "Notifications") as! NotificationViewController
 
         
-        self.tabBar.opaque = false
-        self.tabBar.translucent = false
+        self.tabBar.isOpaque = false
+        self.tabBar.isTranslucent = false
         self.tabBar.alpha = 0.97
         
-        self.tabBar.backgroundColor = UIColor.whiteColor()
+        self.tabBar.backgroundColor = UIColor.white
         self.tabBar.tintColor = Utilities.dopColor
         
         self.tabBar.backgroundImage = UIImage(named: "")
         
-        self.navigationController?.navigationBar.hidden = true
+        self.navigationController?.navigationBar.isHidden = true
         
         //self.startListening()
         //self.startSocketListener()
-        UIApplication.sharedApplication().statusBarStyle = .LightContent
+        UIApplication.shared.statusBarStyle = .lightContent
     }
     
 
@@ -46,51 +46,51 @@ class TabbarController: UITabBarController {
         // Dispose of any resources that can be recreated.
     }
     
-    func addCenterButtonWithImage(buttonImage:UIImage){
-        let button : UIButton = UIButton(type: UIButtonType.Custom)
+    func addCenterButtonWithImage(_ buttonImage:UIImage){
+        let button : UIButton = UIButton(type: UIButtonType.custom)
         
-        button.frame = CGRectMake(0,0, 57,57)
-        button.backgroundColor = UIColor.clearColor()
+        button.frame = CGRect(x: 0,y: 0, width: 57,height: 57)
+        button.backgroundColor = UIColor.clear
         
-        button.setImage(buttonImage, forState: .Normal)
+        button.setImage(buttonImage, for: UIControlState())
 
         button.center = self.tabBar.center
         button.center.y = button.center.y - 6
         
         
         self.view.addSubview(button)
-        button.addTarget(self, action: #selector(TabbarController.pressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        button.addTarget(self, action: #selector(TabbarController.pressed(_:)), for: UIControlEvents.touchUpInside)
 
-        self.view.bringSubviewToFront(button)
+        self.view.bringSubview(toFront: button)
         
     }
     
-    func pressed(sender: UIButton!) {
+    func pressed(_ sender: UIButton!) {
         self.selectedIndex = 2
     }
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         self.selectedIndex = 1
         self.selectedIndex = 0
     }
     
  
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let barViewControllers = segue.destinationViewController 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let barViewControllers = segue.destination 
         barViewControllers.hidesBottomBarWhenPushed = false
         
         self.hidesBottomBarWhenPushed = false
 
     }
 
-    override func tabBar(tabBar: UITabBar, didSelectItem item: UITabBarItem) {
+    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         let currentSelected = self.selectedIndex
         if(lastSelected == currentSelected){
-            self.navigationController?.popToRootViewControllerAnimated(true)
+            self.navigationController?.popToRootViewController(animated: true)
         }
         lastSelected = currentSelected
         
         if(FilterSideViewController.open == true){
-            self.revealViewController().revealToggleAnimated(true)
+            self.revealViewController().revealToggle(animated: true)
         }
     }
     

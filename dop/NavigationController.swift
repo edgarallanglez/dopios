@@ -20,18 +20,18 @@ class NavigationController: UINavigationController{
         self.delegate = self.navigationController?.delegate
         
         self.navigationBar.titleTextAttributes = [
-            NSForegroundColorAttributeName: UIColor.whiteColor()
+            NSForegroundColorAttributeName: UIColor.white
         ]
     
         
-        self.navigationBar.setBackgroundImage(UIImage(named:"topbarBackground"), forBarMetrics: .Default)
+        self.navigationBar.setBackgroundImage(UIImage(named:"topbarBackground"), for: .default)
         
-        self.navigationBar.translucent = false
+        self.navigationBar.isTranslucent = false
         
-        self.navigationItem.backBarButtonItem?.setTitleTextAttributes( [NSForegroundColorAttributeName: UIColor.whiteColor()], forState: UIControlState.Normal)
+        self.navigationItem.backBarButtonItem?.setTitleTextAttributes( [NSForegroundColorAttributeName: UIColor.white], for: UIControlState())
    
 
-        UIApplication.sharedApplication().statusBarStyle = .LightContent
+        UIApplication.shared.statusBarStyle = .lightContent
   
     }
     

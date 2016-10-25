@@ -7,39 +7,51 @@
 //
 
 import Foundation
+import Alamofire
 
 class NotificationController{
-    class func getNotificationsWithSuccess(success succeed: ((notificationsData: NSData!) -> Void), failure errorFound:((notificationsData: NSError?) -> Void )) {
+    class func getNotificationsWithSuccess(success succeed: @escaping ((_ notificationsData: JSON?) -> Void), failure errorFound:@escaping ((_ notificationsData: NSError?) -> Void )) {
         let url = "\(Utilities.dopURL)notification/all/get"
-        Utilities.loadDataFromURL(NSURL(string: url)!, completion: {(data, error) -> Void in
-            if let urlData = data {
-                succeed(notificationsData: urlData)
-            }else{
-                errorFound(notificationsData: error)
+
+        Alamofire.request(url, method: .get, headers: User.userToken).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                succeed(JSON(response.result.value))
+            case .failure(let error):
+                print(error)
+                errorFound(error as NSError)
             }
-        })
+        }
     }
     
-    class func getNotificationsOffsetWithSuccess(notification_id:Int,offset:Int,success succeed: ((notificationsData: NSData!) -> Void),failure errorFound: ((notificationsData: NSError?) -> Void)) {
+    class func getNotificationsOffsetWithSuccess(_ notification_id:Int,offset:Int,success succeed: @escaping ((_ notificationsData: JSON?) -> Void),failure errorFound: @escaping ((_ notificationsData: NSError?) -> Void)) {
         let url = "\(Utilities.dopURL)notification/all/offset/get/?offset=\(offset)&notification_id=\(notification_id)"
-        Utilities.loadDataFromURL(NSURL(string: url)!, completion:{(data, error) -> Void in
-            if let urlData = data {
-                succeed(notificationsData: urlData)
-            }else{
-                errorFound(notificationsData: error)
+
+        Alamofire.request(url, method: .get, headers: User.userToken).validate().responseJSON { response in
+            
+            switch response.result {
+            case .success:
+                succeed(JSON(response.result.value))
+            case .failure(let error):
+                print(error)
+                errorFound(error as NSError)
             }
-        })
+        }
     }
     
-    class func setNotificationsReadWithSuccess(params:[String:AnyObject],success succeed: ((notificationsData: NSData!) -> Void), failure errorFound:((notificationsData: NSError?) -> Void )) {
+    class func setNotificationsReadWithSuccess(_ params:[String:AnyObject],success succeed: @escaping ((_ notificationsData: JSON?) -> Void), failure errorFound:@escaping ((_ notificationsData: NSError?) -> Void )) {
         let url = "\(Utilities.dopURL)notification/set/read"
-        Utilities.sendDataToURL(NSURL(string: url)!, method:"PUT", params: params, completion:{(data, error) -> Void in
-            if let urlData = data {
-                succeed(notificationsData: urlData)
-            }else{
-                errorFound(notificationsData: error)
+
+        Alamofire.request(url, method: .put, headers: User.userToken).validate().responseJSON { response in
+            
+            switch response.result {
+            case .success:
+                succeed(JSON(response.result.value))
+            case .failure(let error):
+                print(error)
+                errorFound(error as NSError)
             }
-        })
+        }
     }
     
 }

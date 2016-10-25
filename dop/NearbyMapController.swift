@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Alamofire
 
 class NearbyMapController {
     
@@ -19,21 +20,23 @@ class NearbyMapController {
 //            }
 //        })
 //    }
-    private var downloadTask: NSURLSessionDownloadTask?
+    fileprivate var downloadTask: URLSessionDownloadTask?
 
-    class func getNearestBranches(params:[String:AnyObject], success succeed: ((branchesData: NSData!) -> Void),failure errorFound: ((branchesData: NSError?) -> Void)) {
-        let latitude: AnyObject! = params["latitude"]
-        let longitude: AnyObject! = params["longitude"]
-        let radio: AnyObject! = params["radio"]
-        print(latitude, longitude, radio)
-        let url = "\(Utilities.dopURL)company/branch/nearest/?latitude=\(latitude)&longitude=\(longitude)&radio=\(radio)"
+    class func getNearestBranches(_ params: Parameters, success succeed: @escaping ((_ branchesData: JSON?) -> Void),failure errorFound: @escaping ((_ branchesData: NSError?) -> Void)) {
 
-        Utilities.sendDataToURL(NSURL(string: url)!, method: "POST", params: params, completion:{(data, error) -> Void in
-                if let urlData = data {
-                    succeed(branchesData: urlData)
-                }else{
-                    errorFound(branchesData: error)
-                }
-            })
+        let url = "\(Utilities.dopURL)company/branch/nearest/?latitude=\(params["latitude"]!)&longitude=\(params["longitude"]!)&radio=\(params["radio"]!)"
+
+
+        
+        Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: User.userToken).validate().responseJSON { response in
+            
+            switch response.result {
+            case .success:
+                succeed(JSON(response.result.value))
+            case .failure(let error):
+                print(error)
+                errorFound(error as NSError)
+            }
+        }
     }
 }

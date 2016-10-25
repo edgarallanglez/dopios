@@ -27,7 +27,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         mainLoader.tintColor = Utilities.dopColor
         mainLoader.lineWidth = 3.0
         
-        friendScrollView.scrollEnabled = false
+        friendScrollView.isScrollEnabled = false
         
         
         getAllPeople()
@@ -41,26 +41,26 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         
     }*/
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == self.tableView { return friends.count } else { return following.count }
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCellWithIdentifier("FriendCell") as! FriendCell;
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: "FriendCell") as! FriendCell;
         var model: PeopleModel
-        if tableView == self.tableView { model = self.friends[indexPath.row] } else { model = self.following[indexPath.row] }
+        if tableView == self.tableView { model = self.friends[(indexPath as NSIndexPath).row] } else { model = self.following[(indexPath as NSIndexPath).row] }
         
-        let imageUrl = NSURL(string: model.main_image)
+        let imageUrl = URL(string: model.main_image)
         cell.loadItem(model, viewController: self)
 
         
-        cell.selectionStyle = UITableViewCellSelectionStyle.None
+        cell.selectionStyle = UITableViewCellSelectionStyle.none
         ////////
-        let identifier = "Cell\(indexPath.row)"
+        let identifier = "Cell\((indexPath as NSIndexPath).row)"
         if tableView == self.tableView {
             if (self.cachedImages[identifier] != nil){
                 let cell_image_saved : UIImage = self.cachedImages[identifier]!
@@ -72,15 +72,15 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
 
                 Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
                     if let image = UIImage(data: data!) {
-                        dispatch_async(dispatch_get_main_queue()) {
+                        DispatchQueue.main.async {
                             var cell_image : UIImage = UIImage()
                             cell_image = image
                             
-                            if tableView.indexPathForCell(cell)?.row == indexPath.row {
+                            if (tableView.indexPath(for: cell) as NSIndexPath?)?.row == (indexPath as NSIndexPath).row {
                                 self.cachedImages[identifier] = cell_image
                                 let cell_image_saved : UIImage = self.cachedImages[identifier]!
                                 cell.user_image.image = cell_image_saved
-                                UIView.animateWithDuration(0.5, animations: {
+                                UIView.animate(withDuration: 0.5, animations: {
                                     cell.user_image.alpha = 1
                                 })
                             }
@@ -102,15 +102,15 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
                 
                 Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
                     if let image = UIImage(data: data!) {
-                        dispatch_async(dispatch_get_main_queue()) {
+                        DispatchQueue.main.async {
                             var cell_image : UIImage = UIImage()
                             cell_image = image
                             
-                            if tableView.indexPathForCell(cell)?.row == indexPath.row {
+                            if (tableView.indexPath(for: cell) as NSIndexPath?)?.row == (indexPath as NSIndexPath).row {
                                 self.cachedFollowingImages[identifier] = cell_image
                                 let cell_image_saved : UIImage = self.cachedFollowingImages[identifier]!
                                 cell.user_image.image = cell_image_saved
-                                UIView.animateWithDuration(0.5, animations: {
+                                UIView.animate(withDuration: 0.5, animations: {
                                     cell.user_image.alpha = 1
                                 })
                             }
@@ -125,9 +125,9 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let cell: FriendCell = tableView.cellForRowAtIndexPath(indexPath) as! FriendCell
-        self.performSegueWithIdentifier("friendUserProfile", sender: cell)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell: FriendCell = tableView.cellForRow(at: indexPath) as! FriendCell
+        self.performSegue(withIdentifier: "friendUserProfile", sender: cell)
     }
     
     func getAllPeople() {
@@ -138,7 +138,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         FriendsController.getAllFriendsWithSuccess(
             success:{ (friendsData) -> Void in
-                let json = JSON(data: friendsData)
+                let json = JSON(data: friendsData!)
                 
                 for (_, subJson): (String, JSON) in json["data"] {
                     let friend_id = subJson["friends_id"].int
@@ -159,7 +159,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
                     self.friends.append(model)
                 }
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     self.mainLoader.stopAnimating()
 
                     self.tableView.reloadData()
@@ -177,7 +177,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         mainLoader.startAnimating()
         FriendsController.getAllFollowingWithSuccess(
             success:{ (friendsData) -> Void in
-                let json = JSON(data: friendsData)
+                let json = JSON(data: friendsData!)
                 print(json)
                 for (_, subJson): (String, JSON) in json["data"] {
                     let friend_id = subJson["friends_id"].int
@@ -199,7 +199,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
                     self.following.append(model)
                 }
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     self.followingTableView.reloadData()
                     self.mainLoader.stopAnimating()
                 });
@@ -210,7 +210,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         })
     }
     
-    @IBAction func setPeopleTarget(sender: FriendSegmentedController) {
+    @IBAction func setPeopleTarget(_ sender: FriendSegmentedController) {
         switch sender.selectedIndex {
         case 0:
             self.current_table = "all"
@@ -224,14 +224,14 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
             print("Oops!")
         }
         let x = CGFloat(sender.selectedIndex) * self.friendScrollView.frame.size.width
-        self.friendScrollView.setContentOffset(CGPointMake(x, 0), animated: true)
+        self.friendScrollView.setContentOffset(CGPoint(x: x, y: 0), animated: true)
     }
     
-    @IBAction func getFriends(sender: UIBarButtonItem) {
+    @IBAction func getFriends(_ sender: UIBarButtonItem) {
         let content: FBSDKAppInviteContent = FBSDKAppInviteContent()
-        content.previewImageURL = NSURL(string: "http://45.55.7.118/branches/images/local/dop_logo.png")
-        content.appLinkURL = NSURL(string: "https://fb.me/927375797314743")
-        FBSDKAppInviteDialog.showWithContent(content, delegate: nil)
+        content.previewImageURL = URL(string: "http://45.55.7.118/branches/images/local/dop_logo.png")
+        content.appLinkURL = URL(string: "https://fb.me/927375797314743")
+        FBSDKAppInviteDialog.show(with: content, delegate: nil)
 
 //        var friendsRequest: FBRequest = FBRequest.requestForMyFriends()
 //        friendsRequest.startWithCompletionHandler {
@@ -251,20 +251,20 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
 //        }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let cell = sender as? FriendCell {
             
             var model: PeopleModel
             if current_table == "all" {
-                let i = self.tableView.indexPathForCell(cell)!.row
+                let i = (self.tableView.indexPath(for: cell)! as NSIndexPath).row
                 model = self.friends[i]
             } else {
-                let i = self.followingTableView.indexPathForCell(cell)!.row
+                let i = (self.followingTableView.indexPath(for: cell)! as NSIndexPath).row
                 model = self.following[i]
             }
             
             if segue.identifier == "friendUserProfile" {
-                let view = segue.destinationViewController as! UserProfileStickyController
+                let view = segue.destination as! UserProfileStickyController
                 view.user_id = model.user_id
                 view.user_image_path = model.main_image
                 view.user_image = cell.user_image

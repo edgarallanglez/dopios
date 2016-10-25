@@ -90,11 +90,11 @@ class Coupon: NSObject {
         
         self.adult_branch = false
     }
-    func setUserLike(user_like: Bool!,total_likes: Int!){
+    func setUserLike(_ user_like: Bool!,total_likes: Int!){
         self.user_like = user_like
         self.total_likes = total_likes
     }
-    func setTakenCoupons(user_take: Bool!, available: Int!){
+    func setTakenCoupons(_ user_take: Bool!, available: Int!){
         self.taken = user_take
         self.available = available
     }

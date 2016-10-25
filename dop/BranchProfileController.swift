@@ -7,61 +7,78 @@
 //
 
 import Foundation
+import Alamofire
 
 class BranchProfileController {
     
-    class func getBranchProfileWithSuccess(branchId: Int, success: ((branchData: NSData!) -> Void),failure errorFound: ((branchData: NSError?) -> Void)) {
+    class func getBranchProfileWithSuccess(_ branchId: Int, success: @escaping ((_ branchData: JSON?) -> Void),failure errorFound: @escaping ((_ branchData: NSError?) -> Void)) {
 
         let url = "\(Utilities.dopURL)company/branch/\(branchId)/profile/get"
-        Utilities.loadDataFromURL(NSURL(string: url)!, completion: {(data, error) -> Void in
-            if let urlData = data {
-                success(branchData: urlData)
-            }else {
-                errorFound(branchData: error)
+
+        Alamofire.request(url, method: .get, headers: User.userToken).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                success(JSON(response.result.value))
+            case .failure(let error):
+                print(error)
+                errorFound(error as NSError)
             }
-            
-        })
+        }
     }
     
-    class func getBranchCouponTimeline(branchId: Int, success: ((branchData: NSData!) -> Void)) {
+    class func getBranchCouponTimeline(_ branchId: Int, success: @escaping ((_ branchData: JSON?) -> Void), failure: @escaping ((_ branchData: NSError?) -> Void)) {
         let url = "\(Utilities.dopURL)coupon/all/\(branchId)/get"
-        Utilities.loadDataFromURL(NSURL(string: url)!, completion: {(data, error) -> Void in
-            if let urlData = data {
-                success(branchData: urlData)
+
+        Alamofire.request(url, method: .get, headers: User.userToken).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                success(JSON(response.result.value))
+            case .failure(let error):
+                print(error)
+                failure(error as NSError)
             }
-        })
+        }
     }
     
-    class func followBranchWithSuccess(params: [String:AnyObject], success succeed: ((branchData: NSData!) -> Void),failure errorFound: ((branchData: NSError?) -> Void)) {
+    class func followBranchWithSuccess(_ params: Parameters, success succeed: @escaping ((_ branchData: JSON?) -> Void),failure errorFound: @escaping ((_ branchData: NSError?) -> Void)) {
         let url = "\(Utilities.dopURL)company/branch/follow"
-        Utilities.sendDataToURL(NSURL(string: url)!, method:"POST", params: params, completion: {(data, error) -> Void in
-            if let urlData = data {
-                succeed(branchData: urlData)
-            } else {
-                errorFound(branchData: error)
+
+        Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default ,headers: User.userToken).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                succeed(JSON(response.result.value))
+            case .failure(let error):
+                print(error)
+                errorFound(error as NSError)
             }
-        })
+        }
     }
     
-    class func getBranchProfileRankingWithSuccess(branch_id: Int, success: ((data: NSData!) -> Void), failure: ((data: NSError?) -> Void)) {
+    class func getBranchProfileRankingWithSuccess(_ branch_id: Int, success: @escaping ((_ data: JSON?) -> Void), failure: @escaping ((_ data: NSError?) -> Void)) {
         let url = "\(Utilities.dopURL)company/branch/\(branch_id)/ranking/get"
-        Utilities.loadDataFromURL(NSURL(string: url)!, completion: {(data, error) -> Void in
-            if let urlData = data {
-                success(data: urlData)
-            } else {
-                failure(data: error)
+        
+        Alamofire.request(url, method: .get, headers: User.userToken).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                success(JSON(response.result.value))
+            case .failure(let error):
+                print(error)
+                failure(error as NSError)
             }
-        })
+        }
     }
     
-    class func getBranchProfileRankingOffsetWithSuccess(last_ranked_id: Int, branch_id: Int, offset: Int, success: ((data: NSData!) -> Void), failure: ((data: NSError?) -> Void)) {
+    class func getBranchProfileRankingOffsetWithSuccess(_ last_ranked_id: Int, branch_id: Int, offset: Int, success: @escaping ((_ data: JSON?) -> Void), failure: @escaping ((_ data: NSError?) -> Void)) {
         let url = "\(Utilities.dopURL)company/branch/\(branch_id)/ranking/\(offset)/\(last_ranked_id)/get"
-        Utilities.loadDataFromURL(NSURL(string: url)!, completion: {(data, error) -> Void in
-            if let urlData = data {
-                success(data: urlData)
-            } else {
-                failure(data: error)
+
+        Alamofire.request(url, method: .get, headers: User.userToken).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                success(JSON(response.result.value))
+            case .failure(let error):
+                print(error)
+                failure(error as NSError)
             }
-        })
+        }
     }
 }

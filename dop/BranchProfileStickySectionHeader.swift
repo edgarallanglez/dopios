@@ -9,7 +9,7 @@
 import UIKit
 
 @objc protocol BranchSegmentedControlDelegate {
-    optional func setupIndex(index: Int)
+    @objc optional func setupIndex(_ index: Int)
 }
 
 class BranchProfileStickySectionHeader: UICollectionReusableView {
@@ -29,8 +29,8 @@ class BranchProfileStickySectionHeader: UICollectionReusableView {
     func commonInit() {
         self.addSubview(segmented_controller)
         segmented_controller.frame = self.bounds
-        segmented_controller.sendActionsForControlEvents(UIControlEvents.TouchUpInside)
-        segmented_controller.addTarget(self, action: #selector(BranchProfileStickySectionHeader.setSegmentedController), forControlEvents: UIControlEvents.ValueChanged)
+        segmented_controller.sendActions(for: UIControlEvents.touchUpInside)
+        segmented_controller.addTarget(self, action: #selector(BranchProfileStickySectionHeader.setSegmentedController), for: UIControlEvents.valueChanged)
         
     }
     

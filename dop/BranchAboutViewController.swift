@@ -10,8 +10,8 @@ import UIKit
 import MapKit
 
 protocol AboutPageDelegate {
-    func resizeAboutView(dynamic_height: CGFloat)
-    func setFollow(branch: Branch)
+    func resizeAboutView(_ dynamic_height: CGFloat)
+    func setFollow(_ branch: Branch)
 }
 
 class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
@@ -35,13 +35,13 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
     override func viewDidLoad() {
         setupLoader()
 //        branch_description.text = description
-        pin_icon.image = pin_icon.image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-        pin_icon.tintColor = UIColor.lightGrayColor()
-        clock_icon.image = clock_icon.image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-        clock_icon.tintColor = UIColor.lightGrayColor()
+        pin_icon.image = pin_icon.image!.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        pin_icon.tintColor = UIColor.lightGray
+        clock_icon.image = clock_icon.image!.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        clock_icon.tintColor = UIColor.lightGray
         
         self.branch_location_map.delegate = self
-        self.view.frame.size.width = UIScreen.mainScreen().bounds.width
+        self.view.frame.size.width = UIScreen.main.bounds.width
         self.view.frame.size.height = 350
         getBranchProfile()
         
@@ -56,7 +56,7 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
     }
     
     func setupLoader(){
-        loader = MMMaterialDesignSpinner(frame: CGRectMake(0,70,50,50))
+        loader = MMMaterialDesignSpinner(frame: CGRect(x: 0,y: 70,width: 50,height: 50))
         loader.center.x = self.view.center.x
         loader.lineWidth = 3.0
         loader.startAnimating()
@@ -68,7 +68,7 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
 //        delegate?.resizeAboutView!(330)
 //    }
 //    
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         parent_view.view.setNeedsLayout()
     }
     
@@ -77,15 +77,15 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
         delegate?.resizeAboutView(dynamic_height)
     }
     
-    func centerMapOnLocation(location: CLLocation) {
+    func centerMapOnLocation(_ location: CLLocation) {
         let coordinate_region = MKCoordinateRegionMakeWithDistance(location.coordinate,
             regions_radius * 2.0, regions_radius * 2.0)
         branch_location_map.setRegion(coordinate_region, animated: false)
     }
     
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView?{
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView?{
         let reuse_id = "custom"
-        var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuse_id)
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuse_id)
         if mapView.userLocation == annotation as! NSObject { return nil }
         if (annotationView == nil) {
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuse_id)
@@ -104,7 +104,7 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
     
     func getBranchProfile() {
         BranchProfileController.getBranchProfileWithSuccess(parent_view.branch_id, success: { (data) -> Void in
-            let data = JSON(data: data)
+            let data = data!
             var json = data["data"]
             print(json)
             json = json[0]
@@ -128,7 +128,7 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
             let new_location = CLLocationCoordinate2DMake(latitude!, longitude!)
             self.centerMapOnLocation(self.branch_pin)
             
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 let drop_pin = Annotation(coordinate: new_location, title: json["name"].string!, subTitle: "", branch_distance: "4.3", branch_id: branch_id, company_id: 0, logo: "")
                 
                 switch json["category_id"].int! {
@@ -158,40 +158,40 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
             
             },
             failure: { (error) -> Void in
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     print(error)
                     Utilities.fadeOutViewAnimation(self.loader, delay: 0, duration: 0.3)
 
                 })
         })
     }
-    func callToBranch(sender: UITapGestureRecognizer){
-        UIApplication.sharedApplication().openURL(NSURL(string: "tel://\(phone.text!)")!)
+    func callToBranch(_ sender: UITapGestureRecognizer){
+        UIApplication.shared.openURL(URL(string: "tel://\(phone.text!)")!)
     }
     
-    func reloadWithOffset(parent_scroll: UICollectionView) {
+    func reloadWithOffset(_ parent_scroll: UICollectionView) {
         parent_scroll.finishInfiniteScroll()
     }
     
     override func viewDidLayoutSubviews() {
-        self.view.frame.size.width = UIScreen.mainScreen().bounds.width
+        self.view.frame.size.width = UIScreen.main.bounds.width
     }
     
-    func pressMap(sender: UITapGestureRecognizer){
+    func pressMap(_ sender: UITapGestureRecognizer){
         //If Google Maps is installed...
-        if UIApplication.sharedApplication().canOpenURL(NSURL(string: "comgooglemaps://")!) {
-            let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+        if UIApplication.shared.canOpenURL(URL(string: "comgooglemaps://")!) {
+            let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
             
-            let googleMaps = UIAlertAction(title: "Google Maps", style: .Default, handler: {
+            let googleMaps = UIAlertAction(title: "Google Maps", style: .default, handler: {
                 (alert: UIAlertAction!) -> Void in
                 self.openGoogleMaps()
             })
-            let appleMaps = UIAlertAction(title: "Apple Maps", style: .Default, handler: {
+            let appleMaps = UIAlertAction(title: "Apple Maps", style: .default, handler: {
                 (alert: UIAlertAction!) -> Void in
                 self.openAppleMaps()
             })
             
-            let cancelAction = UIAlertAction(title: "Cancelar", style: .Cancel, handler: {
+            let cancelAction = UIAlertAction(title: "Cancelar", style: .cancel, handler: {
                 (alert: UIAlertAction!) -> Void in
             })
             
@@ -199,7 +199,7 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
             optionMenu.addAction(appleMaps)
             optionMenu.addAction(cancelAction)
             
-            self.presentViewController(optionMenu, animated: true, completion: nil)
+            self.present(optionMenu, animated: true, completion: nil)
         } else {
             self.openAppleMaps()
         }
@@ -208,7 +208,7 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
     func openGoogleMaps(){
         let customURL = "comgooglemaps://?daddr=\(self.branch_pin!.coordinate.latitude),\(self.branch_pin!.coordinate.longitude)&directionsmode=driving"
         
-        UIApplication.sharedApplication().openURL(NSURL(string: customURL)!)
+        UIApplication.shared.openURL(URL(string: customURL)!)
     }
     
     func openAppleMaps() {
@@ -220,12 +220,12 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
         let coordinates = CLLocationCoordinate2DMake(latitute, longitute)
         let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
         let options = [
-            MKLaunchOptionsMapCenterKey: NSValue(MKCoordinate: regionSpan.center),
-            MKLaunchOptionsMapSpanKey: NSValue(MKCoordinateSpan: regionSpan.span)
+            MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center),
+            MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)
         ]
         let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
         let mapItem = MKMapItem(placemark: placemark)
         //mapItem.name = "\(self.coupon!.name)"
-        mapItem.openInMapsWithLaunchOptions(options)
+        mapItem.openInMaps(launchOptions: options)
     }
 }

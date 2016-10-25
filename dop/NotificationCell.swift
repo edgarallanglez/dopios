@@ -26,11 +26,11 @@ class NotificationCell: UITableViewCell {
         // Initialization code
     }
 
-    func loadItem(notification: Notification, viewController:UIViewController) {
-        NSNotificationCenter.defaultCenter().addObserver(
+    func loadItem(_ notification: Notification, viewController:UIViewController) {
+        NotificationCenter.default.addObserver(
             self,
             selector: #selector(TrendingCoupon.updateLikeAndTaken(_:)),
-            name: "takenOrLikeStatus",
+            name: NSNotification.Name(rawValue: "takenOrLikeStatus"),
             object: nil)
         
         
@@ -40,8 +40,8 @@ class NotificationCell: UITableViewCell {
         let catcher_name = "\(notification.catcher_name) \(notification.catcher_surnames)"
         let newsfeed_activity = "\(notification.branches_name)"
         
-        decline_btn.hidden = true
-        accept_btn.hidden = true
+        decline_btn.isHidden = true
+        accept_btn.isHidden = true
 
 
         if notification.type == "newsfeed" {
@@ -49,12 +49,12 @@ class NotificationCell: UITableViewCell {
             let notification_text = "A \(launcher_name) le ha gustado tu actividad en \(newsfeed_activity)"
             title.text = notification_text
             let nsString = notification_text as NSString
-            let launcher_range = nsString.rangeOfString(launcher_name)
-            let newsfeed_activity_range = nsString.rangeOfString(newsfeed_activity)
-            let segue = NSURL(string: "userProfile:\(notification.launcher_id):\(notification.is_friend)")!
-            let branch_segue = NSURL(string: "branchProfile:\(notification.branch_id)")
-            title.addLinkToURL(segue, withRange: launcher_range)
-            title.addLinkToURL(branch_segue, withRange: newsfeed_activity_range)
+            let launcher_range = nsString.range(of: launcher_name)
+            let newsfeed_activity_range = nsString.range(of: newsfeed_activity)
+            let segue = URL(string: "userProfile:\(notification.launcher_id):\(notification.is_friend)")!
+            let branch_segue = URL(string: "branchProfile:\(notification.branch_id)")
+            title.addLink(to: segue, with: launcher_range)
+            title.addLink(to: branch_segue, with: newsfeed_activity_range)
         }
 
         if notification.type == "friend" {
@@ -65,30 +65,30 @@ class NotificationCell: UITableViewCell {
                     notification_text = "\(launcher_name) quiere seguirte"
 
                     let nsString = notification_text as NSString
-                    let launcher_range = nsString.rangeOfString(launcher_name)
-                    let segue = NSURL(string: "userProfile:\(notification.launcher_id):\(notification.is_friend)")!
+                    let launcher_range = nsString.range(of: launcher_name)
+                    let segue = URL(string: "userProfile:\(notification.launcher_id):\(notification.is_friend)")!
                     title.text = notification_text
-                    title.addLinkToURL(segue, withRange: launcher_range)
-                    decline_btn.hidden = false
-                    accept_btn.hidden = false
+                    title.addLink(to: segue, with: launcher_range)
+                    decline_btn.isHidden = false
+                    accept_btn.isHidden = false
 
                     break
                 case 1:
                     if notification.catcher_id == User.user_id {
                         notification_text = "\(launcher_name) te esta siguiendo"
                         let nsString = notification_text as NSString
-                        let launcher_range = nsString.rangeOfString(launcher_name)
-                        let segue = NSURL(string: "userProfile:\(notification.launcher_id):\(notification.is_friend)")!
+                        let launcher_range = nsString.range(of: launcher_name)
+                        let segue = URL(string: "userProfile:\(notification.launcher_id):\(notification.is_friend)")!
                         title.text = notification_text
-                        title.addLinkToURL(segue, withRange: launcher_range)
+                        title.addLink(to: segue, with: launcher_range)
                     }
                     else {
                         notification_text = "Ahora sigues a \(catcher_name)"
                         let nsString = notification_text as NSString
-                        let catcher_range = nsString.rangeOfString(catcher_name)
-                        let segue = NSURL(string: "userProfile:\(notification.catcher_id):\(notification.is_friend)")!
+                        let catcher_range = nsString.range(of: catcher_name)
+                        let segue = URL(string: "userProfile:\(notification.catcher_id):\(notification.is_friend)")!
                         title.text = notification_text
-                        title.addLinkToURL(segue, withRange: catcher_range)
+                        title.addLink(to: segue, with: catcher_range)
                     }
                     break
             default: print(notification.operation_id)
@@ -112,40 +112,46 @@ class NotificationCell: UITableViewCell {
         self.notification = notification
     }
 
-    @IBAction func declineFriend(sender: AnyObject) {
+    @IBAction func declineFriend(_ sender: AnyObject) {
         let params:[String: AnyObject] = [
-            "notification_id" : self.notification!.notification_id,
-            "friends_id": self.notification!.object_id]
+            "notification_id" : self.notification!.notification_id as AnyObject,
+            "friends_id": self.notification!.object_id as AnyObject]
 
             FriendsController.declineFriendWithSuccess(params, success: {(friendsData) -> Void in
-                NSNotificationCenter.defaultCenter().postNotificationName("refreshTableView", object: nil)
+                NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: "refreshTableView"), object: nil)
 
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 print("Rechazado")
             })
             }, failure: { (error) -> Void in
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     print("Error")
             })
         })
     }
 
-    @IBAction func acceptFriend(sender: AnyObject) {
+    override func layoutIfNeeded() {
+        super.layoutIfNeeded()
+        self.notification_image.layer.cornerRadius = self.notification_image.frame.width/2
+        self.notification_image.layer.masksToBounds = true
+    }
+
+    @IBAction func acceptFriend(_ sender: AnyObject) {
         let params:[String: AnyObject] = [
-            "notification_id" : self.notification!.notification_id,
-            "friends_id": self.notification!.object_id ]
+            "notification_id" : self.notification!.notification_id as AnyObject,
+            "friends_id": self.notification!.object_id as AnyObject ]
 
             FriendsController.acceptFriendWithSuccess(params, success: {(friendsData) -> Void in
-                dispatch_async(dispatch_get_main_queue(), {
-                    NSNotificationCenter.defaultCenter().postNotificationName("refreshTableView", object: nil)
+                DispatchQueue.main.async(execute: {
+                    NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: "refreshTableView"), object: nil)
                 })
                 }, failure: { (error) -> Void in
-                    dispatch_async(dispatch_get_main_queue(), {
+                    DispatchQueue.main.async(execute: {
                         print("Error")
                 })
             })
     }
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
     }

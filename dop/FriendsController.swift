@@ -9,68 +9,68 @@
 import UIKit
 
 class FriendsController: NSObject {
-    class func getAllFriendsWithSuccess(success succeed: ((friendsData: NSData!) -> Void), failure errorFound: ((friendsData: NSError?) -> Void)) {
+    class func getAllFriendsWithSuccess(success succeed: @escaping ((_ friendsData: Data?) -> Void), failure errorFound: @escaping ((_ friendsData: NSError?) -> Void)) {
         let url = "\(Utilities.dopURL)user/friends/get"
-        Utilities.loadDataFromURL(NSURL(string: url)!, completion:{(data, error) -> Void in
+        Utilities.loadDataFromURL(URL(string: url)!, completion:{(data, error) -> Void in
             if let urlData = data {
-                succeed(friendsData: urlData)
+                succeed(urlData)
             }else{
-                errorFound(friendsData: error)
+                errorFound(error)
             }
         })
     }
     
-    class func deleteFriend(params:[String:AnyObject], success: ((friendsData: NSData!) -> Void), failure errorFound: ((friendsData: NSError?) -> Void)) {
+    class func deleteFriend(_ params:[String:AnyObject], success: @escaping ((_ friendsData: Data?) -> Void), failure errorFound: @escaping ((_ friendsData: NSError?) -> Void)) {
         let url = "\(Utilities.dopURL)user/friends/delete"
-        Utilities.sendDataToURL(NSURL(string: url)!, method:"PUT",params: params, completion:{(data, error) -> Void in
+        Utilities.sendDataToURL(URL(string: url)!, method:"PUT",params: params, completion:{(data, error) -> Void in
             if let urlData = data {
-                success(friendsData: urlData)
+                success(urlData)
             }else{
-                errorFound(friendsData: error)
+                errorFound(error)
             }
         })
     }
     
-    class func addFriendWithSuccess(params:[String:AnyObject], success: ((friendsData: NSData!) -> Void), failure errorFound: ((friendsData: NSError?) -> Void)) {
+    class func addFriendWithSuccess(_ params:[String:AnyObject], success: @escaping ((_ friendsData: Data?) -> Void), failure errorFound: @escaping ((_ friendsData: NSError?) -> Void)) {
         let url = "\(Utilities.dopURL)user/friends/add"
         print(url)
-        Utilities.sendDataToURL(NSURL(string: url)!, method:"POST", params: params, completion:{(data, error) -> Void in
+        Utilities.sendDataToURL(URL(string: url)!, method:"POST", params: params, completion:{(data, error) -> Void in
             if let urlData = data {
-                success(friendsData: urlData)
+                success(urlData)
             }else{
-                errorFound(friendsData: error)
+                errorFound(error)
             }
         })
     }
-    class func acceptFriendWithSuccess(params:[String:AnyObject], success: ((friendsData: NSData!) -> Void), failure errorFound: ((friendsData: NSError?) -> Void)) {
+    class func acceptFriendWithSuccess(_ params:[String:AnyObject], success: @escaping ((_ friendsData: Data?) -> Void), failure errorFound: @escaping ((_ friendsData: NSError?) -> Void)) {
         let url = "\(Utilities.dopURL)user/friends/accept"
         print(url)
-        Utilities.sendDataToURL(NSURL(string: url)!, method:"POST", params: params, completion:{(data, error) -> Void in
+        Utilities.sendDataToURL(URL(string: url)!, method:"POST", params: params, completion:{(data, error) -> Void in
             if let urlData = data {
-                success(friendsData: urlData)
+                success(urlData)
             } else {
-                errorFound(friendsData: error)
+                errorFound(error)
             }
         })
     }
-    class func declineFriendWithSuccess(params:[String:AnyObject], success: ((friendsData: NSData!) -> Void), failure errorFound: ((friendsData: NSError?) -> Void)) {
+    class func declineFriendWithSuccess(_ params:[String:AnyObject], success: @escaping ((_ friendsData: Data?) -> Void), failure errorFound: @escaping ((_ friendsData: NSError?) -> Void)) {
         let url = "\(Utilities.dopURL)user/friends/decline"
         print(url)
-        Utilities.sendDataToURL(NSURL(string: url)!, method:"PUT", params: params, completion:{(data, error) -> Void in
+        Utilities.sendDataToURL(URL(string: url)!, method:"PUT", params: params, completion:{(data, error) -> Void in
             if let urlData = data {
-                success(friendsData: urlData)
+                success(urlData)
             } else {
-                errorFound(friendsData: error)
+                errorFound(error)
             }
         })
     }
-    class func getAllFollowingWithSuccess(success succeed: ((friendsData: NSData!) -> Void), failure errorFound: ((friendsData: NSError?) -> Void)) {
+    class func getAllFollowingWithSuccess(success succeed: @escaping ((_ friendsData: Data?) -> Void), failure errorFound: @escaping ((_ friendsData: NSError?) -> Void)) {
         let url = "\(Utilities.dopURL)user/following/get"
-        Utilities.loadDataFromURL(NSURL(string: url)!, completion:{(data, error) -> Void in
+        Utilities.loadDataFromURL(URL(string: url)!, completion:{(data, error) -> Void in
             if let urlData = data {
-                succeed(friendsData: urlData)
+                succeed(urlData)
             }else{
-                errorFound(friendsData: error)
+                errorFound(error)
             }
         })
     }

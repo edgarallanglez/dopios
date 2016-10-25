@@ -9,13 +9,13 @@
 import Foundation
 
 class SettingsController {
-    class func setPrivacyWithSuccess(url: String, params: [String:AnyObject], success succeed: ((data: NSData!) -> Void),failure errorFound: ((data: NSError?) -> Void)) {
+    class func setPrivacyWithSuccess(_ url: String, params: [String:AnyObject], success succeed: @escaping ((_ data: Data?) -> Void),failure errorFound: @escaping ((_ data: NSError?) -> Void)) {
         
-        Utilities.sendDataToURL(NSURL(string: url)!, method:"POST", params: params, completion: {(data, error) -> Void in
+        Utilities.sendDataToURL(URL(string: url)!, method:"POST", params: params, completion: {(data, error) -> Void in
             if let urlData = data {
-                succeed(data: urlData)
+                succeed(urlData)
             }else{
-                errorFound(data: error)
+                errorFound(error)
             }
         })
     }

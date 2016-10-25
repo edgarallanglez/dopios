@@ -7,14 +7,34 @@
 //
 
 import UIKit
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 @objc protocol SetSegmentedBranchPageDelegate {
-    optional func setPage(index: Int)
-    optional func launchInfiniteScroll(parent_scroll: UICollectionView)
+    @objc optional func setPage(_ index: Int)
+    @objc optional func launchInfiniteScroll(_ parent_scroll: UICollectionView)
 }
 
 protocol SetFollowFromController {
-    func setFollowButton(branch: Branch)
+    func setFollowButton(_ branch: Branch)
 }
 
 class BranchProfileStickyController: UICollectionViewController, BranchPaginationDelegate, BranchSegmentedControlDelegate, UISearchBarDelegate {
@@ -48,14 +68,14 @@ class BranchProfileStickyController: UICollectionViewController, BranchPaginatio
     
     var cancelSearchButton:UIBarButtonItem!
     
-    private var layout : CSStickyHeaderFlowLayout? {
+    fileprivate var layout : CSStickyHeaderFlowLayout? {
         return self.collectionView?.collectionViewLayout as? CSStickyHeaderFlowLayout
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.collectionView?.alwaysBounceVertical = true
-        self.view.backgroundColor = UIColor.whiteColor()
+        self.view.backgroundColor = UIColor.white
         self.frame_width = self.collectionView!.frame.width
         //
         // Setup Cell
@@ -63,19 +83,19 @@ class BranchProfileStickyController: UICollectionViewController, BranchPaginatio
         self.layout?.estimatedItemSize = CGSize(width: self.frame_width, height: CGFloat(estimationHeight))
         
         // Setup Header
-        self.collectionView?.registerClass(BranchProfileStickyHeader.self, forSupplementaryViewOfKind: CSStickyHeaderParallaxHeader, withReuseIdentifier: "branchHeader")
-        self.layout?.parallaxHeaderReferenceSize = CGSizeMake(self.view.frame.size.width, 250)
+        self.collectionView?.register(BranchProfileStickyHeader.self, forSupplementaryViewOfKind: CSStickyHeaderParallaxHeader, withReuseIdentifier: "branchHeader")
+        self.layout?.parallaxHeaderReferenceSize = CGSize(width: self.view.frame.size.width, height: 250)
         
         // Setup Section Header
-        self.collectionView?.registerClass(BranchProfileStickySectionHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "sectionHeader")
-        self.layout?.headerReferenceSize = CGSizeMake(320, 40)
+        self.collectionView?.register(BranchProfileStickySectionHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "sectionHeader")
+        self.layout?.headerReferenceSize = CGSize(width: 320, height: 40)
         
         self.collectionView?.delegate = self
         
         drawBar();
         
     }
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         if User.newNotification {
             self.notificationButton.image = UIImage(named: "notification-badge")
         }else{
@@ -87,23 +107,23 @@ class BranchProfileStickyController: UICollectionViewController, BranchPaginatio
         self.navigationItem.titleView = searchBar
     }
     func drawBar(){
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(BranchProfileStickyController.setBadge), name: "newNotification", object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(BranchProfileStickyController.setBadge), name: NSNotification.Name(rawValue: "newNotification"), object: nil)
         
-        notificationButton = UIBarButtonItem(image: UIImage(named: "notification"), style: UIBarButtonItemStyle.Plain, target: self, action: #selector(BranchProfileStickyController.notification))
+        notificationButton = UIBarButtonItem(image: UIImage(named: "notification"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(BranchProfileStickyController.notification))
         
         self.navigationItem.rightBarButtonItem = notificationButton
         
-        vc  = self.storyboard!.instantiateViewControllerWithIdentifier("SearchView") as! SearchViewController
+        vc  = self.storyboard!.instantiateViewController(withIdentifier: "SearchView") as! SearchViewController
         
-        vcNot = self.storyboard!.instantiateViewControllerWithIdentifier("Notifications") as! NotificationViewController
+        vcNot = self.storyboard!.instantiateViewController(withIdentifier: "Notifications") as! NotificationViewController
         
         
         searchBar.delegate = self
         
         
         
-        searchBar.tintColor = UIColor.whiteColor()
-        searchBar.searchBarStyle = UISearchBarStyle.Minimal
+        searchBar.tintColor = UIColor.white
+        searchBar.searchBarStyle = UISearchBarStyle.minimal
         searchBar.placeholder = "Buscar"
         
         
@@ -112,7 +132,7 @@ class BranchProfileStickyController: UICollectionViewController, BranchPaginatio
             for subsubView in subView.subviews{
                 if let textField = subsubView as? UITextField{
                     textField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("Buscar", comment: ""), attributes: [NSForegroundColorAttributeName: Utilities.extraLightGrayColor])
-                    textField.textColor = UIColor.whiteColor()
+                    textField.textColor = UIColor.white
                     
                 }
             }
@@ -120,10 +140,10 @@ class BranchProfileStickyController: UICollectionViewController, BranchPaginatio
         
         
         
-        searchView = UIView(frame: CGRectMake(0,0,self.view.frame.width,self.view.frame.height))
+        searchView = UIView(frame: CGRect(x: 0,y: 0,width: self.view.frame.width,height: self.view.frame.height))
         
         //Add blur view to search view
-        let blurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.ExtraLight))
+        let blurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.extraLight))
         blurView.frame = searchView.bounds
         
         vc.view.addSubview(blurView)
@@ -132,21 +152,21 @@ class BranchProfileStickyController: UICollectionViewController, BranchPaginatio
         blurView.addGestureRecognizer(gestureRecognizer)
         
         //vc.searchScrollView.hidden = true
-        vc.searchScrollView.hidden = true
+        vc.searchScrollView.isHidden = true
         
         
-        cancelSearchButton = UIBarButtonItem(title: "Cancelar", style: .Plain, target: self, action: #selector(BranchProfileStickyController.cancelSearch))
+        cancelSearchButton = UIBarButtonItem(title: "Cancelar", style: .plain, target: self, action: #selector(BranchProfileStickyController.cancelSearch))
         
-        NSNotificationCenter.defaultCenter().addObserver(
+        NotificationCenter.default.addObserver(
             self,
             selector: #selector(BranchProfileStickyController.presentView(_:)),
-            name: "performSegue",
+            name: NSNotification.Name(rawValue: "performSegue"),
             object: nil)
         
     }
     
     // Cells
-    func resizeView(new_height: CGFloat) {
+    func resizeView(_ new_height: CGFloat) {
         var size_changed = false
         if new_height != self.new_height && new_height != 0 { size_changed = true }
         self.new_height = new_height
@@ -157,9 +177,9 @@ class BranchProfileStickyController: UICollectionViewController, BranchPaginatio
         self.layout?.invalidateLayout()
     }
     
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let custom_cell = collectionView.dequeueReusableCellWithReuseIdentifier("page_identifier", forIndexPath: indexPath) as! BranchProfilePageController
+        let custom_cell = collectionView.dequeueReusableCell(withReuseIdentifier: "page_identifier", for: indexPath) as! BranchProfilePageController
         
         custom_cell.delegate = self
         custom_cell.setPaginator(self)
@@ -168,36 +188,36 @@ class BranchProfileStickyController: UICollectionViewController, BranchPaginatio
         return custom_cell
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
         
         let width = collectionView.frame.width
         var height: CGFloat!
         if self.new_height != nil && self.new_height > 300 { height = self.new_height } else { height = 300 }
         
-        return CGSizeMake(width, height)
+        return CGSize(width: width, height: height)
     }
     
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 1
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSizeMake(60.0, 50.0)
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: 60.0, height: 50.0)
     }
     
     
     // Parallax Header
     
-    override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         if kind == CSStickyHeaderParallaxHeader {
-            self.top_view = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "branchHeader", forIndexPath: indexPath) as! BranchProfileStickyHeader
+            self.top_view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "branchHeader", for: indexPath) as! BranchProfileStickyHeader
             self.top_view.setBranchProfile(self)
             
             
             return self.top_view
         } else if kind == UICollectionElementKindSectionHeader {
-            let view = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "sectionHeader", forIndexPath: indexPath) as! BranchProfileStickySectionHeader
+            let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "sectionHeader", for: indexPath) as! BranchProfileStickySectionHeader
             
             view.delegate = self
             self.segmented_controller = view.segmented_controller
@@ -208,27 +228,27 @@ class BranchProfileStickyController: UICollectionViewController, BranchPaginatio
         
     }
     
-    func setupIndex(index: Int) {
+    func setupIndex(_ index: Int) {
         delegate?.setPage!(index)
-        self.collectionView?.setContentOffset(CGPointZero, animated: false)
+        self.collectionView?.setContentOffset(CGPoint.zero, animated: false)
     }
     
     func infiniteScroll() {
         delegate?.launchInfiniteScroll!(self.collectionView!)
     }
     
-    func setSegmentedIndex(index: Int) {
+    func setSegmentedIndex(_ index: Int) {
         self.segmented_controller!.selectedIndex = index
-        self.collectionView?.setContentOffset(CGPointZero, animated: false)
+        self.collectionView?.setContentOffset(CGPoint.zero, animated: false)
     }
     
-    func setFollowButton(branch: Branch) {
+    func setFollowButton(_ branch: Branch) {
         self.branch = branch
         self.following = branch.following
         self.top_view.setBranchFollow(self.branch)
     }
     
-    func presentView(notification:NSNotification){
+    func presentView(_ notification:Foundation.Notification){
         if(searchViewIsOpen){
             searchViewIsSegue = true
             
@@ -236,13 +256,13 @@ class BranchProfileStickyController: UICollectionViewController, BranchPaginatio
             let object_id = params["id"] as! Int
             
             if vc.searchSegmentedController.selectedIndex == 0 {
-                let viewControllerToPresent = self.storyboard!.instantiateViewControllerWithIdentifier("BranchProfileStickyController") as! BranchProfileStickyController
+                let viewControllerToPresent = self.storyboard!.instantiateViewController(withIdentifier: "BranchProfileStickyController") as! BranchProfileStickyController
                 viewControllerToPresent.branch_id = object_id
                 self.navigationController?.pushViewController(viewControllerToPresent, animated: true)
                 
             }
             if vc.searchSegmentedController.selectedIndex == 1 {
-                let viewControllerToPresent = self.storyboard!.instantiateViewControllerWithIdentifier("UserProfileStickyController") as! UserProfileStickyController
+                let viewControllerToPresent = self.storyboard!.instantiateViewController(withIdentifier: "UserProfileStickyController") as! UserProfileStickyController
                 viewControllerToPresent.user_id = object_id
                 viewControllerToPresent.is_friend = params["is_friend"] as! Bool
                 viewControllerToPresent.operation_id = params["operation_id"] as! Int
@@ -256,7 +276,7 @@ class BranchProfileStickyController: UICollectionViewController, BranchPaginatio
         
     }
     
-    func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         if(searchViewIsOpen == false){
             self.navigationItem.rightBarButtonItem = cancelSearchButton
             
@@ -278,28 +298,28 @@ class BranchProfileStickyController: UICollectionViewController, BranchPaginatio
             searchViewIsOpen = false
             self.navigationItem.rightBarButtonItem = notificationButton
             searchBar.text = ""
-            vc.searchScrollView.hidden = true
+            vc.searchScrollView.isHidden = true
             vc.peopleFiltered.removeAll()
             vc.peopleTableView.reloadData()
             vc.filtered.removeAll()
             vc.tableView.reloadData()
         }
     }
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        if(searchViewIsOpen == true && vc.searchScrollView.hidden == true){
-            vc.searchScrollView.hidden = false
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if(searchViewIsOpen == true && vc.searchScrollView.isHidden == true){
+            vc.searchScrollView.isHidden = false
             Utilities.slideFromBottomAnimation(vc.searchScrollView, delay: 0, duration: 0.5, yPosition: 600)
         }
         
         if(searchText.characters.count == 0){
-            vc.searchScrollView.hidden = true
+            vc.searchScrollView.isHidden = true
         }else{
-            vc.searchText = searchText
+            vc.searchText = searchText as NSString!
             vc.searchTimer()
         }
     }
     
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         vc.searchActive = false;
         vc.timer?.invalidate()
         
@@ -309,11 +329,11 @@ class BranchProfileStickyController: UICollectionViewController, BranchPaginatio
         }
     }
     
-    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         vc.searchActive = false;
     }
     
-    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         vc.searchActive = false;
     }
     func setBadge(){
@@ -321,7 +341,7 @@ class BranchProfileStickyController: UICollectionViewController, BranchPaginatio
     }
     func notification() {
         let tabbar = self.tabBarController as! TabbarController!
-        self.navigationController?.pushViewController(tabbar.vcNot, animated: true)
+        self.navigationController?.pushViewController((tabbar?.vcNot)!, animated: true)
         self.notificationButton.image = UIImage(named: "notification")
         
         /*vcNot.navigationController?.hidesBottomBarWhenPushed = true

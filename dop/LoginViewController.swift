@@ -11,6 +11,13 @@ import FBSDKLoginKit
 import JWTDecode
 
 class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationManagerDelegate {
+    /*!
+     @abstract Sent to the delegate when the button was used to login.
+     @param loginButton the sender
+     @param result The results of the login
+     @param error The error (if any) from the login
+     */
+
 
 
     @IBOutlet weak var MD_spinner: MMMaterialDesignSpinner!
@@ -29,10 +36,10 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        UIApplication.sharedApplication().statusBarStyle = .LightContent
+        UIApplication.shared.statusBarStyle = .lightContent
         let background = Utilities.Colors
         background.frame = self.view.bounds
-        self.view.layer.insertSublayer(background, atIndex: 0)
+        self.view.layer.insertSublayer(background, at: 0)
         Utilities.slideFromBottomAnimation(self.dopLogo, delay: 0, duration: 1.5, yPosition: 700)
         self.fbButton.alpha = 0
         self.MD_spinner.lineWidth = 3
@@ -49,15 +56,15 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
         self.fbLoginView.delegate = self
         self.fbLoginView.readPermissions = ["public_profile", "email", "user_friends", "user_birthday", "gender"]
         
-        if (FBSDKAccessToken.currentAccessToken() != nil) {
+        if (FBSDKAccessToken.current() != nil) {
             // User is already logged in, do work such as go to next view controller.
             self.getFBUserData()
         }
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         self.dop_logo_y_constraint.constant = -200
-        UIView.animateWithDuration(0.8) { self.view.layoutIfNeeded() }
+        UIView.animate(withDuration: 0.8, animations: { self.view.layoutIfNeeded() }) 
         Utilities.slideFromBottomAnimation(flat_city_image, delay: 0.4, duration: 1.5, yPosition: 700)
         Utilities.slideFromBottomAnimation(self.LoginButtonView, delay: 0.4, duration: 1.5, yPosition: 700)
         Utilities.fadeInViewAnimation(self.fbButton, delay: 1, duration: 0.7)
@@ -138,7 +145,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
     
     
     // Facebook Delegate Methods
-    func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
+    public func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
         print("User Logged In")
         if ((error) != nil)
         {
@@ -157,13 +164,13 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
         }
     }
     
-    func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
-        self.performSegueWithIdentifier("showLogin", sender: self)
+    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
+        self.performSegue(withIdentifier: "showLogin", sender: self)
     }
     
     func getFBUserData() {
         let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, first_name, middle_name,last_name, email, birthday, gender"])
-        graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
+        graphRequest.start(completionHandler: { (connection, result, error) -> Void in
             let json: JSON = JSON(result)
             if ((error) != nil) {
                 // Process error
@@ -193,14 +200,14 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
         })
     }
 
-    @IBAction func FBlogin(sender: UIButton) {
+    @IBAction func FBlogin(_ sender: UIButton) {
         let loginManager: FBSDKLoginManager = FBSDKLoginManager()
-        loginManager.logInWithReadPermissions(["public_profile", "email", "user_friends", "user_birthday"], fromViewController: self, handler: { (result, error) -> Void in
+        loginManager.logIn(withReadPermissions: ["public_profile", "email", "user_friends", "user_birthday"], from: self, handler: { (result, error) -> Void in
                 if (error != nil) {
                     print("Process error")
-                } else if result.isCancelled {
+                } else if (result?.isCancelled)! {
                     print("Cancelled")
-                } else if result.grantedPermissions.contains("email") {
+                } else if (result?.grantedPermissions.contains("email"))! {
                     self.getFBUserData()
                 }
             })
@@ -209,32 +216,32 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
     
     
     // Social login Call
-    func socialLogin(type: String, params: [String:String]!){
+    func socialLogin(_ type: String, params: [String:String]!){
         print("\(Utilities.dopURL)user/login/"+type)
         Utilities.fadeInFromBottomAnimation(self.MD_spinner, delay: 0, duration: 1, yPosition: 5)
-        LoginController.loginWithSocial("\(Utilities.dopURL)user/login/" + type, params: params,
+        LoginController.loginWithSocial("\(Utilities.dopURL)user/login/" + type, params: params as [String : AnyObject],
             success:{ (loginData) -> Void in
                 User.loginType = type
-                let json = JSON(data: loginData)
+                let json = JSON(loginData!)
                 
                 let jwt = json["token"].string!
                 var error: NSError?
                 
-                User.userToken = jwt
+                User.userToken = [ "Authorization": "\(jwt)" ]
                 User.userImageUrl =  params["main_image"]!
                 User.userName =  params["names"]!
                 User.userSurnames =  params["surnames"]!
                 
                 do {
-                    let payload = try decode(User.userToken)
+                    let payload = try decode(jwt: User.userToken["Authorization"]!)
                     User.user_id = payload.body["id"]! as! Int
                 } catch {
                     print("Failed to decode JWT: \(error)")
                 }
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     //if (!User.activeSession) {
-                        self.performSegueWithIdentifier("showDashboard", sender: self)
+                        self.performSegue(withIdentifier: "showDashboard", sender: self)
                         User.activeSession = true
                     //}
                 })
@@ -244,11 +251,11 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
         })
     }
     
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         locationManager.stopUpdatingLocation()
     }
     
-    func locationManager(manager: CLLocationManager, didFailWithError error: NSError)  {
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)  {
             
     }
     

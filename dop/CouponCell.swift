@@ -19,8 +19,8 @@ class CouponCell: UITableViewCell {
 
     var viewController: UIViewController?
     
-    @IBAction func branchProfile(sender: UIButton) {
-        self.viewController!.performSegueWithIdentifier("branchProfile", sender: self)
+    @IBAction func branchProfile(_ sender: UIButton) {
+        self.viewController!.performSegue(withIdentifier: "branchProfile", sender: self)
     }
     
 
@@ -28,7 +28,7 @@ class CouponCell: UITableViewCell {
     var radius: CGFloat = 2
 
     
-    func loadItem(coupon:Coupon, viewController: UIViewController) {
+    func loadItem(_ coupon:Coupon, viewController: UIViewController) {
         nameLbl.text = coupon.name
         descriptionLbl.text = coupon.couponDescription
 //        branchImage.setBackgroundImage(UIImage(named: coupon.logo), forState: UIControlState.Normal)
@@ -43,10 +43,10 @@ class CouponCell: UITableViewCell {
         let shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: radius)
 
         layer.masksToBounds = false
-        layer.shadowColor = UIColor.blackColor().CGColor
+        layer.shadowColor = UIColor.black.cgColor
         layer.shadowOffset = CGSize(width: 0, height: 3);
         layer.shadowOpacity = 0.3
-        layer.shadowPath = shadowPath.CGPath
+        layer.shadowPath = shadowPath.cgPath
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -63,7 +63,7 @@ class CouponCell: UITableViewCell {
         // Initialization code
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state

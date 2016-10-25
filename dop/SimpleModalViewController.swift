@@ -56,19 +56,19 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate, MKMapView
         super.viewDidLoad()
 
         if((cancel_button) != nil){
-            cancel_button.addTarget(self, action: #selector(SimpleModalViewController.buttonPressed(_:)), forControlEvents: UIControlEvents.TouchDown)
-            cancel_button.addTarget(self, action: #selector(SimpleModalViewController.buttonReleased(_:)), forControlEvents: UIControlEvents.TouchDragOutside)
-            cancel_button.addTarget(self, action: #selector(SimpleModalViewController.cancelTouched(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+            cancel_button.addTarget(self, action: #selector(SimpleModalViewController.buttonPressed(_:)), for: UIControlEvents.touchDown)
+            cancel_button.addTarget(self, action: #selector(SimpleModalViewController.buttonReleased(_:)), for: UIControlEvents.touchDragOutside)
+            cancel_button.addTarget(self, action: #selector(SimpleModalViewController.cancelTouched(_:)), for: UIControlEvents.touchUpInside)
         }
 
         if((action_button) != nil){
-            action_button.addTarget(self, action: #selector(SimpleModalViewController.buttonPressed(_:)), forControlEvents: UIControlEvents.TouchDown)
-            action_button.addTarget(self, action: #selector(SimpleModalViewController.buttonReleased(_:)), forControlEvents: UIControlEvents.TouchDragOutside)
-            action_button.addTarget(self, action: #selector(SimpleModalViewController.actionTouched(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+            action_button.addTarget(self, action: #selector(SimpleModalViewController.buttonPressed(_:)), for: UIControlEvents.touchDown)
+            action_button.addTarget(self, action: #selector(SimpleModalViewController.buttonReleased(_:)), for: UIControlEvents.touchDragOutside)
+            action_button.addTarget(self, action: #selector(SimpleModalViewController.actionTouched(_:)), for: UIControlEvents.touchUpInside)
         }
 
         if((close_button) != nil){
-            close_button.addTarget(self, action: #selector(SimpleModalViewController.closePressed(_:)), forControlEvents: .TouchDown)
+            close_button.addTarget(self, action: #selector(SimpleModalViewController.closePressed(_:)), for: .touchDown)
         }
 
         if((share_text) != nil){
@@ -87,7 +87,7 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate, MKMapView
         }
 
 
-        normalAttrdict = [NSFontAttributeName:UIFont(name: "Montserrat-Light",size: 16.0)!,NSForegroundColorAttributeName: UIColor.lightGrayColor()]
+        normalAttrdict = [NSFontAttributeName:UIFont(name: "Montserrat-Light",size: 16.0)!,NSForegroundColorAttributeName: UIColor.lightGray]
         highlightAttrdict = [NSFontAttributeName:UIFont(name: "Montserrat-Light",size: 16.0)!, NSForegroundColorAttributeName: Utilities.dopColor]
 
         currentAttribute = normalAttrdict
@@ -98,34 +98,34 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate, MKMapView
 
     }
 
-    func buttonPressed(sender: ModalButton){
-        sender.selected = true
+    func buttonPressed(_ sender: ModalButton){
+        sender.isSelected = true
     }
 
-    func buttonReleased(sender: ModalButton){
-        sender.selected = false
+    func buttonReleased(_ sender: ModalButton){
+        sender.isSelected = false
     }
 
-    func cancelTouched(sender: ModalButton){
-        sender.selected = false
+    func cancelTouched(_ sender: ModalButton){
+        sender.isSelected = false
 
-        self.mz_dismissFormSheetControllerAnimated(true, completionHandler: { (MZFormSheetController) -> Void in
+        self.mz_dismissFormSheetController(animated: true, completionHandler: { (MZFormSheetController) -> Void in
 
         })
     }
 
-    func actionTouched(sender: ModalButton){
-        sender.selected = false
+    func actionTouched(_ sender: ModalButton){
+        sender.isSelected = false
     }
 
-    func closePressed(sender: UIButton){
-        self.mz_dismissFormSheetControllerAnimated(true, completionHandler: nil)
+    func closePressed(_ sender: UIButton){
+        self.mz_dismissFormSheetController(animated: true, completionHandler: nil)
     }
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         if(coupon != nil){
-            self.branch_title.setTitle(self.coupon?.name.uppercaseString, forState: .Normal)
-            self.category_label.text = "".uppercaseString
+            self.branch_title.setTitle(self.coupon?.name.uppercased(), for: UIControlState())
+            self.category_label.text = "".uppercased()
             self.map.delegate = self
             self.centerMapOnLocation((self.coupon?.location)!)
             self.setBranchAnnotation()
@@ -136,9 +136,9 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate, MKMapView
             coupon_description.alpha = 0
 
             self.likes_label.text = String(coupon!.total_likes)
-            if coupon!.user_like == true { self.heart.tintColor = Utilities.dopColor } else { self.heart.tintColor = UIColor.lightGrayColor() }
+            if coupon!.user_like == true { self.heart.tintColor = Utilities.dopColor } else { self.heart.tintColor = UIColor.lightGray }
 
-            if coupon.taken == true { self.takeCouponButton.tintColor = Utilities.dopColor } else { self.takeCouponButton.tintColor = UIColor.darkGrayColor() }
+            if coupon.taken == true { self.takeCouponButton.tintColor = Utilities.dopColor } else { self.takeCouponButton.tintColor = UIColor.darkGray }
 
             Utilities.fadeInFromBottomAnimation(self.branch_title, delay: 0, duration: 0.5, yPosition: 30)
             Utilities.fadeInFromBottomAnimation(self.category_label, delay: 0, duration: 0.5, yPosition: 30)
@@ -153,8 +153,8 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate, MKMapView
     func getAvailables(){
         CouponController.getAvailables(self.coupon.id,
                 success: { (couponsData) -> Void in
-                    dispatch_async(dispatch_get_main_queue(), {
-                        let json = JSON(data: couponsData)
+                    DispatchQueue.main.async(execute: {
+                        let json = couponsData!
                         self.coupon.available = json["available"].int!
                         self.available_coupon.text = String(self.coupon!.available)
 
@@ -165,7 +165,7 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate, MKMapView
                 })
             },
                 failure: { (error) -> Void in
-                    dispatch_async(dispatch_get_main_queue(), {
+                    DispatchQueue.main.async(execute: {
                             print("Error")
                 })
         })
@@ -173,18 +173,18 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate, MKMapView
 
     func setCouponLike() {
         let params:[String: AnyObject] = [
-            "coupon_id" : self.coupon.id,
-            "status": true,
-            "type": "like"]
+            "coupon_id" : self.coupon.id as AnyObject,
+            "status": true as AnyObject,
+            "type": "like" as AnyObject]
 
-        heart.transform = CGAffineTransformMakeScale(0.1, 0.1)
-        UIView.animateWithDuration(0.8,
+        heart.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+        UIView.animate(withDuration: 0.8,
             delay: 0,
             usingSpringWithDamping: 0.2,
             initialSpringVelocity: 6.0,
-            options: UIViewAnimationOptions.AllowUserInteraction,
+            options: UIViewAnimationOptions.allowUserInteraction,
             animations: {
-                self.heart.transform = CGAffineTransformIdentity
+                self.heart.transform = CGAffineTransform.identity
             }, completion: nil)
 
         self.heart.tintColor = Utilities.dopColor
@@ -192,33 +192,33 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate, MKMapView
         self.likes_label.text = String(stringInterpolationSegment: totalLikes)
         self.coupon!.setUserLike(true, total_likes: totalLikes)
 
-        NSNotificationCenter.defaultCenter().postNotificationName("takenOrLikeStatus", object: params)
+        NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: "takenOrLikeStatus"), object: params)
     }
 
     func removeCouponLike() {
         let params:[String: AnyObject] = [
-            "coupon_id" : self.coupon.id,
-            "status": false,
-            "type": "like"]
+            "coupon_id" : self.coupon.id as AnyObject,
+            "status": false as AnyObject,
+            "type": "like" as AnyObject]
 
-        self.heart.tintColor = UIColor.lightGrayColor()
+        self.heart.tintColor = UIColor.lightGray
         let totalLikes = (self.coupon?.total_likes)! - 1
         self.likes_label.text = String(stringInterpolationSegment: totalLikes)
         self.coupon!.setUserLike(false, total_likes: totalLikes)
-        NSNotificationCenter.defaultCenter().postNotificationName("takenOrLikeStatus", object: params)
+        NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: "takenOrLikeStatus"), object: params)
 
     }
     func setCouponTaken() {
 
 
-        self.takeCouponButton.transform = CGAffineTransformMakeScale(0.1, 0.1)
-        UIView.animateWithDuration(0.8,
+        self.takeCouponButton.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+        UIView.animate(withDuration: 0.8,
             delay: 0,
             usingSpringWithDamping: 0.2,
             initialSpringVelocity: 6.0,
-            options: UIViewAnimationOptions.AllowUserInteraction,
+            options: UIViewAnimationOptions.allowUserInteraction,
             animations: {
-                self.takeCouponButton.transform = CGAffineTransformIdentity
+                self.takeCouponButton.transform = CGAffineTransform.identity
             }, completion: nil)
 
         self.takeCouponButton.tintColor = Utilities.dopColor
@@ -227,25 +227,25 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate, MKMapView
         self.available_coupon.text = "\(self.coupon.available)"
         self.coupon.setTakenCoupons(true, available: self.coupon.available)
         let params:[String: AnyObject] = [
-            "coupon_id" : self.coupon.id,
-            "status": true,
-            "type": "take"]
-        NSNotificationCenter.defaultCenter().postNotificationName("takenOrLikeStatus", object: params)
+            "coupon_id" : self.coupon.id as AnyObject,
+            "status": true as AnyObject,
+            "type": "take" as AnyObject]
+        NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: "takenOrLikeStatus"), object: params)
     }
 
     func removeCouponTaken() {
         let params:[String: AnyObject] = [
-            "coupon_id" : self.coupon.id,
-            "status": false,
-            "type": "take"]
+            "coupon_id" : self.coupon.id as AnyObject,
+            "status": false as AnyObject,
+            "type": "take" as AnyObject]
 
-        self.takeCouponButton.tintColor = UIColor.darkGrayColor()
+        self.takeCouponButton.tintColor = UIColor.darkGray
         self.coupon.taken = false
         self.coupon.available += 1
         self.available_coupon.text = "\(self.coupon.available)"
         self.coupon.setTakenCoupons(false, available: self.coupon.available)
 
-        NSNotificationCenter.defaultCenter().postNotificationName("takenOrLikeStatus", object: params)
+        NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: "takenOrLikeStatus"), object: params)
 
     }
 
@@ -253,17 +253,17 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate, MKMapView
         super.didReceiveMemoryWarning()
     }
 
-    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+    /*func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         let maxLength = 140
         let currentString: String = textView.text!
-        let newString: String = (currentString as NSString).stringByReplacingCharactersInRange(range, withString: text)
+        let newString: String = (currentString as NSString).replacingCharacters(in: range, with: text)
 
         if(newString.characters.count <= maxLength) {
             self.limit_label.text = "\(newString.characters.count)/\(maxLength)"
         }
 
         if(newString.characters.count >= 2){
-            if(text == "#" && newString[newString.characters.endIndex.predecessor().predecessor()] == " "){
+            if(text == "#" && newString[<#T##Collection corresponding to your index##Collection#>.index(before: newString.characters.index(before: newString.characters.endIndex))] == " "){
                 currentAttribute = highlightAttrdict!
             }
             if(text == " "){
@@ -276,12 +276,12 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate, MKMapView
         textView.typingAttributes = currentAttribute!
 
         return (newString.characters.count) <= maxLength
-    }
+    }*/
 
 
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView?{
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView?{
         let reuseId = "custom"
-        var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId)
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId)
         if mapView.userLocation == annotation as! NSObject { return nil }
         if (annotationView == nil) {
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
@@ -297,21 +297,21 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate, MKMapView
         return annotationView
     }
     
-    func pressMap(sender: UITapGestureRecognizer){
+    func pressMap(_ sender: UITapGestureRecognizer){
         //If Google Maps is installed...
-        if UIApplication.sharedApplication().canOpenURL(NSURL(string: "comgooglemaps://")!) {
-            let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+        if UIApplication.shared.canOpenURL(URL(string: "comgooglemaps://")!) {
+            let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
-            let googleMaps = UIAlertAction(title: "Google Maps", style: .Default, handler: {
+            let googleMaps = UIAlertAction(title: "Google Maps", style: .default, handler: {
                 (alert: UIAlertAction!) -> Void in
                 self.openGoogleMaps()
             })
-            let appleMaps = UIAlertAction(title: "Apple Maps", style: .Default, handler: {
+            let appleMaps = UIAlertAction(title: "Apple Maps", style: .default, handler: {
                 (alert: UIAlertAction!) -> Void in
                 self.openAppleMaps()
             })
 
-            let cancelAction = UIAlertAction(title: "Cancelar", style: .Cancel, handler: {
+            let cancelAction = UIAlertAction(title: "Cancelar", style: .cancel, handler: {
                 (alert: UIAlertAction!) -> Void in
             })
 
@@ -319,7 +319,7 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate, MKMapView
             optionMenu.addAction(appleMaps)
             optionMenu.addAction(cancelAction)
 
-            self.presentViewController(optionMenu, animated: true, completion: nil)
+            self.present(optionMenu, animated: true, completion: nil)
         }else{
             self.openAppleMaps()
         }
@@ -328,7 +328,7 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate, MKMapView
     func openGoogleMaps(){
         let customURL = "comgooglemaps://?daddr=\(self.coupon!.location.latitude),\(self.coupon!.location.longitude)&directionsmode=driving"
 
-        UIApplication.sharedApplication().openURL(NSURL(string: customURL)!)
+        UIApplication.shared.openURL(URL(string: customURL)!)
     }
     func openAppleMaps() {
 
@@ -339,27 +339,27 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate, MKMapView
         let coordinates = CLLocationCoordinate2DMake(latitute, longitute)
         let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
         let options = [
-            MKLaunchOptionsMapCenterKey: NSValue(MKCoordinate: regionSpan.center),
-            MKLaunchOptionsMapSpanKey: NSValue(MKCoordinateSpan: regionSpan.span)
+            MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center),
+            MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)
         ]
         let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
         let mapItem = MKMapItem(placemark: placemark)
         mapItem.name = "\(self.coupon!.name)"
-        mapItem.openInMapsWithLaunchOptions(options)
+        mapItem.openInMaps(launchOptions: options)
     }
 
-    func centerMapOnLocation(location: CLLocationCoordinate2D) {
+    func centerMapOnLocation(_ location: CLLocationCoordinate2D) {
         let centerPin = CLLocation(latitude: location.latitude, longitude: location.longitude)
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(centerPin.coordinate,
             regionRadius * 2.0, regionRadius * 2.0)
         self.map.setRegion(coordinateRegion, animated: false)
 
     }
-    func mapViewDidFinishRenderingMap(mapView: MKMapView, fullyRendered: Bool) {
+    func mapViewDidFinishRenderingMap(_ mapView: MKMapView, fullyRendered: Bool) {
         if(map_loaded == false){
             loader.removeFromSuperview()
             map_loaded = true
-            self.map.hidden = false
+            self.map.isHidden = false
             Utilities.fadeInFromBottomAnimation(self.map, delay: 0, duration: 0.5, yPosition: 30)
 
             Utilities.fadeInFromBottomAnimation(self.description_title, delay: 0, duration: 0.5, yPosition: 30)
@@ -392,19 +392,19 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate, MKMapView
 
     }
 
-    @IBAction func setTakeCoupon(sender: UIButton) {
+    @IBAction func setTakeCoupon(_ sender: UIButton) {
         let params:[String: AnyObject] = [
-            "coupon_id" : self.coupon.id,
-            "branch_id": self.coupon.branch_id,
-            "latitude": User.coordinate.latitude ?? 0,
-            "longitude": User.coordinate.longitude ?? 0 ]
+            "coupon_id" : self.coupon.id as AnyObject,
+            "branch_id": self.coupon.branch_id as AnyObject,
+            "latitude": User.coordinate.latitude as AnyObject? ?? 0 as AnyObject,
+            "longitude": User.coordinate.longitude as AnyObject? ?? 0 as AnyObject ]
 
         var taken: Bool
 
-        if self.takeCouponButton.tintColor == UIColor.darkGrayColor() {
+        if self.takeCouponButton.tintColor == UIColor.darkGray {
             self.setCouponTaken()
             taken = true
-            takeCouponButton.enabled = false
+            takeCouponButton.isEnabled = false
             available_coupon.alpha = 0
             available_coupon_info.alpha = 0
             available_loader.alpha = 1
@@ -416,13 +416,13 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate, MKMapView
 
         CouponController.takeCouponWithSuccess(params,
             success: { (data) -> Void in
-                dispatch_async(dispatch_get_main_queue(), {
-                    let json = JSON(data: data)
+                DispatchQueue.main.async(execute: {
+                    let json = data!
                     print(json)
                     self.coupon.available = json["total"].int!
                     self.available_coupon.text = "\(self.coupon.available)"
 
-                    self.takeCouponButton.enabled = true
+                    self.takeCouponButton.isEnabled = true
                     self.available_coupon.alpha = 1
                     self.available_coupon_info.alpha = 1
                     self.available_loader.alpha = 0
@@ -430,15 +430,15 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate, MKMapView
 
                     if(json["message"].string=="agotado"){
                         let params:[String: AnyObject] = [
-                            "coupon_id" : self.coupon.id,
-                            "status": false,
-                            "type": "take"]
+                            "coupon_id" : self.coupon.id as AnyObject,
+                            "status": false as AnyObject,
+                            "type": "take" as AnyObject]
 
-                        self.takeCouponButton.enabled = false
-                        self.takeCouponButton.tintColor = UIColor.darkGrayColor()
+                        self.takeCouponButton.isEnabled = false
+                        self.takeCouponButton.tintColor = UIColor.darkGray
                         self.coupon.taken = false
                         self.coupon.setTakenCoupons(false, available: self.coupon.available)
-                        NSNotificationCenter.defaultCenter().postNotificationName("takenOrLikeStatus", object: params)
+                        NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: "takenOrLikeStatus"), object: params)
                     }
 
                 })
@@ -446,7 +446,7 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate, MKMapView
             },
 
             failure: { (error) -> Void in
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
 
                     if taken {  self.coupon.available += 1; self.removeCouponTaken(); }
                     else {  self.coupon.available -= 1; self.setCouponTaken(); }
@@ -455,14 +455,14 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate, MKMapView
         )
     }
 
-    func likeCoupon(sender: UIGestureRecognizer) {
+    func likeCoupon(_ sender: UIGestureRecognizer) {
         let params:[String: AnyObject] = [
-            "coupon_id" :  coupon.id,
-            "date" : "2015-01-01" ]
+            "coupon_id" :  coupon.id as AnyObject,
+            "date" : "2015-01-01" as AnyObject ]
 
         var liked: Bool
 
-        if self.heart.tintColor == UIColor.lightGrayColor() {
+        if self.heart.tintColor == UIColor.lightGray {
             self.setCouponLike()
             liked = true
         } else {
@@ -472,57 +472,57 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate, MKMapView
 
         CouponController.likeCouponWithSuccess(params,
             success: { (couponsData) -> Void in
-                dispatch_async(dispatch_get_main_queue(), {
-                    let json = JSON(data: couponsData)
+                DispatchQueue.main.async(execute: {
+                    let json = couponsData!
                     print(json)
                 })
             },
             failure: { (error) -> Void in
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     if liked { self.removeCouponLike() } else { self.setCouponLike() }
                 })
         })
     }
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
         if segue.identifier == "branchProfile" {
-            let view = segue.destinationViewController as! BranchProfileStickyController
+            let view = segue.destination as! BranchProfileStickyController
             view.branch_id = self.coupon!.branch_id
             //            view.logo = self.logo
 
         }
     }
-    @IBAction func share(sender: AnyObject) {
+    @IBAction func share(_ sender: AnyObject) {
         let content : FBSDKShareLinkContent = FBSDKShareLinkContent()
-        content.contentURL = NSURL(string: "http://www.inmoon.io")
+        content.contentURL = URL(string: "http://www.inmoon.io")
         content.contentTitle = self.coupon.name
-        content.imageURL = NSURL(string: "\(Utilities.dopImagesURL)\(self.coupon.company_id)/\(self.coupon.logo)")
+        content.imageURL = URL(string: "\(Utilities.dopImagesURL)\(self.coupon.company_id)/\(self.coupon.logo)")
         content.contentDescription = self.coupon.couponDescription
         
         
         let dialog: FBSDKShareDialog = FBSDKShareDialog()
         
-        if UIApplication.sharedApplication().canOpenURL(NSURL(string: "fbauth2://")!) {
-            dialog.mode = FBSDKShareDialogMode.FeedWeb
+        if UIApplication.shared.canOpenURL(URL(string: "fbauth2://")!) {
+            dialog.mode = FBSDKShareDialogMode.feedWeb
         }else{
-            dialog.mode = FBSDKShareDialogMode.FeedWeb
+            dialog.mode = FBSDKShareDialogMode.feedWeb
         }
         dialog.shareContent = content
         dialog.delegate = self
         dialog.fromViewController = self
         dialog.show()
-        self.mz_dismissFormSheetControllerAnimated(true, completionHandler: nil)
+        self.mz_dismissFormSheetController(animated: true, completionHandler: nil)
     }
-    func sharer(sharer: FBSDKSharing!, didFailWithError error: NSError!) {
-        print(error.description)
+    func sharer(_ sharer: FBSDKSharing!, didFailWithError error: Error!) {
+        //print(error.description)
     }
     
-    func sharer(sharer: FBSDKSharing!, didCompleteWithResults results: [NSObject : AnyObject]!) {
+    func sharer(_ sharer: FBSDKSharing!, didCompleteWithResults results: [AnyHashable: Any]!) {
         print(results)
     }
     
-    func sharerDidCancel(sharer: FBSDKSharing!) {
+    func sharerDidCancel(_ sharer: FBSDKSharing!) {
         print("cancel share")
     }
     

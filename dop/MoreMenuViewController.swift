@@ -26,34 +26,34 @@ class MoreMenuViewController: UITableViewController {
         userName.text = User.userName
         getUserImage()
         
-        friendsIcon.image = friendsIcon.image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-        friendsIcon.tintColor = UIColor.grayColor()
+        friendsIcon.image = friendsIcon.image!.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        friendsIcon.tintColor = UIColor.gray
         
-        trophyIcon.image = trophyIcon.image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-        trophyIcon.tintColor = UIColor.grayColor()
+        trophyIcon.image = trophyIcon.image!.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        trophyIcon.tintColor = UIColor.gray
         
-        configIcon.image = configIcon.image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-        configIcon.tintColor = UIColor.grayColor()
+        configIcon.image = configIcon.image!.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        configIcon.tintColor = UIColor.gray
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.topItem!.title = "Menú"
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if  indexPath.section == 2 { setActionSheet() }
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if  (indexPath as NSIndexPath).section == 2 { setActionSheet() }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 
-    @IBAction func getFriends(sender: UIButton) {
-        self.performSegueWithIdentifier("friendsList", sender: self)
+    @IBAction func getFriends(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "friendsList", sender: self)
     }
     
     func getUserImage() {
-        let url: NSURL = NSURL(string: User.userImageUrl)!
+        let url: URL = URL(string: User.userImageUrl)!
         Utilities.downloadImage(url, completion: {(data, error) -> Void in
             if let image = UIImage(data: data!) {
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
                     self.userImage.image = image
                 }
             } else {
@@ -63,15 +63,15 @@ class MoreMenuViewController: UITableViewController {
     }
     
     func setActionSheet() {
-        let actionSheet: UIAlertController = UIAlertController(title: nil, message: "¿Seguro que deseas cerrar sesión?", preferredStyle: .ActionSheet)
+        let actionSheet: UIAlertController = UIAlertController(title: nil, message: "¿Seguro que deseas cerrar sesión?", preferredStyle: .actionSheet)
         
-        let logoutAction = UIAlertAction(title: "Cerra Sesión", style: .Destructive, handler: {
+        let logoutAction = UIAlertAction(title: "Cerra Sesión", style: .destructive, handler: {
             (alert: UIAlertAction!) -> Void in
             self.logoutSession()
         })
         
         //
-        let cancelAction = UIAlertAction(title: "Cancelar", style: .Cancel, handler: {
+        let cancelAction = UIAlertAction(title: "Cancelar", style: .cancel, handler: {
             (alert: UIAlertAction!) -> Void in
             print("Cancelled")
         })
@@ -79,7 +79,7 @@ class MoreMenuViewController: UITableViewController {
         actionSheet.addAction(logoutAction)
         actionSheet.addAction(cancelAction)
         
-        self.presentViewController(actionSheet, animated: true, completion: nil)
+        self.present(actionSheet, animated: true, completion: nil)
     }
     
 
@@ -87,14 +87,14 @@ class MoreMenuViewController: UITableViewController {
         switch(User.loginType) {
         case("facebook"):
             // Facebook logout
-            if((FBSDKAccessToken.currentAccessToken()) != nil) {
+            if((FBSDKAccessToken.current()) != nil) {
                 // Close the session and remove the access token from the cache
                 // The session state handler (in the app delegate) will be called automatically
                 let loginManager: FBSDKLoginManager = FBSDKLoginManager()
                 loginManager.logOut()
-                self.dismissViewControllerAnimated(true, completion:nil)
+                self.dismiss(animated: true, completion:nil)
                 User.activeSession = false
-                performSegueWithIdentifier("loginController", sender: self)
+                performSegue(withIdentifier: "loginController", sender: self)
             }
 
         default:
@@ -103,9 +103,9 @@ class MoreMenuViewController: UITableViewController {
 
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "userProfile" {
-            let destination_view = segue.destinationViewController as! UserProfileStickyController
+            let destination_view = segue.destination as! UserProfileStickyController
             destination_view.user_image = UIImageView(image: userImage.image)
             destination_view.user_id = User.user_id
 //            destination_view.person = PeopleModel(names: User.userName, surnames: User.userSurnames, user_id: User.user_id, birth_date: "1991-08-20", facebook_key: "", privacy_status: 0, main_image: User.userImageUrl, level: 0, exp: 20.0)

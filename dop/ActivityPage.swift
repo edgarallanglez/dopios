@@ -9,7 +9,7 @@
 import UIKit
 
 @objc protocol ActivityPageDelegate {
-   optional func resizeActivityView(dynamic_height: CGFloat)
+   @objc optional func resizeActivityView(_ dynamic_height: CGFloat)
 }
 
 class ActivityPage: UITableViewController, TTTAttributedLabelDelegate {
@@ -32,17 +32,17 @@ class ActivityPage: UITableViewController, TTTAttributedLabelDelegate {
     
     override func viewDidLoad() {
         self.tableView.alwaysBounceVertical = false
-        self.tableView.scrollEnabled = false
+        self.tableView.isScrollEnabled = false
         
         let nib = UINib(nibName: "RewardsActivityCell", bundle: nil)
-        self.tableView.registerNib(nib, forCellReuseIdentifier: "RewardsActivityCell")
+        self.tableView.register(nib, forCellReuseIdentifier: "RewardsActivityCell")
         self.tableView.rowHeight = 140
         
         setupLoader()
         
     }
     func setupLoader(){
-        loader = MMMaterialDesignSpinner(frame: CGRectMake(0,70,50,50))
+        loader = MMMaterialDesignSpinner(frame: CGRect(x: 0,y: 70,width: 50,height: 50))
         loader.center.x = self.view.center.x
         loader.lineWidth = 3.0
         loader.startAnimating()
@@ -50,12 +50,12 @@ class ActivityPage: UITableViewController, TTTAttributedLabelDelegate {
         self.view.addSubview(loader)
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         if activity_array.count == 0 { getActivity() }
         else {
             reload()
-            let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("default_view")!
-            cell.hidden = false
+            let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "default_view")!
+            cell.isHidden = false
         }
         
     }
@@ -66,51 +66,51 @@ class ActivityPage: UITableViewController, TTTAttributedLabelDelegate {
         delegate?.resizeActivityView!(dynamic_height)
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.activity_array.count != 0 { return self.activity_array.count }
         
         return 1
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if self.activity_array.count != 0 {
-            let custom_cell: RewardsActivityCell = tableView.dequeueReusableCellWithIdentifier("RewardsActivityCell", forIndexPath: indexPath) as! RewardsActivityCell
-            let model = self.activity_array[indexPath.row]
+            let custom_cell: RewardsActivityCell = tableView.dequeueReusableCell(withIdentifier: "RewardsActivityCell", for: indexPath) as! RewardsActivityCell
+            let model = self.activity_array[(indexPath as NSIndexPath).row]
             
             if self.parent_view != nil {
                 if self.parent_view?.user_image?.image != nil {
                     custom_cell.user_image.image = self.parent_view.user_image.image
                 } else {
-                    downloadImage(NSURL(string: self.parent_view.person.main_image)!, cell: custom_cell)
+                    downloadImage(URL(string: self.parent_view.person.main_image)!, cell: custom_cell)
                 }
             }
             custom_cell.activity_description.linkAttributes = [NSForegroundColorAttributeName: Utilities.dopColor]
-            custom_cell.activity_description.enabledTextCheckingTypes = NSTextCheckingType.Link.rawValue
+            custom_cell.activity_description.enabledTextCheckingTypes = NSTextCheckingResult.CheckingType.link.rawValue
             custom_cell.activity_description.delegate = self
             custom_cell.loadItem(model, viewController: self)
             
             return custom_cell
         } else {
-            let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("default_view", forIndexPath: indexPath)
+            let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "default_view", for: indexPath)
             return cell
         }
     }
     
-    func attributedLabel(label: TTTAttributedLabel!, didSelectLinkWithURL url: NSURL!) {
-        let splitter = String(url).componentsSeparatedByString(":")
+    func attributedLabel(_ label: TTTAttributedLabel!, didSelectLinkWith url: URL!) {
+        let splitter = String(describing: url).components(separatedBy: ":")
         let segue: String = splitter[0]
         let branch_id: Int = Int(splitter[1])!
         
         if segue == "branchProfile" {
-            let view_controller = self.storyboard!.instantiateViewControllerWithIdentifier("BranchProfileStickyController") as! BranchProfileStickyController
+            let view_controller = self.storyboard!.instantiateViewController(withIdentifier: "BranchProfileStickyController") as! BranchProfileStickyController
             view_controller.branch_id = branch_id
             self.navigationController?.pushViewController(view_controller, animated: true)
         }
@@ -120,7 +120,7 @@ class ActivityPage: UITableViewController, TTTAttributedLabelDelegate {
     func getActivity() {
 
         UserProfileController.getAllTakingCouponsWithSuccess(parent_view.user_id, limit: 10, success: { (data) -> Void in
-            let json = JSON(data: data)
+            let json = data!
             
             for (_, subJson): (String, JSON) in json["data"] {
                 let client_coupon_id = subJson["clients_coupon_id"].int
@@ -144,8 +144,8 @@ class ActivityPage: UITableViewController, TTTAttributedLabelDelegate {
                 var formatedDate =  subJson["used_date"].string!
                 let private_activity = subJson["private"].bool
                 
-                let separators = NSCharacterSet(charactersInString: "T+")
-                let parts = formatedDate.componentsSeparatedByCharactersInSet(separators)
+                let separators = CharacterSet(charactersIn: "T+")
+                let parts = formatedDate.components(separatedBy: separators)
                 formatedDate = "\(parts[0]) \(parts[1])"
                 
                 let model = NewsfeedNote(client_coupon_id:client_coupon_id,friend_id: friend_id, user_id: user_id, branch_id: branch_id, coupon_name: name, branch_name: branch_name, names: names, surnames: surnames, user_image: main_image, company_id: company_id, branch_image: logo, total_likes:total_likes,user_like: user_like, date: date, formatedDate: formatedDate, private_activity: private_activity!)
@@ -153,7 +153,7 @@ class ActivityPage: UITableViewController, TTTAttributedLabelDelegate {
                 self.activity_array.append(model)
             }
             
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 self.reload()
                 
                 Utilities.fadeInFromBottomAnimation(self.tableView, delay: 0, duration: 1, yPosition: 20)
@@ -163,23 +163,23 @@ class ActivityPage: UITableViewController, TTTAttributedLabelDelegate {
             },
             
             failure: { (error) -> Void in
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     Utilities.fadeOutViewAnimation(self.loader, delay: 0, duration: 0.3)
                 })
         })
     }
     
-    func reloadWithOffset(parent_scroll: UICollectionView) {
+    func reloadWithOffset(_ parent_scroll: UICollectionView) {
         if activity_array.count != 0 {
                 let firstNewsfeed = self.activity_array.first as NewsfeedNote!
 
                 let params:[String: AnyObject] = [
-                    "offset" : String(stringInterpolationSegment: offset),
-                    "used_date" : firstNewsfeed.formatedDate,
-                    "user_id": parent_view.user_id]
+                    "offset" : String(stringInterpolationSegment: offset) as AnyObject,
+                    "used_date" : firstNewsfeed!.formatedDate as AnyObject,
+                    "user_id": parent_view.user_id as AnyObject]
             
             UserProfileController.getAllTakingCouponsOffsetWithSuccess(params, success: { (data) -> Void in
-                let json = JSON(data: data)
+                let json = data!
                 
                 self.new_data = false
                 self.added_values = 0
@@ -212,7 +212,7 @@ class ActivityPage: UITableViewController, TTTAttributedLabelDelegate {
                     self.added_values += 1
                 }
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
 
                     if self.new_data { self.offset += self.added_values }
                     parent_scroll.finishInfiniteScroll()
@@ -222,7 +222,7 @@ class ActivityPage: UITableViewController, TTTAttributedLabelDelegate {
                 },
                 
                 failure: { (error) -> Void in
-                    dispatch_async(dispatch_get_main_queue(), {
+                    DispatchQueue.main.async(execute: {
                         parent_scroll.finishInfiniteScroll()
                     })
             })
@@ -233,16 +233,16 @@ class ActivityPage: UITableViewController, TTTAttributedLabelDelegate {
     func reload() {
         if self.parent_page_controller.index == 0 {
             self.tableView.reloadData()
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 self.setFrame()
             });
         }
     }
     
-    func downloadImage(url: NSURL, cell: RewardsActivityCell) {
+    func downloadImage(_ url: URL, cell: RewardsActivityCell) {
         Utilities.downloadImage(url, completion: {(data, error) -> Void in
             if let image = UIImage(data: data!) {
-                dispatch_async(dispatch_get_main_queue()){
+                DispatchQueue.main.async{
                     cell.user_image.image = image
                 }
             }else{

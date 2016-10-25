@@ -14,7 +14,7 @@ class ConnectionCell: UITableViewCell {
     @IBOutlet weak var connection_image: UIImageView!
     @IBOutlet weak var connection_name: UILabel!
     
-    func loadItem(connection: ConnectionModel) {
+    func loadItem(_ connection: ConnectionModel) {
         connection_name.text = connection.name
     }
 

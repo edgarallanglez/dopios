@@ -9,7 +9,7 @@
 import UIKit
 
 @objc protocol ConnectionsPageDelegate {
-    optional func resizeConnectionsSize(dynamic_height: CGFloat)
+    @objc optional func resizeConnectionsSize(_ dynamic_height: CGFloat)
 }
 
 class ConnectionsPage: UITableViewController {
@@ -27,20 +27,20 @@ class ConnectionsPage: UITableViewController {
     
     override func viewDidLoad() {
         self.tableView.alwaysBounceVertical = false
-        self.tableView.scrollEnabled = false
+        self.tableView.isScrollEnabled = false
         self.tableView.rowHeight = 60
         setupLoader()
         
     }
     func setupLoader(){
-        loader = MMMaterialDesignSpinner(frame: CGRectMake(0,70,50,50))
+        loader = MMMaterialDesignSpinner(frame: CGRect(x: 0,y: 70,width: 50,height: 50))
         loader.center.x = self.view.center.x
         loader.lineWidth = 3.0
         loader.startAnimating()
         loader.tintColor = Utilities.dopColor
         self.view.addSubview(loader)
     }
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         if connection_array.count == 0 { getConnections() }
         else { reload() }
     }
@@ -49,35 +49,35 @@ class ConnectionsPage: UITableViewController {
         delegate?.resizeConnectionsSize!(self.tableView.contentSize.height)
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         
-        let model: ConnectionModel = self.connection_array[indexPath.row]
-        let view_controller = self.storyboard!.instantiateViewControllerWithIdentifier("BranchProfileStickyController") as! BranchProfileStickyController
+        let model: ConnectionModel = self.connection_array[(indexPath as NSIndexPath).row]
+        let view_controller = self.storyboard!.instantiateViewController(withIdentifier: "BranchProfileStickyController") as! BranchProfileStickyController
         view_controller.branch_id = model.branch_id
         //var rootViewController = self.window!.rootViewController as UINavigationController
         self.parent_view.navigationController?.pushViewController(view_controller, animated: true)
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.connection_array.count
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell: ConnectionCell = tableView.dequeueReusableCellWithIdentifier("ConnectionCell", forIndexPath: indexPath) as! ConnectionCell
-        cell.selectionStyle = UITableViewCellSelectionStyle.None
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: ConnectionCell = tableView.dequeueReusableCell(withIdentifier: "ConnectionCell", for: indexPath) as! ConnectionCell
+        cell.selectionStyle = UITableViewCellSelectionStyle.none
         
-        let model = self.connection_array[indexPath.row]
-        cell.hidden = true
+        let model = self.connection_array[(indexPath as NSIndexPath).row]
+        cell.isHidden = true
         downloadImage(model, cell: cell)
         cell.loadItem(model)
         
         if parent_view.user_id != User.user_id{
-            cell.following_button.hidden = true
+            cell.following_button.isHidden = true
         }
         
         return cell
@@ -85,7 +85,7 @@ class ConnectionsPage: UITableViewController {
     
     func getConnections() {
         UserProfileController.getAllBranchesFollowedWithSuccess(parent_view.user_id, success: { (data) -> Void in
-            let json = JSON(data: data)
+            let json = data!
             
             for (_, subJson): (String, JSON) in json["data"] {
                 let name = subJson["name"].string!
@@ -101,7 +101,7 @@ class ConnectionsPage: UITableViewController {
                 self.connection_array.append(model)
             }
             
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 self.reload()
                 Utilities.fadeInFromBottomAnimation(self.tableView, delay: 0, duration: 1, yPosition: 20)
                 Utilities.fadeOutViewAnimation(self.loader, delay: 0, duration: 0.3)
@@ -109,7 +109,7 @@ class ConnectionsPage: UITableViewController {
         },
             
             failure: { (error) -> Void in
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     Utilities.fadeOutViewAnimation(self.loader, delay: 0, duration: 0.3)
                 })
         })
@@ -118,16 +118,16 @@ class ConnectionsPage: UITableViewController {
     func reload() {
         if self.parent_page_controller.index == 2 {
             self.tableView.reloadData()
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            DispatchQueue.main.async(execute: { () -> Void in
                 self.setFrame()
             })
         }
     }
     
-    func reloadWithOffset(parent_scroll: UICollectionView) {
+    func reloadWithOffset(_ parent_scroll: UICollectionView) {
         if connection_array.count != 0 {
             UserProfileController.getAllBranchesFollowedOffsetWithSuccess(parent_view.user_id, last_branch: connection_array.first!.branch_follower_id, offset: offset, success: { (data) -> Void in
-                let json = JSON(data: data)
+                let json = data!
                 
                 self.new_data = false
                 self.added_values = 0
@@ -147,7 +147,7 @@ class ConnectionsPage: UITableViewController {
                     self.added_values += 1
                 }
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     self.reload()
                     if self.new_data { self.offset += self.added_values }
                     parent_scroll.finishInfiniteScroll()
@@ -156,27 +156,27 @@ class ConnectionsPage: UITableViewController {
                 },
                 
                 failure: { (error) -> Void in
-                    dispatch_async(dispatch_get_main_queue(), {
+                    DispatchQueue.main.async(execute: {
                         parent_scroll.finishInfiniteScroll()
                     })
             })
         } else { parent_scroll.finishInfiniteScroll() }
     }
     
-    override func tableView(tableView: UITableView, didEndDisplayingCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-            UIView.animateWithDuration(1, animations: { cell.alpha = 1 })
+    override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        DispatchQueue.main.async(execute: { () -> Void in
+            UIView.animate(withDuration: 1, animations: { cell.alpha = 1 })
         })
     }
     
-    func downloadImage(model: ConnectionModel, cell: ConnectionCell) {
-        let url = NSURL(string: "\(Utilities.dopImagesURL)\(model.company_id)/\(model.logo!)")!
+    func downloadImage(_ model: ConnectionModel, cell: ConnectionCell) {
+        let url = URL(string: "\(Utilities.dopImagesURL)\(model.company_id)/\(model.logo!)")!
         Utilities.downloadImage(url, completion: {(data, error) -> Void in
             if let image = UIImage(data: data!) {
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
                     cell.connection_image.image = image
-                    UIView.animateWithDuration(0.5, animations: {
-                        cell.hidden = false
+                    UIView.animate(withDuration: 0.5, animations: {
+                        cell.isHidden = false
                     })
                     
                 }

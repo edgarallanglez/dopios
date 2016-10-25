@@ -31,7 +31,7 @@ class UserProfileStickyHeader: UIView {
     var following = false
     
     
-    func setView(parent_view_controller: UserProfileStickyController) {
+    func setView(_ parent_view_controller: UserProfileStickyController) {
         self.parent_view = parent_view_controller
         self.user_id = self.parent_view.user_id
         
@@ -41,7 +41,7 @@ class UserProfileStickyHeader: UIView {
         if parent_view.person != nil {
             
             if parent_view.user_image?.image != nil { user_image.image = parent_view_controller.user_image.image }
-            else { downloadImage(NSURL(string: parent_view_controller.person.main_image)!) }
+            else { downloadImage(URL(string: parent_view_controller.person.main_image)!) }
             
             self.user_exp = parent_view.person.exp
             current_level = (self.parent_view.person?.level ?? 0)!
@@ -60,27 +60,27 @@ class UserProfileStickyHeader: UIView {
         
     }
     
-    @IBAction func followUnfollow(sender: UIButton) {
-        self.follow_button.setImage(nil, forState: UIControlState.Normal)
+    @IBAction func followUnfollow(_ sender: UIButton) {
+        self.follow_button.setImage(nil, for: UIControlState())
         
-        let params:[String: AnyObject] = [ "user_two_id": self.user_id ]
+        let params:[String: AnyObject] = [ "user_two_id": self.user_id as AnyObject ]
         
-        Utilities.setButtonSpinner(self.follow_button, spinner: self.spinner, spinner_size: 18, spinner_width: 1.5, spinner_color: UIColor.whiteColor() )
+        Utilities.setButtonSpinner(self.follow_button, spinner: self.spinner, spinner_size: 18, spinner_width: 1.5, spinner_color: UIColor.white )
         Utilities.fadeInViewAnimation(self.spinner, delay: 0, duration: 0.3)
         
         if !self.following {
             UserProfileController.followFriendWithSuccess(params, success: { (data) -> Void in
-                let json: JSON = JSON(data: data)
+                let json:JSON = data!
                 
                 print(json)
-                dispatch_async(dispatch_get_main_queue(), {
-                    UIButton.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
+                DispatchQueue.main.async(execute: {
+                    UIButton.animate(withDuration: 0.5, delay: 0, options: UIViewAnimationOptions(), animations: {
                         
                         Utilities.fadeOutViewAnimation(self.spinner, delay: 0, duration: 0.3)
                         switch json["data"]["operation_id"].int! {
-                            case 0: self.follow_button.setImage(UIImage(named: "clock-icon"), forState: UIControlState.Normal)
+                            case 0: self.follow_button.setImage(UIImage(named: "clock-icon"), for: UIControlState())
                                 self.following = false
-                            case 1: self.follow_button.setImage(UIImage(named: "following-icon"), forState: UIControlState.Normal)
+                            case 1: self.follow_button.setImage(UIImage(named: "following-icon"), for: UIControlState())
                                 self.following = true
                             default: break
                         }
@@ -95,9 +95,9 @@ class UserProfileStickyHeader: UIView {
                 
                 },
                 failure: { (data) -> Void in
-                    dispatch_async(dispatch_get_main_queue(), {
+                    DispatchQueue.main.async(execute: {
                         Utilities.fadeOutViewAnimation(self.spinner, delay: 0, duration: 0.3)
-                        self.follow_button.setImage(UIImage(named: "follow-icon"), forState: .Normal)
+                        self.follow_button.setImage(UIImage(named: "follow-icon"), for: UIControlState())
                         self.follow_button.backgroundColor = Utilities.dop_detail_color
                         self.follow_button.contentEdgeInsets = UIEdgeInsetsMake(18, 18, 18, 18)
                     })
@@ -105,13 +105,13 @@ class UserProfileStickyHeader: UIView {
             })
         } else {
             UserProfileController.unfollowFriendWithSuccess(params, success: { (data) -> Void in
-                let json: JSON = JSON(data: data)
+                let json: JSON = data!
                 self.following = false
                 
-                dispatch_async(dispatch_get_main_queue(), {
-                    UIButton.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
+                DispatchQueue.main.async(execute: {
+                    UIButton.animate(withDuration: 0.5, delay: 0, options: UIViewAnimationOptions(), animations: {
                         Utilities.fadeOutViewAnimation(self.spinner, delay: 0, duration: 0.3)
-                            self.follow_button.setImage(UIImage(named: "follow-icon"), forState: UIControlState.Normal)
+                            self.follow_button.setImage(UIImage(named: "follow-icon"), for: UIControlState())
                             self.follow_button.contentEdgeInsets = UIEdgeInsetsMake(18, 18, 18, 18)
                             self.follow_button.backgroundColor = Utilities.dop_detail_color
                             self.layoutIfNeeded()
@@ -123,8 +123,8 @@ class UserProfileStickyHeader: UIView {
                 
                 },
                 failure: { (data) -> Void in
-                    dispatch_async(dispatch_get_main_queue(), {
-                        self.follow_button.setImage(UIImage(named: "following-icon"), forState: .Normal)
+                    DispatchQueue.main.async(execute: {
+                        self.follow_button.setImage(UIImage(named: "following-icon"), for: UIControlState())
                         self.follow_button.backgroundColor = Utilities.dopColor
                     })
                     
@@ -133,11 +133,11 @@ class UserProfileStickyHeader: UIView {
         
     }
     
-    func setFollowingButton(is_friend: Bool) {
+    func setFollowingButton(_ is_friend: Bool) {
         self.following = is_friend
         if is_friend {
-            UIButton.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
-                self.follow_button.setImage(UIImage(named: "following-icon"), forState: UIControlState.Normal)
+            UIButton.animate(withDuration: 0.5, delay: 0, options: UIViewAnimationOptions(), animations: {
+                self.follow_button.setImage(UIImage(named: "following-icon"), for: UIControlState())
                 self.follow_button.contentEdgeInsets = UIEdgeInsetsMake(16, 16, 16, 16)
                 self.follow_button.backgroundColor = Utilities.dopColor
                 self.layoutIfNeeded()
@@ -147,8 +147,8 @@ class UserProfileStickyHeader: UIView {
                     
             })
         } else if self.parent_view.operation_id == 0 && self.user_id != User.user_id {
-            UIButton.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
-                self.follow_button.setImage(UIImage(named: "clock-icon"), forState: UIControlState.Normal)
+            UIButton.animate(withDuration: 0.5, delay: 0, options: UIViewAnimationOptions(), animations: {
+                self.follow_button.setImage(UIImage(named: "clock-icon"), for: UIControlState())
                 self.follow_button.contentEdgeInsets = UIEdgeInsetsMake(16, 16, 16, 16)
                 self.follow_button.backgroundColor = Utilities.dopColor
                 self.layoutIfNeeded()
@@ -158,8 +158,8 @@ class UserProfileStickyHeader: UIView {
                     
             })
         } else if self.parent_view.operation_id == 4 {
-            UIButton.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
-                self.follow_button.setImage(UIImage(named: "follow-icon"), forState: UIControlState.Normal)
+            UIButton.animate(withDuration: 0.5, delay: 0, options: UIViewAnimationOptions(), animations: {
+                self.follow_button.setImage(UIImage(named: "follow-icon"), for: UIControlState())
                 self.follow_button.contentEdgeInsets = UIEdgeInsetsMake(18, 18, 18, 18)
                 self.follow_button.backgroundColor = Utilities.dop_detail_color
                 self.layoutIfNeeded()
@@ -172,10 +172,10 @@ class UserProfileStickyHeader: UIView {
         } else if self.user_id != User.user_id { Utilities.fadeInFromBottomAnimation(self.follow_button, delay: 0, duration: 0.7, yPosition: 0) }
     }
     
-    func downloadImage(url: NSURL) {
+    func downloadImage(_ url: URL) {
         Utilities.downloadImage(url, completion: {(data, error) -> Void in
             if let image = UIImage(data: data!) {
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
                     self.user_image?.image = image
                     self.setProgressBar()
                 }

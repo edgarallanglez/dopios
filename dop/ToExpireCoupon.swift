@@ -26,17 +26,17 @@ class ToExpireCoupon: UIView, ModalDelegate {
         super.init(frame: CGRect(x: 0, y: 0, width: 180, height: 230))
     }
     
-    func loadItem(coupon: Coupon, viewController: UIViewController) {
+    func loadItem(_ coupon: Coupon, viewController: UIViewController) {
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(ToExpireCoupon.tapCoupon(_:))))
         
         self.coupon = coupon
         self.descriptionLbl.text = coupon.couponDescription
         self.viewController = viewController
         
-        NSNotificationCenter.defaultCenter().addObserver(
+        NotificationCenter.default.addObserver(
             self,
             selector: #selector(ToExpireCoupon.updateLikeAndTaken(_:)),
-            name: "takenOrLikeStatus",
+            name: NSNotification.Name(rawValue: "takenOrLikeStatus"),
             object: nil)
         
     }
@@ -45,45 +45,45 @@ class ToExpireCoupon: UIView, ModalDelegate {
         super.init(coder: aDecoder)!
     }
     
-    func move(x: CGFloat, y: CGFloat){
-        self.frame.origin = CGPointMake(x,y)
+    func move(_ x: CGFloat, y: CGFloat){
+        self.frame.origin = CGPoint(x: x,y: y)
     }
 
-    func tapCoupon(sender: UITapGestureRecognizer){
+    func tapCoupon(_ sender: UITapGestureRecognizer){
         setViewCount()
         
         let modal: ModalViewController = ModalViewController(currentView: self.viewController!, type: ModalViewControllerType.CouponDetail)
         
-        dispatch_async(dispatch_get_main_queue()) {
+        DispatchQueue.main.async {
             modal.willPresentCompletionHandler = { vc in
                 let navigationController = vc as! SimpleModalViewController
                 navigationController.coupon = self.coupon
             }
-            modal.presentAnimated(true, completionHandler: nil)
+            modal.present(animated: true, completionHandler: nil)
             modal.delegate = self
         }
     }
     
-    func pressActionButton(modal: ModalViewController) {
+    func pressActionButton(_ modal: ModalViewController) {
         if modal.action_type == "profile" {
-            let view_controller = viewController!.storyboard!.instantiateViewControllerWithIdentifier("BranchProfileStickyController") as! BranchProfileStickyController
+            let view_controller = viewController!.storyboard!.instantiateViewController(withIdentifier: "BranchProfileStickyController") as! BranchProfileStickyController
             view_controller.coupon = self.coupon
             view_controller.branch_id = coupon.branch_id
             viewController!.navigationController?.pushViewController(view_controller, animated: true)
             viewController?.hidesBottomBarWhenPushed = false
-            modal.dismissAnimated(true, completionHandler: nil)
+            modal.dismiss(animated: true, completionHandler: nil)
         }
         
         if modal.action_type == "redeem" {
             if coupon.available>0{
-                let view_controller  = viewController!.storyboard!.instantiateViewControllerWithIdentifier("readQRView") as! readQRViewController
+                let view_controller  = viewController!.storyboard!.instantiateViewController(withIdentifier: "readQRView") as! readQRViewController
                 view_controller.coupon_id = self.coupon.id
                 view_controller.coupon = self.coupon
                 view_controller.branch_id = self.coupon.branch_id
                 
                 viewController?.hidesBottomBarWhenPushed = true
                 
-                modal.dismissAnimated(true, completionHandler:{ (modal) -> Void in
+                modal.dismiss(animated: true, completionHandler:{ (modal) -> Void in
                     self.viewController!.hidesBottomBarWhenPushed = true
                     self.viewController!.navigationController?.pushViewController(view_controller, animated: true)
                     self.viewController!.hidesBottomBarWhenPushed = false
@@ -100,8 +100,8 @@ class ToExpireCoupon: UIView, ModalDelegate {
                     navigation_controller.setAlert(alert_array)
                 }
                 
-                modal.dismissAnimated(true, completionHandler: { (modal) -> Void in
-                    error_modal.presentAnimated(true, completionHandler: nil)
+                modal.dismiss(animated: true, completionHandler: { (modal) -> Void in
+                    error_modal.present(animated: true, completionHandler: nil)
                     
                 })
                 
@@ -110,7 +110,7 @@ class ToExpireCoupon: UIView, ModalDelegate {
     }
     
     func setViewCount() {
-        let params: [String: AnyObject] = ["coupon_id": self.coupon.id]
+        let params: [String: AnyObject] = ["coupon_id": self.coupon.id as AnyObject]
         CouponController.viewCouponWithSuccess(params, success: { (couponsData) -> Void in
             let json: JSON = JSON(couponsData)
             print(json)
@@ -121,7 +121,7 @@ class ToExpireCoupon: UIView, ModalDelegate {
         )
     }
     
-    func updateLikeAndTaken(notification:NSNotification){
+    func updateLikeAndTaken(_ notification:Foundation.Notification){
         
         let object = notification.object as! [String: AnyObject]
         

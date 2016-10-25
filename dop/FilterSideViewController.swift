@@ -52,13 +52,13 @@ class FilterSideViewController: UIViewController {
     
     var activeFilters: [Int] = []
     
-    override func viewWillAppear(animated: Bool) {
-        UIApplication.sharedApplication().statusBarStyle = .Default
+    override func viewWillAppear(_ animated: Bool) {
+        UIApplication.shared.statusBarStyle = .default
         FilterSideViewController.open = true
     }
     
-    override func viewWillDisappear(animated: Bool) {
-        UIApplication.sharedApplication().statusBarStyle = .LightContent
+    override func viewWillDisappear(_ animated: Bool) {
+        UIApplication.shared.statusBarStyle = .lightContent
         FilterSideViewController.open = false
     }
     override func viewDidLoad() {
@@ -89,36 +89,36 @@ class FilterSideViewController: UIViewController {
                                              teatro]
     }
     
-    @IBAction func setFoodSubcategories(sender: UIButton) {
+    @IBAction func setFoodSubcategories(_ sender: UIButton) {
         activeFilters.removeAll()
         for item in foodCategoriesArray {
-            if item.on {
+            if item.isOn {
                 activeFilters.append(item.tag)
             }
         }
-        self.revealViewController().revealToggleAnimated(true)
+        self.revealViewController().revealToggle(animated: true)
         setFilterArray()
     }
     
-    @IBAction func setServicesSubcategories(sender: UIButton) {
+    @IBAction func setServicesSubcategories(_ sender: UIButton) {
         activeFilters.removeAll()
         for item in servicesCategoriesArray {
-            if item.on {
+            if item.isOn {
                 activeFilters.append(item.tag)
             }
         }
-        self.revealViewController().revealToggleAnimated(true)
+        self.revealViewController().revealToggle(animated: true)
         setFilterArray()
     }
     
-    @IBAction func setEntertainmentSubcategories(sender: UIButton) {
+    @IBAction func setEntertainmentSubcategories(_ sender: UIButton) {
         activeFilters.removeAll()
         for item in entertainmentCategoriesArray {
-            if item.on {
+            if item.isOn {
                 activeFilters.append(item.tag)
             }
         }
-        self.revealViewController().revealToggleAnimated(true)
+        self.revealViewController().revealToggle(animated: true)
         setFilterArray()
         
     }
@@ -126,30 +126,30 @@ class FilterSideViewController: UIViewController {
     
     func setFilterArray() {
         Utilities.filterArray = activeFilters
-        NSNotificationCenter.defaultCenter().postNotificationName("filtersChanged", object: nil)
+        NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: "filtersChanged"), object: nil)
 
     }
     
-    @IBAction func setViewController(sender: FilterSegmentedControl) {
+    @IBAction func setViewController(_ sender: FilterSegmentedControl) {
         switch filterSegmented.selectedIndex {
             case 0:
-                foodView.hidden = false
-                servicesView.hidden = true
-                entertainmentView.hidden = true
+                foodView.isHidden = false
+                servicesView.isHidden = true
+                entertainmentView.isHidden = true
             case 1:
-                foodView.hidden = true
-                servicesView.hidden = false
-                entertainmentView.hidden = true
+                foodView.isHidden = true
+                servicesView.isHidden = false
+                entertainmentView.isHidden = true
             case 2:
-                foodView.hidden = true
-                servicesView.hidden = true
-                entertainmentView.hidden = false
+                foodView.isHidden = true
+                servicesView.isHidden = true
+                entertainmentView.isHidden = false
             default:
                 break
             }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 //        let view = segue.destinationViewController as! NearbyMapViewController
 //        view.filterArray = activeFilters
         //view.getNearestBranches(UIButton())

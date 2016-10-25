@@ -7,9 +7,29 @@
 //
 
 import UIKit
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 @objc protocol RankingPageDelegate {
-    optional func resizeRankingView(dynamic_height: CGFloat)
+    @objc optional func resizeRankingView(_ dynamic_height: CGFloat)
 }
 
 class BranchRankingViewController: UITableViewController {
@@ -27,7 +47,7 @@ class BranchRankingViewController: UITableViewController {
     
     override func viewDidLoad() {
         self.tableView.alwaysBounceVertical = false
-        self.tableView.scrollEnabled = false
+        self.tableView.isScrollEnabled = false
         //        self.view.translatesAutoresizingMaskIntoConstraints = false
         self.tableView.rowHeight = 60
         
@@ -35,7 +55,7 @@ class BranchRankingViewController: UITableViewController {
     }
     
     func setupLoader(){
-        loader = MMMaterialDesignSpinner(frame: CGRectMake(0,70,50,50))
+        loader = MMMaterialDesignSpinner(frame: CGRect(x: 0,y: 70,width: 50,height: 50))
         loader.center.x = self.view.center.x
         loader.lineWidth = 3.0
         loader.startAnimating()
@@ -43,7 +63,7 @@ class BranchRankingViewController: UITableViewController {
         self.view.addSubview(loader)
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         if ranking_array.count == 0 {
             getRanking()
         } else { setFrame() }
@@ -54,11 +74,11 @@ class BranchRankingViewController: UITableViewController {
         delegate?.resizeRankingView!(self.tableView.contentSize.height)
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        let model: PeopleModel = ranking_array[indexPath.row]
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let model: PeopleModel = ranking_array[(indexPath as NSIndexPath).row]
         
-        let view_controller = self.storyboard!.instantiateViewControllerWithIdentifier("UserProfileStickyController") as! UserProfileStickyController
+        let view_controller = self.storyboard!.instantiateViewController(withIdentifier: "UserProfileStickyController") as! UserProfileStickyController
         view_controller.user_id = model.user_id
         view_controller.is_friend = model.is_friend
         view_controller.operation_id = model.operation_id!
@@ -67,20 +87,20 @@ class BranchRankingViewController: UITableViewController {
 
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.ranking_array.count
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell: PeopleCell = tableView.dequeueReusableCellWithIdentifier("PeopleCell", forIndexPath: indexPath) as! PeopleCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: PeopleCell = tableView.dequeueReusableCell(withIdentifier: "PeopleCell", for: indexPath) as! PeopleCell
         
-        let model = self.ranking_array[indexPath.row]
+        let model = self.ranking_array[(indexPath as NSIndexPath).row]
         cell.loadItem(model, viewController: self)
-        downloadImage(model, cell: cell, index: indexPath.row)
+        downloadImage(model, cell: cell, index: (indexPath as NSIndexPath).row)
         
         return cell
     }
@@ -88,7 +108,7 @@ class BranchRankingViewController: UITableViewController {
     func getRanking() {
 
         BranchProfileController.getBranchProfileRankingWithSuccess(parent_view.branch_id, success: { (data) -> Void in
-            let json = JSON(data: data)
+            let json = data!
             
             for (_, subJson): (String, JSON) in json["data"] {
                 let names = subJson["names"].string!
@@ -113,8 +133,8 @@ class BranchRankingViewController: UITableViewController {
                 }
             }
             
-            dispatch_async(dispatch_get_main_queue(), {
-                self.ranking_array.sortInPlace({ $0.total_used > $1.total_used })
+            DispatchQueue.main.async(execute: {
+                self.ranking_array.sort(by: { $0.total_used > $1.total_used })
                 self.reload()
                 Utilities.fadeInFromBottomAnimation(self.tableView, delay: 0, duration: 1, yPosition: 20)
                 Utilities.fadeOutViewAnimation(self.loader, delay: 0, duration: 0.3)
@@ -123,7 +143,7 @@ class BranchRankingViewController: UITableViewController {
             },
             
             failure: { (error) -> Void in
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     Utilities.fadeOutViewAnimation(self.loader, delay: 0, duration: 0.3)
                 })
         })
@@ -131,15 +151,15 @@ class BranchRankingViewController: UITableViewController {
     
     func reload() {
         self.tableView.reloadData()
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+        DispatchQueue.main.async(execute: { () -> Void in
             self.setFrame()
         })
     }
     
-    func reloadWithOffset(parent_scroll: UICollectionView) {
+    func reloadWithOffset(_ parent_scroll: UICollectionView) {
         if ranking_array.count != 0 {
             BranchProfileController.getBranchProfileRankingOffsetWithSuccess(ranking_array.last!.user_id, branch_id: self.parent_view.branch_id, offset: offset, success: { (data) -> Void in
-                let json = JSON(data: data)
+                let json = data!
                 
                 for (_, subJson): (String, JSON) in json["data"] {
                     let names = subJson["names"].string!
@@ -164,7 +184,7 @@ class BranchRankingViewController: UITableViewController {
                     self.added_values += 1
                 }
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     self.reload()
                     if self.new_data { self.offset += self.added_values }
                     parent_scroll.finishInfiniteScroll()
@@ -172,19 +192,19 @@ class BranchRankingViewController: UITableViewController {
                 },
                 
                 failure: { (error) -> Void in
-                    dispatch_async(dispatch_get_main_queue(), {
+                    DispatchQueue.main.async(execute: {
                         parent_scroll.finishInfiniteScroll()
                     })
             })
         } else { parent_scroll.finishInfiniteScroll() }
     }
     
-    func downloadImage(model: PeopleModel, cell: PeopleCell, index: Int) {
-        let url = NSURL(string: model.main_image)
+    func downloadImage(_ model: PeopleModel, cell: PeopleCell, index: Int) {
+        let url = URL(string: model.main_image)
         cell.user_image.alpha = 0
         Utilities.downloadImage(url!, completion: {(data, error) -> Void in
             if let image = data{
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
                     cell.user_image.image = UIImage(data: image)
                     Utilities.fadeInViewAnimation(cell.user_image, delay: 0, duration: 1)
                     cell.setRankingPosition(index)

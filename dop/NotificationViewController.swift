@@ -7,7 +7,9 @@
 //
 
 import UIKit
-
+import Alamofire
+import AlamofireImage
+ 
 class NotificationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, TTTAttributedLabelDelegate {
     @IBOutlet var notificationButton: UIButton!
 
@@ -30,10 +32,10 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         notification_table.alpha = 0
 
         self.refreshControl = UIRefreshControl()
-        self.refreshControl.addTarget(self, action: #selector(NotificationViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        self.refreshControl.addTarget(self, action: #selector(NotificationViewController.refresh(_:)), for: UIControlEvents.valueChanged)
         self.notification_table.addSubview(refreshControl)
 
-        let loader: MMMaterialDesignSpinner = MMMaterialDesignSpinner(frame: CGRectMake(0,0,24,24))
+        let loader: MMMaterialDesignSpinner = MMMaterialDesignSpinner(frame: CGRect(x: 0,y: 0,width: 24,height: 24))
 
         loader.lineWidth = 2.0
         self.notification_table.infiniteScrollIndicatorView = loader
@@ -49,33 +51,33 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         self.offset = self.limit - 1
 
         // Add infinite scroll handler
-        notification_table.addInfiniteScrollWithHandler { [weak self] (scrollView) -> Void in
+        notification_table.addInfiniteScroll { [weak self] (scrollView) -> Void in
             //if(!self!.notifications.isEmpty){
                 self!.getNotificationsWithOffset() //offset
             //}
         }
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(NotificationViewController.showNotificationButton), name: "newNotification", object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(NotificationViewController.showNotificationButton), name: NSNotification.Name(rawValue: "newNotification"), object: nil)
 
         mainLoader.startAnimating()
         mainLoader.tintColor = Utilities.dopColor
         mainLoader.lineWidth = 3.0
         getNotifications()
         
-        NSNotificationCenter.defaultCenter().addObserver(
+        NotificationCenter.default.addObserver(
             self,
             selector: #selector(NotificationViewController.refreshTableView(_:)),
-            name: "refreshTableView",
+            name: NSNotification.Name(rawValue: "refreshTableView"),
             object: nil)
 
     }
-    @IBAction func pressNotificationButton(sender: AnyObject) {
+    @IBAction func pressNotificationButton(_ sender: AnyObject) {
         //notification_table.setContentOffset(CGPointMake(0, 0), animated: true)
         notificationButtonPressed = true
-        if !refreshControl.refreshing { self.getNotifications() }
+        if !refreshControl.isRefreshing { self.getNotifications() }
         Utilities.fadeOutViewAnimation(self.notificationButton, delay: 0, duration: 0.5)
     }
 
-    func refresh(sender:AnyObject){
+    func refresh(_ sender:AnyObject){
         Utilities.fadeOutViewAnimation(self.notificationButton, delay: 0, duration: 0.5)
         if(notificationButtonPressed == false){
             getNotifications()
@@ -83,68 +85,69 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         }
     }
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         User.newNotification = false
     }
 
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return notifications.count
     }
 
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as! NotificationCell;
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! NotificationCell;
 
         cell.title.delegate = self
         cell.title.linkAttributes = [NSForegroundColorAttributeName: Utilities.dopColor]
-        cell.title.activeLinkAttributes = [NSForegroundColorAttributeName : UIColor.blackColor(), NSBackgroundColorAttributeName: UIColor.lightGrayColor()]
-        cell.title.enabledTextCheckingTypes = NSTextCheckingType.Link.rawValue
+        cell.title.activeLinkAttributes = [NSForegroundColorAttributeName : UIColor.black, NSBackgroundColorAttributeName: UIColor.lightGray]
+        cell.title.enabledTextCheckingTypes = NSTextCheckingResult.CheckingType.link.rawValue
 
         if !notifications.isEmpty {
-            let model = self.notifications[indexPath.row]
+            let model = self.notifications[(indexPath as NSIndexPath).row]
             cell.loadItem(model, viewController: self)
-            cell.selectionStyle = UITableViewCellSelectionStyle.None
+            cell.selectionStyle = UITableViewCellSelectionStyle.none
 
-            var imageUrl: NSURL
-            let identifier = "Cell\(indexPath.row)"
-            if model.catcher_id != User.user_id { imageUrl = NSURL(string: "\(model.catcher_image)")! }
-            else { imageUrl = NSURL(string: "\(model.launcher_image)")! }
+            var imageUrl: URL
+            let identifier = "Cell\((indexPath as NSIndexPath).row)"
+            if model.catcher_id != User.user_id { imageUrl = URL(string: "\(model.catcher_image)")! }
+            else { imageUrl = URL(string: "\(model.launcher_image)")! }
 
             let color = cell.contentView.backgroundColor
             cell.backgroundColor = color
-            cell.notification_image.layer.cornerRadius = cell.notification_image.frame.width/2
+
+            //cell.layoutIfNeeded()
+
+            //cell.notification_image.layer.cornerRadius = cell.notification_image.frame.width/2
+
+            
 
             if self.cachedImages[identifier] != nil {
                 let cell_image_saved : UIImage = self.cachedImages[identifier]!
                 cell.notification_image.image = cell_image_saved
-                UIView.animateWithDuration(0.5, animations: {
+                UIView.animate(withDuration: 0.5, animations: {
                     cell.notification_image.alpha = 1
                 })
 
             } else {
-                cell.notification_image.alpha = 0
-                Utilities.downloadImage(imageUrl, completion: {(data, error) -> Void in
-                    if let image = UIImage(data: data!) {
-                        dispatch_async(dispatch_get_main_queue()) {
-                            if tableView.indexPathForCell(cell)?.row == indexPath.row {
-                                self.cachedImages[identifier] = image
-                                //self.cachedImages[identifier] = imageData
-                                let image_saved : UIImage = self.cachedImages[identifier]!
-                                cell.notification_image.image = image_saved
-                                UIView.animateWithDuration(0.5, animations: {
-                                    cell.notification_image.alpha = 1
-                                })
-                            }
-                        }
-                    } else {
-                        print("Error")
+                print("ENTRO AQUI")
+                cell.notification_image.alpha = 0.3
+                cell.notification_image.image = UIImage(named: "dop-logo-transparent")
+                cell.notification_image.backgroundColor = Utilities.lightGrayColor
+                Alamofire.request(imageUrl).responseImage { response in
+                    if let image = response.result.value{
+                        self.cachedImages[identifier] = image
+                        cell.notification_image.image = image
+                        UIView.animate(withDuration: 0.5, animations: {
+                            cell.notification_image.alpha = 1
+                        })
                     }
-                })
+                }
+                
             }
         }
 
@@ -160,7 +163,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
 
         NotificationController.getNotificationsWithSuccess(
             success: { (data) -> Void in
-                let json = JSON(data: data)
+                let json = data!
                 print(json)
                 for (_, subJson): (String, JSON) in json["data"]{
                     let type = subJson["type"].string ?? ""
@@ -190,13 +193,15 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                     }
                 }
 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     self.notifications.removeAll()
                     self.notifications = self.notificationsTemporary
 
                     self.notification_table.reloadData()
                     self.notification_table.finishInfiniteScroll()
 
+                    
+                    self.view.setNeedsLayout()
                     self.offset = self.limit - 1
 
                     self.refreshControl.endRefreshing()
@@ -205,11 +210,11 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                     self.notificationButtonPressed = false
                     //Utilities.fadeInViewAnimation(self.notification_table, delay: 0, duration: 1)
                     Utilities.fadeInFromBottomAnimation(self.notification_table, delay: 0, duration: 1, yPosition: 20)
-                    self.notification_table.setContentOffset(CGPointMake(0, 0), animated: true)
+                    self.notification_table.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
                 });
             },
             failure: { (error) -> Void in
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     self.notification_table.finishInfiniteScroll()
                     Utilities.fadeOutViewAnimation(self.mainLoader, delay: 0, duration: 0.3)
 
@@ -222,9 +227,9 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
 
         let firstNotification = self.notifications.first as Notification!
 
-        NotificationController.getNotificationsOffsetWithSuccess(firstNotification.notification_id, offset:offset,
+        NotificationController.getNotificationsOffsetWithSuccess((firstNotification?.notification_id)!, offset:offset,
             success: { (couponsData) -> Void in
-                let json = JSON(data: couponsData)
+                let json = couponsData!
                 print(json)
                 for (_, subJson): (String, JSON) in json["data"]{
                     let type = subJson["type"].string ?? ""
@@ -254,8 +259,8 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                     newData = true
                     addedValues += 1
                 }
-                dispatch_async(dispatch_get_main_queue(), {
-                    UIView.animateWithDuration(0.3, animations: {
+                DispatchQueue.main.async(execute: {
+                    UIView.animate(withDuration: 0.3, animations: {
                         self.notifications.removeAll()
                         self.notifications = self.notificationsTemporary
                         self.notification_table.finishInfiniteScroll()
@@ -271,29 +276,29 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                 });
             },
             failure: { (error) -> Void in
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     self.notification_table.finishInfiniteScroll()
                 })
         })
     }
-    func readNotification(notification:Notification){
+    func readNotification(_ notification:Notification){
 
-        let params: [String: AnyObject] = [ "notification_id": notification.notification_id ]
+        let params: [String: AnyObject] = [ "notification_id": notification.notification_id as AnyObject ]
 
         NotificationController.setNotificationsReadWithSuccess(params,
             success: { (couponsData) -> Void in
-               let json = JSON(data: couponsData)
+               let json = couponsData!
 
                 notification.read = true
 
-                dispatch_async(dispatch_get_main_queue(), {
-                    UIView.animateWithDuration(0.3, animations: {
+                DispatchQueue.main.async(execute: {
+                    UIView.animate(withDuration: 0.3, animations: {
                         //self.notification_table.reloadData()
                     })
                 });
             },
             failure: { (error) -> Void in
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     //self.CouponsCollectionView.finishInfiniteScroll()
                 })
         })
@@ -302,8 +307,8 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     func showNotificationButton() {
         Utilities.fadeInFromBottomAnimation(notificationButton, delay: 0, duration: 1, yPosition: 20)
     }
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let selectedItem = notifications[indexPath.row]
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedItem = notifications[(indexPath as NSIndexPath).row]
         /*let itemId = selectedItem.notification_id
 
         let cell: NotificationCell = tableView.cellForRowAtIndexPath(indexPath) as! NotificationCell
@@ -327,32 +332,32 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             }
         }*/
     }
-    func attributedLabel(label: TTTAttributedLabel!, didSelectLinkWithURL url: NSURL!) {
-        let splitter = String(url).componentsSeparatedByString(":")
+    func attributedLabel(_ label: TTTAttributedLabel!, didSelectLinkWith url: URL!) {
+        let splitter = String(describing: url).components(separatedBy: ":")
         let segue: String = splitter[0]
         let object_id: Int = Int(splitter[1])!
         
 
         if segue == "userProfile" {
             let is_friend: Bool = (splitter[2] as NSString!).boolValue
-            let view_controller = self.storyboard!.instantiateViewControllerWithIdentifier("UserProfileStickyController") as! UserProfileStickyController
+            let view_controller = self.storyboard!.instantiateViewController(withIdentifier: "UserProfileStickyController") as! UserProfileStickyController
             view_controller.user_id = object_id
             view_controller.is_friend = is_friend
             self.navigationController?.pushViewController(view_controller, animated: true)
         }
 
         if segue == "branchProfile" {
-            let view_controller = self.storyboard!.instantiateViewControllerWithIdentifier("BranchProfileStickyController") as! BranchProfileStickyController
+            let view_controller = self.storyboard!.instantiateViewController(withIdentifier: "BranchProfileStickyController") as! BranchProfileStickyController
             view_controller.branch_id = object_id
             self.navigationController?.pushViewController(view_controller, animated: true)
         }
     }
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         self.refreshControl.endRefreshing()
         print("disappear")
     }
     
-    func refreshTableView(notification: NSNotification){
+    func refreshTableView(_ notification: Foundation.Notification){
         getNotifications()
     }
 

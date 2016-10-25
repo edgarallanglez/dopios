@@ -24,16 +24,16 @@ class FriendCell: UITableViewCell {
         
     }
     
-    func loadItem(person: PeopleModel, viewController: UIViewController) {
+    func loadItem(_ person: PeopleModel, viewController: UIViewController) {
         self.person = person
         
         if person.is_friend! {
             self.setFollowButton.backgroundColor = Utilities.dopColor
-            self.setFollowButton.setTitle("SIGUIENDO", forState: UIControlState.Normal)
-            self.setFollowButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+            self.setFollowButton.setTitle("SIGUIENDO", for: UIControlState())
+            self.setFollowButton.setTitleColor(UIColor.white, for: UIControlState())
         } else {
             self.setFollowButton.layer.borderWidth = 1
-            self.setFollowButton.layer.borderColor = Utilities.dopColor.CGColor
+            self.setFollowButton.layer.borderColor = Utilities.dopColor.cgColor
         }
         
         name.text = person.names
@@ -42,23 +42,23 @@ class FriendCell: UITableViewCell {
         user_image.layer.masksToBounds = true
     }
     
-    @IBAction func getProfile(sender: UIButton) {
+    @IBAction func getProfile(_ sender: UIButton) {
     }
     
     func deleteFriend(){
         let params:[String: Int] = [
             "friends_id": self.friend_id]
         
-        FriendsController.deleteFriend(params,
+        FriendsController.deleteFriend(params as [String : AnyObject],
             success:{(data) -> Void in
-                let json = JSON(data: data)
-                dispatch_async(dispatch_get_main_queue(), {
-                    UIButton.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
+                let json = JSON(data: data!)
+                DispatchQueue.main.async(execute: {
+                    UIButton.animate(withDuration: 0.5, delay: 0, options: UIViewAnimationOptions(), animations: {
                             self.setFollowButton.layer.borderWidth = 1
-                            self.setFollowButton.backgroundColor = UIColor.whiteColor()
-                            self.setFollowButton.setTitle("SEGUIENDO", forState: UIControlState.Normal)
-                            self.setFollowButton.layer.borderColor = Utilities.dopColor.CGColor
-                            self.setFollowButton.setTitleColor(Utilities.dopColor, forState: UIControlState.Normal)
+                            self.setFollowButton.backgroundColor = UIColor.white
+                            self.setFollowButton.setTitle("SEGUIENDO", for: UIControlState())
+                            self.setFollowButton.layer.borderColor = Utilities.dopColor.cgColor
+                            self.setFollowButton.setTitleColor(Utilities.dopColor, for: UIControlState())
                             self.person.is_friend = false
                         }, completion: { (Bool) in
                             
@@ -71,35 +71,35 @@ class FriendCell: UITableViewCell {
             })
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
     }
     
-    @IBAction func setFollow(sender: UIButton) {
+    @IBAction func setFollow(_ sender: UIButton) {
         
         if !person.is_friend! {
             let params:[String: AnyObject] = [
-                "user_two_id": self.friend_id
+                "user_two_id": self.friend_id as AnyObject
             ]
             
             UserProfileController.followFriendWithSuccess(params, success: { (data) -> Void in
-                dispatch_async(dispatch_get_main_queue(), {
-                    UIButton.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
-                        self.setFollowButton.setImage(nil, forState: UIControlState.Normal)
+                DispatchQueue.main.async(execute: {
+                    UIButton.animate(withDuration: 0.5, delay: 0, options: UIViewAnimationOptions(), animations: {
+                        self.setFollowButton.setImage(nil, for: UIControlState())
                         
                         self.setFollowButton.backgroundColor = Utilities.dopColor
                         //                    self.follow_button_width.constant = CGFloat(100)
     //                    self.view.layoutIfNeeded()
                         }, completion: { (Bool) in
                             self.person.is_friend = true
-                            self.setFollowButton.setTitle("DEJAR DE SEGUIR", forState: UIControlState.Normal)
-                            self.setFollowButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+                            self.setFollowButton.setTitle("DEJAR DE SEGUIR", for: UIControlState())
+                            self.setFollowButton.setTitleColor(UIColor.white, for: UIControlState())
                     })
                 })
                 },
                 failure: { (data) -> Void in
-                    dispatch_async(dispatch_get_main_queue(), {})
+                    DispatchQueue.main.async(execute: {})
                     
             })
         } else {

@@ -9,18 +9,18 @@
 import Foundation
 
 class MoreMenuController {
-    class func getImage(url:String, success: ((imageData: NSData!) -> Void)) {
-        Utilities.loadDataFromURL(NSURL(string: url)!, completion:{(data, error) -> Void in
+    class func getImage(_ url:String, success: @escaping ((_ imageData: Data?) -> Void)) {
+        Utilities.loadDataFromURL(URL(string: url)!, completion:{(data, error) -> Void in
             if let urlData = data {
-                success(imageData: urlData)
+                success(urlData)
             }
         })
     }
     
-    class func getUserProfile(url:String, success: ((profileData: NSData!) -> Void)) {
-        Utilities.loadDataFromURL(NSURL(string: url)!, completion:{(data, error) -> Void in
+    class func getUserProfile(_ url:String, success: @escaping ((_ profileData: Data?) -> Void)) {
+        Utilities.loadDataFromURL(URL(string: url)!, completion:{(data, error) -> Void in
             if let urlData = data {
-                success(profileData: urlData)
+                success(urlData)
             }
         })
     }

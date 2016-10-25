@@ -13,7 +13,7 @@ class BadgeCollectionCell: UICollectionViewCell {
     @IBOutlet weak var badge_image: UIImageView!
    // @IBOutlet weak var badge_name: UILabel!
     
-    func loadItem(model: BadgeModel) {
+    func loadItem(_ model: BadgeModel) {
         //badge_name.text = model.name
         
 //        badge_description.text = model.info

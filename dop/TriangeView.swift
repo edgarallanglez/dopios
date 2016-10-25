@@ -19,20 +19,20 @@ class TriangeView : UIView {
         super.init(coder: aDecoder)!
     }
     
-    override func drawRect(rect: CGRect) {
+    override func draw(_ rect: CGRect) {
         
-        let ctx : CGContextRef = UIGraphicsGetCurrentContext()!
+        let ctx : CGContext = UIGraphicsGetCurrentContext()!
 
-        CGContextBeginPath(ctx)
-        CGContextMoveToPoint(ctx, CGRectGetMinX(rect), CGRectGetMinY(rect))
-        CGContextAddLineToPoint(ctx, CGRectGetMaxX(rect), CGRectGetMinY(rect))
-        CGContextAddLineToPoint(ctx, CGRectGetMaxX(rect)/2.0, CGRectGetMaxY(rect))
-        CGContextAddLineToPoint(ctx, CGRectGetMinX(rect), CGRectGetMinY(rect))
-        CGContextClosePath(ctx)
+        ctx.beginPath()
+        ctx.move(to: CGPoint(x: rect.minX, y: rect.minY))
+        ctx.addLine(to: CGPoint(x: rect.maxX, y: rect.minY))
+        ctx.addLine(to: CGPoint(x: rect.maxX/2.0, y: rect.maxY))
+        ctx.addLine(to: CGPoint(x: rect.minX, y: rect.minY))
+        ctx.closePath()
 
         
         
-        CGContextSetRGBFillColor(ctx, 1.0, 1.0, 1.0, 1.0);
-        CGContextFillPath(ctx);
+        ctx.setFillColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0);
+        ctx.fillPath();
     }
 }

@@ -14,7 +14,7 @@ enum ModalViewControllerType: String {
 }
 
 @objc protocol ModalDelegate {
-    func pressActionButton(modal: ModalViewController)
+    func pressActionButton(_ modal: ModalViewController)
 }
 
 class ModalViewController: MZFormSheetController {
@@ -37,7 +37,7 @@ class ModalViewController: MZFormSheetController {
         MZFormSheetController.sharedBackgroundWindow().backgroundColor = UIColor.clearColor()*/
         self.shouldDismissOnBackgroundViewTap = false
         self.cornerRadius = 8.0
-        self.transitionStyle = MZFormSheetTransitionStyle.EaseFromBottom
+        self.transitionStyle = MZFormSheetTransitionStyle.easeFromBottom
         self.portraitTopInset = 40.0
         self.landscapeTopInset = 6.0
         
@@ -53,49 +53,49 @@ class ModalViewController: MZFormSheetController {
         var alert_modal: AlertModalViewController!
         
         switch type {
-            case .Share: simple_modal = presentedFormSheetViewController.storyboard?.instantiateViewControllerWithIdentifier("ShareModal") as? SimpleModalViewController
+            case .Share: simple_modal = presentedFormSheetViewController.storyboard?.instantiateViewController(withIdentifier: "ShareModal") as? SimpleModalViewController
                 super.init(viewController: simple_modal!)
             
-                let width = UIScreen.mainScreen().bounds.width - 50
-                self.presentedFormSheetSize = CGSizeMake(width, 330)
+                let width = UIScreen.main.bounds.width - 50
+                self.presentedFormSheetSize = CGSize(width: width, height: 330)
                 simple_modal!.title_label.text = "Compartir"
                 simple_modal!.action_button.titleLabel!.text = "Compartir"
                 simple_modal!.share_text.contentInset = UIEdgeInsetsMake(0,-5,0,0)
-                simple_modal!.twitter_button.addTarget(self, action: #selector(ModalViewController.tintButton(_:)), forControlEvents: .TouchUpInside)
-                simple_modal!.facebook_button.addTarget(self, action: #selector(ModalViewController.tintButton(_:)), forControlEvents: .TouchUpInside)
-                simple_modal!.instagram_button.addTarget(self, action: #selector(ModalViewController.tintButton(_:)), forControlEvents: .TouchUpInside)
+                simple_modal!.twitter_button.addTarget(self, action: #selector(ModalViewController.tintButton(_:)), for: .touchUpInside)
+                simple_modal!.facebook_button.addTarget(self, action: #selector(ModalViewController.tintButton(_:)), for: .touchUpInside)
+                simple_modal!.instagram_button.addTarget(self, action: #selector(ModalViewController.tintButton(_:)), for: .touchUpInside)
             
-            case .CouponDetail: simple_modal = presentedFormSheetViewController.storyboard?.instantiateViewControllerWithIdentifier("CouponDetailModal") as? SimpleModalViewController
+            case .CouponDetail: simple_modal = presentedFormSheetViewController.storyboard?.instantiateViewController(withIdentifier: "CouponDetailModal") as? SimpleModalViewController
                 super.init(viewController: simple_modal!)
             var height: CGFloat = CGFloat(0)
-                if UIScreen.mainScreen().bounds.width == 320 {
+                if UIScreen.main.bounds.width == 320 {
                     simple_modal.setLittleSize()
-                    height = (UIScreen.mainScreen().bounds.height / 3) * 2.4
-                } else { height = (UIScreen.mainScreen().bounds.height / 3) * 2.16 }
-                let width = UIScreen.mainScreen().bounds.width - 30
+                    height = (UIScreen.main.bounds.height / 3) * 2.4
+                } else { height = (UIScreen.main.bounds.height / 3) * 2.16 }
+                let width = UIScreen.main.bounds.width - 30
                 
-                self.presentedFormSheetSize = CGSizeMake(width, height)
-                simple_modal.branch_title.addTarget(self, action: #selector(ModalViewController.toBranch), forControlEvents: .TouchUpInside)
+                self.presentedFormSheetSize = CGSize(width: width, height: height)
+                simple_modal.branch_title.addTarget(self, action: #selector(ModalViewController.toBranch), for: .touchUpInside)
                 
                 let gesture = UITapGestureRecognizer(target: self, action: #selector(ModalViewController.likeCoupon(_:)))
                 simple_modal.heartView.addGestureRecognizer(gesture)
 
             
-            case .AlertModal: alert_modal = presentedFormSheetViewController.storyboard?.instantiateViewControllerWithIdentifier("AlertModal") as? AlertModalViewController
+            case .AlertModal: alert_modal = presentedFormSheetViewController.storyboard?.instantiateViewController(withIdentifier: "AlertModal") as? AlertModalViewController
                 super.init(viewController: alert_modal!)
             
-                let width = UIScreen.mainScreen().bounds.width - 60
-                let height = (UIScreen.mainScreen().bounds.height / 3) * 2
-                self.presentedFormSheetSize = CGSizeMake(width, height)
+                let width = UIScreen.main.bounds.width - 60
+                let height = (UIScreen.main.bounds.height / 3) * 2
+                self.presentedFormSheetSize = CGSize(width: width, height: height)
             
         default: super.init(viewController: simple_modal!)
         }
 
-        if simple_modal?.action_button != nil { simple_modal!.action_button.addTarget(self, action: #selector(ModalViewController.pressed(_:)), forControlEvents: .TouchUpInside) }
-        if alert_modal?.dismiss_button != nil { alert_modal!.dismiss_button.addTarget(self, action: #selector(ModalViewController.pressed(_:)), forControlEvents: .TouchUpInside) }
+        if simple_modal?.action_button != nil { simple_modal!.action_button.addTarget(self, action: #selector(ModalViewController.pressed(_:)), for: .touchUpInside) }
+        if alert_modal?.dismiss_button != nil { alert_modal!.dismiss_button.addTarget(self, action: #selector(ModalViewController.pressed(_:)), for: .touchUpInside) }
     }
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nil, bundle:nil)
     }
 
@@ -108,7 +108,7 @@ class ModalViewController: MZFormSheetController {
         // Dispose of any resources that can be recreated.
     }
     
-    func pressed(sender: UIButton!) {
+    func pressed(_ sender: UIButton!) {
         self.action_type = "redeem"
         self.delegate?.pressActionButton(self)
     }
@@ -118,17 +118,17 @@ class ModalViewController: MZFormSheetController {
         self.delegate?.pressActionButton(self)
     }
     
-    func tintButton(sender: UIButton!) {
-        if (sender.selected) {
-            sender.selected = false
-            sender.tintColor = UIColor.lightGrayColor()
+    func tintButton(_ sender: UIButton!) {
+        if (sender.isSelected) {
+            sender.isSelected = false
+            sender.tintColor = UIColor.lightGray
         } else {
-            sender.selected = true
+            sender.isSelected = true
             sender.tintColor = Utilities.dopColor
         }
     }
     
-    func likeCoupon(sender: UITapGestureRecognizer){
+    func likeCoupon(_ sender: UITapGestureRecognizer){
         /*let params:[String: AnyObject] = [
             "coupon_id" : String(stringInterpolationSegment: simple_modal!.coupon!.id),
             "date" : "2015-01-01"]

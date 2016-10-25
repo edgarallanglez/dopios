@@ -23,28 +23,28 @@ class ModalButton: UIButton {
         background_selected.frame = self.bounds
 
         
-        self.layer.insertSublayer(background, atIndex: 0)
+        self.layer.insertSublayer(background, at: 0)
     }
     
-    override var selected: Bool {
+    override var isSelected: Bool {
         
         willSet(newValue) {
-            if(selected){
-                self.layer.insertSublayer(background_selected, atIndex: 0)
+            if(isSelected){
+                self.layer.insertSublayer(background_selected, at: 0)
             }else{
-                self.layer.insertSublayer(background, atIndex: 0)
+                self.layer.insertSublayer(background, at: 0)
             }
-            print("changing from \(selected) to \(newValue)")
+            print("changing from \(isSelected) to \(newValue)")
         }
         didSet {
             background.removeFromSuperlayer()
             background_selected.removeFromSuperlayer()
-            if(selected){
-                self.layer.insertSublayer(background_selected, atIndex: 0)
+            if(isSelected){
+                self.layer.insertSublayer(background_selected, at: 0)
             }else{
-                self.layer.insertSublayer(background, atIndex: 0)
+                self.layer.insertSublayer(background, at: 0)
             }
-            print("selected=\(selected)")
+            print("selected=\(isSelected)")
         }
     }
 }

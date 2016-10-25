@@ -47,7 +47,7 @@ class NewsfeedNote: NSObject {
         self.private_activity = private_activity ?? false
     }
     
-    func setUserLike(user_like: Bool!,total_likes: Int!){
+    func setUserLike(_ user_like: Bool!,total_likes: Int!){
         self.user_like = user_like
         self.total_likes = total_likes
     }

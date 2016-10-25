@@ -22,23 +22,23 @@ class MedalTableViewController: UITableViewController {
     }
     
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return medal_list.count
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell: BadgeCell = tableView.dequeueReusableCellWithIdentifier("BadgeCell", forIndexPath: indexPath) as! BadgeCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: BadgeCell = tableView.dequeueReusableCell(withIdentifier: "BadgeCell", for: indexPath) as! BadgeCell
         
         if(!medal_list.isEmpty){
-            let model = self.medal_list[indexPath.row]
+            let model = self.medal_list[(indexPath as NSIndexPath).row]
             
             cell.loadItem(model)
-            let imageUrl = NSURL(string: "\(Utilities.badgeURL)\(model.badge_id).png")
-            let identifier = "Cell\(indexPath.row)"
+            let imageUrl = URL(string: "\(Utilities.badgeURL)\(model.badge_id).png")
+            let identifier = "Cell\((indexPath as NSIndexPath).row)"
             
             if (self.cached_images[identifier] != nil){
                 let cell_image_saved : UIImage = self.cached_images[identifier]!
@@ -46,9 +46,9 @@ class MedalTableViewController: UITableViewController {
             } else {
                 Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
                     if let image = UIImage(data: data!) {
-                        dispatch_async(dispatch_get_main_queue()) {
+                        DispatchQueue.main.async {
                             cell.badge_image.image = image
-                            UIView.animateWithDuration(0.5, animations: {
+                            UIView.animate(withDuration: 0.5, animations: {
                                 //alpha = 1
                             })
                         }
@@ -61,17 +61,17 @@ class MedalTableViewController: UITableViewController {
             if !model.earned { cell.backgroundColor = Utilities.lightGrayColor }
         }
         
-        cell.selectionStyle = UITableViewCellSelectionStyle.None
+        cell.selectionStyle = UITableViewCellSelectionStyle.none
         
         
         return cell
     }
     
     func getMedals() {
-        NSNotificationCenter.defaultCenter().postNotificationName("showLoader", object: true)
+        NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: "showLoader"), object: true)
         BadgeController.getAllMedalsWithSuccess(
             success: { (data) -> Void in
-                let json = JSON(data: data)
+                let json = JSON(data: data!)
                 print(json)
                 for (_, subJson): (String, JSON) in json["data"] {
                     
@@ -94,15 +94,15 @@ class MedalTableViewController: UITableViewController {
                         self.medal_list.append(model)
                     }
                 }
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     self.table_view.reloadData()
-                    NSNotificationCenter.defaultCenter().postNotificationName("showLoader", object: false)
+                    NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: "showLoader"), object: false)
                     //self.refreshControl.endRefreshing()
                 });
             },
             failure: { (error) -> Void in
-                dispatch_async(dispatch_get_main_queue(), {
-                    NSNotificationCenter.defaultCenter().postNotificationName("showLoader", object: false)
+                DispatchQueue.main.async(execute: {
+                    NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: "showLoader"), object: false)
             })
         })
         

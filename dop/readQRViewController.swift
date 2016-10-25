@@ -35,20 +35,20 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
         self.navigationController!.navigationBar.translucent = true*/
 
         
-        problems_button.layer.borderColor = UIColor.whiteColor().CGColor
+        problems_button.layer.borderColor = UIColor.white.cgColor
         problems_button.layer.borderWidth = 1.0
         problems_button.layer.cornerRadius = 3
         //problems_button.backgroundColor = UIColor.clearColor()
         
         
-        spinner = MMMaterialDesignSpinner(frame: CGRectMake(0, 0, 50, 50))
+        spinner = MMMaterialDesignSpinner(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
         spinner.center.x = self.view.center.x
         spinner.center.y = self.view.center.y
         spinner.layer.cornerRadius = spinner.frame.width / 2
         spinner.lineWidth = 3.0
         spinner.startAnimating()
         spinner.tintColor = Utilities.dopColor
-        spinner.backgroundColor = UIColor.whiteColor()
+        spinner.backgroundColor = UIColor.white
 
         
         self.title = coupon.name
@@ -56,7 +56,7 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
         let input: AnyObject?
         
         do {
-            let captureDevice = AVCaptureDevice.defaultDeviceWithMediaType( AVMediaTypeVideo )
+            let captureDevice = AVCaptureDevice.defaultDevice( withMediaType: AVMediaTypeVideo )
             input = try AVCaptureDeviceInput.init( device: captureDevice )
         } catch {
             if let error = error as NSError?
@@ -67,7 +67,7 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
         }
         
         if let input = input as! AVCaptureInput? {
-            let queue = dispatch_queue_create("camera", nil)
+            let queue = DispatchQueue(label: "camera", attributes: [])
             // Initialize the captureSession object.
             captureSession = AVCaptureSession()
             // Set the input device on the capture session.
@@ -79,7 +79,7 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
             
             // Set delegate and use the default dispatch queue to execute the call back
             
-            captureMetadataOutput!.setMetadataObjectsDelegate(self, queue: dispatch_get_main_queue())
+            captureMetadataOutput!.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
             captureMetadataOutput!.metadataObjectTypes = [AVMetadataObjectTypeQRCode]
             
             // Initialize the video preview layer and add it as a sublayer to the viewPreview view's layer.
@@ -99,7 +99,7 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
             qrCodeFrameView?.alpha = 0
             //qrCodeFrameView?.layer.borderWidth = 2
             view.addSubview(qrCodeFrameView!)
-            view.bringSubviewToFront(qrCodeFrameView!)
+            view.bringSubview(toFront: qrCodeFrameView!)
             
             self.view.addSubview(spinner)
             spinner.alpha = 0
@@ -125,11 +125,11 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
     }
 
 
-    func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [AnyObject]!, fromConnection connection: AVCaptureConnection!) {
+    func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [Any]!, from connection: AVCaptureConnection!) {
         if(!self.qr_detected){
             // Check if the metadataObjects array is not nil and it contains at least one object.
             if metadataObjects == nil || metadataObjects.count == 0 {
-                self.qrCodeFrameView?.frame = CGRectZero
+                self.qrCodeFrameView?.frame = CGRect.zero
                 print("No QR code is detected")
                 return
             }
@@ -139,7 +139,7 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
             
             if metadataObj.type == AVMetadataObjectTypeQRCode {
                 // If the found metadata is equal to the QR code metadata then update the status label's text and set the bounds
-                let barCodeObject = self.videoPreviewLayer?.transformedMetadataObjectForMetadataObject(metadataObj as AVMetadataMachineReadableCodeObject) as! AVMetadataMachineReadableCodeObject
+                let barCodeObject = self.videoPreviewLayer?.transformedMetadataObject(for: metadataObj as AVMetadataMachineReadableCodeObject) as! AVMetadataMachineReadableCodeObject
                 self.qrCodeFrameView?.frame = barCodeObject.bounds;
                 
                 if metadataObj.stringValue != nil {
@@ -165,11 +165,11 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                                 self.alert_array.removeAll()
 
                             }
-                            modal.presentAnimated(true, completionHandler: nil)
+                            modal.present(animated: true, completionHandler: nil)
 
                         }
                     } else {
-                        dispatch_async(dispatch_get_main_queue(), {
+                        DispatchQueue.main.async(execute: {
                             let modal: ModalViewController = ModalViewController(currentView: self, type: ModalViewControllerType.AlertModal)
                             modal.delegate = self
                             modal.willPresentCompletionHandler = { vc in
@@ -183,7 +183,7 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                                 self.qr_detected = false
                                 self.alert_array.removeAll()
                             }
-                            modal.presentAnimated(true, completionHandler: nil)
+                            modal.present(animated: true, completionHandler: nil)
                         })
 
                     }
@@ -192,7 +192,7 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
         }
     }
     
-    func sendQR(qr_code:Int){
+    func sendQR(_ qr_code:Int){
         Utilities.fadeInViewAnimation(self.spinner, delay: 0, duration: 0.3)
         Utilities.fadeOutViewAnimation(self.qr_image, delay: 0, duration: 0.3)
         spinner?.startAnimating()
@@ -202,18 +202,18 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
             }, completion: nil)*/
         
         let params:[String: AnyObject] = [
-            "qr_code" : qr_code,
-            "coupon_id": self.coupon_id!,
-            "branch_id": self.branch_id!,
-            "latitude": User.coordinate.latitude ?? 0,
-            "longitude": User.coordinate.longitude ?? 0 ]
+            "qr_code" : qr_code as AnyObject,
+            "coupon_id": self.coupon_id! as AnyObject,
+            "branch_id": self.branch_id! as AnyObject,
+            "latitude": User.coordinate.latitude as AnyObject? ?? 0 as AnyObject,
+            "longitude": User.coordinate.longitude as AnyObject? ?? 0 as AnyObject ]
         
         
         readQRController.sendQRWithSuccess(params,
             success: { (couponsData) -> Void in
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     
-                    let json = JSON(data: couponsData)
+                    let json = JSON(data: couponsData!)
                     print(json)
                     if let message = json["message"].string {
                             Utilities.fadeOutViewAnimation(self.spinner, delay: 0, duration: 0.3)
@@ -237,7 +237,7 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                                 self.qr_detected = false
                                 self.alert_array.removeAll()
                             }
-                             error_modal.presentAnimated(true, completionHandler: nil)
+                             error_modal.present(animated: true, completionHandler: nil)
                         
                         
                     }else{
@@ -248,13 +248,13 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                         
                         let modal: ModalViewController = ModalViewController(currentView: self, type: ModalViewControllerType.AlertModal)
                         
-                        dispatch_async(dispatch_get_main_queue()) {
+                        DispatchQueue.main.async {
                             Utilities.fadeOutViewAnimation(self.spinner, delay: 0, duration: 0.3)
 
                             modal.willPresentCompletionHandler = { vc in
                                 let navigation_controller = vc as! AlertModalViewController
                                 
-                                navigation_controller.share_view.hidden = false
+                                navigation_controller.share_view.isHidden = false
                                 
                                 self.alert_array.append(AlertModel(alert_title: "¡Felicidades!", alert_image: "success", alert_description: "Has redimido tu promoción con éxito en \(name!)"))
                                 
@@ -273,13 +273,13 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                                 let alert_modal = vc as! AlertModalViewController
                                 
                                 
-                                if alert_modal.share_activity.on == false{
-                                    readQRController.setActivityPrivacy(["folio":folio!], success: { (couponsData) in
-                                         dispatch_async(dispatch_get_main_queue()) {
+                                if alert_modal.share_activity.isOn == false{
+                                    readQRController.setActivityPrivacy(["folio":folio! as AnyObject], success: { (couponsData) in
+                                         DispatchQueue.main.async {
                                                 print("privacy success")
                                             }
                                         }, failure: { (couponsData) in
-                                            dispatch_async(dispatch_get_main_queue()) {
+                                            DispatchQueue.main.async {
                                                 print("privacy error")
                                             }
                                     })
@@ -287,10 +287,10 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                                 self.alert_array.removeAll()
                                 
                                 if alert_modal.alert_flag <= 1 {
-                                    self.navigationController?.popViewControllerAnimated(true)
+                                    self.navigationController?.popViewController(animated: true)
                                 }
                             }
-                            modal.presentAnimated(true, completionHandler: nil)
+                            modal.present(animated: true, completionHandler: nil)
                             self.coupon?.available = (self.coupon?.available)! - 1
                         }
                     }
@@ -298,7 +298,7 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                 
             },
             failure: { (error) -> Void in
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     Utilities.fadeOutViewAnimation(self.spinner, delay: 0, duration: 0.3)
 
                     let modal: ModalViewController = ModalViewController(currentView: self, type: ModalViewControllerType.AlertModal)
@@ -317,7 +317,7 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                         }
                        
                     }
-                    modal.presentAnimated(true, completionHandler: nil)
+                    modal.present(animated: true, completionHandler: nil)
                 })
             }
     
@@ -325,7 +325,7 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
         
     }
 
-    func pressActionButton(modal: ModalViewController) {
+    func pressActionButton(_ modal: ModalViewController) {
         modal.didDismissCompletionHandler = { vc in
             Utilities.fadeInViewAnimation(self.qr_image, delay: 0, duration: 0.3)
             self.qr_detected = false
@@ -345,11 +345,11 @@ class readQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
         })
     }*/
     
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return true
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         Utilities.permanentBounce(qr_image, delay: 0.5, duration: 0.8)
         Utilities.fadeInFromTopAnimation(qr_instructions_view, delay: 0, duration: 1, yPosition: 15)
     }
