@@ -74,9 +74,7 @@ extension NSDate {
 
     public var timeAgo: String {
         let components = self.dateComponents()
-        
 
-        print("COMPONENTES \(components)")
         if components.year > 0 {
             if components.year < 2 {
                 return NSDateTimeAgoLocalizedStrings("Hace un año")
@@ -134,7 +132,7 @@ extension NSDate {
                 return stringFromFormat("Hace %%d %@segundos", withValue: components.second)
             }
         }
-        
+
         return ""
     }
 
@@ -147,12 +145,12 @@ extension NSDate {
         let localeFormat = String(format: format, getLocaleFormatUnderscoresWithValue(Double(value)))
         return String(format: NSDateTimeAgoLocalizedStrings(localeFormat), value)
     }
-    
+
     private func getLocaleFormatUnderscoresWithValue(value: Double) -> String {
         guard let localeCode = NSLocale.preferredLanguages().first else {
             return ""
         }
-        
+
         // Russian (ru) and Ukrainian (uk)
         if localeCode == "ru" || localeCode == "uk" {
             let XY = Int(floor(value)) % 100
@@ -170,9 +168,8 @@ extension NSDate {
                 return "__"
             }
         }
-        
+
         return ""
     }
-    
-}
 
+}
