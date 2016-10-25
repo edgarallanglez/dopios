@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import AlamofireImage
+import Alamofire
 
 class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, TTTAttributedLabelDelegate {
     
@@ -55,11 +57,23 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
                 cell.username_button.alpha = 1
             
             } else {
-                cell.username_button.alpha = 0
+                cell.user_image.alpha = 0.3
+                cell.user_image.image = UIImage(named: "dop-logo-transparent")
+                cell.user_image.backgroundColor = Utilities.lightGrayColor
+
                 UIView.animate(withDuration: 0.5, animations: {
                     cell.username_button.alpha = 1
                 })
-                Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
+                Alamofire.request(imageUrl!).responseImage { response in
+                    if let image = response.result.value{
+                        self.cachedImages[identifier] = image
+                        cell.user_image.image = image
+                        UIView.animate(withDuration: 0.5, animations: {
+                            cell.user_image.alpha = 1
+                        })
+                    }
+                }
+                /*Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
                     if let image = data {
                         DispatchQueue.main.async {
                             var cell_image : UIImage = UIImage()
@@ -77,7 +91,7 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
                     } else {
                         print("Error")
                     }
-                })
+                })*/
             }
         }
         

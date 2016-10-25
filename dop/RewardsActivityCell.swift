@@ -27,8 +27,7 @@ class RewardsActivityCell: UITableViewCell {
         self.activity_model = model
         self.user_name.setTitle(model.names.uppercased(), for: UIControlState())
         
-        self.user_image.layer.masksToBounds = true
-        self.user_image.layer.cornerRadius = self.user_image.frame.width / 2
+        
         
         downloadImage(URL(string: "\(Utilities.dopImagesURL)\(model.company_id)/\(model.branch_image)")!)
         
@@ -143,4 +142,9 @@ class RewardsActivityCell: UITableViewCell {
         self.activity_model!.setUserLike(false,total_likes: totalLikes)
     }
     
+    override func layoutIfNeeded() {
+        super.layoutIfNeeded()
+        self.user_image.layer.masksToBounds = true
+        self.user_image.layer.cornerRadius = self.user_image.frame.width / 2
+    }
 }
