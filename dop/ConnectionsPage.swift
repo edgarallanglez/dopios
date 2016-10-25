@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireImage
 
 @objc protocol ConnectionsPageDelegate {
     @objc optional func resizeConnectionsSize(_ dynamic_height: CGFloat)
@@ -171,20 +173,14 @@ class ConnectionsPage: UITableViewController {
     
     func downloadImage(_ model: ConnectionModel, cell: ConnectionCell) {
         let url = URL(string: "\(Utilities.dopImagesURL)\(model.company_id)/\(model.logo!)")!
-        Utilities.downloadImage(url, completion: {(data, error) -> Void in
-            if let image = UIImage(data: data!) {
-                DispatchQueue.main.async {
-                    cell.connection_image.image = image
-                    UIView.animate(withDuration: 0.5, animations: {
-                        cell.isHidden = false
-                    })
-                    
-                }
-            }else{
-                print("Error")
+        Alamofire.request(url).responseImage { response in
+            if let image = response.result.value{
+                cell.connection_image.image = image
+                UIView.animate(withDuration: 0.5, animations: {
+                    cell.isHidden = false
+                })
             }
-        })
-
+        }
     }
     
     override func viewDidLayoutSubviews() {
