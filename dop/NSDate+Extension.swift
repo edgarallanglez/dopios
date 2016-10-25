@@ -74,7 +74,7 @@ extension NSDate {
 
     public var timeAgo: String {
         let components = self.dateComponents()
-        
+
         if components.year > 0 {
             if components.year < 2 {
                 return NSDateTimeAgoLocalizedStrings("Hace un año")
