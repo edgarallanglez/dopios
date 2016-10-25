@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireImage
 
 class PromoViewController: BaseViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIAlertViewDelegate, UIDocumentInteractionControllerDelegate, ModalDelegate {
     
@@ -38,6 +40,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        promoSegmentedController.selectedIndex = 0
         if UIScreen.main.bounds.width == 320 { self.little_size = true }
         self.title = ""
         offset = limit - 1
@@ -124,6 +127,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
     
     override func viewDidAppear(_ animated: Bool) {
         self.refreshControl.endRefreshing()
+        self.CouponsCollectionView.reloadData()
     }
     
     func refresh(_ sender:AnyObject) {
@@ -142,8 +146,11 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
+        print("ENTRA ENTRA ")
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PromoCollectionCell
+        
+        
+
         if promoSegmentedController.selectedIndex == 0 {
             if (!coupons.isEmpty) {
                 let model = self.coupons[(indexPath as NSIndexPath).row]
@@ -168,7 +175,15 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                     
                 } else {
                     //cell.branch_banner.alpha = 0
-                    Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
+                    Alamofire.request(imageUrl!).responseImage { response in
+                        if let image = response.result.value{
+                            if (self.CouponsCollectionView.indexPath(for: cell) as NSIndexPath?)?.row == (indexPath as NSIndexPath).row {
+                                self.cachedImages[identifier] = image
+                                cell.branch_banner.image = image
+                            }
+                        }
+                    }
+                    /*Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
                         if let image = data{
                             DispatchQueue.main.async {
                                 var imageData : UIImage = UIImage()
@@ -186,7 +201,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                         }else{
                             print("Error")
                         }
-                    })
+                    })*/
                 }
             
             }
@@ -387,7 +402,6 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                 }
                 
                 DispatchQueue.main.async(execute: {
-                    
                     
                     self.CouponsCollectionView.reloadData()
                     self.CouponsCollectionView.contentOffset = CGPoint(x: 0,y: 0)

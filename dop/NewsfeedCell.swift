@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireImage
 
 class NewsfeedCell: UITableViewCell {
 
@@ -51,8 +53,7 @@ class NewsfeedCell: UITableViewCell {
 
         self.user_image.alpha = 0
         self.user_image.layoutIfNeeded()
-        self.user_image.layer.masksToBounds = true
-        self.user_image.layer.cornerRadius = self.user_image.frame.width / 2
+
         self.username_button.setTitle(newsfeed_note.names.uppercased(), for: UIControlState())
         self.username_button.addTarget(self, action: #selector(NewsfeedCell.goToUserProfile(_:)), for: UIControlEvents.touchUpInside)
         self.user_image.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(NewsfeedCell.goToUserProfile(_:))))
@@ -144,7 +145,12 @@ class NewsfeedCell: UITableViewCell {
     }
 
     func downloadImage(_ url: URL) {
-        Utilities.downloadImage(url, completion: {(data, error) -> Void in
+        Alamofire.request(url).responseImage { response in
+            if let image = response.result.value{
+                self.branch_logo.image = image
+            }
+        }
+        /*Utilities.downloadImage(url, completion: {(data, error) -> Void in
             if let image = data{
                 DispatchQueue.main.async {
                     let imageData: Data = NSData(data: image) as Data
@@ -153,8 +159,14 @@ class NewsfeedCell: UITableViewCell {
             }else{
                 print("Error")
             }
-        })
+        })*/
 
+    }
+
+    override func layoutIfNeeded() {
+        super.layoutIfNeeded()
+        self.user_image.layer.cornerRadius = self.user_image.frame.width / 2
+        self.user_image.layer.masksToBounds = true
     }
 
 }

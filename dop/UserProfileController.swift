@@ -29,9 +29,9 @@ class UserProfileController: NSObject {
     }*/
     class func getUserProfile(_ user_id: Int, success succeed: @escaping ((_ profileData: JSON?) -> Void), failure errorFound: @escaping ((_ profileData: NSError?) -> Void)) {
         let url = "\(Utilities.dopURL)user/\(user_id)/profile"
-
         
-        Alamofire.request(url, method: .post, headers: User.userToken).validate().responseJSON { response in
+        
+        Alamofire.request(url, method: .get, headers: User.userToken).validate().responseJSON { response in
             switch response.result {
             case .success:
                 succeed(JSON(response.result.value))

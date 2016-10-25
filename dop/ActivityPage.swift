@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import AlamofireImage
+import Alamofire
 
 @objc protocol ActivityPageDelegate {
    @objc optional func resizeActivityView(_ dynamic_height: CGFloat)
@@ -240,15 +242,18 @@ class ActivityPage: UITableViewController, TTTAttributedLabelDelegate {
     }
     
     func downloadImage(_ url: URL, cell: RewardsActivityCell) {
-        Utilities.downloadImage(url, completion: {(data, error) -> Void in
-            if let image = UIImage(data: data!) {
-                DispatchQueue.main.async{
-                    cell.user_image.image = image
-                }
-            }else{
-                print("Error")
+        cell.user_image.alpha = 0.3
+        cell.user_image.image = UIImage(named: "dop-logo-transparent")
+        cell.user_image.backgroundColor = Utilities.lightGrayColor
+        Alamofire.request(url).responseImage { response in
+            if let image = response.result.value{
+                cell.user_image.image = image
+                UIView.animate(withDuration: 0.5, animations: {
+                    cell.user_image.alpha = 1
+                })
             }
-        })
+        }
+
     }
     
     override func viewDidLayoutSubviews() {
