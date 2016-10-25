@@ -9,7 +9,7 @@
 import UIKit
 
 @objc protocol AlertDelegate {
-    func pressAlertButton(modal: AlertModalViewController)
+    func pressAlertButton(_ modal: AlertModalViewController)
 }
 
 class AlertModalViewController: UIViewController {
@@ -25,11 +25,11 @@ class AlertModalViewController: UIViewController {
     var alert_array = [AlertModel]()
     var alert_flag: Int!
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         dismiss_button.layoutIfNeeded()
     }
     
-    func setAlert(alert_array: [AlertModel]) {
+    func setAlert(_ alert_array: [AlertModel]) {
         self.alert_array = alert_array
         alert_flag = self.alert_array.count
         
@@ -48,31 +48,31 @@ class AlertModalViewController: UIViewController {
         }
     }
     
-    @IBAction func dismissAlert(sender: ModalButton) {
+    @IBAction func dismissAlert(_ sender: ModalButton) {
         if self.alert_flag > 1 {
             for model in alert_array {
                 if model != alert_array.first { self.setNextAlert(model) }
                 self.alert_flag! -= 1
             }
         } else {
-            self.mz_dismissFormSheetControllerAnimated(true, completionHandler: nil)
-            self.navigationController?.popViewControllerAnimated(true)
+            self.mz_dismissFormSheetController(animated: true, completionHandler: nil)
+            self.navigationController?.popViewController(animated: true)
         }
         
         self.delegate?.pressAlertButton(self)
     }
     
-    func setNextAlert(model: AlertModel) {
+    func setNextAlert(_ model: AlertModel) {
         self.alert_description.alpha = 0
         self.alert_title.text = model.alert_title
-        self.alert_title.transform = CGAffineTransformMakeScale(0.1, 0.1)
-        UIView.animateWithDuration(0.8,
+        self.alert_title.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+        UIView.animate(withDuration: 0.8,
             delay: 0,
             usingSpringWithDamping: 0.2,
             initialSpringVelocity: 6.0,
-            options: UIViewAnimationOptions.AllowUserInteraction,
+            options: UIViewAnimationOptions.allowUserInteraction,
             animations: {
-                self.alert_title.transform = CGAffineTransformIdentity
+                self.alert_title.transform = CGAffineTransform.identity
                 Utilities.fadeInFromBottomAnimation(self.alert_image, delay: 0, duration: 0.5, yPosition: 40)
             }, completion: { (Bool) -> Void in
                 Utilities.fadeInFromBottomAnimation(self.alert_description, delay: 0, duration: 0.5, yPosition: 20)

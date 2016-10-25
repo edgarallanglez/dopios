@@ -9,7 +9,7 @@
 import UIKit
 
 @objc protocol CampaignPageDelegate {
-    optional func resizeCampaignView(dynamic_height: CGFloat)
+    @objc optional func resizeCampaignView(_ dynamic_height: CGFloat)
 }
 
 class BranchCampaignCollectionViewController: UICollectionViewController, ModalDelegate {
@@ -20,7 +20,7 @@ class BranchCampaignCollectionViewController: UICollectionViewController, ModalD
     var parent_view: BranchProfileStickyController!
     var coupons = [Coupon]()
     var selected_coupon: Coupon!
-    private let reuseIdentifier = "PromoCell"
+    fileprivate let reuseIdentifier = "PromoCell"
     
     var cachedImages: [String: UIImage] = [:]
     var refreshControl: UIRefreshControl!
@@ -37,19 +37,19 @@ class BranchCampaignCollectionViewController: UICollectionViewController, ModalD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.collectionView!.scrollEnabled = false
+        self.collectionView!.isScrollEnabled = false
         self.collectionView!.alwaysBounceVertical = false
         
         self.refreshControl = UIRefreshControl()
         
-        self.refreshControl.addTarget(self, action: #selector(BranchCampaignCollectionViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        self.refreshControl.addTarget(self, action: #selector(BranchCampaignCollectionViewController.refresh(_:)), for: UIControlEvents.valueChanged)
         self.collection_view.addSubview(refreshControl)
         
         setupLoader()
     }
     
     func setupLoader(){
-        loader = MMMaterialDesignSpinner(frame: CGRectMake(0,70,50,50))
+        loader = MMMaterialDesignSpinner(frame: CGRect(x: 0,y: 70,width: 50,height: 50))
         loader.center.x = self.view.center.x
         loader.lineWidth = 3.0
         loader.startAnimating()
@@ -57,13 +57,13 @@ class BranchCampaignCollectionViewController: UICollectionViewController, ModalD
         self.view.addSubview(loader)
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         if coupons.count == 0 { getCoupons() } else { setFrame() }
-        collection_view.frame.size.width = UIScreen.mainScreen().bounds.width
+        collection_view.frame.size.width = UIScreen.main.bounds.width
 
     }
     
-    func refresh(sender:AnyObject) {
+    func refresh(_ sender:AnyObject) {
         getCoupons()
     }
     
@@ -72,18 +72,18 @@ class BranchCampaignCollectionViewController: UICollectionViewController, ModalD
     }
     
     
-    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
 
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return coupons.count
     }
     
-    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //if(showing_modal == false){
-        let cell = self.collection_view.cellForItemAtIndexPath(indexPath)
-        selected_coupon = self.coupons[indexPath.row] as Coupon
+        let cell = self.collection_view.cellForItem(at: indexPath)
+        selected_coupon = self.coupons[(indexPath as NSIndexPath).row] as Coupon
         
         let modal: ModalViewController = ModalViewController(currentView: self, type: ModalViewControllerType.CouponDetail)
         modal.willPresentCompletionHandler = { vc in
@@ -94,23 +94,23 @@ class BranchCampaignCollectionViewController: UICollectionViewController, ModalD
         
         setViewCount(selected_coupon.id)
         modal.delegate = self
-        modal.presentAnimated(true, completionHandler: nil)
+        modal.present(animated: true, completionHandler: nil)
         //}
     }
     
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! PromoCollectionCell
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PromoCollectionCell
         
         if (!coupons.isEmpty) {
-            let model = self.coupons[indexPath.row]
+            let model = self.coupons[(indexPath as NSIndexPath).row]
             cell.loadItem(model, viewController: self)
             cell.setTakeButtonState(model.taken)
-            let imageUrl = NSURL(string: "\(Utilities.dopImagesURL)\(model.company_id)/\(model.logo)")
+            let imageUrl = URL(string: "\(Utilities.dopImagesURL)\(model.company_id)/\(model.logo)")
             
-            let identifier = "Cell\(indexPath.row)"
+            let identifier = "Cell\((indexPath as NSIndexPath).row)"
             
-            cell.backgroundColor = UIColor.whiteColor()
-            cell.heart.image = cell.heart.image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+            cell.backgroundColor = UIColor.white
+            cell.heart.image = cell.heart.image!.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
             //cell.viewForBaselineLayout()?.alpha = 0
             cell.branch_banner.alpha=0
             
@@ -118,7 +118,7 @@ class BranchCampaignCollectionViewController: UICollectionViewController, ModalD
             if (self.cachedImages[identifier] != nil){
                 let cell_image_saved : UIImage = self.cachedImages[identifier]!
                 cell.branch_banner.image = cell_image_saved
-                UIView.animateWithDuration(0.5, animations: {
+                UIView.animate(withDuration: 0.5, animations: {
                     cell.branch_banner.alpha = 1
                 })
                 
@@ -126,15 +126,15 @@ class BranchCampaignCollectionViewController: UICollectionViewController, ModalD
                 //cell.branch_banner.alpha = 0
                 Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
                     if let image = data{
-                        dispatch_async(dispatch_get_main_queue()) {
+                        DispatchQueue.main.async {
                             var imageData : UIImage = UIImage()
                             imageData = UIImage(data: image)!
-                            if self.collection_view.indexPathForCell(cell)?.row == indexPath.row {
+                            if (self.collection_view.indexPath(for: cell) as NSIndexPath?)?.row == (indexPath as NSIndexPath).row {
                                 self.cachedImages[identifier] = imageData
                                 let image_saved : UIImage = self.cachedImages[identifier]!
                                 cell.branch_banner.image = image_saved
                                 
-                                UIView.animateWithDuration(0.5, animations: {
+                                UIView.animate(withDuration: 0.5, animations: {
                                     cell.branch_banner.alpha = 1
                                 })
                             }
@@ -151,9 +151,9 @@ class BranchCampaignCollectionViewController: UICollectionViewController, ModalD
     }
     
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        let width = (UIScreen.mainScreen().bounds.width / 2) - 15
-        let size = CGSizeMake(width, 230)
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
+        let width = (UIScreen.main.bounds.width / 2) - 15
+        let size = CGSize(width: width, height: 230)
         
         return size
     }
@@ -167,7 +167,7 @@ class BranchCampaignCollectionViewController: UICollectionViewController, ModalD
     
     func reload() {
         self.collection_view.reloadData()
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+        DispatchQueue.main.async(execute: { () -> Void in
             self.setFrame()
         })
     }
@@ -177,13 +177,13 @@ class BranchCampaignCollectionViewController: UICollectionViewController, ModalD
         cachedImages.removeAll()
         
         
-        UIView.animateWithDuration(0.3, animations: {
+        UIView.animate(withDuration: 0.3, animations: {
             //self.CouponsCollectionView.alpha = 0
         })
         
         CouponController.getAllCouponsByBranchWithSuccess(parent_view.branch_id,
             success: { (data) -> Void in
-                let json = JSON(data: data)
+                let json =  data!
                 
                 print(json)
                 for (_, subJson): (String, JSON) in json["data"]{
@@ -210,7 +210,7 @@ class BranchCampaignCollectionViewController: UICollectionViewController, ModalD
                     self.coupons.append(model)
                 }
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     self.reload()
                     
                     self.refreshControl.endRefreshing()
@@ -223,17 +223,17 @@ class BranchCampaignCollectionViewController: UICollectionViewController, ModalD
             },
             
             failure: { (error) -> Void in
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     self.refreshControl.endRefreshing()
                     Utilities.fadeOutViewAnimation(self.loader, delay: 0, duration: 0.3)
                 })
         })
     }
 
-    func reloadWithOffset(parent_scroll: UICollectionView) {
+    func reloadWithOffset(_ parent_scroll: UICollectionView) {
         
         CouponController.getAllCouponsByBranchOffsetWithSuccess(self.selected_coupon.id, offset: self.offset, branch_id: self.branch_id!, success: { (data) -> Void in
-            let json = JSON(data: data)
+            let json = data!
             
             print(json)
             self.new_data = false
@@ -264,7 +264,7 @@ class BranchCampaignCollectionViewController: UICollectionViewController, ModalD
                 self.added_values += 1
             }
             
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 self.reload()
                 if self.new_data { self.offset += self.added_values }
                 parent_scroll.finishInfiniteScroll()
@@ -277,8 +277,8 @@ class BranchCampaignCollectionViewController: UICollectionViewController, ModalD
         })
         
     }
-    func setViewCount(coupon_id: Int) {
-        let params: [String: AnyObject] = ["coupon_id": coupon_id]
+    func setViewCount(_ coupon_id: Int) {
+        let params: [String: AnyObject] = ["coupon_id": coupon_id as AnyObject]
         CouponController.viewCouponWithSuccess(params, success: { (couponsData) -> Void in
             let json: JSON = JSON(couponsData)
             print(json)
@@ -291,24 +291,24 @@ class BranchCampaignCollectionViewController: UICollectionViewController, ModalD
     
     //MODAL DELEGATE
     
-    func pressActionButton(modal: ModalViewController) {
+    func pressActionButton(_ modal: ModalViewController) {
         print("Press action button")
         
         if modal.action_type == "profile" {
-            modal.dismissAnimated(true, completionHandler: nil)
+            modal.dismiss(animated: true, completionHandler: nil)
         }
         if modal.action_type == "redeem" {
             if selected_coupon.available>0 {
-                let view_controller  = self.storyboard!.instantiateViewControllerWithIdentifier("readQRView") as! readQRViewController
+                let view_controller  = self.storyboard!.instantiateViewController(withIdentifier: "readQRView") as! readQRViewController
                 view_controller.coupon = self.selected_coupon
                 view_controller.coupon_id = self.selected_coupon.id
                 view_controller.branch_id = self.selected_coupon.branch_id
                 self.hidesBottomBarWhenPushed = true
-                self.parent_view.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.Plain, target:nil, action:nil)
+                self.parent_view.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.plain, target:nil, action:nil)
 
                 self.parent_view.navigationController?.pushViewController(view_controller, animated: true)
                 //self.hidesBottomBarWhenPushed = false
-                modal.dismissAnimated(true, completionHandler: nil)
+                modal.dismiss(animated: true, completionHandler: nil)
             }else{
                 let error_modal: ModalViewController = ModalViewController(currentView: self, type: ModalViewControllerType.AlertModal)
                 error_modal.willPresentCompletionHandler = { vc in
@@ -321,8 +321,8 @@ class BranchCampaignCollectionViewController: UICollectionViewController, ModalD
                     navigation_controller.setAlert(alert_array)
                 }
                 
-                modal.dismissAnimated(true, completionHandler: { (modal) -> Void in
-                    error_modal.presentAnimated(true, completionHandler: nil)
+                modal.dismiss(animated: true, completionHandler: { (modal) -> Void in
+                    error_modal.present(animated: true, completionHandler: nil)
                     
                 })
             }

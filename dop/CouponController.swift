@@ -4,145 +4,188 @@
 //
 
 import Foundation
-
+import Alamofire
 
 class CouponController {
     typealias ServiceResponse = (NSDictionary?, NSError?) -> Void
 
   
-    class func getAllCouponsWithSuccess(limit:Int,success succeed: ((couponsData: NSData!) -> Void),failure errorFound: ((couponsData: NSError?) -> Void)) {
+    class func getAllCouponsWithSuccess(_ limit:Int,success succeed: @escaping ((_ couponsData: JSON?) -> Void),failure errorFound: @escaping ((_ couponsData: NSError?) -> Void)) {
         let url = "\(Utilities.dopURL)coupon/all/for/user/get/?limit=\(limit)"
-        Utilities.loadDataFromURL(NSURL(string: url)!, completion:{(data, error) -> Void in
-            if let urlData = data {
-                succeed(couponsData: urlData)
-            }else{
-                errorFound(couponsData: error)
+
+        Alamofire.request(url, method: .get, headers: User.userToken).validate().responseJSON { response in
+            
+            switch response.result {
+            case .success:
+                succeed(JSON(response.result.value))
+            case .failure(let error):
+                print(error)
+                errorFound(error as NSError)
             }
-        })
+        }
+        
     }
     
-    class func getAllCouponsOffsetWithSuccess(start_date: String,offset: Int,success succeed: ((couponsData: NSData!) -> Void),failure errorFound: ((couponsData: NSError?) -> Void)) {
+    class func getAllCouponsOffsetWithSuccess(_ start_date: String,offset: Int,success succeed: @escaping ((_ couponsData: JSON?) -> Void),failure errorFound: @escaping ((_ couponsData: NSError?) -> Void)) {
         let url = "\(Utilities.dopURL)coupon/all/for/user/offset/get"
 
         let params:[String: AnyObject] = [
-            "offset" : String(stringInterpolationSegment: offset),
-            "start_date" : String(start_date)]
+            "offset" : String(stringInterpolationSegment: offset) as AnyObject,
+            "start_date" : String(start_date) as AnyObject]
         
         print(start_date)
         print(offset)
-        Utilities.sendDataToURL(NSURL(string: url)!, method:"POST", params: params, completion:{(data, error) -> Void in
-            if let urlData = data {
-                succeed(couponsData: urlData)
-            }else{
-                errorFound(couponsData: error)
+        
+        Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default ,headers: User.userToken).validate().responseJSON { response in
+            
+            switch response.result {
+            case .success:
+                succeed(JSON(response.result.value))
+            case .failure(let error):
+                print(error)
+                errorFound(error as NSError)
             }
-        })
+        }
     }
     
-    class func getAllCouponsByBranchWithSuccess(branch_id:Int,success succeed: ((couponsData: NSData!) -> Void),failure errorFound: ((couponsData: NSError?) -> Void)) {
+    class func getAllCouponsByBranchWithSuccess(_ branch_id:Int,success succeed: @escaping ((_ couponsData: JSON?) -> Void),failure errorFound: @escaping ((_ couponsData: NSError?) -> Void)) {
         let url = "\(Utilities.dopURL)coupon/all/for/user/by/branch/\(branch_id)/get"
         
-        print(url)
         
-        Utilities.loadDataFromURL(NSURL(string: url)!, completion:{(data, error) -> Void in
-            if let urlData = data {
-                succeed(couponsData: urlData)
-            }else{
-                errorFound(couponsData: error)
+        Alamofire.request(url, method: .get, headers: User.userToken).validate().responseJSON { response in
+            
+            switch response.result {
+            case .success:
+                succeed(JSON(response.result.value))
+            case .failure(let error):
+                print(error)
+                errorFound(error as NSError)
             }
-        })
+        }
     }
     
-    class func getAllCouponsByBranchOffsetWithSuccess(coupon_id:Int,offset:Int,branch_id:Int,success succeed: ((couponsData: NSData!) -> Void),failure errorFound: ((couponsData: NSError?) -> Void)) {
+    class func getAllCouponsByBranchOffsetWithSuccess(_ coupon_id:Int,offset:Int,branch_id:Int,success succeed: @escaping ((_ couponsData: JSON?) -> Void),failure errorFound: @escaping ((_ couponsData: NSError?) -> Void)) {
         let url = "\(Utilities.dopURL)coupon/all/for/user/by/branch/offset/get/?offset=\(offset)&coupon_id=\(coupon_id)&branch_id=\(branch_id)"
-        Utilities.loadDataFromURL(NSURL(string: url)!, completion:{(data, error) -> Void in
-            if let urlData = data {
-                succeed(couponsData: urlData)
-            }else{
-                errorFound(couponsData: error)
+
+        Alamofire.request(url, method: .get, headers: User.userToken).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                succeed(JSON(response.result.value))
+            case .failure(let error):
+                print(error)
+                errorFound(error as NSError)
             }
-        })
+        }
     }
     
-    class func getAllTakenCouponsWithSuccess(limit:Int,success succeed: ((couponsData: NSData!) -> Void),failure errorFound: ((couponsData: NSError?) -> Void)) {
+    class func getAllTakenCouponsWithSuccess(_ limit:Int,success succeed: @escaping ((_ couponsData: JSON?) -> Void),failure errorFound: @escaping ((_ couponsData: NSError?) -> Void)) {
         let url = "\(Utilities.dopURL)coupon/all/taken/for/user/get/?limit=\(limit)"
-        Utilities.loadDataFromURL(NSURL(string: url)!, completion:{(data, error) -> Void in
-            if let urlData = data {
-                succeed(couponsData: urlData)
-            }else{
-                errorFound(couponsData: error)
+        
+        Alamofire.request(url, method: .get, headers: User.userToken).validate().responseJSON { response in
+            
+            switch response.result {
+            case .success:
+                succeed(JSON(response.result.value))
+            case .failure(let error):
+                print(error)
+                errorFound(error as NSError)
             }
-        })
+        }
     }
     
-    class func getAllTakenCouponsOffsetWithSuccess(taken_date: String,offset:Int,success succeed: ((couponsData: NSData!) -> Void),failure errorFound: ((couponsData: NSError?) -> Void)) {
+    class func getAllTakenCouponsOffsetWithSuccess(_ taken_date: String,offset:Int,success succeed: @escaping ((_ couponsData: JSON?) -> Void),failure errorFound: @escaping ((_ couponsData: NSError?) -> Void)) {
         let url = "\(Utilities.dopURL)coupon/all/taken/for/user/offset/get"
   
         let params:[String: AnyObject] = [
-            "offset" : String(stringInterpolationSegment: offset),
-            "taken_date" : String(taken_date)]
+            "offset" : String(stringInterpolationSegment: offset) as AnyObject,
+            "taken_date" : String(taken_date) as AnyObject]
 
-        Utilities.sendDataToURL(NSURL(string: url)!, method:"POST", params: params, completion:{(data, error) -> Void in
-            if let urlData = data {
-                succeed(couponsData: urlData)
-            }else{
-                errorFound(couponsData: error)
+        
+        Alamofire.request(url, method: .get, parameters: params, encoding: JSONEncoding.default ,headers: User.userToken).validate().responseJSON { response in
+            
+            switch response.result {
+            case .success:
+                succeed(JSON(response.result.value))
+            case .failure(let error):
+                print(error)
+                errorFound(error as NSError)
             }
-        })
+        }
     }
     
-    class func takeCouponWithSuccess(params:[String:AnyObject], success succeed: ((couponsData: NSData!) -> Void) ,failure errorFound: ((couponsData: NSError?) -> Void)){
+    class func takeCouponWithSuccess(_ params:[String:AnyObject], success succeed: @escaping ((_ couponsData: JSON?) -> Void) ,failure errorFound: @escaping ((_ couponsData: NSError?) -> Void)){
         let url = "\(Utilities.dopURL)coupon/user/take"
-        Utilities.sendDataToURL(NSURL(string: url)!, method:"POST", params: params, completion:{(data, error) -> Void in
-            if let urlData = data {
-                succeed(couponsData: urlData)
-            }else{
-                errorFound(couponsData: error)
+        
+        Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default ,headers: User.userToken).validate().responseJSON { response in
+            
+            switch response.result {
+            case .success:
+                succeed(JSON(response.result.value))
+            case .failure(let error):
+                print(error)
+                errorFound(error as NSError)
             }
-        })
+        }
     }
     
-    class func likeCouponWithSuccess(params:[String:AnyObject], success succeed: ((couponsData: NSData!) -> Void),failure errorFound: ((couponsData: NSError?) -> Void)) {
+    class func likeCouponWithSuccess(_ params:[String:AnyObject], success succeed: @escaping ((_ couponsData: JSON?) -> Void),failure errorFound: @escaping ((_ couponsData: NSError?) -> Void)) {
         let url = "\(Utilities.dopURL)coupon/like"
-        Utilities.sendDataToURL(NSURL(string: url)!, method:"POST", params: params, completion:{(data, error) -> Void in
-            if let urlData = data {
-                succeed(couponsData: urlData)
-            } else {
-                errorFound(couponsData: error)
+
+        Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default ,headers: User.userToken).validate().responseJSON { response in
+            
+            switch response.result {
+            case .success:
+                succeed(JSON(response.result.value))
+            case .failure(let error):
+                print(error)
+                errorFound(error as NSError)
             }
-        })
+        }
     }
     
-    class func viewCouponWithSuccess(params:[String:AnyObject], success succeed: ((couponsData: NSData!) -> Void),failure errorFound: ((couponsData: NSError?) -> Void)) {
+    class func viewCouponWithSuccess(_ params:[String:AnyObject], success succeed: @escaping ((_ couponsData: JSON?) -> Void),failure errorFound: @escaping ((_ couponsData: NSError?) -> Void)) {
         let url = "\(Utilities.dopURL)coupon/view"
-        Utilities.sendDataToURL(NSURL(string: url)!, method:"POST", params: params, completion:{(data, error) -> Void in
-            if let urlData = data {
-                succeed(couponsData: urlData)
-            }else{
-                errorFound(couponsData: error)
+
+        Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default ,headers: User.userToken).validate().responseJSON { response in
+            
+            switch response.result {
+            case .success:
+                succeed(JSON(response.result.value))
+            case .failure(let error):
+                print(error)
+                errorFound(error as NSError)
             }
-        })
+        }
     }
     
-    class func getAvailables(coupon_id: Int, success succeed: ((couponsData: NSData!) -> Void),failure errorFound: ((couponsData: NSError?) -> Void)) {
+    class func getAvailables(_ coupon_id: Int, success succeed: @escaping ((_ couponsData: JSON?) -> Void),failure errorFound: @escaping ((_ couponsData: NSError?) -> Void)) {
         let url = "\(Utilities.dopURL)coupon/available/\(coupon_id)"
-        Utilities.loadDataFromURL(NSURL(string: url)!, completion:{(data, error) -> Void in
-            if let urlData = data {
-                succeed(couponsData: urlData)
-            }else{
-                errorFound(couponsData: error)
+
+        
+        Alamofire.request(url, method: .get ,headers: User.userToken).validate().responseJSON { response in
+            
+            switch response.result {
+            case .success:
+                succeed(JSON(response.result.value))
+            case .failure(let error):
+                print(error)
+                errorFound(error as NSError)
             }
-        })
+        }
     }
     
-    class func getPeopleTakingSpecificCouponWithSuccess(params:[String:AnyObject], success succeed: ((couponsData: NSData!) -> Void),failure errorFound: ((couponsData: NSError?) -> Void)) {
+    class func getPeopleTakingSpecificCouponWithSuccess(_ params:[String:AnyObject], success succeed: @escaping ((_ couponsData: JSON?) -> Void),failure errorFound: @escaping ((_ couponsData: NSError?) -> Void)) {
         let url = "\(Utilities.dopURL)coupon/used/get/bycoupon"
-        Utilities.sendDataToURL(NSURL(string: url)!, method:"POST", params: params, completion:{(data, error) -> Void in
-            if let urlData = data {
-                succeed(couponsData: urlData)
-            }else{
-                errorFound(couponsData: error)
+
+        Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default ,headers: User.userToken).validate().responseJSON { response in
+            
+            switch response.result {
+            case .success:
+                succeed(JSON(response.result.value))
+            case .failure(let error):
+                print(error)
+                errorFound(error as NSError)
             }
-        })
+        }
     }
 }

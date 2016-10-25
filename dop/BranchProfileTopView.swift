@@ -24,24 +24,24 @@ class BranchProfileTopView: UIView {
     var adult_branch: Bool!
     
     
-    @IBAction func followBranch(sender: AnyObject) {
-        self.follow_button.setImage(nil, forState: UIControlState.Normal)
-        Utilities.setButtonSpinner(self.follow_button, spinner: self.spinner, spinner_size: 22, spinner_width: 1.5, spinner_color: UIColor.whiteColor() )
+    @IBAction func followBranch(_ sender: AnyObject) {
+        self.follow_button.setImage(nil, for: UIControlState())
+        Utilities.setButtonSpinner(self.follow_button, spinner: self.spinner, spinner_size: 22, spinner_width: 1.5, spinner_color: UIColor.white )
         Utilities.fadeInViewAnimation(self.spinner, delay: 0, duration: 0.3)
         
         let params:[String: AnyObject] = [
-            "branch_id" : parent_view.branch_id,
-            "date" : "2015-01-01" ]
+            "branch_id" : parent_view.branch_id as AnyObject,
+            "date" : "2015-01-01" as AnyObject ]
         
         print(params)
         BranchProfileController.followBranchWithSuccess(params,
             success: { (data) -> Void in
-                let json: JSON = JSON(data: data)
-                dispatch_async(dispatch_get_main_queue(), {
+                let json: JSON = data!
+                DispatchQueue.main.async(execute: {
                     if json["data"].string! == "following" {
-                        UIButton.animateWithDuration(0.3, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
+                        UIButton.animate(withDuration: 0.3, delay: 0, options: UIViewAnimationOptions(), animations: {
                             Utilities.fadeOutViewAnimation(self.spinner, delay: 0, duration: 0.3)
-                            self.follow_button.setImage(UIImage(named: "following-icon"), forState: UIControlState.Normal)
+                            self.follow_button.setImage(UIImage(named: "following-icon"), for: UIControlState())
                             self.follow_button.contentEdgeInsets = UIEdgeInsetsMake(16, 16, 16, 16)
                             self.follow_button.backgroundColor = Utilities.dopColor
                             self.layoutIfNeeded()
@@ -50,9 +50,9 @@ class BranchProfileTopView: UIView {
                                 
                         })
                     } else if json["data"].string! == "unfollowing" {
-                        UIButton.animateWithDuration(0.3, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
+                        UIButton.animate(withDuration: 0.3, delay: 0, options: UIViewAnimationOptions(), animations: {
                             Utilities.fadeOutViewAnimation(self.spinner, delay: 0, duration: 0.3)
-                            self.follow_button.setImage(UIImage(named: "follow-icon"), forState: UIControlState.Normal)
+                            self.follow_button.setImage(UIImage(named: "follow-icon"), for: UIControlState())
                             self.follow_button.contentEdgeInsets = UIEdgeInsetsMake(18, 18, 18, 18)
                             self.follow_button.backgroundColor = Utilities.dop_detail_color
                             self.layoutIfNeeded()
@@ -65,9 +65,9 @@ class BranchProfileTopView: UIView {
                 })
             },
             failure: { (error) -> Void in
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     Utilities.fadeOutViewAnimation(self.spinner, delay: 0, duration: 0.3)
-                    self.follow_button.setImage(UIImage(named: "follow-icon"), forState: UIControlState.Normal)
+                    self.follow_button.setImage(UIImage(named: "follow-icon"), for: UIControlState())
 
                     let modal: ModalViewController = ModalViewController(currentView: self.parent_view, type: ModalViewControllerType.AlertModal)
                     
@@ -78,13 +78,13 @@ class BranchProfileTopView: UIView {
                         
                         navigation_controller.setAlert(self.alert_array)
                     }
-                    modal.presentAnimated(true, completionHandler: nil)
+                    modal.present(animated: true, completionHandler: nil)
                 })
         })
 
     }
     
-    func setFollow(branch: Branch) {
+    func setFollow(_ branch: Branch) {
         Utilities.fadeInFromBottomAnimation(self.follow_button, delay: 0, duration: 0.3, yPosition: 5)
         self.branch = branch
         self.branch_name.text = branch.name
@@ -92,17 +92,17 @@ class BranchProfileTopView: UIView {
         if (parent_view.following != nil && parent_view.following == true) { setFollowingButton() }
     }
     
-    func setView(viewController: BranchProfileStickyController) {
+    func setView(_ viewController: BranchProfileStickyController) {
         self.parent_view = viewController
         self.branch_name.text = self.parent_view.coupon?.name
         if parent_view.coupon != nil { downloadImage(parent_view.coupon) }
         Utilities.setMaterialDesignButton(self.follow_button, button_size: 50)
         
         if (parent_view.coupon != nil && parent_view.coupon.adult_branch == true){
-            let adultsLabel: UILabel = UILabel(frame: CGRectMake(0, 0, parent_view.view.frame.width-20, 35))
+            let adultsLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: parent_view.view.frame.width-20, height: 35))
             adultsLabel.text="+18"
-            adultsLabel.textAlignment = NSTextAlignment.Right
-            adultsLabel.textColor = UIColor.whiteColor()
+            adultsLabel.textAlignment = NSTextAlignment.right
+            adultsLabel.textColor = UIColor.white
             adultsLabel.font = UIFont(name: "Montserrat-Regular", size: 26)
             adultsLabel.layer.shadowOffset = CGSize(width: 3, height: 3)
             adultsLabel.layer.shadowOpacity = 0.6
@@ -115,8 +115,8 @@ class BranchProfileTopView: UIView {
 
     
     func setFollowingButton() {
-        UIButton.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
-            self.follow_button.setImage(UIImage(named: "following-icon"), forState: UIControlState.Normal)
+        UIButton.animate(withDuration: 0.5, delay: 0, options: UIViewAnimationOptions(), animations: {
+            self.follow_button.setImage(UIImage(named: "following-icon"), for: UIControlState())
             self.follow_button.contentEdgeInsets = UIEdgeInsetsMake(16, 16, 16, 16)
             self.follow_button.backgroundColor = Utilities.dopColor
             self.layoutIfNeeded()
@@ -126,11 +126,11 @@ class BranchProfileTopView: UIView {
         })
     }
     
-    func downloadImage(model: Coupon) {
-        let imageUrl = NSURL(string: "\(Utilities.dopImagesURL)\(model.company_id)/\(model.logo)")
+    func downloadImage(_ model: Coupon) {
+        let imageUrl = URL(string: "\(Utilities.dopImagesURL)\(model.company_id)/\(model.logo)")
         Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
             if let image = UIImage(data: data!) {
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
                     self.branch_logo.image = image
                     self.branch_logo.layer.cornerRadius = self.branch_logo.frame.width / 2
                     Utilities.fadeInFromBottomAnimation(self.branch_logo, delay: 0, duration: 1, yPosition: 1)
@@ -141,16 +141,16 @@ class BranchProfileTopView: UIView {
         })
         
         if !model.banner.isEmpty {
-            let banner_url = NSURL(string: "\(Utilities.dopImagesURL)\(model.company_id)/\(model.banner)")
+            let banner_url = URL(string: "\(Utilities.dopImagesURL)\(model.company_id)/\(model.banner)")
             
             
             Utilities.downloadImage(banner_url!, completion: {(data, error) -> Void in
                 if var image = UIImage(data: data!) {
                     image = image.applyLightEffect()
-                    dispatch_async(dispatch_get_main_queue()) {
+                    DispatchQueue.main.async {
                         self.branch_banner.image = image
-                        self.branch_name.textColor = UIColor.whiteColor()
-                        self.branch_name.shadowColor = UIColor.darkGrayColor()
+                        self.branch_name.textColor = UIColor.white
+                        self.branch_name.shadowColor = UIColor.darkGray
                         Utilities.fadeInFromBottomAnimation(self.branch_banner, delay: 0, duration: 0.8, yPosition: 4)
                     }
                 }else{
@@ -161,12 +161,12 @@ class BranchProfileTopView: UIView {
         }
     }
     
-    func downloadImage(model: Branch) {
+    func downloadImage(_ model: Branch) {
         if (model.adults_only == true){
-            let adultsLabel: UILabel = UILabel(frame: CGRectMake(0, 0, parent_view.view.frame.width-20, 35))
+            let adultsLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: parent_view.view.frame.width-20, height: 35))
             adultsLabel.text="+18"
-            adultsLabel.textAlignment = NSTextAlignment.Right
-            adultsLabel.textColor = UIColor.whiteColor()
+            adultsLabel.textAlignment = NSTextAlignment.right
+            adultsLabel.textColor = UIColor.white
             adultsLabel.font = UIFont(name: "Montserrat-Regular", size: 26)
             adultsLabel.layer.shadowOffset = CGSize(width: 3, height: 3)
             adultsLabel.layer.shadowOpacity = 0.6
@@ -175,10 +175,10 @@ class BranchProfileTopView: UIView {
             
         }
 
-        let imageUrl = NSURL(string: "\(Utilities.dopImagesURL)\(model.company_id!)/\(model.logo!)")
+        let imageUrl = URL(string: "\(Utilities.dopImagesURL)\(model.company_id!)/\(model.logo!)")
         Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
             if let image = data{
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
                     self.branch_logo.image = UIImage(data: image)
                     self.branch_logo.layer.cornerRadius = self.branch_logo.frame.width / 2
                     Utilities.fadeInFromBottomAnimation(self.branch_logo, delay: 0, duration: 1, yPosition: 1)
@@ -190,14 +190,14 @@ class BranchProfileTopView: UIView {
         
         
         if !model.banner!.isEmpty {
-            let banner_url = NSURL(string: "\(Utilities.dopImagesURL)\(model.company_id!)/\(model.banner!)")
+            let banner_url = URL(string: "\(Utilities.dopImagesURL)\(model.company_id!)/\(model.banner!)")
             Utilities.downloadImage(banner_url!, completion: {(data, error) -> Void in
                 if var image = UIImage(data: data!) {
                     image = image.applyLightEffect()
-                    dispatch_async(dispatch_get_main_queue()) {
+                    DispatchQueue.main.async {
                         self.branch_banner.image = image
-                        self.branch_name.textColor = UIColor.whiteColor()
-                        self.branch_name.shadowColor = UIColor.darkGrayColor()
+                        self.branch_name.textColor = UIColor.white
+                        self.branch_name.shadowColor = UIColor.darkGray
                         Utilities.fadeInFromBottomAnimation(self.branch_banner, delay: 0, duration: 0.8, yPosition: 4)
                     }
                 }else{

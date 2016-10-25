@@ -9,7 +9,7 @@
 import UIKit
 
 @objc protocol SegmentedControlDelegate {
-    optional func setupIndex(index: Int)
+    @objc optional func setupIndex(_ index: Int)
 }
 
 class UserProfileSectionHeader: UICollectionReusableView {
@@ -29,8 +29,8 @@ class UserProfileSectionHeader: UICollectionReusableView {
     func commonInit() {
         self.addSubview(segmented_controller)
         segmented_controller.frame = self.bounds
-        segmented_controller.sendActionsForControlEvents(UIControlEvents.TouchUpInside)
-        segmented_controller.addTarget(self, action: #selector(UserProfileSectionHeader.setSegmentedController), forControlEvents: UIControlEvents.ValueChanged)
+        segmented_controller.sendActions(for: UIControlEvents.touchUpInside)
+        segmented_controller.addTarget(self, action: #selector(UserProfileSectionHeader.setSegmentedController), for: UIControlEvents.valueChanged)
         
     }
     

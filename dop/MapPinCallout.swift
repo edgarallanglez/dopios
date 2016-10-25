@@ -10,61 +10,61 @@ import UIKit
 
 class MapPinCallout: UIView {
     
-    var branch_image = UIImageView?()
+    var branch_image: UIImageView = UIImageView()
     var name_label: UILabel?
     var address_label: UILabel?
     var info_label: UILabel?
     var button: UIButton?
 
-    override func hitTest(let point: CGPoint, withEvent event: UIEvent?) -> UIView? {
-        let viewPoint = superview?.convertPoint(point, toView: self) ?? point
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        let viewPoint = superview?.convert(point, to: self) ?? point
         
-        _ = pointInside(viewPoint, withEvent: event)
+        _ = self.point(inside: viewPoint, with: event)
         
-        let view = super.hitTest(viewPoint, withEvent: event)
+        let view = super.hitTest(viewPoint, with: event)
 
         return view
     }
     override init (frame : CGRect) {
         super.init(frame : frame)
         
-        self.frame = CGRectMake(-130, -72, 330, 64)
+        self.frame = CGRect(x: -130, y: -72, width: 330, height: 64)
         
         Utilities.applySolidShadow(self)
 
-        let triangle: TriangeView = TriangeView(frame: CGRectMake(132, 60, 28, 9))
-        triangle.backgroundColor = UIColor.clearColor()
-        self.backgroundColor = UIColor.whiteColor()
+        let triangle: TriangeView = TriangeView(frame: CGRect(x: 132, y: 60, width: 28, height: 9))
+        triangle.backgroundColor = UIColor.clear
+        self.backgroundColor = UIColor.white
         self.addSubview(triangle)
 
         
         let inset = (self.frame.size.height - 30)/2
         
-        button = UIButton(frame: CGRectMake(self.frame.width-30, 0, 30, self.frame.height))
-        button!.setImage(UIImage(named:"arrow-right"), forState: .Normal)
+        button = UIButton(frame: CGRect(x: self.frame.width-30, y: 0, width: 30, height: self.frame.height))
+        button!.setImage(UIImage(named:"arrow-right"), for: UIControlState())
         button?.imageEdgeInsets = UIEdgeInsets(top: inset , left: 0, bottom: inset, right: 0)
         button?.tintColor = Utilities.dopColor
-        button!.backgroundColor = UIColor.whiteColor()
+        button!.backgroundColor = UIColor.white
         
-        branch_image = UIImageView(frame: CGRectMake(0, 0, self.frame.height, self.frame.height))
+        branch_image = UIImageView(frame: CGRect(x: 0, y: 0, width: self.frame.height, height: self.frame.height))
         
-        branch_image?.contentMode = .ScaleAspectFill
-        branch_image?.layer.masksToBounds = true
-        self.addSubview(branch_image!)
+        branch_image.contentMode = .scaleAspectFill
+        branch_image.layer.masksToBounds = true
+        self.addSubview(branch_image)
         
-        name_label = UILabel(frame: CGRectMake(self.frame.height+15, 5, self.frame.width-self.frame.height-45,20))
+        name_label = UILabel(frame: CGRect(x: self.frame.height+15, y: 5, width: self.frame.width-self.frame.height-45,height: 20))
         name_label!.font = UIFont(name: "Montserrat-Regular", size: 16.0)
-        name_label?.textColor = UIColor.darkGrayColor()
+        name_label?.textColor = UIColor.darkGray
         self.addSubview(name_label!)
         
-        address_label = UILabel(frame: CGRectMake(self.frame.height+15, 21, self.frame.width-self.frame.height-45,20))
+        address_label = UILabel(frame: CGRect(x: self.frame.height+15, y: 21, width: self.frame.width-self.frame.height-45,height: 20))
         address_label!.font = UIFont(name: "Montserrat-Light", size: 14.0)
-        address_label?.textColor = UIColor.darkGrayColor()
+        address_label?.textColor = UIColor.darkGray
         self.addSubview(address_label!)
         
-        info_label = UILabel(frame: CGRectMake(self.frame.height+15, 40, self.frame.width-self.frame.height-45,20))
+        info_label = UILabel(frame: CGRect(x: self.frame.height+15, y: 40, width: self.frame.width-self.frame.height-45,height: 20))
         info_label!.font = UIFont(name: "Montserrat-Regular", size: 10.0)
-        info_label?.textColor = UIColor.darkGrayColor()
+        info_label?.textColor = UIColor.darkGray
         self.addSubview(info_label!)
         
         self.addSubview(button!)
@@ -83,9 +83,9 @@ class MapPinCallout: UIView {
         fatalError("This class does not support NSCoding")
     }
     
-    override func pointInside(point: CGPoint, withEvent event: UIEvent?) -> Bool {
+    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
         
-        return CGRectContainsPoint(bounds, point)
+        return bounds.contains(point)
     }
     override func removeFromSuperview() {
         Utilities.fadeOutToBottomWithCompletion(self, delay: 0, duration: 0.5, yPosition: 5, completion: {(result: Bool)in

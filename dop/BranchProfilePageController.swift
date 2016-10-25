@@ -9,15 +9,15 @@
 import UIKit
 
 protocol BranchPaginationDelegate {
-    func resizeView(new_height: CGFloat)
-    func setSegmentedIndex(index: Int)
-    func setFollowButton(branch: Branch)
+    func resizeView(_ new_height: CGFloat)
+    func setSegmentedIndex(_ index: Int)
+    func setFollowButton(_ branch: Branch)
 }
 
 class BranchProfilePageController: UICollectionViewCell, UIPageViewControllerDataSource, UIPageViewControllerDelegate, SetSegmentedBranchPageDelegate, AboutPageDelegate, CampaignPageDelegate, RankingPageDelegate, UIScrollViewDelegate {
     
     var delegate: BranchPaginationDelegate?
-    var branchPageViewController: UIPageViewController = UIPageViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
+    var branchPageViewController: UIPageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
     
     var index: Int = 0
     
@@ -31,28 +31,28 @@ class BranchProfilePageController: UICollectionViewCell, UIPageViewControllerDat
     var identifiers: NSArray = ["AboutPage", "CampaignPage", "RankingPage"]
     
     override func setNeedsLayout() {
-        self.branchPageViewController.view.frame.size.width = UIScreen.mainScreen().bounds.width
+        self.branchPageViewController.view.frame.size.width = UIScreen.main.bounds.width
         self.branchPageViewController.view.frame.size.height = dynamic_height
     }
     
-    func resizeAboutView(dynamic_height: CGFloat) {
+    func resizeAboutView(_ dynamic_height: CGFloat) {
         self.dynamic_height = dynamic_height
         setNeedsLayout()
         delegate?.resizeView(dynamic_height)
     }
     
-    func resizeCampaignView(dynamic_height: CGFloat) {
+    func resizeCampaignView(_ dynamic_height: CGFloat) {
         self.dynamic_height = dynamic_height
         delegate?.resizeView(dynamic_height)
     }
     
-    func resizeRankingView(dynamic_height: CGFloat) {
+    func resizeRankingView(_ dynamic_height: CGFloat) {
         self.dynamic_height = dynamic_height
         delegate?.resizeView(dynamic_height)
     }
     
     
-    func setPaginator(viewController: BranchProfileStickyController) {
+    func setPaginator(_ viewController: BranchProfileStickyController) {
         
         parentViewController = viewController
         parentViewController.delegate = self
@@ -65,12 +65,12 @@ class BranchProfilePageController: UICollectionViewCell, UIPageViewControllerDat
         
         let viewControllers: [UIViewController] = [about_view]
         
-        self.branchPageViewController.setViewControllers(viewControllers, direction: .Forward, animated: true, completion: nil)
+        self.branchPageViewController.setViewControllers(viewControllers, direction: .forward, animated: true, completion: nil)
         
         self.contentView.addSubview(self.branchPageViewController.view)
     }
     
-    func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         
         switch viewController.title! {
         case "aboutPage": return nil
@@ -83,7 +83,7 @@ class BranchProfilePageController: UICollectionViewCell, UIPageViewControllerDat
         
     }
     
-    func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         
         switch viewController.title! {
         case "aboutPage": self.index = 1
@@ -96,7 +96,7 @@ class BranchProfilePageController: UICollectionViewCell, UIPageViewControllerDat
         
     }
     
-    func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         
         if !completed {
             let viewController = pageViewController.viewControllers!.first!
@@ -112,7 +112,7 @@ class BranchProfilePageController: UICollectionViewCell, UIPageViewControllerDat
         
     }
     
-    func pageViewController(pageViewController: UIPageViewController, willTransitionToViewControllers pendingViewControllers: [UIViewController]) {
+    func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
         let viewController = pendingViewControllers.first!
         var index = 0
         switch viewController.title! {
@@ -125,22 +125,22 @@ class BranchProfilePageController: UICollectionViewCell, UIPageViewControllerDat
         delegate?.setSegmentedIndex(index)
     }
     
-    func viewControllerAtIndex(index: Int) -> UIViewController?{
+    func viewControllerAtIndex(_ index: Int) -> UIViewController?{
         //first view controller = firstViewControllers navigation controller
         
         switch index {
         case 0:
-            let viewController = parentViewController.storyboard!.instantiateViewControllerWithIdentifier("AboutPage") as! BranchAboutViewController
+            let viewController = parentViewController.storyboard!.instantiateViewController(withIdentifier: "AboutPage") as! BranchAboutViewController
             viewController.delegate = self
             viewController.parent_view = self.parentViewController
             return viewController
         case 1:
-            let viewController = parentViewController.storyboard!.instantiateViewControllerWithIdentifier("CampaignPage") as! BranchCampaignCollectionViewController
+            let viewController = parentViewController.storyboard!.instantiateViewController(withIdentifier: "CampaignPage") as! BranchCampaignCollectionViewController
             viewController.delegate = self
             viewController.parent_view = self.parentViewController
             return viewController
         case 2:
-            let viewController = parentViewController.storyboard!.instantiateViewControllerWithIdentifier("RankingPage") as! BranchRankingViewController
+            let viewController = parentViewController.storyboard!.instantiateViewController(withIdentifier: "RankingPage") as! BranchRankingViewController
             viewController.delegate = self
             viewController.parent_view = self.parentViewController
             return viewController
@@ -150,10 +150,10 @@ class BranchProfilePageController: UICollectionViewCell, UIPageViewControllerDat
         }
     }
     
-    func setPage(index: Int) {
+    func setPage(_ index: Int) {
         var direction: UIPageViewControllerNavigationDirection
         
-        if(index < self.index){ direction = .Reverse } else { direction = .Forward }
+        if(index < self.index){ direction = .reverse } else { direction = .forward }
         var toViewController = self.viewControllerAtIndex(0)
         
         switch index {
@@ -173,7 +173,7 @@ class BranchProfilePageController: UICollectionViewCell, UIPageViewControllerDat
         self.branchPageViewController.setViewControllers(viewControllers as? [UIViewController], direction: direction, animated: true, completion: nil)
     }
     
-    func launchInfiniteScroll(parent_scroll: UICollectionView) {
+    func launchInfiniteScroll(_ parent_scroll: UICollectionView) {
         let viewController = branchPageViewController.viewControllers!.first!
         switch viewController.title! {
         case "aboutPage": let currentController = viewController as! BranchAboutViewController
@@ -188,7 +188,7 @@ class BranchProfilePageController: UICollectionViewCell, UIPageViewControllerDat
         }
     }
     
-    func setFollow(branch: Branch) {
+    func setFollow(_ branch: Branch) {
         delegate?.setFollowButton(branch)
     }
 }

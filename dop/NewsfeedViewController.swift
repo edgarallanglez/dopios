@@ -24,28 +24,28 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
     
     @IBOutlet var tableView: UITableView!
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return newsfeed.count
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell: NewsfeedCell = tableView.dequeueReusableCellWithIdentifier("NewsfeedCell", forIndexPath: indexPath) as! NewsfeedCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: NewsfeedCell = tableView.dequeueReusableCell(withIdentifier: "NewsfeedCell", for: indexPath) as! NewsfeedCell
         
         if !newsfeed.isEmpty {
-            let model = self.newsfeed[indexPath.row]
+            let model = self.newsfeed[(indexPath as NSIndexPath).row]
             cell.newsfeed_description.linkAttributes = [NSForegroundColorAttributeName: Utilities.dopColor]
-            cell.newsfeed_description.enabledTextCheckingTypes = NSTextCheckingType.Link.rawValue
+            cell.newsfeed_description.enabledTextCheckingTypes = NSTextCheckingResult.CheckingType.link.rawValue
 
             cell.newsfeed_description.delegate = self
-            cell.loadItem(model, viewController: self, index: indexPath.row)
+            cell.loadItem(model, viewController: self, index: (indexPath as NSIndexPath).row)
             
 
-            let imageUrl = NSURL(string: model.user_image)
-            let identifier = "Cell\(indexPath.row)"
+            let imageUrl = URL(string: model.user_image)
+            let identifier = "Cell\((indexPath as NSIndexPath).row)"
             
             
             if  self.cachedImages[identifier] != nil {
@@ -56,20 +56,20 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
             
             } else {
                 cell.username_button.alpha = 0
-                UIView.animateWithDuration(0.5, animations: {
+                UIView.animate(withDuration: 0.5, animations: {
                     cell.username_button.alpha = 1
                 })
                 Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
                     if let image = data {
-                        dispatch_async(dispatch_get_main_queue()) {
+                        DispatchQueue.main.async {
                             var cell_image : UIImage = UIImage()
                             cell_image = UIImage(data:image)!
                             
-                            if tableView.indexPathForCell(cell)?.row == indexPath.row {
+                            if (tableView.indexPath(for: cell) as NSIndexPath?)?.row == (indexPath as NSIndexPath).row {
                                 self.cachedImages[identifier] = cell_image
                                 let cell_image_saved : UIImage = self.cachedImages[identifier]!
                                 cell.user_image.image = cell_image_saved
-                                UIView.animateWithDuration(0.5, animations: {
+                                UIView.animate(withDuration: 0.5, animations: {
                                     cell.user_image.alpha = 1
                                 })
                             }
@@ -81,18 +81,18 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
             }
         }
         
-        cell.selectionStyle = UITableViewCellSelectionStyle.None
+        cell.selectionStyle = UITableViewCellSelectionStyle.none
         
         return cell
     }
     
-    func attributedLabel(label: TTTAttributedLabel!, didSelectLinkWithURL url: NSURL!) {
-        let splitter = String(url).componentsSeparatedByString(":")
+    func attributedLabel(_ label: TTTAttributedLabel!, didSelectLinkWith url: URL!) {
+        let splitter = String(describing: url).components(separatedBy: ":")
         let segue: String = splitter[0]
         let branch_id: Int = Int(splitter[1])!
         
         if segue == "branchProfile" {
-            let view_controller = self.storyboard!.instantiateViewControllerWithIdentifier("BranchProfileStickyController") as! BranchProfileStickyController
+            let view_controller = self.storyboard!.instantiateViewController(withIdentifier: "BranchProfileStickyController") as! BranchProfileStickyController
             view_controller.branch_id = branch_id
             self.navigationController?.pushViewController(view_controller, animated: true)
         }
@@ -102,11 +102,11 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
         super.viewDidLoad()
         
         self.refreshControl = UIRefreshControl()
-        self.refreshControl.addTarget(self, action: #selector(NewsfeedViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        self.refreshControl.addTarget(self, action: #selector(NewsfeedViewController.refresh(_:)), for: UIControlEvents.valueChanged)
         self.tableView.addSubview(refreshControl)
         
         let nib = UINib(nibName: "NewsfeedCell", bundle: nil)
-        tableView.registerNib(nib, forCellReuseIdentifier: "NewsfeedCell")
+        tableView.register(nib, forCellReuseIdentifier: "NewsfeedCell")
         
         main_loader.alpha = 0
         
@@ -117,7 +117,7 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
         
         self.offset = self.limit
         
-        let loader:MMMaterialDesignSpinner = MMMaterialDesignSpinner(frame: CGRectMake(0,0,24,24))
+        let loader:MMMaterialDesignSpinner = MMMaterialDesignSpinner(frame: CGRect(x: 0,y: 0,width: 24,height: 24))
         loader.lineWidth = 2.0
         self.tableView.infiniteScrollIndicatorView = loader
         self.tableView.infiniteScrollIndicatorView?.tintColor = Utilities.dopColor
@@ -128,7 +128,7 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
         
         
         // Add infinite scroll handler
-        tableView.addInfiniteScrollWithHandler { [weak self] (scrollView) -> Void in
+        tableView.addInfiniteScroll { [weak self] (scrollView) -> Void in
             if !self!.newsfeed.isEmpty { self!.getNewsfeedActivityWithOffset() }
         }
         
@@ -140,22 +140,22 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
         // Dispose of any resources that can be recreated.
     }
     
-    func refresh(sender: AnyObject) {
+    func refresh(_ sender: AnyObject) {
         getNewsfeedActivity()
     }
     
     func getNewsfeedActivity() {
         main_loader.startAnimating()
 
-        newsfeedTemporary.removeAll(keepCapacity: false)
-        cachedImages.removeAll(keepCapacity: false)
-        people_array.removeAll(keepCapacity: false)
+        newsfeedTemporary.removeAll(keepingCapacity: false)
+        cachedImages.removeAll(keepingCapacity: false)
+        people_array.removeAll(keepingCapacity: false)
 
         
         Utilities.fadeInViewAnimation(main_loader, delay: 0, duration: 0.5)
 
         NewsfeedController.getAllFriendsTakingCouponsWithSuccess(success: { (friendsData) -> Void in
-            let json = JSON(data: friendsData)
+            let json = friendsData!
             
             for (index, subJson): (String, JSON) in json["data"] {
                 print(subJson)
@@ -189,8 +189,8 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
                 
                 self.people_array.append(person_model)
                 
-                let separators = NSCharacterSet(charactersInString: "T+")
-                let parts = formated_date.componentsSeparatedByCharactersInSet(separators)
+                let separators = CharacterSet(charactersIn: "T+")
+                let parts = formated_date.components(separatedBy: separators)
                 formated_date = "\(parts[0]) \(parts[1])"
 
                 let model = NewsfeedNote(client_coupon_id:client_coupon_id,friend_id: friend_id, user_id: user_id, branch_id: branch_id, coupon_name: name, branch_name: branch_name, names: names, surnames: surnames, user_image: main_image, company_id: company_id, branch_image: logo, total_likes:total_likes,user_like: user_like, date:date, formatedDate: formated_date, private_activity: false)
@@ -198,7 +198,7 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
                 self.newsfeedTemporary.append(model)
             }
             
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 self.newsfeed.removeAll()
                 self.newsfeed = self.newsfeedTemporary
                 
@@ -218,7 +218,7 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
         },
             
         failure: { (error) -> Void in
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 self.refreshControl.endRefreshing()
                 Utilities.fadeOutViewAnimation(self.main_loader, delay: 0, duration: 0.3)
             })
@@ -235,13 +235,14 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
         let firstNewsfeed = self.newsfeed.first as NewsfeedNote!
         
         let params:[String: AnyObject] = [
-            "offset": String(stringInterpolationSegment: offset),
-            "used_date": firstNewsfeed.formatedDate
+            "offset": String(stringInterpolationSegment: offset) as AnyObject,
+            "used_date": firstNewsfeed!.formatedDate as AnyObject
         ]
         
-        print("La fecha es \(firstNewsfeed.formatedDate)")
+        print("La fecha es \(firstNewsfeed?.formatedDate)")
         NewsfeedController.getAllFriendsTakingCouponsOffsetWithSuccess(params, success: { (friendsData) -> Void in
-            let json = JSON(data: friendsData)
+            let json = friendsData!
+            
             
             for (index, subJson): (String, JSON) in json["data"] {
                 let client_coupon_id = subJson["clients_coupon_id"].int
@@ -279,7 +280,7 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
                 newData = true
                 addedValues += 1
             }
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 self.newsfeed.removeAll()
                 self.newsfeed = self.newsfeedTemporary
                 
@@ -293,19 +294,19 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
             },
             
             failure: { (error) -> Void in
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     self.tableView.finishInfiniteScroll()
                 })
         })
         
     }
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
-        if cell.respondsToSelector(Selector("setSeparatorInset:")) { cell.separatorInset = UIEdgeInsetsZero }
-        if cell.respondsToSelector(Selector("setPreservesSuperviewLayoutMargins:")) {
+        if cell.responds(to: #selector(setter: UITableViewCell.separatorInset)) { cell.separatorInset = UIEdgeInsets.zero }
+        if cell.responds(to: #selector(setter: UIView.preservesSuperviewLayoutMargins)) {
             cell.preservesSuperviewLayoutMargins = false
         }
-        if cell.respondsToSelector(Selector("setLayoutMargins:")) { cell.layoutMargins = UIEdgeInsetsZero }
+        if cell.responds(to: #selector(setter: UIView.layoutMargins)) { cell.layoutMargins = UIEdgeInsets.zero }
     }
 //    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 //        if let cell = sender as? NewsfeedCell {
@@ -320,10 +321,10 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
 //            }
 //        }
 //    }
-    func goToUserProfile(index: Int!) {
+    func goToUserProfile(_ index: Int!) {
         let person: PeopleModel = self.people_array[index]
         
-        let view_controller = self.storyboard!.instantiateViewControllerWithIdentifier("UserProfileStickyController") as! UserProfileStickyController
+        let view_controller = self.storyboard!.instantiateViewController(withIdentifier: "UserProfileStickyController") as! UserProfileStickyController
         view_controller.user_id = person.user_id
         view_controller.is_friend = person.is_friend
         view_controller.operation_id = person.operation_id!
@@ -331,19 +332,19 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
         self.navigationController?.pushViewController(view_controller, animated: true)
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let person: PeopleModel = self.people_array[indexPath.row]
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let person: PeopleModel = self.people_array[(indexPath as NSIndexPath).row]
         
-        let view_controller = self.storyboard!.instantiateViewControllerWithIdentifier("UserProfileStickyController") as! UserProfileStickyController
+        let view_controller = self.storyboard!.instantiateViewController(withIdentifier: "UserProfileStickyController") as! UserProfileStickyController
         view_controller.user_id = person.user_id
         view_controller.is_friend = person.is_friend
         view_controller.operation_id = person.operation_id!
         view_controller.person = person
         self.navigationController?.pushViewController(view_controller, animated: true)
-        tableView.deselectRowAtIndexPath(indexPath, animated: false)
+        tableView.deselectRow(at: indexPath, animated: false)
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         self.refreshControl.endRefreshing()
     }
 

@@ -32,16 +32,16 @@ class RewardsViewController: UIViewController, UIPageViewControllerDataSource, U
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NSNotificationCenter.defaultCenter().addObserver(
+        NotificationCenter.default.addObserver(
             self,
             selector: #selector(RewardsViewController.showLoader(_:)),
-            name: "showLoader",
+            name: NSNotification.Name(rawValue: "showLoader"),
             object: nil)
         
         mainLoader.tintColor = Utilities.dopColor
         mainLoader.lineWidth = 3.0
         
-        self.rewardsPageViewController =  UIPageViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
+        self.rewardsPageViewController =  UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
         
         self.rewardsPageViewController.dataSource = self
         self.rewardsPageViewController.delegate = self
@@ -51,12 +51,12 @@ class RewardsViewController: UIViewController, UIPageViewControllerDataSource, U
         
         let viewControllers: [UIViewController] = [trophy_view]
         
-        self.rewardsPageViewController.setViewControllers(viewControllers, direction: .Forward, animated: true, completion: nil)
+        self.rewardsPageViewController.setViewControllers(viewControllers, direction: .forward, animated: true, completion: nil)
         
         self.addChildViewController(self.rewardsPageViewController)
         
         self.contentView.addSubview(self.rewardsPageViewController.view)
-        self.rewardsPageViewController.didMoveToParentViewController(self)
+        self.rewardsPageViewController.didMove(toParentViewController: self)
         
     }
     
@@ -64,30 +64,30 @@ class RewardsViewController: UIViewController, UIPageViewControllerDataSource, U
         self.rewardsPageViewController.view.translatesAutoresizingMaskIntoConstraints = false
         
         // Equal height constraint
-        let height_constraint = NSLayoutConstraint(item: self.contentView!, attribute: .Height, relatedBy: .Equal, toItem: self.rewardsPageViewController.view, attribute: .Height, multiplier: 1.0, constant: 0)
+        let height_constraint = NSLayoutConstraint(item: self.contentView!, attribute: .height, relatedBy: .equal, toItem: self.rewardsPageViewController.view, attribute: .height, multiplier: 1.0, constant: 0)
         self.view.addConstraint(height_constraint)
         
         // Equal width constraint
-        let width_constraint = NSLayoutConstraint(item: self.contentView!, attribute: .Width, relatedBy: .Equal, toItem: self.rewardsPageViewController.view, attribute: .Width, multiplier: 1.0, constant: 0)
+        let width_constraint = NSLayoutConstraint(item: self.contentView!, attribute: .width, relatedBy: .equal, toItem: self.rewardsPageViewController.view, attribute: .width, multiplier: 1.0, constant: 0)
         self.view.addConstraint(width_constraint)
         
         // Equal top constraint
-        let top_constraint = NSLayoutConstraint(item: self.rewards_segmented_controller!, attribute: .Bottom, relatedBy: .Equal, toItem: self.rewardsPageViewController.view, attribute: .Top, multiplier: 1.0, constant: 0)
+        let top_constraint = NSLayoutConstraint(item: self.rewards_segmented_controller!, attribute: .bottom, relatedBy: .equal, toItem: self.rewardsPageViewController.view, attribute: .top, multiplier: 1.0, constant: 0)
         self.view.addConstraint(top_constraint)
         
         self.view.layoutSubviews()
     }
     
-    func viewControllerAtIndex(index: Int) -> UIViewController?{
+    func viewControllerAtIndex(_ index: Int) -> UIViewController?{
         //first view controller = firstViewControllers navigation controller
         
         switch index {
         case 0:
-            let viewController = self.storyboard!.instantiateViewControllerWithIdentifier("TrophyTableViewController") as! TrophyTableViewController
+            let viewController = self.storyboard!.instantiateViewController(withIdentifier: "TrophyTableViewController") as! TrophyTableViewController
             return viewController
             
         case 1:
-            let viewController = self.storyboard!.instantiateViewControllerWithIdentifier("MedalTableViewController") as! MedalTableViewController
+            let viewController = self.storyboard!.instantiateViewController(withIdentifier: "MedalTableViewController") as! MedalTableViewController
             return viewController
             
         default:
@@ -95,11 +95,11 @@ class RewardsViewController: UIViewController, UIPageViewControllerDataSource, U
         }
     }
     
-    func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         
         let identifier = viewController.restorationIdentifier
 //        if identifier == nil { return self.viewControllerAtIndex(0) }
-        let index = self.identifiers.indexOfObject(identifier!)
+        let index = self.identifiers.index(of: identifier!)
         
         self.index = index - 1
         
@@ -108,10 +108,10 @@ class RewardsViewController: UIViewController, UIPageViewControllerDataSource, U
         
     }
     
-    func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         
         let identifier = viewController.restorationIdentifier
-        let index = self.identifiers.indexOfObject(identifier!)
+        let index = self.identifiers.index(of: identifier!)
     
         if index == identifiers.count - 1 || index < 0 { return nil }
         self.index = index + 1
@@ -119,7 +119,7 @@ class RewardsViewController: UIViewController, UIPageViewControllerDataSource, U
         return self.viewControllerAtIndex(self.index)
     }
     
-    func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         
         
 //        rewardsPageViewController.viewControllers.
@@ -132,21 +132,21 @@ class RewardsViewController: UIViewController, UIPageViewControllerDataSource, U
         next_index = 0
     }
     
-    func pageViewController(pageViewController: UIPageViewController, willTransitionToViewControllers pendingViewControllers: [UIViewController]) {
+    func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
         
         let controller = pendingViewControllers.first?.restorationIdentifier ?? ""
-        self.next_index = self.identifiers.indexOfObject(controller)
+        self.next_index = self.identifiers.index(of: controller)
         
         print("IDENTIFICADOR WILL: \(next_index)")
         
     }
     
-    @IBAction func setSegmentedController(sender: RewardsSegmentedController) {
+    @IBAction func setSegmentedController(_ sender: RewardsSegmentedController) {
         var direction:UIPageViewControllerNavigationDirection;
         
         
-        if (sender.selectedIndex < self.current_pressed_tab) { direction = .Reverse }
-        else { direction = .Forward }
+        if (sender.selectedIndex < self.current_pressed_tab) { direction = .reverse }
+        else { direction = .forward }
         
         var starting_view_controller = self.viewControllerAtIndex(0)
         
@@ -167,7 +167,7 @@ class RewardsViewController: UIViewController, UIPageViewControllerDataSource, U
         self.rewardsPageViewController.setViewControllers(viewControllers, direction: direction, animated: true, completion: nil)
     }
     
-    func showLoader(notification: NSNotification){
+    func showLoader(_ notification: Foundation.Notification){
         let show = notification.object as! Bool
         
         if(show == true){

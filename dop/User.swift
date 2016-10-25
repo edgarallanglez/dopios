@@ -9,7 +9,8 @@
 import UIKit
 
 class User: NSObject, CLLocationManagerDelegate {
-    static var userToken:String = ""
+    static var userToken: [String: String] = [:]
+    
     static var user_id: Int = 0
     static var userEmail:String = ""
     static var userName:String = ""

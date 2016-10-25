@@ -26,7 +26,7 @@ class CouponDetailViewController: BaseViewController, UITableViewDelegate, UITab
     var locationManager = CLLocationManager()
     var logo: UIImage!
     var banner: String!
-    var imageUrl: NSURL!
+    var imageUrl: URL!
     var categoryId: Int!
     
     
@@ -40,9 +40,9 @@ class CouponDetailViewController: BaseViewController, UITableViewDelegate, UITab
         locationManager.startUpdatingLocation()
 
         let nib = UINib(nibName: "NewsfeedCell", bundle: nil)
-        tableView.registerNib(nib, forCellReuseIdentifier: "NewsfeedCell")
+        tableView.register(nib, forCellReuseIdentifier: "NewsfeedCell")
         
-        customView = (NSBundle.mainBundle().loadNibNamed("CouponDetailView", owner: self, options: nil)![0] as? CouponDetailView)!
+        customView = (Bundle.main.loadNibNamed("CouponDetailView", owner: self, options: nil)![0] as? CouponDetailView)!
         customView.alpha = 0
         customView.layer.borderWidth = 0;
         
@@ -50,8 +50,8 @@ class CouponDetailViewController: BaseViewController, UITableViewDelegate, UITab
         customView.couponsName.layer.shadowOffset = CGSize(width: 1, height: 3)
         customView.couponsName.layer.shadowOpacity = 1
         customView.couponsName.layer.shadowRadius = 3
-        customView.couponsName.layer.shadowColor = UIColor.blackColor().CGColor
-        customView.couponsName.setTitle(self.couponsName, forState: UIControlState.Normal)
+        customView.couponsName.layer.shadowColor = UIColor.black.cgColor
+        customView.couponsName.setTitle(self.couponsName, for: UIControlState())
         customView.couponsDescription.text = self.couponsDescription
         customView.categoryId = self.categoryId
         customView.centerMapOnLocation(self.location)
@@ -63,7 +63,7 @@ class CouponDetailViewController: BaseViewController, UITableViewDelegate, UITab
         customView.branch_category.layer.shadowOffset = CGSize(width: 1, height: 3)
         customView.branch_category.layer.shadowOpacity = 1
         customView.branch_category.layer.shadowRadius = 3
-        customView.branch_category.layer.shadowColor = UIColor.blackColor().CGColor
+        customView.branch_category.layer.shadowColor = UIColor.black.cgColor
 
         
         
@@ -74,36 +74,36 @@ class CouponDetailViewController: BaseViewController, UITableViewDelegate, UITab
         
     }
     
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         coordinate = manager.location!.coordinate
         customView.coordinate = coordinate
         locationManager.stopUpdatingLocation()
     }
     
-    override func viewDidAppear(animated: Bool) {
-        UIView.animateWithDuration(0.7, delay: 0, options: .CurveEaseInOut, animations: {
+    override func viewDidAppear(_ animated: Bool) {
+        UIView.animate(withDuration: 0.7, delay: 0, options: UIViewAnimationOptions(), animations: {
             self.customView.alpha = 1
             }, completion: { finished in
                 
         })
     }
     
-    func getBannerImage(customView: CouponDetailView) {
+    func getBannerImage(_ customView: CouponDetailView) {
         if self.banner == "" {
-            imageUrl = NSURL(string: "\(Utilities.dopImagesURL)local/default_banner.png")
+            imageUrl = URL(string: "\(Utilities.dopImagesURL)local/default_banner.png")
             
         } else {
-            imageUrl = NSURL(string: "\(Utilities.dopImagesURL)\(companyId)/\(self.banner)")
+            imageUrl = URL(string: "\(Utilities.dopImagesURL)\(companyId)/\(self.banner)")
         }
         Utilities.downloadImage(imageUrl, completion: {(data, error) -> Void in
             if let image = data{
-                dispatch_async(dispatch_get_main_queue()) {
-                    let imageData: NSData = NSData(data: image)
+                DispatchQueue.main.async {
+                    let imageData: Data = NSData(data: image) as Data
                     
                     customView.branch_cover.image = UIImage(data: imageData)!
                     
                     if(customView.branch_cover.image == nil){
-                        customView.backgroundColor = UIColor.redColor()
+                        customView.backgroundColor = UIColor.red
                     }
                 }
             }else{
@@ -129,13 +129,13 @@ class CouponDetailViewController: BaseViewController, UITableViewDelegate, UITab
         // Dispose of any resources that can be recreated.
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell:NewsfeedCell = tableView.dequeueReusableCellWithIdentifier("NewsfeedCell", forIndexPath: indexPath) as! NewsfeedCell
-        let model = self.newsfeed[indexPath.row]
-        cell.loadItem(model,viewController: self as! NewsfeedViewController, index: indexPath.row)
-        let imageUrl = NSURL(string: model.user_image)
-        let identifier = "Cell\(indexPath.row)"
+        let cell:NewsfeedCell = tableView.dequeueReusableCell(withIdentifier: "NewsfeedCell", for: indexPath) as! NewsfeedCell
+        let model = self.newsfeed[(indexPath as NSIndexPath).row]
+        cell.loadItem(model,viewController: self as! NewsfeedViewController, index: (indexPath as NSIndexPath).row)
+        let imageUrl = URL(string: model.user_image)
+        let identifier = "Cell\((indexPath as NSIndexPath).row)"
         
         if(self.cachedImages[identifier] != nil){
             let cell_image_saved : UIImage = self.cachedImages[identifier]!
@@ -147,18 +147,18 @@ class CouponDetailViewController: BaseViewController, UITableViewDelegate, UITab
             
             Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
                 if let image = UIImage(data: data!) {
-                    dispatch_async(dispatch_get_main_queue()) {
+                    DispatchQueue.main.async {
                         
                         var cell_image : UIImage = UIImage()
                         cell_image = image
-                        if tableView.indexPathForCell(cell)?.section == indexPath.section{
+                        if (tableView.indexPath(for: cell) as NSIndexPath?)?.section == (indexPath as NSIndexPath).section{
                             self.cachedImages[identifier] = cell_image
                             
                             let cell_image_saved : UIImage = self.cachedImages[identifier]!
                             
                             cell.user_image.image = cell_image_saved
                             
-                            UIView.animateWithDuration(0.5, animations: {
+                            UIView.animate(withDuration: 0.5, animations: {
                                 cell.user_image.alpha = 1
                             })
                         }
@@ -170,29 +170,29 @@ class CouponDetailViewController: BaseViewController, UITableViewDelegate, UITab
         }
 
         
-        cell.selectionStyle = UITableViewCellSelectionStyle.None
+        cell.selectionStyle = UITableViewCellSelectionStyle.none
 
         
         return cell
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return newsfeed.count
     }
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 568
     }
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         return customView
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
              //let i = couponsTableView.indexPathForCell(cell)!.section
         
         if segue.identifier == "branchProfile" {
-            let view = segue.destinationViewController as! BranchProfileStickyController
+            let view = segue.destination as! BranchProfileStickyController
             view.branch_id = branchId
             view.logo = self.logo
             
@@ -203,12 +203,12 @@ class CouponDetailViewController: BaseViewController, UITableViewDelegate, UITab
     
     func getNewsfeedActivity() {
         let params:[String: AnyObject] = [
-            "coupon_id" : couponId
+            "coupon_id" : couponId as AnyObject
         ]
         
         CouponController.getPeopleTakingSpecificCouponWithSuccess(params,
             success: { (peopleData) -> Void in
-                let json = JSON(data: peopleData)
+                let json = peopleData!
             
                 for (_, subJson): (String, JSON) in json["data"] {
                     let client_coupon_id = subJson["clients_coupon_id"].int
@@ -235,13 +235,13 @@ class CouponDetailViewController: BaseViewController, UITableViewDelegate, UITab
                 
                     self.newsfeed.append(model)
                 }
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     self.tableView.reloadData()
                 //self.refreshControl.endRefreshing()
                 });
             },
             failure: { (error) -> Void in
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                    
             })
         })

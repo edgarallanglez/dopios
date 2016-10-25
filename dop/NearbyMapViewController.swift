@@ -8,6 +8,8 @@
 
 import Foundation
 import MapKit
+import AlamofireImage
+import Alamofire
 
 class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MKMapViewDelegate, ModalDelegate, UIScrollViewDelegate {
     
@@ -26,7 +28,7 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
     var currentAnnotationView: MapPinCallout?
     var spinner: MMMaterialDesignSpinner!
     var alert_array = [AlertModel]()
-    var modal: ModalViewController!
+    var modal_alert: ModalViewController!
     
     let regionRadius: CLLocationDistance = 1000
     
@@ -35,20 +37,20 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
         nearbyMap.delegate = self
 //        topBorder.layer.borderWidth = (1.0 / UIScreen.mainScreen.scale) / 2
         
-        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        let screenSize: CGRect = UIScreen.main.bounds
         
-        spinner = MMMaterialDesignSpinner(frame: CGRectMake(0, 0, 50, 50))
+        spinner = MMMaterialDesignSpinner(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
         spinner.center.x = self.view.center.x
         spinner.center.y = self.view.center.y - 70.0
         spinner.layer.cornerRadius = spinner.frame.width / 2
         spinner.lineWidth = 3.0
         spinner.startAnimating()
         spinner.tintColor = Utilities.dopColor
-        spinner.backgroundColor = UIColor.whiteColor()
+        spinner.backgroundColor = UIColor.white
         self.view.addSubview(spinner)
         spinner?.startAnimating()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(NearbyMapViewController.getNearestBranches), name: "filtersChanged", object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(NearbyMapViewController.getNearestBranches), name: NSNotification.Name(rawValue: "filtersChanged"), object: nil)
         
         locationManager = CLLocationManager()
         locationManager.delegate = self
@@ -58,15 +60,15 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
         User.coordinate = locationManager.location!.coordinate
         
         if (self.revealViewController() != nil) {
-            filterSidebarButton = UIBarButtonItem(image: UIImage(named: "filter"), style: UIBarButtonItemStyle.Plain, target: self.revealViewController(), action: #selector(SWRevealViewController.revealToggle(_:)))
+            filterSidebarButton = UIBarButtonItem(image: UIImage(named: "filter"), style: UIBarButtonItemStyle.plain, target: self.revealViewController(), action: #selector(SWRevealViewController.revealToggle(_:)))
             self.nearbyMap.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(NearbyMapViewController.tapMap)))
             self.navigationItem.leftBarButtonItem = filterSidebarButton
         }
         
-        let locationArrow:UIImageView = UIImageView(image: UIImage(named: "locationArrow")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate))
-        currentLocationLbl.setImage(locationArrow.image, forState: UIControlState.Normal)
+        let locationArrow:UIImageView = UIImageView(image: UIImage(named: "locationArrow")?.withRenderingMode(UIImageRenderingMode.alwaysTemplate))
+        currentLocationLbl.setImage(locationArrow.image, for: UIControlState())
         currentLocationLbl.tintColor = Utilities.dopColor
-        currentLocationLbl.backgroundColor = UIColor.whiteColor()
+        currentLocationLbl.backgroundColor = UIColor.white
         
         
         
@@ -76,30 +78,30 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
 
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         setMapAtCurrent()
     }
     func tapMap() {
-        if FilterSideViewController.open == true { self.revealViewController().revealToggleAnimated(true) }
+        if FilterSideViewController.open == true { self.revealViewController().revealToggle(animated: true) }
     }
     
-    func mapView(mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
-        if FilterSideViewController.open == true { self.revealViewController().revealToggleAnimated(true) }
+    func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
+        if FilterSideViewController.open == true { self.revealViewController().revealToggle(animated: true) }
     }
     
     
-    func centerMapOnLocation(location: CLLocation) {
+    func centerMapOnLocation(_ location: CLLocation) {
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate,
             regionRadius * 2.0, regionRadius * 2.0)
         nearbyMap.setRegion(coordinateRegion, animated: true)
     }
     
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         coordinate = manager.location!.coordinate
         locationManager.stopUpdatingLocation()
     }
     
-    @IBAction func currentLocation(sender: UIButton) {
+    @IBAction func currentLocation(_ sender: UIButton) {
         setMapAtCurrent()
     }
     
@@ -117,14 +119,14 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
             self.nearbyMap.removeAnnotations(self.annotationArray)
         }
         let params:[String:AnyObject] = [
-            "latitude": latitude,
-            "longitude": longitude,
-            "radio": 15,
-            "filterArray": filterArray
+            "latitude": latitude as AnyObject,
+            "longitude": longitude as AnyObject,
+            "radio": 15 as AnyObject,
+            "filterArray": filterArray as AnyObject
         ]
         Utilities.fadeInViewAnimation(self.spinner!, delay: 0, duration: 0.3)
         NearbyMapController.getNearestBranches(params, success: {(branchesData) -> Void in
-            let json = JSON(data: branchesData)
+            let json =  branchesData!
             print(json)
             for (_, branch) in json["data"] {
                 let branch_id = branch["branch_id"].int
@@ -135,7 +137,7 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
                 let distance = Utilities.roundValue(branch["distance"].double!,numberOfPlaces: 1.0)
                 let logo = branch["logo"].string!
                 let newLocation = CLLocationCoordinate2DMake(latitude!, longitude!)
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
                     // Drop a pin
                     let dropPin : Annotation = Annotation(coordinate: newLocation, title: branch["name"].string!, subTitle: address, branch_distance: "\(distance)", branch_id: branch_id!, company_id: company_id!, logo: logo)
                     if branch["category_id"].int! == 1 {
@@ -155,24 +157,24 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
             },
             failure:{(branchesData)-> Void in
                 Utilities.fadeOutViewAnimation(self.spinner!, delay: 0, duration: 0.3)
-                dispatch_async(dispatch_get_main_queue(), {
-                    self.modal = ModalViewController(currentView: self, type: ModalViewControllerType.AlertModal)
-                    self.modal.willPresentCompletionHandler = { vc in
+                DispatchQueue.main.async(execute: {
+                    self.modal_alert = ModalViewController(currentView: self, type: ModalViewControllerType.AlertModal)
+                    self.modal_alert.willPresentCompletionHandler = { vc in
                         let navigation_controller = vc as! AlertModalViewController
-                        navigation_controller.dismiss_button.setTitle("REINTENTAR", forState: .Normal)
+                        navigation_controller.dismiss_button.setTitle("REINTENTAR", for: UIControlState())
                         self.alert_array.append(AlertModel(alert_title: "¡Oops!", alert_image: "error", alert_description: "Ha ocurrido un error :("))
                         
                         navigation_controller.setAlert(self.alert_array)
                     }
-                    self.modal.presentAnimated(true, completionHandler: nil)
-                    self.modal.delegate = self
+                    self.modal_alert.present(animated: true, completionHandler: nil)
+                    self.modal_alert.delegate = self
                 })
         })
     }
     
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView?{
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView?{
         let reuseId = "custom"
-        var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId)
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId)
         if mapView.userLocation == annotation as! NSObject { return nil }
         if (annotationView == nil) {
             annotationView = MapPin(annotation: annotation, reuseIdentifier: reuseId)
@@ -189,7 +191,7 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
         return annotationView
     }
     
-    func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
      
         
         if let mapPin = view as? MapPin {
@@ -199,22 +201,22 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
                 mapPin.calloutView?.address_label!.text = annotation.subtitle!
                 mapPin.calloutView?.info_label!.text = "A \(annotation.distance!) km de tu ubicación actual"
                 mapPin.calloutView?.button!.tag = annotation.branch_id!
-                mapPin.calloutView?.button!.addTarget(self, action: #selector(NearbyMapViewController.goToBranchProfile(_:)), forControlEvents: .TouchUpInside)
-                let imageUrl = NSURL(string: "\(Utilities.dopImagesURL)\(annotation.company_id!)/\(annotation.logo!)")
+                mapPin.calloutView?.button!.addTarget(self, action: #selector(NearbyMapViewController.goToBranchProfile(_:)), for: .touchUpInside)
+                let imageUrl = URL(string: "\(Utilities.dopImagesURL)\(annotation.company_id!)/\(annotation.logo!)")
             
                 print("\(imageUrl!)")
-                mapPin.calloutView?.branch_image!.alpha = 0
+                mapPin.calloutView?.branch_image.alpha = 0
             
-                Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
-                    if let image = UIImage(data: data!) {
-                        dispatch_async(dispatch_get_main_queue()) {
-                            mapPin.calloutView?.branch_image!.image = image;                            Utilities.fadeInViewAnimation((mapPin.calloutView?.branch_image)!, delay:0, duration:1)
-                            
-                        }
-                    }else{
-                        print("Error")
+                mapPin.calloutView?.branch_image.image = UIImage(named: "dop-logo-transparent")
+                mapPin.calloutView?.branch_image.alpha = 0.3
+            
+                Alamofire.request(imageUrl!).responseImage { response in
+                    if let image = response.result.value{
+                        mapPin.calloutView?.branch_image.image = image;                            Utilities.fadeInViewAnimation((mapPin.calloutView?.branch_image)!, delay:0, duration:0.8)
                     }
-                })
+                }
+            
+            
                 
 
                 updatePinPosition(mapPin)
@@ -222,7 +224,7 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
         
         
     }
-    func mapView(mapView: MKMapView, didDeselectAnnotationView view: MKAnnotationView) {
+    func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
         currentAnnotationView!.removeFromSuperview()
        /* if let mapPin = view as? MapPin {
             if mapPin.preventDeselection {
@@ -230,28 +232,28 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
             }
         }*/
     }
-    func goToBranchProfile(sender: UIButton) {
-        let view_controller = self.storyboard!.instantiateViewControllerWithIdentifier("BranchProfileStickyController") as! BranchProfileStickyController
+    func goToBranchProfile(_ sender: UIButton) {
+        let view_controller = self.storyboard!.instantiateViewController(withIdentifier: "BranchProfileStickyController") as! BranchProfileStickyController
         view_controller.branch_id = sender.tag
         self.navigationController?.pushViewController(view_controller, animated: true)
     }
 
 
-    func updatePinPosition(pin:MapPin) {
+    func updatePinPosition(_ pin:MapPin) {
         let defaultShift:CGFloat = 10
-        let pinPosition = CGPointMake(pin.frame.midX, pin.frame.maxY)
+        let pinPosition = CGPoint(x: pin.frame.midX, y: pin.frame.maxY)
         
         let y = pinPosition.y - defaultShift
         
-        let controlPoint = CGPointMake(pinPosition.x, y)
-        let controlPointCoordinate = nearbyMap.convertPoint(controlPoint, toCoordinateFromView: nearbyMap)
+        let controlPoint = CGPoint(x: pinPosition.x, y: y)
+        let controlPointCoordinate = nearbyMap.convert(controlPoint, toCoordinateFrom: nearbyMap)
         
-        nearbyMap.setCenterCoordinate(controlPointCoordinate, animated: true)
+        nearbyMap.setCenter(controlPointCoordinate, animated: true)
     }
     
-    func pressActionButton(modal: ModalViewController) {
-        modal.dismissAnimated(true, completionHandler: { (modal) -> Void in
-            dispatch_async(dispatch_get_main_queue(), {
+    func pressActionButton(_ modal: ModalViewController) {
+        modal_alert.dismiss(animated: true, completionHandler: { (modal) -> Void in
+            DispatchQueue.main.async(execute: {
                 self.getNearestBranches()
             })
         })

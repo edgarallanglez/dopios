@@ -12,6 +12,13 @@ import FBSDKLoginKit
 import FBSDKShareKit
 
 class PromoCollectionCell: UICollectionViewCell, FBSDKSharingDelegate {
+    /*!
+     @abstract Sent to the delegate when the sharer encounters an error.
+     @param sharer The FBSDKSharing that completed.
+     @param error The error.
+     */
+
+
     
     @IBOutlet var coupon_description: UILabel!
     @IBOutlet var branch_banner: UIImageView!
@@ -27,7 +34,7 @@ class PromoCollectionCell: UICollectionViewCell, FBSDKSharingDelegate {
     var coupon:Coupon!
     var branch_id: Int!
     
-    func loadItem(coupon:Coupon, viewController: UIViewController) {
+    func loadItem(_ coupon:Coupon, viewController: UIViewController) {
         coupon_description.text = coupon.couponDescription
         self.branch_id = coupon.branch_id
         self.coupon_id = coupon.id
@@ -40,21 +47,21 @@ class PromoCollectionCell: UICollectionViewCell, FBSDKSharingDelegate {
         if coupon.user_like == true {
             self.heart.tintColor = Utilities.dopColor
         } else {
-            self.heart.tintColor = UIColor.lightGrayColor()
+            self.heart.tintColor = UIColor.lightGray
         }
 
         
-        NSNotificationCenter.defaultCenter().addObserver(
+        NotificationCenter.default.addObserver(
             self,
             selector: #selector(PromoCollectionCell.updateLikeAndTaken(_:)),
-            name: "takenOrLikeStatus",
+            name: NSNotification.Name(rawValue: "takenOrLikeStatus"),
             object: nil)
     }
-    @IBAction func share(sender: AnyObject) {
+    @IBAction func share(_ sender: AnyObject) {
         let content : FBSDKShareLinkContent = FBSDKShareLinkContent()
-        content.contentURL = NSURL(string: "http://www.inmoon.io")
+        content.contentURL = URL(string: "http://www.inmoon.io")
         content.contentTitle = self.coupon.name
-        content.imageURL = NSURL(string: "\(Utilities.dopImagesURL)\(self.coupon.company_id)/\(self.coupon.logo)")
+        content.imageURL = URL(string: "\(Utilities.dopImagesURL)\(self.coupon.company_id)/\(self.coupon.logo)")
         content.contentDescription = self.coupon_description?.text
         
         //FBSDKShareDialog.showFromViewController(viewController, withContent: content, delegate: self)
@@ -62,10 +69,10 @@ class PromoCollectionCell: UICollectionViewCell, FBSDKSharingDelegate {
         
         let dialog: FBSDKShareDialog = FBSDKShareDialog()
         
-        if UIApplication.sharedApplication().canOpenURL(NSURL(string: "fbauth2://")!) {
-            dialog.mode = FBSDKShareDialogMode.FeedWeb
+        if UIApplication.shared.canOpenURL(URL(string: "fbauth2://")!) {
+            dialog.mode = FBSDKShareDialogMode.feedWeb
         }else{
-            dialog.mode = FBSDKShareDialogMode.FeedWeb
+            dialog.mode = FBSDKShareDialogMode.feedWeb
         }
         dialog.shareContent = content
         dialog.delegate = self
@@ -74,14 +81,14 @@ class PromoCollectionCell: UICollectionViewCell, FBSDKSharingDelegate {
     }
     
     
-    func likeCoupon(sender: UITapGestureRecognizer){
+    func likeCoupon(_ sender: UITapGestureRecognizer){
         let params:[String: AnyObject] = [
-            "coupon_id" : String(stringInterpolationSegment: coupon.id),
-            "date" : "2015-01-01"]
+            "coupon_id" : String(stringInterpolationSegment: coupon.id) as AnyObject,
+            "date" : "2015-01-01" as AnyObject]
         
         var liked: Bool
         
-        if  self.heart.tintColor == UIColor.lightGrayColor() {
+        if  self.heart.tintColor == UIColor.lightGray {
             self.setCouponLike()
             liked = true
         } else {
@@ -91,13 +98,13 @@ class PromoCollectionCell: UICollectionViewCell, FBSDKSharingDelegate {
     
         CouponController.likeCouponWithSuccess(params,
             success: { (couponsData) -> Void in
-                dispatch_async(dispatch_get_main_queue(), {
-                    let json = JSON(data: couponsData)
+                DispatchQueue.main.async(execute: {
+                    let json = couponsData!
                     print(json)
                 })
             },
             failure: { (error) -> Void in
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     if(liked == true){
                         self.removeCouponLike()
                     }else{
@@ -107,40 +114,40 @@ class PromoCollectionCell: UICollectionViewCell, FBSDKSharingDelegate {
             })
     }
     
-    @IBAction func shareCoupon(sender: UIButton) {
+    @IBAction func shareCoupon(_ sender: UIButton) {
         let content : FBSDKShareLinkContent = FBSDKShareLinkContent()
-        content.contentURL = NSURL(string: "https://www.inmoon.com.mx")
+        content.contentURL = URL(string: "https://www.inmoon.com.mx")
         content.contentTitle = self.coupon.name
         content.contentDescription = self.coupon_description?.text
-        content.imageURL = NSURL(string: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Facebook_Headquarters_Menlo_Park.jpg/2880px-Facebook_Headquarters_Menlo_Park.jpg") //NSURL(string: "\(Utilities.dopImagesURL)\(self.coupon.company_id)/\(self.coupon.logo)")
+        content.imageURL = URL(string: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Facebook_Headquarters_Menlo_Park.jpg/2880px-Facebook_Headquarters_Menlo_Park.jpg") //NSURL(string: "\(Utilities.dopImagesURL)\(self.coupon.company_id)/\(self.coupon.logo)")
         
                 let dialog: FBSDKShareDialog = FBSDKShareDialog()
         //        dialog.mode = FBSDKShareDialogModeShareSheet
-        dialog.mode = FBSDKShareDialogMode.Browser
-        FBSDKShareDialog.showFromViewController(self.viewController, withContent: content, delegate: self)
+        dialog.mode = FBSDKShareDialogMode.browser
+        FBSDKShareDialog.show(from: self.viewController, with: content, delegate: self)
     }
     
-    func sharer(sharer: FBSDKSharing!, didFailWithError error: NSError!) {
-        print(error.description)
+    public func sharer(_ sharer: FBSDKSharing!, didFailWithError error: Error!) {
+        //print(error.description)
     }
     
-    func sharer(sharer: FBSDKSharing!, didCompleteWithResults results: [NSObject : AnyObject]!) {
+    func sharer(_ sharer: FBSDKSharing!, didCompleteWithResults results: [AnyHashable: Any]!) {
         print(results)
     }
     
-    func sharerDidCancel(sharer: FBSDKSharing!) {
+    func sharerDidCancel(_ sharer: FBSDKSharing!) {
         print("cancel share")
     }
 
     func setCouponLike() {
-        heart.transform = CGAffineTransformMakeScale(0.1, 0.1)
-        UIView.animateWithDuration(0.8,
+        heart.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+        UIView.animate(withDuration: 0.8,
             delay: 0,
             usingSpringWithDamping: 0.2,
             initialSpringVelocity: 6.0,
-            options: UIViewAnimationOptions.AllowUserInteraction,
+            options: UIViewAnimationOptions.allowUserInteraction,
             animations: {
-                self.heart.transform = CGAffineTransformIdentity
+                self.heart.transform = CGAffineTransform.identity
         }, completion: nil)
         
         self.heart.tintColor = Utilities.dopColor
@@ -151,7 +158,7 @@ class PromoCollectionCell: UICollectionViewCell, FBSDKSharingDelegate {
     }
 
     func removeCouponLike() {
-        self.heart.tintColor = UIColor.lightGrayColor()
+        self.heart.tintColor = UIColor.lightGray
         let totalLikes = (Int(self.likes.text!))! - 1
         self.likes.text = String(stringInterpolationSegment: totalLikes)
         self.coupon.setUserLike(false, total_likes: totalLikes)
@@ -159,14 +166,14 @@ class PromoCollectionCell: UICollectionViewCell, FBSDKSharingDelegate {
     }
     
     func setCouponTaken() {
-        self.take_coupon_btn.transform = CGAffineTransformMakeScale(0.1, 0.1)
-        UIView.animateWithDuration(0.8,
+        self.take_coupon_btn.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+        UIView.animate(withDuration: 0.8,
             delay: 0,
             usingSpringWithDamping: 0.2,
             initialSpringVelocity: 6.0,
-            options: UIViewAnimationOptions.AllowUserInteraction,
+            options: UIViewAnimationOptions.allowUserInteraction,
             animations: {
-                self.take_coupon_btn.transform = CGAffineTransformIdentity
+                self.take_coupon_btn.transform = CGAffineTransform.identity
             }, completion: nil)
         
         self.take_coupon_btn.tintColor = Utilities.dopColor
@@ -175,34 +182,34 @@ class PromoCollectionCell: UICollectionViewCell, FBSDKSharingDelegate {
         self.coupon.available -= 1
         
         let params:[String: AnyObject] = [
-            "coupon_id" : self.coupon.id,
-            "status": true,
-            "type": "take"]
-        NSNotificationCenter.defaultCenter().postNotificationName("takenOrLikeStatus", object: params)
+            "coupon_id" : self.coupon.id as AnyObject,
+            "status": true as AnyObject,
+            "type": "take" as AnyObject]
+        NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: "takenOrLikeStatus"), object: params)
     }
     
     func removeCouponTaken() {
-        self.take_coupon_btn.tintColor = UIColor.darkGrayColor()
+        self.take_coupon_btn.tintColor = UIColor.darkGray
         self.coupon.taken = false
         //self.coupon.setTakenCoupons(false, available: self.coupon.available+1)
         self.coupon.available += 1
         
         let params:[String: AnyObject] = [
-            "coupon_id" : self.coupon.id,
-            "status": false,
-            "type": "take"]
-        NSNotificationCenter.defaultCenter().postNotificationName("takenOrLikeStatus", object: params)
+            "coupon_id" : self.coupon.id as AnyObject,
+            "status": false as AnyObject,
+            "type": "take" as AnyObject]
+        NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: "takenOrLikeStatus"), object: params)
     }
     
     func setCouponTakenNotification() {
-        self.take_coupon_btn.transform = CGAffineTransformMakeScale(0.1, 0.1)
-        UIView.animateWithDuration(0.8,
+        self.take_coupon_btn.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+        UIView.animate(withDuration: 0.8,
                                    delay: 0,
                                    usingSpringWithDamping: 0.2,
                                    initialSpringVelocity: 6.0,
-                                   options: UIViewAnimationOptions.AllowUserInteraction,
+                                   options: UIViewAnimationOptions.allowUserInteraction,
                                    animations: {
-                                    self.take_coupon_btn.transform = CGAffineTransformIdentity
+                                    self.take_coupon_btn.transform = CGAffineTransform.identity
             }, completion: nil)
         
         self.take_coupon_btn.tintColor = Utilities.dopColor
@@ -210,21 +217,21 @@ class PromoCollectionCell: UICollectionViewCell, FBSDKSharingDelegate {
     }
     
     func removeCouponTakenNotification() {
-        self.take_coupon_btn.tintColor = UIColor.darkGrayColor()
+        self.take_coupon_btn.tintColor = UIColor.darkGray
         self.coupon.taken = false
     }
     
-    @IBAction func setTakeCoupon(sender: UIButton) {
+    @IBAction func setTakeCoupon(_ sender: UIButton) {
         let params:[String: AnyObject] = [
-            "coupon_id" : self.coupon.id,
-            "branch_id": self.coupon.branch_id,
-            "latitude": User.coordinate.latitude ?? 0,
-            "longitude": User.coordinate.longitude ?? 0 ]
+            "coupon_id" : self.coupon.id as AnyObject,
+            "branch_id": self.coupon.branch_id as AnyObject,
+            "latitude": User.coordinate.latitude as AnyObject? ?? 0 as AnyObject,
+            "longitude": User.coordinate.longitude as AnyObject? ?? 0 as AnyObject ]
         
         var taken: Bool
         
         
-        if self.take_coupon_btn.tintColor == UIColor.darkGrayColor() {
+        if self.take_coupon_btn.tintColor == UIColor.darkGray {
             self.setCouponTaken()
             taken = true
         } else {
@@ -235,8 +242,8 @@ class PromoCollectionCell: UICollectionViewCell, FBSDKSharingDelegate {
         
         CouponController.takeCouponWithSuccess(params,
             success: { (data) -> Void in
-                dispatch_async(dispatch_get_main_queue(), {
-                    let json = JSON(data: data)
+                DispatchQueue.main.async(execute: {
+                    let json = data!
                     print(json)
                     
                 })
@@ -244,7 +251,7 @@ class PromoCollectionCell: UICollectionViewCell, FBSDKSharingDelegate {
             },
             
             failure: { (error) -> Void in
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     if taken { self.removeCouponTaken() }
                     else { self.setCouponTaken() }
                 })
@@ -253,12 +260,12 @@ class PromoCollectionCell: UICollectionViewCell, FBSDKSharingDelegate {
 
     }
     
-    func setTakeButtonState(state: Bool) {
+    func setTakeButtonState(_ state: Bool) {
         if state { self.take_coupon_btn.tintColor = Utilities.dopColor }
-        else { self.take_coupon_btn.tintColor = UIColor.darkGrayColor() }
+        else { self.take_coupon_btn.tintColor = UIColor.darkGray }
     }
     
-    func updateLikeAndTaken(notification:NSNotification){
+    func updateLikeAndTaken(_ notification:Foundation.Notification){
         
         let object = notification.object as! [String: AnyObject]
         
@@ -282,7 +289,7 @@ class PromoCollectionCell: UICollectionViewCell, FBSDKSharingDelegate {
             }
         }
     }
-    func refreshAvailable(notification:NSNotification){
+    func refreshAvailable(_ notification:Foundation.Notification){
         print("Available refresh!")
         let object = notification.object as! Int
         

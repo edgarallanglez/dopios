@@ -29,13 +29,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
 //    }
     
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        NSURLCache.sharedURLCache().removeAllCachedResponses()
+        URLCache.shared.removeAllCachedResponses()
         
         registerForPushNotifications(application)
         
-        if let notification = launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey] as? [String: AnyObject] {
+        if let notification = launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] as? [String: AnyObject] {
             // 2
             let aps = notification["aps"] as! [String: AnyObject]
             
@@ -50,40 +50,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     
-    func application(application: UIApplication,
-        openURL url: NSURL,
+    func application(_ application: UIApplication,
+        open url: URL,
         sourceApplication: String?,
-        annotation: AnyObject) -> Bool {
+        annotation: Any) -> Bool {
             return FBSDKApplicationDelegate.sharedInstance().application(
                 application,
-                openURL: url,
+                open: url,
                 sourceApplication: sourceApplication,
                 annotation: annotation)
     }
     
-    func applicationWillResignActive(application: UIApplication) {
+    func applicationWillResignActive(_ application: UIApplication) {
         
     }
 
-    func applicationDidEnterBackground(application: UIApplication) {
+    func applicationDidEnterBackground(_ application: UIApplication) {
         //SocketIOManager.sharedInstance.closeConnection()
     }
 
-    func applicationWillEnterForeground(application: UIApplication) {
+    func applicationWillEnterForeground(_ application: UIApplication) {
 
     }
 
-    func applicationDidBecomeActive(application: UIApplication) {
+    func applicationDidBecomeActive(_ application: UIApplication) {
         //SocketIOManager.sharedInstance.establishConnection()
     }
 
-    func applicationWillTerminate(application: UIApplication) {
+    func applicationWillTerminate(_ application: UIApplication) {
 
     }
 
-    func application(application: UIApplication, performFetchWithCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+    func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         print("Complete");
-        completionHandler(UIBackgroundFetchResult.NewData)
+        completionHandler(UIBackgroundFetchResult.newData)
         
         getData();
         
@@ -92,20 +92,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let localNotification:UILocalNotification = UILocalNotification()
             localNotification.alertAction = "Testing notifications on iOS8"
             localNotification.alertBody = "Movie Count : \(1)"
-            localNotification.fireDate = NSDate(timeIntervalSinceNow: 1)
-            UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
+            localNotification.fireDate = Date(timeIntervalSinceNow: 1)
+            UIApplication.shared.scheduleLocalNotification(localNotification)
     }
     
-    func registerForPushNotifications(application: UIApplication) {
+    func registerForPushNotifications(_ application: UIApplication) {
         let notificationSettings = UIUserNotificationSettings(
-            forTypes: [.Badge, .Sound, .Alert], categories: nil)
+            types: [.badge, .sound, .alert], categories: nil)
         
         application.registerUserNotificationSettings(notificationSettings)
     }
     
-    func application(application: UIApplication, didRegisterUserNotificationSettings notificationSettings: UIUserNotificationSettings) {
+    func application(_ application: UIApplication, didRegister notificationSettings: UIUserNotificationSettings) {
         
-        if (notificationSettings.types == UIUserNotificationType.None) {
+        if (notificationSettings.types == UIUserNotificationType()) {
             
         }
             
@@ -118,11 +118,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 
-    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-        let tokenChars = UnsafePointer<CChar>(deviceToken.bytes)
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        let tokenChars = (deviceToken as NSData).bytes.bindMemory(to: CChar.self, capacity: deviceToken.count)
         var tokenString = ""
         
-        for i in 0..<deviceToken.length {
+        for i in 0..<deviceToken.count {
             tokenString += String(format: "%02.2hhx", arguments: [tokenChars[i]])
         }
         
@@ -130,16 +130,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("Device Token:", tokenString)
     }
     
-    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         print("Failed to register:", error)
     }
-    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
         let aps = userInfo["aps"] as! [String: AnyObject]
         
         let notification = userInfo["data"] as! [String: AnyObject]
         print(notification)
         
-        NSNotificationCenter.defaultCenter().postNotificationName("newNotification", object: nil)
+        NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: "newNotification"), object: nil)
         AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
     }
 

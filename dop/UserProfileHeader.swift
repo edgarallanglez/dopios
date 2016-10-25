@@ -11,13 +11,13 @@ import UIKit
 class UserProfileHeader: UICollectionReusableView {
     
     
-    private var imageView : UIImageView?
-    private var user_profile: UserProfileStickyHeader = UserProfileStickyHeader()
+    fileprivate var imageView : UIImageView?
+    fileprivate var user_profile: UserProfileStickyHeader = UserProfileStickyHeader()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.clipsToBounds = true
-        user_profile = (NSBundle.mainBundle().loadNibNamed("UserProfileStickyHeader", owner: self, options: nil)![0] as? UserProfileStickyHeader)!
+        user_profile = (Bundle.main.loadNibNamed("UserProfileStickyHeader", owner: self, options: nil)![0] as? UserProfileStickyHeader)!
         
         self.addSubview(user_profile)
     }
@@ -31,7 +31,7 @@ class UserProfileHeader: UICollectionReusableView {
         self.user_profile.frame = self.bounds
     }
     
-    func setUserProfile(viewController: UserProfileStickyController) {
+    func setUserProfile(_ viewController: UserProfileStickyController) {
         user_profile.setView(viewController)
     }
     

@@ -25,18 +25,18 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(BaseViewController.setBadge), name: "newNotification", object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(BaseViewController.setBadge), name: NSNotification.Name(rawValue: "newNotification"), object: nil)
 
         
-        notificationButton = UIBarButtonItem(image: UIImage(named: "notification"), style: UIBarButtonItemStyle.Plain, target: self, action: #selector(BaseViewController.notification))
+        notificationButton = UIBarButtonItem(image: UIImage(named: "notification"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(BaseViewController.notification))
         
         
         self.navigationItem.rightBarButtonItem = notificationButton
 
         
-        vc  = self.storyboard!.instantiateViewControllerWithIdentifier("SearchView") as! SearchViewController
+        vc  = self.storyboard!.instantiateViewController(withIdentifier: "SearchView") as! SearchViewController
         
-        vcNot = self.storyboard!.instantiateViewControllerWithIdentifier("Notifications") as! NotificationViewController
+        vcNot = self.storyboard!.instantiateViewController(withIdentifier: "Notifications") as! NotificationViewController
         
         
         searchBar.delegate = self
@@ -44,8 +44,8 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
         
         self.navigationItem.titleView = searchBar
         
-        searchBar.tintColor = UIColor.whiteColor()
-        searchBar.searchBarStyle = UISearchBarStyle.Minimal
+        searchBar.tintColor = UIColor.white
+        searchBar.searchBarStyle = UISearchBarStyle.minimal
         searchBar.placeholder = "Buscar"
         
      
@@ -55,7 +55,7 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
             for subsubView in subView.subviews{
                 if let textField = subsubView as? UITextField{
                     textField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("Buscar", comment: ""), attributes: [NSForegroundColorAttributeName: Utilities.extraLightGrayColor])
-                    textField.textColor = UIColor.whiteColor()
+                    textField.textColor = UIColor.white
 
                 }
             }
@@ -65,16 +65,16 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
         self.navigationController?.delegate = self
         
         
-        errorView = (NSBundle.mainBundle().loadNibNamed("ErrorView", owner: self, options: nil)![0] as? UIView)!
+        errorView = (Bundle.main.loadNibNamed("ErrorView", owner: self, options: nil)![0] as? UIView)!
         
         
         errorView.frame.size.width = self.view.frame.width
-        errorView.backgroundColor = UIColor.redColor()
+        errorView.backgroundColor = UIColor.red
         
-        searchView = UIView(frame: CGRectMake(0,0,self.view.frame.width,self.view.frame.height))
+        searchView = UIView(frame: CGRect(x: 0,y: 0,width: self.view.frame.width,height: self.view.frame.height))
         
         //Add blur view to search view
-        let blurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.ExtraLight))
+        let blurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.extraLight))
         blurView.frame = searchView.bounds
         
         vc.view.addSubview(blurView)
@@ -83,19 +83,19 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
         blurView.addGestureRecognizer(gestureRecognizer)
         
         //vc.searchScrollView.hidden = true
-        vc.searchScrollView.hidden = true
+        vc.searchScrollView.isHidden = true
         
         
-        cancelSearchButton = UIBarButtonItem(title: "Cancelar", style: .Plain, target: self, action: #selector(BaseViewController.cancelSearch))
+        cancelSearchButton = UIBarButtonItem(title: "Cancelar", style: .plain, target: self, action: #selector(BaseViewController.cancelSearch))
         
-        NSNotificationCenter.defaultCenter().addObserver(
+        NotificationCenter.default.addObserver(
             self,
             selector: #selector(BaseViewController.presentView(_:)),
-            name: "performSegue",
+            name: NSNotification.Name(rawValue: "performSegue"),
             object: nil)
     }
     
-    func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         if(searchViewIsOpen == false){
             self.navigationItem.rightBarButtonItem = cancelSearchButton
             
@@ -117,28 +117,28 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
             searchViewIsOpen = false
             self.navigationItem.rightBarButtonItem = notificationButton
             searchBar.text = ""
-            vc.searchScrollView.hidden = true
+            vc.searchScrollView.isHidden = true
             vc.peopleFiltered.removeAll()
             vc.peopleTableView.reloadData()
             vc.filtered.removeAll()
             vc.tableView.reloadData()
         }
     }
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        if(searchViewIsOpen == true && vc.searchScrollView.hidden == true){
-            vc.searchScrollView.hidden = false
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if(searchViewIsOpen == true && vc.searchScrollView.isHidden == true){
+            vc.searchScrollView.isHidden = false
             Utilities.slideFromBottomAnimation(vc.searchScrollView, delay: 0, duration: 0.5, yPosition: 600)
         }
         
         if(searchText.characters.count == 0){
-            vc.searchScrollView.hidden = true
+            vc.searchScrollView.isHidden = true
         }else{
-            vc.searchText = searchText
+            vc.searchText = searchText as NSString!
             vc.searchTimer()
         }
     }
     
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         vc.searchActive = false;
         vc.timer?.invalidate()
         
@@ -148,11 +148,11 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
         }
     }
     
-    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         vc.searchActive = false;
     }
     
-    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         vc.searchActive = false;
     }
     
@@ -162,28 +162,28 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
     }
     func notification() {
         let tabbar = self.tabBarController as! TabbarController!
-        self.navigationController?.pushViewController(tabbar.vcNot, animated: true)
+        self.navigationController?.pushViewController((tabbar?.vcNot)!, animated: true)
         self.notificationButton.image = UIImage(named: "notification")
 
        /*vcNot.navigationController?.hidesBottomBarWhenPushed = true
        self.navigationController?.pushViewController(vcNot, animated: true)*/
         
     }
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return .LightContent
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+        return .lightContent
     }
     
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return false
     }
 
     
-    func navigationController(navigationController: UINavigationController, didShowViewController viewController: UIViewController, animated: Bool) {
+    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
         viewController.viewDidAppear(true)
         
     }
 
-    func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
         viewController.viewWillAppear(true)
         if(!searchViewIsSegue) {
             cancelSearch()
@@ -192,7 +192,7 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
 
 
     }
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         
         
         if User.newNotification {
@@ -202,11 +202,11 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
         }
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(true)
     }
     
-    func presentView(notification: NSNotification){
+    func presentView(_ notification: Foundation.Notification){
         if(searchViewIsOpen){
             searchViewIsSegue = true
             
@@ -214,13 +214,13 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
             let object_id = params["id"] as! Int
             
             if vc.searchSegmentedController.selectedIndex == 0 {
-                let viewControllerToPresent = self.storyboard!.instantiateViewControllerWithIdentifier("BranchProfileStickyController") as! BranchProfileStickyController
+                let viewControllerToPresent = self.storyboard!.instantiateViewController(withIdentifier: "BranchProfileStickyController") as! BranchProfileStickyController
                 viewControllerToPresent.branch_id = object_id
                 self.navigationController?.pushViewController(viewControllerToPresent, animated: true)
                 
             }
             if vc.searchSegmentedController.selectedIndex == 1 {
-                let viewControllerToPresent = self.storyboard!.instantiateViewControllerWithIdentifier("UserProfileStickyController") as! UserProfileStickyController
+                let viewControllerToPresent = self.storyboard!.instantiateViewController(withIdentifier: "UserProfileStickyController") as! UserProfileStickyController
                 viewControllerToPresent.user_id = object_id
                 viewControllerToPresent.is_friend = params["is_friend"] as! Bool
                 viewControllerToPresent.operation_id = params["operation_id"] as! Int

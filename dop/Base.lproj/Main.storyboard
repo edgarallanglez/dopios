@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="wsr-0B-cyM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="wsr-0B-cyM">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -5686,9 +5686,6 @@
                                                                 <constraint firstAttribute="width" constant="55" id="dn4-l0-u9L"/>
                                                                 <constraint firstAttribute="height" constant="55" id="ufS-oZ-dLS"/>
                                                             </constraints>
-                                                            <userDefinedRuntimeAttributes>
-                                                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                                            </userDefinedRuntimeAttributes>
                                                             <variation key="default">
                                                                 <mask key="constraints">
                                                                     <exclude reference="dn4-l0-u9L"/>
@@ -5767,14 +5764,14 @@
                                                             <exclude reference="1sd-Es-u2A"/>
                                                             <exclude reference="Fqt-ga-9k7"/>
                                                             <exclude reference="Mfo-Fp-wY0"/>
-                                                            <exclude reference="eqy-Hk-hYq"/>
-                                                            <exclude reference="fKv-8W-Sme"/>
                                                             <exclude reference="78a-Sj-hG8"/>
                                                             <exclude reference="Wrl-N5-WF8"/>
                                                             <exclude reference="gsI-b8-ixJ"/>
                                                             <exclude reference="ouq-Nr-BZs"/>
                                                             <exclude reference="yRJ-He-XqM"/>
                                                             <exclude reference="zeM-LX-ldV"/>
+                                                            <exclude reference="eqy-Hk-hYq"/>
+                                                            <exclude reference="fKv-8W-Sme"/>
                                                         </mask>
                                                     </variation>
                                                     <variation key="widthClass=compact">
@@ -5787,14 +5784,14 @@
                                                             <include reference="1sd-Es-u2A"/>
                                                             <include reference="Fqt-ga-9k7"/>
                                                             <include reference="Mfo-Fp-wY0"/>
-                                                            <include reference="eqy-Hk-hYq"/>
-                                                            <include reference="fKv-8W-Sme"/>
                                                             <exclude reference="78a-Sj-hG8"/>
                                                             <exclude reference="Wrl-N5-WF8"/>
                                                             <include reference="gsI-b8-ixJ"/>
                                                             <exclude reference="ouq-Nr-BZs"/>
                                                             <include reference="yRJ-He-XqM"/>
                                                             <exclude reference="zeM-LX-ldV"/>
+                                                            <include reference="eqy-Hk-hYq"/>
+                                                            <include reference="fKv-8W-Sme"/>
                                                         </mask>
                                                     </variation>
                                                 </view>
@@ -5892,11 +5889,11 @@
                                 <exclude reference="DBj-0l-8wm"/>
                                 <exclude reference="1Sd-3u-Crk"/>
                                 <exclude reference="ImV-kB-E6K"/>
+                                <exclude reference="UVR-r4-lW3"/>
+                                <exclude reference="eKq-ui-cHN"/>
                                 <exclude reference="7vW-uL-W07"/>
                                 <exclude reference="Ysf-Cj-x3x"/>
                                 <exclude reference="g5Q-02-Qa9"/>
-                                <exclude reference="UVR-r4-lW3"/>
-                                <exclude reference="eKq-ui-cHN"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -5909,11 +5906,11 @@
                                 <include reference="DBj-0l-8wm"/>
                                 <include reference="1Sd-3u-Crk"/>
                                 <include reference="ImV-kB-E6K"/>
+                                <include reference="UVR-r4-lW3"/>
+                                <include reference="eKq-ui-cHN"/>
                                 <include reference="7vW-uL-W07"/>
                                 <include reference="Ysf-Cj-x3x"/>
                                 <include reference="g5Q-02-Qa9"/>
-                                <include reference="UVR-r4-lW3"/>
-                                <include reference="eKq-ui-cHN"/>
                             </mask>
                         </variation>
                     </view>

@@ -9,15 +9,15 @@
 import UIKit
 
 @objc protocol UserPaginationDelegate {
-    optional func resizeView(new_height: CGFloat)
+    @objc optional func resizeView(_ new_height: CGFloat)
     
-    optional func setSegmentedIndex(index: Int)
+    @objc optional func setSegmentedIndex(_ index: Int)
 }
 
 class UserPaginationViewController: UICollectionViewCell, UIPageViewControllerDataSource, UIPageViewControllerDelegate, SetSegmentedPageDelegate, ActivityPageDelegate, BadgePageDelegate, ConnectionsPageDelegate, UIScrollViewDelegate {
     
     var delegate: UserPaginationDelegate?
-    var userPageViewController: UIPageViewController = UIPageViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
+    var userPageViewController: UIPageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
     
     var index: Int = 0
     
@@ -31,28 +31,28 @@ class UserPaginationViewController: UICollectionViewCell, UIPageViewControllerDa
     var identifiers: NSArray = ["ActivityPage", "BadgesPage", "ConnectionsPage"]
     
     override func setNeedsLayout() {
-        self.userPageViewController.view.frame.size.width = UIScreen.mainScreen().bounds.width
+        self.userPageViewController.view.frame.size.width = UIScreen.main.bounds.width
         self.userPageViewController.view.frame.size.height = dynamic_height
     }
     
-    func resizeActivityView(dynamic_height: CGFloat) {
+    func resizeActivityView(_ dynamic_height: CGFloat) {
         self.dynamic_height = dynamic_height
         setNeedsLayout()
         delegate?.resizeView!(dynamic_height)
     }
     
-    func resizeBadgeView(dynamic_height: CGFloat) {
+    func resizeBadgeView(_ dynamic_height: CGFloat) {
         self.dynamic_height = dynamic_height
         delegate?.resizeView!(dynamic_height)
     }
     
-    func resizeConnectionsSize(dynamic_height: CGFloat) {
+    func resizeConnectionsSize(_ dynamic_height: CGFloat) {
         self.dynamic_height = dynamic_height
         delegate?.resizeView!(dynamic_height)
     }
     
     
-    func setPaginator(viewController: UserProfileStickyController) {
+    func setPaginator(_ viewController: UserProfileStickyController) {
         
         parentViewController = viewController
         parentViewController.delegate = self
@@ -64,12 +64,12 @@ class UserPaginationViewController: UICollectionViewCell, UIPageViewControllerDa
     
         let viewControllers: [UIViewController] = [activity_view]
         
-        self.userPageViewController.setViewControllers(viewControllers, direction: .Forward, animated: true, completion: nil)
+        self.userPageViewController.setViewControllers(viewControllers, direction: .forward, animated: true, completion: nil)
         
         self.contentView.addSubview(self.userPageViewController.view)
     }
     
-    func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         
         switch viewController.title! {
             case "activityPage": return nil
@@ -82,7 +82,7 @@ class UserPaginationViewController: UICollectionViewCell, UIPageViewControllerDa
         
     }
     
-    func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         
         switch viewController.title! {
             case "activityPage": self.index = 1
@@ -95,7 +95,7 @@ class UserPaginationViewController: UICollectionViewCell, UIPageViewControllerDa
 
     }
     
-    func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         
         if !completed {
             let viewController = pageViewController.viewControllers!.first!
@@ -111,7 +111,7 @@ class UserPaginationViewController: UICollectionViewCell, UIPageViewControllerDa
         
     }
     
-    func pageViewController(pageViewController: UIPageViewController, willTransitionToViewControllers pendingViewControllers: [UIViewController]) {
+    func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
         let viewController = pendingViewControllers.first!
         var index = 0
         switch viewController.title! {
@@ -124,24 +124,24 @@ class UserPaginationViewController: UICollectionViewCell, UIPageViewControllerDa
         delegate?.setSegmentedIndex!(index)
     }
 
-    func viewControllerAtIndex(index: Int) -> UIViewController?{
+    func viewControllerAtIndex(_ index: Int) -> UIViewController?{
         //first view controller = firstViewControllers navigation controller
         
         switch index {
         case 0:
-            let viewController = parentViewController.storyboard!.instantiateViewControllerWithIdentifier("ActivityPage") as! ActivityPage
+            let viewController = parentViewController.storyboard!.instantiateViewController(withIdentifier: "ActivityPage") as! ActivityPage
             viewController.delegate = self
             viewController.parent_view = self.parentViewController
             viewController.parent_page_controller = self
             return viewController
         case 1:
-            let viewController = parentViewController.storyboard!.instantiateViewControllerWithIdentifier("BadgesPage") as! BadgesPage
+            let viewController = parentViewController.storyboard!.instantiateViewController(withIdentifier: "BadgesPage") as! BadgesPage
             viewController.delegate = self
             viewController.parent_view = self.parentViewController
             viewController.parent_page_controller = self
             return viewController
         case 2:
-            let viewController = parentViewController.storyboard!.instantiateViewControllerWithIdentifier("ConnectionsPage") as! ConnectionsPage
+            let viewController = parentViewController.storyboard!.instantiateViewController(withIdentifier: "ConnectionsPage") as! ConnectionsPage
             viewController.delegate = self
             viewController.parent_view = self.parentViewController
             viewController.parent_page_controller = self
@@ -152,10 +152,10 @@ class UserPaginationViewController: UICollectionViewCell, UIPageViewControllerDa
         }
     }
     
-    func setPage(index: Int) {
+    func setPage(_ index: Int) {
         var direction: UIPageViewControllerNavigationDirection
         
-        if(index < self.index){ direction = .Reverse } else { direction = .Forward }
+        if(index < self.index){ direction = .reverse } else { direction = .forward }
         var toViewController = self.viewControllerAtIndex(0)
         
         switch index {
@@ -175,7 +175,7 @@ class UserPaginationViewController: UICollectionViewCell, UIPageViewControllerDa
         self.userPageViewController.setViewControllers(viewControllers as? [UIViewController], direction: direction, animated: true, completion: nil)
     }
     
-    func launchInfiniteScroll(parent_scroll: UICollectionView) {
+    func launchInfiniteScroll(_ parent_scroll: UICollectionView) {
         let viewController = userPageViewController.viewControllers!.first!
         switch viewController.title! {
             case "activityPage": let currentController = viewController as! ActivityPage

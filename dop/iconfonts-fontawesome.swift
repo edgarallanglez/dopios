@@ -10,7 +10,7 @@
 import UIKit
 
 public extension UIFont{
-	class func iconFontOfSize(font: String, fontSize: CGFloat) -> UIFont {
+	class func iconFontOfSize(_ font: String, fontSize: CGFloat) -> UIFont {
 		
 		return UIFont(name: font, size: fontSize)!
 		
@@ -18,7 +18,7 @@ public extension UIFont{
 }
 
 public extension String {
-	public static func fontAwesomeString(name: String) -> String {
+	public static func fontAwesomeString(_ name: String) -> String {
 		
 		return fetchIconFontAwesome(name)
 		
@@ -26,7 +26,7 @@ public extension String {
 }
 
 public extension NSMutableAttributedString {
-	public static func fontAwesomeAttributedString(name: String, suffix: String?, iconSize: CGFloat, suffixSize: CGFloat?) -> NSMutableAttributedString {
+	public static func fontAwesomeAttributedString(_ name: String, suffix: String?, iconSize: CGFloat, suffixSize: CGFloat?) -> NSMutableAttributedString {
 		
 		// Initialise some variables
 		var iconString = fetchIconFontAwesome(name)
@@ -54,10 +54,10 @@ public extension NSMutableAttributedString {
 }
 
 
-func fetchIconFontAwesome(name: String) -> String {
+func fetchIconFontAwesome(_ name: String) -> String {
 	
 	var returnValue = "\u{f059}"
-	let start = name[name.startIndex.advancedBy(3)]
+	let start = name[name.characters.index(name.startIndex, offsetBy: 3)]
 	
 	switch start {
 	case "a":

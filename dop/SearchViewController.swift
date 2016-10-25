@@ -22,7 +22,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     var cachedImages: [String: UIImage] = [:]
     
     var searching: Bool = false
-    var timer: NSTimer? = nil
+    var timer: Timer? = nil
     var coordinate: CLLocationCoordinate2D?
     var locationManager: CLLocationManager!
     var current: CLLocation!
@@ -48,7 +48,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         
         
 
-        self.view.backgroundColor = UIColor.clearColor()
+        self.view.backgroundColor = UIColor.clear
         
     }
 
@@ -59,11 +59,11 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         }
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if !searching {
             if tableView == self.tableView {
                 if filtered.count == 0 { return 1 }
@@ -75,32 +75,32 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         } else { return 1 }
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let default_cell: UITableViewCell = UITableViewCell()
         
         if tableView == self.tableView {
             if(!searching){
                 if(self.filtered.count != 0){
-                    let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as! SearchCell;
-                    let model = self.filtered[indexPath.row]
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! SearchCell;
+                    let model = self.filtered[(indexPath as NSIndexPath).row]
                     cell.loadItem(model, viewController: self)
-                    cell.selectionStyle = UITableViewCellSelectionStyle.None
+                    cell.selectionStyle = UITableViewCellSelectionStyle.none
                     
                     return (cell)
                 } else {
-                    let cell = tableView.dequeueReusableCellWithIdentifier("loadingCell") as! LoadingCell;
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "loadingCell") as! LoadingCell;
                     cell.label.text = "No se encontraron resultados"
-                    cell.selectionStyle = UITableViewCellSelectionStyle.None
-                    cell.loading_indicator.hidden = true
+                    cell.selectionStyle = UITableViewCellSelectionStyle.none
+                    cell.loading_indicator.isHidden = true
                     
                     return (cell)
                 }
                 
             } else {
-                let cell = tableView.dequeueReusableCellWithIdentifier("loadingCell") as! LoadingCell;
+                let cell = tableView.dequeueReusableCell(withIdentifier: "loadingCell") as! LoadingCell;
                 cell.label.text = "Buscando"
-                cell.selectionStyle = UITableViewCellSelectionStyle.None
-                cell.loading_indicator.hidden = false
+                cell.selectionStyle = UITableViewCellSelectionStyle.none
+                cell.loading_indicator.isHidden = false
                 cell.loading_indicator.startAnimating()
                 
                 return (cell)
@@ -108,13 +108,13 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         } else if tableView == self.peopleTableView {
             if(!searching){
                 if(self.peopleFiltered.count != 0){
-                    let cell = tableView.dequeueReusableCellWithIdentifier("PeopleCell") as! PeopleCell;
-                    let model = self.peopleFiltered[indexPath.row]
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "PeopleCell") as! PeopleCell;
+                    let model = self.peopleFiltered[(indexPath as NSIndexPath).row]
                     cell.loadItem(model, viewController: self)
-                    cell.selectionStyle = UITableViewCellSelectionStyle.None
+                    cell.selectionStyle = UITableViewCellSelectionStyle.none
                     ////////
-                    let imageUrl = NSURL(string: model.main_image)
-                    let identifier = "Cell\(indexPath.row)"
+                    let imageUrl = URL(string: model.main_image)
+                    let identifier = "Cell\((indexPath as NSIndexPath).row)"
                     
                     if (self.cachedImages[identifier] != nil){
                         let cell_image_saved : UIImage = self.cachedImages[identifier]!
@@ -126,15 +126,15 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
                         cell.user_image.alpha = 0
                         Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
                             if let image = UIImage(data: data!) {
-                                dispatch_async(dispatch_get_main_queue()) {
+                                DispatchQueue.main.async {
                                     let cell_image: UIImage? = image
                                     
-                                    if tableView.indexPathForCell(cell)?.row == indexPath.row {
+                                    if (tableView.indexPath(for: cell) as NSIndexPath?)?.row == (indexPath as NSIndexPath).row {
                                         if cell_image == nil { self.cachedImages[identifier] = UIImage(named: "dopLogo") }
                                         else { self.cachedImages[identifier] = cell_image }
                                         
                                         cell.user_image.image = self.cachedImages[identifier]!
-                                        UIView.animateWithDuration(0.5, animations: {
+                                        UIView.animate(withDuration: 0.5, animations: {
                                             cell.user_image.alpha = 1
                                             cell.user_name.alpha = 1
                                         })
@@ -150,17 +150,17 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
                     
                     return (cell)
                 } else {
-                    let cell = self.tableView.dequeueReusableCellWithIdentifier("loadingCell") as! LoadingCell;
+                    let cell = self.tableView.dequeueReusableCell(withIdentifier: "loadingCell") as! LoadingCell;
                     cell.label.text = "No se encontraron resultados"
-                    cell.selectionStyle = UITableViewCellSelectionStyle.None
-                    cell.loading_indicator.hidden = true
+                    cell.selectionStyle = UITableViewCellSelectionStyle.none
+                    cell.loading_indicator.isHidden = true
                     
                     return (cell)
                 }
                 
             } else {
-                let cell = self.tableView.dequeueReusableCellWithIdentifier("loadingCell") as! LoadingCell;
-                cell.selectionStyle = UITableViewCellSelectionStyle.None
+                let cell = self.tableView.dequeueReusableCell(withIdentifier: "loadingCell") as! LoadingCell;
+                cell.selectionStyle = UITableViewCellSelectionStyle.none
                 cell.loading_indicator.startAnimating()
                 
                 return (cell)
@@ -175,7 +175,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
             search()
         }else{*/
             timer?.invalidate()
-            timer = NSTimer.scheduledTimerWithTimeInterval(0.7, target: self, selector: #selector(SearchViewController.timeOut), userInfo: nil, repeats: false)
+            timer = Timer.scheduledTimer(timeInterval: 0.7, target: self, selector: #selector(SearchViewController.timeOut), userInfo: nil, repeats: false)
         //}
     }
     
@@ -189,8 +189,8 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         let longitude = User.coordinate.longitude
         let params: [String:AnyObject] = [
             "text": searchText!,
-            "latitude": latitude,
-            "longitude":longitude
+            "latitude": latitude as AnyObject,
+            "longitude":longitude as AnyObject
         ]
         
         searching = true
@@ -200,12 +200,12 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
             SearchController.searchWithSuccess(params,
                 success: { (couponsData) -> Void in
                     
-                    let json = JSON(data: couponsData)
+                    let json = couponsData!
                     print(json)
                     for (_, subJson): (String, JSON) in json["data"] {
                         var distance:Double = 0.0
                         
-                        if (subJson["distance"]) {
+                        if (!subJson["distance"].isEmpty) {
                              distance = Utilities.roundValue(subJson["distance"].double!,numberOfPlaces: 1.0)
                         }
                         
@@ -216,14 +216,14 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
                         self.filtered.append(model)
                     }
                     
-                    dispatch_async(dispatch_get_main_queue(), {
+                    DispatchQueue.main.async(execute: {
                         self.searching = false
                         self.tableView.reloadData()
 
                     })
                 },
                 failure: { (error) -> Void in
-                    dispatch_async(dispatch_get_main_queue(), {
+                    DispatchQueue.main.async(execute: {
                         self.searching = false
                         self.tableView.reloadData()
                     })
@@ -233,7 +233,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
             peopleTableView.reloadData()
             SearchController.searchPeopleWithSuccess(params,
                 success: { (data) -> Void in
-                    let json = JSON(data: data)
+                    let json = data!
                     print(json)
                     for (_, subJson): (String, JSON) in json["data"] {
                         let names = subJson["names"].string!
@@ -252,14 +252,14 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
                         
                         self.peopleFiltered.append(model)
                     }
-                    dispatch_async(dispatch_get_main_queue(), {
+                    DispatchQueue.main.async(execute: {
                         self.searching = false
                         self.peopleTableView.reloadData()
                         
                     })
                 },
                 failure: { (error) -> Void in
-                    dispatch_async(dispatch_get_main_queue(), {
+                    DispatchQueue.main.async(execute: {
                         self.searching = false
                         self.peopleTableView.reloadData()
                     })
@@ -268,29 +268,29 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         }
     }
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         searchBar.resignFirstResponder()
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if(!searching){
             var params = [String: AnyObject]()
             if(tableView == self.tableView && filtered.count > 0){
-                 let model = self.filtered[indexPath.row]
-                params = ["id": model.id]
-                 NSNotificationCenter.defaultCenter().postNotificationName("performSegue", object: params)
+                 let model = self.filtered[(indexPath as NSIndexPath).row]
+                params = ["id": model.id as AnyObject]
+                 NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: "performSegue"), object: params)
 
             } else if peopleFiltered.count > 0 {
-                let model = self.peopleFiltered[indexPath.row]
-                params = ["id": model.user_id,
-                          "is_friend": model.is_friend!,
-                          "operation_id": model.operation_id! ]
-                NSNotificationCenter.defaultCenter().postNotificationName("performSegue", object: params)
+                let model = self.peopleFiltered[(indexPath as NSIndexPath).row]
+                params = ["id": model.user_id as AnyObject,
+                          "is_friend": model.is_friend! as AnyObject,
+                          "operation_id": model.operation_id! as AnyObject ]
+                NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: "performSegue"), object: params)
             }
         }
     }
 
-    @IBAction func setSearchTarget(sender: SearchSegmentedController) {
+    @IBAction func setSearchTarget(_ sender: SearchSegmentedController) {
         switch sender.selectedIndex {
         case 0:
             tableView.reloadData()
@@ -300,12 +300,12 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
             print("Oops!")
         }
         let x = CGFloat(sender.selectedIndex) * self.searchScrollView.frame.size.width
-        self.searchScrollView.setContentOffset(CGPointMake(x, 0), animated: true)
+        self.searchScrollView.setContentOffset(CGPoint(x: x, y: 0), animated: true)
         
     }
 
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 //        if let cell = sender as? SearchCell {
 //            let i = tableView.indexPathForCell(cell)!.row
 //            

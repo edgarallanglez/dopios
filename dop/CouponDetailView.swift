@@ -29,27 +29,27 @@ class CouponDetailView: UIView, MKMapViewDelegate {
     
     var readQRView: readQRViewController?
     
-    @IBAction func triggerSegue(sender: UIButton) {
-        self.viewController!.performSegueWithIdentifier("branchProfile", sender: self)
+    @IBAction func triggerSegue(_ sender: UIButton) {
+        self.viewController!.performSegue(withIdentifier: "branchProfile", sender: self)
     }
     
-    func loadView(viewController: UIViewController) {
+    func loadView(_ viewController: UIViewController) {
         self.viewController = viewController
         self.location.delegate = self
         
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        readQRView = storyboard.instantiateViewControllerWithIdentifier("readQRView") as! readQRViewController
+        readQRView = storyboard.instantiateViewController(withIdentifier: "readQRView") as! readQRViewController
     }
     
-    func centerMapOnLocation(location: CLLocationCoordinate2D) {
+    func centerMapOnLocation(_ location: CLLocationCoordinate2D) {
         let centerPin = CLLocation(latitude: location.latitude, longitude: location.longitude)
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(centerPin.coordinate,
             regionRadius * 2.0, regionRadius * 2.0)
         self.location.setRegion(coordinateRegion, animated: true)
     }
     
-    @IBAction func dopixCoupon(sender: UIButton) {
+    @IBAction func dopixCoupon(_ sender: UIButton) {
         /*let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyyMMdd"
         let folioDate = dateFormatter.stringFromDate(NSDate())
@@ -82,15 +82,15 @@ class CouponDetailView: UIView, MKMapViewDelegate {
         //self.viewController!.performSegueWithIdentifier("readQR", sender: self)
         
         readQRView?.coupon_id = 5
-        self.viewController!.presentViewController(readQRView!,
+        self.viewController!.present(readQRView!,
             animated: true,
             completion: nil)
                 
     }
     
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView?{
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView?{
         let reuseId = "custom"
-        var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId)
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId)
         if mapView.userLocation == annotation as! NSObject { return nil }
         if (annotationView == nil) {
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)

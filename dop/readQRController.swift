@@ -9,24 +9,24 @@
 import Foundation
 
 class readQRController{
-    class func sendQRWithSuccess(params:[String:AnyObject], success succeed: ((couponsData: NSData!) -> Void) ,failure errorFound: ((couponsData: NSError?) -> Void)){
+    class func sendQRWithSuccess(_ params:[String:AnyObject], success succeed: @escaping ((_ couponsData: Data?) -> Void) ,failure errorFound: @escaping ((_ couponsData: NSError?) -> Void)){
         let url = "\(Utilities.dopURL)coupon/user/redeem"
-        Utilities.sendDataToURL(NSURL(string: url)!, method:"POST", params: params, completion:{(data, error) -> Void in
+        Utilities.sendDataToURL(URL(string: url)!, method:"POST", params: params, completion:{(data, error) -> Void in
             if let urlData = data {
-                succeed(couponsData: urlData)
+                succeed(urlData)
             }else{
-                errorFound(couponsData: error)
+                errorFound(error)
             }
         })
     }
     
-    class func setActivityPrivacy(params:[String:AnyObject], success succeed: ((couponsData: NSData!) -> Void) ,failure errorFound: ((couponsData: NSError?) -> Void)){
+    class func setActivityPrivacy(_ params:[String:AnyObject], success succeed: @escaping ((_ couponsData: Data?) -> Void) ,failure errorFound: @escaping ((_ couponsData: NSError?) -> Void)){
         let url = "\(Utilities.dopURL)coupon/user/privacy"
-        Utilities.sendDataToURL(NSURL(string: url)!, method:"POST", params: params, completion:{(data, error) -> Void in
+        Utilities.sendDataToURL(URL(string: url)!, method:"POST", params: params, completion:{(data, error) -> Void in
             if let urlData = data {
-                succeed(couponsData: urlData)
+                succeed(urlData)
             }else{
-                errorFound(couponsData: error)
+                errorFound(error)
             }
         })
     }

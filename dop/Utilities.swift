@@ -8,6 +8,7 @@
 //
 
 import Foundation
+import Alamofire
 
 class Utilities {
     static var filterArray: [Int] = []
@@ -48,8 +49,8 @@ class Utilities {
     }
 
     class var Colors: CAGradientLayer {
-        let colorBottom = UIColor(red: 217.0/255.0, green: 4.0/255.0, blue: 121.0/255.0, alpha: 1.0).CGColor
-        let colorTop = UIColor(red: 248.0/255.0, green: 20.0/255.0, blue: 90.0/255.0, alpha: 1.0).CGColor
+        let colorBottom = UIColor(red: 217.0/255.0, green: 4.0/255.0, blue: 121.0/255.0, alpha: 1.0).cgColor
+        let colorTop = UIColor(red: 248.0/255.0, green: 20.0/255.0, blue: 90.0/255.0, alpha: 1.0).cgColor
 
         let gl: CAGradientLayer
 
@@ -61,8 +62,8 @@ class Utilities {
     }
 
     class var DarkColors:CAGradientLayer {
-        let colorBottom = UIColor(red: 201.0/255.0, green: 4.0/255.0, blue: 107.0/255.0, alpha: 1.0).CGColor
-        let colorTop = UIColor(red: 207.0/255.0, green: 17.0/255.0, blue: 74.0/255.0, alpha: 1.0).CGColor
+        let colorBottom = UIColor(red: 201.0/255.0, green: 4.0/255.0, blue: 107.0/255.0, alpha: 1.0).cgColor
+        let colorTop = UIColor(red: 207.0/255.0, green: 17.0/255.0, blue: 74.0/255.0, alpha: 1.0).cgColor
 
         let gl: CAGradientLayer
 
@@ -74,23 +75,24 @@ class Utilities {
     }
 
 
-    class func roundValue(value:Double,numberOfPlaces:Double)->Double{
+    class func roundValue(_ value:Double,numberOfPlaces:Double)->Double{
         let multiplier = pow(10.0, numberOfPlaces)
         let rounded = round(value * multiplier) / multiplier
 
         return rounded
     }
 
-    class func loadDataFromURL(url: NSURL, completion: (data: NSData?, error: NSError?) -> Void) {
-        let session = NSURLSession.sharedSession()
-        let request = NSMutableURLRequest(URL: url)
+    class func loadDataFromURL(_ url: URL, completion: @escaping (_ data: Data?, _ error: NSError?) -> Void) {
+        let session = URLSession.shared
+        let request = NSMutableURLRequest(url: url)
         request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
-        request.addValue(User.userToken, forHTTPHeaderField: "Authorization")
-
-        let loadDataTask = session.dataTaskWithRequest(request, completionHandler: { (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
+        //request.addValue(User.userToken, forHTTPHeaderField: "Authorization")
+        
+ 
+        /*let loadDataTask = session.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: NSError?) in
             if let responseError = error {
                 completion(data: nil, error: responseError)
-            } else if let httpResponse = response as? NSHTTPURLResponse {
+            } else if let httpResponse = response as? HTTPURLResponse {
                 if httpResponse.statusCode != 200 {
                     let statusError = NSError(domain: "com.dop", code:httpResponse.statusCode, userInfo:[NSLocalizedDescriptionKey: "HTTP status code has unexpected value."])
                     completion(data: nil, error: statusError)
@@ -101,30 +103,32 @@ class Utilities {
             }
         })
 
-        loadDataTask.resume()
+        loadDataTask.resume()*/
     }
 
-    class func sendDataToURL(url: NSURL, method: String,params: [String:AnyObject], completion: (data:NSData?,error:NSError?)->Void) {
+    class func sendDataToURL(_ url: URL, method: String,params: [String:AnyObject], completion: @escaping (_ data:Data?,_ error:NSError?)->Void) {
 
-        let session = NSURLSession.sharedSession()
-        let request = NSMutableURLRequest(URL: url)
+        let session = URLSession.shared
+        let request = NSMutableURLRequest(url: url)
         request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
-        request.addValue(User.userToken, forHTTPHeaderField: "Authorization")
-        request.HTTPMethod = method
+        //request.addValue(User.userToken, forHTTPHeaderField: "Authorization")
+        request.httpMethod = method
 
         do {
-            request.HTTPBody = try NSJSONSerialization.dataWithJSONObject(params, options: NSJSONWritingOptions())
+            request.httpBody = try JSONSerialization.data(withJSONObject: params, options: JSONSerialization.WritingOptions())
         } catch let error as NSError {
             let err = error
-            request.HTTPBody = nil
+            request.httpBody = nil
         }
+        
+        
 
-        let task = session.dataTaskWithRequest(request, completionHandler: {
-            (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
+        /*let task = session.dataTask(with: request, completionHandler: {
+            (data: Data?, response: URLResponse?, error: NSError?) -> Void in
 
             if let responseError = error {
                 completion(data: nil, error: responseError)
-            } else if let httpResponse = response as? NSHTTPURLResponse {
+            } else if let httpResponse = response as? HTTPURLResponse {
                 if httpResponse.statusCode != 200 {
                     let statusError = NSError(domain: "com.dop", code: httpResponse.statusCode, userInfo:[NSLocalizedDescriptionKey: "HTTP status code has unexpected value."])
                     completion(data: nil, error: statusError)
@@ -134,30 +138,29 @@ class Utilities {
             }
         })
 
-        task.resume()
+        task.resume()*/
     }
 
-    class func downloadImage(urL:NSURL, completion: (data: NSData?,error: NSError?) -> Void) {
+    class func downloadImage(_ urL:URL, completion: @escaping (_ data: Data?,_ error: NSError?) -> Void) {
 
 
-
-        NSURLSession.sharedSession().dataTaskWithURL(urL, completionHandler: { (data: NSData? , response: NSURLResponse?, error: NSError?) -> Void in
+        /*URLSession.shared.dataTask(with: urL, completionHandler: { (data: Data? , response: URLResponse?, error: NSError?) -> Void in
             if let responseError = error {
-                completion(data: nil, error: responseError)
+                completion(nil, responseError)
             }else{
 
-                completion(data: NSData(data: data!),error: nil)
+                completion(NSData(data: data!) as Data,nil)
             }
-        }).resume()
+        } as! (Data?, URLResponse?, Error?) -> Void).resume()*/
 
     }
 
     //FRIENDLY DATE FUNCTION
 
-    class func friendlyDate(date:String) -> String{
-        let separators = NSCharacterSet(charactersInString: "T.")
-        let parts = date.componentsSeparatedByCharactersInSet(separators)
-        let friendly_date = NSDate(dateString: "\(parts[0]) \(parts[1])")
+    class func friendlyDate(_ date:String) -> String{
+        let separators = CharacterSet(charactersIn: "T.")
+        let parts = date.components(separatedBy: separators)
+        let friendly_date = Date(dateString: "\(parts[0]) \(parts[1])")
         
         let friendly_date_str = timeAgoSinceDate(friendly_date, numericDates: false)
         
@@ -174,73 +177,73 @@ class Utilities {
     }
 
     //SHADOWS
-    class func applyPlainShadow(view: UIView) {
+    class func applyPlainShadow(_ view: UIView) {
         let layer = view.layer
 
-        layer.shadowColor = UIColor.lightGrayColor().CGColor
+        layer.shadowColor = UIColor.lightGray.cgColor
         layer.shadowOffset = CGSize(width: 0, height: 6)
         layer.shadowOpacity = 0.4
         layer.shadowRadius = 4
     }
 
-    class func applyMaterialDesignShadow(button: UIButton) {
-        button.layer.shadowColor = UIColor.darkGrayColor().CGColor
+    class func applyMaterialDesignShadow(_ button: UIButton) {
+        button.layer.shadowColor = UIColor.darkGray.cgColor
         button.layer.shadowOffset = CGSize(width: 4, height: 4)
         button.layer.shadowOpacity = 0.5
         button.layer.shadowRadius = 4
     }
 
-    class func applySolidShadow(view: UIView) {
+    class func applySolidShadow(_ view: UIView) {
         let layer = view.layer
 
-        layer.shadowColor = UIColor.lightGrayColor().CGColor
+        layer.shadowColor = UIColor.lightGray.cgColor
         layer.shadowOffset = CGSize(width: 0, height: 3)
         layer.shadowOpacity = 0.6
         layer.shadowRadius = 1
     }
 
     //ANIMATIONS
-    class func fadeInViewAnimation(view:UIView, delay:NSTimeInterval, duration:NSTimeInterval){
-        UIView.animateWithDuration(duration, delay: delay, options: .CurveEaseInOut,
+    class func fadeInViewAnimation(_ view:UIView, delay:TimeInterval, duration:TimeInterval){
+        UIView.animate(withDuration: duration, delay: delay, options: UIViewAnimationOptions(),
             animations: {
                 view.alpha = 1
 
             }, completion: nil)
     }
-    class func fadeOutViewAnimation(view:UIView, delay:NSTimeInterval, duration:NSTimeInterval){
-        UIView.animateWithDuration(duration, delay: delay, options: .CurveEaseInOut,
+    class func fadeOutViewAnimation(_ view:UIView, delay:TimeInterval, duration:TimeInterval){
+        UIView.animate(withDuration: duration, delay: delay, options: UIViewAnimationOptions(),
             animations: {
                 view.alpha = 0
 
             }, completion: nil)
     }
 
-    class func fadeInFromBottomAnimation(view: UIView, delay: NSTimeInterval, duration: NSTimeInterval, yPosition: CGFloat){
+    class func fadeInFromBottomAnimation(_ view: UIView, delay: TimeInterval, duration: TimeInterval, yPosition: CGFloat){
         view.alpha = 0
         let finalYPosition = view.frame.origin.y
         view.frame.origin.y += yPosition
 
-        UIView.animateWithDuration(duration, delay: delay, usingSpringWithDamping: 1, initialSpringVelocity: 2, options: .CurveEaseInOut, animations: ({
+        UIView.animate(withDuration: duration, delay: delay, usingSpringWithDamping: 1, initialSpringVelocity: 2, options: UIViewAnimationOptions(), animations: ({
             view.frame.origin.y = finalYPosition
             view.alpha = 1
         }), completion: nil)
     }
 
-    class func fadeInFromTopAnimation(view:UIView, delay:NSTimeInterval, duration:NSTimeInterval, yPosition:CGFloat){
+    class func fadeInFromTopAnimation(_ view:UIView, delay:TimeInterval, duration:TimeInterval, yPosition:CGFloat){
         view.alpha = 0
         let finalYPosition = view.frame.origin.y
         view.frame.origin.y -= yPosition
 
-        UIView.animateWithDuration(duration, delay: delay, usingSpringWithDamping: 1, initialSpringVelocity: 2, options: .CurveEaseInOut, animations: ({
+        UIView.animate(withDuration: duration, delay: delay, usingSpringWithDamping: 1, initialSpringVelocity: 2, options: UIViewAnimationOptions(), animations: ({
             view.frame.origin.y = finalYPosition
             view.alpha = 1
         }), completion:nil)
     }
 
-    class func fadeOutToTopAnimation(view:UIView, delay:NSTimeInterval, duration:NSTimeInterval, yPosition:CGFloat){
+    class func fadeOutToTopAnimation(_ view:UIView, delay:TimeInterval, duration:TimeInterval, yPosition:CGFloat){
         let finalYPosition = view.frame.origin.y - yPosition
 
-        UIView.animateWithDuration(duration, delay: delay, usingSpringWithDamping: 1, initialSpringVelocity: 2, options: .CurveEaseInOut, animations: ({
+        UIView.animate(withDuration: duration, delay: delay, usingSpringWithDamping: 1, initialSpringVelocity: 2, options: UIViewAnimationOptions(), animations: ({
             view.frame.origin.y = finalYPosition
             view.alpha = 0
         }), completion:{(value:Bool) in
@@ -248,36 +251,36 @@ class Utilities {
         })
     }
 
-    class func fadeOutToBottomAnimation(view:UIView, delay:NSTimeInterval, duration:NSTimeInterval, yPosition:CGFloat){
+    class func fadeOutToBottomAnimation(_ view:UIView, delay:TimeInterval, duration:TimeInterval, yPosition:CGFloat){
         let finalYPosition = view.frame.origin.y + yPosition
 
-        UIView.animateWithDuration(duration, delay: delay, usingSpringWithDamping: 1, initialSpringVelocity: 2, options: .CurveEaseInOut, animations: ({
+        UIView.animate(withDuration: duration, delay: delay, usingSpringWithDamping: 1, initialSpringVelocity: 2, options: UIViewAnimationOptions(), animations: ({
             view.frame.origin.y = finalYPosition
             view.alpha = 0
         }), completion:{ (value: Bool) in
             view.frame.origin.y -= yPosition
         })
     }
-    class func fadeOutToBottomWithCompletion(view:UIView, delay:NSTimeInterval, duration:NSTimeInterval, yPosition:CGFloat, completion: (value: Bool) -> Void){
+    class func fadeOutToBottomWithCompletion(_ view:UIView, delay:TimeInterval, duration:TimeInterval, yPosition:CGFloat, completion: @escaping (_ value: Bool) -> Void){
         let finalYPosition = view.frame.origin.y + yPosition
 
-        UIView.animateWithDuration(duration, delay: delay, usingSpringWithDamping: 1, initialSpringVelocity: 2, options: .CurveEaseInOut, animations: ({
+        UIView.animate(withDuration: duration, delay: delay, usingSpringWithDamping: 1, initialSpringVelocity: 2, options: UIViewAnimationOptions(), animations: ({
             view.frame.origin.y = finalYPosition
             view.alpha = 0
         }), completion: { (value: Bool) in
-            completion(value: true)
+            completion(true)
         })
     }
 
-    class func permanentBounce(view:UIView, delay:NSTimeInterval, duration:NSTimeInterval){
-        view.transform = CGAffineTransformMakeScale(0.9, 0.9)
-        var bounce_delay:NSTimeInterval = 0
-        UIView.animateWithDuration(duration, delay: delay, usingSpringWithDamping: 1, initialSpringVelocity: 2, options: .CurveEaseInOut, animations: ({
+    class func permanentBounce(_ view:UIView, delay:TimeInterval, duration:TimeInterval){
+        view.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+        var bounce_delay:TimeInterval = 0
+        UIView.animate(withDuration: duration, delay: delay, usingSpringWithDamping: 1, initialSpringVelocity: 2, options: UIViewAnimationOptions(), animations: ({
                 view.alpha = 1
-                view.transform = CGAffineTransformMakeScale(0.9, 0.9)
+                view.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
         }), completion: { (value:Bool) in
-            UIView.animateWithDuration(duration, delay: bounce_delay, usingSpringWithDamping: 0.5, initialSpringVelocity: 8, options: [.CurveEaseInOut, .Repeat, .Autoreverse], animations: ({
-                view.transform = CGAffineTransformMakeScale(1, 1)
+            UIView.animate(withDuration: duration, delay: bounce_delay, usingSpringWithDamping: 0.5, initialSpringVelocity: 8, options: [.repeat, .autoreverse], animations: ({
+                view.transform = CGAffineTransform(scaleX: 1, y: 1)
                 bounce_delay = 3
                 //view.transform = CGAffineTransformIdentity
 
@@ -285,21 +288,21 @@ class Utilities {
         })
     }
 
-    class func slideFromBottomAnimation(view: UIView, delay: NSTimeInterval, duration: NSTimeInterval, yPosition: CGFloat){
+    class func slideFromBottomAnimation(_ view: UIView, delay: TimeInterval, duration: TimeInterval, yPosition: CGFloat){
         let finalYPosition = view.frame.origin.y
         view.frame.origin.y += yPosition
         view.alpha = 1
-        UIView.animateWithDuration(duration, delay: delay, usingSpringWithDamping: 1, initialSpringVelocity: 2, options: .CurveEaseInOut, animations: ({
+        UIView.animate(withDuration: duration, delay: delay, usingSpringWithDamping: 1, initialSpringVelocity: 2, options: UIViewAnimationOptions(), animations: ({
             view.frame.origin.y = finalYPosition
         }), completion: nil)
     }
 
     //spinner loader for buttons
 
-    class func setButtonSpinner(sender: UIButton, spinner: MMMaterialDesignSpinner, spinner_size: CGFloat, spinner_width: CGFloat, spinner_color: UIColor) {
+    class func setButtonSpinner(_ sender: UIButton, spinner: MMMaterialDesignSpinner, spinner_size: CGFloat, spinner_width: CGFloat, spinner_color: UIColor) {
         let x = (sender.frame.width / 2) - (spinner_size / 2)
         let y = (sender.frame.height / 2) - (spinner_size / 2)
-        spinner.frame = CGRectMake(x, y, spinner_size, spinner_size)
+        spinner.frame = CGRect(x: x, y: y, width: spinner_size, height: spinner_size)
         spinner.lineWidth = spinner_width
         spinner.startAnimating()
         spinner.tintColor = spinner_color
@@ -308,8 +311,8 @@ class Utilities {
 
     // Material Design Button
 
-    class func setMaterialDesignButton(button: UIButton, button_size: CGFloat) {
-        button.frame = CGRectMake(button.frame.origin.x, button.frame.origin.y, button_size, button_size)
+    class func setMaterialDesignButton(_ button: UIButton, button_size: CGFloat) {
+        button.frame = CGRect(x: button.frame.origin.x, y: button.frame.origin.y, width: button_size, height: button_size)
         button.layer.cornerRadius = button.frame.width / 2
         self.applyMaterialDesignShadow(button)
     }

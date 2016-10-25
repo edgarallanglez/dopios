@@ -22,28 +22,28 @@ class PeopleCell: UITableViewCell {
         // Initialization code
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state
     }
     
-    func loadItem(person: PeopleModel, viewController: UIViewController) {
+    func loadItem(_ person: PeopleModel, viewController: UIViewController) {
         user_name.text = "\(person.names) \(person.surnames)"
 //        user_image.image = person.main_image
         self.viewController = viewController
     }
     
-    func setRankingPosition(index: Int) {
+    func setRankingPosition(_ index: Int) {
         ranking_position.trackWidth = 0
         ranking_position.alpha = 1
         ranking_position.startDegree = 0
         
         switch index {
             case 0: ranking_position.progressColor = Utilities.dop_gold_color
-            case 1: ranking_position.progressColor = UIColor.grayColor()
+            case 1: ranking_position.progressColor = UIColor.gray
             case 2: ranking_position.progressColor = Utilities.dop_bronze_color
-        default: ranking_position.progressColor = UIColor.whiteColor()
+        default: ranking_position.progressColor = UIColor.white
         
         }
         

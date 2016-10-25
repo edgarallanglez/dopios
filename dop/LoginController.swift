@@ -7,29 +7,35 @@
 //
 
 import Foundation
+import Alamofire
 
 class LoginController {
     
-    class func loginWithSocial(url: String, params: [String:AnyObject], success succeed: ((loginData: NSData!) -> Void),failure errorFound: ((loginData: NSError?) -> Void)) {
+    class func loginWithSocial(_ url: String, params: [String:AnyObject], success succeed: @escaping ((_ loginData: JSON?) -> Void),failure errorFound: @escaping ((_ loginData: NSError?) -> Void)) {
 
-        Utilities.sendDataToURL(NSURL(string: url)!, method:"POST", params: params, completion: {(data, error) -> Void in
-            if let urlData = data {
-                succeed(loginData: urlData)
-            } else {
-                errorFound(loginData: error)
+        Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                succeed(JSON(response.result.value))
+            case .failure(let error):
+                print(error)
+                errorFound(error as NSError)
             }
-        })
+        }
         
     }
-    class func getPrivacyInfo(success succeed: ((userData: NSData!) -> Void), failure errorFound:((userData: NSError?) -> Void )) {
+    class func getPrivacyInfo(success succeed: @escaping ((_ userData: JSON?) -> Void), failure errorFound:@escaping ((_ userData: NSError?) -> Void )) {
         let url = "\(Utilities.dopURL)user/privacy_status/get"
-        Utilities.loadDataFromURL(NSURL(string: url)!, completion: {(data, error) -> Void in
-            if let urlData = data {
-                succeed(userData: urlData)
-            }else{
-                errorFound(userData: error)
+
+        Alamofire.request(url, method: .get, encoding: JSONEncoding.default, headers: User.userToken).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                succeed(JSON(response.result.value))
+            case .failure(let error):
+                print(error)
+                errorFound(error as NSError)
             }
-        })
+        }
     }
     
     

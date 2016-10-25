@@ -10,13 +10,13 @@ import UIKit
 
 class BranchProfileStickyHeader: UICollectionReusableView {
     
-    private var imageView : UIImageView?
-    private var branch_profile: BranchProfileTopView = BranchProfileTopView()
+    fileprivate var imageView : UIImageView?
+    fileprivate var branch_profile: BranchProfileTopView = BranchProfileTopView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.clipsToBounds = true
-        branch_profile = (NSBundle.mainBundle().loadNibNamed("BranchProfileTopView", owner: self, options: nil)![0] as? BranchProfileTopView)!
+        branch_profile = (Bundle.main.loadNibNamed("BranchProfileTopView", owner: self, options: nil)![0] as? BranchProfileTopView)!
         
         self.addSubview(branch_profile)
     }
@@ -30,11 +30,11 @@ class BranchProfileStickyHeader: UICollectionReusableView {
         self.branch_profile.frame = self.bounds
     }
     
-    func setBranchProfile(viewController: BranchProfileStickyController) {
+    func setBranchProfile(_ viewController: BranchProfileStickyController) {
         branch_profile.setView(viewController)
     }
     
-    func setBranchFollow(branch: Branch) {
+    func setBranchFollow(_ branch: Branch) {
         branch_profile.setFollow(branch)
     }
 

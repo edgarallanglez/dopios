@@ -9,50 +9,50 @@
 import Foundation
 
 class BadgeController {
-    class func getAllBadgesWithSuccess(user_id: Int, success succeed: ((couponsData: NSData!) -> Void),failure errorFound: ((couponsData: NSError?) -> Void)) {
+    class func getAllBadgesWithSuccess(_ user_id: Int, success succeed: @escaping ((_ couponsData: Data?) -> Void),failure errorFound: @escaping ((_ couponsData: NSError?) -> Void)) {
         let url = "\(Utilities.dopURL)badge/\(user_id)/all/get"
         
-        Utilities.loadDataFromURL(NSURL(string: url)!, completion:{(data, error) -> Void in
+        Utilities.loadDataFromURL(URL(string: url)!, completion:{(data, error) -> Void in
             if let urlData = data {
-                succeed(couponsData: urlData)
+                succeed(urlData)
             }else{
-                errorFound(couponsData: error)
+                errorFound(error)
             }
         })
     }
     
-    class func getAllBadgesOffsetWithSuccess(user_id: Int, last_badge: Int, offset: Int, success succeed: ((couponsData: NSData!) -> Void),failure errorFound: ((couponsData: NSError?) -> Void)) {
+    class func getAllBadgesOffsetWithSuccess(_ user_id: Int, last_badge: Int, offset: Int, success succeed: @escaping ((_ couponsData: Data?) -> Void),failure errorFound: @escaping ((_ couponsData: NSError?) -> Void)) {
         let url = "\(Utilities.dopURL)badge/\(user_id)/all/\(last_badge)/\(offset)/get"
         
-        Utilities.loadDataFromURL(NSURL(string: url)!, completion:{(data, error) -> Void in
+        Utilities.loadDataFromURL(URL(string: url)!, completion:{(data, error) -> Void in
             if let urlData = data {
-                succeed(couponsData: urlData)
+                succeed(urlData)
             }else{
-                errorFound(couponsData: error)
+                errorFound(error)
             }
         })
     }
     
-    class func getAllTrophiesWithSuccess(success succeed: ((couponsData: NSData!) -> Void),failure errorFound: ((couponsData: NSError?) -> Void)) {
+    class func getAllTrophiesWithSuccess(success succeed: @escaping ((_ couponsData: Data?) -> Void),failure errorFound: @escaping ((_ couponsData: NSError?) -> Void)) {
         let url = "\(Utilities.dopURL)badge/all/trophy/get"
         
-        Utilities.loadDataFromURL(NSURL(string: url)!, completion:{(data, error) -> Void in
+        Utilities.loadDataFromURL(URL(string: url)!, completion:{(data, error) -> Void in
             if let urlData = data {
-                succeed(couponsData: urlData)
+                succeed(urlData)
             }else{
-                errorFound(couponsData: error)
+                errorFound(error)
             }
         })
     }
     
-    class func getAllMedalsWithSuccess(success succeed: ((couponsData: NSData!) -> Void),failure errorFound: ((couponsData: NSError?) -> Void)) {
+    class func getAllMedalsWithSuccess(success succeed: @escaping ((_ couponsData: Data?) -> Void),failure errorFound: @escaping ((_ couponsData: NSError?) -> Void)) {
         let url = "\(Utilities.dopURL)badge/all/medal/get"
         
-        Utilities.loadDataFromURL(NSURL(string: url)!, completion:{(data, error) -> Void in
+        Utilities.loadDataFromURL(URL(string: url)!, completion:{(data, error) -> Void in
             if let urlData = data {
-                succeed(couponsData: urlData)
+                succeed(urlData)
             }else{
-                errorFound(couponsData: error)
+                errorFound(error)
             }
         })
     }

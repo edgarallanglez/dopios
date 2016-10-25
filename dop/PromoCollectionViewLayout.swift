@@ -10,11 +10,11 @@ import UIKit
 
 class PromoCollectionViewLayout: UICollectionViewFlowLayout {
     
-    override func finalLayoutAttributesForDisappearingItemAtIndexPath(itemIndexPath: NSIndexPath) -> UICollectionViewLayoutAttributes? {
-        let attribute = super.finalLayoutAttributesForDisappearingItemAtIndexPath(itemIndexPath)
+    override func finalLayoutAttributesForDisappearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+        let attribute = super.finalLayoutAttributesForDisappearingItem(at: itemIndexPath)
         
-        attribute?.transform = CGAffineTransformTranslate(attribute!.transform, 0, 0)
-        attribute?.transform = CGAffineTransformScale(attribute!.transform, 0.5, 0.5)
+        attribute?.transform = attribute!.transform.translatedBy(x: 0, y: 0)
+        attribute?.transform = attribute!.transform.scaledBy(x: 0.5, y: 0.5)
         attribute?.alpha = 0.0
         
         return attribute

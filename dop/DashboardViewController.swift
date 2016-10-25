@@ -8,6 +8,8 @@
 
 import UIKit
 import QuartzCore
+import Alamofire
+import AlamofireImage
 
 class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UIScrollViewDelegate {
     
@@ -52,7 +54,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
         mainLoader.tintColor = Utilities.dopColor
         mainLoader.lineWidth = 3.0
         
-        mainScroll.contentSize = CGSizeMake(mainScroll.frame.size.width, 4500)
+        mainScroll.contentSize = CGSize(width: mainScroll.frame.size.width, height: 4500)
         mainScroll.delegate = self
         
         branchesScroll.delegate = self
@@ -74,7 +76,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
         locationManager.startUpdatingLocation()
         
         self.refreshControl = UIRefreshControl()
-        self.refreshControl.addTarget(self, action: #selector(DashboardViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        self.refreshControl.addTarget(self, action: #selector(DashboardViewController.refresh(_:)), for: UIControlEvents.valueChanged)
         self.mainScroll.addSubview(refreshControl)
 
         self.setNeedsStatusBarAppearanceUpdate()
@@ -86,18 +88,18 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
     }
     
     func setupLoaders(){
-        trendingLoader = MMMaterialDesignSpinner(frame: CGRectMake(0, 0, 30, 30))
+        trendingLoader = MMMaterialDesignSpinner(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
         trendingLoader.startAnimating()
         trendingLoader.lineWidth = 2.0
         trendingLoader.alpha = 0
         trendingLoader.tintColor = Utilities.dopColor
         
-        toexpireLoader = MMMaterialDesignSpinner(frame: CGRectMake(0, 0, 30, 30))
+        toexpireLoader = MMMaterialDesignSpinner(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
         toexpireLoader.startAnimating()
         toexpireLoader.lineWidth = 2.0
         toexpireLoader.tintColor = Utilities.dopColor
         
-        nearestLoader = MMMaterialDesignSpinner(frame: CGRectMake(0, 0, 30, 30))
+        nearestLoader = MMMaterialDesignSpinner(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
         nearestLoader.startAnimating()
         nearestLoader.lineWidth = 2.0
         nearestLoader.tintColor = Utilities.dopColor
@@ -107,8 +109,8 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
     }
     
 
-    override func viewDidAppear(animated: Bool) {
-        if (updater) != nil { updater!.paused = false }
+    override func viewDidAppear(_ animated: Bool) {
+        if (updater) != nil { updater!.isPaused = false }
         
         trendingLoader.center.x = self.mainScroll.center.x
         trendingLoader.center.y = self.trendingContainer.center.y
@@ -137,7 +139,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
 
     }
     
-    func refresh(sender:AnyObject) {
+    func refresh(_ sender:AnyObject) {
         getToExpireCoupons()
         getTrendingCoupons()
         getNearestCoupons()
@@ -159,17 +161,17 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
         super.didReceiveMemoryWarning()
     }
 
-    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-        if scrollView == branchesScroll { updater!.paused = false }
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        if scrollView == branchesScroll { updater!.isPaused = false }
     }
     
-    func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) { }
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) { }
     
-    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
-        if scrollView == branchesScroll { updater!.paused = true }
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        if scrollView == branchesScroll { updater!.isPaused = true }
     }
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         switch scrollView {
             case branchesScroll:
@@ -195,7 +197,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
         branches = [Branch]()
 
         DashboardController.getDashboardBranchesWithSuccess(success:{(branchesData) -> Void in
-            let json = JSON(data: branchesData)
+            let json = branchesData!
             
             for (_, subJson): (String, JSON) in json["data"] {
                 let branch_id = subJson["branch_id"].int
@@ -213,7 +215,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                 self.branches.append(model)
             }
             print(json)
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 self.reloadBranchCarousel()
                 self.pageControl.numberOfPages = self.branches.count
                 
@@ -228,7 +230,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
             });
         },
         failure: { (error) -> Void in
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 print("Error banner \(error)")
               //self.view.addSubview(super.errorView)
               //self.errorView.translatesAutoresizingMaskIntoConstraints = false
@@ -239,27 +241,27 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
     func reloadBranchCarousel(){
         updater = CADisplayLink(target: self, selector: #selector(DashboardViewController.changePage))
         updater!.frameInterval = 300
-        updater!.addToRunLoop(NSRunLoop.currentRunLoop(), forMode: NSRunLoopCommonModes)
+        updater!.add(to: RunLoop.current, forMode: RunLoopMode.commonModes)
         
-        for (index, branch) in branches.enumerate() {
+        for (index, branch) in branches.enumerated() {
             
             let scrollWidth = branchesScroll.frame.size.width
             let scrollHeight = branchesScroll.frame.size.height
             let actualX = branchesScroll.frame.size.width * CGFloat(index)
             let margin:CGFloat = 20.0
             
-            let branchNameLbl: UILabel = UILabel(frame: CGRectMake(margin+actualX, 80, scrollWidth-80, 75))
+            let branchNameLbl: UILabel = UILabel(frame: CGRect(x: margin+actualX, y: 80, width: scrollWidth-80, height: 75))
             branchNameLbl.alpha = 0
-            branchNameLbl.textColor = UIColor.whiteColor()
+            branchNameLbl.textColor = UIColor.white
             branchNameLbl.font = UIFont(name: "Montserrat-Regular", size: 26)
-            branchNameLbl.text = branch.name.uppercaseString
+            branchNameLbl.text = branch.name.uppercased()
             branchNameLbl.numberOfLines = 2
             branchNameLbl.layer.shadowOffset = CGSize(width: 3, height: 3)
             branchNameLbl.layer.shadowOpacity = 0.6
             branchNameLbl.layer.shadowRadius = 1
             
             
-            let progressIcon = MMMaterialDesignSpinner(frame: CGRectMake(actualX + ((branchesScroll.frame.size.width / 2) - (30 / 2)), (branchesScroll.frame.size.height / 2) - (30 / 2), 30, 30))
+            let progressIcon = MMMaterialDesignSpinner(frame: CGRect(x: actualX + ((branchesScroll.frame.size.width / 2) - (30 / 2)), y: (branchesScroll.frame.size.height / 2) - (30 / 2), width: 30, height: 30))
             
             /*let progressIcon = UIActivityIndicatorView(frame: CGRectMake(actualX + ((branchesScroll.frame.size.width / 2) - (30 / 2)), (branchesScroll.frame.size.height / 2) - (30 / 2), 30, 30))
             progressIcon.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray*/
@@ -270,38 +272,33 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
             
             
             
-            let imageView: UIImageView = UIImageView(frame: CGRectMake(actualX, 0, scrollWidth, scrollHeight))
+            let imageView: UIImageView = UIImageView(frame: CGRect(x: actualX, y: 0, width: scrollWidth, height: scrollHeight))
             imageView.alpha = 0
             imageView.layer.masksToBounds = true;
-            let imageUrl = NSURL(string: "\(Utilities.dopImagesURL)\(branch.company_id!)/\(branch.banner!)")
+            let imageUrl = URL(string: "\(Utilities.dopImagesURL)\(branch.company_id!)/\(branch.banner!)")
             
             //let imageUrl = NSURL(string: "http://axeetech.com/wp-content/uploads/2014/09/458791.jpg")
             print("\(Utilities.dopImagesURL)\(branch.company_id!)/\(branch.banner!)")
             
             Utilities.fadeInFromBottomAnimation(branchNameLbl, delay: 0.8, duration: 1, yPosition: 20)
-            Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
-                if let image = data{
-                    dispatch_async(dispatch_get_main_queue()) {
-                        let imageData: NSData = NSData(data: image)
-                        imageView.image = UIImage(data: imageData)
-                        if imageView.image == nil { imageView.backgroundColor = Utilities.dopColor }
-                        
-                        Utilities.fadeInFromBottomAnimation(imageView, delay: 0, duration: 1, yPosition: 20)
-                        
-                        Utilities.fadeOutToBottomWithCompletion(progressIcon, delay: 0, duration: 0.5, yPosition: 0, completion: { (value) -> Void in
-                            progressIcon.removeFromSuperview()
-                        })
-                        
-                    }
+            
+            Alamofire.request(imageUrl!).responseImage { response in
+                if let image = response.result.value{
+                    imageView.image = image
                 }else{
-                    print("Error")
+                    imageView.backgroundColor = Utilities.dopColor
                 }
-            })
+                
+                Utilities.fadeInFromBottomAnimation(imageView, delay: 0, duration: 1, yPosition: 20)
+                Utilities.fadeOutToBottomWithCompletion(progressIcon, delay: 0, duration: 0.5, yPosition: 0, completion: { (value) -> Void in
+                    progressIcon.removeFromSuperview()
+                })
+            }
 
             
-            imageView.contentMode = UIViewContentMode.ScaleAspectFill
+            imageView.contentMode = UIViewContentMode.scaleAspectFill
             imageView.tag = branch.id
-            imageView.userInteractionEnabled = true
+            imageView.isUserInteractionEnabled = true
             imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(DashboardViewController.performSegueToBranch(_:))))
         
             branchesScroll.addSubview(imageView)
@@ -309,10 +306,10 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
             branchesScroll.addSubview(progressIcon)
             
             if(branch.adults_only == true){
-                let adultsLabel: UILabel = UILabel(frame: CGRectMake(actualX, 0, scrollWidth-20, 35))
+                let adultsLabel: UILabel = UILabel(frame: CGRect(x: actualX, y: 0, width: scrollWidth-20, height: 35))
                 adultsLabel.text="+18"
-                adultsLabel.textAlignment = NSTextAlignment.Right
-                adultsLabel.textColor = UIColor.whiteColor()
+                adultsLabel.textAlignment = NSTextAlignment.right
+                adultsLabel.textColor = UIColor.white
                 adultsLabel.font = UIFont(name: "Montserrat-Regular", size: 26)
                 adultsLabel.layer.shadowOffset = CGSize(width: 3, height: 3)
                 adultsLabel.layer.shadowOpacity = 0.6
@@ -322,14 +319,14 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
             
         }
     
-        branchesScroll.contentSize = CGSizeMake(branchesScroll.frame.size.width*CGFloat(branches.count), branchesScroll.frame.size.height)
+        branchesScroll.contentSize = CGSize(width: branchesScroll.frame.size.width*CGFloat(branches.count), height: branchesScroll.frame.size.height)
         pageControlContainer.layer.cornerRadius = 4
         pageControlContainer.layer.masksToBounds = true
     }
 
     
-    func performSegueToBranch(sender: UIGestureRecognizer) {
-        let view_controller = self.storyboard!.instantiateViewControllerWithIdentifier("BranchProfileStickyController") as! BranchProfileStickyController
+    func performSegueToBranch(_ sender: UIGestureRecognizer) {
+        let view_controller = self.storyboard!.instantiateViewController(withIdentifier: "BranchProfileStickyController") as! BranchProfileStickyController
         view_controller.branch_id = (sender.view?.tag)!
         self.navigationController?.pushViewController(view_controller, animated: true)
     }
@@ -339,8 +336,8 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
         let page = branchesScroll.contentOffset.x + width
 
         if branchesScroll.contentSize.width <= page || firstCallToUpdater == true {
-            branchesScroll.setContentOffset(CGPointMake(0, 0), animated: true)
-        } else { branchesScroll.setContentOffset(CGPointMake(page, 0), animated: true) }
+            branchesScroll.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+        } else { branchesScroll.setContentOffset(CGPoint(x: page, y: 0), animated: true) }
 
         if firstCallToUpdater { firstCallToUpdater = false }
     }
@@ -351,7 +348,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
         trendingScroll.layer.masksToBounds = false
         trendingScroll.subviews.forEach({ $0.removeFromSuperview() })
         DashboardController.getTrendingCouponsWithSuccess(success: { (couponsData) -> Void in
-            let json = JSON(data: couponsData)
+            let json = couponsData!
             
                 for (_, subJson): (String, JSON) in json["data"]{
                     let coupon_id = subJson["coupon_id"].int
@@ -382,32 +379,34 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                     self.trending.append(model)
                 }
             
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     let margin = 18
                     let positionX = 18
                     let couponWidth = 180
                     
-                    for (index, coupon) in self.trending.enumerate() {
-                        let coupon_box: TrendingCoupon = NSBundle.mainBundle().loadNibNamed("TrendingCoupon", owner: self, options:
+                    for (index, coupon) in self.trending.enumerated() {
+                        let coupon_box: TrendingCoupon = Bundle.main.loadNibNamed("TrendingCoupon", owner: self, options:
                         nil)![0] as! TrendingCoupon
         
                         var position = 0
                         position = positionX + ((margin + couponWidth) * index)
                         coupon_box.setCoupon(coupon, view: self, x: CGFloat(position), y: 0)
 
-                        let imageUrl = NSURL(string: "\(Utilities.dopImagesURL)\(coupon.company_id)/\(coupon.logo)")
+                        let imageUrl = URL(string: "\(Utilities.dopImagesURL)\(coupon.company_id)/\(coupon.logo)")
                         coupon_box.logo.alpha = 0
-                        Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
-                            if let image = UIImage(data: data!) {
-                                dispatch_async(dispatch_get_main_queue()) {
-                                    coupon_box.logo.image = image
-                                    Utilities.fadeInViewAnimation(coupon_box.logo, delay:0, duration:1)
-                                }
+                        Alamofire.request(imageUrl!).responseImage { response in
+                            if let image = response.result.value{
+                                coupon_box.logo.image = image
+                                coupon_box.logo.backgroundColor = Utilities.lightGrayColor
+                                Utilities.fadeInViewAnimation(coupon_box.logo, delay:0, duration:1)
                             }else{
-                                print("Error")
+                                coupon_box.logo.image = UIImage(named: "dop-logo-transparent")
+                                coupon_box.backgroundColor = Utilities.lightGrayColor
+                                coupon_box.logo.alpha = 0.3
                             }
-                        })
-                        
+                            //Utilities.fadeInViewAnimation(coupon_box.logo, delay:0, duration:1)
+                        }
+
                         coupon_box.loadItem(coupon, viewController: self)
                         Utilities.applyPlainShadow(coupon_box)
                         self.trendingScroll.addSubview(coupon_box)
@@ -416,7 +415,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                     
                     let trendingScroll_size = ((margin+couponWidth)*self.trending.count)+margin
                     self.trendingPageControl.numberOfPages = self.trending.count/2
-                    self.trendingScroll.contentSize = CGSizeMake(CGFloat(trendingScroll_size), self.trendingScroll.frame.size.height)
+                    self.trendingScroll.contentSize = CGSize(width: CGFloat(trendingScroll_size), height: self.trendingScroll.frame.size.height)
                     Utilities.fadeInFromBottomAnimation(self.trendingContainer, delay: 0, duration: 1, yPosition: 30)
                     if self.trendingLoader.alpha>0{
                         Utilities.fadeOutViewAnimation(self.trendingLoader, delay:0, duration:0.3)
@@ -430,7 +429,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
             },
             
             failure: { (error) -> Void in
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     
                 })
         })
@@ -445,7 +444,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
         toExpireScroll.subviews.forEach({ $0.removeFromSuperview() })
 
         DashboardController.getAlmostExpiredCouponsWithSuccess(success: { (couponsData) -> Void in
-            let json = JSON(data: couponsData)
+            let json = couponsData!
             
             for (_, subJson): (String, JSON) in json["data"]{
                 let coupon_id = subJson["coupon_id"].int
@@ -476,13 +475,13 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                 self.almost_expired.append(model)
             }
             
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 let margin = 18
                 let positionX = 18
                 let couponWidth = 180
                 
-                for (index, coupon) in self.almost_expired.enumerate() {
-                    let coupon_box: ToExpireCoupon = NSBundle.mainBundle().loadNibNamed("ToExpireCoupon", owner: self, options:
+                for (index, coupon) in self.almost_expired.enumerated() {
+                    let coupon_box: ToExpireCoupon = Bundle.main.loadNibNamed("ToExpireCoupon", owner: self, options:
                         nil)![0] as! ToExpireCoupon
                     
                     var position = 0
@@ -499,7 +498,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                 
                 let trendingScroll_size = ((margin + couponWidth) * self.almost_expired.count) + margin
                 self.toExpirePageControl.numberOfPages = self.almost_expired.count / 2
-                self.toExpireScroll.contentSize = CGSizeMake(CGFloat(trendingScroll_size), self.toExpireScroll.frame.size.height)
+                self.toExpireScroll.contentSize = CGSize(width: CGFloat(trendingScroll_size), height: self.toExpireScroll.frame.size.height)
                 
                 Utilities.fadeInFromBottomAnimation(self.toExpireContainer, delay:0, duration:1, yPosition: 20)
                 
@@ -509,13 +508,13 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
             },
             
             failure: { (error) -> Void in
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     
                 })
         })
     }
     
-    func triggerCouponModal(sender: UIGestureRecognizer) {
+    func triggerCouponModal(_ sender: UIGestureRecognizer) {
         
     }
     
@@ -526,14 +525,14 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
         let latitude = User.coordinate.latitude
         let longitude = User.coordinate.longitude
         
-        let params:[String:AnyObject] = [
+        let params = [
             "latitude": latitude,
             "longitude": longitude,
             "radio": 15
         ]
         
         DashboardController.getNearestCoupons(params, success: {(branchesData) -> Void in
-            let json = JSON(data: branchesData)
+            let json = branchesData!
             
             for (_, subJson): (String, JSON) in json["data"]{
                 let coupon_id = subJson["coupon_id"].int
@@ -565,13 +564,13 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                 self.nearest.append(model)
             }
             
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 let margin = 18
                 let positionX = 18
                 let couponWidth = 180
                 
-                for (index, coupon) in self.nearest.enumerate() {
-                    let coupon_box:NearestCoupon = NSBundle.mainBundle().loadNibNamed("NearestCoupon", owner: self, options:
+                for (index, coupon) in self.nearest.enumerated() {
+                    let coupon_box:NearestCoupon = Bundle.main.loadNibNamed("NearestCoupon", owner: self, options:
                         nil)![0] as! NearestCoupon
                     
                     var position = 0
@@ -587,7 +586,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                 
                 let trendingScroll_size = ((margin+couponWidth)*self.nearest.count) + margin
                 self.nearestPageControl.numberOfPages = self.nearest.count / 2
-                self.nearestScroll.contentSize = CGSizeMake(CGFloat(trendingScroll_size), self.nearestScroll.frame.size.height)
+                self.nearestScroll.contentSize = CGSize(width: CGFloat(trendingScroll_size), height: self.nearestScroll.frame.size.height)
                 
                 Utilities.fadeInFromBottomAnimation(self.nearestContainer, delay:0, duration:1, yPosition: 20)
                
@@ -603,20 +602,20 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
  
     
     
-    func takeCoupon(coupon_id:Int) {
+    func takeCoupon(_ coupon_id:Int) {
         
         let latitude = String(stringInterpolationSegment:locValue!.latitude)
         let longitude = String(stringInterpolationSegment: locValue!.longitude)
 
         let params:[String: AnyObject] = [
-            "coupon_id" : coupon_id,
-            "taken_date" : "2015-01-01",
-            "latitude" : latitude,
-            "longitude" : longitude ]
+            "coupon_id" : coupon_id as AnyObject,
+            "taken_date" : "2015-01-01" as AnyObject,
+            "latitude" : latitude as AnyObject,
+            "longitude" : longitude as AnyObject ]
 
         CouponController.takeCouponWithSuccess(params,
         success:{(couponsData) -> Void in
-            let json = JSON(data: couponsData)
+            let json = couponsData!
         },
         failure: { (error) -> Void in
             
@@ -625,7 +624,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
     
     }
     
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         locValue = manager.location!.coordinate
         User.coordinate = locationManager.location!.coordinate
         locationManager.stopUpdatingLocation()
@@ -636,13 +635,13 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-            let i = sender!.tag
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+            let i = (sender! as AnyObject).tag
         
-            let model = self.trending[i]
+            let model = self.trending[i!]
             if segue.identifier == "couponDetail" {
                 let coupon_box: TrendingCoupon = sender as! TrendingCoupon
-                let view = segue.destinationViewController as! CouponDetailViewController
+                let view = segue.destination as! CouponDetailViewController
                 view.couponsName = model.name
                 view.couponsDescription = model.couponDescription
                 view.location = model.location
@@ -656,19 +655,19 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
         
     }
     
-    @IBAction func goToPage(sender: AnyObject) {
+    @IBAction func goToPage(_ sender: AnyObject) {
         let page = branchesScroll.frame.size.width * CGFloat(pageControl.currentPage)
-        branchesScroll.setContentOffset(CGPointMake(page, 0), animated: true)
+        branchesScroll.setContentOffset(CGPoint(x: page, y: 0), animated: true)
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         if (updater) != nil {
-            updater!.paused = true
-            branchesScroll.setContentOffset(CGPointMake(0, 0), animated: false)
+            updater!.isPaused = true
+            branchesScroll.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
         }
     }
     
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return .LightContent
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+        return .lightContent
     }
 }

@@ -9,7 +9,7 @@
 import UIKit
 
 @objc protocol BadgePageDelegate {
-    optional func resizeBadgeView(dynamic_height: CGFloat)
+    @objc optional func resizeBadgeView(_ dynamic_height: CGFloat)
 }
 
 class BadgesPage: UICollectionViewController {
@@ -31,7 +31,7 @@ class BadgesPage: UICollectionViewController {
     var loader:MMMaterialDesignSpinner!
     
     override func viewDidLoad() {
-        self.collectionView!.scrollEnabled = false
+        self.collectionView!.isScrollEnabled = false
         self.collectionView!.alwaysBounceVertical = false
         
         frame_width = self.badgeCollectionView.frame.size.width
@@ -39,7 +39,7 @@ class BadgesPage: UICollectionViewController {
         setupLoader()
     }
     func setupLoader(){
-        loader = MMMaterialDesignSpinner(frame: CGRectMake(0,70,50,50))
+        loader = MMMaterialDesignSpinner(frame: CGRect(x: 0,y: 70,width: 50,height: 50))
         loader.center.x = self.view.center.x
         loader.lineWidth = 3.0
         loader.startAnimating()
@@ -47,7 +47,7 @@ class BadgesPage: UICollectionViewController {
         self.view.addSubview(loader)
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         if badge_array.count == 0 { getBadges() }
         else { reload() }
         
@@ -62,22 +62,22 @@ class BadgesPage: UICollectionViewController {
         delegate?.resizeBadgeView!(frame_height)
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
         
-        return CGSizeMake(cell_size, cell_size)
+        return CGSize(width: cell_size, height: cell_size)
     }
     
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell: BadgeCollectionCell = collectionView.dequeueReusableCellWithReuseIdentifier("badgeCell", forIndexPath: indexPath) as! BadgeCollectionCell
+        let cell: BadgeCollectionCell = collectionView.dequeueReusableCell(withReuseIdentifier: "badgeCell", for: indexPath) as! BadgeCollectionCell
         
         if !badge_array.isEmpty {
-            let model = self.badge_array[indexPath.row]
+            let model = self.badge_array[(indexPath as NSIndexPath).row]
             
             cell.loadItem(model)
-            let imageUrl = NSURL(string: "\(Utilities.badgeURL)\(model.badge_id).png")
+            let imageUrl = URL(string: "\(Utilities.badgeURL)\(model.badge_id).png")
             
-            let identifier = "Cell\(indexPath.row)"
+            let identifier = "Cell\((indexPath as NSIndexPath).row)"
             
             if (self.cached_images[identifier] != nil){
                 let cell_image_saved : UIImage = self.cached_images[identifier]!
@@ -85,7 +85,7 @@ class BadgesPage: UICollectionViewController {
             } else {
                 Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
                     if let image = UIImage(data: data!) {
-                        dispatch_async(dispatch_get_main_queue()){
+                        DispatchQueue.main.async{
                             cell.badge_image.image = image
                         }
                     }else{
@@ -95,19 +95,19 @@ class BadgesPage: UICollectionViewController {
             }
         }
         
-        cell.layer.borderColor = UIColor.lightGrayColor().CGColor
+        cell.layer.borderColor = UIColor.lightGray.cgColor
         
         return cell
     }
     
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.badge_array.count
     }
     
     func getBadges() {
         BadgeController.getAllBadgesWithSuccess(parent_view.user_id,
             success: { (data) -> Void in
-                let json = JSON(data: data)
+                let json = JSON(data: data!)
                 print(json)
                 for (_, subJson): (String, JSON) in json["data"] {
                     
@@ -131,14 +131,14 @@ class BadgesPage: UICollectionViewController {
                     }
                 }
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     self.reload()
                     Utilities.fadeInFromBottomAnimation((self.collectionView)!, delay: 0, duration: 1, yPosition: 20)
                     Utilities.fadeOutViewAnimation(self.loader, delay: 0, duration: 0.3)
                 });
             },
             failure: { (error) -> Void in
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     Utilities.fadeOutViewAnimation(self.loader, delay: 0, duration: 0.3)
                 })
         })
@@ -147,17 +147,17 @@ class BadgesPage: UICollectionViewController {
     func reload() {
         if self.parent_page_controller.index == 1 {
             self.badgeCollectionView.reloadData()
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            DispatchQueue.main.async(execute: { () -> Void in
                 self.setFrame()
             })
         }
     }
     
-    func reloadWithOffset(parent_scroll: UICollectionView) {
+    func reloadWithOffset(_ parent_scroll: UICollectionView) {
         if badge_array.count != 0 {
             BadgeController.getAllBadgesOffsetWithSuccess(parent_view.user_id, last_badge: self.badge_array[0].users_badges_id!, offset: offset,
                 success: { (data) -> Void in
-                    let json = JSON(data: data)
+                    let json = JSON(data: data!)
                     print(json)
                     self.new_data = false
                     self.added_values = 0
@@ -179,7 +179,7 @@ class BadgesPage: UICollectionViewController {
                         self.added_values += 1
                     }
                     
-                    dispatch_async(dispatch_get_main_queue(), {
+                    DispatchQueue.main.async(execute: {
                         self.reload()
                         if self.new_data { self.offset += self.added_values }
                         parent_scroll.finishInfiniteScroll()
@@ -187,7 +187,7 @@ class BadgesPage: UICollectionViewController {
                     });
                 },
                 failure: { (error) -> Void in
-                    dispatch_async(dispatch_get_main_queue(), {
+                    DispatchQueue.main.async(execute: {
                         parent_scroll.finishInfiniteScroll()
                     })
             })

@@ -8,12 +8,12 @@
 
 import UIKit
 
-protocol NotificationDelegate {
-    func getNotification(packet: SocketIOPacket)
-}
+/*protocol NotificationDelegate {
+    func getNotification(_ packet: SocketIOPacket)
+}*/
 
-class NotificationButton: UIBarButtonItem, SocketIODelegate {
-    var delegate:NotificationDelegate? = nil
+class NotificationButton: UIBarButtonItem/*, SocketIODelegate*/ {
+    //var delegate:NotificationDelegate? = nil
     //let socketIO : SocketIO = SocketIO()
     
     func startListening(){
