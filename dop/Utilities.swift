@@ -161,8 +161,6 @@ class Utilities {
         return friendly_date
     }
 
-
-
     //CONSTANTS
 
     class var connectionError:String{

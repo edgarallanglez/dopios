@@ -66,21 +66,18 @@ class NewsfeedCell: UITableViewCell {
         let gesture = UITapGestureRecognizer(target: self, action: #selector(NewsfeedCell.likeActivity(_:)))
         heartView.addGestureRecognizer(gesture)
         
-        
         self.likes.text = String(newsfeed_note.total_likes)
         self.heart.image = self.heart.image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-        
-    
         
         if newsfeed_note.user_like == true { self.heart.tintColor = Utilities.dopColor }
         else { self.heart.tintColor = UIColor.lightGrayColor() }
         
     }
     
-    func likeActivity(sender:UITapGestureRecognizer){
+    func likeActivity(sender:UITapGestureRecognizer) {
         let params:[String: AnyObject] = [
             "clients_coupon_id" : String(stringInterpolationSegment: newsfeedNote!.client_coupon_id),
-            "date" : "2015-01-01"]
+            "date" : "2015-01-01" ]
         
         var liked:Bool;
         
@@ -106,8 +103,6 @@ class NewsfeedCell: UITableViewCell {
                 })
         })
     }
-    
-    
     
     func goToUserProfile(_: UIButton!){
         self.viewController!.goToUserProfile(self.index)
