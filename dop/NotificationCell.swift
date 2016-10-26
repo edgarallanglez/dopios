@@ -52,7 +52,11 @@ class NotificationCell: UITableViewCell {
             let launcher_range = nsString.range(of: launcher_name)
             let newsfeed_activity_range = nsString.range(of: newsfeed_activity)
             let segue = URL(string: "userProfile:\(notification.launcher_id):\(notification.is_friend)")!
-            let branch_segue = URL(string: "branchProfile:\(notification.branch_id)")
+
+            let segue_text: String! = "branchProfile:\(notification.branch_id)"
+            
+            print(segue_text)
+            let branch_segue: URL! = URL(string: segue_text!)
             title.addLink(to: segue, with: launcher_range)
             title.addLink(to: branch_segue, with: newsfeed_activity_range)
         }

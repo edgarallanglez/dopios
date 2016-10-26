@@ -28,6 +28,8 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     override func viewDidLoad() {
 
         self.title = "Notificaciones"
+        
+        self.navigationItem.backBarButtonItem?.title = " "
 
         notification_table.alpha = 0
 
@@ -335,6 +337,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     func attributedLabel(_ label: TTTAttributedLabel!, didSelectLinkWith url: URL!) {
         let splitter = String(describing: url).components(separatedBy: ":")
         let segue: String = splitter[0]
+        
         let object_id: Int = Int(splitter[1])!
         
 

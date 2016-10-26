@@ -9,6 +9,8 @@
 import UIKit
 import JWTDecode
 import FBSDKLoginKit
+import Alamofire
+import AlamofireImage
 
 class MoreMenuViewController: UITableViewController {
     @IBOutlet var menuTableView: UITableView!
@@ -51,15 +53,18 @@ class MoreMenuViewController: UITableViewController {
     
     func getUserImage() {
         let url: URL = URL(string: User.userImageUrl)!
-        Utilities.downloadImage(url, completion: {(data, error) -> Void in
-            if let image = UIImage(data: data!) {
-                DispatchQueue.main.async {
-                    self.userImage.image = image
-                }
-            } else {
-                print("Error")
+        userImage.image = UIImage(named: "dop-logo-transparent")
+        userImage.backgroundColor = Utilities.lightGrayColor
+        userImage.alpha = 0.3
+
+    
+        Alamofire.request(url).responseImage { response in
+            if let image = response.result.value{
+                self.userImage.image = image
+                self.userImage.alpha = 1
             }
-        })
+        }
+        
     }
     
     func setActionSheet() {

@@ -51,7 +51,7 @@ class FriendCell: UITableViewCell {
         
         FriendsController.deleteFriend(params as [String : AnyObject],
             success:{(data) -> Void in
-                let json = JSON(data: data!)
+                let json = data!
                 DispatchQueue.main.async(execute: {
                     UIButton.animate(withDuration: 0.5, delay: 0, options: UIViewAnimationOptions(), animations: {
                             self.setFollowButton.layer.borderWidth = 1

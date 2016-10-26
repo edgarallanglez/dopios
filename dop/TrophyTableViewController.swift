@@ -8,6 +8,8 @@
 
 import Foundation
 import UIKit
+import AlamofireImage
+import Alamofire
 
 class TrophyTableViewController: UITableViewController {
     
@@ -47,18 +49,16 @@ class TrophyTableViewController: UITableViewController {
                 let cell_image_saved : UIImage = self.cached_images[identifier]!
                 cell.badge_image.image = cell_image_saved
             } else {
-                Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
-                    if let image = UIImage(data: data!) {
-                        DispatchQueue.main.async {
-                            cell.badge_image.image = image
-                            UIView.animate(withDuration: 0.5, animations: {
-                                //alpha = 1
-                            })
-                        }
-                    }else{
-                        print("Error")
+                cell.badge_image.alpha = 0
+                Alamofire.request(imageUrl!).responseImage { response in
+                    if let image = response.result.value{
+                        cell.badge_image.image = image
+                        UIView.animate(withDuration: 0.5, animations: {
+                            cell.badge_image.alpha = 1
+                        })
                     }
-                })
+                }
+                
             }
             
             if !model.earned { cell.backgroundColor = Utilities.lightGrayColor }
@@ -75,7 +75,7 @@ class TrophyTableViewController: UITableViewController {
 
         BadgeController.getAllTrophiesWithSuccess(
             success: { (data) -> Void in
-                let json = JSON(data: data!)
+                let json = data!
                 print(json)
                 for (_, subJson): (String, JSON) in json["data"] {
                     

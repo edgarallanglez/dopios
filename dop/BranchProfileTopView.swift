@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireImage
 
 class BranchProfileTopView: UIView {
     
@@ -128,36 +130,35 @@ class BranchProfileTopView: UIView {
     
     func downloadImage(_ model: Coupon) {
         let imageUrl = URL(string: "\(Utilities.dopImagesURL)\(model.company_id)/\(model.logo)")
-        Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
-            if let image = UIImage(data: data!) {
-                DispatchQueue.main.async {
-                    self.branch_logo.image = image
-                    self.branch_logo.layer.cornerRadius = self.branch_logo.frame.width / 2
-                    Utilities.fadeInFromBottomAnimation(self.branch_logo, delay: 0, duration: 1, yPosition: 1)
-                }
-            }else{
-                print("Error")
+        
+        self.branch_logo.layer.cornerRadius = self.branch_logo.frame.width / 2
+        
+        Alamofire.request(imageUrl!).responseImage { response in
+            if let image = response.result.value{
+                self.branch_logo.image = image
+                Utilities.fadeInFromBottomAnimation(self.branch_logo, delay: 0, duration: 1, yPosition: 1)
+            } else{
+                self.branch_logo.alpha = 0.3
+                self.branch_logo.image = UIImage(named: "dop-logo-transparent")
+                self.branch_logo.backgroundColor = Utilities.lightGrayColor
             }
-        })
+        }
+        
+        
         
         if !model.banner.isEmpty {
             let banner_url = URL(string: "\(Utilities.dopImagesURL)\(model.company_id)/\(model.banner)")
             
-            
-            Utilities.downloadImage(banner_url!, completion: {(data, error) -> Void in
-                if var image = UIImage(data: data!) {
+            Alamofire.request(banner_url!).responseImage { response in
+                if var image = response.result.value{
                     image = image.applyLightEffect()
-                    DispatchQueue.main.async {
-                        self.branch_banner.image = image
-                        self.branch_name.textColor = UIColor.white
-                        self.branch_name.shadowColor = UIColor.darkGray
-                        Utilities.fadeInFromBottomAnimation(self.branch_banner, delay: 0, duration: 0.8, yPosition: 4)
-                    }
-                }else{
-                    print("Error")
+                    self.branch_banner.image = image
+                    self.branch_name.textColor = UIColor.white
+                    self.branch_name.shadowColor = UIColor.darkGray
+                    Utilities.fadeInFromBottomAnimation(self.branch_banner, delay: 0, duration: 0.8, yPosition: 4)
                 }
-                
-            })
+            }
+            
         }
     }
     
@@ -176,44 +177,31 @@ class BranchProfileTopView: UIView {
         }
 
         let imageUrl = URL(string: "\(Utilities.dopImagesURL)\(model.company_id!)/\(model.logo!)")
-        Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
-            if let image = data{
-                DispatchQueue.main.async {
-                    self.branch_logo.image = UIImage(data: image)
-                    self.branch_logo.layer.cornerRadius = self.branch_logo.frame.width / 2
-                    Utilities.fadeInFromBottomAnimation(self.branch_logo, delay: 0, duration: 1, yPosition: 1)
-                }
-            } else {
-                print("Error")
-            }
-        })
         
+        Alamofire.request(imageUrl!).responseImage { response in
+            if let image = response.result.value{
+                self.branch_logo.image = image
+                self.branch_logo.layer.cornerRadius = self.branch_logo.frame.width / 2
+                Utilities.fadeInFromBottomAnimation(self.branch_logo, delay: 0, duration: 1, yPosition: 1)
+            }else{
+                self.branch_logo.alpha = 0.3
+                self.branch_logo.image = UIImage(named: "dop-logo-transparent")
+                self.branch_logo.backgroundColor = Utilities.lightGrayColor
+            }
+        }
+
         
         if !model.banner!.isEmpty {
             let banner_url = URL(string: "\(Utilities.dopImagesURL)\(model.company_id!)/\(model.banner!)")
-            Utilities.downloadImage(banner_url!, completion: {(data, error) -> Void in
-                if var image = UIImage(data: data!) {
+            Alamofire.request(banner_url!).responseImage { response in
+                if var image = response.result.value{
                     image = image.applyLightEffect()
-                    DispatchQueue.main.async {
-                        self.branch_banner.image = image
-                        self.branch_name.textColor = UIColor.white
-                        self.branch_name.shadowColor = UIColor.darkGray
-                        Utilities.fadeInFromBottomAnimation(self.branch_banner, delay: 0, duration: 0.8, yPosition: 4)
-                    }
-                }else{
-                    print("Error")
+                    self.branch_banner.image = image
+                    self.branch_name.textColor = UIColor.white
+                    self.branch_name.shadowColor = UIColor.darkGray
+                    Utilities.fadeInFromBottomAnimation(self.branch_banner, delay: 0, duration: 0.8, yPosition: 4)
                 }
-                /*if let image = data {
-                    dispatch_async(dispatch_get_main_queue()) {
-                        self.branch_banner.image = UIImage(data: image)!.applyLightEffect()
-                        self.branch_name.textColor = UIColor.whiteColor()
-                        self.branch_name.shadowColor = UIColor.darkGrayColor()
-                        Utilities.fadeInFromBottomAnimation(self.branch_banner, delay: 0, duration: 0.8, yPosition: 4)
-                    }
-                } else {
-                    print("Error")
-                }*/
-            })
+            }
         }
     }
     

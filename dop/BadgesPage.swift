@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireImage
 
 @objc protocol BadgePageDelegate {
     @objc optional func resizeBadgeView(_ dynamic_height: CGFloat)
@@ -83,15 +85,11 @@ class BadgesPage: UICollectionViewController {
                 let cell_image_saved : UIImage = self.cached_images[identifier]!
                 cell.badge_image.image = cell_image_saved
             } else {
-                Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
-                    if let image = UIImage(data: data!) {
-                        DispatchQueue.main.async{
-                            cell.badge_image.image = image
-                        }
-                    }else{
-                        print("Error")
+                Alamofire.request(imageUrl!).responseImage { response in
+                    if let image = response.result.value{
+                        cell.badge_image.image = image
                     }
-                })
+                }
             }
         }
         
@@ -107,7 +105,7 @@ class BadgesPage: UICollectionViewController {
     func getBadges() {
         BadgeController.getAllBadgesWithSuccess(parent_view.user_id,
             success: { (data) -> Void in
-                let json = JSON(data: data!)
+                let json = data!
                 print(json)
                 for (_, subJson): (String, JSON) in json["data"] {
                     
@@ -157,7 +155,7 @@ class BadgesPage: UICollectionViewController {
         if badge_array.count != 0 {
             BadgeController.getAllBadgesOffsetWithSuccess(parent_view.user_id, last_badge: self.badge_array[0].users_badges_id!, offset: offset,
                 success: { (data) -> Void in
-                    let json = JSON(data: data!)
+                    let json = data!
                     print(json)
                     self.new_data = false
                     self.added_values = 0

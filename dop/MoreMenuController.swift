@@ -7,21 +7,17 @@
 //
 
 import Foundation
+import Alamofire
 
 class MoreMenuController {
-    class func getImage(_ url:String, success: @escaping ((_ imageData: Data?) -> Void)) {
-        Utilities.loadDataFromURL(URL(string: url)!, completion:{(data, error) -> Void in
-            if let urlData = data {
-                success(urlData)
-            }
-        })
-    }
     
-    class func getUserProfile(_ url:String, success: @escaping ((_ profileData: Data?) -> Void)) {
-        Utilities.loadDataFromURL(URL(string: url)!, completion:{(data, error) -> Void in
-            if let urlData = data {
-                success(urlData)
+    class func getUserProfile(_ url:String, success: @escaping ((_ profileData: JSON?) -> Void)) {
+
+        Alamofire.request(url, method: .get, headers: User.userToken).validate().responseJSON { response in
+            switch response.result {
+            default:
+                success(JSON(response.result.value))
             }
-        })
+        }
     }
 }

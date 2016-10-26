@@ -73,7 +73,7 @@ struct Branch {
         self.id = id ?? 0
         self.name = name ?? ""
         
-        if distance == 0.0 { self.distance = String(stringInterpolationSegment: "") } else { self.distance = String(stringInterpolationSegment: "A \(distance) Km") }
+        if distance == 0.0 { self.distance = String(stringInterpolationSegment: "") } else { self.distance = String(stringInterpolationSegment: "A \(distance!) Km") }
         
         self.logo = nil
         self.banner = nil

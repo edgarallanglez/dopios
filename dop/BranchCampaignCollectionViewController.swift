@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireImage
 
 @objc protocol CampaignPageDelegate {
     @objc optional func resizeCampaignView(_ dynamic_height: CGFloat)
@@ -124,7 +126,25 @@ class BranchCampaignCollectionViewController: UICollectionViewController, ModalD
                 
             } else {
                 //cell.branch_banner.alpha = 0
-                Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
+                Alamofire.request(imageUrl!).responseImage { response in
+                    if let image = response.result.value{
+                        if (self.collection_view.indexPath(for: cell) as NSIndexPath?)?.row == (indexPath as NSIndexPath).row {
+                            self.cachedImages[identifier] = image
+                            cell.branch_banner.image = image
+                            
+                            UIView.animate(withDuration: 0.5, animations: {
+                                cell.branch_banner.alpha = 1
+                            })
+                        }
+                    }else{
+                        if (self.collection_view.indexPath(for: cell) as NSIndexPath?)?.row == (indexPath as NSIndexPath).row {
+                            cell.branch_banner.image = UIImage(named: "dop-logo-transparent")
+                            cell.branch_banner.alpha = 0.3
+                            self.cachedImages[identifier] = cell.branch_banner.image
+                        }
+                    }
+                }
+                /*Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
                     if let image = data{
                         DispatchQueue.main.async {
                             var imageData : UIImage = UIImage()
@@ -142,7 +162,7 @@ class BranchCampaignCollectionViewController: UICollectionViewController, ModalD
                     }else{
                         print("Error")
                     }
-                })
+                })*/
             }
             Utilities.applyPlainShadow(cell)
             cell.layer.masksToBounds = false
@@ -360,5 +380,4 @@ class BranchCampaignCollectionViewController: UICollectionViewController, ModalD
 //            }
 //        }
     }
-    
 }

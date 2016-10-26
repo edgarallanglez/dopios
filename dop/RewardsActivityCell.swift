@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import AlamofireImage
+import Alamofire
 
 class RewardsActivityCell: UITableViewCell {
     
@@ -71,15 +73,11 @@ class RewardsActivityCell: UITableViewCell {
     }
     
     func downloadImage(_ url: URL) {
-        Utilities.downloadImage(url, completion: {(data, error) -> Void in
-            if let image = UIImage(data: data!) {
-                DispatchQueue.main.async {
-                    self.branch_image.image = image
-                }
-            }else{
-                print("Error")
+        Alamofire.request(url).responseImage { response in
+            if let image = response.result.value{
+                self.branch_image.image = image
             }
-        })
+        }
     }
     
     func goToBranchProfile(_ sender: UIGestureRecognizer!){

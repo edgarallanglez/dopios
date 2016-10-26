@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireImage
 
 class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
     
@@ -68,27 +70,22 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
                 cell.user_image.alpha = 1
                 
             } else {
-                cell.user_image.alpha = 1
-
-                Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
-                    if let image = UIImage(data: data!) {
-                        DispatchQueue.main.async {
-                            var cell_image : UIImage = UIImage()
-                            cell_image = image
-                            
-                            if (tableView.indexPath(for: cell) as NSIndexPath?)?.row == (indexPath as NSIndexPath).row {
-                                self.cachedImages[identifier] = cell_image
-                                let cell_image_saved : UIImage = self.cachedImages[identifier]!
-                                cell.user_image.image = cell_image_saved
-                                UIView.animate(withDuration: 0.5, animations: {
-                                    cell.user_image.alpha = 1
-                                })
-                            }
+                cell.user_image.alpha = 0.3
+                cell.user_image.image = UIImage(named: "dop-logo-transparent")
+                cell.user_image.backgroundColor = Utilities.lightGrayColor
+                
+                Alamofire.request(imageUrl!).responseImage { response in
+                    if let image = response.result.value{
+                        if (tableView.indexPath(for: cell) as NSIndexPath?)?.row == (indexPath as NSIndexPath).row {
+                            self.cachedImages[identifier] = image
+                            let cell_image_saved : UIImage = self.cachedImages[identifier]!
+                            cell.user_image.image = cell_image_saved
+                            UIView.animate(withDuration: 0.5, animations: {
+                                cell.user_image.alpha = 1
+                            })
                         }
-                    }else{
-                        print("Error")
                     }
-                })
+                }
                 
             }
         } else {
@@ -98,27 +95,23 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
                 cell.user_image.alpha = 1
                 
             } else {
-                cell.user_image.alpha = 1
+                cell.user_image.alpha = 0.3
+                cell.user_image.image = UIImage(named: "dop-logo-transparent")
+                cell.user_image.backgroundColor = Utilities.lightGrayColor
                 
-                Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
-                    if let image = UIImage(data: data!) {
-                        DispatchQueue.main.async {
-                            var cell_image : UIImage = UIImage()
-                            cell_image = image
-                            
-                            if (tableView.indexPath(for: cell) as NSIndexPath?)?.row == (indexPath as NSIndexPath).row {
-                                self.cachedFollowingImages[identifier] = cell_image
-                                let cell_image_saved : UIImage = self.cachedFollowingImages[identifier]!
-                                cell.user_image.image = cell_image_saved
-                                UIView.animate(withDuration: 0.5, animations: {
-                                    cell.user_image.alpha = 1
-                                })
-                            }
+                Alamofire.request(imageUrl!).responseImage { response in
+                    if let image = response.result.value{
+                        if (tableView.indexPath(for: cell) as NSIndexPath?)?.row == (indexPath as NSIndexPath).row {
+                            self.cachedFollowingImages[identifier] = image
+                            let cell_image_saved : UIImage = self.cachedFollowingImages[identifier]!
+                            cell.user_image.image = cell_image_saved
+                            UIView.animate(withDuration: 0.5, animations: {
+                                cell.user_image.alpha = 1
+                            })
                         }
-                    }else{
-                        print("Error")
                     }
-                })
+                }
+
                 
             }
         }
@@ -138,7 +131,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         FriendsController.getAllFriendsWithSuccess(
             success:{ (friendsData) -> Void in
-                let json = JSON(data: friendsData!)
+                let json = friendsData!
                 
                 for (_, subJson): (String, JSON) in json["data"] {
                     let friend_id = subJson["friends_id"].int
@@ -146,7 +139,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
                     let user_name = subJson["names"].string
                     let user_surnames = subJson["surnames"].string
                     let main_image = subJson["main_image"].string
-                    let friend = subJson["friend"].bool!
+                    let friend = subJson["is_friend"].bool!
                     let birth_date = subJson["birth_date"].string!
                     let privacy_status = subJson["privacy_status"].int
                     let facebook_key = subJson["facebook_key"].string ?? ""
@@ -177,7 +170,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         mainLoader.startAnimating()
         FriendsController.getAllFollowingWithSuccess(
             success:{ (friendsData) -> Void in
-                let json = JSON(data: friendsData!)
+                let json = friendsData!
                 print(json)
                 for (_, subJson): (String, JSON) in json["data"] {
                     let friend_id = subJson["friends_id"].int
@@ -185,7 +178,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
                     let user_name = subJson["names"].string ?? ""
                     let user_surnames = subJson["surnames"].string ?? ""
                     let main_image = subJson["main_image"].string ?? ""
-                    let friend = subJson["friend"].bool!
+                    let friend = subJson["is_friend"].bool!
                     let birth_date = subJson["birth_date"].string!
                     let privacy_status = subJson["privacy_status"].int
                     let facebook_key = subJson["facebook_key"].string ?? ""

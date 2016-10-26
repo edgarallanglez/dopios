@@ -7,72 +7,91 @@
 //
 
 import UIKit
+import Alamofire
 
 class FriendsController: NSObject {
-    class func getAllFriendsWithSuccess(success succeed: @escaping ((_ friendsData: Data?) -> Void), failure errorFound: @escaping ((_ friendsData: NSError?) -> Void)) {
+    class func getAllFriendsWithSuccess(success succeed: @escaping ((_ friendsData: JSON?) -> Void), failure errorFound: @escaping ((_ friendsData: NSError?) -> Void)) {
         let url = "\(Utilities.dopURL)user/friends/get"
-        Utilities.loadDataFromURL(URL(string: url)!, completion:{(data, error) -> Void in
-            if let urlData = data {
-                succeed(urlData)
-            }else{
-                errorFound(error)
+
+        Alamofire.request(url, method: .get, headers: User.userToken).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                succeed(JSON(response.result.value))
+            case .failure(let error):
+                print(error)
+                errorFound(error as NSError)
             }
-        })
+        }
     }
     
-    class func deleteFriend(_ params:[String:AnyObject], success: @escaping ((_ friendsData: Data?) -> Void), failure errorFound: @escaping ((_ friendsData: NSError?) -> Void)) {
+    class func deleteFriend(_ params:[String:AnyObject], success: @escaping ((_ friendsData: JSON?) -> Void), failure errorFound: @escaping ((_ friendsData: NSError?) -> Void)) {
         let url = "\(Utilities.dopURL)user/friends/delete"
-        Utilities.sendDataToURL(URL(string: url)!, method:"PUT",params: params, completion:{(data, error) -> Void in
-            if let urlData = data {
-                success(urlData)
-            }else{
-                errorFound(error)
+
+        
+        Alamofire.request(url, method: .put, parameters: params, encoding: JSONEncoding.default ,headers: User.userToken).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                success(JSON(response.result.value))
+            case .failure(let error):
+                print(error)
+                errorFound(error as NSError)
             }
-        })
+        }
     }
     
-    class func addFriendWithSuccess(_ params:[String:AnyObject], success: @escaping ((_ friendsData: Data?) -> Void), failure errorFound: @escaping ((_ friendsData: NSError?) -> Void)) {
+    class func addFriendWithSuccess(_ params: Parameters, success: @escaping ((_ friendsData: JSON?) -> Void), failure errorFound: @escaping ((_ friendsData: NSError?) -> Void)) {
         let url = "\(Utilities.dopURL)user/friends/add"
         print(url)
-        Utilities.sendDataToURL(URL(string: url)!, method:"POST", params: params, completion:{(data, error) -> Void in
-            if let urlData = data {
-                success(urlData)
-            }else{
-                errorFound(error)
+
+        Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default ,headers: User.userToken).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                success(JSON(response.result.value))
+            case .failure(let error):
+                print(error)
+                errorFound(error as NSError)
             }
-        })
+        }
     }
-    class func acceptFriendWithSuccess(_ params:[String:AnyObject], success: @escaping ((_ friendsData: Data?) -> Void), failure errorFound: @escaping ((_ friendsData: NSError?) -> Void)) {
+    class func acceptFriendWithSuccess(_ params: Parameters, success: @escaping ((_ friendsData: JSON?) -> Void), failure errorFound: @escaping ((_ friendsData: NSError?) -> Void)) {
         let url = "\(Utilities.dopURL)user/friends/accept"
         print(url)
-        Utilities.sendDataToURL(URL(string: url)!, method:"POST", params: params, completion:{(data, error) -> Void in
-            if let urlData = data {
-                success(urlData)
-            } else {
-                errorFound(error)
+
+        Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default ,headers: User.userToken).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                success(JSON(response.result.value))
+            case .failure(let error):
+                print(error)
+                errorFound(error as NSError)
             }
-        })
+        }
     }
-    class func declineFriendWithSuccess(_ params:[String:AnyObject], success: @escaping ((_ friendsData: Data?) -> Void), failure errorFound: @escaping ((_ friendsData: NSError?) -> Void)) {
+    class func declineFriendWithSuccess(_ params:[String:AnyObject], success: @escaping ((_ friendsData: JSON?) -> Void), failure errorFound: @escaping ((_ friendsData: NSError?) -> Void)) {
         let url = "\(Utilities.dopURL)user/friends/decline"
-        print(url)
-        Utilities.sendDataToURL(URL(string: url)!, method:"PUT", params: params, completion:{(data, error) -> Void in
-            if let urlData = data {
-                success(urlData)
-            } else {
-                errorFound(error)
+
+        Alamofire.request(url, method: .put, parameters: params, encoding: JSONEncoding.default ,headers: User.userToken).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                success(JSON(response.result.value))
+            case .failure(let error):
+                print(error)
+                errorFound(error as NSError)
             }
-        })
+        }
     }
-    class func getAllFollowingWithSuccess(success succeed: @escaping ((_ friendsData: Data?) -> Void), failure errorFound: @escaping ((_ friendsData: NSError?) -> Void)) {
+    class func getAllFollowingWithSuccess(success succeed: @escaping ((_ friendsData: JSON?) -> Void), failure errorFound: @escaping ((_ friendsData: NSError?) -> Void)) {
         let url = "\(Utilities.dopURL)user/following/get"
-        Utilities.loadDataFromURL(URL(string: url)!, completion:{(data, error) -> Void in
-            if let urlData = data {
-                succeed(urlData)
-            }else{
-                errorFound(error)
+
+        Alamofire.request(url, method: .get, headers: User.userToken).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                succeed(JSON(response.result.value))
+            case .failure(let error):
+                print(error)
+                errorFound(error as NSError)
             }
-        })
+        }
     }
 
 }

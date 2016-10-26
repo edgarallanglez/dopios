@@ -34,6 +34,7 @@ class UserProfileStickyHeader: UIView {
     
     
     func setView(_ parent_view_controller: UserProfileStickyController) {
+        self.user_image.alpha = 0
         self.parent_view = parent_view_controller
         self.user_id = self.parent_view.user_id
         
@@ -175,9 +176,11 @@ class UserProfileStickyHeader: UIView {
     }
     
     func downloadImage(_ url: URL) {
+        
         Alamofire.request(url).responseImage { response in
             if let image = response.result.value{
                 self.user_image?.image = image
+                Utilities.fadeInViewAnimation(self.user_image, delay: 0, duration: 0.5)
             }else{
                 self.user_image.alpha = 0.3
                 self.user_image.image = UIImage(named: "dop-logo-transparent")

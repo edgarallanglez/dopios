@@ -71,7 +71,7 @@ class MedalTableViewController: UITableViewController {
         NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: "showLoader"), object: true)
         BadgeController.getAllMedalsWithSuccess(
             success: { (data) -> Void in
-                let json = JSON(data: data!)
+                let json = data!
                 print(json)
                 for (_, subJson): (String, JSON) in json["data"] {
                     

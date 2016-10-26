@@ -16,7 +16,7 @@ func timeAgoSinceDate(_ date:Date, numericDates:Bool) -> String {
     let components:DateComponents = (calendar as NSCalendar).components([NSCalendar.Unit.minute , NSCalendar.Unit.hour , NSCalendar.Unit.day , NSCalendar.Unit.weekOfYear , NSCalendar.Unit.month , NSCalendar.Unit.year , NSCalendar.Unit.second], from: earliest, to: latest, options: NSCalendar.Options())
     
     if (components.year! >= 2) {
-        return "Hace \(components.year) años"
+        return "Hace \(components.year!) años"
     } else if (components.year! >= 1){
         if (numericDates){
             return "Hace 1 año"
@@ -24,7 +24,7 @@ func timeAgoSinceDate(_ date:Date, numericDates:Bool) -> String {
             return "Hace un año"
         }
     } else if (components.month! >= 2) {
-        return "Hace \(components.month) meses"
+        return "Hace \(components.month!) meses"
     } else if (components.month! >= 1){
         if (numericDates){
             return "Hace 1 mes"
@@ -32,15 +32,15 @@ func timeAgoSinceDate(_ date:Date, numericDates:Bool) -> String {
             return "Hace un mes"
         }
     } else if (components.weekOfYear! >= 2) {
-        return "Hace \(components.weekOfYear) semanas"
+        return "Hace \(components.weekOfYear!) semanas"
     } else if (components.weekOfYear! >= 1){
         if (numericDates){
-            return "Hace una semana"
+            return "Hace 1 semana"
         } else {
             return "La semana pasada"
         }
     } else if (components.day! >= 2) {
-        return "Hace \(components.day) dias"
+        return "Hace \(components.day!) dias"
     } else if (components.day! >= 1){
         if (numericDates){
             return "Hace 1 dia"
@@ -48,7 +48,7 @@ func timeAgoSinceDate(_ date:Date, numericDates:Bool) -> String {
             return "Ayer"
         }
     } else if (components.hour! >= 2) {
-        return "Hace \(components.hour) horas"
+        return "Hace \(components.hour!) horas"
     } else if (components.hour! >= 1){
         if (numericDates){
             return "Hace 1 hora"
@@ -56,7 +56,7 @@ func timeAgoSinceDate(_ date:Date, numericDates:Bool) -> String {
             return "Hace una hora"
         }
     } else if (components.minute! >= 2) {
-        return "\(components.minute) minutes ago"
+        return "Hace \(components.minute!) minutos"
     } else if (components.minute! >= 1){
         if (numericDates){
             return "Hace 1 minuto"
@@ -64,7 +64,7 @@ func timeAgoSinceDate(_ date:Date, numericDates:Bool) -> String {
             return "Hace un minuto"
         }
     } else if (components.second! >= 3) {
-        return "Hace \(components.second) segundos"
+        return "Hace \(components.second!) segundos"
     } else {
         return "Ahora"
     }

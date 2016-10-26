@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import AlamofireImage
+import Alamofire
 
 class SearchViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, CLLocationManagerDelegate {
     
@@ -123,8 +125,25 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
                         cell.user_name.alpha = 1
                         
                     } else {
-                        cell.user_image.alpha = 0
-                        Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
+                        cell.user_name.alpha = 1
+                        cell.user_image.alpha = 0.3
+                        cell.user_image.image = UIImage(named: "dop-logo-transparent")
+                        cell.user_image.backgroundColor = Utilities.lightGrayColor
+                        
+                        Alamofire.request(imageUrl!).responseImage { response in
+                            if let image = response.result.value{
+                                if (tableView.indexPath(for: cell) as NSIndexPath?)?.row == (indexPath as NSIndexPath).row {
+                                    self.cachedImages[identifier] = image
+                                    
+                                    cell.user_image.image = self.cachedImages[identifier]!
+                                    UIView.animate(withDuration: 0.5, animations: {
+                                        cell.user_image.alpha = 1
+                                    })
+                                }
+                                
+                            }
+                        }
+                        /*Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
                             if let image = UIImage(data: data!) {
                                 DispatchQueue.main.async {
                                     let cell_image: UIImage? = image
@@ -143,7 +162,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
                             }else{
                                 print("Error")
                             }
-                        })
+                        })*/
                     
                     }
                     ////////

@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import AlamofireImage
+import Alamofire
+
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
@@ -201,18 +204,17 @@ class BranchRankingViewController: UITableViewController {
     
     func downloadImage(_ model: PeopleModel, cell: PeopleCell, index: Int) {
         let url = URL(string: model.main_image)
-        cell.user_image.alpha = 0
-        Utilities.downloadImage(url!, completion: {(data, error) -> Void in
-            if let image = data{
-                DispatchQueue.main.async {
-                    cell.user_image.image = UIImage(data: image)
-                    Utilities.fadeInViewAnimation(cell.user_image, delay: 0, duration: 1)
-                    cell.setRankingPosition(index)
-                }
-            }else{
-                print("Error")
+        cell.user_image.alpha = 0.3
+        cell.user_image.image = UIImage(named: "dop-logo-transparent")
+
+        Alamofire.request(url!).responseImage { response in
+            if let image = response.result.value{
+                cell.user_image.image = image
+                Utilities.fadeInViewAnimation(cell.user_image, delay: 0, duration: 1)
+                cell.setRankingPosition(index)
             }
-        })
+        }
+
     }
 }
 
