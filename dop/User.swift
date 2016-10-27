@@ -25,4 +25,5 @@ class User: NSObject, CLLocationManagerDelegate {
     static var adult: Bool = false
     
     static var newestNotification: [String: AnyObject] = [:]
+    
 }
