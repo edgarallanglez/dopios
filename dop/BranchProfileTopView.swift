@@ -134,7 +134,7 @@ class BranchProfileTopView: UIView {
         self.branch_logo.layer.cornerRadius = self.branch_logo.frame.width / 2
         
         Alamofire.request(imageUrl!).responseImage { response in
-            if let image = response.result.value{
+            if let image = response.result.value {
                 self.branch_logo.image = image
                 Utilities.fadeInFromBottomAnimation(self.branch_logo, delay: 0, duration: 1, yPosition: 1)
             } else{
