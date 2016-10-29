@@ -34,7 +34,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
     var offset_mycoupons: Int = 0
     var little_size: Bool = false
     
-    var documentController:UIDocumentInteractionController!
+    var documentController: UIDocumentInteractionController!
     
     var selected_coupon: Coupon!
     
@@ -47,14 +47,14 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
         offset_mycoupons = limit - 1
 
         
-        self.myCouponsCollectionView.isHidden = true
-        self.myCouponsCollectionView.alpha = 0
+//        self.myCouponsCollectionView.isHidden = true
+//        self.myCouponsCollectionView.alpha = 0
         
         self.refreshControl = UIRefreshControl()
-        self.myCouponsRefreshControl = UIRefreshControl()
+//        self.myCouponsRefreshControl = UIRefreshControl()
         
         self.refreshControl.addTarget(self, action: #selector(PromoViewController.refresh(_:)), for: UIControlEvents.valueChanged)
-        self.myCouponsRefreshControl.addTarget(self, action: #selector(PromoViewController.refresh(_:)), for: UIControlEvents.valueChanged)
+//        self.myCouponsRefreshControl.addTarget(self, action: #selector(PromoViewController.refresh(_:)), for: UIControlEvents.valueChanged)
         
         self.CouponsCollectionView.addSubview(refreshControl)
         //self.myCouponsCollectionView.addSubview(myCouponsRefreshControl)
@@ -78,9 +78,9 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
 
         self.CouponsCollectionView.infiniteScrollIndicatorView = loader
         self.CouponsCollectionView.infiniteScrollIndicatorView?.tintColor = Utilities.dopColor
-        
-        self.myCouponsCollectionView.infiniteScrollIndicatorView = loader
-        self.myCouponsCollectionView.infiniteScrollIndicatorView?.tintColor = Utilities.dopColor
+//        
+//        self.myCouponsCollectionView.infiniteScrollIndicatorView = loader
+//        self.myCouponsCollectionView.infiniteScrollIndicatorView?.tintColor = Utilities.dopColor
         
         // Set custom indicator margin
         //CouponsCollectionView.infiniteScrollIndicatorMargin = 49
@@ -127,7 +127,8 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
     
     override func viewDidAppear(_ animated: Bool) {
         self.refreshControl.endRefreshing()
-        self.CouponsCollectionView.reloadData()
+//        self.CouponsCollectionView.reloadData()
+        self.CouponsCollectionView.alpha = 1
     }
     
     func refresh(_ sender:AnyObject) {
@@ -144,16 +145,16 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
         if promoSegmentedController.selectedIndex == 1 { return myCoupons.count }
         else { return coupons.count }
     }
-
+    
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        print("ENTRA ENTRA ")
+
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PromoCollectionCell
         
         
-
         if promoSegmentedController.selectedIndex == 0 {
             if (!coupons.isEmpty) {
-                let model = self.coupons[(indexPath as NSIndexPath).row]
+                let model = self.coupons[indexPath.row]
                 cell.loadItem(model, viewController: self)
                 cell.setTakeButtonState(model.taken)
                 let imageUrl = URL(string: "\(Utilities.dopImagesURL)\(model.company_id)/\(model.logo)")
@@ -177,7 +178,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                     //cell.branch_banner.alpha = 0
                     Alamofire.request(imageUrl!).responseImage { response in
                         if let image = response.result.value{
-                            if (self.CouponsCollectionView.indexPath(for: cell) as NSIndexPath?)?.row == (indexPath as NSIndexPath).row {
+                            if self.CouponsCollectionView.indexPath(for: cell)?.row == indexPath.row {
                                 self.cachedImages[identifier] = image
                                 cell.branch_banner.image = image
                             }
@@ -297,6 +298,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
         
         return size
     }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
 //        collectionView.performBatchUpdates({ () -> Void in
@@ -331,8 +333,6 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
         setViewCount(selected_coupon.id)
         modal.delegate = self
         modal.present(animated: true, completionHandler: nil)
-        
-        
      
     }
 
@@ -358,9 +358,9 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
     }
 
     func getCoupons() {
-
+        self.coupons.removeAll()
+        self.cachedImages.removeAll()
         self.offset = 0
-        
         
         self.CouponsCollectionView.isHidden = false
         self.view.bringSubview(toFront: self.mainLoader)
@@ -368,10 +368,6 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
         
         CouponController.getAllCouponsWithSuccess(limit,
             success: { (couponsData) -> Void in
-                DispatchQueue.main.async(execute: {
-                    self.coupons.removeAll(keepingCapacity: false)
-                    self.cachedImages.removeAll(keepingCapacity: false)
-                })
                 
                 let json = couponsData!
             
@@ -414,13 +410,12 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                     Utilities.fadeOutViewAnimation(self.mainLoader, delay: 0, duration: 0.3)
                     Utilities.fadeInFromBottomAnimation(self.CouponsCollectionView, delay: 0, duration: 0.25, yPosition: 20)
                     
-                    
                 });
             },
             
             failure: { (error) -> Void in
                 DispatchQueue.main.async(execute: {
-                    self.myCouponsRefreshControl.endRefreshing()
+//                    self.myCouponsRefreshControl.endRefreshing()
                     self.refreshControl.endRefreshing()
                     Utilities.fadeOutViewAnimation(self.mainLoader, delay: 0, duration: 0.3)
                     
@@ -494,14 +489,14 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        self.myCouponsRefreshControl.endRefreshing()
+//        self.myCouponsRefreshControl.endRefreshing()
         self.refreshControl.endRefreshing()
     }
     
     func getTakenCoupons() {
         self.offset_mycoupons = 0
        
-        self.myCouponsCollectionView.isHidden = false
+        self.myCouponsCollectionView.isHidden = true
         self.view.bringSubview(toFront: self.mainLoader)
         Utilities.fadeInViewAnimation(self.mainLoader, delay: 0, duration: 0.5)
     
@@ -542,7 +537,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                 print(json)
                 
                 DispatchQueue.main.async(execute: {
-                    self.myCouponsCollectionView.reloadData()
+//                    self.myCouponsCollectionView.reloadData()
                     self.emptyMessage.isHidden = true
                     self.CouponsCollectionView.contentOffset = CGPoint(x: 0, y: 0)
                     self.refreshControl.endRefreshing()
@@ -555,7 +550,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
             
             failure: { (error) -> Void in
                 DispatchQueue.main.async(execute: {
-                    self.myCouponsCollectionView.reloadData()
+//                    self.myCouponsCollectionView.reloadData()
                     self.emptyMessage.isHidden = false
                     self.refreshControl.endRefreshing()
                     Utilities.fadeOutViewAnimation(self.mainLoader, delay: 0, duration: 0.3)
@@ -611,7 +606,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                 DispatchQueue.main.async(execute: {
                     //self.CouponsCollectionView.alwaysBounceVertical = true
                     self.myCouponsCollectionView.finishInfiniteScroll()
-                    self.myCouponsCollectionView.reloadData()
+//                    self.myCouponsCollectionView.reloadData()
                     
                     if newData { self.offset_mycoupons+=addedValues }
                     /*if(addedValues<6 || !newData){
@@ -653,10 +648,10 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
         /*Utilities.fadeOutViewAnimation(self.CouponsCollectionView, delay: 0, duration: 0.3)
         Utilities.fadeOutViewAnimation(self.myCouponsCollectionView, delay: 0, duration: 0.3)
         */
-        CouponsCollectionView.alpha = 0
+        CouponsCollectionView.alpha = 1
         myCouponsCollectionView.alpha = 0
-        self.CouponsCollectionView.isHidden = true
-        self.myCouponsCollectionView.isHidden = true
+        self.CouponsCollectionView.isHidden = false
+//        self.myCouponsCollectionView.isHidden = true
         
         switch promoSegmentedController.selectedIndex {
             case 0:
