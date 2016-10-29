@@ -29,8 +29,6 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
 
         self.title = "Notificaciones"
         
-        self.navigationItem.backBarButtonItem?.title = " "
-
         notification_table.alpha = 0
 
         self.refreshControl = UIRefreshControl()
@@ -89,11 +87,14 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
+        self.navigationController?.navigationBar.backItem?.title = " "
+
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         User.newNotification = false
+
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -336,6 +337,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     }
     func attributedLabel(_ label: TTTAttributedLabel!, didSelectLinkWith url: URL!) {
         let splitter = String(describing: url).components(separatedBy: ":")
+        
         let segue: String = splitter[0]
         
         let object_id: Int = Int(splitter[1])!
