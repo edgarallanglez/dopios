@@ -416,8 +416,10 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
     }
     
     func notification() {
-        let tabbar = self.tabBarController as! TabbarController!
-        self.navigationController?.pushViewController((tabbar?.vcNot)!, animated: true)
+        //let tabbar = self.tabBarController as! TabbarController!
+        let vcNot = self.storyboard!.instantiateViewController(withIdentifier: "Notifications") as! NotificationViewController
+        
+        self.navigationController?.pushViewController(vcNot, animated: true)
         self.notificationButton.image = UIImage(named: "notification")
         
         /*vcNot.navigationController?.hidesBottomBarWhenPushed = true

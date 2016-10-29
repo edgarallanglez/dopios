@@ -12,7 +12,7 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
     
     var notificationButton: UIBarButtonItem!
     var vc: SearchViewController!
-    var vcNot: NotificationViewController!
+    //var vcNot: NotificationViewController!
     var searchBar: UISearchBar = UISearchBar()
     var errorView: UIView = UIView()
     
@@ -36,7 +36,7 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
         
         vc  = self.storyboard!.instantiateViewController(withIdentifier: "SearchView") as! SearchViewController
         
-        vcNot = self.storyboard!.instantiateViewController(withIdentifier: "Notifications") as! NotificationViewController
+        //vcNot = self.storyboard!.instantiateViewController(withIdentifier: "Notifications") as! NotificationViewController
         
         
         searchBar.delegate = self
@@ -84,6 +84,7 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
         
         //vc.searchScrollView.hidden = true
         vc.searchScrollView.isHidden = true
+        
         
         
         cancelSearchButton = UIBarButtonItem(title: "Cancelar", style: .plain, target: self, action: #selector(BaseViewController.cancelSearch))
@@ -161,8 +162,11 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
         super.didReceiveMemoryWarning()
     }
     func notification() {
-        let tabbar = self.tabBarController as! TabbarController!
-        self.navigationController?.pushViewController((tabbar?.vcNot)!, animated: true)
+       let vcNot = self.storyboard!.instantiateViewController(withIdentifier: "Notifications") as! NotificationViewController
+        
+        //let tabbar = self.tabBarController as! TabbarController!
+        self.navigationController?.pushViewController(vcNot, animated: true)
+        //self.navigationController?.pushViewController((tabbar?.vcNot)!, animated: true)
         self.notificationButton.image = UIImage(named: "notification")
 
        /*vcNot.navigationController?.hidesBottomBarWhenPushed = true

@@ -15,13 +15,13 @@ class TabbarController: UITabBarController {
     
     //let socketIO : SocketIO = SocketIO()
     
-    var vcNot: NotificationViewController!
+    //var vcNot: NotificationViewController!
 
     override func viewDidLoad() {
         
         super.viewDidLoad()
 
-        vcNot = self.storyboard!.instantiateViewController(withIdentifier: "Notifications") as! NotificationViewController
+        //vcNot = self.storyboard!.instantiateViewController(withIdentifier: "Notifications") as! NotificationViewController
 
         
         self.tabBar.isOpaque = false

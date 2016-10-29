@@ -56,6 +56,10 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                 self!.getNotificationsWithOffset() //offset
             //}
         }
+        
+
+        
+        
         NotificationCenter.default.addObserver(self, selector: #selector(NotificationViewController.showNotificationButton), name: NSNotification.Name(rawValue: "newNotification"), object: nil)
 
         mainLoader.startAnimating()
@@ -68,6 +72,9 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             selector: #selector(NotificationViewController.refreshTableView(_:)),
             name: NSNotification.Name(rawValue: "refreshTableView"),
             object: nil)
+        
+        
+
 
     }
     @IBAction func pressNotificationButton(_ sender: AnyObject) {
@@ -87,7 +94,6 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        self.navigationController?.navigationBar.backItem?.title = " "
 
     }
 
@@ -101,6 +107,10 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         return notifications.count
     }
 
+    override func viewDidLayoutSubviews() {
+        self.navigationController?.navigationBar.backItem?.title = " "
+
+    }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! NotificationCell;
@@ -266,14 +276,12 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                     UIView.animate(withDuration: 0.3, animations: {
                         self.notifications.removeAll()
                         self.notifications = self.notificationsTemporary
-                        self.notification_table.finishInfiniteScroll()
+                        
+                        
                         self.notification_table.reloadData()
-
+                        self.notification_table.finishInfiniteScroll()
+                        
                         if newData { self.offset += addedValues }
-
-                        /*UIView.animateWithDuration(0.3, animations: {
-                            self.notification_table.alpha = 1
-                        })*/
 
                     })
                 });
@@ -336,7 +344,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         }*/
     }
     func attributedLabel(_ label: TTTAttributedLabel!, didSelectLinkWith url: URL!) {
-        let splitter = String(describing: url).components(separatedBy: ":")
+        let splitter = String(describing: url!).components(separatedBy: ":")
         
         let segue: String = splitter[0]
         
