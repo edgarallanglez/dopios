@@ -221,9 +221,6 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
                     }
                 }
             
-            
-                
-
                 updatePinPosition(mapPin)
         }
         
