@@ -29,12 +29,10 @@ class CouponController {
     class func getAllCouponsOffsetWithSuccess(_ start_date: String,offset: Int,success succeed: @escaping ((_ couponsData: JSON?) -> Void),failure errorFound: @escaping ((_ couponsData: NSError?) -> Void)) {
         let url = "\(Utilities.dopURL)coupon/all/for/user/offset/get"
 
-        let params:[String: AnyObject] = [
+        let params: Parameters = [
             "offset" : String(stringInterpolationSegment: offset) as AnyObject,
             "start_date" : String(start_date) as AnyObject]
         
-        print(start_date)
-        print(offset)
         
         Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default ,headers: User.userToken).validate().responseJSON { response in
             
