@@ -175,15 +175,21 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                     })
                     
                 } else {
+                    print("DESCARGANDO IMAGEN")
                     //cell.branch_banner.alpha = 0
                     Alamofire.request(imageUrl!).responseImage { response in
                         if let image = response.result.value{
-                            if self.CouponsCollectionView.indexPath(for: cell)?.row == indexPath.row {
-                                self.cachedImages[identifier] = image
-                                cell.branch_banner.image = image
-                            }
+                            self.cachedImages[identifier] = image
+                            cell.branch_banner.image = image
+                            UIView.animate(withDuration: 0.5, animations: {
+                                cell.branch_banner.alpha = 1
+                            })
                         }
                     }
+                       
+                    
+
+
                     /*Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
                         if let image = data{
                             DispatchQueue.main.async {
@@ -258,7 +264,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
   
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         
-        for indexPath in indexPaths {
+        /*for indexPath in indexPaths {
             let model = self.coupons[(indexPath as NSIndexPath).row]
             let imageUrl = URL(string: "\(Utilities.dopImagesURL)\(model.company_id)/\(model.logo)")
             let cell = self.CouponsCollectionView.cellForItem(at: indexPath) as! PromoCollectionCell
@@ -285,7 +291,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                 }
             })
             
-        }
+        }*/
         
     }
   
