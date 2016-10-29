@@ -15,6 +15,7 @@ class MapPinCallout: UIView {
     var address_label: UILabel?
     var info_label: UILabel?
     var button: UIButton?
+    var little_size: Bool?
 
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         let viewPoint = superview?.convert(point, to: self) ?? point
@@ -25,8 +26,11 @@ class MapPinCallout: UIView {
 
         return view
     }
+
     override init (frame : CGRect) {
         super.init(frame : frame)
+        
+        
         
         self.frame = CGRect(x: -130, y: -72, width: 330, height: 64)
         

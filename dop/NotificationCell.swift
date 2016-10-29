@@ -58,7 +58,7 @@ class NotificationCell: UITableViewCell {
             print(segue_text)
             let branch_segue: URL! = URL(string: segue_text!)
             title.addLink(to: segue, with: launcher_range)
-            title.addLink(to: branch_segue, with: newsfeed_activity_range)
+            title.addLink(to: branch_segue!, with: newsfeed_activity_range)
         }
 
         if notification.type == "friend" {

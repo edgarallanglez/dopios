@@ -30,6 +30,8 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
     var alert_array = [AlertModel]()
     var modal_alert: ModalViewController!
     
+    var little_size: Bool!
+    
     let regionRadius: CLLocationDistance = 1000
     
     override func viewDidLoad() {
@@ -70,7 +72,8 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
         currentLocationLbl.tintColor = Utilities.dopColor
         currentLocationLbl.backgroundColor = UIColor.white
         
-        
+        if UIScreen.main.bounds.width == 320 { self.little_size = true }
+
         
         getNearestBranches()
         super.viewDidLoad()
@@ -195,8 +198,10 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
      
         
         if let mapPin = view as? MapPin {
+                
                 currentAnnotationView = mapPin.calloutView
                 let annotation = view.annotation! as! Annotation
+
                 mapPin.calloutView?.name_label!.text = annotation.title!
                 mapPin.calloutView?.address_label!.text = annotation.subtitle!
                 mapPin.calloutView?.info_label!.text = "A \(annotation.distance!) km de tu ubicación actual"

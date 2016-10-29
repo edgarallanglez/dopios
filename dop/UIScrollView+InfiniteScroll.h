@@ -9,16 +9,6 @@
 
 #import <UIKit/UIKit.h>
 
-#ifdef __pb_kindof
-#   undef __pb_kindof
-#endif
-
-#if __has_feature(objc_kindof)
-#   define __pb_kindof(__typename) __kindof __typename
-#else
-#   define __pb_kindof(__typename) id
-#endif
-
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UIScrollView (InfiniteScroll)
@@ -29,14 +19,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly, getter=isAnimatingInfiniteScroll) BOOL animatingInfiniteScroll;
 
 /**
- *  Infinite scroll activity indicator style (default: UIActivityIndicatorViewStyleGray)
+ *  Infinite scroll activity indicator style (default: UIActivityIndicatorViewStyleGray on iOS, UIActivityIndicatorViewStyleWhite on tvOS)
  */
 @property (nonatomic) UIActivityIndicatorViewStyle infiniteScrollIndicatorStyle;
 
 /**
  *  Infinite indicator view
  *
- *  You can set your own custom view instead of default activity indicator, 
+ *  You can set your own custom view instead of default activity indicator,
  *  make sure it implements methods below:
  *
  *  * `- (void)startAnimating`
@@ -52,11 +42,24 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) CGFloat infiniteScrollIndicatorMargin;
 
 /**
+ *  Sets the offset between the real end of the scroll view content and the scroll position, so the handler can be triggered before reaching end.
+ *  Defaults to 0.0;
+ */
+@property (nonatomic) CGFloat infiniteScrollTriggerOffset;
+
+/**
  *  Setup infinite scroll handler
  *
  *  @param handler a handler block
  */
-- (void)addInfiniteScrollWithHandler:(void(^)(__pb_kindof(UIScrollView *) scrollView))handler;
+- (void)addInfiniteScrollWithHandler:(void(^)(UIScrollView *scrollView))handler;
+
+/**
+ *  Set a handler to be called to check if the infinite scroll should be shown
+ *
+ *  @param handler a handler block
+ */
+- (void)setShouldShowInfiniteScrollHandler:(nullable BOOL(^)(UIScrollView *scrollView))handler;
 
 /**
  *  Unregister infinite scroll
@@ -71,7 +74,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @param handler a completion block handler called when animation finished
  */
-- (void)finishInfiniteScrollWithCompletion:(nullable void(^)(__pb_kindof(UIScrollView *) scrollView))handler;
+- (void)finishInfiniteScrollWithCompletion:(nullable void(^)(UIScrollView *scrollView))handler;
 
 /**
  *  Finish infinite scroll animations
@@ -80,6 +83,26 @@ NS_ASSUME_NONNULL_BEGIN
  *  animations properly and reset infinite scroll state
  */
 - (void)finishInfiniteScroll;
+
+@end
+
+/*
+ Convenience interface to avoid cast from UIScrollView to common subclasses such as UITableView and UICollectionView.
+ */
+
+@interface UITableView (InfiniteScrollConvenienceInterface)
+
+- (void)addInfiniteScrollWithHandler:(void(^)(UITableView *tableView))handler;
+- (void)setShouldShowInfiniteScrollHandler:(BOOL(^)(UITableView *tableView))handler;
+- (void)finishInfiniteScrollWithCompletion:(nullable void(^)(UITableView *tableView))handler;
+
+@end
+
+@interface UICollectionView (InfiniteScrollConvenienceInterface)
+
+- (void)addInfiniteScrollWithHandler:(void(^)(UICollectionView *collectionView))handler;
+- (void)setShouldShowInfiniteScrollHandler:(BOOL(^)(UICollectionView *collectionView))handler;
+- (void)finishInfiniteScrollWithCompletion:(nullable void(^)(UICollectionView *collectionView))handler;
 
 @end
 
