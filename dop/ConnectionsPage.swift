@@ -78,9 +78,9 @@ class ConnectionsPage: UITableViewController {
         downloadImage(model, cell: cell)
         cell.loadItem(model)
         
-        if parent_view.user_id != User.user_id{
-            cell.following_button.isHidden = true
-        }
+//        if parent_view.user_id != User.user_id{
+//            cell.following_button.isHidden = true
+//        }
         
         return cell
     }

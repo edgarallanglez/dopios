@@ -17,9 +17,10 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
     @IBOutlet weak var currentLocationLbl: UIButton!
     @IBOutlet weak var nearbyMap: MKMapView!
     @IBOutlet weak var topBorder: UIView!
+    @IBOutlet weak var giverView: UIView!
     
     var coordinate: CLLocationCoordinate2D?
-    var locationManager: CLLocationManager!
+    var locationManager = CLLocationManager()
     var current: CLLocation!
     var filterArray: [Int] = []
     var annotationArray: [MKAnnotation] = []
@@ -35,55 +36,23 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
     let regionRadius: CLLocationDistance = 1000
     
     override func viewDidLoad() {
-        Utilities.filterArray.removeAll()
-        nearbyMap.delegate = self
-//        topBorder.layer.borderWidth = (1.0 / UIScreen.mainScreen.scale) / 2
-        
-        let screenSize: CGRect = UIScreen.main.bounds
-        
-        spinner = MMMaterialDesignSpinner(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
-        spinner.center.x = self.view.center.x
-        spinner.center.y = self.view.center.y - 70.0
-        spinner.layer.cornerRadius = spinner.frame.width / 2
-        spinner.lineWidth = 3.0
-        spinner.startAnimating()
-        spinner.tintColor = Utilities.dopColor
-        spinner.backgroundColor = UIColor.white
-        self.view.addSubview(spinner)
-        spinner?.startAnimating()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(NearbyMapViewController.getNearestBranches), name: NSNotification.Name(rawValue: "filtersChanged"), object: nil)
-        
-        locationManager = CLLocationManager()
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestAlwaysAuthorization()
-        locationManager.startUpdatingLocation()
-        User.coordinate = locationManager.location!.coordinate
-        
-        if (self.revealViewController() != nil) {
-            filterSidebarButton = UIBarButtonItem(image: UIImage(named: "filter"), style: UIBarButtonItemStyle.plain, target: self.revealViewController(), action: #selector(SWRevealViewController.revealToggle(_:)))
-            self.nearbyMap.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(NearbyMapViewController.tapMap)))
-            self.navigationItem.leftBarButtonItem = filterSidebarButton
-        }
-        
-        let locationArrow:UIImageView = UIImageView(image: UIImage(named: "locationArrow")?.withRenderingMode(UIImageRenderingMode.alwaysTemplate))
-        currentLocationLbl.setImage(locationArrow.image, for: UIControlState())
-        currentLocationLbl.tintColor = Utilities.dopColor
-        currentLocationLbl.backgroundColor = UIColor.white
-        
-        if UIScreen.main.bounds.width == 320 { self.little_size = true }
-
-        
-        getNearestBranches()
         super.viewDidLoad()
-        
-
+        locationManager.delegate = self
+        nearbyMap.delegate = self
+        if !(CLLocationManager.authorizationStatus() == .denied || CLLocationManager.authorizationStatus() == .notDetermined) {
+            setNearbyMap()
+        } else {
+            let background = Utilities.Colors
+            background.frame = self.view.bounds
+            self.giverView.layer.insertSublayer(background, at: 0)
+            self.giverView.isHidden = false
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         setMapAtCurrent()
     }
+    
     func tapMap() {
         if FilterSideViewController.open == true { self.revealViewController().revealToggle(animated: true) }
     }
@@ -127,6 +96,7 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
             "radio": 15 as AnyObject,
             "filterArray": filterArray as AnyObject
         ]
+        
         Utilities.fadeInViewAnimation(self.spinner!, delay: 0, duration: 0.3)
         NearbyMapController.getNearestBranches(params, success: {(branchesData) -> Void in
             let json =  branchesData!
@@ -154,7 +124,6 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
                     self.nearbyMap.addAnnotation(dropPin)
                     
                     Utilities.fadeOutViewAnimation(self.spinner!, delay: 0, duration: 0.3)
-
                 }
             }
             },
@@ -165,8 +134,7 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
                     self.modal_alert.willPresentCompletionHandler = { vc in
                         let navigation_controller = vc as! AlertModalViewController
                         navigation_controller.dismiss_button.setTitle("REINTENTAR", for: UIControlState())
-                        self.alert_array.append(AlertModel(alert_title: "¡Oops!", alert_image: "error", alert_description: "Ha ocurrido un error :("))
-                        
+                        self.alert_array.append(AlertModel(alert_title: "¡Oops!", alert_image: "error", alert_description: "Ha ocurrido un error ☹️"))
                         navigation_controller.setAlert(self.alert_array)
                     }
                     self.modal_alert.present(animated: true, completionHandler: nil)
@@ -182,23 +150,16 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
         if (annotationView == nil) {
             annotationView = MapPin(annotation: annotation, reuseIdentifier: reuseId)
             annotationView!.canShowCallout = false
-            
-            
         } else {  annotationView?.annotation = annotation }
         
         let customAnnotation = annotation as! Annotation
-       
         annotationView!.image = UIImage(named: customAnnotation.typeOfAnnotation)
-        
         
         return annotationView
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-     
-        
         if let mapPin = view as? MapPin {
-                
                 currentAnnotationView = mapPin.calloutView
                 let annotation = view.annotation! as! Annotation
 
@@ -220,20 +181,14 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
                         mapPin.calloutView?.branch_image.image = image;                            Utilities.fadeInViewAnimation((mapPin.calloutView?.branch_image)!, delay:0, duration:0.8)
                     }
                 }
-            
                 updatePinPosition(mapPin)
         }
-        
-        
     }
+    
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
         currentAnnotationView!.removeFromSuperview()
-       /* if let mapPin = view as? MapPin {
-            if mapPin.preventDeselection {
-                mapView.selectAnnotation(view.annotation!, animated: false)
-            }
-        }*/
     }
+    
     func goToBranchProfile(_ sender: UIButton) {
         let view_controller = self.storyboard!.instantiateViewController(withIdentifier: "BranchProfileStickyController") as! BranchProfileStickyController
         view_controller.branch_id = sender.tag
@@ -260,5 +215,62 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
             })
         })
     }
+    
+    @IBAction func askPermission(_ sender: UIButton) {
+        if CLLocationManager.locationServicesEnabled() && CLLocationManager.authorizationStatus() == .notDetermined {
+            locationManager.requestWhenInUseAuthorization()
+        } else {
+            if let url = URL(string:UIApplicationOpenSettingsURLString) {
+                UIApplication.shared.openURL(url)
+            }
+        }
+    }
+    
+
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedWhenInUse || status == .authorizedAlways  {
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.startUpdatingLocation()
+            setNearbyMap()
+        }
+    }
+    
+    func setNearbyMap() {
+        self.giverView.isHidden = true
+        Utilities.filterArray.removeAll()
+
+        spinner = MMMaterialDesignSpinner(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+        spinner.center.x = self.view.center.x
+        spinner.center.y = self.view.center.y - 70.0
+        spinner.layer.cornerRadius = spinner.frame.width / 2
+        spinner.lineWidth = 3.0
+        spinner.startAnimating()
+        spinner.tintColor = Utilities.dopColor
+        spinner.backgroundColor = UIColor.white
+        self.view.addSubview(spinner)
+        spinner?.startAnimating()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(NearbyMapViewController.getNearestBranches), name: NSNotification.Name(rawValue: "filtersChanged"), object: nil)
+        
+        locationManager.startUpdatingLocation()
+        User.coordinate = locationManager.location!.coordinate
+        
+        if self.revealViewController() != nil {
+            filterSidebarButton = UIBarButtonItem(image: UIImage(named: "filter"), style: UIBarButtonItemStyle.plain, target: self.revealViewController(), action: #selector(SWRevealViewController.revealToggle(_:)))
+            self.nearbyMap.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(NearbyMapViewController.tapMap)))
+            self.navigationItem.leftBarButtonItem = filterSidebarButton
+        }
+        
+        let locationArrow:UIImageView = UIImageView(image: UIImage(named: "locationArrow")?.withRenderingMode(UIImageRenderingMode.alwaysTemplate))
+        currentLocationLbl.setImage(locationArrow.image, for: UIControlState())
+        currentLocationLbl.tintColor = Utilities.dopColor
+        currentLocationLbl.backgroundColor = UIColor.white
+        
+        if UIScreen.main.bounds.width == 320 { self.little_size = true }
+        setMapAtCurrent()
+        getNearestBranches()
+    }
+    
+    
     
 }

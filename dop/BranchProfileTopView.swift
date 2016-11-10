@@ -34,8 +34,7 @@ class BranchProfileTopView: UIView {
         let params:[String: AnyObject] = [
             "branch_id" : parent_view.branch_id as AnyObject,
             "date" : "2015-01-01" as AnyObject ]
-        
-        print(params)
+
         BranchProfileController.followBranchWithSuccess(params,
             success: { (data) -> Void in
                 let json: JSON = data!
@@ -60,10 +59,8 @@ class BranchProfileTopView: UIView {
                             self.layoutIfNeeded()
                             }, completion: { (Bool) in
                                 //print("error")
-                                
                         })
                     }
-
                 })
             },
             failure: { (error) -> Void in
@@ -97,8 +94,13 @@ class BranchProfileTopView: UIView {
     func setView(_ viewController: BranchProfileStickyController) {
         self.parent_view = viewController
         self.branch_name.text = self.parent_view.coupon?.name
-        if parent_view.coupon != nil { downloadImage(parent_view.coupon) }
+        if parent_view.coupon != nil {
+            downloadImage(parent_view.coupon)
+            branch_logo.alpha = 1
+        }
+        
         Utilities.setMaterialDesignButton(self.follow_button, button_size: 50)
+        getBranchProfile()
         
         if (parent_view.coupon != nil && parent_view.coupon.adult_branch == true){
             let adultsLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: parent_view.view.frame.width-20, height: 35))
@@ -111,8 +113,6 @@ class BranchProfileTopView: UIView {
             adultsLabel.layer.shadowRadius = 1
             self.addSubview(adultsLabel)
         }
-    
-        
     }
 
     
@@ -130,42 +130,41 @@ class BranchProfileTopView: UIView {
     
     func downloadImage(_ model: Coupon) {
         let imageUrl = URL(string: "\(Utilities.dopImagesURL)\(model.company_id)/\(model.logo)")
-        
         self.branch_logo.layer.cornerRadius = self.branch_logo.frame.width / 2
-        
-        Alamofire.request(imageUrl!).responseImage { response in
-            if let image = response.result.value {
-                self.branch_logo.image = image
-                Utilities.fadeInFromBottomAnimation(self.branch_logo, delay: 0, duration: 1, yPosition: 1)
-            } else{
-                self.branch_logo.alpha = 0.3
-                self.branch_logo.image = UIImage(named: "dop-logo-transparent")
-                self.branch_logo.backgroundColor = Utilities.lightGrayColor
-            }
-        }
-        
-        
-        
-        if !model.banner.isEmpty {
-            let banner_url = URL(string: "\(Utilities.dopImagesURL)\(model.company_id)/\(model.banner)")
+        if self.branch_logo.image == nil {
+            Alamofire.request(imageUrl!).responseImage { response in
+                if let image = response.result.value {
+                    self.branch_logo.image = image
+                    Utilities.fadeInFromBottomAnimation(self.branch_logo, delay: 0, duration: 1, yPosition: 1)
             
-            Alamofire.request(banner_url!).responseImage { response in
-                if var image = response.result.value{
-                    image = image.applyLightEffect()
-                    self.branch_banner.image = image
-                    self.branch_name.textColor = UIColor.white
-                    self.branch_name.shadowColor = UIColor.darkGray
-                    Utilities.fadeInFromBottomAnimation(self.branch_banner, delay: 0, duration: 0.8, yPosition: 4)
+                } else {
+                    self.branch_logo.alpha = 0.3
+                    self.branch_logo.image = UIImage(named: "dop-logo-transparent")
+                    self.branch_logo.backgroundColor = Utilities.lightGrayColor
                 }
             }
-            
         }
+        
+//        if self.branch_banner.image == nil && !model.banner.isEmpty {
+//            let banner_url = URL(string: "\(Utilities.dopImagesURL)\(model.company_id)/\(model.banner)")
+//            
+//            Alamofire.request(banner_url!).responseImage { response in
+//                if var image = response.result.value{
+//                    image = image.applyLightEffect()
+//                    self.branch_banner.image = image
+//                    self.branch_name.textColor = UIColor.white
+//                    self.branch_name.shadowColor = UIColor.darkGray
+//                    Utilities.fadeInFromBottomAnimation(self.branch_banner, delay: 0, duration: 0.8, yPosition: 4)
+//                }
+//            }
+//            
+//        }
     }
     
     func downloadImage(_ model: Branch) {
         if (model.adults_only == true){
             let adultsLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: parent_view.view.frame.width-20, height: 35))
-            adultsLabel.text="+18"
+            adultsLabel.text = "+18"
             adultsLabel.textAlignment = NSTextAlignment.right
             adultsLabel.textColor = UIColor.white
             adultsLabel.font = UIFont(name: "Montserrat-Regular", size: 26)
@@ -173,25 +172,24 @@ class BranchProfileTopView: UIView {
             adultsLabel.layer.shadowOpacity = 0.6
             adultsLabel.layer.shadowRadius = 1
             self.addSubview(adultsLabel)
-            
         }
 
         let imageUrl = URL(string: "\(Utilities.dopImagesURL)\(model.company_id!)/\(model.logo!)")
-        
-        Alamofire.request(imageUrl!).responseImage { response in
-            if let image = response.result.value{
-                self.branch_logo.image = image
-                self.branch_logo.layer.cornerRadius = self.branch_logo.frame.width / 2
-                Utilities.fadeInFromBottomAnimation(self.branch_logo, delay: 0, duration: 1, yPosition: 1)
-            }else{
-                self.branch_logo.alpha = 0.3
-                self.branch_logo.image = UIImage(named: "dop-logo-transparent")
-                self.branch_logo.backgroundColor = Utilities.lightGrayColor
+        if self.branch_logo.image == nil {
+            Alamofire.request(imageUrl!).responseImage { response in
+                if let image = response.result.value{
+                    self.branch_logo.image = image
+                    self.branch_logo.layer.cornerRadius = self.branch_logo.frame.width / 2
+                    Utilities.fadeInFromBottomAnimation(self.branch_logo, delay: 0, duration: 1, yPosition: 1)
+                } else {
+                    self.branch_logo.alpha = 0.3
+                    self.branch_logo.image = UIImage(named: "dop-logo-transparent")
+                    self.branch_logo.backgroundColor = Utilities.lightGrayColor
+                }
             }
         }
-
         
-        if !model.banner!.isEmpty {
+        if self.branch_banner.image == nil && !model.banner!.isEmpty {
             let banner_url = URL(string: "\(Utilities.dopImagesURL)\(model.company_id!)/\(model.banner!)")
             Alamofire.request(banner_url!).responseImage { response in
                 if var image = response.result.value{
@@ -202,8 +200,43 @@ class BranchProfileTopView: UIView {
                     Utilities.fadeInFromBottomAnimation(self.branch_banner, delay: 0, duration: 0.8, yPosition: 4)
                 }
             }
+        } else {
+           // Utilities.fadeInFromBottomAnimation(self.branch_banner, delay: 0, duration: 0.8, yPosition: 4)
         }
     }
     
+    func getBranchProfile() {
+        BranchProfileController.getBranchProfileWithSuccess(parent_view.branch_id, success: { (data) -> Void in
+            let data = data!
+            var json = data["data"]
+
+            json = json[0]
+            let branch_id = json["branch_id"].int!
+            let latitude = json["latitude"].double
+            let longitude = json["longitude"].double
+            let following = json["following"].bool!
+            let branch_name = json["name"].string
+            let company_id = json["company_id"].int
+            let banner = json["banner"].string
+            let logo = json["logo"].string!
+            let about = json["about"].string ?? ""
+            let phone = json["phone"].string ?? ""
+            let adults_only = json["adults_only"].bool ?? false
+            let address = json["address"].string ?? ""
+            
+            let model = Branch(id: branch_id, name: branch_name, banner: banner, company_id: company_id, logo: logo, following: following, about: about, phone: phone, adults_only: adults_only, address: address)
+            
+            DispatchQueue.main.async(execute: {
+                self.downloadImage(model)
+            })
+            
+        },
+        failure: { (error) -> Void in
+            DispatchQueue.main.async(execute: {
+        
+//                Utilities.fadeOutViewAnimation(self.loader, delay: 0, duration: 0.3)
+            })
+        })
+    }
     
 }

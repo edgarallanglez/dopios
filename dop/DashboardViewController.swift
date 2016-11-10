@@ -29,6 +29,8 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
     @IBOutlet var pageControlContainer: UIView!
     @IBOutlet var pageControl: UIPageControl!
     @IBOutlet var branchesScroll: UIScrollView!
+    @IBOutlet weak var askPermissionButton: UIButton!
+    
     
     var locValue: CLLocationCoordinate2D?
     var refreshControl: UIRefreshControl!
@@ -44,11 +46,16 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
     var firstCallToUpdater: Bool = true
     var trendingLoader: MMMaterialDesignSpinner!
     var toexpireLoader: MMMaterialDesignSpinner!
-    var nearestLoader: MMMaterialDesignSpinner!
+    var nearestLoader: MMMaterialDesignSpinner = MMMaterialDesignSpinner(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
     
     var firstTime: Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
+        nearestContainer.alpha = 0
+        if (CLLocationManager.authorizationStatus() == .denied || CLLocationManager.authorizationStatus() == .notDetermined) {
+            self.askPermissionButton.isHidden = false
+            nearestContainer.alpha = 1
+        }
         
         mainLoader.startAnimating()
         mainLoader.tintColor = Utilities.dopColor
@@ -66,13 +73,10 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
         pageControlContainer.alpha = 0
         trendingContainer.alpha = 0
         toExpireContainer.alpha = 0
-        nearestContainer.alpha = 0
-        
         
         locationManager = CLLocationManager()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
         
         self.refreshControl = UIRefreshControl()
@@ -81,9 +85,6 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
 
         self.setNeedsStatusBarAppearanceUpdate()
         setupLoaders()
-        
-        
-        
         
     }
     
@@ -99,13 +100,15 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
         toexpireLoader.lineWidth = 2.0
         toexpireLoader.tintColor = Utilities.dopColor
         
-        nearestLoader = MMMaterialDesignSpinner(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
-        nearestLoader.startAnimating()
-        nearestLoader.lineWidth = 2.0
-        nearestLoader.tintColor = Utilities.dopColor
-
+        if !(CLLocationManager.authorizationStatus() == .denied ||
+            CLLocationManager.authorizationStatus() == .notDetermined) {
+        
+            nearestLoader.startAnimating()
+            nearestLoader.lineWidth = 2.0
+            nearestLoader.tintColor = Utilities.dopColor
+        }
+        
         self.getTopBranches()
-
     }
     
 
@@ -119,13 +122,16 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
         toexpireLoader.center.x = self.mainScroll.center.x
         toexpireLoader.center.y = self.toExpireContainer.center.y
         self.mainScroll.addSubview(toexpireLoader)
-        
-        nearestLoader.center.x = self.mainScroll.center.x
-        nearestLoader.center.y = self.nearestContainer.center.y
-        self.mainScroll.addSubview(nearestLoader)
+        if !(CLLocationManager.authorizationStatus() == .denied ||
+            CLLocationManager.authorizationStatus() == .notDetermined) {
+            nearestLoader.center.x = self.mainScroll.center.x
+            nearestLoader.center.y = self.nearestContainer.center.y
+           // self.mainScroll.addSubview(nearestLoader)
+        } else {
+            Utilities.fadeOutViewAnimation(self.nearestLoader, delay: 0, duration: 0.3)
+        }
 
-
-        if firstTime==false{
+        if firstTime == false {
             firstTime = true
             self.getTrendingCoupons()
             self.getToExpireCoupons()
@@ -278,14 +284,14 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
             let imageUrl = URL(string: "\(Utilities.dopImagesURL)\(branch.company_id!)/\(branch.banner!)")
             
             //let imageUrl = NSURL(string: "http://axeetech.com/wp-content/uploads/2014/09/458791.jpg")
-            print("\(Utilities.dopImagesURL)\(branch.company_id!)/\(branch.banner!)")
+//            print("\(Utilities.dopImagesURL)\(branch.company_id!)/\(branch.banner!)")
             
             Utilities.fadeInFromBottomAnimation(branchNameLbl, delay: 0.8, duration: 1, yPosition: 20)
             
             Alamofire.request(imageUrl!).responseImage { response in
                 if let image = response.result.value{
                     imageView.image = image
-                }else{
+                } else {
                     imageView.backgroundColor = Utilities.dopColor
                 }
                 
@@ -329,6 +335,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
         let view_controller = self.storyboard!.instantiateViewController(withIdentifier: "BranchProfileStickyController") as! BranchProfileStickyController
         view_controller.branch_id = (sender.view?.tag)!
         self.navigationController?.pushViewController(view_controller, animated: true)
+        
     }
     
     func changePage() {
@@ -670,4 +677,28 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
     override var preferredStatusBarStyle : UIStatusBarStyle {
         return .lightContent
     }
+    
+    @IBAction func askPermission(_ sender: UIButton) {
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.requestWhenInUseAuthorization()
+        } else {
+            if let url = URL(string:UIApplicationOpenSettingsURLString) {
+                UIApplication.shared.openURL(url)
+            }
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedWhenInUse || status == .authorizedAlways  {
+            nearestLoader = MMMaterialDesignSpinner(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+            nearestLoader.startAnimating()
+            nearestLoader.lineWidth = 2.0
+            nearestLoader.tintColor = Utilities.dopColor
+
+            locationManager.startUpdatingLocation()
+            self.askPermissionButton.isHidden = true
+            getNearestCoupons()
+        }
+    }
+    
 }

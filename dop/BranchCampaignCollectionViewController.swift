@@ -319,7 +319,7 @@ class BranchCampaignCollectionViewController: UICollectionViewController, ModalD
         }
         if modal.action_type == "redeem" {
             if selected_coupon.available>0 {
-                let view_controller  = self.storyboard!.instantiateViewController(withIdentifier: "readQRView") as! readQRViewController
+                let view_controller  = self.storyboard!.instantiateViewController(withIdentifier: "readQRView") as! ReadQRViewController
                 view_controller.coupon = self.selected_coupon
                 view_controller.coupon_id = self.selected_coupon.id
                 view_controller.branch_id = self.selected_coupon.branch_id

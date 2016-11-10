@@ -49,8 +49,8 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
 
         locationManager = CLLocationManager()
         locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestAlwaysAuthorization()
+//        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+//        locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
         
         self.fbLoginView.delegate = self
@@ -147,18 +147,14 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
     // Facebook Delegate Methods
     public func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
         print("User Logged In")
-        if ((error) != nil)
-        {
+        if ((error) != nil) {
             // Process error
-        }
-        else if result.isCancelled {
+        } else if result.isCancelled {
             // Handle cancellations
-        }
-        else {
+        } else {
             // If you ask for multiple permissions at once, you
             // should check if specific permissions missing
-            if result.grantedPermissions.contains("email")
-            {
+            if result.grantedPermissions.contains("email") {
                 // Do work
             }
         }
@@ -172,7 +168,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
         let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, first_name, middle_name,last_name, email, birthday, gender"])
         graphRequest.start(completionHandler: { (connection, result, error) -> Void in
             let json: JSON = JSON(result)
-            if ((error) != nil) {
+            if (error != nil) {
                 // Process error
                 print("Error: \(error)")
             } else {
@@ -220,20 +216,19 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
         print("\(Utilities.dopURL)user/login/"+type)
         Utilities.fadeInFromBottomAnimation(self.MD_spinner, delay: 0, duration: 1, yPosition: 5)
         LoginController.loginWithSocial("\(Utilities.dopURL)user/login/" + type, params: params as [String : AnyObject],
-            success:{ (loginData) -> Void in
+            success: { (loginData) -> Void in
                 User.loginType = type
-                let json = JSON(loginData!)
-                
+                let json = loginData!
+            
                 let jwt = json["token"].string!
-                var error: NSError?
-                
-                User.userToken = [ "Authorization": "\(jwt)" ]
+                    
+                User.userToken = ["Authorization": "\(jwt)"]
                 User.userImageUrl =  params["main_image"]!
                 User.userName =  params["names"]!
                 User.userSurnames =  params["surnames"]!
                 
                 do {
-                    let payload = try decode(jwt: User.userToken["Authorization"]!)
+                    let payload = try decode(jwt: (User.userToken["Authorization"])!)
                     User.user_id = payload.body["id"]! as! Int
                 } catch {
                     print("Failed to decode JWT: \(error)")

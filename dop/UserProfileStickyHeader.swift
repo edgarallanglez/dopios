@@ -45,9 +45,7 @@ class UserProfileStickyHeader: UIView {
             
             if parent_view.user_image?.image != nil { user_image.image = parent_view_controller.user_image.image
                 Utilities.fadeInViewAnimation(self.user_image, delay: 0, duration: 0.5)
-
-            }
-            else { downloadImage(URL(string: parent_view_controller.person.main_image)!) }
+            } else { downloadImage(URL(string: parent_view_controller.person.main_image)!) }
             
             self.user_exp = parent_view.person.exp
             current_level = (self.parent_view.person?.level ?? 0)!
@@ -63,7 +61,7 @@ class UserProfileStickyHeader: UIView {
         user_level.text = "Nivel \(current_level)"
         
         if (parent_view.person?.is_friend != nil) { setFollowingButton((parent_view.person?.is_friend)!) }
-        
+        self.layoutIfNeeded()
     }
     
     @IBAction func followUnfollow(_ sender: UIButton) {

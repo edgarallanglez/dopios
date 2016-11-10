@@ -7,38 +7,27 @@
 //
 
 import UIKit
-//import TwitterKit
 import Fabric
 import FBSDKLoginKit
 import AVFoundation
+import Alamofire
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    
-//    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-//        // Override point for customization after application launch.
-//        
-//        let settings = UIUserNotificationSettings(forTypes: UIUserNotificationType.Alert, categories: nil)
-//        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
-//        UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
-//        
-//        
-//        return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
-//    }
-    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         URLCache.shared.removeAllCachedResponses()
-        
-        registerForPushNotifications(application)
+        let notificationType = UIApplication.shared.currentUserNotificationSettings!.types
+        if notificationType.contains(UIUserNotificationType.alert) {
+            registerForPushNotifications(application)
+        }
         
         if let notification = launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] as? [String: AnyObject] {
             // 2
             let aps = notification["aps"] as! [String: AnyObject]
-            
             let notification_data = notification["data"] as! [String: AnyObject]
             
             User.newestNotification = notification_data
@@ -91,7 +80,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func getData() -> Void{
             let localNotification:UILocalNotification = UILocalNotification()
             localNotification.alertAction = "Testing notifications on iOS8"
-            localNotification.alertBody = "Movie Count : \(1)"
+            localNotification.alertBody = "Movie Count: \(1)"
             localNotification.fireDate = Date(timeIntervalSinceNow: 1)
             UIApplication.shared.scheduleLocalNotification(localNotification)
     }
@@ -106,17 +95,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didRegister notificationSettings: UIUserNotificationSettings) {
         
         if (notificationSettings.types == UIUserNotificationType()) {
-            
         }
-            
-        else{
-            
-            application.registerForRemoteNotifications()
-        }
-        
-        
+        else { application.registerForRemoteNotifications() }
     }
-
 
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         let tokenChars = (deviceToken as NSData).bytes.bindMemory(to: CChar.self, capacity: deviceToken.count)
@@ -127,12 +108,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         User.deviceToken = tokenString
-        print("Device Token:", tokenString)
+        let params: Parameters = ["device_token": User.deviceToken]
+        Alamofire.request("\(Utilities.dopURL)user/device_token/set",
+            method: .post,
+            parameters: params,
+            encoding: JSONEncoding.default,
+            headers: User.userToken ).validate().responseJSON { response in
+                print(response)
+        }
+        
+        NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: "notificationsRegistered"), object: nil)
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         print("Failed to register:", error)
     }
+    
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
         let aps = userInfo["aps"] as! [String: AnyObject]
         
@@ -142,6 +133,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: "newNotification"), object: nil)
         AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
     }
-
-
 }

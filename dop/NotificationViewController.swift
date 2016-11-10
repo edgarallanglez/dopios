@@ -9,13 +9,16 @@
 import UIKit
 import Alamofire
 import AlamofireImage
- 
+
 class NotificationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, TTTAttributedLabelDelegate {
     @IBOutlet var notificationButton: UIButton!
 
 
     @IBOutlet var mainLoader: MMMaterialDesignSpinner!
     @IBOutlet var notification_table: UITableView!
+    @IBOutlet weak var giverView: UIView!
+    
+    
     //let socketIO : SocketIO = SocketIO()
     var notifications = [Notification]()
     var notificationsTemporary = [Notification]()
@@ -26,57 +29,24 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     var notificationButtonPressed: Bool = false
 
     override func viewDidLoad() {
-
-        self.title = "Notificaciones"
-        
-        notification_table.alpha = 0
-
-        self.refreshControl = UIRefreshControl()
-        self.refreshControl.addTarget(self, action: #selector(NotificationViewController.refresh(_:)), for: UIControlEvents.valueChanged)
-        self.notification_table.addSubview(refreshControl)
-
-        let loader: MMMaterialDesignSpinner = MMMaterialDesignSpinner(frame: CGRect(x: 0,y: 0,width: 24,height: 24))
-
-        loader.lineWidth = 2.0
-        self.notification_table.infiniteScrollIndicatorView = loader
-        self.notification_table.infiniteScrollIndicatorView?.tintColor = Utilities.dopColor
-
-
-        // Set custom indicator
-        //self.notification_table.infiniteScrollIndicatorView = CustomInfiniteIndicator(frame: CGRectMake(0, 0, 24, 24))
-
-        // Set custom indicator margin
-        notification_table.infiniteScrollIndicatorMargin = 10
-
-        self.offset = self.limit - 1
-
-        // Add infinite scroll handler
-        notification_table.addInfiniteScroll { [weak self] (scrollView) -> Void in
-            //if(!self!.notifications.isEmpty){
-                self!.getNotificationsWithOffset() //offset
-            //}
-        }
-        
-
-        
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(NotificationViewController.showNotificationButton), name: NSNotification.Name(rawValue: "newNotification"), object: nil)
-
-        mainLoader.startAnimating()
-        mainLoader.tintColor = Utilities.dopColor
-        mainLoader.lineWidth = 3.0
-        getNotifications()
-        
+        super.viewDidLoad()
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(NotificationViewController.refreshTableView(_:)),
-            name: NSNotification.Name(rawValue: "refreshTableView"),
+            selector: #selector(self.setNotificationConfig),
+            name: NSNotification.Name(rawValue: "notificationsRegistered"),
             object: nil)
         
-        
-
+        if User.deviceToken == "" {
+            let background = Utilities.Colors
+            background.frame = self.view.bounds
+            self.giverView.layer.insertSublayer(background, at: 0)
+            self.giverView.isHidden = false
+        } else {
+            setNotificationConfig()
+        }
 
     }
+    
     @IBAction func pressNotificationButton(_ sender: AnyObject) {
         //notification_table.setContentOffset(CGPointMake(0, 0), animated: true)
         notificationButtonPressed = true
@@ -234,6 +204,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                 })
         })
     }
+    
     func getNotificationsWithOffset() {
         var newData:Bool = false
         var addedValues:Int = 0
@@ -366,13 +337,64 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         }
     }
     override func viewDidDisappear(_ animated: Bool) {
-        self.refreshControl.endRefreshing()
+        if self.giverView.isHidden { self.refreshControl.endRefreshing() }
         print("disappear")
     }
     
     func refreshTableView(_ notification: Foundation.Notification){
         getNotifications()
     }
-
+    
+    func setNotificationConfig() {
+     //   self.checkDeviceToken()
+        self.title = "Notificaciones"
+        notification_table.alpha = 0
+        self.giverView.isHidden = true
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl.addTarget(self, action: #selector(NotificationViewController.refresh(_:)), for: UIControlEvents.valueChanged)
+        self.notification_table.addSubview(refreshControl)
+        
+        let loader: MMMaterialDesignSpinner = MMMaterialDesignSpinner(frame: CGRect(x: 0,y: 0,width: 24,height: 24))
+        
+        loader.lineWidth = 2.0
+        self.notification_table.infiniteScrollIndicatorView = loader
+        self.notification_table.infiniteScrollIndicatorView?.tintColor = Utilities.dopColor
+        
+        // Set custom indicator
+        //self.notification_table.infiniteScrollIndicatorView = CustomInfiniteIndicator(frame: CGRectMake(0, 0, 24, 24))
+        
+        // Set custom indicator margin
+        notification_table.infiniteScrollIndicatorMargin = 10
+        
+        self.offset = self.limit - 1
+        
+        // Add infinite scroll handler
+        notification_table.addInfiniteScroll { [weak self] (scrollView) -> Void in
+            //if(!self!.notifications.isEmpty){
+            self!.getNotificationsWithOffset() //offset
+            //}
+        }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(NotificationViewController.showNotificationButton), name: NSNotification.Name(rawValue: "newNotification"), object: nil)
+        
+        mainLoader.startAnimating()
+        mainLoader.tintColor = Utilities.dopColor
+        mainLoader.lineWidth = 3.0
+        getNotifications()
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(NotificationViewController.refreshTableView(_:)),
+            name: NSNotification.Name(rawValue: "refreshTableView"),
+            object: nil)
+    }
+    
+    @IBAction func askPermission(_ sender: UIButton) {
+        UIApplication.shared.registerForRemoteNotifications()
+        UIApplication.shared.registerUserNotificationSettings(
+            UIUserNotificationSettings(types: [.alert, .sound, .badge],
+                                       categories: nil)
+        )
+    }
 
 }

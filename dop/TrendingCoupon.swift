@@ -273,7 +273,7 @@ class TrendingCoupon: UIView, ModalDelegate, FBSDKSharingDelegate {
         if modal.action_type == "redeem" {
             
             if coupon.available>0{
-                let view_controller  = viewController!.storyboard!.instantiateViewController(withIdentifier: "readQRView") as! readQRViewController
+                let view_controller  = viewController!.storyboard!.instantiateViewController(withIdentifier: "readQRView") as! ReadQRViewController
                 view_controller.coupon_id = self.coupon.id
                 view_controller.coupon = self.coupon
                 view_controller.branch_id = self.coupon.branch_id

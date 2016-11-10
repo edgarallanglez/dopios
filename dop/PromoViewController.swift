@@ -178,7 +178,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                     print("DESCARGANDO IMAGEN")
                     //cell.branch_banner.alpha = 0
                     Alamofire.request(imageUrl!).responseImage { response in
-                        if let image = response.result.value{
+                        if let image = response.result.value {
                             self.cachedImages[identifier] = image
                             cell.branch_banner.image = image
                             UIView.animate(withDuration: 0.5, animations: {
@@ -684,8 +684,9 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
         }
         if modal.action_type == "redeem" {
             if(selected_coupon.available>0){
-                let view_controller  = self.storyboard!.instantiateViewController(withIdentifier: "readQRView") as! readQRViewController
+                let view_controller  = self.storyboard!.instantiateViewController(withIdentifier: "readQRView") as! ReadQRViewController
                 view_controller.coupon_id = self.selected_coupon.id
+                view_controller.coupon = self.selected_coupon
                 view_controller.branch_id = self.selected_coupon.branch_id
                 self.hidesBottomBarWhenPushed = true
                 self.navigationController?.pushViewController(view_controller, animated: true)

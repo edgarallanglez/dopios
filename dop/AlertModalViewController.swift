@@ -38,7 +38,6 @@ class AlertModalViewController: UIViewController {
             self.alert_title.text = model.alert_title
             self.alert_description.text = model.alert_description
             
-            
             switch model.alert_image {
                 case "success": alert_image.image = UIImage(named: "success")
                 case "error": alert_image.image = UIImage(named: "error")

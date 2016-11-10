@@ -101,9 +101,9 @@ class BranchRankingViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: PeopleCell = tableView.dequeueReusableCell(withIdentifier: "PeopleCell", for: indexPath) as! PeopleCell
         
-        let model = self.ranking_array[(indexPath as NSIndexPath).row]
+        let model = self.ranking_array[indexPath.row]
         cell.loadItem(model, viewController: self)
-        downloadImage(model, cell: cell, index: (indexPath as NSIndexPath).row)
+        downloadImage(model, cell: cell, index: indexPath.row)
         
         return cell
     }

@@ -32,6 +32,7 @@ class PeopleCell: UITableViewCell {
         user_name.text = "\(person.names) \(person.surnames)"
 //        user_image.image = person.main_image
         self.viewController = viewController
+        self.layoutIfNeeded()
     }
     
     func setRankingPosition(_ index: Int) {

@@ -62,31 +62,31 @@ class FilterSideViewController: UIViewController {
         FilterSideViewController.open = false
     }
     override func viewDidLoad() {
-        self.foodCategoriesArray = [alitasAndBoneless,
-                                    bistro,
-                                    cafeteria,
-                                    comidaChina,
-                                    comidaRapida,
-                                    gourmet,
-                                    italiana,
-                                    marisco,
-                                    mexicana,
-                                    sushi]
+        self.foodCategoriesArray = [ alitasAndBoneless,
+                                     bistro,
+                                     cafeteria,
+                                     comidaChina,
+                                     comidaRapida,
+                                     gourmet,
+                                     italiana,
+                                     marisco,
+                                     mexicana,
+                                     sushi ]
         
-        self.servicesCategoriesArray = [automotriz,
-                                        educacion,
-                                        electronica,
-                                        hogar,
-                                        moda,
-                                        viajes,
-                                        saludAndBelleza]
+        self.servicesCategoriesArray = [ automotriz,
+                                         educacion,
+                                         electronica,
+                                         hogar,
+                                         moda,
+                                         viajes,
+                                         saludAndBelleza ]
         
-        self.entertainmentCategoriesArray = [bar,
-                                             cine,
-                                             clubNocturno,
-                                             deporte,
-                                             parques,
-                                             teatro]
+        self.entertainmentCategoriesArray = [ bar,
+                                              cine,
+                                              clubNocturno,
+                                              deporte,
+                                              parques,
+                                              teatro ]
     }
     
     @IBAction func setFoodSubcategories(_ sender: UIButton) {

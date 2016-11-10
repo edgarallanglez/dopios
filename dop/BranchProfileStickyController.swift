@@ -7,6 +7,7 @@
 //
 
 import UIKit
+
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
@@ -44,9 +45,7 @@ class BranchProfileStickyController: UICollectionViewController, BranchPaginatio
     
     var new_height: CGFloat!
     var frame_width: CGFloat!
-    
     var coupon: Coupon!
-    
     var branch: Branch!
     /// User data
     var branch_id: Int = 0
@@ -95,10 +94,11 @@ class BranchProfileStickyController: UICollectionViewController, BranchPaginatio
         drawBar();
         
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         if User.newNotification {
             self.notificationButton.image = UIImage(named: "notification-badge")
-        }else{
+        } else {
             self.notificationButton.image = UIImage(named: "notification")
         }
         
@@ -106,41 +106,32 @@ class BranchProfileStickyController: UICollectionViewController, BranchPaginatio
         Utilities.fadeInViewAnimation(searchBar, delay: 0, duration: 0.5)
         self.navigationItem.titleView = searchBar
     }
+    
     func drawBar(){
         NotificationCenter.default.addObserver(self, selector: #selector(BranchProfileStickyController.setBadge), name: NSNotification.Name(rawValue: "newNotification"), object: nil)
         
         notificationButton = UIBarButtonItem(image: UIImage(named: "notification"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(BranchProfileStickyController.notification))
         
         self.navigationItem.rightBarButtonItem = notificationButton
-        
+
         vc  = self.storyboard!.instantiateViewController(withIdentifier: "SearchView") as! SearchViewController
-        
         vcNot = self.storyboard!.instantiateViewController(withIdentifier: "Notifications") as! NotificationViewController
         
-        
         searchBar.delegate = self
-        
-        
-        
         searchBar.tintColor = UIColor.white
         searchBar.searchBarStyle = UISearchBarStyle.minimal
         searchBar.placeholder = "Buscar"
         
-        
-        
-        for subView in self.searchBar.subviews{
-            for subsubView in subView.subviews{
+        for subView in self.searchBar.subviews {
+            for subsubView in subView.subviews {
                 if let textField = subsubView as? UITextField{
                     textField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("Buscar", comment: ""), attributes: [NSForegroundColorAttributeName: Utilities.extraLightGrayColor])
                     textField.textColor = UIColor.white
-                    
                 }
             }
         }
         
-        
-        
-        searchView = UIView(frame: CGRect(x: 0,y: 0,width: self.view.frame.width,height: self.view.frame.height))
+        searchView = UIView(frame: CGRect(x: 0, y: 0,width: self.view.frame.width,height: self.view.frame.height))
         
         //Add blur view to search view
         let blurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.extraLight))
@@ -162,7 +153,6 @@ class BranchProfileStickyController: UICollectionViewController, BranchPaginatio
             selector: #selector(BranchProfileStickyController.presentView(_:)),
             name: NSNotification.Name(rawValue: "performSegue"),
             object: nil)
-        
     }
     
     // Cells
@@ -225,7 +215,6 @@ class BranchProfileStickyController: UICollectionViewController, BranchPaginatio
         }
         
         return UICollectionReusableView()
-        
     }
     
     func setupIndex(_ index: Int) {
@@ -259,21 +248,17 @@ class BranchProfileStickyController: UICollectionViewController, BranchPaginatio
                 let viewControllerToPresent = self.storyboard!.instantiateViewController(withIdentifier: "BranchProfileStickyController") as! BranchProfileStickyController
                 viewControllerToPresent.branch_id = object_id
                 self.navigationController?.pushViewController(viewControllerToPresent, animated: true)
-                
             }
+            
             if vc.searchSegmentedController.selectedIndex == 1 {
                 let viewControllerToPresent = self.storyboard!.instantiateViewController(withIdentifier: "UserProfileStickyController") as! UserProfileStickyController
                 viewControllerToPresent.user_id = object_id
                 viewControllerToPresent.is_friend = params["is_friend"] as! Bool
                 viewControllerToPresent.operation_id = params["operation_id"] as! Int
                 self.navigationController?.pushViewController(viewControllerToPresent, animated: true)
-                
             }
-            
             searchBar.resignFirstResponder()
-            
         }
-        
     }
     
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
@@ -289,8 +274,10 @@ class BranchProfileStickyController: UICollectionViewController, BranchPaginatio
             
             searchViewIsOpen = true
         }
+        
         return true
     }
+    
     func cancelSearch(){
         if(searchViewIsOpen == true){
             searchView.removeFromSuperview()
@@ -305,6 +292,7 @@ class BranchProfileStickyController: UICollectionViewController, BranchPaginatio
             vc.tableView.reloadData()
         }
     }
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if(searchViewIsOpen == true && vc.searchScrollView.isHidden == true){
             vc.searchScrollView.isHidden = false
