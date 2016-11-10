@@ -29,7 +29,7 @@ class SearchController: NSObject {
             }
         })*/
         
-        Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default ,headers: User.userToken).validate().responseJSON { response in
+        Alamofire.request(url, method: .get ,headers: User.userToken).validate().responseJSON { response in
             switch response.result {
             case .success:
                 succeed(JSON(response.result.value))
@@ -53,7 +53,7 @@ class SearchController: NSObject {
                 errorFound(error)
             }
         })*/
-        Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default ,headers: User.userToken).validate().responseJSON { response in
+        Alamofire.request(url, method: .get, headers: User.userToken).validate().responseJSON { response in
             switch response.result {
             case .success:
                 succeed(JSON(response.result.value))
