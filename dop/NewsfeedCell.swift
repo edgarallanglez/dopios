@@ -149,17 +149,6 @@ class NewsfeedCell: UITableViewCell {
                 self.branch_logo.image = image
             }
         }
-        /*Utilities.downloadImage(url, completion: {(data, error) -> Void in
-            if let image = data{
-                DispatchQueue.main.async {
-                    let imageData: Data = NSData(data: image) as Data
-                    self.branch_logo.image = UIImage(data: imageData)
-                }
-            }else{
-                print("Error")
-            }
-        })*/
-
     }
 
     override func layoutIfNeeded() {

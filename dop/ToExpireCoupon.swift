@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireImage
 
 class ToExpireCoupon: UIView, ModalDelegate {
 
@@ -17,8 +19,13 @@ class ToExpireCoupon: UIView, ModalDelegate {
         // Drawing code
     }
     */
+    
+    @IBOutlet weak var branch_logo_view: UIView!
+    @IBOutlet weak var branch_logo: UIImageView!
     @IBOutlet var descriptionLbl: UILabel!
     @IBOutlet var branchNameLbl: UILabel!
+    @IBOutlet weak var expire_date: UILabel!
+    
     var viewController: UIViewController?
     var coupon: Coupon!
     
@@ -30,7 +37,9 @@ class ToExpireCoupon: UIView, ModalDelegate {
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(ToExpireCoupon.tapCoupon(_:))))
         
         self.coupon = coupon
-        self.descriptionLbl.text = coupon.couponDescription
+        self.descriptionLbl.text = coupon.name
+        self.branchNameLbl.text = coupon.couponDescription
+        self.expire_date.text = "en \(Utilities.friendlyToDate(coupon.end_date!))"
         self.viewController = viewController
         
         NotificationCenter.default.addObserver(
@@ -38,6 +47,29 @@ class ToExpireCoupon: UIView, ModalDelegate {
             selector: #selector(ToExpireCoupon.updateLikeAndTaken(_:)),
             name: NSNotification.Name(rawValue: "takenOrLikeStatus"),
             object: nil)
+        
+        Alamofire.request("\(Utilities.dopImagesURL)\(self.coupon.company_id)/\(self.coupon.logo)").responseImage { response in
+            if let image = response.result.value {
+                
+                self.branch_logo.image = image
+                self.branch_logo.alpha = 1
+            
+                let container_layer: CALayer = CALayer()
+                container_layer.shadowColor = UIColor.lightGray.cgColor
+                container_layer.shadowRadius = 1
+                container_layer.shadowOffset = CGSize(width: 1.2, height: 1.2)
+                container_layer.shadowOpacity = 1
+                container_layer.contentsScale = 2.0
+                container_layer.addSublayer(self.branch_logo.layer)
+                
+                self.branch_logo_view.layer.addSublayer(container_layer)
+                self.branch_logo_view.layer.contentsScale = 2.0
+                self.branch_logo_view.layer.rasterizationScale = 12.0
+                self.branch_logo_view.layer.shouldRasterize = true
+
+            } else { print("HUEHUE") }
+        }
+
         
     }
     
@@ -88,21 +120,20 @@ class ToExpireCoupon: UIView, ModalDelegate {
                     self.viewController!.navigationController?.pushViewController(view_controller, animated: true)
                     self.viewController!.hidesBottomBarWhenPushed = false
                 })
-            }else{
+            } else {
                 let error_modal: ModalViewController = ModalViewController(currentView: self.viewController!, type: ModalViewControllerType.AlertModal)
                 error_modal.willPresentCompletionHandler = { vc in
                     let navigation_controller = vc as! AlertModalViewController
                     
                     var alert_array = [AlertModel]()
                     
-                    alert_array.append(AlertModel(alert_title: "¡Oops!", alert_image: "error", alert_description: "Esta promoción se ha terminado :("))
+                    alert_array.append(AlertModel(alert_title: "¡Oops!", alert_image: "error", alert_description: "Esta promoción se ha terminado ☹️"))
                     
                     navigation_controller.setAlert(alert_array)
                 }
                 
                 modal.dismiss(animated: true, completionHandler: { (modal) -> Void in
                     error_modal.present(animated: true, completionHandler: nil)
-                    
                 })
                 
             }
@@ -111,38 +142,29 @@ class ToExpireCoupon: UIView, ModalDelegate {
     
     func setViewCount() {
         let params: [String: AnyObject] = ["coupon_id": self.coupon.id as AnyObject]
-        CouponController.viewCouponWithSuccess(params, success: { (couponsData) -> Void in
-            let json: JSON = JSON(couponsData)
-            print(json)
+        CouponController.viewCouponWithSuccess(params, success: { (data) -> Void in
+            let json: JSON = JSON(data)
             },
-            failure: { (couponsData) -> Void in
+            failure: { (data) -> Void in
                 print("couponsData")
             }
         )
     }
     
     func updateLikeAndTaken(_ notification:Foundation.Notification){
-        
         let object = notification.object as! [String: AnyObject]
         
         let type = object["type"] as! String
         let status = object["status"] as! Bool
         let coupon_id = object["coupon_id"] as! Int
         
-        
-        if(coupon_id == self.coupon.id){
-            if(status == false){
-                if(type == "take"){
-                    self.coupon.taken = false
-                }else{
-                    self.coupon.user_like = false
-                }
-            }else{
-                if(type == "take"){
-                    self.coupon.taken = true
-                }else{
-                    self.coupon.user_like = true
-                }
+        if coupon_id == self.coupon.id {
+            if !status {
+                if type == "take" { self.coupon.taken = false }
+                else { self.coupon.user_like = false }
+            } else {
+                if type == "take" { self.coupon.taken = true }
+                else { self.coupon.user_like = true }
             }
         }
     }

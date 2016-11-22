@@ -227,7 +227,6 @@ class TrendingCoupon: UIView, ModalDelegate, FBSDKSharingDelegate {
             taken = false
         }
         
-        
         CouponController.takeCouponWithSuccess(params,
             success: { (data) -> Void in
                 DispatchQueue.main.async(execute: {

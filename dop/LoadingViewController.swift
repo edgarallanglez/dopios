@@ -194,11 +194,13 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
     }
     
     func triggerAlert() {
+        self.alert_array.removeAll()
         self.modal_alert = ModalViewController(currentView: self, type: ModalViewControllerType.AlertModal)
         self.modal_alert.willPresentCompletionHandler = { vc in
             let navigation_controller = vc as! AlertModalViewController
+            navigation_controller.close_button.isHidden = true
             navigation_controller.dismiss_button.setTitle("REINTENTAR", for: UIControlState())
-            self.alert_array.append(AlertModel(alert_title: "¡Oops!", alert_image: "error", alert_description: "Ha ocurrido un error :("))
+            self.alert_array.append(AlertModel(alert_title: "¡Oops!", alert_image: "error", alert_description: "Ha ocurrido un error ☹️"))
             
             navigation_controller.setAlert(self.alert_array)
         }

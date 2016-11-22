@@ -220,7 +220,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                 let model = Branch(id: branch_id, name: branch_name, banner: banner, company_id: company_id, adults_only: adults_only)
                 self.branches.append(model)
             }
-            print(json)
+         
             DispatchQueue.main.async(execute: {
                 self.reloadBranchCarousel()
                 self.pageControl.numberOfPages = self.branches.count
@@ -453,7 +453,8 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
         DashboardController.getAlmostExpiredCouponsWithSuccess(success: { (couponsData) -> Void in
             let json = couponsData!
             
-            for (_, subJson): (String, JSON) in json["data"]{
+            for (_, subJson): (String, JSON) in json["data"] {
+                print(subJson)
                 let coupon_id = subJson["coupon_id"].int
                 let coupon_name = subJson["name"].string
                 let coupon_description = subJson["description"].string
@@ -468,6 +469,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                 let longitude = subJson["longitude"].double!
                 let banner = subJson["banner"].string ?? ""
                 //                    let categoryId = subJson["category_id"].int!
+                let end_date = subJson["end_date"].string ?? ""
                 let taken = subJson["taken"].bool ?? false
                 let available = subJson["available"].int!
                 
@@ -478,6 +480,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                 }
                 
                 let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: 1, available: available, taken: taken, adult_branch: adult_branch)
+                model.end_date = end_date
                 
                 self.almost_expired.append(model)
             }
@@ -535,13 +538,13 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
         let params = [
             "latitude": latitude,
             "longitude": longitude,
-            "radio": 15
+            "radio": 10
         ]
         
         DashboardController.getNearestCoupons(params, success: {(branchesData) -> Void in
             let json = branchesData!
             
-            for (_, subJson): (String, JSON) in json["data"]{
+            for (_, subJson): (String, JSON) in json["data"] {
                 let coupon_id = subJson["coupon_id"].int
                 let coupon_name = subJson["name"].string
                 let coupon_description = subJson["description"].string
@@ -555,18 +558,18 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                 let latitude = subJson["latitude"].double!
                 let longitude = subJson["longitude"].double!
                 let banner = subJson["banner"].string ?? ""
+                let distance = subJson["distance"].double ?? 0.0
                 //                    let categoryId = subJson["category_id"].int!
                 let available = subJson["available"].int!
                 let taken = subJson["taken"].bool ?? false
                 
                 let subcategory_id = subJson["subcategory_id"].int
                 var adult_branch = false
-                if(subcategory_id == 25){
-                    adult_branch = true
-                }
+                if subcategory_id == 25 { adult_branch = true }
 
                 
                 let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: 1, available: available, taken: taken, adult_branch: adult_branch)
+                model.distance = distance
                 
                 self.nearest.append(model)
             }

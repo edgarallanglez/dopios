@@ -16,6 +16,7 @@ class ReadQRHelpViewController: UIViewController, ModalDelegate {
     @IBOutlet weak var app_broken: UISwitch!
     @IBOutlet weak var qr_lost: UISwitch!
     
+    var some_checked: Bool = false
     var coupon: Coupon!
     var modal_alert: ModalViewController!
     var alert_array = [AlertModel]()
@@ -30,6 +31,7 @@ class ReadQRHelpViewController: UIViewController, ModalDelegate {
     }
     
     @IBAction func send_report(_ sender: UIButton) {
+        
         var params: [String: AnyObject] = [ "user_id": User.user_id as AnyObject,
                                             "branch_id": coupon.branch_id as AnyObject,
                                             "coupon_id": coupon.id as AnyObject,
@@ -39,6 +41,8 @@ class ReadQRHelpViewController: UIViewController, ModalDelegate {
                                             "qr_lost":  false as AnyObject ]
         
         for item in problems_switch_array {
+            if item.isOn { some_checked = true }
+            
             switch item.tag {
             case 0:
                 params["branch_indiference"] = item.isOn as AnyObject
@@ -53,11 +57,13 @@ class ReadQRHelpViewController: UIViewController, ModalDelegate {
             
         }
         
-        ReadQRController.sendReport("\(Utilities.dopURL)coupon/report",
+        
+        if some_checked {
+            ReadQRController.sendReport("\(Utilities.dopURL)coupon/report",
                                     params: params,
                                     success: { (data) -> Void in
                                         DispatchQueue.main.async(execute: {
-                                            self.triggerSuccessError()
+                                            self.triggerAlertSuccess()
                                         })
                                     },
                                     failure: { (error) -> Void in
@@ -65,7 +71,10 @@ class ReadQRHelpViewController: UIViewController, ModalDelegate {
                                             self.triggerAlertError()
                                         })
                                     }
-        )
+            )
+        } else {
+            self.triggerWarningAlert()
+        }
     }
     
     func triggerAlertError() {
@@ -82,7 +91,7 @@ class ReadQRHelpViewController: UIViewController, ModalDelegate {
         self.modal_alert.delegate = self
     }
     
-    func triggerSuccessError() {
+    func triggerAlertSuccess() {
         self.modal_alert = ModalViewController(currentView: self, type: ModalViewControllerType.AlertModal)
         self.modal_alert.willPresentCompletionHandler = { vc in
             let navigation_controller = vc as! AlertModalViewController
@@ -97,9 +106,27 @@ class ReadQRHelpViewController: UIViewController, ModalDelegate {
         self.modal_alert.delegate = self
     }
     
+    func triggerWarningAlert() {
+        self.alert_array.removeAll()
+        self.modal_alert = ModalViewController(currentView: self, type: ModalViewControllerType.AlertModal)
+        self.modal_alert.willPresentCompletionHandler = { vc in
+            let navigation_controller = vc as! AlertModalViewController
+            navigation_controller.share_view.isHidden = true
+            navigation_controller.dismiss_button.setTitle("CERRAR", for: UIControlState())
+            
+            self.alert_array.append(AlertModel(alert_title: "¡Oops!", alert_image: "warning", alert_description: "No has seleccionado algún problema aún"))
+            
+            navigation_controller.setAlert(self.alert_array)
+        }
+        self.modal_alert.present(animated: true, completionHandler: nil)
+        self.modal_alert.delegate = self
+    }
+    
     func pressActionButton(_ modal: ModalViewController) {
         modal.didDismissCompletionHandler = { vc in
-            self.navigationController?.popToRootViewController(animated: true)
+            if self.some_checked {
+                self.navigationController?.popToRootViewController(animated: true)
+            }
         }
     }
 }

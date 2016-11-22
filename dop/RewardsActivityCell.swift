@@ -29,8 +29,6 @@ class RewardsActivityCell: UITableViewCell {
         self.activity_model = model
         self.user_name.setTitle(model.names.uppercased(), for: UIControlState())
         
-        
-        
         downloadImage(URL(string: "\(Utilities.dopImagesURL)\(model.company_id)/\(model.branch_image)")!)
         
         self.total_likes.text = "\(model.total_likes)"
@@ -49,6 +47,7 @@ class RewardsActivityCell: UITableViewCell {
         activity_description.addLink(to: segue, with: newsfeed_activity_range)
         
         self.branch_image.tag = model.branch_id
+        self.branch_image.isUserInteractionEnabled = true
         self.branch_image.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(RewardsActivityCell.goToBranchProfile(_:))))
         
 //        self.moment.text = Utilities.friendlyDate(model.date)

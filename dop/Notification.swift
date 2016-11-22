@@ -41,8 +41,8 @@ class Notification:NSObject{
         self.operation_id = operation_id ?? 0
         self.read = read ?? false
         self.date = date ?? ""
-        self.launcher_image = launcher_image
-        self.catcher_image = catcher_image
+        self.launcher_image = launcher_image ?? ""
+        self.catcher_image = catcher_image ?? ""
         self.company_id = company_id ?? 0
         self.object_id = object_id ?? 0
         self.branch_id = branch_id ?? 0

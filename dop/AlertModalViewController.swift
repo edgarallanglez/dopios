@@ -12,6 +12,20 @@ import UIKit
     func pressAlertButton(_ modal: AlertModalViewController)
 }
 
+extension String {
+    func image() -> UIImage {
+        let size = CGSize(width: 100, height: 105)
+        UIGraphicsBeginImageContextWithOptions(size, false, 0);
+        UIColor.white.set()
+        let rect = CGRect(origin: CGPoint.zero, size: size)
+        self.draw(in: rect, withAttributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 90)])
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image!
+    }
+    
+}
+
 class AlertModalViewController: UIViewController {
     var delegate: AlertDelegate?
     
@@ -21,6 +35,7 @@ class AlertModalViewController: UIViewController {
     @IBOutlet weak var alert_image: UIImageView!
     @IBOutlet weak var alert_description: UILabel!
     @IBOutlet weak var dismiss_button: ModalButton!
+    @IBOutlet weak var close_button: UIButton!
     
     var alert_array = [AlertModel]()
     var alert_flag: Int!
@@ -41,6 +56,7 @@ class AlertModalViewController: UIViewController {
             switch model.alert_image {
                 case "success": alert_image.image = UIImage(named: "success")
                 case "error": alert_image.image = UIImage(named: "error")
+                case "warning": alert_image.image = "😦".image()
                 case "Bronce": alert_image.image = UIImage(named: "bronce")
             default:break
             }
@@ -82,10 +98,16 @@ class AlertModalViewController: UIViewController {
         switch model.alert_image {
             case "success": alert_image.image = UIImage(named: "success")
             case "error": alert_image.image = UIImage(named: "error")
+            case "warning": alert_image.image = "😦".image()
             case "Bronce": alert_image.image = UIImage(named: "bronce")
 
         default: break
         }
 
     }
+    
+    @IBAction func closeAlert(_ sender: UIButton) {
+        self.mz_dismissFormSheetController(animated: true, completionHandler: nil)
+    }
+    
 }

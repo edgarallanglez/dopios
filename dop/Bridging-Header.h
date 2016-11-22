@@ -22,6 +22,7 @@
 #import "SocketIOTransportWebsocket.h"
 #import "SocketIOTransportXHR.h"
 #import "TTTAttributedLabel.h"
+#import "TTTTimeIntervalFormatter.h"
 #import "CSStickyHeaderFlowLayout.h"
 #import "CSStickyHeaderFlowLayoutAttributes.h"
 #import "MZFormSheetController.h"

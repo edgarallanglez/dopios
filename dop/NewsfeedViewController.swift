@@ -38,16 +38,16 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
         let cell: NewsfeedCell = tableView.dequeueReusableCell(withIdentifier: "NewsfeedCell", for: indexPath) as! NewsfeedCell
         
         if !newsfeed.isEmpty {
-            let model = self.newsfeed[(indexPath as NSIndexPath).row]
+            let model = self.newsfeed[indexPath.row]
             cell.newsfeed_description.linkAttributes = [NSForegroundColorAttributeName: Utilities.dopColor]
             cell.newsfeed_description.enabledTextCheckingTypes = NSTextCheckingResult.CheckingType.link.rawValue
 
             cell.newsfeed_description.delegate = self
-            cell.loadItem(model, viewController: self, index: (indexPath as NSIndexPath).row)
+            cell.loadItem(model, viewController: self, index: indexPath.row)
             
 
             let imageUrl = URL(string: model.user_image)
-            let identifier = "Cell\((indexPath as NSIndexPath).row)"
+            let identifier = "Cell\(indexPath.row)"
             
             
             if  self.cachedImages[identifier] != nil {
@@ -101,7 +101,7 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
     }
     
     func attributedLabel(_ label: TTTAttributedLabel!, didSelectLinkWith url: URL!) {
-        let splitter = String(describing: url).components(separatedBy: ":")
+        let splitter = String(describing: url!).components(separatedBy: ":")
         let segue: String = splitter[0]
         let branch_id: Int = Int(splitter[1])!
         

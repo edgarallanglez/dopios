@@ -37,7 +37,6 @@ class SearchController: NSObject {
         let url = "\(Utilities.dopURL)user/people/search/?text=\(params["text"]!)"
                     .addingPercentEscapes(using: String.Encoding.utf8)!
         
-
         Alamofire.request(url,
                           method: .get,
                           headers: User.userToken).validate().responseJSON { response in

@@ -24,9 +24,11 @@ class Coupon: NSObject {
     let categoryId: Int
     var available: Int
     var taken: Bool!
+    var end_date: String!
     var taken_date: String!
     var start_date: String!
     var adult_branch: Bool
+    var distance: Double?
 
     init(id: Int?, name: String?, description: String?, limit: String?, exp: String?, logo: String? ,branch_id:Int?, company_id: Int?, total_likes: Int?, user_like: Bool?, latitude: Double, longitude: Double, banner: String, category_id: Int, available: Int, taken: Bool, adult_branch: Bool) {
         
@@ -90,10 +92,12 @@ class Coupon: NSObject {
         
         self.adult_branch = false
     }
+    
     func setUserLike(_ user_like: Bool!,total_likes: Int!){
         self.user_like = user_like
         self.total_likes = total_likes
     }
+    
     func setTakenCoupons(_ user_take: Bool!, available: Int!){
         self.taken = user_take
         self.available = available

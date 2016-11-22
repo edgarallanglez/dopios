@@ -10,6 +10,14 @@
 import Foundation
 import Alamofire
 
+extension Double {
+    /// Rounds the double to decimal places value
+    func roundTo(places:Int) -> Double {
+        let divisor = pow(10.0, Double(places))
+        return (self * divisor).rounded() / divisor
+    }
+}
+
 class Utilities {
     static var filterArray: [Int] = []
 
@@ -157,7 +165,7 @@ class Utilities {
 
     //FRIENDLY DATE FUNCTION
 
-    class func friendlyDate(_ date:String) -> String{
+    class func friendlyDate(_ date:String) -> String {
         let separators = CharacterSet(charactersIn: "T.")
         let parts = date.components(separatedBy: separators)
         let friendly_date = Date(dateString: "\(parts[0]) \(parts[1])")
@@ -167,6 +175,17 @@ class Utilities {
         
         return friendly_date_str
     }
+    
+    class func friendlyToDate(_ date:String) -> String {
+        let separators = CharacterSet(charactersIn: "T+")
+        let parts = date.components(separatedBy: separators)
+        let friendly_date = Date(dateString: "\(parts[0]) \(parts[1])")
+        
+        let friendly_date_str = timeToDate(friendly_date, numericDates: false)
+        
+        return friendly_date_str
+    }
+    
 
     //CONSTANTS
 

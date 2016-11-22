@@ -85,7 +85,7 @@ class ActivityPage: UITableViewController, TTTAttributedLabelDelegate {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if self.activity_array.count != 0 {
             let custom_cell: RewardsActivityCell = tableView.dequeueReusableCell(withIdentifier: "RewardsActivityCell", for: indexPath) as! RewardsActivityCell
-            let model = self.activity_array[(indexPath as NSIndexPath).row]
+            let model = self.activity_array[indexPath.row]
             
             if self.parent_view != nil {
                 if self.parent_view?.user_image?.image != nil {
@@ -97,24 +97,27 @@ class ActivityPage: UITableViewController, TTTAttributedLabelDelegate {
             custom_cell.activity_description.linkAttributes = [NSForegroundColorAttributeName: Utilities.dopColor]
             custom_cell.activity_description.enabledTextCheckingTypes = NSTextCheckingResult.CheckingType.link.rawValue
             custom_cell.activity_description.delegate = self
-            custom_cell.loadItem(model, viewController: self)
+            custom_cell.loadItem(model, viewController: self.parent_view)
+            
+            custom_cell.selectionStyle = UITableViewCellSelectionStyle.none
             
             return custom_cell
         } else {
             let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "default_view", for: indexPath)
+            cell.selectionStyle = UITableViewCellSelectionStyle.none
             return cell
         }
     }
     
     func attributedLabel(_ label: TTTAttributedLabel!, didSelectLinkWith url: URL!) {
-        let splitter = String(describing: url).components(separatedBy: ":")
+        let splitter = String(describing: url!).components(separatedBy: ":")
         let segue: String = splitter[0]
         let branch_id: Int = Int(splitter[1])!
         
         if segue == "branchProfile" {
             let view_controller = self.storyboard!.instantiateViewController(withIdentifier: "BranchProfileStickyController") as! BranchProfileStickyController
             view_controller.branch_id = branch_id
-            self.navigationController?.pushViewController(view_controller, animated: true)
+            self.parent_view.navigationController?.pushViewController(view_controller, animated: true)
         }
     }
     

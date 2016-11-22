@@ -22,14 +22,16 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     //let socketIO : SocketIO = SocketIO()
     var notifications = [Notification]()
     var notificationsTemporary = [Notification]()
-    var offset:Int = 0
-    let limit:Int = 11
+    var offset: Int = 0
+    let limit: Int = 11
     var refreshControl: UIRefreshControl!
     var cachedImages: [String: UIImage] = [:]
     var notificationButtonPressed: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        notification_table.rowHeight = UITableViewAutomaticDimension
+        notification_table.estimatedRowHeight = 75
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(self.setNotificationConfig),
@@ -91,23 +93,17 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         cell.title.enabledTextCheckingTypes = NSTextCheckingResult.CheckingType.link.rawValue
 
         if !notifications.isEmpty {
-            let model = self.notifications[(indexPath as NSIndexPath).row]
+            let model = self.notifications[indexPath.row]
             cell.loadItem(model, viewController: self)
             cell.selectionStyle = UITableViewCellSelectionStyle.none
 
-            var imageUrl: URL
+            var imageUrl: URL = URL(string: "http://")!
             let identifier = "Cell\((indexPath as NSIndexPath).row)"
             if model.catcher_id != User.user_id { imageUrl = URL(string: "\(model.catcher_image)")! }
-            else { imageUrl = URL(string: "\(model.launcher_image)")! }
+            else if model.launcher_image != "" { imageUrl = URL(string: "\(model.launcher_image)")! }
 
             let color = cell.contentView.backgroundColor
             cell.backgroundColor = color
-
-            //cell.layoutIfNeeded()
-
-            //cell.notification_image.layer.cornerRadius = cell.notification_image.frame.width/2
-
-            
 
             if self.cachedImages[identifier] != nil {
                 let cell_image_saved : UIImage = self.cachedImages[identifier]!
@@ -122,15 +118,14 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                 cell.notification_image.image = UIImage(named: "dop-logo-transparent")
                 cell.notification_image.backgroundColor = Utilities.lightGrayColor
                 Alamofire.request(imageUrl).responseImage { response in
-                    if let image = response.result.value{
+                    if let image = response.result.value {
                         self.cachedImages[identifier] = image
                         cell.notification_image.image = image
                         UIView.animate(withDuration: 0.5, animations: {
-                            cell.notification_image.alpha = 1
+                            cell.notification_image.alpha = 3
                         })
                     }
                 }
-                
             }
         }
 
@@ -163,11 +158,10 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                     let date = subJson["notification_date"].string ?? ""
                     let company_id = subJson["company_id"].int ?? 0
                     let object_id = subJson["object_id"].int ?? 0
-                    let catcher_image = subJson["catcher_image"].string!
-                    let launcher_image = subJson["launcher_image"].string!
+                    let catcher_image = subJson["catcher_image"].string ?? ""
+                    let launcher_image = subJson["launcher_image"].string ?? ""
                     let branch_id = subJson["branch_id"].int ?? 0
                     let is_friend = subJson["is_friend"].bool!
-
 
                     let model = Notification(type: type, notification_id: notification_id, launcher_id: launcher_id, catcher_id: catcher_id, launcher_name: launcher_name, launcher_surnames: launcher_surnames,  catcher_name: catcher_name, catcher_surnames: catcher_surnames, branches_name: branches_name, operation_id: operation_id, read: read, date: date, launcher_image: launcher_image, catcher_image: catcher_image, company_id: company_id, object_id: object_id, branch_id: branch_id, is_friend: is_friend)
                     
@@ -343,6 +337,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     
     func refreshTableView(_ notification: Foundation.Notification){
         getNotifications()
+        self.view.layoutIfNeeded()
     }
     
     func setNotificationConfig() {

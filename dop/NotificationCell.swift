@@ -15,7 +15,8 @@ class NotificationCell: UITableViewCell {
     @IBOutlet var notification_view: UIView!
     @IBOutlet var notification_image: UIImageView!
     @IBOutlet var title: TTTAttributedLabel!
-
+    @IBOutlet weak var title_to_date_constraint: NSLayoutConstraint!
+    
     var viewController:UIViewController?
     var notification:Notification?
 
@@ -42,7 +43,6 @@ class NotificationCell: UITableViewCell {
         
         decline_btn.isHidden = true
         accept_btn.isHidden = true
-
 
         if notification.type == "newsfeed" {
 
@@ -75,6 +75,7 @@ class NotificationCell: UITableViewCell {
                     title.addLink(to: segue, with: launcher_range)
                     decline_btn.isHidden = false
                     accept_btn.isHidden = false
+                    self.title_to_date_constraint.constant = 35
 
                     break
                 case 1:
@@ -136,7 +137,7 @@ class NotificationCell: UITableViewCell {
 
     override func layoutIfNeeded() {
         super.layoutIfNeeded()
-        self.notification_image.layer.cornerRadius = self.notification_image.frame.width/2
+        self.notification_image.layer.cornerRadius = self.notification_image.frame.width / 2
         self.notification_image.layer.masksToBounds = true
     }
 

@@ -54,7 +54,9 @@ class TrophyTableViewController: UITableViewController {
                     if let image = response.result.value{
                         cell.badge_image.image = image
                         UIView.animate(withDuration: 0.5, animations: {
-                            cell.badge_image.alpha = 1
+                            if model.earned { cell.badge_image.alpha = 1 }
+                            else { cell.badge_image.alpha = 0.3 }
+//
                         })
                     }
                 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class MedalTableViewController: UITableViewController {
     
@@ -44,18 +45,17 @@ class MedalTableViewController: UITableViewController {
                 let cell_image_saved : UIImage = self.cached_images[identifier]!
                 cell.badge_image.image = cell_image_saved
             } else {
-                Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
-                    if let image = UIImage(data: data!) {
-                        DispatchQueue.main.async {
-                            cell.badge_image.image = image
-                            UIView.animate(withDuration: 0.5, animations: {
-                                //alpha = 1
-                            })
-                        }
-                    }else{
-                        print("Error")
+                Alamofire.request(imageUrl!).responseImage { response in
+                    if let image = response.result.value{
+                        cell.badge_image.image = image
+                        UIView.animate(withDuration: 0.5, animations: {
+                            if model.earned { cell.badge_image.alpha = 1 }
+                            else { cell.badge_image.alpha = 0.3 }
+                            //
+                        })
                     }
-                })
+                }
+
             }
     
             if !model.earned { cell.backgroundColor = Utilities.lightGrayColor }
