@@ -102,7 +102,7 @@ class BranchProfileTopView: UIView {
         Utilities.setMaterialDesignButton(self.follow_button, button_size: 50)
         getBranchProfile()
         
-        if (parent_view.coupon != nil && parent_view.coupon.adult_branch == true){
+        if (parent_view.coupon != nil && parent_view.coupon.adult_branch == true) {
             let adultsLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: parent_view.view.frame.width-20, height: 35))
             adultsLabel.text="+18"
             adultsLabel.textAlignment = NSTextAlignment.right

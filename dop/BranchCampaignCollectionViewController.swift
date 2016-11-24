@@ -104,7 +104,7 @@ class BranchCampaignCollectionViewController: UICollectionViewController, ModalD
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PromoCollectionCell
         
         if (!coupons.isEmpty) {
-            let model = self.coupons[(indexPath as NSIndexPath).row]
+            let model = self.coupons[indexPath.row]
             cell.loadItem(model, viewController: self)
             cell.setTakeButtonState(model.taken)
             let imageUrl = URL(string: "\(Utilities.dopImagesURL)\(model.company_id)/\(model.logo)")
@@ -128,7 +128,7 @@ class BranchCampaignCollectionViewController: UICollectionViewController, ModalD
                 //cell.branch_banner.alpha = 0
                 Alamofire.request(imageUrl!).responseImage { response in
                     if let image = response.result.value{
-                        if (self.collection_view.indexPath(for: cell) as NSIndexPath?)?.row == (indexPath as NSIndexPath).row {
+                        if self.collection_view.indexPath(for: cell)?.row == indexPath.row {
                             self.cachedImages[identifier] = image
                             cell.branch_banner.image = image
                             
@@ -137,7 +137,7 @@ class BranchCampaignCollectionViewController: UICollectionViewController, ModalD
                             })
                         }
                     }else{
-                        if (self.collection_view.indexPath(for: cell) as NSIndexPath?)?.row == (indexPath as NSIndexPath).row {
+                        if self.collection_view.indexPath(for: cell)?.row == indexPath.row {
                             cell.branch_banner.image = UIImage(named: "dop-logo-transparent")
                             cell.branch_banner.alpha = 0.3
                             self.cachedImages[identifier] = cell.branch_banner.image
@@ -226,7 +226,7 @@ class BranchCampaignCollectionViewController: UICollectionViewController, ModalD
                     let taken = subJson["taken"].bool ?? false
                     
                     let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: category_id, available: available, taken: taken, start_date: start_date)
-                    
+                    model.adult_branch = self.parent_view.branch.adults_only!
                     self.coupons.append(model)
                 }
                 
@@ -278,7 +278,7 @@ class BranchCampaignCollectionViewController: UICollectionViewController, ModalD
                 let taken = subJson["taken"].bool ?? false
                 
                 let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: category_id, available: available, taken: taken, start_date: start_date)
-                
+                model.adult_branch = self.parent_view.coupon.adult_branch
                 self.coupons.append(model)
                 self.new_data = true
                 self.added_values += 1

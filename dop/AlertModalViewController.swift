@@ -36,6 +36,8 @@ class AlertModalViewController: UIViewController {
     @IBOutlet weak var alert_description: UILabel!
     @IBOutlet weak var dismiss_button: ModalButton!
     @IBOutlet weak var close_button: UIButton!
+    @IBOutlet weak var share_text: UILabel!
+    
     
     var alert_array = [AlertModel]()
     var alert_flag: Int!

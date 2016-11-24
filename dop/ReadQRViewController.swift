@@ -159,8 +159,15 @@ class ReadQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                         
                             modal.willPresentCompletionHandler = { vc in
                                 let navigation_controller = vc as! AlertModalViewController
-//                                navigation_controller.share_view.isHidden = false
-                                
+                                if self.coupon.adult_branch {
+                                    navigation_controller.share_text.text = "  Esto no se compartirá 😏"
+                                    navigation_controller.share_view.isHidden = false
+                                    navigation_controller.share_activity.isOn = false
+                                    navigation_controller.share_activity.isHidden = true
+                                    
+                                } else {
+                                    navigation_controller.share_view.isHidden = false
+                                }
                                 self.alert_array.append(AlertModel(alert_title: "¡Felicidades!", alert_image: "success", alert_description: "Has redimido tu promoción con éxito en \(name)"))
                                 print(json)
 //                                
@@ -176,9 +183,9 @@ class ReadQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                             
                             modal.willDismissCompletionHandler = { vc in
                                 let alert_modal = vc as! AlertModalViewController
-                                if !alert_modal.share_activity.isOn {
-                                    let params = ["folio": folio as AnyObject]
-                                    ReadQRController.setActivityPrivacy(params,
+                                let params = ["folio": folio as AnyObject,
+                                              "privacy_status": !alert_modal.share_activity.isOn as AnyObject ]
+                                ReadQRController.setActivityPrivacy(params,
                                         success: { (data) in
                                             DispatchQueue.main.async {
                                                 print("privacy success")
@@ -190,7 +197,7 @@ class ReadQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                                             }
                                         }
                                     )
-                                }
+                                
                                 self.alert_array.removeAll()
                                 if alert_modal.alert_flag <= 1 {
                                     self.navigationController?.popViewController(animated: true)
