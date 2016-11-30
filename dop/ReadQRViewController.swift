@@ -10,10 +10,10 @@ import UIKit
 import AVFoundation
 
 class ReadQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, ModalDelegate{
-    var captureSession:AVCaptureSession?
-    var videoPreviewLayer:AVCaptureVideoPreviewLayer?
-    var qrCodeFrameView:UIView?
-    var captureMetadataOutput:AVCaptureMetadataOutput?
+    var captureSession: AVCaptureSession?
+    var videoPreviewLayer: AVCaptureVideoPreviewLayer?
+    var qrCodeFrameView: UIView?
+    var captureMetadataOutput: AVCaptureMetadataOutput?
     @IBOutlet var problems_button: UIButton!
     @IBOutlet weak var giverView: UIView!
     @IBOutlet weak var qr_image_view: UIView!
@@ -365,5 +365,10 @@ class ReadQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
         destination_view.coupon = self.coupon
     }
     
-
+    override func viewDidDisappear(_ animated: Bool) {
+        self.captureSession?.stopRunning()
+        self.videoPreviewLayer?.removeFromSuperlayer()
+        self.videoPreviewLayer = nil
+        self.captureSession = nil
+    }
 }

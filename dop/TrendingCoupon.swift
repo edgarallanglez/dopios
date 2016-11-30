@@ -291,7 +291,7 @@ class TrendingCoupon: UIView, ModalDelegate, FBSDKSharingDelegate {
                         
                         var alert_array = [AlertModel]()
                         
-                        alert_array.append(AlertModel(alert_title: "¡Oops!", alert_image: "error", alert_description: "Esta promoción se ha terminado :("))
+                        alert_array.append(AlertModel(alert_title: "¡Oops!", alert_image: "error", alert_description: "Esta promoción se ha terminado ☹️"))
                         
                         navigation_controller.setAlert(alert_array)
                     }

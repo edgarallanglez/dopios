@@ -27,7 +27,9 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
     @IBOutlet var tableView: UITableView!
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return newsfeed.count
+        if self.newsfeed.count != 0 { return self.newsfeed.count }
+        
+        return 1
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -35,9 +37,10 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: NewsfeedCell = tableView.dequeueReusableCell(withIdentifier: "NewsfeedCell", for: indexPath) as! NewsfeedCell
+       
         
-        if !newsfeed.isEmpty {
+        if self.newsfeed.count != 0 {
+            let cell: NewsfeedCell = tableView.dequeueReusableCell(withIdentifier: "NewsfeedCell", for: indexPath) as! NewsfeedCell
             let model = self.newsfeed[indexPath.row]
             cell.newsfeed_description.linkAttributes = [NSForegroundColorAttributeName: Utilities.dopColor]
             cell.newsfeed_description.enabledTextCheckingTypes = NSTextCheckingResult.CheckingType.link.rawValue
@@ -73,31 +76,14 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
                         })
                     }
                 }
-                /*Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
-                    if let image = data {
-                        DispatchQueue.main.async {
-                            var cell_image : UIImage = UIImage()
-                            cell_image = UIImage(data:image)!
-                            
-                            if (tableView.indexPath(for: cell) as NSIndexPath?)?.row == (indexPath as NSIndexPath).row {
-                                self.cachedImages[identifier] = cell_image
-                                let cell_image_saved : UIImage = self.cachedImages[identifier]!
-                                cell.user_image.image = cell_image_saved
-                                UIView.animate(withDuration: 0.5, animations: {
-                                    cell.user_image.alpha = 1
-                                })
-                            }
-                        }
-                    } else {
-                        print("Error")
-                    }
-                })*/
             }
+            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            return cell
+        } else {
+            let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "default_view", for: indexPath)
+            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            return cell
         }
-        
-        cell.selectionStyle = UITableViewCellSelectionStyle.none
-        
-        return cell
     }
     
     func attributedLabel(_ label: TTTAttributedLabel!, didSelectLinkWith url: URL!) {
