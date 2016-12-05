@@ -11,14 +11,6 @@ import FBSDKLoginKit
 import JWTDecode
 
 class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationManagerDelegate {
-    /*!
-     @abstract Sent to the delegate when the button was used to login.
-     @param loginButton the sender
-     @param result The results of the login
-     @param error The error (if any) from the login
-     */
-
-
 
     @IBOutlet weak var MD_spinner: MMMaterialDesignSpinner!
     @IBOutlet weak var fbLoginView: FBSDKLoginButton!
@@ -41,16 +33,14 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
         background.frame = self.view.bounds
         self.view.layer.insertSublayer(background, at: 0)
         Utilities.slideFromBottomAnimation(self.dopLogo, delay: 0, duration: 1.5, yPosition: 700)
+        
         self.fbButton.alpha = 0
         self.MD_spinner.lineWidth = 3
         self.MD_spinner.startAnimating()
         self.MD_spinner.alpha = 0
-//        UIApplication.sharedApplication().statusBarStyle = .Default
 
         locationManager = CLLocationManager()
         locationManager.delegate = self
-//        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-//        locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
         
         self.fbLoginView.delegate = self

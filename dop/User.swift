@@ -23,6 +23,10 @@ class User: NSObject, CLLocationManagerDelegate {
     static var newNotification: Bool = false
     static var deviceToken: String = ""
     static var adult: Bool = false
+    static var first_following: Bool = false
+    static var first_follower: Bool = false
+    static var first_company_fav: Bool = false
+    static var first_using: Bool = false
     
     static var newestNotification: [String: AnyObject] = [:]
     

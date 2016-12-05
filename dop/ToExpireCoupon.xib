@@ -39,7 +39,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GbY-tM-we1">
-                    <rect key="frame" x="15" y="180" width="35" height="35"/>
+                    <rect key="frame" x="15" y="185" width="35" height="35"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dop-logo-transparent" translatesAutoresizingMaskIntoConstraints="NO" id="mkX-uy-Cdm">
                             <rect key="frame" x="0.0" y="0.0" width="35" height="35"/>
@@ -57,6 +57,7 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstItem="mkX-uy-Cdm" firstAttribute="centerY" secondItem="GbY-tM-we1" secondAttribute="centerY" id="KOC-d4-5cf"/>
                         <constraint firstItem="mkX-uy-Cdm" firstAttribute="leading" secondItem="GbY-tM-we1" secondAttribute="leading" id="Len-OA-U4g"/>
                         <constraint firstAttribute="width" constant="35" id="R26-VC-xpy"/>
                         <constraint firstAttribute="bottom" secondItem="mkX-uy-Cdm" secondAttribute="bottom" id="S3j-fA-CXi"/>
@@ -65,8 +66,8 @@
                         <constraint firstItem="mkX-uy-Cdm" firstAttribute="top" secondItem="GbY-tM-we1" secondAttribute="top" id="rbw-0E-kmX"/>
                     </constraints>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expira" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="urJ-te-q5d">
-                    <rect key="frame" x="58" y="197" width="112" height="18"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expira" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="urJ-te-q5d">
+                    <rect key="frame" x="58" y="193.5" width="112" height="18"/>
                     <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="15"/>
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
@@ -74,11 +75,11 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="urJ-te-q5d" firstAttribute="centerY" secondItem="GbY-tM-we1" secondAttribute="centerY" id="7w5-Y9-f8S"/>
                 <constraint firstItem="Gme-gJ-qRa" firstAttribute="top" secondItem="GnP-zC-AX5" secondAttribute="bottom" id="Dti-9a-23h"/>
                 <constraint firstItem="GnP-zC-AX5" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="GNM-iX-1Dc"/>
                 <constraint firstItem="GbY-tM-we1" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="IUB-IH-SwO"/>
-                <constraint firstAttribute="bottom" secondItem="GbY-tM-we1" secondAttribute="bottom" constant="15" id="MDV-Qk-4uh"/>
-                <constraint firstAttribute="bottom" secondItem="urJ-te-q5d" secondAttribute="bottom" constant="15" id="PBP-eS-Fai"/>
+                <constraint firstAttribute="bottom" secondItem="GbY-tM-we1" secondAttribute="bottom" constant="10" id="MDV-Qk-4uh"/>
                 <constraint firstAttribute="trailing" secondItem="urJ-te-q5d" secondAttribute="trailing" constant="10" id="XjS-3u-W71"/>
                 <constraint firstAttribute="trailing" secondItem="Gme-gJ-qRa" secondAttribute="trailing" constant="10" id="Y2q-Hj-NsV"/>
                 <constraint firstAttribute="trailing" secondItem="GnP-zC-AX5" secondAttribute="trailing" constant="10" id="c7b-wA-Kqf"/>

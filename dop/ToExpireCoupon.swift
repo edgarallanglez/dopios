@@ -39,7 +39,7 @@ class ToExpireCoupon: UIView, ModalDelegate {
         self.coupon = coupon
         self.descriptionLbl.text = coupon.name
         self.branchNameLbl.text = coupon.couponDescription
-        self.expire_date.text = "en \(Utilities.friendlyToDate(coupon.end_date!))"
+        self.expire_date.text = "\(Utilities.friendlyToDate(coupon.end_date!))"
         self.viewController = viewController
         
         NotificationCenter.default.addObserver(

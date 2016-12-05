@@ -30,7 +30,7 @@ class ReadQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo) ==  AVAuthorizationStatus.authorized {
+        if AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo) == AVAuthorizationStatus.authorized {
             setCameraConfig()
         } else {
             let background = Utilities.Colors
@@ -108,17 +108,31 @@ class ReadQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
         }
     }
     
-    func sendQR(_ qr_code:Int){
+    func sendQR(_ qr_code:Int) {
         Utilities.fadeInViewAnimation(self.spinner, delay: 0, duration: 0.3)
         Utilities.fadeOutViewAnimation(self.qr_image, delay: 0, duration: 0.3)
         spinner?.startAnimating()
         
-        let params: [String: AnyObject] = [
-            "qr_code" : qr_code as AnyObject,
-            "coupon_id": self.coupon_id! as AnyObject,
-            "branch_id": self.branch_id! as AnyObject,
-            "latitude": User.coordinate.latitude as AnyObject? ?? 0 as AnyObject,
-            "longitude": User.coordinate.longitude as AnyObject? ?? 0 as AnyObject ]
+        var params: [String: AnyObject]
+        
+        if User.first_using {
+            params = [
+                "qr_code" : qr_code as AnyObject,
+                "coupon_id": self.coupon_id! as AnyObject,
+                "branch_id": self.branch_id! as AnyObject,
+                "latitude": User.coordinate.latitude as AnyObject? ?? 0 as AnyObject,
+                "longitude": User.coordinate.longitude as AnyObject? ?? 0 as AnyObject,
+                "first_using": false as AnyObject ]
+        } else {
+            params = [
+                "qr_code" : qr_code as AnyObject,
+                "coupon_id": self.coupon_id! as AnyObject,
+                "branch_id": self.branch_id! as AnyObject,
+                "latitude": User.coordinate.latitude as AnyObject? ?? 0 as AnyObject,
+                "longitude": User.coordinate.longitude as AnyObject? ?? 0 as AnyObject,
+                "first_using": true as AnyObject ]
+            User.first_using = true
+        }
         
         
         ReadQRController.sendQRWithSuccess(params,
@@ -175,8 +189,9 @@ class ReadQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                                 if badges_array.count != 0 {
                                     let badges = json["reward"]["badges"].array!
                                     let badge_name: String = badges[0]["name"].string!
+                                    let badge_id: Int = badges[0]["badge_id"].int!
                                     
-                                    self.alert_array.append(AlertModel(alert_title: "¡Felicidades!", alert_image: "\(badge_name)", alert_description: "Has desbloqueado una nueva medalla \(badge_name)"))
+                                    self.alert_array.append(AlertModel(alert_title: "¡Felicidades!", alert_image: "\(badge_id)", alert_description: "Has desbloqueado una nueva medalla \(badge_name)"))
                                 }
                                 navigation_controller.setAlert(self.alert_array)
                             }
@@ -321,13 +336,7 @@ class ReadQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
             
             self.view.addSubview(spinner)
             spinner.alpha = 0
-            
-
-            //blurView.bringSubviewToFront(loader!)
         }
-        
-        
-        //self.blurViewLeadingConstraint.constant = UIScreen.mainScreen().bounds.size.width
 
         self.view.layoutIfNeeded()
     }
@@ -363,6 +372,17 @@ class ReadQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destination_view = segue.destination as! ReadQRHelpViewController
         destination_view.coupon = self.coupon
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+//        if AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo) == AVAuthorizationStatus.authorized {
+//            setCameraConfig()
+//        } else {
+//            let background = Utilities.Colors
+//            background.frame = self.view.bounds
+//            self.giverView.layer.insertSublayer(background, at: 0)
+//            self.giverView.alpha = 1
+//        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {

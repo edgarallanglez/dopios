@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireImage
 
 @objc protocol AlertDelegate {
     func pressAlertButton(_ modal: AlertModalViewController)
@@ -60,7 +62,16 @@ class AlertModalViewController: UIViewController {
                 case "error": alert_image.image = UIImage(named: "error")
                 case "warning": alert_image.image = "😦".image()
                 case "Bronce": alert_image.image = UIImage(named: "bronce")
-            default:break
+            default: let imageUrl = URL(string: "\(Utilities.badgeURL)\(model.alert_image).png")
+                     Alamofire.request(imageUrl!).responseImage { response in
+                        if let image = response.result.value {
+                            UIView.animate(withDuration: 0.5, animations: {
+                                self.alert_image.image = image
+                                self.alert_image.alpha = 1
+                            })
+                        }
+                }
+
             }
         }
     }
@@ -70,6 +81,7 @@ class AlertModalViewController: UIViewController {
             for model in alert_array {
                 if model != alert_array.first { self.setNextAlert(model) }
                 self.alert_flag! -= 1
+                self.alert_image.alpha = 0
             }
         } else {
             self.mz_dismissFormSheetController(animated: true, completionHandler: nil)
@@ -103,7 +115,14 @@ class AlertModalViewController: UIViewController {
             case "warning": alert_image.image = "😦".image()
             case "Bronce": alert_image.image = UIImage(named: "bronce")
 
-        default: break
+        default: Alamofire.request("\(Utilities.badgeURL)\(model.alert_image!).png").responseImage { response in
+                    if let image = response.result.value {
+                        UIView.animate(withDuration: 0.5, animations: {
+                            self.alert_image.image = image
+                            self.alert_image.alpha = 1
+                        })
+                    }
+                }
         }
 
     }

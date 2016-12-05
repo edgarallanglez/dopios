@@ -38,8 +38,6 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
         loader.startAnimating()
         loader.lineWidth = 3.0
         UIApplication.shared.statusBarStyle = .lightContent
-        
-        
     }
     
     func validateSession() {
@@ -83,7 +81,6 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
                     "device_os": "ios",
                     "device_token" : User.deviceToken]
                 
-                print(params)
                 self.socialLogin("facebook", params: params)
             }
         })
@@ -172,14 +169,20 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
                 
                 self.performSegue(withIdentifier: "showDashboard", sender: self.notification)
                 
-                LoginController.getPrivacyInfo(success: { (userData) in
-                    let json = userData!
+                LoginController.getPrivacyInfo(success: { (response) in
+                    let json = response!["data"][0]
                     
-                    print("Privacy status \(json)")
+                    print("\(json)")
                     User.privacy_status = json["privacy_status"].int!
+                    User.first_following = json["first_following"].bool!
+                    User.first_follower = json["first_follower"].bool!
+                    User.first_company_fav = json["first_company_fav"].bool!
+                    User.first_using = json["first_using"].bool!
+
                     //User.adult = json["adult"].bool!
 
                     }, failure: { (userData) in
+                        print(userData)
                 })
                 User.activeSession = true
                 self.firstTime = false

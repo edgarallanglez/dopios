@@ -454,7 +454,6 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
             let json = couponsData!
             
             for (_, subJson): (String, JSON) in json["data"] {
-                print(subJson)
                 let coupon_id = subJson["coupon_id"].int
                 let coupon_name = subJson["name"].string
                 let coupon_description = subJson["description"].string
@@ -682,13 +681,14 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
     }
     
     @IBAction func askPermission(_ sender: UIButton) {
-        if CLLocationManager.locationServicesEnabled() {
+        if CLLocationManager.locationServicesEnabled() && CLLocationManager.authorizationStatus() == .notDetermined {
             locationManager.requestWhenInUseAuthorization()
         } else {
             if let url = URL(string:UIApplicationOpenSettingsURLString) {
                 UIApplication.shared.openURL(url)
             }
         }
+
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
