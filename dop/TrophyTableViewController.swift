@@ -51,7 +51,7 @@ class TrophyTableViewController: UITableViewController {
             } else {
                 cell.badge_image.alpha = 0
                 Alamofire.request(imageUrl!).responseImage { response in
-                    if let image = response.result.value{
+                    if let image = response.result.value {
                         cell.badge_image.image = image
                         UIView.animate(withDuration: 0.5, animations: {
                             if model.earned { cell.badge_image.alpha = 1 }

@@ -226,7 +226,7 @@ class BranchCampaignCollectionViewController: UICollectionViewController, ModalD
                     let taken = subJson["taken"].bool ?? false
                     
                     let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: category_id, available: available, taken: taken, start_date: start_date)
-                    model.adult_branch = self.parent_view.branch.adults_only!
+                    model.adult_branch = self.parent_view.branch.adults_only ?? false
                     self.coupons.append(model)
                 }
                 

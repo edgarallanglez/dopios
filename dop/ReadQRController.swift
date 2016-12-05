@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 class ReadQRController{
-    class func sendQRWithSuccess(_ params:[String:AnyObject],
+    class func sendQRWithSuccess(_ params:[String: AnyObject],
                                    success succeed: @escaping ((_ data: JSON?) -> Void),
                                    failure error_found: @escaping ((_ error_data: Error?) -> Void)) {
         let url = "\(Utilities.dopURL)coupon/user/redeem"
@@ -29,7 +29,7 @@ class ReadQRController{
         }
     }
     
-    class func setActivityPrivacy(_ params:[String:AnyObject],
+    class func setActivityPrivacy(_ params:[String: AnyObject],
                                     success succeed: @escaping ((_ data: JSON?) -> Void),
                                     failure error_found: @escaping ((_ error_data: Error?) -> Void)) {
         let url = "\(Utilities.dopURL)coupon/user/privacy"
