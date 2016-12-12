@@ -268,6 +268,14 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
             }
         }
     }
+    
+    func sendPushNotification(params: Parameters) {
+        UserProfileController.sendPushNotification(params, success: { (data) -> Void in
+        },
+                                                   failure: { (error) -> Void in
+        })
+        
+    }
 
     
 

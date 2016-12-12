@@ -96,7 +96,7 @@ class UserProfileStickyHeader: UIView {
                             
                     })
                 })
-                
+                self.sendPushNotification(params: params)
                 },
                 failure: { (data) -> Void in
                     DispatchQueue.main.async(execute: {
@@ -201,6 +201,14 @@ class UserProfileStickyHeader: UIView {
         percent = (((user_exp - min_exp) / (level_up - min_exp)))
         progress = 360 * percent
         exp_progress.setEndDegree(CGFloat(progress), timing: TPPropertyAnimationTimingEaseInEaseOut, duration: 1.5, delay: 0)
+    }
+    
+    func sendPushNotification(params: Parameters) {
+        UserProfileController.sendPushNotification(params, success: { (data) -> Void in
+            },
+            failure: { (error) -> Void in
+            })
+        
     }
     
 }

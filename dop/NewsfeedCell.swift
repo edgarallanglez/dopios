@@ -89,13 +89,11 @@ class NewsfeedCell: UITableViewCell {
             liked = false
         }
 
-        print(params)
         NewsfeedController.likeFriendsActivityWithSuccess(params,
             success: { (data) -> Void in
-                DispatchQueue.main.async(execute: {
-                    let json = data!
-                    print(json)
-                })
+                let params: [String: AnyObject] = [ "user_two_id": self.newsfeedNote?.user_id as AnyObject ]
+                self.sendPushNotification(params: params)
+                
             },
             failure: { (error) -> Void in
                 DispatchQueue.main.async(execute: {
@@ -156,5 +154,14 @@ class NewsfeedCell: UITableViewCell {
         self.user_image.layer.cornerRadius = self.user_image.frame.width / 2
         self.user_image.layer.masksToBounds = true
     }
-
+    
+    func sendPushNotification(params: Parameters) {
+        UserProfileController.sendLikePushNotification(params, success: { (data) -> Void in
+            print(data)
+        },
+        failure: { (error) -> Void in
+            print(error)
+        })
+        
+    }
 }

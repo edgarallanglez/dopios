@@ -385,11 +385,11 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     @IBAction func askPermission(_ sender: UIButton) {
-        UIApplication.shared.registerForRemoteNotifications()
         UIApplication.shared.registerUserNotificationSettings(
             UIUserNotificationSettings(types: [.alert, .sound, .badge],
                                        categories: nil)
         )
+        UIApplication.shared.registerForRemoteNotifications()
     }
 
 }
