@@ -15,6 +15,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
     @IBOutlet var sign_up_or_login_button_height: NSLayoutConstraint!
     @IBOutlet var sign_up_error_label: UILabel!
     @IBOutlet var sign_up_email: LoginTextView!
+    @IBOutlet var swipe_down: UISwipeGestureRecognizer!
     
     @IBOutlet var sign_up_password: LoginTextView!
     @IBOutlet var signup_login_button: UIButton!
@@ -94,7 +95,20 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
         self.LoginButtonView.clipsToBounds = true
         self.fbButton.clipsToBounds = true
         
+        self.swipe_down.addTarget(self, action: #selector(swipeDown))
+        self.swipe_down.direction = .down
+        
     }
+    func swipeDown(gesture: UIGestureRecognizer) {
+        self.showSignUpAnimation(flag: false)
+        
+        self.login_email_text.resignFirstResponder()
+        self.login_password_text.resignFirstResponder()
+        self.sign_up_email.resignFirstResponder()
+        self.sign_up_password.resignFirstResponder()
+        self.sign_up_confirm_password.resignFirstResponder()
+    }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         self.login_email_text.resignFirstResponder()
         self.login_password_text.resignFirstResponder()

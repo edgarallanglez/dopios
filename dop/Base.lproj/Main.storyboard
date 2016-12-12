@@ -565,6 +565,7 @@
                         </variation>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="Qwp-F8-uHk" appends="YES" id="yug-R8-sUV"/>
+                            <outletCollection property="gestureRecognizers" destination="wwh-uv-aA4" appends="YES" id="dl5-2F-eEV"/>
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" id="edN-ug-l0k"/>
@@ -596,6 +597,7 @@
                         <outlet property="sign_up_view_height_constrain" destination="o7K-ez-Zg2" id="dio-Mu-suG"/>
                         <outlet property="sign_up_view_scroll_content" destination="D72-O6-Z8S" id="LXG-AB-afD"/>
                         <outlet property="signup_login_button" destination="8i1-TG-Xo6" id="ni1-81-3jp"/>
+                        <outlet property="swipe_down" destination="wwh-uv-aA4" id="TJ7-45-LZD"/>
                         <segue destination="NXt-XB-PrX" kind="presentation" identifier="showDashboard" id="NZR-gR-mOn"/>
                     </connections>
                 </viewController>
@@ -605,8 +607,38 @@
                         <action selector="touchScreen:" destination="vXZ-lx-hvc" id="4IJ-sO-MFH"/>
                     </connections>
                 </tapGestureRecognizer>
+                <swipeGestureRecognizer direction="right" id="wwh-uv-aA4"/>
             </objects>
             <point key="canvasLocation" x="2924.8000000000002" y="127.736131934033"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="PKh-G3-7xD">
+            <objects>
+                <viewController id="cPG-XB-ASA" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8B7-xK-hPc"/>
+                        <viewControllerLayoutGuide type="bottom" id="rSi-cj-8wn"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Gl0-o1-aMz">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b4M-Pi-v8D">
+                                <rect key="frame" x="0.0" y="7" width="375" height="660"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="b4M-Pi-v8D" secondAttribute="trailing" id="J8k-GD-JzM"/>
+                            <constraint firstItem="b4M-Pi-v8D" firstAttribute="top" secondItem="Gl0-o1-aMz" secondAttribute="top" id="MMR-rG-dir"/>
+                            <constraint firstItem="b4M-Pi-v8D" firstAttribute="leading" secondItem="Gl0-o1-aMz" secondAttribute="leading" id="lNu-oy-O1F"/>
+                            <constraint firstItem="rSi-cj-8wn" firstAttribute="top" secondItem="b4M-Pi-v8D" secondAttribute="bottom" id="rD6-O2-bt4"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SfM-uK-Xus" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4501.6000000000004" y="-883.80809595202402"/>
         </scene>
         <!--Reveal View Controller-->
         <scene sceneID="3nY-1O-UVn">
@@ -4746,7 +4778,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No has tomado ninguna promoción aún" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YXf-Z9-RcB">
-                                <rect key="frame" x="20" y="120" width="337" height="20"/>
+                                <rect key="frame" x="19.5" y="120" width="337" height="20"/>
                                 <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="17"/>
                                 <color key="textColor" red="0.26379796862602234" green="0.2637900710105896" blue="0.26379451155662537" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
