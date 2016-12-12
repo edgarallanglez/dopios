@@ -81,7 +81,11 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
                     "device_os": "ios",
                     "device_token" : User.deviceToken]
                 
-                self.socialLogin("facebook", params: params)
+//                self.socialLogin("facebook", params: params)
+                let storyboard = UIStoryboard(name: "Tutorial", bundle: nil)
+                let controller = storyboard.instantiateViewController(withIdentifier: "TutorialContentViewController")
+                
+                self.present(controller, animated: true, completion: nil)
             }
         })
     }
@@ -104,6 +108,10 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
     override func viewDidAppear(_ animated: Bool) {
         if (FBSDKAccessToken.current() == nil) {
             self.performSegue(withIdentifier: "showLogin", sender: self)
+//            let storyboard = UIStoryboard(name: "Tutorial", bundle: nil)
+//            let controller = storyboard.instantiateViewController(withIdentifier: "Page_0")
+//            
+//            self.present(controller, animated: true, completion: nil)
         } else {
             validateSession()
         }
@@ -157,10 +165,7 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
             
             do {
                 let payload = try decode(jwt: User.userToken["Authorization"]!)
-                
                 User.user_id = payload.body["id"]! as! Int
-                
-                
             } catch {
                 print("Failed to decode JWT: \(error)")
             }
@@ -172,7 +177,7 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
                 LoginController.getPrivacyInfo(success: { (response) in
                     let json = response!["data"][0]
                     
-                    print("\(json)")
+        
                     User.privacy_status = json["privacy_status"].int!
                     User.first_following = json["first_following"].bool!
                     User.first_follower = json["first_follower"].bool!

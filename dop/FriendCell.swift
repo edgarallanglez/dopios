@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class FriendCell: UITableViewCell {
 
@@ -64,6 +65,7 @@ class FriendCell: UITableViewCell {
                             
                     })
                 })
+                self.sendPushNotification(params: params)
 
             },
             failure:{(error) -> Void in
@@ -95,6 +97,7 @@ class FriendCell: UITableViewCell {
                             self.person.is_friend = true
                             self.setFollowButton.setTitle("DEJAR DE SEGUIR", for: UIControlState())
                             self.setFollowButton.setTitleColor(UIColor.white, for: UIControlState())
+                            self.sendPushNotification(params: params)
                     })
                 })
                 },
@@ -109,4 +112,11 @@ class FriendCell: UITableViewCell {
         
     }
     
+    func sendPushNotification(params: Parameters) {
+        UserProfileController.sendPushNotification(params, success: { (data) -> Void in
+        },
+                                                   failure: { (error) -> Void in
+        })
+        
+    }
 }
