@@ -38,5 +38,31 @@ class LoginController {
         }
     }
     
+    class func loginWithEmail(_ url: String, params: [String:AnyObject], success succeed: @escaping ((_ loginData: JSON?) -> Void),failure errorFound: @escaping ((_ loginData: NSError?) -> Void)) {
+        
+        Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                succeed(JSON(response.result.value ?? ""))
+            case .failure(let error):
+                print(error)
+                errorFound(error as NSError)
+            }
+        }
+        
+    }
     
+    class func verifyEmail(_ url: String, params: [String:AnyObject], success succeed: @escaping ((_ loginData: JSON?) -> Void),failure errorFound: @escaping ((_ loginData: NSError?) -> Void)) {
+        
+        Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                succeed(JSON(response.result.value ?? ""))
+            case .failure(let error):
+                print(error)
+                errorFound(error as NSError)
+            }
+        }
+        
+    }
 }

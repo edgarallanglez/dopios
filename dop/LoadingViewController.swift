@@ -18,9 +18,9 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
      @param result The results of the login
      @param error The error (if any) from the login
      */
-
-
-//
+    
+    
+    //
     @IBOutlet weak var loginView: FBSDKLoginButton!
     var loginManager: FBSDKLoginManager = FBSDKLoginManager()
     var firstTime: Bool = true
@@ -28,7 +28,7 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
     var modal_alert: ModalViewController!
     
     var notification: [String: AnyObject] = [:]
-
+    
     @IBOutlet var loader: MMMaterialDesignSpinner!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,12 +41,22 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
     }
     
     func validateSession() {
-        self.loginView.readPermissions = ["public_profile", "email", "user_friends", "user_birthday", "gender"]
-        self.loginView.delegate = self
-        if (FBSDKAccessToken.current() != nil) {
-            self.getFBUserData()
-        } else {
-            self.performSegue(withIdentifier: "showLogin", sender: self)
+        
+        let keychain = A0SimpleKeychain()
+        if let jwt = keychain.string(forKey: "auth0-user-jwt"){
+            print("ENCONTRO TOKEN")
+            User.loginType = "email"
+            User.userToken = [ "Authorization": "\(jwt)" ]
+            self.getUserData()
+        }else{
+            print("NO ENCONTRO TOKEN")
+            self.loginView.readPermissions = ["public_profile", "email", "user_friends", "user_birthday", "gender"]
+            self.loginView.delegate = self
+            if (FBSDKAccessToken.current() != nil) {
+                self.getFBUserData()
+            } else {
+                self.performSegue(withIdentifier: "showLogin", sender: self)
+            }
         }
     }
     
@@ -55,6 +65,51 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
         self.performSegue(withIdentifier: "showLogin", sender: self)
     }
     
+    func getUserData(){
+        do {
+            let payload = try decode(jwt: User.userToken["Authorization"]!)
+            User.user_id = payload.body["id"]! as! Int
+        } catch {
+            self.performSegue(withIdentifier: "showLogin", sender: self)
+            print("Failed to decode JWT: \(error)")
+        }
+        
+        UserProfileController.getUserProfile(User.user_id, success: { (data) -> Void in
+            let json = data!
+            for (_, subJson): (String, JSON) in json["data"] {
+                let names = subJson["names"].string!
+                let surnames = subJson["surnames"].string!
+                let facebook_key = subJson["facebook_key"].string ?? ""
+                let user_id = subJson["user_id"].int!
+                let birth_date = subJson["birth_date"].string!
+                let privacy_status = subJson["privacy_status"].int!
+                let main_image = subJson["main_image"].string!
+                let level = subJson["level"].int!
+                let exp = subJson["exp"].double!
+                let is_friend = subJson["is_friend"].bool!
+                //let total_used = subJson["total_used"].int!
+                
+                User.userName = names
+                User.userSurnames = surnames
+                User.userImageUrl = main_image
+                
+                
+                // self.person = model
+            }
+            
+            DispatchQueue.main.async(execute: {
+                self.performSegue(withIdentifier: "showDashboard", sender: self.notification)
+            })
+            
+            
+        }, failure: { (error) -> Void in
+            DispatchQueue.main.async(execute: {
+                print("Error")
+            })
+        })
+        
+        
+    }
     
     func getFBUserData() {
         let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, middle_name, last_name, email, birthday, gender"])
@@ -69,7 +124,7 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
                 let middle_name = json["middle_name"].string ?? ""
                 let gender = json["gender"].string ?? ""
                 print("\(birthday )")
-        
+                
                 let params:[String: String] = [
                     "facebook_key" : json["id"].string!,
                     "names" : "\(json["first_name"].string!) \(middle_name)",
@@ -86,7 +141,7 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
         })
     }
     
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -95,21 +150,22 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
     func didDismissed(){
         
     }
-
-
+    
+    
     func loginViewShowingLoggedInUser(_ loginView : FBSDKLoginButton!) {
         print("User Logged In")
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        if (FBSDKAccessToken.current() == nil) {
-            self.performSegue(withIdentifier: "showLogin", sender: self)
-        } else {
-            validateSession()
-        }
+        /*if (FBSDKAccessToken.current() == nil) {
+         self.performSegue(withIdentifier: "showLogin", sender: self)
+         } else {
+         validateSession()
+         }*/
+        validateSession()
         
     }
-
+    
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
         print("User Logged In")
         if ((error) != nil) {
@@ -134,65 +190,65 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
     }
     
     
-
+    
     // Social login Call
     func socialLogin(_ type: String, params: [String:String]!){
         print("\(Utilities.dopURL)user/login/" + type)
         
         LoginController.loginWithSocial("\(Utilities.dopURL)user/login/" + type, params: params as [String : AnyObject],
-        success:{ (loginData) -> Void in
-            
-            print(loginData)
-            User.loginType = type
-            let json = loginData!
-            
-            let jwt = json["token"].string!
-            var error: NSError?
-            
-            User.userToken = [ "Authorization": "\(jwt)" ]
-            User.userImageUrl = params["main_image"]!
-            User.userName = params["names"]!
-            User.userSurnames = params["surnames"]!
-            
-            
-            do {
-                let payload = try decode(jwt: User.userToken["Authorization"]!)
-                
-                User.user_id = payload.body["id"]! as! Int
-                
-                
-            } catch {
-                print("Failed to decode JWT: \(error)")
-            }
-            
-            DispatchQueue.main.async(execute: {
-                
-                self.performSegue(withIdentifier: "showDashboard", sender: self.notification)
-                
-                LoginController.getPrivacyInfo(success: { (response) in
-                    let json = response!["data"][0]
-                    
-                    print("\(json)")
-                    User.privacy_status = json["privacy_status"].int!
-                    User.first_following = json["first_following"].bool!
-                    User.first_follower = json["first_follower"].bool!
-                    User.first_company_fav = json["first_company_fav"].bool!
-                    User.first_using = json["first_using"].bool!
-
-                    //User.adult = json["adult"].bool!
-
-                    }, failure: { (userData) in
-                        print(userData)
-                })
-                User.activeSession = true
-                self.firstTime = false
-            })
+                                        success:{ (loginData) -> Void in
+                                            
+                                            print(loginData)
+                                            User.loginType = type
+                                            let json = loginData!
+                                            
+                                            let jwt = json["token"].string!
+                                            var error: NSError?
+                                            
+                                            User.userToken = [ "Authorization": "\(jwt)" ]
+                                            User.userImageUrl = params["main_image"]!
+                                            User.userName = params["names"]!
+                                            User.userSurnames = params["surnames"]!
+                                            
+                                            
+                                            do {
+                                                let payload = try decode(jwt: User.userToken["Authorization"]!)
+                                                
+                                                User.user_id = payload.body["id"]! as! Int
+                                                
+                                                
+                                            } catch {
+                                                print("Failed to decode JWT: \(error)")
+                                            }
+                                            
+                                            DispatchQueue.main.async(execute: {
+                                                
+                                                self.performSegue(withIdentifier: "showDashboard", sender: self.notification)
+                                                
+                                                LoginController.getPrivacyInfo(success: { (response) in
+                                                    let json = response!["data"][0]
+                                                    
+                                                    print("\(json)")
+                                                    User.privacy_status = json["privacy_status"].int!
+                                                    User.first_following = json["first_following"].bool!
+                                                    User.first_follower = json["first_follower"].bool!
+                                                    User.first_company_fav = json["first_company_fav"].bool!
+                                                    User.first_using = json["first_using"].bool!
+                                                    
+                                                    //User.adult = json["adult"].bool!
+                                                    
+                                                }, failure: { (userData) in
+                                                    print(userData)
+                                                })
+                                                User.activeSession = true
+                                                self.firstTime = false
+                                            })
         },
-        failure:{ (error) -> Void in
-            DispatchQueue.main.async(execute: {
-                print(error)
-                self.triggerAlert()
-            })
+                                        failure:{ (error) -> Void in
+                                            DispatchQueue.main.async(execute: {
+                                                print(error)
+                                                self.triggerAlert()
+                                            })
         })
     }
     
@@ -213,10 +269,10 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
     
     func pressActionButton(_ modal: ModalViewController) {
         modal.dismiss(animated: true, completionHandler: { (modal) -> Void in
-              DispatchQueue.main.async(execute: {
+            DispatchQueue.main.async(execute: {
                 self.validateSession()
-              })
+            })
         })
-
+        
     }
 }

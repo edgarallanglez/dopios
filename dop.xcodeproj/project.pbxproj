@@ -204,6 +204,9 @@
 		A0F1E0321BF3D3000092C1F4 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F1E0311BF3D3000092C1F4 /* BaseViewController.swift */; };
 		A0F7E9201AFAE48500A4F0F2 /* CouponCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F7E91E1AFAE48500A4F0F2 /* CouponCell.swift */; };
 		A0F7E9211AFAE48500A4F0F2 /* CouponCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0F7E91F1AFAE48500A4F0F2 /* CouponCell.xib */; };
+		A0F8DE621DF9CB0A003A01F8 /* LoginTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F8DE611DF9CB0A003A01F8 /* LoginTextView.swift */; };
+		A0F8DE7A1DFA4DA8003A01F8 /* A0SimpleKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F8DE761DFA4DA8003A01F8 /* A0SimpleKeychain.m */; };
+		A0F8DE7B1DFA4DA8003A01F8 /* A0SimpleKeychain+KeyPair.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F8DE781DFA4DA8003A01F8 /* A0SimpleKeychain+KeyPair.m */; };
 		A0FB84341BFFF0630099B2F4 /* ReadQRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0FB84331BFFF0630099B2F4 /* ReadQRViewController.swift */; };
 		A0FB84361BFFF07D0099B2F4 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0FB84351BFFF07D0099B2F4 /* AVFoundation.framework */; };
 		A0FB84381C03F5780099B2F4 /* ReadQRController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0FB84371C03F5780099B2F4 /* ReadQRController.swift */; };
@@ -656,6 +659,12 @@
 		A0F1E0311BF3D3000092C1F4 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		A0F7E91E1AFAE48500A4F0F2 /* CouponCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CouponCell.swift; sourceTree = "<group>"; };
 		A0F7E91F1AFAE48500A4F0F2 /* CouponCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CouponCell.xib; sourceTree = "<group>"; };
+		A0F8DE611DF9CB0A003A01F8 /* LoginTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginTextView.swift; sourceTree = "<group>"; };
+		A0F8DE751DFA4DA8003A01F8 /* A0SimpleKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = A0SimpleKeychain.h; sourceTree = "<group>"; };
+		A0F8DE761DFA4DA8003A01F8 /* A0SimpleKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = A0SimpleKeychain.m; sourceTree = "<group>"; };
+		A0F8DE771DFA4DA8003A01F8 /* A0SimpleKeychain+KeyPair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "A0SimpleKeychain+KeyPair.h"; sourceTree = "<group>"; };
+		A0F8DE781DFA4DA8003A01F8 /* A0SimpleKeychain+KeyPair.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "A0SimpleKeychain+KeyPair.m"; sourceTree = "<group>"; };
+		A0F8DE791DFA4DA8003A01F8 /* SimpleKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleKeychain.h; sourceTree = "<group>"; };
 		A0FB84331BFFF0630099B2F4 /* ReadQRViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadQRViewController.swift; sourceTree = "<group>"; };
 		A0FB84351BFFF07D0099B2F4 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		A0FB84371C03F5780099B2F4 /* ReadQRController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadQRController.swift; sourceTree = "<group>"; };
@@ -1044,11 +1053,13 @@
 				A0646AF11C2C649D00527B90 /* CustomModals */,
 				9D4C04801B18EAF600D5DCEE /* FontAwesome.ttf */,
 				9D697C791B5EF13000D786AA /* iconfonts-fontawesome.swift */,
+				A0F8DE741DFA4D9B003A01F8 /* SimpleKeychain */,
 				A0B74E491DBBCABF0061F0CF /* timeago.swift */,
 				A09AB4E11AF99136004287F7 /* SwiftyJSON.swift */,
 				A060F7871B717DB9009D6ADB /* UIImage+ImageEffects.h */,
 				A060F7881B717DB9009D6ADB /* UIImage+ImageEffects.m */,
 				A0EB97AF1B05131E005112EF /* Utilities.swift */,
+				A0F8DE611DF9CB0A003A01F8 /* LoginTextView.swift */,
 				6D8D32691C89EDDA00DA0DBD /* Constants.swift */,
 			);
 			name = Utilities;
@@ -1366,6 +1377,18 @@
 				A0EB97B11B051F02005112EF /* LoginController.swift */,
 			);
 			name = Login;
+			sourceTree = "<group>";
+		};
+		A0F8DE741DFA4D9B003A01F8 /* SimpleKeychain */ = {
+			isa = PBXGroup;
+			children = (
+				A0F8DE751DFA4DA8003A01F8 /* A0SimpleKeychain.h */,
+				A0F8DE761DFA4DA8003A01F8 /* A0SimpleKeychain.m */,
+				A0F8DE771DFA4DA8003A01F8 /* A0SimpleKeychain+KeyPair.h */,
+				A0F8DE781DFA4DA8003A01F8 /* A0SimpleKeychain+KeyPair.m */,
+				A0F8DE791DFA4DA8003A01F8 /* SimpleKeychain.h */,
+			);
+			name = SimpleKeychain;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1794,9 +1817,12 @@
 				A01D17DB1C2B2A15002FC5F2 /* MZFormSheetBackgroundWindowViewController.m in Sources */,
 				A01A39BC1BDF0D8C00F231F5 /* NotificationController.swift in Sources */,
 				9DB327CE1B863C84006BF882 /* MoreMenuViewController.swift in Sources */,
+				A0F8DE7A1DFA4DA8003A01F8 /* A0SimpleKeychain.m in Sources */,
 				A09AB4DB1AF95A26004287F7 /* DashboardViewController.swift in Sources */,
+				A0F8DE7B1DFA4DA8003A01F8 /* A0SimpleKeychain+KeyPair.m in Sources */,
 				A01A39BA1BDF050800F231F5 /* NotificationCell.swift in Sources */,
 				A01D17DA1C2B2A15002FC5F2 /* MZFormSheetBackgroundWindow.m in Sources */,
+				A0F8DE621DF9CB0A003A01F8 /* LoginTextView.swift in Sources */,
 				A06B35791B9F5D9F003C90EF /* SearchCell.swift in Sources */,
 				A01D17DF1C2B2A15002FC5F2 /* UIImage+Additional.m in Sources */,
 				A0995E451C29DAA900C4F802 /* TTTAttributedLabel.m in Sources */,
