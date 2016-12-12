@@ -52,18 +52,22 @@ class MoreMenuViewController: UITableViewController {
     }
     
     func getUserImage() {
-        let url: URL = URL(string: User.userImageUrl)!
+        if User.userImageUrl != ""{
+            let url: URL = URL(string: User.userImageUrl)!
+            
+            Alamofire.request(url).responseImage { response in
+                if let image = response.result.value{
+                    self.userImage.image = image
+                    self.userImage.alpha = 1
+                }
+            }
+        }
         userImage.image = UIImage(named: "dop-logo-transparent")
         userImage.backgroundColor = Utilities.lightGrayColor
         userImage.alpha = 0.3
 
     
-        Alamofire.request(url).responseImage { response in
-            if let image = response.result.value{
-                self.userImage.image = image
-                self.userImage.alpha = 1
-            }
-        }
+        
         
     }
     
@@ -97,11 +101,15 @@ class MoreMenuViewController: UITableViewController {
                 // The session state handler (in the app delegate) will be called automatically
                 let loginManager: FBSDKLoginManager = FBSDKLoginManager()
                 loginManager.logOut()
-                self.dismiss(animated: true, completion:nil)
                 User.activeSession = false
-                performSegue(withIdentifier: "loginController", sender: self)
+                self.dismiss(animated: true, completion:nil)
+                //performSegue(withIdentifier: "loginController", sender: self)
             }
-
+        case("email"):
+            A0SimpleKeychain().deleteEntry(forKey: "auth0-user-jwt")
+            User.activeSession = false
+            self.dismiss(animated: true, completion:nil)
+            //performSegue(withIdentifier: "loginController", sender: self)
         default:
             print("no hay sesion activa")
         }
