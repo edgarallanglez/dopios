@@ -221,14 +221,14 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
         sign_up_password.text = ""
         sign_up_confirm_password.text = ""
         
-        sign_up_view_bottom_constrain.constant = -(UIScreen.main.bounds.height/2)
+        /*sign_up_view_bottom_constrain.constant = -(UIScreen.main.bounds.height/2)
         self.view.layoutIfNeeded()
         
         
         self.fbButton.isUserInteractionEnabled = true
-        self.sign_up_or_login_button.isUserInteractionEnabled = true
+        self.sign_up_or_login_button.isUserInteractionEnabled = true*/
         
-        self.MD_spinner.alpha = 0
+        
         
     }
     
@@ -369,11 +369,11 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
         UserProfileController.getUserProfile(User.user_id, success: { (data) -> Void in
             let json = data!
             for (_, subJson): (String, JSON) in json["data"] {
-                let names = subJson["names"].string!
-                let surnames = subJson["surnames"].string!
+                let names = subJson["names"].string ?? ""
+                let surnames = subJson["surnames"].string ?? ""
                 let facebook_key = subJson["facebook_key"].string ?? ""
                 let user_id = subJson["user_id"].int!
-                let birth_date = subJson["birth_date"].string!
+                let birth_date = subJson["birth_date"].string ?? ""
                 let privacy_status = subJson["privacy_status"].int!
                 let main_image = subJson["main_image"].string ?? ""
                 let level = subJson["level"].int!
@@ -403,11 +403,10 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
                 print("Error")
             })
         })
-        
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        self.MD_spinner.alpha = 0
         self.dop_logo_y_constraint.constant = -200
         UIView.animate(withDuration: 0.8, animations: { self.view.layoutIfNeeded() })
         Utilities.slideFromBottomAnimation(flat_city_image, delay: 0.4, duration: 1.5, yPosition: 700)

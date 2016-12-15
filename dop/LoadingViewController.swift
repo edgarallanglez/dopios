@@ -27,11 +27,17 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
     var alert_array = [AlertModel]()
     var modal_alert: ModalViewController!
 
+    var tutorial_checked: Bool = true
+
     var notification: [String: AnyObject] = [:]
 
     @IBOutlet var loader: MMMaterialDesignSpinner!
     override func viewDidLoad() {
         super.viewDidLoad()
+        if UserDefaults.standard.object(forKey: "tutorial_checked") != nil{
+            tutorial_checked = UserDefaults.standard.value(forKeyPath: "tutorial_checked") as! Bool
+        }
+
         let background = Utilities.Colors
         background.frame = self.view.bounds
         self.view.layer.insertSublayer(background, at: 0)
@@ -77,28 +83,43 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
         UserProfileController.getUserProfile(User.user_id, success: { (data) -> Void in
             let json = data!
             for (_, subJson): (String, JSON) in json["data"] {
-                let names = subJson["names"].string!
-                let surnames = subJson["surnames"].string!
+                let names = subJson["names"].string ?? ""
+                let surnames = subJson["surnames"].string ?? ""
                 let facebook_key = subJson["facebook_key"].string ?? ""
                 let user_id = subJson["user_id"].int!
-                let birth_date = subJson["birth_date"].string!
-                let privacy_status = subJson["privacy_status"].int!
-                let main_image = subJson["main_image"].string!
-                let level = subJson["level"].int!
-                let exp = subJson["exp"].double!
+                let birth_date = subJson["birth_date"].string ?? ""
+                let privacy_status = subJson["privacy_status"].int ?? 0
+                let main_image = subJson["main_image"].string ?? ""
+                let level = subJson["level"].int ?? 0
+                let exp = subJson["exp"].double ?? 0
                 let is_friend = subJson["is_friend"].bool!
+                let email = subJson["email"].string ?? ""
                 //let total_used = subJson["total_used"].int!
 
                 User.userName = names
                 User.userSurnames = surnames
                 User.userImageUrl = main_image
+                User.userEmail = email
 
 
                 // self.person = model
             }
 
             DispatchQueue.main.async(execute: {
-                self.performSegue(withIdentifier: "showDashboard", sender: self.notification)
+                if User.userName == "" || User.userSurnames == "" || User.userImageUrl == "" || User.userEmail == ""{
+                    let storyboard = UIStoryboard(name: "Register", bundle: nil)
+                    let controller = storyboard.instantiateViewController(withIdentifier: "RegisterViewController")
+                    self.present(controller, animated: true, completion: nil)
+                }else{
+                    if self.tutorial_checked == false {
+                        let storyboard = UIStoryboard(name: "Tutorial", bundle: nil)
+                        let controller = storyboard.instantiateViewController(withIdentifier: "TutorialContentViewController")
+                        self.present(controller, animated: true, completion: nil)
+
+                    }else{
+                        self.performSegue(withIdentifier: "showDashboard", sender: self.notification)
+                    }
+                }
             })
 
 
@@ -137,7 +158,6 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
                     "device_token" : User.deviceToken]
 
                 self.socialLogin("facebook", params: params)
-
             }
         })
     }
@@ -158,15 +178,6 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        if (FBSDKAccessToken.current() == nil) {
-            self.performSegue(withIdentifier: "showLogin", sender: self)
-//            let storyboard = UIStoryboard(name: "Tutorial", bundle: nil)
-//            let controller = storyboard.instantiateViewController(withIdentifier: "Page_0")
-//
-//            self.present(controller, animated: true, completion: nil)
-        } else {
-
-        }
         validateSession()
     }
 
@@ -213,6 +224,7 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
                                             User.userImageUrl = params["main_image"]!
                                             User.userName = params["names"]!
                                             User.userSurnames = params["surnames"]!
+                                            User.userEmail = params["email"]!
 
 
                                             do {
@@ -223,15 +235,20 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
                                             }
 
                                             DispatchQueue.main.async(execute: {
-                                                let first_time_flag: Bool = UserDefaults.standard.value(forKey: "tutorial_checked") as! Bool? ?? false
-                                                if  !first_time_flag {
-                                                    let storyboard = UIStoryboard(name: "Tutorial", bundle: nil)
-                                                    let controller = storyboard.instantiateViewController(withIdentifier: "TutorialContentViewController")
-                                                    
+
+                                                if User.userName == "" || User.userSurnames == "" || User.userImageUrl == "" || User.userEmail == ""{
+                                                    let storyboard = UIStoryboard(name: "Register", bundle: nil)
+                                                    let controller = storyboard.instantiateViewController(withIdentifier: "RegisterViewController")
                                                     self.present(controller, animated: true, completion: nil)
-                                                } else { self.performSegue(withIdentifier: "showDashboard", sender: self.notification) }
-                                                
-                                                UIApplication.shared.registerForRemoteNotifications()
+                                                } else {
+                                                    if self.tutorial_checked {
+                                                        self.performSegue(withIdentifier: "showDashboard", sender: self.notification)
+                                                    } else {
+                                                        let storyboard = UIStoryboard(name: "Tutorial", bundle: nil)
+                                                        let controller = storyboard.instantiateViewController(withIdentifier: "TutorialContentViewController")
+                                                        self.present(controller, animated: true, completion: nil)
+                                                    }
+                                                }
 
                                                 LoginController.getPrivacyInfo(success: { (response) in
                                                     let json = response!["data"][0]
