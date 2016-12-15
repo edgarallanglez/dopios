@@ -51,6 +51,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
     var firstTime: Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
+        UIApplication.shared.statusBarStyle = .lightContent
         nearestContainer.alpha = 0
         if (CLLocationManager.authorizationStatus() == .denied || CLLocationManager.authorizationStatus() == .notDetermined) {
             self.askPermissionButton.isHidden = false

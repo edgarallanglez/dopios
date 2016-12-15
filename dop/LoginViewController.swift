@@ -390,9 +390,9 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
             }
             
             DispatchQueue.main.async(execute: {
-                if User.userName != ""{
+                if User.userName != "" {
                     self.performSegue(withIdentifier: "showDashboard", sender: self)
-                }else{
+                } else {
                     
                 }
             })
@@ -591,8 +591,14 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
                                             }
                                             
                                             DispatchQueue.main.async(execute: {
-                                                //if (!User.activeSession) {
-                                                self.performSegue(withIdentifier: "showDashboard", sender: self)
+                                                let first_time_flag: Bool = UserDefaults.standard.value(forKey: "tutorial_checked") as! Bool? ?? false
+                                                if  !first_time_flag {
+                                                    let storyboard = UIStoryboard(name: "Tutorial", bundle: nil)
+                                                    let controller = storyboard.instantiateViewController(withIdentifier: "TutorialContentViewController")
+                                                    
+                                                    self.present(controller, animated: true, completion: nil)
+                                                } else { self.performSegue(withIdentifier: "showDashboard", sender: self) }
+//                                                self.performSegue(withIdentifier: "showDashboard", sender: self)
                                                 User.activeSession = true
                                                 //}
                                             })

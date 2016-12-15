@@ -37,10 +37,13 @@ class PageThreeViewController: UIViewController {
             
             self.follow_button.contentEdgeInsets = UIEdgeInsetsMake(16, 16, 16, 16)
             self.follow_button.backgroundColor = Utilities.dopColor
+            self.follow_button.imageView?.alpha = 0
             self.view.layoutIfNeeded()
         }, completion: { (Bool) in
-            self.follow_button.setImage(UIImage(named: "following-icon"), for: UIControlState())
-            //
+            UIButton.animate(withDuration: 0.5, delay: 0, options: UIViewAnimationOptions(), animations: {
+                self.follow_button.setImage(UIImage(named: "following-icon"), for: UIControlState())
+                self.follow_button.imageView?.alpha = 1
+            })
             
         })
     }

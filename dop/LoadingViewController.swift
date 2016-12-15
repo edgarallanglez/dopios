@@ -136,11 +136,8 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
                     "device_os": "ios",
                     "device_token" : User.deviceToken]
 
-//                self.socialLogin("facebook", params: params)
-                let storyboard = UIStoryboard(name: "Tutorial", bundle: nil)
-                let controller = storyboard.instantiateViewController(withIdentifier: "TutorialContentViewController")
+                self.socialLogin("facebook", params: params)
 
-                self.present(controller, animated: true, completion: nil)
             }
         })
     }
@@ -220,17 +217,21 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
 
                                             do {
                                                 let payload = try decode(jwt: User.userToken["Authorization"]!)
-
                                                 User.user_id = payload.body["id"]! as! Int
-
-
                                             } catch {
                                                 print("Failed to decode JWT: \(error)")
                                             }
 
                                             DispatchQueue.main.async(execute: {
-
-                                                self.performSegue(withIdentifier: "showDashboard", sender: self.notification)
+                                                let first_time_flag: Bool = UserDefaults.standard.value(forKey: "tutorial_checked") as! Bool? ?? false
+                                                if  !first_time_flag {
+                                                    let storyboard = UIStoryboard(name: "Tutorial", bundle: nil)
+                                                    let controller = storyboard.instantiateViewController(withIdentifier: "TutorialContentViewController")
+                                                    
+                                                    self.present(controller, animated: true, completion: nil)
+                                                } else { self.performSegue(withIdentifier: "showDashboard", sender: self.notification) }
+                                                
+                                                UIApplication.shared.registerForRemoteNotifications()
 
                                                 LoginController.getPrivacyInfo(success: { (response) in
                                                     let json = response!["data"][0]

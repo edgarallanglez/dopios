@@ -9,11 +9,14 @@
 import UIKit
 
 class PageOneViewController: UIViewController {
+    
+    @IBOutlet weak var permission_button: UIButton!
+    
     var locationManager = CLLocationManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        Utilities.applyPlainShadow(permission_button)
         // Do any additional setup after loading the view.
     }
 

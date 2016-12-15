@@ -12,7 +12,7 @@ class TutorialContentViewController: UIViewController, UIPageViewControllerDeleg
     
     @IBOutlet weak var tutorial_page_control: UIPageControl!
     
-    var identifiers: Array = ["page_0", "page_1", "page_2", "page_3", "page_4", "page_5"]
+    var identifiers: Array = ["page_0", "page_1", "page_2", "page_3", "page_4", "page_5", "page_6"]
     var index: Int!
     var pageViewController : UIPageViewController!
 
@@ -52,6 +52,7 @@ class TutorialContentViewController: UIViewController, UIPageViewControllerDeleg
             case "page_3": self.index = 2
             case "page_4": self.index = 3
             case "page_5": self.index = 4
+            case "page_6": self.index = 5
             
         default: return nil
         }
@@ -68,7 +69,8 @@ class TutorialContentViewController: UIViewController, UIPageViewControllerDeleg
             case "page_2": self.index = 3
             case "page_3": self.index = 4
             case "page_4": self.index = 5
-            case "page_5": return nil
+            case "page_5": self.index = 6
+            case "page_6": return nil
             
         default: return nil
         }
@@ -78,7 +80,7 @@ class TutorialContentViewController: UIViewController, UIPageViewControllerDeleg
     }
     
     func presentationCount(for pageViewController: UIPageViewController) -> Int {
-        return 6
+        return 7
     }
     
     func presentationIndex(for pageViewController: UIPageViewController) -> Int {
@@ -113,7 +115,11 @@ class TutorialContentViewController: UIViewController, UIPageViewControllerDeleg
             let viewController = self.storyboard!.instantiateViewController(withIdentifier: "Page_5")
             
             return viewController
+        
+        case 6:
+            let viewController = self.storyboard!.instantiateViewController(withIdentifier: "Page_6")
             
+            return viewController
         default:
             return UIViewController()
         }

@@ -20,7 +20,7 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
     var searchViewIsOpen: Bool = false
     var searchViewIsSegue: Bool = false
     
-    var cancelSearchButton:UIBarButtonItem!
+    var cancelSearchButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,12 +51,11 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
      
         
         
-        for subView in self.searchBar.subviews{
-            for subsubView in subView.subviews{
-                if let textField = subsubView as? UITextField{
+        for subView in self.searchBar.subviews {
+            for subsubView in subView.subviews {
+                if let textField = subsubView as? UITextField {
                     textField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("Buscar", comment: ""), attributes: [NSForegroundColorAttributeName: Utilities.extraLightGrayColor])
                     textField.textColor = UIColor.white
-
                 }
             }
         }

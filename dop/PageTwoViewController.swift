@@ -11,9 +11,10 @@ import AVFoundation
 
 class PageTwoViewController: UIViewController {
 
+    @IBOutlet weak var permission_button: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        Utilities.applyPlainShadow(permission_button)
         // Do any additional setup after loading the view.
     }
 

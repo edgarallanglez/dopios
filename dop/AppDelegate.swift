@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         URLCache.shared.removeAllCachedResponses()
         let notificationType = UIApplication.shared.currentUserNotificationSettings!.types
-        if notificationType.contains(UIUserNotificationType.alert) {
+        if notificationType.contains(UIUserNotificationType.alert) && !User.userToken.isEmpty  {
             registerForPushNotifications(application)
         }
         
@@ -101,7 +101,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         let tokenChars = (deviceToken as NSData).bytes.bindMemory(to: CChar.self, capacity: deviceToken.count)
-        var tokenString = ""
+        var tokenString: String = ""
         
         for i in 0..<deviceToken.count {
             tokenString += String(format: "%02.2hhx", arguments: [tokenChars[i]])
@@ -109,11 +109,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         User.deviceToken = tokenString
         let params: Parameters = ["device_token": User.deviceToken]
+        
         Alamofire.request("\(Utilities.dopURL)user/device_token/set",
             method: .post,
             parameters: params,
             encoding: JSONEncoding.default,
-            headers: User.userToken ).validate().responseJSON { response in
+            headers: User.userToken).validate().responseJSON { response in
                 print(response)
         }
         

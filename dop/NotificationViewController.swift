@@ -11,13 +11,11 @@ import Alamofire
 import AlamofireImage
 
 class NotificationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, TTTAttributedLabelDelegate {
+    
     @IBOutlet var notificationButton: UIButton!
-
-
     @IBOutlet var mainLoader: MMMaterialDesignSpinner!
     @IBOutlet var notification_table: UITableView!
     @IBOutlet weak var giverView: UIView!
-    
     
     //let socketIO : SocketIO = SocketIO()
     var notifications = [Notification]()

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -167,8 +167,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="dop te permite redimir promociones escaneándo el código QR a través tu cámara" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tar-Pe-h5J">
-                                <rect key="frame" x="32" y="311" width="256" height="92"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Puedes seguir y ser seguido por tus amigos para poder compartir su actividad en dop" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tar-Pe-h5J">
+                                <rect key="frame" x="32" y="311" width="256" height="91.5"/>
                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="19"/>
                                 <color key="textColor" red="0.50980392159999999" green="0.50980392159999999" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -523,10 +523,10 @@
                                         <exclude reference="6Mp-z9-7zW"/>
                                     </mask>
                                     <mask key="constraints">
+                                        <exclude reference="ESr-dl-r2f"/>
                                         <exclude reference="1Ef-uM-SFU"/>
                                         <exclude reference="py0-en-Rxy"/>
                                         <exclude reference="xqt-d1-nXq"/>
-                                        <exclude reference="ESr-dl-r2f"/>
                                     </mask>
                                 </variation>
                                 <variation key="widthClass=compact">
@@ -536,10 +536,10 @@
                                         <include reference="6Mp-z9-7zW"/>
                                     </mask>
                                     <mask key="constraints">
+                                        <include reference="ESr-dl-r2f"/>
                                         <include reference="1Ef-uM-SFU"/>
                                         <include reference="py0-en-Rxy"/>
                                         <include reference="xqt-d1-nXq"/>
-                                        <include reference="ESr-dl-r2f"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -577,11 +577,42 @@
                     </view>
                     <connections>
                         <outlet property="notification_view" destination="efs-uv-h2Q" id="UzC-ZY-xWF"/>
+                        <outlet property="permission_button" destination="S8n-Vp-OIQ" id="9tr-G1-Fmc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fOQ-ge-VaJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1323.75" y="-770.07042253521126"/>
+        </scene>
+        <!--page_6-->
+        <scene sceneID="Vw1-yx-phn">
+            <objects>
+                <viewController storyboardIdentifier="Page_6" title="page_6" id="lYm-7d-y0r" customClass="LastPageViewController" customModule="dop" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="OGL-qt-VDp"/>
+                        <viewControllerLayoutGuide type="bottom" id="Yc8-3v-RfM"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="9t1-PZ-JTB">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bye 🙊" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UCN-nt-0N2">
+                                <rect key="frame" x="125.5" y="271.5" width="69.5" height="26.5"/>
+                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="22"/>
+                                <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="UCN-nt-0N2" firstAttribute="centerX" secondItem="9t1-PZ-JTB" secondAttribute="centerX" id="9TX-fY-qZo"/>
+                            <constraint firstItem="UCN-nt-0N2" firstAttribute="centerY" secondItem="9t1-PZ-JTB" secondAttribute="centerY" id="LTW-2n-HYh"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4DM-at-CYg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-638" y="-770"/>
         </scene>
         <!--page_1-->
         <scene sceneID="NLl-Ii-U9j">
@@ -648,6 +679,9 @@
                             <constraint firstItem="JP1-RS-1al" firstAttribute="centerX" secondItem="Yow-Aa-1aM" secondAttribute="centerX" id="zhB-Ym-pSy"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="permission_button" destination="FFM-ml-B69" id="gbH-N9-uDQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k55-tB-CPK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -697,7 +731,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="dop te permite redimir promociones escaneándo el código QR a través tu cámara" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0dH-YI-PQF">
-                                <rect key="frame" x="32" y="362" width="256" height="62"/>
+                                <rect key="frame" x="32" y="362" width="256" height="61.5"/>
                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
                                 <color key="textColor" red="0.50980392159999999" green="0.50980392159999999" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -719,6 +753,9 @@
                             <constraint firstItem="0dH-YI-PQF" firstAttribute="width" secondItem="AlH-sN-8M3" secondAttribute="width" multiplier="0.8" id="xap-KJ-jK0"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="permission_button" destination="a3t-8a-W46" id="tMD-8k-YRA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lUT-2C-9gN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

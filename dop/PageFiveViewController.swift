@@ -10,10 +10,12 @@ import UIKit
 
 class PageFiveViewController: UIViewController {
 
+    @IBOutlet weak var permission_button: UIButton!
     @IBOutlet weak var notification_view: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
         Utilities.applyPlainShadow(notification_view)
+        Utilities.applyPlainShadow(permission_button)
         // Do any additional setup after loading the view.
     }
     
@@ -21,10 +23,11 @@ class PageFiveViewController: UIViewController {
         let status = UIApplication.shared.currentUserNotificationSettings
 
         
-        if let settingTypes = status?.types, settingTypes != UIUserNotificationType() || settingTypes == UIUserNotificationType() {
+        if let settingTypes = status?.types, settingTypes != UIUserNotificationType() {
             let settingsUrl = URL(string: UIApplicationOpenSettingsURLString)
             UIApplication.shared.openURL(settingsUrl!)
         } else {
+//            if UIApplication.shared.currentUserNotificationSettings?.hashValue == 0 {
             UIApplication.shared.registerForRemoteNotifications()
             UIApplication.shared.registerUserNotificationSettings(
                 UIUserNotificationSettings(types: [.alert, .sound, .badge],
