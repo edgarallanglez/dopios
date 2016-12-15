@@ -110,14 +110,14 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
                     let storyboard = UIStoryboard(name: "Register", bundle: nil)
                     let controller = storyboard.instantiateViewController(withIdentifier: "RegisterViewController")
                     self.present(controller, animated: true, completion: nil)
-                }else{
-                    if self.tutorial_checked == false {
+                } else {
+                    if self.tutorial_checked {
+                        self.performSegue(withIdentifier: "showDashboard", sender: self.notification)
+                        UIApplication.shared.registerForRemoteNotifications()
+                    } else {
                         let storyboard = UIStoryboard(name: "Tutorial", bundle: nil)
                         let controller = storyboard.instantiateViewController(withIdentifier: "TutorialContentViewController")
                         self.present(controller, animated: true, completion: nil)
-
-                    }else{
-                        self.performSegue(withIdentifier: "showDashboard", sender: self.notification)
                     }
                 }
             })
@@ -243,6 +243,7 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
                                                 } else {
                                                     if self.tutorial_checked {
                                                         self.performSegue(withIdentifier: "showDashboard", sender: self.notification)
+                                                        UIApplication.shared.registerForRemoteNotifications()
                                                     } else {
                                                         let storyboard = UIStoryboard(name: "Tutorial", bundle: nil)
                                                         let controller = storyboard.instantiateViewController(withIdentifier: "TutorialContentViewController")
