@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="wsr-0B-cyM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="wsr-0B-cyM">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -670,7 +670,7 @@
             <objects>
                 <navigationController title=" " id="VaC-N9-SbM" customClass="NavigationController" customModule="dop" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="Kfj-AK-f4w"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="UmP-Ab-0o3">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="UmP-Ab-0o3">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1992,7 +1992,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="140" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Wkj-oU-bl0">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
-                                <color key="backgroundColor" red="1" green="0.99997437000274658" blue="0.99999129772186279" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.89607453349999999" green="0.89601361749999997" blue="0.89604926110000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="0.0" shouldIndentWhileEditing="NO" reuseIdentifier="default_view" rowHeight="250" id="8OX-es-kg1">
                                         <rect key="frame" x="0.0" y="28" width="375" height="250"/>
@@ -2000,6 +2000,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8OX-es-kg1" id="jfa-2G-waU">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="249"/>
                                             <autoresizingMask key="autoresizingMask"/>
+
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dop_logo_outline" translatesAutoresizingMaskIntoConstraints="NO" id="qkC-eU-nVC">
                                                     <rect key="frame" x="158" y="95" width="60" height="60"/>
@@ -2099,14 +2100,22 @@
                                     </mask>
                                 </variation>
                             </view>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="NO HAY ACTIVIDAD PARA MOSTRAR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ky0-yO-RMe">
+                                <rect key="frame" x="19" y="323" width="337" height="20"/>
+                                <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="17"/>
+                                <color key="textColor" red="0.26379796859999999" green="0.26379007100000001" blue="0.2637945116" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="0.99997437000274658" blue="0.99999129772186279" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.89607453349999999" green="0.89601361749999997" blue="0.89604926110000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="VCY-2h-5fF" firstAttribute="centerX" secondItem="W3U-ac-5LL" secondAttribute="centerX" id="1po-6b-SRb"/>
                             <constraint firstItem="VCY-2h-5fF" firstAttribute="centerY" secondItem="W3U-ac-5LL" secondAttribute="centerY" id="4Ll-Kg-Wjs"/>
                             <constraint firstItem="37d-tA-MMx" firstAttribute="top" secondItem="Wkj-oU-bl0" secondAttribute="bottom" id="8mV-jT-fxi"/>
                             <constraint firstItem="Wkj-oU-bl0" firstAttribute="leading" secondItem="W3U-ac-5LL" secondAttribute="leading" id="U2d-AI-neT"/>
                             <constraint firstItem="Wkj-oU-bl0" firstAttribute="top" secondItem="IO3-pJ-NPT" secondAttribute="bottom" id="VMy-2e-NLy"/>
+                            <constraint firstItem="ky0-yO-RMe" firstAttribute="centerX" secondItem="W3U-ac-5LL" secondAttribute="centerX" id="Vzw-8A-5Vx"/>
+                            <constraint firstItem="ky0-yO-RMe" firstAttribute="top" secondItem="IO3-pJ-NPT" secondAttribute="bottom" constant="100" id="e2K-H4-QHP"/>
                             <constraint firstAttribute="trailing" secondItem="Wkj-oU-bl0" secondAttribute="trailing" id="h3q-m2-4Ki"/>
                         </constraints>
                         <variation key="default">
@@ -2115,12 +2124,12 @@
                                 <exclude reference="VCY-2h-5fF"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="8mV-jT-fxi"/>
-                                <exclude reference="1po-6b-SRb"/>
-                                <exclude reference="4Ll-Kg-Wjs"/>
                                 <exclude reference="U2d-AI-neT"/>
                                 <exclude reference="VMy-2e-NLy"/>
                                 <exclude reference="h3q-m2-4Ki"/>
+                                <exclude reference="1po-6b-SRb"/>
+                                <exclude reference="4Ll-Kg-Wjs"/>
+                                <exclude reference="8mV-jT-fxi"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -2129,12 +2138,12 @@
                                 <include reference="VCY-2h-5fF"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="8mV-jT-fxi"/>
-                                <include reference="1po-6b-SRb"/>
-                                <include reference="4Ll-Kg-Wjs"/>
                                 <include reference="U2d-AI-neT"/>
                                 <include reference="VMy-2e-NLy"/>
                                 <include reference="h3q-m2-4Ki"/>
+                                <include reference="1po-6b-SRb"/>
+                                <include reference="4Ll-Kg-Wjs"/>
+                                <include reference="8mV-jT-fxi"/>
                             </mask>
                         </variation>
                     </view>
@@ -2145,6 +2154,7 @@
                         <barButtonItem key="backBarButtonItem" title=" " id="YiP-G7-npv"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="empty_message" destination="ky0-yO-RMe" id="b4A-dS-g48"/>
                         <outlet property="main_loader" destination="VCY-2h-5fF" id="9FE-Pn-ydy"/>
                         <outlet property="tableView" destination="Wkj-oU-bl0" id="N82-px-WuG"/>
                     </connections>
@@ -3255,7 +3265,7 @@
         <scene sceneID="wvB-E6-6Zw">
             <objects>
                 <collectionViewController storyboardIdentifier="BranchProfileStickyController" id="eti-F0-VTD" customClass="BranchProfileStickyController" customModule="dop" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="cCX-0x-4Un">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="cCX-0x-4Un">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="0.99997437000274658" blue="0.99999129772186279" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -4043,13 +4053,13 @@
                                 <exclude reference="kdr-Wp-L54"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="IeW-td-Q9L"/>
                                 <exclude reference="Lfr-S9-fUU"/>
                                 <exclude reference="bjZ-FW-2oZ"/>
                                 <exclude reference="1Qf-q4-Zwo"/>
                                 <exclude reference="4Xa-NB-3G3"/>
                                 <exclude reference="F13-uE-c1G"/>
                                 <exclude reference="NJB-LQ-w1J"/>
+                                <exclude reference="IeW-td-Q9L"/>
                                 <exclude reference="iot-Ll-zll"/>
                             </mask>
                         </variation>
@@ -4059,13 +4069,13 @@
                                 <include reference="kdr-Wp-L54"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="IeW-td-Q9L"/>
                                 <include reference="Lfr-S9-fUU"/>
                                 <include reference="bjZ-FW-2oZ"/>
                                 <include reference="1Qf-q4-Zwo"/>
                                 <include reference="4Xa-NB-3G3"/>
                                 <include reference="F13-uE-c1G"/>
                                 <include reference="NJB-LQ-w1J"/>
+                                <include reference="IeW-td-Q9L"/>
                                 <exclude reference="iot-Ll-zll"/>
                             </mask>
                         </variation>
@@ -4281,7 +4291,7 @@
                                             </variation>
                                         </imageView>
                                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BLOQUEADA" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rA0-d5-7jM">
-                                            <rect key="frame" x="52" y="51" width="91" height="17"/>
+                                            <rect key="frame" x="53" y="51" width="91" height="17"/>
                                             <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                             <color key="textColor" red="0.36010122299194336" green="0.36671203374862671" blue="0.3987540602684021" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -4781,7 +4791,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No has tomado ninguna promoción aún" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YXf-Z9-RcB">
-                                <rect key="frame" x="19.5" y="100" width="337" height="20"/>
+                                <rect key="frame" x="19" y="100" width="337" height="20"/>
                                 <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="17"/>
                                 <color key="textColor" red="0.26379796862602234" green="0.2637900710105896" blue="0.26379451155662537" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -6709,7 +6719,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="U1W-BL-qLY" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="nGT-Na-jtp">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="nGT-Na-jtp">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -6910,7 +6920,7 @@
                                             </variation>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NO HAY DATOS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YRf-Uu-TLL">
-                                            <rect key="frame" x="115" y="160" width="145" height="23"/>
+                                            <rect key="frame" x="116" y="160" width="145" height="23"/>
                                             <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="19"/>
                                             <color key="textColor" red="0.60271793603897095" green="0.602699875831604" blue="0.60271012783050537" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -8585,10 +8595,10 @@
         <image name="twitter-logo" width="42" height="42"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="8iK-Yr-WEc"/>
         <segue reference="njR-gH-Wm2"/>
         <segue reference="Y2I-Nl-h09"/>
-        <segue reference="8iK-Yr-WEc"/>
-        <segue reference="AaG-PG-nLf"/>
+        <segue reference="TKt-eX-Ulp"/>
         <segue reference="fpu-8Z-7Bb"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="0.99997437000274658" blue="0.99999129772186279" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

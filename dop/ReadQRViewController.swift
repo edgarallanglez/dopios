@@ -140,13 +140,17 @@ class ReadQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                 DispatchQueue.main.async(execute: {
                     
                     let json = data!
+                    print("JSON ES \(json)")
                     if json["message"].string != nil {
                         Utilities.fadeOutViewAnimation(self.spinner, delay: 0, duration: 0.3)
                         let error_modal: ModalViewController = ModalViewController(currentView: self, type: ModalViewControllerType.AlertModal)
                         
                         var error_message = "Esta promoción se ha terminado ☹️"
-                        if let recently_used = json["minutes"].string {
+                        if json["minutes"].string != nil {
                             error_message = "Recientemente usaste esta promoción, intenta más tarde"
+                        }
+                        if json["expired"].string != nil {
+                            error_message = "Esta promoción ha caducado"
                         }
                         
                         error_modal.willPresentCompletionHandler = { vc in
