@@ -36,6 +36,10 @@ class TutorialContentViewController: UIViewController, UIPageViewControllerDeleg
         
         // Do any additional setup after loading the view.
     }
+    override func viewDidAppear(_ animated: Bool) {
+        let page_zero = self.pageViewController.childViewControllers[0] as! PageZeroViewController
+        page_zero.startFadeIn()
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

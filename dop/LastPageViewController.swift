@@ -24,5 +24,9 @@ class LastPageViewController: UIViewController {
         
         self.present(controller, animated: true, completion: nil)
         controller.performSegue(withIdentifier: "showDashboard", sender: self)
+        
+        /*self.present(controller, animated: true, completion: {
+            self.parent?.dismiss(animated: true, completion: nil)
+        })*/
     }
 }

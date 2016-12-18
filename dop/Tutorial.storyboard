@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11761" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -148,7 +148,10 @@
                     <connections>
                         <outlet property="exp_near_image_view" destination="iAt-0A-0PO" id="Q4s-PT-omD"/>
                         <outlet property="promo_container" destination="dFY-zm-irw" id="ncd-P0-GqU"/>
+                        <outlet property="top_logo" destination="Ps0-D0-DC8" id="S9I-la-yBE"/>
                         <outlet property="trending_image_view" destination="VAC-n0-5V0" id="4QO-2n-tvT"/>
+                        <outlet property="tutorial_description" destination="Fjk-uB-3XE" id="nhj-Rb-Aii"/>
+                        <outlet property="tutorial_title" destination="AfH-G5-IWM" id="3xM-zW-bgW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5sT-0H-5pe" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -238,6 +241,9 @@
                     <connections>
                         <outlet property="exp_progress" destination="jGq-PC-WWQ" id="Du3-Qm-yCH"/>
                         <outlet property="follow_button" destination="LAZ-D3-1aX" id="WHa-HX-LRN"/>
+                        <outlet property="top_logo" destination="bbA-be-kin" id="JG9-iB-u2J"/>
+                        <outlet property="tutorial_description" destination="tar-Pe-h5J" id="oDg-fB-Hqb"/>
+                        <outlet property="tutorial_title" destination="fqc-aB-Fnr" id="Wy3-N8-t1f"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jxY-no-Nib" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -266,7 +272,7 @@
                                 <rect key="frame" x="32" y="212" width="256" height="115"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="585-qR-cbt">
-                                        <rect key="frame" x="70" y="5" width="141" height="29"/>
+                                        <rect key="frame" x="70" y="5" width="135" height="29"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="14"/>
                                         <state key="normal" title="EDGAR ALLAN GLEZ">
                                             <color key="titleColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -274,7 +280,7 @@
                                         </state>
                                     </button>
                                     <label opaque="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Asistió a " lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NKg-sM-zdX" customClass="TTTAttributedLabel">
-                                        <rect key="frame" x="70" y="34" width="53" height="16"/>
+                                        <rect key="frame" x="70" y="34" width="50" height="16"/>
                                         <color key="tintColor" red="0.98431372549999996" green="0.1333333333" blue="0.43529411759999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="13"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -340,7 +346,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="INSTITUTO M.I.A" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wxW-KO-Ile">
-                                        <rect key="frame" x="128" y="34" width="113" height="16"/>
+                                        <rect key="frame" x="125" y="34" width="116" height="16"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="13"/>
                                         <color key="textColor" red="0.98431372549999996" green="0.1333333333" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -374,7 +380,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Puedes compartir con tus amigos la actividad que realizan en dop" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="sbt-n2-051">
-                                <rect key="frame" x="32" y="406" width="256" height="61.5"/>
+                                <rect key="frame" x="32" y="406" width="256" height="59.5"/>
                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
                                 <color key="textColor" red="0.50980392159999999" green="0.50980392159999999" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -398,6 +404,9 @@
                     </view>
                     <connections>
                         <outlet property="activity_view" destination="l8e-3r-PY3" id="qqK-7O-JFz"/>
+                        <outlet property="top_icon" destination="KYx-Xi-5E0" id="w0s-V4-woX"/>
+                        <outlet property="tutorial_description" destination="sbt-n2-051" id="lpL-jJ-hKa"/>
+                        <outlet property="tutorial_title" destination="rrF-lw-q5c" id="TW0-13-K7k"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lGn-LP-VTc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -463,7 +472,7 @@
                                         </variation>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Eduardo Quintero quiere seguirte" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OrS-sb-OLF" customClass="TTTAttributedLabel">
-                                        <rect key="frame" x="67" y="34" width="189" height="34"/>
+                                        <rect key="frame" x="67" y="34.5" width="189" height="33"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="14"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -550,7 +559,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enterate de inmediato de la interacción con tus amigos o tus lugares favoritos" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="4oE-0R-PE5">
-                                <rect key="frame" x="32" y="381" width="256" height="61.5"/>
+                                <rect key="frame" x="32" y="381" width="256" height="59.5"/>
                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
                                 <color key="textColor" red="0.50980392159999999" green="0.50980392159999999" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -578,6 +587,9 @@
                     <connections>
                         <outlet property="notification_view" destination="efs-uv-h2Q" id="UzC-ZY-xWF"/>
                         <outlet property="permission_button" destination="S8n-Vp-OIQ" id="9tr-G1-Fmc"/>
+                        <outlet property="top_logo" destination="eU0-Fh-EQf" id="muP-4B-1FO"/>
+                        <outlet property="tutorial_description" destination="4oE-0R-PE5" id="XoV-5B-WAJ"/>
+                        <outlet property="tutorial_title" destination="TTB-ei-ejN" id="P5I-Bz-7rW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fOQ-ge-VaJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -597,7 +609,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bye 🙊" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UCN-nt-0N2">
-                                <rect key="frame" x="125.5" y="271.5" width="69.5" height="26.5"/>
+                                <rect key="frame" x="125" y="271" width="70" height="27"/>
                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="22"/>
                                 <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -681,6 +693,9 @@
                     </view>
                     <connections>
                         <outlet property="permission_button" destination="FFM-ml-B69" id="gbH-N9-uDQ"/>
+                        <outlet property="top_logo" destination="C8U-pt-ZuT" id="ajW-Vv-IJt"/>
+                        <outlet property="tutorial_description" destination="JP1-RS-1al" id="vPv-nU-jLQ"/>
+                        <outlet property="tutorial_title" destination="6N7-wq-BoO" id="me8-J1-Dlf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k55-tB-CPK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -755,6 +770,9 @@
                     </view>
                     <connections>
                         <outlet property="permission_button" destination="a3t-8a-W46" id="tMD-8k-YRA"/>
+                        <outlet property="top_logo" destination="Nt5-Fh-Q1m" id="O3H-Kf-JyJ"/>
+                        <outlet property="tutorial_description" destination="0dH-YI-PQF" id="BIj-k9-tBb"/>
+                        <outlet property="tutorial_title" destination="CCy-lu-I4N" id="FSI-cy-5tE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lUT-2C-9gN" userLabel="First Responder" sceneMemberID="firstResponder"/>

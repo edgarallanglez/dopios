@@ -24,12 +24,11 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
     let limit: Int = 6
     var offset: Int = 0
     
+    @IBOutlet var empty_message: UILabel!
     @IBOutlet var tableView: UITableView!
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if self.newsfeed.count != 0 { return self.newsfeed.count }
-        
-        return 1
+        return self.newsfeed.count
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -146,7 +145,7 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
     
     func getNewsfeedActivity() {
         main_loader.startAnimating()
-
+        empty_message.isHidden = true
         newsfeedTemporary.removeAll(keepingCapacity: false)
         cachedImages.removeAll(keepingCapacity: false)
         people_array.removeAll(keepingCapacity: false)
@@ -210,6 +209,14 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
                 
                 Utilities.fadeInFromBottomAnimation(self.tableView, delay: 0, duration: 1, yPosition: 20)
                 
+                if self.newsfeed.count > 0{
+                    self.tableView.backgroundColor = UIColor.white
+                }else{
+                    self.tableView.separatorColor = .clear
+                    self.empty_message.text = "NO HAY ACTIVIDAD PARA MOSTRAR"
+                    self.empty_message.isHidden = false
+                }
+                
                 print("Printed")
                 print(json)
                 
@@ -221,6 +228,9 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
             DispatchQueue.main.async(execute: {
                 self.refreshControl.endRefreshing()
                 Utilities.fadeOutViewAnimation(self.main_loader, delay: 0, duration: 0.3)
+                
+                self.empty_message.text = "ERROR DE CONEXIÓN"
+                self.empty_message.isHidden = false
             })
         })
 

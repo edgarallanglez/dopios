@@ -9,7 +9,11 @@
 import UIKit
 
 class PageThreeViewController: UIViewController {
-
+    
+    @IBOutlet weak var tutorial_description: UILabel!
+    @IBOutlet weak var tutorial_title: UILabel!
+    @IBOutlet weak var top_logo: UIImageView!
+    
     @IBOutlet weak var exp_progress: KAProgressLabel!
     @IBOutlet weak var follow_button: UIButton!
     var spinner: MMMaterialDesignSpinner = MMMaterialDesignSpinner()
@@ -18,10 +22,15 @@ class PageThreeViewController: UIViewController {
         super.viewDidLoad()
         
         Utilities.setMaterialDesignButton(self.follow_button, button_size: 50)
-
+        
         // Do any additional setup after loading the view.
+        follow_button.alpha = 0
+        
+        top_logo.alpha = 0
+        tutorial_title.alpha = 0
+        tutorial_description.alpha = 0
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
         setProgressBar()
     }
@@ -55,10 +64,21 @@ class PageThreeViewController: UIViewController {
         exp_progress.trackColor = Utilities.lightGrayColor
         exp_progress.trackWidth = 3
         exp_progress.progressWidth = 3
-
+        
         exp_progress.setEndDegree(270.0, timing: TPPropertyAnimationTimingEaseInEaseOut, duration: 1.5, delay: 0)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        Utilities.fadeInFromBottomAnimation(top_logo, delay: 0.5, duration: 1, yPosition: 20)
+        Utilities.fadeInFromBottomAnimation(tutorial_title, delay: 0.5, duration: 1, yPosition: 20)
+        Utilities.fadeInFromBottomAnimation(tutorial_description, delay: 0.5, duration: 1, yPosition: 20)
+        Utilities.fadeInFromBottomAnimation(follow_button, delay: 0.8, duration: 1, yPosition: 20)
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        top_logo.alpha = 0
+        tutorial_title.alpha = 0
+        tutorial_description.alpha = 0
+        follow_button.alpha = 0
+    }
     
-
 }

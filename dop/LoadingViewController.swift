@@ -27,13 +27,14 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
     var alert_array = [AlertModel]()
     var modal_alert: ModalViewController!
 
-    var tutorial_checked: Bool = true
+    var tutorial_checked: Bool = false
 
     var notification: [String: AnyObject] = [:]
 
     @IBOutlet var loader: MMMaterialDesignSpinner!
     override func viewDidLoad() {
         super.viewDidLoad()
+
         if UserDefaults.standard.object(forKey: "tutorial_checked") != nil{
             tutorial_checked = UserDefaults.standard.value(forKeyPath: "tutorial_checked") as! Bool
         }
@@ -106,7 +107,7 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
             }
 
             DispatchQueue.main.async(execute: {
-                if User.userName == "" || User.userSurnames == "" || User.userImageUrl == "" || User.userEmail == ""{
+                if User.userName == "" ||  User.userEmail == ""{
                     let storyboard = UIStoryboard(name: "Register", bundle: nil)
                     let controller = storyboard.instantiateViewController(withIdentifier: "RegisterViewController")
                     self.present(controller, animated: true, completion: nil)
@@ -236,7 +237,7 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
 
                                             DispatchQueue.main.async(execute: {
 
-                                                if User.userName == "" || User.userSurnames == "" || User.userImageUrl == "" || User.userEmail == ""{
+                                                if User.userName == "" || User.userEmail == ""{
                                                     let storyboard = UIStoryboard(name: "Register", bundle: nil)
                                                     let controller = storyboard.instantiateViewController(withIdentifier: "RegisterViewController")
                                                     self.present(controller, animated: true, completion: nil)

@@ -237,19 +237,33 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                     case .success(let upload, _, _):
                         upload.responseJSON { response in
                             print(response)
-                            let json:JSON = JSON(response)
+                            let json:JSON = JSON(response.result.value)
                             print(json)
                             Utilities.fadeOutViewAnimation(self.loader, delay: 0, duration: 0.4)
-                            Utilities.fadeOutToBottomAnimation(self.welcome_label, delay: 0, duration: 0.4, yPosition: 10)
-                            Utilities.fadeOutToBottomAnimation(self.pick_photo_button, delay: 0, duration: 0.4, yPosition: 10)
-                            Utilities.fadeOutToBottomAnimation(self.gender_picker, delay: 0, duration: 0.4, yPosition: 10)
-                            Utilities.fadeOutToBottomAnimation(self.names_text, delay: 0, duration: 0.4, yPosition: 10)
-                            Utilities.fadeOutToBottomAnimation(self.surnames_text, delay: 0, duration: 0.4, yPosition: 10)
-                            Utilities.fadeOutToBottomAnimation(self.email_text, delay: 0, duration: 0.3, yPosition: 10)
-                            Utilities.fadeOutToBottomAnimation(self.birthday_text, delay: 0, duration: 0.4, yPosition: 10)
-                            Utilities.fadeOutToBottomAnimation(self.birthday_picker, delay: 0, duration: 0.4, yPosition: 10)
+                            
+                            if json["message"].string! == "success" {
+                
+                                Utilities.fadeOutToBottomAnimation(self.welcome_label, delay: 0, duration: 0.4, yPosition: 10)
+                                Utilities.fadeOutToBottomAnimation(self.pick_photo_button, delay: 0, duration: 0.4, yPosition: 10)
+                                Utilities.fadeOutToBottomAnimation(self.gender_picker, delay: 0, duration: 0.4, yPosition: 10)
+                                Utilities.fadeOutToBottomAnimation(self.names_text, delay: 0, duration: 0.4, yPosition: 10)
+                                Utilities.fadeOutToBottomAnimation(self.surnames_text, delay: 0, duration: 0.4, yPosition: 10)
+                                Utilities.fadeOutToBottomAnimation(self.email_text, delay: 0, duration: 0.3, yPosition: 10)
+                                Utilities.fadeOutToBottomAnimation(self.birthday_text, delay: 0, duration: 0.4, yPosition: 10)
+                                Utilities.fadeOutToBottomAnimation(self.birthday_picker, delay: 0, duration: 0.4, yPosition: 10)
+                                Utilities.fadeOutToBottomWithCompletion(self.birthday_picker, delay: 0, duration: 0.4, yPosition: 10, completion: { (value) -> Void in
+                                    let storyboard = UIStoryboard(name: "Tutorial", bundle: nil)
+                                    let controller = storyboard.instantiateViewController(withIdentifier: "TutorialContentViewController")
+                                    self.present(controller, animated: true, completion: {
+                                        self.parent?.dismiss(animated: true, completion: nil)
+                                    })
+                                })
+                                
+                            }else{
+                                self.error_label.text = "El email ya esta registrado 😱"
+                                Utilities.fadeInFromBottomAnimation(self.accept_button, delay: 0, duration: 0.3, yPosition: 20)
+                            }
                             //self.image_preview.isHidden = true
-                            //self.dismiss(animated: true, completion: nil)
                         }
                         
                     case .failure( _):
@@ -275,7 +289,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                     if self.email_text.text == "" { success=false; error_label.text = "Asegúrate de llenar todos los campos";break }
                     if !self.isValidEmail(testStr: email_text.text!) { success=false; error_label.text = "Verifica tu correo"; break;  }
                 case "birthday":
-                    if self.birthday_text.text == "" { success=false; break }
+                    if self.birthday_text.text == "" { success=false; error_label.text = "Asegúrate de llenar todos los campos"; break }
                 default:
                     success = false
                     break

@@ -421,6 +421,8 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
         
         self.navigationController?.pushViewController(vcNot, animated: true)
         self.notificationButton.image = UIImage(named: "notification")
+
+        
         
         /*vcNot.navigationController?.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(vcNot, animated: true)*/
