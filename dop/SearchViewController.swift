@@ -47,11 +47,8 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
         //User.coordinate = locationManager.location!.coordinate
-        
-        
 
         self.view.backgroundColor = UIColor.clear
-        
     }
 
     func timeOut(){
@@ -253,7 +250,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
             SearchController.searchPeopleWithSuccess(params,
                 success: { (data) -> Void in
                     let json = data!
-                    print(json)
+                    
                     for (_, subJson): (String, JSON) in json["data"] {
                         let names = subJson["names"].string!
                         let surnames = subJson["surnames"].string!
@@ -294,7 +291,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if(!searching){
             var params = [String: AnyObject]()
-            if(tableView == self.tableView && filtered.count > 0){
+            if(tableView == self.tableView && filtered.count > 0) {
                  let model = self.filtered[(indexPath as NSIndexPath).row]
                 params = ["id": model.id as AnyObject]
                  NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: "performSegue"), object: params)

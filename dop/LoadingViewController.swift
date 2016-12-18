@@ -219,7 +219,7 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
                                             let json = loginData!
 
                                             let jwt = json["token"].string!
-                                            var error: NSError?
+                                            var error: Error?
 
                                             User.userToken = [ "Authorization": "\(jwt)" ]
                                             User.userImageUrl = params["main_image"]!
