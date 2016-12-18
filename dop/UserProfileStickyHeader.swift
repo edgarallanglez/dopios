@@ -76,7 +76,6 @@ class UserProfileStickyHeader: UIView {
             UserProfileController.followFriendWithSuccess(params, success: { (data) -> Void in
                 let json:JSON = data!
                 
-                print(json)
                 DispatchQueue.main.async(execute: {
                     UIButton.animate(withDuration: 0.5, delay: 0, options: UIViewAnimationOptions(), animations: {
                         
@@ -93,7 +92,6 @@ class UserProfileStickyHeader: UIView {
                         self.layoutIfNeeded()
                         }, completion: { (Bool) in
                            //
-                            
                     })
                 })
                 self.sendPushNotification(params: params)
@@ -105,7 +103,6 @@ class UserProfileStickyHeader: UIView {
                         self.follow_button.backgroundColor = Utilities.dop_detail_color
                         self.follow_button.contentEdgeInsets = UIEdgeInsetsMake(18, 18, 18, 18)
                     })
-                    
             })
         } else {
             UserProfileController.unfollowFriendWithSuccess(params, success: { (data) -> Void in
@@ -121,7 +118,6 @@ class UserProfileStickyHeader: UIView {
                             self.layoutIfNeeded()
                         }, completion: { (Bool) in
                             //
-                            
                     })
                 })
                 
@@ -131,10 +127,8 @@ class UserProfileStickyHeader: UIView {
                         self.follow_button.setImage(UIImage(named: "following-icon"), for: UIControlState())
                         self.follow_button.backgroundColor = Utilities.dopColor
                     })
-                    
             })
         }
-        
     }
     
     func setFollowingButton(_ is_friend: Bool) {
@@ -170,7 +164,6 @@ class UserProfileStickyHeader: UIView {
                 Utilities.fadeInFromBottomAnimation(self.follow_button, delay: 0, duration: 0.7, yPosition: 0)
                 }, completion: { (Bool) in
                     
-                    
             })
             
         } else if self.user_id != User.user_id { Utilities.fadeInFromBottomAnimation(self.follow_button, delay: 0, duration: 0.7, yPosition: 0) }
@@ -182,7 +175,7 @@ class UserProfileStickyHeader: UIView {
             if let image = response.result.value{
                 self.user_image?.image = image
                 Utilities.fadeInViewAnimation(self.user_image, delay: 0, duration: 0.5)
-            }else{
+            } else {
                 self.user_image.alpha = 0.3
                 self.user_image.image = UIImage(named: "dop-logo-transparent")
                 self.user_image.backgroundColor = Utilities.lightGrayColor
@@ -191,7 +184,7 @@ class UserProfileStickyHeader: UIView {
         }
     }
     
-    func setProgressBar () {
+    func setProgressBar() {
         exp_progress.alpha = 1
         exp_progress.startDegree = 0
         exp_progress.progressColor = UIColor(red: 33.0/255.0, green: 150.0/255.0, blue: 243.0/255.0, alpha: 1.0)
