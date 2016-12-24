@@ -26,7 +26,6 @@ class MoreMenuViewController: UITableViewController {
 //        self.userImage.layer.masksToBounds = true
 //
         userName.text = User.userName
-        getUserImage()
         
         friendsIcon.image = friendsIcon.image!.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
         friendsIcon.tintColor = UIColor.gray
@@ -40,6 +39,8 @@ class MoreMenuViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.topItem!.title = "Menú"
+        getUserImage()
+
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -66,8 +67,6 @@ class MoreMenuViewController: UITableViewController {
         userImage.backgroundColor = Utilities.lightGrayColor
         userImage.alpha = 0.3
 
-    
-        
         
     }
     

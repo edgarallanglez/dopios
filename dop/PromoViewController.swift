@@ -505,7 +505,9 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
     
     override func viewDidDisappear(_ animated: Bool) {
         //        self.myCouponsRefreshControl.endRefreshing()
-        self.refreshControl.endRefreshing()
+        if self.refreshControl.isRefreshing {
+            self.refreshControl.endRefreshing()
+        }
     }
     
     func getTakenCoupons() {

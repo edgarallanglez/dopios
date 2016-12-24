@@ -230,7 +230,6 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
         /*sign_up_view_bottom_constrain.constant = -(UIScreen.main.bounds.height/2)
         self.view.layoutIfNeeded()
         
-        
         self.fbButton.isUserInteractionEnabled = true
         self.sign_up_or_login_button.isUserInteractionEnabled = true*/
         
@@ -263,7 +262,8 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
                     
                     let params:[String: String] = [
                         "email" : sign_up_email.text!,
-                        "password" : sign_up_password.text!]
+                        "password" : sign_up_password.text!,
+                        "device_os": "ios"]
                     
                     LoginController.verifyEmail("\(Utilities.dopURL)user/signup/email/verification", params: params as [String : AnyObject],
                                                 success: { (loginData) -> Void in
@@ -399,6 +399,25 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
             }
             
             DispatchQueue.main.async(execute: {
+                LoginController.getPrivacyInfo(success: { (response) in
+                    let json = response!["data"][0]
+                    
+                    print("\(json)")
+                    User.privacy_status = json["privacy_status"].int!
+                    User.first_following = json["first_following"].bool!
+                    User.first_follower = json["first_follower"].bool!
+                    User.first_company_fav = json["first_company_fav"].bool!
+                    User.first_using = json["first_using"].bool!
+                    
+                    //User.adult = json["adult"].bool!
+                    
+                }, failure: { (userData) in
+                    print(userData)
+                })
+                
+                User.activeSession = true
+                
+                
                 if User.userName == "" ||  User.userEmail == ""{
                     let storyboard = UIStoryboard(name: "Register", bundle: nil)
                     let controller = storyboard.instantiateViewController(withIdentifier: "RegisterViewController")

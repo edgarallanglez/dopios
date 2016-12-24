@@ -355,7 +355,9 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        self.refreshControl.endRefreshing()
+        if self.refreshControl.isRefreshing {
+            self.refreshControl.endRefreshing()
+        }
     }
 
 }

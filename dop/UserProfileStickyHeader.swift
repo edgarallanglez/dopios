@@ -45,7 +45,9 @@ class UserProfileStickyHeader: UIView {
             
             if parent_view.user_image?.image != nil { user_image.image = parent_view_controller.user_image.image
                 Utilities.fadeInViewAnimation(self.user_image, delay: 0, duration: 0.5)
-            } else { downloadImage(URL(string: parent_view_controller.person.main_image)!) }
+            } else { if parent_view_controller.person.main_image != "" {downloadImage(URL(string: parent_view_controller.person.main_image)!)} else{ self.user_image.alpha = 0.3
+                self.user_image.image = UIImage(named: "dop-logo-transparent")
+                self.user_image.backgroundColor = Utilities.lightGrayColor } }
             
             self.user_exp = parent_view.person.exp
             current_level = (self.parent_view.person?.level ?? 0)!

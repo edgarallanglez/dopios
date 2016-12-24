@@ -91,7 +91,9 @@ class ActivityPage: UITableViewController, TTTAttributedLabelDelegate {
                 if self.parent_view?.user_image?.image != nil {
                     custom_cell.user_image.image = self.parent_view.user_image.image
                 } else {
+                    if self.parent_view.person.main_image != "" {
                     downloadImage(URL(string: self.parent_view.person.main_image)!, cell: custom_cell)
+                    }
                 }
             }
             custom_cell.activity_description.linkAttributes = [NSForegroundColorAttributeName: Utilities.dopColor]
