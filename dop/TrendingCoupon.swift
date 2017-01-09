@@ -9,14 +9,14 @@
 import UIKit
 
 class TrendingCoupon: UIView, ModalDelegate, FBSDKSharingDelegate {
-
-
+    
+    
     /*!
      @abstract Sent to the delegate when the sharer encounters an error.
      @param sharer The FBSDKSharing that completed.
      @param error The error.
      */
-
+    
     
     @IBOutlet var descriptionLbl: UILabel!
     @IBOutlet var logo: UIImageView!
@@ -26,7 +26,7 @@ class TrendingCoupon: UIView, ModalDelegate, FBSDKSharingDelegate {
     @IBOutlet weak var takeView: UIView!
     @IBOutlet var heartView: UIView!
     @IBOutlet var heart: UIImageView!
-
+    
     var viewController: UIViewController?
     var coupon: Coupon!
     
@@ -34,7 +34,7 @@ class TrendingCoupon: UIView, ModalDelegate, FBSDKSharingDelegate {
         heartView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(TrendingCoupon.likeCoupon(_:))))
         takeView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(TrendingCoupon.setTakeCoupon(_:))))
         shareView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(TrendingCoupon.share(_:))))
-
+        
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(TrendingCoupon.tapCoupon(_:))))
         self.coupon = coupon
         
@@ -62,10 +62,10 @@ class TrendingCoupon: UIView, ModalDelegate, FBSDKSharingDelegate {
         super.init(frame: CGRect(x: 0, y: 0, width: 180, height: 230))
     }
     
-/*    func viewDidAppear(){
-        self.likes.text = String(coupon.total_likes)
-        if coupon.user_like == 1 { self.heart.tintColor = Utilities.dopColor } else { self.heart.tintColor = UIColor.lightGrayColor() }
-    }*/
+    /*    func viewDidAppear(){
+     self.likes.text = String(coupon.total_likes)
+     if coupon.user_like == 1 { self.heart.tintColor = Utilities.dopColor } else { self.heart.tintColor = UIColor.lightGrayColor() }
+     }*/
     
     func likeCoupon(_ sender: UITapGestureRecognizer){
         let params:[String: AnyObject] = [
@@ -83,30 +83,30 @@ class TrendingCoupon: UIView, ModalDelegate, FBSDKSharingDelegate {
         }
         
         CouponController.likeCouponWithSuccess(params,
-            success: { (couponsData) -> Void in
-                DispatchQueue.main.async(execute: {
-                    let json = couponsData!
-                    print(json)
-                })
-            },
-            failure: { (error) -> Void in
-                DispatchQueue.main.async(execute: {
-                    if liked { self.removeCouponLike() }
-                    else { self.setCouponLike() }
-                })
+                                               success: { (couponsData) -> Void in
+                                                DispatchQueue.main.async(execute: {
+                                                    let json = couponsData!
+                                                    print(json)
+                                                })
+        },
+                                               failure: { (error) -> Void in
+                                                DispatchQueue.main.async(execute: {
+                                                    if liked { self.removeCouponLike() }
+                                                    else { self.setCouponLike() }
+                                                })
         })
     }
     
     func setCouponLike() {
         heart.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
         UIView.animate(withDuration: 0.8,
-            delay: 0,
-            usingSpringWithDamping: 0.2,
-            initialSpringVelocity: 6.0,
-            options: UIViewAnimationOptions.allowUserInteraction,
-            animations: {
-                self.heart.transform = CGAffineTransform.identity
-            }, completion: nil)
+                       delay: 0,
+                       usingSpringWithDamping: 0.2,
+                       initialSpringVelocity: 6.0,
+                       options: UIViewAnimationOptions.allowUserInteraction,
+                       animations: {
+                        self.heart.transform = CGAffineTransform.identity
+        }, completion: nil)
         
         self.heart.tintColor = Utilities.dopColor
         let totalLikes = (Int(self.likes.text!))! + 1
@@ -132,7 +132,7 @@ class TrendingCoupon: UIView, ModalDelegate, FBSDKSharingDelegate {
                 let navigationController = vc as! SimpleModalViewController
                 navigationController.coupon = self.coupon
             }
-           
+            
             modal.present(animated: true, completionHandler: nil)
             modal.delegate = self
         }
@@ -150,13 +150,13 @@ class TrendingCoupon: UIView, ModalDelegate, FBSDKSharingDelegate {
     func setCouponTaken() {
         self.takeCouponButton.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
         UIView.animate(withDuration: 0.8,
-            delay: 0,
-            usingSpringWithDamping: 0.2,
-            initialSpringVelocity: 6.0,
-            options: UIViewAnimationOptions.allowUserInteraction,
-            animations: {
-                self.takeCouponButton.transform = CGAffineTransform.identity
-            }, completion: nil)
+                       delay: 0,
+                       usingSpringWithDamping: 0.2,
+                       initialSpringVelocity: 6.0,
+                       options: UIViewAnimationOptions.allowUserInteraction,
+                       animations: {
+                        self.takeCouponButton.transform = CGAffineTransform.identity
+        }, completion: nil)
         
         self.takeCouponButton.tintColor = Utilities.dopColor
         self.coupon.taken = true
@@ -168,7 +168,7 @@ class TrendingCoupon: UIView, ModalDelegate, FBSDKSharingDelegate {
             "type": "take" as AnyObject]
         NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: "takenOrLikeStatus"), object: params)
         self.coupon.setTakenCoupons(true, available: self.coupon.available)
-
+        
     }
     
     func removeCouponTaken() {
@@ -182,18 +182,18 @@ class TrendingCoupon: UIView, ModalDelegate, FBSDKSharingDelegate {
             "type": "take" as AnyObject]
         NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: "takenOrLikeStatus"), object: params)
         self.coupon.setTakenCoupons(false, available: self.coupon.available)
-
+        
     }
     func setCouponTakenNotification() {
         self.takeCouponButton.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
         UIView.animate(withDuration: 0.8,
-                                   delay: 0,
-                                   usingSpringWithDamping: 0.2,
-                                   initialSpringVelocity: 6.0,
-                                   options: UIViewAnimationOptions.allowUserInteraction,
-                                   animations: {
-                                    self.takeCouponButton.transform = CGAffineTransform.identity
-            }, completion: nil)
+                       delay: 0,
+                       usingSpringWithDamping: 0.2,
+                       initialSpringVelocity: 6.0,
+                       options: UIViewAnimationOptions.allowUserInteraction,
+                       animations: {
+                        self.takeCouponButton.transform = CGAffineTransform.identity
+        }, completion: nil)
         
         self.takeCouponButton.tintColor = Utilities.dopColor
         self.coupon.taken = true
@@ -228,28 +228,28 @@ class TrendingCoupon: UIView, ModalDelegate, FBSDKSharingDelegate {
         }
         
         CouponController.takeCouponWithSuccess(params,
-            success: { (data) -> Void in
-                DispatchQueue.main.async(execute: {
-                    let json = data!
-                    self.coupon.available = json["total"].int!
-
-                    if(json["message"].string=="agotado"){
-                        self.takeCouponButton.isHidden = true
-                        self.removeCouponTaken()
-                    
-                    }
-                    
-                    
-                })
-                
-            },
-            
-            failure: { (error) -> Void in
-                DispatchQueue.main.async(execute: {
-                    if taken { self.removeCouponTaken() }
-                    else { self.setCouponTaken() }
-                })
-            }
+                                               success: { (data) -> Void in
+                                                DispatchQueue.main.async(execute: {
+                                                    let json = data!
+                                                    self.coupon.available = json["total"].int!
+                                                    
+                                                    if(json["message"].string=="agotado"){
+                                                        self.takeCouponButton.isHidden = true
+                                                        self.removeCouponTaken()
+                                                        
+                                                    }
+                                                    
+                                                    
+                                                })
+                                                
+        },
+                                               
+                                               failure: { (error) -> Void in
+                                                DispatchQueue.main.async(execute: {
+                                                    if taken { self.removeCouponTaken() }
+                                                    else { self.setCouponTaken() }
+                                                })
+        }
         )
         
     }
@@ -257,36 +257,40 @@ class TrendingCoupon: UIView, ModalDelegate, FBSDKSharingDelegate {
     func setTakeButtonState() {
         self.takeCouponButton.tintColor = Utilities.dopColor
     }
-
+    
     func pressActionButton(_ modal: ModalViewController) {
-        if modal.action_type == "profile" {
-            let view_controller = viewController!.storyboard!.instantiateViewController(withIdentifier: "BranchProfileStickyController") as! BranchProfileStickyController
-            view_controller.coupon = self.coupon
-            //view_controller.branch.adults_only = coupon.adult_branch
-            view_controller.branch_id = coupon.branch_id
-            modal.dismiss(animated: true, completionHandler: { (modal) -> Void in
-                self.viewController!.navigationController?.pushViewController(view_controller, animated: true)
-            })
-        }
-        
-        if modal.action_type == "redeem" {
-            
-            if coupon.available>0{
-                let view_controller  = viewController!.storyboard!.instantiateViewController(withIdentifier: "readQRView") as! ReadQRViewController
-                view_controller.coupon_id = self.coupon.id
-                view_controller.coupon = self.coupon
-                view_controller.branch_id = self.coupon.branch_id
+        print("Delegate modal neter \(self.coupon.id) ---- \(modal.simple_modal?.coupon.id)")
+        //if(self.coupon.id == modal.simple_modal?.coupon.id){
+            if modal.action_type == "profile" {
+                print("Profile delegate modal")
                 
-                viewController?.hidesBottomBarWhenPushed = true
-
-                modal.dismiss(animated: true, completionHandler:{ (modal) -> Void in
-                    self.viewController!.hidesBottomBarWhenPushed = true
+                let view_controller = viewController!.storyboard!.instantiateViewController(withIdentifier: "BranchProfileStickyController") as! BranchProfileStickyController
+                view_controller.coupon = self.coupon
+                //view_controller.branch.adults_only = coupon.adult_branch
+                view_controller.branch_id = coupon.branch_id
+                modal.dismiss(animated: true, completionHandler: { (modal) -> Void in
                     self.viewController!.navigationController?.pushViewController(view_controller, animated: true)
-                    self.viewController!.hidesBottomBarWhenPushed = false
                 })
-            }else{
-                let error_modal: ModalViewController = ModalViewController(currentView: self.viewController!, type: ModalViewControllerType.AlertModal)
-                error_modal.willPresentCompletionHandler = { vc in
+            }
+            
+            if modal.action_type == "redeem" {
+                
+                if coupon.available>0{
+                    let view_controller  = viewController!.storyboard!.instantiateViewController(withIdentifier: "readQRView") as! ReadQRViewController
+                    view_controller.coupon_id = self.coupon.id
+                    view_controller.coupon = self.coupon
+                    view_controller.branch_id = self.coupon.branch_id
+                    
+                    viewController?.hidesBottomBarWhenPushed = true
+                    
+                    modal.dismiss(animated: true, completionHandler:{ (modal) -> Void in
+                        self.viewController!.hidesBottomBarWhenPushed = true
+                        self.viewController!.navigationController?.pushViewController(view_controller, animated: true)
+                        self.viewController!.hidesBottomBarWhenPushed = false
+                    })
+                }else{
+                    let error_modal: ModalViewController = ModalViewController(currentView: self.viewController!, type: ModalViewControllerType.AlertModal)
+                    error_modal.willPresentCompletionHandler = { vc in
                         let navigation_controller = vc as! AlertModalViewController
                         
                         var alert_array = [AlertModel]()
@@ -295,14 +299,15 @@ class TrendingCoupon: UIView, ModalDelegate, FBSDKSharingDelegate {
                         
                         navigation_controller.setAlert(alert_array)
                     }
-
-                modal.dismiss(animated: true, completionHandler: { (modal) -> Void in
-                    error_modal.present(animated: true, completionHandler: nil)
-
-                })
-
+                    
+                    modal.dismiss(animated: true, completionHandler: { (modal) -> Void in
+                        error_modal.present(animated: true, completionHandler: nil)
+                        
+                    })
+                    
+                }
             }
-        }
+        //}
     }
     func updateLikeAndTaken(_ notification:Foundation.Notification){
         
@@ -311,7 +316,7 @@ class TrendingCoupon: UIView, ModalDelegate, FBSDKSharingDelegate {
         let type = object["type"] as! String
         let status = object["status"] as! Bool
         let coupon_id = object["coupon_id"] as! Int
-
+        
         
         if(coupon_id == self.coupon.id){
             if(status == false){
@@ -331,14 +336,15 @@ class TrendingCoupon: UIView, ModalDelegate, FBSDKSharingDelegate {
     }
     
     func setViewCount() {
-        let params: [String: AnyObject] = ["coupon_id": self.coupon.id as AnyObject]
+        let params: [String: AnyObject] = ["coupon_id": self.coupon.id as AnyObject, "latitude": User.coordinate.latitude as AnyObject, "longitude": User.coordinate.longitude as AnyObject]
+        
         CouponController.viewCouponWithSuccess(params, success: { (couponsData) -> Void in
             let json: JSON = JSON(couponsData)
             print(json)
-            },
-            failure: { (couponsData) -> Void in
-                print("couponsData")
-            }
+        },
+                                               failure: { (couponsData) -> Void in
+                                                print("couponsData")
+        }
         )
     }
     func refreshAvailable(_ notification:Foundation.Notification){

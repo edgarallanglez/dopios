@@ -298,7 +298,7 @@ class BranchCampaignCollectionViewController: UICollectionViewController, ModalD
         
     }
     func setViewCount(_ coupon_id: Int) {
-        let params: [String: AnyObject] = ["coupon_id": coupon_id as AnyObject]
+        let params: [String: AnyObject] = ["coupon_id": coupon_id as AnyObject, "latitude": User.coordinate.latitude as AnyObject, "longitude": User.coordinate.longitude as AnyObject]
         CouponController.viewCouponWithSuccess(params, success: { (couponsData) -> Void in
             let json: JSON = JSON(couponsData)
             print(json)

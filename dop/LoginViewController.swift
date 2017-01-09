@@ -12,6 +12,10 @@ import JWTDecode
 
 class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocationManagerDelegate, UITextFieldDelegate, UIScrollViewDelegate {
     
+    @IBOutlet var forgot_password_cancel_button: UIButton!
+    @IBOutlet var forgot_password_email: LoginTextView!
+    @IBOutlet var login_view: UIView!
+    @IBOutlet var forgot_password_view: UIView!
     @IBOutlet var sign_up_or_login_button_height: NSLayoutConstraint!
     @IBOutlet var sign_up_error_label: UILabel!
     @IBOutlet var sign_up_email: LoginTextView!
@@ -20,6 +24,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
     @IBOutlet var sign_up_password: LoginTextView!
     @IBOutlet var signup_login_button: UIButton!
     
+    @IBOutlet var forgot_password_error_label: UILabel!
     
     @IBOutlet var error_label: UILabel!
     @IBOutlet var sign_up_confirm_password: LoginTextView!
@@ -86,6 +91,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
         sign_up_view_bottom_constrain.constant = -(UIScreen.main.bounds.height/2)
         
         self.signup_login_button.layer.borderColor = UIColor(red: 255.0/255, green: 255.0/255, blue: 255.0/255, alpha: 0.1).cgColor
+        self.forgot_password_cancel_button.layer.borderColor = UIColor(red: 255.0/255, green: 255.0/255, blue: 255.0/255, alpha: 0.1).cgColor
         
         login_email_text.delegate = self
         login_password_text.delegate = self
@@ -98,6 +104,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
         
         error_label.text = ""
         sign_up_error_label.text = ""
+        forgot_password_error_label.text = ""
         
         self.LoginButtonView.clipsToBounds = true
         self.fbButton.clipsToBounds = true
@@ -114,6 +121,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
         self.sign_up_email.resignFirstResponder()
         self.sign_up_password.resignFirstResponder()
         self.sign_up_confirm_password.resignFirstResponder()
+        self.forgot_password_email.resignFirstResponder()
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -123,6 +131,8 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
         self.sign_up_email.resignFirstResponder()
         self.sign_up_password.resignFirstResponder()
         self.sign_up_confirm_password.resignFirstResponder()
+        self.forgot_password_email.resignFirstResponder()
+        
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -141,6 +151,9 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
         if textField == sign_up_confirm_password {
             self.emailValidation(self)
         }
+        if textField == forgot_password_email {
+            self.forgotPassword(self)
+        }
         return true
     }
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -152,10 +165,12 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
         }
     }
     func textFieldDidEndEditing(_ textField: UITextField) {
-        self.sign_up_view_bottom_constrain.constant = 0
-        UIView.animate(withDuration: 0.2, animations: {
-            self.view.layoutIfNeeded()
-        })
+        if textField == sign_up_confirm_password{
+            self.sign_up_view_bottom_constrain.constant = 0
+            UIView.animate(withDuration: 0.2, animations: {
+                self.view.layoutIfNeeded()
+            })
+        }
     }
     @IBAction func touchScreen(_ sender: Any) {
         self.login_email_text.resignFirstResponder()
@@ -163,6 +178,8 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
         self.sign_up_email.resignFirstResponder()
         self.sign_up_password.resignFirstResponder()
         self.sign_up_confirm_password.resignFirstResponder()
+        self.forgot_password_email.resignFirstResponder()
+
     }
     
     @IBAction func emailLogIn(_ sender: Any) {
@@ -228,10 +245,10 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
         sign_up_confirm_password.text = ""
         
         /*sign_up_view_bottom_constrain.constant = -(UIScreen.main.bounds.height/2)
-        self.view.layoutIfNeeded()
-        
-        self.fbButton.isUserInteractionEnabled = true
-        self.sign_up_or_login_button.isUserInteractionEnabled = true*/
+         self.view.layoutIfNeeded()
+         
+         self.fbButton.isUserInteractionEnabled = true
+         self.sign_up_or_login_button.isUserInteractionEnabled = true*/
         
         
         
@@ -252,50 +269,52 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
         sign_up_error_label.text = ""
         
         if sign_up_email.text != "" && sign_up_password.text != "" && sign_up_confirm_password.text != ""{
-            
             if self.isValidEmail(testStr: sign_up_email.text!) {
-                if self.sign_up_password.text == self.sign_up_confirm_password.text{
-                    
-                    Utilities.fadeInFromBottomAnimation(self.MD_spinner, delay: 0, duration: 1, yPosition: 5)
-                    
-                    self.showSignUpAnimation(flag: false)
-                    
-                    let params:[String: String] = [
-                        "email" : sign_up_email.text!,
-                        "password" : sign_up_password.text!,
-                        "device_os": "ios"]
-                    
-                    LoginController.verifyEmail("\(Utilities.dopURL)user/signup/email/verification", params: params as [String : AnyObject],
-                                                success: { (loginData) -> Void in
-                                                    let json = loginData!
-                                                    
-                                                    print(json)
-                                                    
-                                                    if let token = json["token"].string{
-                                                        User.loginType = "email"
-                                                        A0SimpleKeychain().setString(token, forKey:"auth0-user-jwt")
-                                                        User.userToken = [ "Authorization": "\(token)" ]
-                                                        self.getUserData()
-                                                    }else{
-                                                        self.sign_up_error_label.text = "El email ya esta registrado 😱"
+                if (self.sign_up_password.text?.characters.count)! > 5{
+                    if self.sign_up_password.text == self.sign_up_confirm_password.text{
+                        
+                        Utilities.fadeInFromBottomAnimation(self.MD_spinner, delay: 0, duration: 1, yPosition: 5)
+                        
+                        self.showSignUpAnimation(flag: false)
+                        
+                        let params:[String: String] = [
+                            "email" : sign_up_email.text!,
+                            "password" : sign_up_password.text!,
+                            "device_os": "ios"]
+                        
+                        LoginController.verifyEmail("\(Utilities.dopURL)user/signup/email/verification", params: params as [String : AnyObject],
+                                                    success: { (loginData) -> Void in
+                                                        let json = loginData!
+                                                        
+                                                        print(json)
+                                                        
+                                                        if let token = json["token"].string{
+                                                            User.loginType = "email"
+                                                            A0SimpleKeychain().setString(token, forKey:"auth0-user-jwt")
+                                                            User.userToken = [ "Authorization": "\(token)" ]
+                                                            self.getUserData()
+                                                        }else{
+                                                            self.sign_up_error_label.text = "El email ya esta registrado 😱"
+                                                            
+                                                            self.showSignUpAnimation(flag: true)
+                                                        }
+                                                        
+                                                        Utilities.fadeOutViewAnimation(self.MD_spinner, delay: 0, duration: 1)
+                                                        
+                        },
+                                                    failure:{ (error) -> Void in
+                                                        self.sign_up_error_label.text = "Problemas de conexión ☹️"
+                                                        
+                                                        Utilities.fadeOutViewAnimation(self.MD_spinner, delay: 0, duration: 1)
                                                         
                                                         self.showSignUpAnimation(flag: true)
-                                                    }
-                                                    
-                                                    
-                                                    Utilities.fadeOutViewAnimation(self.MD_spinner, delay: 0, duration: 1)
-                                                    
-                    },
-                                                failure:{ (error) -> Void in
-                                                    self.sign_up_error_label.text = "Problemas de conexión ☹️"
-                                                    
-                                                    Utilities.fadeOutViewAnimation(self.MD_spinner, delay: 0, duration: 1)
-                                                    
-                                                    self.showSignUpAnimation(flag: true)
-                                                    
-                    })
+                                                        
+                        })
+                    }else{
+                        self.sign_up_error_label.text = "El password no coincide, verificalo"
+                    }
                 }else{
-                    self.sign_up_error_label.text = "El password no coincide, verificalo"
+                    self.sign_up_error_label.text = "El password debe tener al menos 6 caracteres"
                 }
             }else{
                 self.sign_up_error_label.text = "Verifica tu email"
@@ -303,14 +322,9 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
         }else{
             self.sign_up_error_label.text = "No olvides llenar todos los campos"
         }
-        
-        
-        
     }
     
     func showSignUpAnimation(flag: Bool){
-        
-        
         if flag == true {
             self.sign_up_view_bottom_constrain.constant = 0
             fbLoginViewHeight.isActive = false
@@ -326,6 +340,13 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
             UIView.animate(withDuration: 0.5, animations: {
                 self.view.layoutIfNeeded()
                 self.dopLogo.alpha = 0
+                
+                self.login_email_text.resignFirstResponder()
+                self.login_password_text.resignFirstResponder()
+                self.sign_up_email.resignFirstResponder()
+                self.sign_up_password.resignFirstResponder()
+                self.sign_up_confirm_password.resignFirstResponder()
+                self.forgot_password_email.resignFirstResponder()
                 
             })
         }else{
@@ -344,8 +365,16 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
                 self.dopLogo.alpha = 1
                 self.fbButton.alpha = 1
                 
+                self.login_email_text.resignFirstResponder()
+                self.login_password_text.resignFirstResponder()
+                self.sign_up_email.resignFirstResponder()
+                self.sign_up_password.resignFirstResponder()
+                self.sign_up_confirm_password.resignFirstResponder()
+                self.forgot_password_email.resignFirstResponder()
+                
             })
         }
+        
     }
     
     
@@ -392,9 +421,6 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
                 User.userSurnames = surnames
                 User.userImageUrl = main_image
                 User.userEmail = email
-
-                
-                
                 // self.person = model
             }
             
@@ -402,7 +428,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
                 LoginController.getPrivacyInfo(success: { (response) in
                     let json = response!["data"][0]
                     
-                    print("\(json)")
+                    
                     User.privacy_status = json["privacy_status"].int!
                     User.first_following = json["first_following"].bool!
                     User.first_follower = json["first_follower"].bool!
@@ -618,6 +644,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
                                             User.userImageUrl =  params["main_image"]!
                                             User.userName =  params["names"]!
                                             User.userSurnames =  params["surnames"]!
+                                            User.userEmail = params["email"]!
                                             
                                             do {
                                                 let payload = try decode(jwt: (User.userToken["Authorization"])!)
@@ -680,6 +707,71 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
         
         let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailTest.evaluate(with: testStr)
+    }
+    @IBAction func cancelForgotPassword(_ sender: Any) {
+        self.login_view.alpha = 0
+        self.login_view.isHidden = false
+        
+        Utilities.fadeOutToBottomWithCompletion(self.forgot_password_view, delay: 0, duration: 0.3, yPosition: 5) { (completion) in
+            self.forgot_password_view.isHidden = true
+            
+            Utilities.fadeInFromBottomAnimation(self.login_view, delay: 0, duration: 0.3, yPosition: 5)
+        }
+        
+    }
+    @IBAction func forgotPassword(_ sender: Any) {
+        if forgot_password_email.text != ""{
+            if self.isValidEmail(testStr: forgot_password_email.text!) {
+                let params:[String: String] = [ "email": forgot_password_email.text! ]
+                LoginController.forgotPassword("\(Utilities.dopURL)user/forgot/password", params: params as [String : AnyObject],
+                                               success: { (userData) -> Void in
+                                                
+                                                let json = userData!
+                                                
+                                                let result = json["data"].string!
+                                                
+                                                switch (result){
+                                                    case "success":
+                                                        self.cancelForgotPassword(self)
+                                                        break;
+                                                    case "user_not_found":
+                                                        self.forgot_password_error_label.text = "El email no esta registrado, verifícalo"
+                                                        break;
+                                                    case "error":
+                                                        self.forgot_password_error_label.text = "Ocurrió un error ☹️"
+                                                        break;
+                                                default:
+                                                    self.forgot_password_error_label.text = "Ocurrió un error ☹️"
+
+                                                        break;
+                                                }
+                                                
+                                                
+                },
+                                               failure:{ (error) -> Void in
+                                                self.forgot_password_error_label.text = "Ocurrió un error ☹️"
+
+                                                
+                })
+            }else{
+                forgot_password_error_label.text = "Verifica tu email"
+            }
+        }else{
+            forgot_password_error_label.text = "Escribe tu email"
+        }
+        
+    }
+    @IBAction func showForgotPasswordView(_ sender: Any) {
+        self.forgot_password_view.alpha = 0
+        self.forgot_password_view.isHidden = false
+        
+        Utilities.fadeOutToBottomWithCompletion(self.login_view, delay: 0, duration: 0.3, yPosition: 5) { (completion) in
+            self.login_view.isHidden = true
+            
+            Utilities.fadeInFromBottomAnimation(self.forgot_password_view, delay: 0, duration: 0.3, yPosition: 5)
+        }
+        
+        self.forgot_password_email.text = self.login_email_text.text
     }
     
 }
