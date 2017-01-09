@@ -165,7 +165,7 @@ class Utilities {
 
     //FRIENDLY DATE FUNCTION
 
-    class func friendlyDate(_ date:String) -> String {
+    class func friendlyDate(_ date: String) -> String {
         let separators = CharacterSet(charactersIn: "T.")
         let parts = date.components(separatedBy: separators)
         let friendly_date = Date(dateString: "\(parts[0]) \(parts[1])")
@@ -176,7 +176,7 @@ class Utilities {
         return friendly_date_str
     }
     
-    class func friendlyToDate(_ date:String) -> String {
+    class func friendlyToDate(_ date: String) -> String {
         let separators = CharacterSet(charactersIn: "T+")
         let parts = date.components(separatedBy: separators)
         let friendly_date = Date(dateString: "\(parts[0]) \(parts[1])")

@@ -41,6 +41,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     var email_needed: Bool = true
     var birthday_needed: Bool = true
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -200,11 +201,20 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
             let names = names_text.text!
             let surnames = surnames_text.text!
             let email = email_text.text!
-            let birthday = self.dateToString(date: self.birthday_picker.date)
+            var birthday: String!
             
-            var gender: String = "male"
+            if self.birthday_text.text != "" {
+                birthday = self.dateToString(date: self.birthday_picker.date)
+            }
+            
+            var gender: String = ""
+            
             if gender_picker.selectedSegmentIndex == 1{
-                gender = "female"
+                gender = "male"
+            }else{
+                if gender_picker.selectedSegmentIndex == 2{
+                    gender = "female"
+                }
             }
             
             Alamofire.upload(
@@ -219,13 +229,15 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                         multipartFormData.append(names.data(using: String.Encoding.utf8)!, withName: "names")
                         multipartFormData.append(surnames.data(using: String.Encoding.utf8)!, withName: "surnames")
                     }
-                    if self.birthday_needed {
+                    if birthday != nil {
                         multipartFormData.append(birthday.data(using: String.Encoding.utf8)!, withName: "birthday")
                     }
                     if self.email_needed {
                         multipartFormData.append(email.data(using: String.Encoding.utf8)!, withName: "email")
                     }
-                    multipartFormData.append(gender.data(using: String.Encoding.utf8)!, withName: "gender")
+                    if gender != "" {
+                        multipartFormData.append(gender.data(using: String.Encoding.utf8)!, withName: "gender")
+                    }
                     
             },
                 to: "\(Utilities.dopURL)user/profile/photo",
@@ -242,7 +254,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                             Utilities.fadeOutViewAnimation(self.loader, delay: 0, duration: 0.4)
                             
                             if json["message"].string! == "success" {
-                
+                                
                                 Utilities.fadeOutToBottomAnimation(self.welcome_label, delay: 0, duration: 0.4, yPosition: 10)
                                 Utilities.fadeOutToBottomAnimation(self.pick_photo_button, delay: 0, duration: 0.4, yPosition: 10)
                                 Utilities.fadeOutToBottomAnimation(self.gender_picker, delay: 0, duration: 0.4, yPosition: 10)
@@ -288,10 +300,10 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                 case "email":
                     if self.email_text.text == "" { success=false; error_label.text = "Asegúrate de llenar todos los campos";break }
                     if !self.isValidEmail(testStr: email_text.text!) { success=false; error_label.text = "Verifica tu correo"; break;  }
-                case "birthday":
-                    if self.birthday_text.text == "" { success=false; error_label.text = "Asegúrate de llenar todos los campos"; break }
+                    /*case "birthday":
+                     if self.birthday_text.text == "" { success=false; error_label.text = "Asegúrate de llenar todos los campos"; break }*/
                 default:
-                    success = false
+                    success = true
                     break
                 }
             }

@@ -11,23 +11,23 @@ import AlamofireImage
 import Alamofire
 
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
+    switch (lhs, rhs) {
+    case let (l?, r?):
+        return l < r
+    case (nil, _?):
+        return true
+    default:
+        return false
+    }
 }
 
 fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l > r
-  default:
-    return rhs < lhs
-  }
+    switch (lhs, rhs) {
+    case let (l?, r?):
+        return l > r
+    default:
+        return rhs < lhs
+    }
 }
 
 
@@ -87,7 +87,7 @@ class BranchRankingViewController: UITableViewController {
         view_controller.operation_id = model.operation_id!
         view_controller.person = model
         self.parent_view.navigationController?.pushViewController(view_controller, animated: true)
-
+        
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -109,7 +109,7 @@ class BranchRankingViewController: UITableViewController {
     }
     
     func getRanking() {
-
+        
         BranchProfileController.getBranchProfileRankingWithSuccess(parent_view.branch_id, success: { (data) -> Void in
             let json = data!
             
@@ -119,10 +119,10 @@ class BranchRankingViewController: UITableViewController {
                 let facebook_key = subJson["facebook_key"].string ?? "No Facebook Key"
                 let user_id = subJson["user_id"].int!
                 let company_id = subJson["company_id"].int ?? 0
-//                let branch_id =  subJson["branch_id" ].int!
-                let birth_date = subJson["birth_date"].string!
-                let privacy_status = subJson["privacy_status"].int!
-                let main_image = subJson["main_image"].string!
+                //                let branch_id =  subJson["branch_id" ].int!
+                let birth_date = subJson["birth_date"].string ?? ""
+                let privacy_status = subJson["privacy_status"].int ?? 0
+                let main_image = subJson["main_image"].string ?? ""
                 let total_used = subJson["total_used"].int!
                 let level = subJson["level"].int ?? 0
                 let exp = subJson["exp"].double ?? 0
@@ -141,14 +141,14 @@ class BranchRankingViewController: UITableViewController {
                 self.reload()
                 Utilities.fadeInFromBottomAnimation(self.tableView, delay: 0, duration: 1, yPosition: 20)
                 Utilities.fadeOutViewAnimation(self.loader, delay: 0, duration: 0.3)
-
+                
             });
-            },
-            
-            failure: { (error) -> Void in
-                DispatchQueue.main.async(execute: {
-                    Utilities.fadeOutViewAnimation(self.loader, delay: 0, duration: 0.3)
-                })
+        },
+                                                                   
+                                                                   failure: { (error) -> Void in
+                                                                    DispatchQueue.main.async(execute: {
+                                                                        Utilities.fadeOutViewAnimation(self.loader, delay: 0, duration: 0.3)
+                                                                    })
         })
     }
     
@@ -192,12 +192,12 @@ class BranchRankingViewController: UITableViewController {
                     if self.new_data { self.offset += self.added_values }
                     parent_scroll.finishInfiniteScroll()
                 });
-                },
-                
-                failure: { (error) -> Void in
-                    DispatchQueue.main.async(execute: {
-                        parent_scroll.finishInfiniteScroll()
-                    })
+            },
+                                                                             
+                                                                             failure: { (error) -> Void in
+                                                                                DispatchQueue.main.async(execute: {
+                                                                                    parent_scroll.finishInfiniteScroll()
+                                                                                })
             })
         } else { parent_scroll.finishInfiniteScroll() }
     }
@@ -206,15 +206,17 @@ class BranchRankingViewController: UITableViewController {
         let url = URL(string: model.main_image)
         cell.user_image.alpha = 0.3
         cell.user_image.image = UIImage(named: "dop-logo-transparent")
-
-        Alamofire.request(url!).responseImage { response in
-            if let image = response.result.value{
-                cell.user_image.image = image
-                Utilities.fadeInViewAnimation(cell.user_image, delay: 0, duration: 1)
-                cell.setRankingPosition(index)
+        
+        if model.main_image != "" {
+            Alamofire.request(url!).responseImage { response in
+                if let image = response.result.value{
+                    cell.user_image.image = image
+                    Utilities.fadeInViewAnimation(cell.user_image, delay: 0, duration: 1)
+                    cell.setRankingPosition(index)
+                }
             }
         }
-
+        
     }
 }
 

@@ -149,7 +149,7 @@ class ReadQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                         if json["minutes"].string != nil {
                             error_message = "Recientemente usaste esta promoción, intenta más tarde"
                         }
-                        if json["expired"].string != nil {
+                        if json["message"].string == "expired" {
                             error_message = "Esta promoción ha caducado"
                         }
                         

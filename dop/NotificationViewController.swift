@@ -97,8 +97,14 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
 
             var imageUrl: URL = URL(string: "http://")!
             let identifier = "Cell\((indexPath as NSIndexPath).row)"
-            if model.catcher_id != User.user_id { imageUrl = URL(string: "\(model.catcher_image)")! }
-            else if model.launcher_image != "" { imageUrl = URL(string: "\(model.launcher_image)")! }
+            if model.catcher_id != User.user_id {
+                if model.catcher_image != ""{
+                    imageUrl = URL(string: "\(model.catcher_image)")!
+                }
+            }
+            else if model.launcher_image != "" {
+                imageUrl = URL(string: "\(model.launcher_image)")!
+            }
 
             let color = cell.contentView.backgroundColor
             cell.backgroundColor = color

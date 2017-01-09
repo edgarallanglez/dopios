@@ -17,6 +17,9 @@ class ImageCropperViewController: UIViewController, UIScrollViewDelegate, UIImag
     let picker = UIImagePickerController()
     @IBOutlet weak var scrollViewSquare: UIScrollView!
     
+    var first_time: Bool = false
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         picker.delegate = self
@@ -35,6 +38,12 @@ class ImageCropperViewController: UIViewController, UIScrollViewDelegate, UIImag
         
         
         dismiss(animated: false, completion: nil)
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        if first_time == false{
+            first_time = true
+            self.Pick(sender: self)
+        }
     }
     
     @IBAction func Pick(sender: AnyObject) {

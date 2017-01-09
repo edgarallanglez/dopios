@@ -7,16 +7,19 @@
 //
 
 import Foundation
+import Alamofire
 
 class SettingsController {
-    class func setPrivacyWithSuccess(_ url: String, params: [String:AnyObject], success succeed: @escaping ((_ data: Data?) -> Void),failure errorFound: @escaping ((_ data: NSError?) -> Void)) {
+    class func setPrivacyWithSuccess(_ url: String, params: [String:AnyObject], success succeed: @escaping ((_ data: JSON?) -> Void),failure errorFound: @escaping ((_ data: NSError?) -> Void)) {
         
-        Utilities.sendDataToURL(URL(string: url)!, method:"POST", params: params, completion: {(data, error) -> Void in
-            if let urlData = data {
-                succeed(urlData)
-            }else{
-                errorFound(error)
+        Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default ,headers: User.userToken).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                succeed(JSON(response.result.value))
+            case .failure(let error):
+                print(error)
+                errorFound(error as NSError)
             }
-        })
+        }
     }
 }

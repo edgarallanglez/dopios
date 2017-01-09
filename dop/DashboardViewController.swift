@@ -48,10 +48,41 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
     var toexpireLoader: MMMaterialDesignSpinner!
     var nearestLoader: MMMaterialDesignSpinner = MMMaterialDesignSpinner(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
     
+    var nearest_info_text: UILabel!
+    var trending_info_text: UILabel!
+    var toexpire_info_text: UILabel!
+    
     var firstTime: Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         UIApplication.shared.statusBarStyle = .lightContent
+        
+        nearest_info_text = UILabel(frame: self.nearestScroll.frame)
+        nearest_info_text.text = "NO HAY DISPONIBLES"
+        nearest_info_text.font = UIFont(name: "Montserrat-Regular", size: 15)
+        nearest_info_text.textColor = UIColor.lightGray
+        nearest_info_text.textAlignment = .center
+        nearest_info_text.isHidden = true
+        self.nearestContainer.addSubview(nearest_info_text)
+        
+        trending_info_text = UILabel(frame: self.trendingScroll.frame)
+        trending_info_text.text = "NO HAY DISPONIBLES"
+        trending_info_text.font = UIFont(name: "Montserrat-Regular", size: 15)
+        trending_info_text.textColor = UIColor.lightGray
+        trending_info_text.textAlignment = .center
+        trending_info_text.isHidden = true
+        self.trendingContainer.addSubview(trending_info_text)
+        
+        toexpire_info_text = UILabel(frame: self.toExpireScroll.frame)
+        toexpire_info_text.text = "NO HAY DISPONIBLES"
+        toexpire_info_text.font = UIFont(name: "Montserrat-Regular", size: 15)
+        toexpire_info_text.textColor = UIColor.lightGray
+        toexpire_info_text.textAlignment = .center
+        toexpire_info_text.isHidden = true
+        self.toExpireContainer.addSubview(toexpire_info_text)
+        
         nearestContainer.alpha = 0
         if (CLLocationManager.authorizationStatus() == .denied || CLLocationManager.authorizationStatus() == .notDetermined) {
             self.askPermissionButton.isHidden = false
@@ -351,7 +382,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
     }
     
     func getTrendingCoupons() {
-        
+        self.trending_info_text.isHidden = true
         trending = [Coupon]()
         trendingScroll.layer.masksToBounds = false
         trendingScroll.subviews.forEach({ $0.removeFromSuperview() })
@@ -436,12 +467,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                 }
                 
                 if json["data"].count == 0 {
-                    let info_text: UILabel = UILabel(frame: self.trendingScroll.frame)
-                    info_text.text = "NO HAY DISPONIBLES"
-                    info_text.font = UIFont(name: "Montserrat-Regular", size: 15)
-                    info_text.textColor = UIColor.lightGray
-                    info_text.textAlignment = .center
-                    self.trendingContainer.addSubview(info_text)
+                    self.trending_info_text.isHidden = false
                 }
                 
             });
@@ -449,7 +475,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                                                           
                                                           failure: { (error) -> Void in
                                                             DispatchQueue.main.async(execute: {
-                                                                
+                                                                self.trending_info_text.isHidden = false
                                                             })
         })
         
@@ -459,6 +485,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
         almost_expired = [Coupon]()
         
         self.mainScroll.addSubview(toexpireLoader)
+        self.toexpire_info_text.isHidden = true
         
         toExpireScroll.subviews.forEach({ $0.removeFromSuperview() })
         
@@ -527,19 +554,14 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                 self.toexpireLoader.stopAnimating()
                 
                 if json["data"].count == 0 {
-                    let info_text: UILabel = UILabel(frame: self.toExpireScroll.frame)
-                    info_text.text = "NO HAY DISPONIBLES"
-                    info_text.font = UIFont(name: "Montserrat-Regular", size: 15)
-                    info_text.textColor = UIColor.lightGray
-                    info_text.textAlignment = .center
-                    self.toExpireContainer.addSubview(info_text)
+                    self.toexpire_info_text.isHidden = false
                 }
             });
         },
                                                                
                                                                failure: { (error) -> Void in
                                                                 DispatchQueue.main.async(execute: {
-                                                                    
+                                                                    self.toexpire_info_text.isHidden = false
                                                                 })
         })
     }
@@ -598,7 +620,14 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                 let margin = 18
                 let positionX = 18
                 let couponWidth = 180
-                
+                self.nearest_info_text.isHidden = true
+
+                print("ENTRO CAbS \(self.nearest.count)")
+
+                if self.nearest.count == 0{
+                    print("ENTRO CAUS \(self.nearest.count)")
+                    self.nearest_info_text.isHidden = false
+                }
                 for (index, coupon) in self.nearest.enumerated() {
                     let coupon_box:NearestCoupon = Bundle.main.loadNibNamed("NearestCoupon", owner: self, options:
                         nil)![0] as! NearestCoupon
@@ -623,20 +652,15 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                 Utilities.fadeOutViewAnimation(self.nearestLoader, delay:0, duration:0.3)
                 self.nearestLoader.stopAnimating()
                 
-                if self.nearest.count == 0 {
-                    print("WTF")
-                    let info_text: UILabel = UILabel(frame: self.nearestScroll.frame)
-                    info_text.text = "NO HAY DISPONIBLES"
-                    info_text.font = UIFont(name: "Montserrat-Regular", size: 15)
-                    info_text.textColor = UIColor.lightGray
-                    info_text.textAlignment = .center
-                    self.nearestContainer.addSubview(info_text)
-                }
+                
                 
             });
             
         },
                                               failure:{(branchesData)-> Void in
+                                                print(branchesData)
+                                                //self.nearest_info_text.isHidden = false
+
         })
     }
     

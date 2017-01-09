@@ -35,6 +35,7 @@ class SettingsViewController: UITableViewController {
 
         SettingsController.setPrivacyWithSuccess("\(Utilities.dopURL)user/privacy_status/set", params: params,
             success: { (data) -> Void in
+                
                 User.privacy_status = (params["privacy_status"]?.intValue)!
             }, failure: { (data) -> Void in
                 sender.setOn(!currentState, animated:true)
