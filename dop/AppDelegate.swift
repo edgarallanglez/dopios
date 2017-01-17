@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
+        if ((launchOptions) != nil) {
         URLCache.shared.removeAllCachedResponses()
         let notificationType = UIApplication.shared.currentUserNotificationSettings!.types
         if notificationType.contains(UIUserNotificationType.alert) && !User.userToken.isEmpty  {
@@ -33,6 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             User.newestNotification = notification_data
             // 3
             (window?.rootViewController as? LoadingViewController)?.notification = notification_data
+        }
         }
 
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
@@ -51,7 +53,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
-        
+        print("ALO1")
+
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
@@ -63,6 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
+        print("ALO2")
         //SocketIOManager.sharedInstance.establishConnection()
     }
 
@@ -74,7 +78,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("Complete");
         completionHandler(UIBackgroundFetchResult.newData)
         
-        getData();
+        //getData();
         
     }
     func getData() -> Void{

@@ -141,7 +141,7 @@ class ToExpireCoupon: UIView, ModalDelegate {
     }
     
     func setViewCount() {
-        let params: [String: AnyObject] = ["coupon_id": self.coupon.id as AnyObject]
+        let params: [String: AnyObject] = ["coupon_id": self.coupon.id as AnyObject, "latitude": User.coordinate.latitude as AnyObject, "longitude": User.coordinate.longitude as AnyObject]
         CouponController.viewCouponWithSuccess(params, success: { (data) -> Void in
             let json: JSON = JSON(data)
             },

@@ -34,7 +34,8 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
     @IBOutlet var loader: MMMaterialDesignSpinner!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        A0SimpleKeychain().deleteEntry(forKey: "auth0-user-jwt")
+
         
         if UserDefaults.standard.object(forKey: "tutorial_checked") != nil{
             tutorial_checked = UserDefaults.standard.value(forKeyPath: "tutorial_checked") as! Bool
@@ -239,7 +240,7 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
 
                                             DispatchQueue.main.async(execute: {
 
-                                                if User.userName == "" || User.userEmail == ""{
+                                                if User.userName == ""{
                                                     let storyboard = UIStoryboard(name: "Register", bundle: nil)
                                                     let controller = storyboard.instantiateViewController(withIdentifier: "RegisterViewController")
                                                     self.present(controller, animated: true, completion: nil)
@@ -287,7 +288,7 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
         self.modal_alert.willPresentCompletionHandler = { vc in
             let navigation_controller = vc as! AlertModalViewController
             navigation_controller.close_button.isHidden = true
-            navigation_controller.dismiss_button.setTitle("REINTENTAR", for: UIControlState())
+
             self.alert_array.append(AlertModel(alert_title: "¡Oops!", alert_image: "error", alert_description: "Ha ocurrido un error ☹️"))
 
             navigation_controller.setAlert(self.alert_array)

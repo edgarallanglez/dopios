@@ -30,4 +30,5 @@ class User: NSObject, CLLocationManagerDelegate {
     
     static var newestNotification: [String: AnyObject] = [:]
     
+    
 }

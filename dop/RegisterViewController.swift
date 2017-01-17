@@ -41,6 +41,8 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     var email_needed: Bool = true
     var birthday_needed: Bool = true
     
+    var modal_picker: Bool = false
+    var modal_view: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,20 +56,15 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         self.birthday_picker.alpha = 0
         self.birthday_picker.addTarget(self, action: #selector(handleDatePicker), for: .valueChanged)
         
-        
         self.names_text.delegate = self
         self.surnames_text.delegate = self
         self.email_text.delegate = self
         self.birthday_text.delegate = self
         
-        
         error_label.text = ""
         
         loader.startAnimating()
         loader.lineWidth = 3
-        
-        
-        
         
         if User.userName != "" {
             self.names_text_top.isActive = false
@@ -108,15 +105,75 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
             }
         }
         
-        loader.alpha = 0
+        if smallSizeScreen() {
+            modal_view = UIView(frame: self.view.frame)
+            modal_view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.8)
+            self.view.addSubview(modal_view)
+            self.birthday_picker.removeFromSuperview()
+            self.birthday_picker.removeConstraints(birthday_picker.constraints)
+            birthday_picker.frame = modal_view.frame
+            self.birthday_picker.tintColor = .white
+            self.birthday_picker.isHidden = false
+            modal_picker = true
+            self.birthday_picker.alpha = 1
+            birthday_picker.setValue(UIColor.white, forKeyPath: "textColor")
+            
+            self.birthday_picker.center.x = modal_view.center.x
+            modal_view.addSubview(birthday_picker)
+            
+            
+            let accept_date = UIButton(frame: self.accept_button.frame)
+            accept_date.backgroundColor = UIColor.white
+            accept_date.setTitleColor(Utilities.dopColor, for: .normal)
+            accept_date.setTitle("Aceptar", for: .normal)
+            accept_date.layer.cornerRadius = 3
+            accept_date.titleLabel?.font = UIFont(name: "Montserrat-Regular", size: 15)
+            accept_date.addTarget(self, action: #selector(closeModal), for: .touchUpInside)
+            modal_view.addSubview(accept_date)
+            accept_date.center.x = self.view.center.x
+            modal_view.isHidden = true
+            
+        }
         
+        loader.alpha = 0
         
         Utilities.applyPlainShadow(self.accept_button)
     }
+    func closeModal(){
+        modal_view.isHidden = true
+    }
+    
+    func smallSizeScreen() -> Bool {
+        if (UIDevice().userInterfaceIdiom == .phone){
+            switch UIScreen.main.nativeBounds.height {
+            case 960:
+                print("iPhone 4 or 4S")
+                return true
+            case 1136:
+                print("iPhone 5 or 5S or 5C")
+                return true
+            case 1334:
+                print("iPhone 6 or 6S")
+                return false
+            case 2208:
+                print("iPhone 6+ or 6S+")
+                return false
+            default:
+                return false
+            }
+        }
+        return false
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         if RegisterViewController.user_image != nil{
             self.image_loader.isHidden = true
             pick_photo_button.setImage(RegisterViewController.user_image, for: .normal)
+        }
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        if modal_picker {
+            birthday_picker.center = modal_view.center
         }
     }
     func handleDatePicker() {
@@ -132,6 +189,11 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
             textField.text = self.dateToFriendlyString(date: birthday_picker.date)
             self.error_label.text = ""
             
+            if modal_picker {
+                modal_view.isHidden = false
+            }
+            return false
+            
         }
         return true
     }
@@ -141,10 +203,8 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
             
         }
         
-        
-        
-        
     }
+    
     
     func dateToFriendlyString(date: Date) -> String {
         let dateFormatter = DateFormatter()
@@ -183,7 +243,12 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         self.surnames_text.resignFirstResponder()
         self.email_text.resignFirstResponder()
         self.birthday_text.resignFirstResponder()
+        
         Utilities.fadeOutViewAnimation(birthday_picker, delay: 0, duration: 0.4)
+        
+        if modal_picker {
+            modal_view.isHidden = true
+        }
     }
     @IBAction func accept(_ sender: Any) {
         error_label.text = ""

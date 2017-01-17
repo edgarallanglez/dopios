@@ -36,7 +36,7 @@ class CouponDetailViewController: BaseViewController, UITableViewDelegate, UITab
         
         //locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestAlwaysAuthorization()
+        locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
 
         let nib = UINib(nibName: "NewsfeedCell", bundle: nil)

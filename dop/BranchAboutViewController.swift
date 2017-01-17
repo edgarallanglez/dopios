@@ -64,10 +64,6 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
         self.view.addSubview(loader)
     }
     
-//    override func viewWillAppear(animated: Bool) {
-//        delegate?.resizeAboutView!(330)
-//    }
-//    
     override func viewDidAppear(_ animated: Bool) {
         parent_view.view.setNeedsLayout()
     }
@@ -83,7 +79,7 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
         branch_location_map.setRegion(coordinate_region, animated: false)
     }
     
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView?{
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let reuse_id = "custom"
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuse_id)
         if mapView.userLocation == annotation as! NSObject { return nil }
@@ -91,9 +87,7 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuse_id)
             annotationView!.canShowCallout = true
             
-        } else {
-            annotationView?.annotation = annotation
-        }
+        } else { annotationView?.annotation = annotation }
         
         let customAnnotation = annotation as! Annotation
         annotationView!.image = UIImage(named: customAnnotation.typeOfAnnotation)
@@ -132,10 +126,12 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
                 let drop_pin = Annotation(coordinate: new_location, title: json["name"].string!, subTitle: "", branch_distance: "4.3", branch_id: branch_id, company_id: 0, logo: "")
                 
                 switch json["category_id"].int! {
+                    case 0: drop_pin.typeOfAnnotation = "marker-services-icon"
                     case 1: drop_pin.typeOfAnnotation = "marker-food-icon"
                     case 2: drop_pin.typeOfAnnotation = "marker-services-icon"
                     case 3: drop_pin.typeOfAnnotation = "marker-entertainment-icon"
-                default: break
+                default: drop_pin.typeOfAnnotation = "marker-services-icon"
+                        break
                 }
                 self.branch_description.text = model.about
                 self.phone.text = model.phone
@@ -151,7 +147,7 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
 
                 self.delegate!.setFollow(model)
                 
-                if model.adults_only == true{
+                if model.adults_only {
                     
                 }
             })

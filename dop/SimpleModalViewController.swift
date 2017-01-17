@@ -54,7 +54,11 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate, MKMapView
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(didBecomeActive), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
 
+        
         if((cancel_button) != nil){
             cancel_button.addTarget(self, action: #selector(SimpleModalViewController.buttonPressed(_:)), for: UIControlEvents.touchDown)
             cancel_button.addTarget(self, action: #selector(SimpleModalViewController.buttonReleased(_:)), for: UIControlEvents.touchDragOutside)
@@ -123,6 +127,7 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate, MKMapView
     }
 
     override func viewDidAppear(_ animated: Bool) {
+        print("YES")
         if(coupon != nil){
             self.branch_title.setTitle(self.coupon?.name.uppercased(), for: UIControlState())
             self.category_label.text = "".uppercased()
@@ -327,8 +332,17 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate, MKMapView
     
     func openGoogleMaps(){
         let customURL = "comgooglemaps://?daddr=\(self.coupon!.location.latitude),\(self.coupon!.location.longitude)&directionsmode=driving"
+        
+        if #available(iOS 10, *) {
+            UIApplication.shared.open(URL(string: customURL)!, options: [:],
+                                      completionHandler: {
+                                        (success) in
+                                        print("Listo")
+            })
+        } else {
+            UIApplication.shared.openURL(URL(string: customURL)!)
 
-        UIApplication.shared.openURL(URL(string: customURL)!)
+        }
     }
     func openAppleMaps() {
 
@@ -525,5 +539,16 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate, MKMapView
     func sharerDidCancel(_ sharer: FBSDKSharing!) {
         print("cancel share")
     }
+    
+    
+    func didBecomeActive() {
+        print("did become active")
+        print(parent ?? "NO hay parent")
+    }
+    
+    func willEnterForeground() {
+        print("will enter foreground")
+    }
+    
     
 }
