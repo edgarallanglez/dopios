@@ -147,7 +147,7 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
 
                 self.delegate!.setFollow(model)
                 
-                if model.adults_only {
+                if model.adults_only! {
                     
                 }
             })

@@ -10,6 +10,7 @@ import UIKit
 import AVFoundation
 
 class ReadQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, ModalDelegate{
+    var captureDevice: AVCaptureDevice?
     var captureSession: AVCaptureSession?
     var videoPreviewLayer: AVCaptureVideoPreviewLayer?
     var qrCodeFrameView: UIView?
@@ -292,7 +293,7 @@ class ReadQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
         let input: AnyObject?
         
         do {
-            let captureDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo )
+             captureDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo )
             input = try AVCaptureDeviceInput.init(device: captureDevice )
         } catch {
             if let error = error as NSError? {
@@ -340,6 +341,10 @@ class ReadQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
             
             self.view.addSubview(spinner)
             spinner.alpha = 0
+            
+            print("Category is \(self.coupon.categoryId)")
+            
+
         }
 
         self.view.layoutIfNeeded()
@@ -389,6 +394,28 @@ class ReadQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
 //        }
     }
     
+    @IBAction func turnLightOn(_ sender: Any) {
+        if (captureDevice?.hasTorch)! {
+            do {
+                try captureDevice?.lockForConfiguration()
+                if (captureDevice?.torchMode == AVCaptureTorchMode.on) {
+                    captureDevice?.torchMode = AVCaptureTorchMode.off
+                    (sender as! UIButton).setBackgroundImage(UIImage(named: "lintern"), for: .normal)
+                } else {
+                    do {
+                        (sender as! UIButton).setBackgroundImage(UIImage(named: "lintern_inverted"), for: .normal)
+                        try captureDevice?.setTorchModeOnWithLevel(1.0)
+                    } catch {
+                        print(error)
+                    }
+                }
+                captureDevice?.unlockForConfiguration()
+            } catch {
+                print(error)
+            }
+        }
+        
+    }
     override func viewDidDisappear(_ animated: Bool) {
         self.captureSession?.stopRunning()
         self.videoPreviewLayer?.removeFromSuperlayer()
