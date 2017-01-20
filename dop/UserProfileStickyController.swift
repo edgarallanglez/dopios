@@ -48,7 +48,7 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
     var user_image: UIImageView!
     var user_image_path: String = ""
     var is_friend: Bool?
-    var operation_id: Int = 0
+    var operation_id: Int = 5
     var person: PeopleModel!
     var page_index: Int!
     var segmented_controller: UserProfileSegmentedController?
