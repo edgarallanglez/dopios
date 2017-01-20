@@ -91,10 +91,28 @@ class FilterSideViewController: UIViewController {
     
     @IBAction func setFoodSubcategories(_ sender: UIButton) {
         activeFilters.removeAll()
-        for item in foodCategoriesArray {
-            if item.isOn {
-                activeFilters.append(item.tag)
+        switch filterSegmented.selectedIndex {
+        case 0:
+            for item in foodCategoriesArray {
+                if item.isOn {
+                    activeFilters.append(item.tag)
+                }
             }
+        case 1:
+            for item in servicesCategoriesArray {
+                if item.isOn {
+                    activeFilters.append(item.tag)
+                }
+            }
+
+        case 2:
+            for item in entertainmentCategoriesArray {
+                if item.isOn {
+                    activeFilters.append(item.tag)
+                }
+            }
+        default:
+            break
         }
         self.revealViewController().revealToggle(animated: true)
         setFilterArray()
