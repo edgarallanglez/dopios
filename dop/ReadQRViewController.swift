@@ -124,25 +124,6 @@ class ReadQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
             "longitude": User.coordinate.longitude as AnyObject? ?? 0 as AnyObject,
             "first_using": User.first_using as AnyObject ]
         
-        /*if User.first_using {
-            params = [
-                "qr_code" : qr_code as AnyObject,
-                "coupon_id": self.coupon_id! as AnyObject,
-                "branch_id": self.branch_id! as AnyObject,
-                "latitude": User.coordinate.latitude as AnyObject? ?? 0 as AnyObject,
-                "longitude": User.coordinate.longitude as AnyObject? ?? 0 as AnyObject,
-                "first_using": false as AnyObject ]
-        } else {
-            params = [
-                "qr_code" : qr_code as AnyObject,
-                "coupon_id": self.coupon_id! as AnyObject,
-                "branch_id": self.branch_id! as AnyObject,
-                "latitude": User.coordinate.latitude as AnyObject? ?? 0 as AnyObject,
-                "longitude": User.coordinate.longitude as AnyObject? ?? 0 as AnyObject,
-                "first_using": true as AnyObject ]
-            User.first_using = true
-        }*/
-        
         
         ReadQRController.sendQRWithSuccess(params,
             success: { (data) -> Void in
