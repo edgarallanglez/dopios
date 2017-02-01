@@ -104,7 +104,7 @@ class BranchProfileTopView: UIView {
         
         if (parent_view.coupon != nil && parent_view.coupon.adult_branch == true) {
             let adultsLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: parent_view.view.frame.width-20, height: 35))
-            adultsLabel.text="+18"
+            adultsLabel.text = "+18"
             adultsLabel.textAlignment = NSTextAlignment.right
             adultsLabel.textColor = UIColor.white
             adultsLabel.font = UIFont(name: "Montserrat-Regular", size: 26)

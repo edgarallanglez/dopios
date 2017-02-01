@@ -114,14 +114,13 @@ class CouponDetailViewController: BaseViewController, UITableViewDelegate, UITab
     
     func setBranchAnnotation () {
         let dropPin : Annotation = Annotation(coordinate: location, title: self.couponsName, subTitle: "Los mejores", branch_distance: "4.3", branch_id: branchId, company_id: 0, logo: "")
-        if categoryId == 1 {
-            dropPin.typeOfAnnotation = "marker-food-icon"
-        } else if categoryId == 2 {
-            dropPin.typeOfAnnotation = "marker-services-icon"
-        } else if categoryId == 3 {
-            dropPin.typeOfAnnotation = "marker-entertainment-icon"
+        switch categoryId {
+        case 1: dropPin.typeOfAnnotation = "marker-food-icon"
+        case 2: dropPin.typeOfAnnotation = "marker-services-icon"
+        case 3: dropPin.typeOfAnnotation = "marker-entertainment-icon"
+        default: dropPin.typeOfAnnotation = "marker-services-icon"
+            break
         }
-        
         customView.location.addAnnotation(dropPin)
     }
     override func didReceiveMemoryWarning() {

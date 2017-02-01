@@ -21,7 +21,7 @@ class Coupon: NSObject {
     var user_like: Bool
     let location: CLLocationCoordinate2D
     let banner: String
-    let categoryId: Int
+    var categoryId: Int = 2
     var available: Int
     var taken: Bool!
     var end_date: String!

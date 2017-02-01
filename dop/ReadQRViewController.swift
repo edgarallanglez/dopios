@@ -283,7 +283,7 @@ class ReadQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
     }
     
     func setCameraConfig() {
-        
+//        Utilities.setMaterialDesignButton(self., button_size: 50)
         problems_button.layer.borderColor = UIColor.white.cgColor
         problems_button.layer.borderWidth = 1.0
         problems_button.layer.cornerRadius = 3
@@ -409,7 +409,7 @@ class ReadQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                 try captureDevice?.lockForConfiguration()
                 if (captureDevice?.torchMode == AVCaptureTorchMode.on) {
                     captureDevice?.torchMode = AVCaptureTorchMode.off
-                    (sender as! UIButton).setBackgroundImage(UIImage(named: "lintern"), for: .normal)
+                    (sender as! UIButton).setBackgroundImage(UIImage(named: "latern"), for: .normal)
                 } else {
                     do {
                         (sender as! UIButton).setBackgroundImage(UIImage(named: "lintern_inverted"), for: .normal)
@@ -423,8 +423,8 @@ class ReadQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                 print(error)
             }
         }
-        
     }
+    
     override func viewDidDisappear(_ animated: Bool) {
         self.captureSession?.stopRunning()
         self.videoPreviewLayer?.removeFromSuperlayer()

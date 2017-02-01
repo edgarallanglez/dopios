@@ -99,8 +99,7 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
         
         Utilities.fadeInViewAnimation(self.spinner!, delay: 0, duration: 0.3)
         NearbyMapController.getNearestBranches(params, success: {(branchesData) -> Void in
-            let json =  branchesData!
-            print(json)
+            let json = branchesData!
             for (_, branch) in json["data"] {
                 let branch_id = branch["branch_id"].int
                 let company_id = branch["company_id"].int
@@ -113,13 +112,15 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
                 DispatchQueue.main.async {
                     // Drop a pin
                     let dropPin : Annotation = Annotation(coordinate: newLocation, title: branch["name"].string!, subTitle: address, branch_distance: "\(distance)", branch_id: branch_id!, company_id: company_id!, logo: logo)
-                    if branch["category_id"].int! == 1 {
-                        dropPin.typeOfAnnotation = "marker-food-icon"
-                    } else if branch["category_id"].int! == 2 {
-                        dropPin.typeOfAnnotation = "marker-services-icon"
-                    } else if branch["category_id"].int! == 3 {
-                        dropPin.typeOfAnnotation = "marker-entertainment-icon"
+                    
+                    switch branch["category_id"].int! {
+                    case 1: dropPin.typeOfAnnotation = "marker-food-icon"
+                    case 2: dropPin.typeOfAnnotation = "marker-services-icon"
+                    case 3: dropPin.typeOfAnnotation = "marker-entertainment-icon"
+                    default: dropPin.typeOfAnnotation = "marker-services-icon"
+                        break
                     }
+                    
                     self.annotationArray.append(dropPin)
                     self.nearbyMap.addAnnotation(dropPin)
                     
@@ -143,7 +144,7 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
         })
     }
     
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView?{
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let reuseId = "custom"
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId)
         if mapView.userLocation == annotation as! NSObject { return nil }
@@ -169,10 +170,8 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
                 mapPin.calloutView?.button!.tag = annotation.branch_id!
                 mapPin.calloutView?.button!.addTarget(self, action: #selector(NearbyMapViewController.goToBranchProfile(_:)), for: .touchUpInside)
                 let imageUrl = URL(string: "\(Utilities.dopImagesURL)\(annotation.company_id!)/\(annotation.logo!)")
-            
-                print("\(imageUrl!)")
+
                 mapPin.calloutView?.branch_image.alpha = 0
-            
                 mapPin.calloutView?.branch_image.image = UIImage(named: "dop-logo-transparent")
                 mapPin.calloutView?.branch_image.alpha = 0.3
             
