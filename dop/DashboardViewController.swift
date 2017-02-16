@@ -408,12 +408,14 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                 let taken = subJson["taken"].bool!
                 
                 let subcategory_id = subJson["subcategory_id"].int
+                let branch_folio = subJson["folio"].string!
+
                 var adult_branch = false
                 if(subcategory_id == 25){
                     adult_branch = true
                 }
                 
-                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: 1, available: available, taken: taken, adult_branch: adult_branch)
+                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: 1, available: available, taken: taken, adult_branch: adult_branch, branch_folio: branch_folio)
                 
                 self.trending.append(model)
             }
@@ -512,12 +514,14 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                 let available = subJson["available"].int!
                 
                 let subcategory_id = subJson["subcategory_id"].int
+                let branch_folio = subJson["folio"].string!
+
                 var adult_branch = false
                 if(subcategory_id == 25){
                     adult_branch = true
                 }
                 
-                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: 1, available: available, taken: taken, adult_branch: adult_branch)
+                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: 1, available: available, taken: taken, adult_branch: adult_branch, branch_folio: branch_folio)
                 model.end_date = end_date
                 
                 self.almost_expired.append(model)
@@ -606,11 +610,13 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                 let taken = subJson["taken"].bool ?? false
                 
                 let subcategory_id = subJson["subcategory_id"].int
+                let branch_folio = subJson["folio"].string!
+
                 var adult_branch = false
                 if subcategory_id == 25 { adult_branch = true }
                 
                 
-                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: 1, available: available, taken: taken, adult_branch: adult_branch)
+                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: 1, available: available, taken: taken, adult_branch: adult_branch, branch_folio: branch_folio)
                 model.distance = distance
                 
                 self.nearest.append(model)
