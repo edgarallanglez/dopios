@@ -165,10 +165,10 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                 cell.backgroundColor = UIColor.white
                 cell.heart.image = cell.heart.image!.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
                 //cell.viewForBaselineLayout()?.alpha = 0
-                cell.branch_banner.alpha=0
+                cell.branch_banner.alpha = 0
                 
                 
-                if (self.cachedImages[identifier] != nil){
+                if (self.cachedImages[identifier] != nil) {
                     let cell_image_saved : UIImage = self.cachedImages[identifier]!
                     cell.branch_banner.image = cell_image_saved
                     UIView.animate(withDuration: 0.5, animations: {
