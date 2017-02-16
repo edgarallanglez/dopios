@@ -44,7 +44,6 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         } else {
             setNotificationConfig()
         }
-
     }
     
     @IBAction func pressNotificationButton(_ sender: AnyObject) {
@@ -58,7 +57,6 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         Utilities.fadeOutViewAnimation(self.notificationButton, delay: 0, duration: 0.5)
         if(notificationButtonPressed == false){
             getNotifications()
-            print("entro")
         }
     }
 
@@ -117,7 +115,6 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                 })
 
             } else {
-                print("ENTRO AQUI")
                 cell.notification_image.alpha = 0.3
                 cell.notification_image.image = UIImage(named: "dop-logo-transparent")
                 cell.notification_image.backgroundColor = Utilities.lightGrayColor
@@ -146,7 +143,6 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         NotificationController.getNotificationsWithSuccess(
             success: { (data) -> Void in
                 let json = data!
-                print(json)
                 for (_, subJson): (String, JSON) in json["data"]{
                     let type = subJson["type"].string ?? ""
                     let notification_id = subJson["notification_id"].int ?? 0
@@ -204,15 +200,14 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func getNotificationsWithOffset() {
-        var newData:Bool = false
-        var addedValues:Int = 0
+        var newData: Bool = false
+        var addedValues: Int = 0
 
         let firstNotification = self.notifications.first as Notification!
 
         NotificationController.getNotificationsOffsetWithSuccess((firstNotification?.notification_id)!, offset:offset,
             success: { (couponsData) -> Void in
                 let json = couponsData!
-                print(json)
                 for (_, subJson): (String, JSON) in json["data"]{
                     let type = subJson["type"].string ?? ""
                     let notification_id = subJson["notification_id"].int ?? 0
@@ -241,6 +236,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                     newData = true
                     addedValues += 1
                 }
+                
                 DispatchQueue.main.async(execute: {
                     UIView.animate(withDuration: 0.3, animations: {
                         self.notifications.removeAll()
@@ -261,9 +257,9 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                 })
         })
     }
+    
     func readNotification(_ notification:Notification){
-
-        let params: [String: AnyObject] = [ "notification_id": notification.notification_id as AnyObject ]
+        let params: [String: AnyObject] = [ "notification_id" : notification.notification_id as AnyObject ]
 
         NotificationController.setNotificationsReadWithSuccess(params,
             success: { (couponsData) -> Void in
@@ -284,9 +280,11 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         })
 
     }
+    
     func showNotificationButton() {
         Utilities.fadeInFromBottomAnimation(notificationButton, delay: 0, duration: 1, yPosition: 20)
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedItem = notifications[(indexPath as NSIndexPath).row]
         /*let itemId = selectedItem.notification_id
@@ -312,14 +310,12 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             }
         }*/
     }
+    
     func attributedLabel(_ label: TTTAttributedLabel!, didSelectLinkWith url: URL!) {
         let splitter = String(describing: url!).components(separatedBy: ":")
         
         let segue: String = splitter[0]
-        
         let object_id: Int = Int(splitter[1])!
-        
-
         if segue == "userProfile" {
             let is_friend: Bool = (splitter[2] as NSString!).boolValue
             let view_controller = self.storyboard!.instantiateViewController(withIdentifier: "UserProfileStickyController") as! UserProfileStickyController
@@ -334,9 +330,9 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             self.navigationController?.pushViewController(view_controller, animated: true)
         }
     }
+    
     override func viewDidDisappear(_ animated: Bool) {
         if self.giverView.isHidden { self.refreshControl.endRefreshing() }
-        print("disappear")
     }
     
     func refreshTableView(_ notification: Foundation.Notification){
@@ -389,11 +385,18 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     @IBAction func askPermission(_ sender: UIButton) {
-        UIApplication.shared.registerUserNotificationSettings(
-            UIUserNotificationSettings(types: [.alert, .sound, .badge],
-                                       categories: nil)
-        )
-        UIApplication.shared.registerForRemoteNotifications()
+        if UIApplication.shared.isRegisteredForRemoteNotifications {
+            UIApplication.shared.registerUserNotificationSettings(
+                UIUserNotificationSettings(types: [.alert, .sound, .badge],
+                                           categories: nil)
+            )
+            UIApplication.shared.registerForRemoteNotifications()
+        } else {
+            if let url = URL(string:UIApplicationOpenSettingsURLString) {
+                UIApplication.shared.openURL(url)
+            }
+        }
+
     }
 
 }

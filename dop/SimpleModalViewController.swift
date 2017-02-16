@@ -390,7 +390,8 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate, MKMapView
             case 1: drop_pin.typeOfAnnotation = "marker-food-icon"
             case 2: drop_pin.typeOfAnnotation = "marker-services-icon"
             case 3: drop_pin.typeOfAnnotation = "marker-entertainment-icon"
-        default: break
+            default: drop_pin.typeOfAnnotation = "marker-services-icon"
+            break
         }
 
         self.map.addAnnotation(drop_pin)
@@ -509,7 +510,7 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate, MKMapView
     }
     @IBAction func share(_ sender: AnyObject) {
         let content : FBSDKShareLinkContent = FBSDKShareLinkContent()
-        content.contentURL = URL(string: "http://www.inmoon.io")
+        content.contentURL = URL(string: "http://www.dop.life")
         content.contentTitle = self.coupon.name
         content.imageURL = URL(string: "\(Utilities.dopImagesURL)\(self.coupon.company_id)/\(self.coupon.logo)")
         content.contentDescription = self.coupon.couponDescription
