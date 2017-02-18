@@ -112,6 +112,7 @@ class ToExpireCoupon: UIView, ModalDelegate {
                 view_controller.coupon_id = self.coupon.id
                 view_controller.coupon = self.coupon
                 view_controller.branch_id = self.coupon.branch_id
+                view_controller.branch_folio = self.coupon.branch_folio
                 
                 viewController?.hidesBottomBarWhenPushed = true
                 
