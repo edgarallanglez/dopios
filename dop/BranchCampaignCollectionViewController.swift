@@ -224,7 +224,7 @@ class BranchCampaignCollectionViewController: UICollectionViewController, ModalD
                     let available = subJson["available"].int!
                     let start_date = subJson["start_date"].string!
                     let taken = subJson["taken"].bool ?? false
-                    let branch_folio = subJson["branch_folio"].string!
+                    let branch_folio = subJson["folio"].string!
 
                     
                     let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: category_id, available: available, taken: taken, start_date: start_date, branch_folio: branch_folio)
@@ -278,7 +278,7 @@ class BranchCampaignCollectionViewController: UICollectionViewController, ModalD
                 let available = subJson["available"].int!
                 let start_date = subJson["start_date"].string!
                 let taken = subJson["taken"].bool ?? false
-                let branch_folio = subJson["branch_folio"].string!
+                let branch_folio = subJson["folio"].string!
                 
                 let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: category_id, available: available, taken: taken, start_date: start_date, branch_folio: branch_folio)
                 model.adult_branch = self.parent_view.coupon.adult_branch
@@ -326,6 +326,7 @@ class BranchCampaignCollectionViewController: UICollectionViewController, ModalD
                 view_controller.coupon = self.selected_coupon
                 view_controller.coupon_id = self.selected_coupon.id
                 view_controller.branch_id = self.selected_coupon.branch_id
+                view_controller.branch_folio = self.selected_coupon.branch_folio
                 self.hidesBottomBarWhenPushed = true
                 self.parent_view.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.plain, target:nil, action:nil)
 

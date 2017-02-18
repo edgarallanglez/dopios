@@ -26,10 +26,13 @@ class ReadQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
     var coupon_id: Int?
     var coupon: Coupon!
     var branch_id: Int?
+    var branch_folio: String!
     var spinner: MMMaterialDesignSpinner!
+    var qr_problems_pressed: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         
         if AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo) == AVAuthorizationStatus.authorized {
             setCameraConfig()
@@ -64,9 +67,9 @@ class ReadQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
 
                     self.qr_detected = true
                     
-                    if let qrInt = Int(metadataObj.stringValue) {
-                        if qrInt == self.branch_id {
-                            self.sendQR(qrInt)
+                    if let qr_code = metadataObj.stringValue {
+                        if qr_code == self.branch_folio! {
+                            self.sendQR(qr_code)
                         } else {
                             let modal: ModalViewController = ModalViewController(currentView: self, type: ModalViewControllerType.AlertModal)
                             modal.willPresentCompletionHandler = { vc in
@@ -83,33 +86,13 @@ class ReadQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                             }
                             modal.present(animated: true, completionHandler: nil)
                         }
-                    } else {
-                        DispatchQueue.main.async(execute: {
-                            let modal: ModalViewController = ModalViewController(currentView: self, type: ModalViewControllerType.AlertModal)
-                            modal.delegate = self
-                            modal.willPresentCompletionHandler = { vc in
-                                let navigation_controller = vc as! AlertModalViewController
-                                
-                                self.alert_array.append(AlertModel(alert_title: "¡Oops!", alert_image: "error", alert_description: "Ha ocurrido un error, al parecer el QR no es válido ☹️"))
-                                
-                                navigation_controller.setAlert(self.alert_array)
-                            }
-                            
-                            modal.didDismissCompletionHandler = { vc in
-                                self.qr_detected = false
-                                self.alert_array.removeAll()
-                            }
-                            
-                            modal.present(animated: true, completionHandler: nil)
-                        })
-
                     }
                 }
             }
         }
     }
     
-    func sendQR(_ qr_code:Int) {
+    func sendQR(_ qr_code:String) {
         Utilities.fadeInViewAnimation(self.spinner, delay: 0, duration: 0.3)
         Utilities.fadeOutViewAnimation(self.qr_image, delay: 0, duration: 0.3)
         spinner?.startAnimating()
@@ -369,11 +352,14 @@ class ReadQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        qr_problems_pressed = true
         let destination_view = segue.destination as! ReadQRHelpViewController
         destination_view.coupon = self.coupon
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        qr_problems_pressed = false
 //        if AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo) == AVAuthorizationStatus.authorized {
 //            setCameraConfig()
 //        } else {
@@ -407,9 +393,11 @@ class ReadQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        self.captureSession?.stopRunning()
-        self.videoPreviewLayer?.removeFromSuperlayer()
-        self.videoPreviewLayer = nil
-        self.captureSession = nil
+        if qr_problems_pressed == false{
+            self.captureSession?.stopRunning()
+            self.videoPreviewLayer?.removeFromSuperlayer()
+            self.videoPreviewLayer = nil
+            self.captureSession = nil
+        }
     }
 }

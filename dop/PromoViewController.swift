@@ -399,7 +399,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                                                         let available = subJson["available"].int!
                                                         let taken = subJson["taken"].bool!
                                                         let start_date = subJson["start_date"].string ?? ""
-                                                        let branch_folio = subJson["branch_folio"].string!
+                                                        let branch_folio = subJson["folio"].string!
                                                         
                                                         let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: category_id, available: available, taken: taken, start_date: start_date, branch_folio: branch_folio)
                                                         
@@ -470,7 +470,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                                                                 let available = subJson["available"].int!
                                                                 let taken = subJson["taken"].bool!
                                                                 let start_date = subJson["start_date"].string!
-                                                                let branch_folio = subJson["branch_folio"].string!
+                                                                let branch_folio = subJson["folio"].string!
                                                                 
                                                                 let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: category_id, available: available, taken: taken, start_date: start_date, branch_folio: branch_folio)
                                                                 
@@ -544,7 +544,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                                                             let category_id = subJson["category_id"].int!
                                                             let available = subJson["available"].int!
                                                             var taken_date =  subJson["taken_date"].string!
-                                                            let branch_folio = subJson["branch_folio"].string!
+                                                            let branch_folio = subJson["folio"].string!
 
                                                             let separators = CharacterSet(charactersIn: "T+")
                                                             let parts = taken_date.components(separatedBy: separators)
@@ -608,7 +608,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                                                                     let banner = subJson["banner"].string ?? ""
                                                                     let category_id = subJson["category_id"].int!
                                                                     let available = subJson["available"].int!
-                                                                    let branch_folio = subJson["branch_folio"].string!
+                                                                    let branch_folio = subJson["folio"].string!
 
                                                                     let subcategory_id = subJson["subcategory_id"].int
                                                                     var adult_branch = false
@@ -703,6 +703,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                 view_controller.coupon_id = self.selected_coupon.id
                 view_controller.coupon = self.selected_coupon
                 view_controller.branch_id = self.selected_coupon.branch_id
+                view_controller.branch_folio = self.selected_coupon.branch_folio
                 self.hidesBottomBarWhenPushed = true
                 self.navigationController?.pushViewController(view_controller, animated: true)
                 self.hidesBottomBarWhenPushed = false
