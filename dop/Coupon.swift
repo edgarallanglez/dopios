@@ -15,7 +15,7 @@ class Coupon: NSObject {
     let limit: String
     let exp: String
     let logo: String
-    let branch_id: Int
+    let owner_id: Int
     let company_id: Int
     var total_likes: Int
     var user_like: Bool
@@ -31,7 +31,7 @@ class Coupon: NSObject {
     var distance: Double?
     var branch_folio: String!
 
-    init(id: Int?, name: String?, description: String?, limit: String?, exp: String?, logo: String? ,branch_id:Int?, company_id: Int?, total_likes: Int?, user_like: Bool?, latitude: Double, longitude: Double, banner: String, category_id: Int, available: Int, taken: Bool, adult_branch: Bool, branch_folio: String) {
+    init(id: Int?, name: String?, description: String?, limit: String?, exp: String?, logo: String? ,owner_id:Int?, company_id: Int?, total_likes: Int?, user_like: Bool?, latitude: Double, longitude: Double, banner: String, category_id: Int, available: Int, taken: Bool, adult_branch: Bool, branch_folio: String) {
         
         self.id = id ?? 0
         self.name = name ?? ""
@@ -39,7 +39,7 @@ class Coupon: NSObject {
         self.limit = limit ?? ""
         self.exp = exp ?? ""
         self.logo = logo ?? ""
-        self.branch_id = branch_id ?? 0
+        self.owner_id = owner_id ?? 0
         self.company_id = company_id ?? 0
         self.total_likes = total_likes ?? 0
         self.user_like = user_like ?? false
@@ -52,7 +52,7 @@ class Coupon: NSObject {
         self.branch_folio = branch_folio
         
     }
-    init(id: Int?, name: String?, description: String?, limit: String?, exp: String?, logo: String? ,branch_id:Int?, company_id: Int?, total_likes: Int?, user_like: Bool?, latitude: Double, longitude: Double, banner: String, category_id: Int, available: Int, taken: Bool, start_date: String, branch_folio: String) {
+    init(id: Int?, name: String?, description: String?, limit: String?, exp: String?, logo: String? ,owner_id:Int?, company_id: Int?, total_likes: Int?, user_like: Bool?, latitude: Double, longitude: Double, banner: String, category_id: Int, available: Int, taken: Bool, start_date: String, branch_folio: String) {
         
         self.id = id ?? 0
         self.name = name ?? ""
@@ -60,7 +60,7 @@ class Coupon: NSObject {
         self.limit = limit ?? ""
         self.exp = exp ?? ""
         self.logo = logo ?? ""
-        self.branch_id = branch_id ?? 0
+        self.owner_id = owner_id ?? 0
         self.company_id = company_id ?? 0
         self.total_likes = total_likes ?? 0
         self.user_like = user_like ?? false
@@ -75,7 +75,7 @@ class Coupon: NSObject {
         self.adult_branch = false
     }
     
-    init(id: Int?, name: String?, description: String?, limit: String?, exp: String?, logo: String? ,branch_id:Int?, company_id: Int?, total_likes: Int?, user_like: Bool?, latitude: Double, longitude: Double, banner: String, category_id: Int, available: Int, taken: Bool, taken_date: String, branch_folio: String){
+    init(id: Int?, name: String?, description: String?, limit: String?, exp: String?, logo: String? ,owner_id:Int?, company_id: Int?, total_likes: Int?, user_like: Bool?, latitude: Double, longitude: Double, banner: String, category_id: Int, available: Int, taken: Bool, taken_date: String, branch_folio: String){
         
         self.id = id ?? 0
         self.name = name ?? ""
@@ -83,7 +83,7 @@ class Coupon: NSObject {
         self.limit = limit ?? ""
         self.exp = exp ?? ""
         self.logo = logo ?? ""
-        self.branch_id = branch_id ?? 0
+        self.owner_id = owner_id ?? 0
         self.company_id = company_id ?? 0
         self.total_likes = total_likes ?? 0
         self.user_like = user_like ?? false

@@ -243,13 +243,12 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                 let company_id = subJson["company_id"].int
                 let banner = subJson["banner"].string
                 let subcategory_id = subJson["subcategory_id"].int
+                let folio = subJson[]
                 
                 var adults_only = false
-                if(subcategory_id == 25){
-                    adults_only = true
-                }
+                if(subcategory_id == 25) { adults_only = true }
                 
-                let model = Branch(id: branch_id, name: branch_name, banner: banner, company_id: company_id, adults_only: adults_only)
+                let model = Branch(id: branch_id, name: branch_name, banner: banner, company_id: company_id, folio: folio, adults_only)
                 self.branches.append(model)
             }
             
@@ -263,7 +262,6 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                 if self.view.subviews.contains(self.mainLoader) {
                     self.mainLoader.removeFromSuperview()
                     Utilities.fadeInViewAnimation(self.trendingLoader, delay:0, duration:0.3)
-                    
                 }
             });
         },
@@ -396,7 +394,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                 let coupon_limit = subJson["limit"].string
                 let coupon_exp = "2015-09-30"
                 let coupon_logo = subJson["logo"].string
-                let branch_id = subJson["branch_id"].int
+                let owner_id = subJson["owner_id"].int
                 let company_id = subJson["company_id"].int
                 let total_likes = subJson["total_likes"].int
                 let user_like = subJson["user_like"].bool
@@ -415,7 +413,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                     adult_branch = true
                 }
                 
-                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: 1, available: available, taken: taken, adult_branch: adult_branch, branch_folio: branch_folio)
+                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, owner_id: owner_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: 1, available: available, taken: taken, adult_branch: adult_branch, branch_folio: branch_folio)
 
                 
                 self.trending.append(model)
@@ -502,7 +500,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                 let coupon_limit = subJson["limit"].string
                 let coupon_exp = "2015-09-30"
                 let coupon_logo = subJson["logo"].string
-                let branch_id = subJson["branch_id"].int
+                let owner_id = subJson["owner_id"].int
                 let company_id = subJson["company_id"].int
                 let total_likes = subJson["total_likes"].int
                 let user_like = subJson["user_like"].bool
@@ -522,7 +520,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                     adult_branch = true
                 }
                 
-                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: 1, available: available, taken: taken, adult_branch: adult_branch, branch_folio: branch_folio)
+                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, owner_id: owner_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: 1, available: available, taken: taken, adult_branch: adult_branch, branch_folio: branch_folio)
 
                 model.end_date = end_date
                 
@@ -599,7 +597,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                 let coupon_limit = subJson["limit"].string
                 let coupon_exp = "2015-09-30"
                 let coupon_logo = subJson["logo"].string
-                let branch_id = subJson["branch_id"].int
+                let owner_id = subJson["owner_id"].int
                 let company_id = subJson["company_id"].int
                 let total_likes = subJson["total_likes"].int
                 let user_like = subJson["user_like"].bool
@@ -618,7 +616,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                 if subcategory_id == 25 { adult_branch = true }
                 
                 
-                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: 1, available: available, taken: taken, adult_branch: adult_branch, branch_folio: branch_folio)
+                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, owner_id: owner_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: 1, available: available, taken: taken, adult_branch: adult_branch, branch_folio: branch_folio)
 
                 model.distance = distance
                 
