@@ -68,10 +68,9 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
         mainLoader.lineWidth = 3.0
         mainLoader.startAnimating()
         
-        
         getCoupons()
         
-        let loader:MMMaterialDesignSpinner = MMMaterialDesignSpinner(frame: CGRect(x: 0,y: 0,width: 24,height: 24))
+        let loader:MMMaterialDesignSpinner = MMMaterialDesignSpinner(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
         
         loader.lineWidth = 2.0
         
@@ -388,7 +387,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                                                         let coupon_limit = subJson["limit"].string
                                                         let coupon_exp = "2015-09-30"
                                                         let coupon_logo = subJson["logo"].string
-                                                        let branch_id = subJson["branch_id"].int
+//                                                        let branch_id = subJson["branch_id"].int
                                                         let company_id = subJson["company_id"].int
                                                         let total_likes = subJson["total_likes"].int
                                                         let user_like = subJson["user_like"].bool
@@ -400,9 +399,9 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                                                         let taken = subJson["taken"].bool!
                                                         let start_date = subJson["start_date"].string ?? ""
                                                         let branch_folio = subJson["folio"].string!
-                                                        let owner_id = subJson["owner_id"].int!
+                                                        let branch_id = subJson["branch_id"].int!
                                                         
-                                                        let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, owner_id: owner_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: category_id, available: available, taken: taken, start_date: start_date, branch_folio: branch_folio)
+                                                        let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: category_id, available: available, taken: taken, start_date: start_date, branch_folio: branch_folio)
                                                         
                                                         self.coupons.append(model)
                                                     }
@@ -460,7 +459,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                                                                 let coupon_limit = subJson["limit"].string
                                                                 let coupon_exp = "2015-09-30"
                                                                 let coupon_logo = subJson["logo"].string!
-                                                                let branch_id = subJson["branch_id"].int!
+//                                                                let branch_id = subJson["branch_id"].int!
                                                                 let company_id = subJson["company_id"].int!
                                                                 let total_likes = subJson["total_likes"].int!
                                                                 let user_like = subJson["user_like"].bool!
@@ -472,9 +471,9 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                                                                 let taken = subJson["taken"].bool!
                                                                 let start_date = subJson["start_date"].string!
                                                                 let branch_folio = subJson["folio"].string!
-                                                                let owner_id = subJson["owner_id"].int!
+                                                                let branch_id = subJson["branch_id"].int!
                                                                 
-                                                                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, owner_id: owner_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: category_id, available: available, taken: taken, start_date: start_date, branch_folio: branch_folio)
+                                                                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: category_id, available: available, taken: taken, start_date: start_date, branch_folio: branch_folio)
                                                                 
                                                                 self.coupons.append(model)
                                                                 
@@ -547,13 +546,13 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                                                             let available = subJson["available"].int!
                                                             var taken_date =  subJson["taken_date"].string!
                                                             let branch_folio = subJson["folio"].string!
-                                                            let owner_id = subJson["owner_id"].int!
+//                                                            let branch_id = subJson["branch_id"].int!
 
                                                             let separators = CharacterSet(charactersIn: "T+")
                                                             let parts = taken_date.components(separatedBy: separators)
                                                             taken_date = "\(parts[0]) \(parts[1])"
                                                             
-                                                            let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, owner_id: owner_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: category_id, available: available, taken: true, taken_date: taken_date, branch_folio: branch_folio)
+                                                            let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: category_id, available: available, taken: true, taken_date: taken_date, branch_folio: branch_folio)
                                                             
                                                             self.myCoupons.append(model)
                                                         }
@@ -612,7 +611,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                                                                     let category_id = subJson["category_id"].int!
                                                                     let available = subJson["available"].int!
                                                                     let branch_folio = subJson["folio"].string!
-                                                                    let owner_id = subJson["owner_id"].int
+//                                                                    let branch_id = subJson["branch_id"].int
 
                                                                     let subcategory_id = subJson["subcategory_id"].int
                                                                     var adult_branch = false
@@ -620,7 +619,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                                                                         adult_branch = true
                                                                     }
                                                                     
-                                                                    let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, owner_id: owner_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: category_id, available: available, taken: true, adult_branch: adult_branch, branch_folio: branch_folio)
+                                                                    let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: category_id, available: available, taken: true, adult_branch: adult_branch, branch_folio: branch_folio)
                                                                     
                                                                     self.myCoupons.append(model)
                                                                     
@@ -658,7 +657,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                 view.couponsName = model.name
                 view.couponsDescription = model.couponDescription
                 view.location = model.location
-                view.branchId = model.owner_id
+                view.branchId = model.branch_id
                 view.couponId = model.id
                 view.logo = cachedImages["Cell\(i)"]
                 view.banner = coupons[i].banner
@@ -695,7 +694,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
     func pressActionButton(_ modal: ModalViewController) {
         if modal.action_type == "profile" {
             let view_controller = self.storyboard!.instantiateViewController(withIdentifier: "BranchProfileStickyController") as! BranchProfileStickyController
-            view_controller.branch_id = self.selected_coupon.owner_id
+            view_controller.branch_id = self.selected_coupon.branch_id
             view_controller.coupon = self.selected_coupon
             self.navigationController?.pushViewController(view_controller, animated: true)
             self.hidesBottomBarWhenPushed = false
@@ -706,7 +705,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                 let view_controller  = self.storyboard!.instantiateViewController(withIdentifier: "readQRView") as! ReadQRViewController
                 view_controller.coupon_id = self.selected_coupon.id
                 view_controller.coupon = self.selected_coupon
-                view_controller.branch_id = self.selected_coupon.owner_id
+                view_controller.branch_id = self.selected_coupon.branch_id
                 view_controller.branch_folio = self.selected_coupon.branch_folio
                 self.hidesBottomBarWhenPushed = true
                 self.navigationController?.pushViewController(view_controller, animated: true)

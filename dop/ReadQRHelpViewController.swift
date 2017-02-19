@@ -33,7 +33,7 @@ class ReadQRHelpViewController: UIViewController, ModalDelegate {
     @IBAction func send_report(_ sender: UIButton) {
         
         var params: [String: AnyObject] = [ "user_id": User.user_id as AnyObject,
-                                            "branch_id": coupon.owner_id as AnyObject,
+                                            "branch_id": coupon.branch_id as AnyObject,
                                             "coupon_id": coupon.id as AnyObject,
                                             "branch_indiference": false as AnyObject,
                                             "camera_broken": false as AnyObject,

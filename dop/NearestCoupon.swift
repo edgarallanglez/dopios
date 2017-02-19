@@ -90,7 +90,7 @@ class NearestCoupon: UIView, ModalDelegate {
         if modal.action_type == "profile" {
             let view_controller = viewController!.storyboard!.instantiateViewController(withIdentifier: "BranchProfileStickyController") as! BranchProfileStickyController
             view_controller.coupon = self.coupon
-            view_controller.branch_id = coupon.owner_id
+            view_controller.branch_id = coupon.branch_id
             
             viewController!.navigationController?.pushViewController(view_controller, animated: true)
             viewController?.hidesBottomBarWhenPushed = false
@@ -102,7 +102,7 @@ class NearestCoupon: UIView, ModalDelegate {
                 let view_controller  = viewController!.storyboard!.instantiateViewController(withIdentifier: "readQRView") as! ReadQRViewController
                 view_controller.coupon_id = self.coupon.id
                 view_controller.coupon = self.coupon
-                view_controller.branch_id = self.coupon.owner_id
+                view_controller.branch_id = self.coupon.branch_id
                 view_controller.branch_folio = self.coupon.branch_folio
                 viewController?.hidesBottomBarWhenPushed = true
                 

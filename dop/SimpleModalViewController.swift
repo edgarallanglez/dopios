@@ -384,7 +384,7 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate, MKMapView
     }
 
     func setBranchAnnotation () {
-        let drop_pin : Annotation = Annotation(coordinate: (coupon?.location)!, title: coupon!.name, subTitle: "Los mejores", branch_distance: "4.3", branch_id: coupon!.owner_id, company_id: coupon!.company_id, logo: "")
+        let drop_pin : Annotation = Annotation(coordinate: (coupon?.location)!, title: coupon!.name, subTitle: "Los mejores", branch_distance: "4.3", branch_id: coupon!.branch_id, company_id: coupon!.company_id, logo: "")
 
         switch coupon!.categoryId {
             case 1: drop_pin.typeOfAnnotation = "marker-food-icon"
@@ -410,7 +410,7 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate, MKMapView
     @IBAction func setTakeCoupon(_ sender: UIButton) {
         let params:[String: AnyObject] = [
             "coupon_id" : self.coupon.id as AnyObject,
-            "branch_id": self.coupon.owner_id as AnyObject,
+            "branch_id": self.coupon.branch_id as AnyObject,
             "latitude": User.coordinate.latitude as AnyObject? ?? 0 as AnyObject,
             "longitude": User.coordinate.longitude as AnyObject? ?? 0 as AnyObject ]
 
@@ -503,7 +503,7 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate, MKMapView
 
         if segue.identifier == "branchProfile" {
             let view = segue.destination as! BranchProfileStickyController
-            view.branch_id = self.coupon!.owner_id
+            view.branch_id = self.coupon!.branch_id
             //            view.logo = self.logo
 
         }
