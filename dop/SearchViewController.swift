@@ -89,6 +89,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
                 } else {
                     let cell = tableView.dequeueReusableCell(withIdentifier: "loadingCell") as! LoadingCell;
                     cell.label.text = "No se encontraron resultados"
+                    
                     cell.selectionStyle = UITableViewCellSelectionStyle.none
                     cell.loading_indicator.isHidden = true
                     
