@@ -243,12 +243,12 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                 let company_id = subJson["company_id"].int
                 let banner = subJson["banner"].string
                 let subcategory_id = subJson["subcategory_id"].int
-                let folio = subJson[]
+                let folio = subJson["folio"].string!
                 
                 var adults_only = false
                 if(subcategory_id == 25) { adults_only = true }
                 
-                let model = Branch(id: branch_id, name: branch_name, banner: banner, company_id: company_id, folio: folio, adults_only)
+                let model = Branch(id: branch_id, name: branch_name, banner: banner, company_id: company_id, adults_only: adults_only, folio: folio)
                 self.branches.append(model)
             }
             
@@ -716,7 +716,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
             view.couponsName = model.name
             view.couponsDescription = model.couponDescription
             view.location = model.location
-            view.branchId = model.branch_id
+            view.branchId = model.owner_id
             view.couponId = model.id
             view.logo = coupon_box.logo.image
             view.banner = model.banner

@@ -223,8 +223,9 @@ class BranchProfileTopView: UIView {
             let phone = json["phone"].string ?? ""
             let adults_only = json["adults_only"].bool ?? false
             let address = json["address"].string ?? ""
+            let folio = json["folio"].string!
             
-            let model = Branch(id: branch_id, name: branch_name, banner: banner, company_id: company_id, logo: logo, following: following, about: about, phone: phone, adults_only: adults_only, address: address)
+            let model = Branch(id: branch_id, name: branch_name, banner: banner, company_id: company_id, logo: logo, following: following, about: about, phone: phone, adults_only: adults_only, address: address, folio: folio)
             
             DispatchQueue.main.async(execute: {
                 self.downloadImage(model)

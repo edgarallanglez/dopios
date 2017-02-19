@@ -212,7 +212,7 @@ class TrendingCoupon: UIView, ModalDelegate, FBSDKSharingDelegate {
         
         let params:[String: AnyObject] = [
             "coupon_id" : self.coupon.id as AnyObject,
-            "branch_id": self.coupon.branch_id as AnyObject,
+            "branch_id": self.coupon.owner_id as AnyObject,
             "latitude": User.coordinate.latitude as AnyObject? ?? 0 as AnyObject,
             "longitude": User.coordinate.longitude as AnyObject? ?? 0 as AnyObject ]
         
@@ -267,7 +267,7 @@ class TrendingCoupon: UIView, ModalDelegate, FBSDKSharingDelegate {
                 let view_controller = viewController!.storyboard!.instantiateViewController(withIdentifier: "BranchProfileStickyController") as! BranchProfileStickyController
                 view_controller.coupon = self.coupon
                 //view_controller.branch.adults_only = coupon.adult_branch
-                view_controller.branch_id = coupon.branch_id
+                view_controller.branch_id = coupon.owner_id
                 modal.dismiss(animated: true, completionHandler: { (modal) -> Void in
                     self.viewController!.navigationController?.pushViewController(view_controller, animated: true)
                 })
@@ -279,7 +279,7 @@ class TrendingCoupon: UIView, ModalDelegate, FBSDKSharingDelegate {
                     let view_controller  = viewController!.storyboard!.instantiateViewController(withIdentifier: "readQRView") as! ReadQRViewController
                     view_controller.coupon_id = self.coupon.id
                     view_controller.coupon = self.coupon
-                    view_controller.branch_id = self.coupon.branch_id
+                    view_controller.branch_id = self.coupon.owner_id
                     view_controller.branch_folio = self.coupon.branch_folio
                     print("FOLIO ES \(coupon.branch_folio)")
                     viewController?.hidesBottomBarWhenPushed = true

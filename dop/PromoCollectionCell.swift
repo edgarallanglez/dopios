@@ -31,12 +31,12 @@ class PromoCollectionCell: UICollectionViewCell, FBSDKSharingDelegate {
     var viewController: UIViewController?
     var coordinate: CLLocationCoordinate2D?
     var coupon_id: Int!
-    var coupon:Coupon!
+    var coupon: Coupon!
     var branch_id: Int!
     
     func loadItem(_ coupon:Coupon, viewController: UIViewController) {
         coupon_description.text = coupon.couponDescription
-        self.branch_id = coupon.branch_id
+        self.branch_id = coupon.owner_id
         self.coupon_id = coupon.id
         //self.shareButton.setBackgroundImage(UIImage(named: "share-icon"), forState: UIControlState.Normal)
         let gesture = UITapGestureRecognizer(target: self, action: #selector(PromoCollectionCell.likeCoupon(_:)))
@@ -224,7 +224,7 @@ class PromoCollectionCell: UICollectionViewCell, FBSDKSharingDelegate {
     @IBAction func setTakeCoupon(_ sender: UIButton) {
         let params:[String: AnyObject] = [
             "coupon_id" : self.coupon.id as AnyObject,
-            "branch_id": self.coupon.branch_id as AnyObject,
+            "branch_id": self.coupon.owner_id as AnyObject,
             "latitude": User.coordinate.latitude as AnyObject? ?? 0 as AnyObject,
             "longitude": User.coordinate.longitude as AnyObject? ?? 0 as AnyObject ]
         
