@@ -87,7 +87,7 @@ class BranchProfileTopView: UIView {
         Utilities.fadeInFromBottomAnimation(self.follow_button, delay: 0, duration: 0.3, yPosition: 5)
         self.branch = branch
         self.branch_name.text = branch.name
-        if branch_logo.image == nil { self.downloadImage(self.branch) }
+        //if branch_logo.image == nil { self.downloadImage(self.branch) }
         if (parent_view.following != nil && parent_view.following == true) { setFollowingButton() }
     }
     
@@ -223,8 +223,9 @@ class BranchProfileTopView: UIView {
             let phone = json["phone"].string ?? ""
             let adults_only = json["adults_only"].bool ?? false
             let address = json["address"].string ?? ""
+            let folio = json["folio"].string!
             
-            let model = Branch(id: branch_id, name: branch_name, banner: banner, company_id: company_id, logo: logo, following: following, about: about, phone: phone, adults_only: adults_only, address: address)
+            let model = Branch(id: branch_id, name: branch_name, banner: banner, company_id: company_id, logo: logo, following: following, about: about, phone: phone, adults_only: adults_only, address: address, folio: folio)
             
             DispatchQueue.main.async(execute: {
                 self.downloadImage(model)

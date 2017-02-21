@@ -225,9 +225,11 @@ class BranchCampaignCollectionViewController: UICollectionViewController, ModalD
                     let start_date = subJson["start_date"].string!
                     let taken = subJson["taken"].bool ?? false
                     let branch_folio = subJson["folio"].string!
+//                    let branch_id = subJson["branch_id"].int
+                    let is_global = subJson["is_global"].bool!
 
                     
-                    let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: category_id, available: available, taken: taken, start_date: start_date, branch_folio: branch_folio)
+                    let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: category_id, available: available, taken: taken, start_date: start_date, branch_folio: branch_folio, is_global: is_global)
                     model.adult_branch = self.parent_view.branch.adults_only ?? false
                     self.coupons.append(model)
                 }
@@ -279,8 +281,10 @@ class BranchCampaignCollectionViewController: UICollectionViewController, ModalD
                 let start_date = subJson["start_date"].string!
                 let taken = subJson["taken"].bool ?? false
                 let branch_folio = subJson["folio"].string!
+//                let branch_id = subJson["branch_id"].int
+                let is_global = subJson["is_global"].bool!
                 
-                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: category_id, available: available, taken: taken, start_date: start_date, branch_folio: branch_folio)
+                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: category_id, available: available, taken: taken, start_date: start_date, branch_folio: branch_folio, is_global: is_global)
                 model.adult_branch = self.parent_view.coupon.adult_branch
                 self.coupons.append(model)
                 self.new_data = true

@@ -229,7 +229,9 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
                                                     
                                                     let name = subJson["name"].string!
                                                     let branch_id = subJson["branch_id"].int
-                                                    let model = Branch(id: branch_id, name: name, distance: distance)
+                                                    let folio = subJson["folio"].string!
+                                                    
+                                                    let model = Branch(id: branch_id, name: name, distance: distance, folio: folio)
                                                     
                                                     self.filtered.append(model)
                                                 }

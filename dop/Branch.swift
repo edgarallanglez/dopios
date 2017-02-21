@@ -20,14 +20,16 @@ struct Branch {
     let phone: String?
     let adults_only: Bool?
     let address: String?
+    let folio: String!
     
-    init(id: Int?, name: String?,  logo: String? ,banner: String?, company_id: Int?, latitude: Double, longitude: Double, following: Bool) {
+    init(id: Int?, name: String?,  logo: String? ,banner: String?, company_id: Int?, latitude: Double, longitude: Double, following: Bool, folio: String!) {
         self.id = id ?? 0
         self.name = name ?? ""
         self.banner = banner ?? ""
         self.company_id = company_id ?? 0
-        self.location = CLLocationCoordinate2DMake(latitude, longitude) ?? CLLocationCoordinate2DMake(0.0, 0.0)
+        self.location = CLLocationCoordinate2DMake(latitude, longitude) 
         self.following = following
+        self.folio = folio
         
         self.about = nil
         self.phone = nil
@@ -37,11 +39,12 @@ struct Branch {
         self.address = nil
     }
     
-    init(id: Int?, name: String?, banner: String?, company_id: Int?) {
+    init(id: Int?, name: String?, banner: String?, company_id: Int?, folio: String!) {
         self.id = id ?? 0
         self.name = name ?? ""
         self.banner = banner ?? ""
         self.company_id = company_id ?? 0
+        self.folio = folio
         
         self.distance = nil
         self.location = nil
@@ -53,12 +56,13 @@ struct Branch {
         self.address = nil
     }
     
-    init(id: Int?, name: String?, banner: String?, company_id: Int?, adults_only: Bool?) {
+    init(id: Int?, name: String?, banner: String?, company_id: Int?, adults_only: Bool?, folio: String!) {
         self.id = id ?? 0
         self.name = name ?? ""
         self.banner = banner ?? ""
         self.company_id = company_id ?? 0
         self.adults_only = adults_only ?? false
+        self.folio = folio
         
         self.distance = nil
         self.location = nil
@@ -69,9 +73,10 @@ struct Branch {
         self.address = nil
     }
     
-    init(id: Int?, name: String?, distance: Double!) {
+    init(id: Int?, name: String?, distance: Double!, folio: String!) {
         self.id = id ?? 0
         self.name = name ?? ""
+        self.folio = folio
         
         if distance == 0.0 { self.distance = String(stringInterpolationSegment: "") } else { self.distance = String(stringInterpolationSegment: "A \(distance!) Km") }
         
@@ -86,7 +91,7 @@ struct Branch {
         self.address = nil
     }
     
-    init(id: Int?, name: String?, banner: String?, company_id: Int?, logo: String!, following: Bool!, about: String?, phone: String?, adults_only: Bool?, address: String?) {
+    init(id: Int?, name: String?, banner: String?, company_id: Int?, logo: String!, following: Bool!, about: String?, phone: String?, adults_only: Bool?, address: String?, folio: String!) {
         self.id = id ?? 0
         self.name = name ?? ""
         self.banner = banner ?? ""
@@ -97,6 +102,7 @@ struct Branch {
         self.phone = phone
         self.adults_only = adults_only
         self.address = address
+        self.folio = folio
         
         self.distance = nil
         self.location = nil

@@ -6,9 +6,11 @@
 //  Copyright (c) 2015 Edgar Allan Glez. All rights reserved.
 //
 
-#ifndef dop_Bridging_h
-#define dop_Bridging_h
-#endif
+#ifndef Bridging_Header_h
+#define Bridging_Header_h
+
+
+#endif /* Bridging_Header_h */
 
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKShareKit/FBSDKShareKit.h>

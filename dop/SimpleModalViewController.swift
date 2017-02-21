@@ -447,7 +447,7 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate, MKMapView
                         let params:[String: AnyObject] = [
                             "coupon_id" : self.coupon.id as AnyObject,
                             "status": false as AnyObject,
-                            "type": "take" as AnyObject]
+                            "type": "take" as AnyObject ]
 
                         self.takeCouponButton.isEnabled = false
                         self.takeCouponButton.tintColor = UIColor.darkGray
@@ -515,13 +515,18 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate, MKMapView
         content.imageURL = URL(string: "\(Utilities.dopImagesURL)\(self.coupon.company_id)/\(self.coupon.logo)")
         content.contentDescription = self.coupon.couponDescription
         
+//        let share: FBSDKShareButton = FBSDKShareButton()
+//        share.shareContent = content
+//        
+//        share.sendActions(for: .touchUpInside)
+        
         
         let dialog: FBSDKShareDialog = FBSDKShareDialog()
         
         if UIApplication.shared.canOpenURL(URL(string: "fbauth2://")!) {
-            dialog.mode = FBSDKShareDialogMode.feedWeb
+            dialog.mode = FBSDKShareDialogMode.native
         }else{
-            dialog.mode = FBSDKShareDialogMode.feedWeb
+            dialog.mode = FBSDKShareDialogMode.native
         }
         dialog.shareContent = content
         dialog.delegate = self
@@ -529,6 +534,7 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate, MKMapView
         dialog.show()
         self.mz_dismissFormSheetController(animated: true, completionHandler: nil)
     }
+    
     func sharer(_ sharer: FBSDKSharing!, didFailWithError error: Error!) {
         //print(error.description)
     }

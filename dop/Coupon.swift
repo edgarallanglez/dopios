@@ -30,8 +30,9 @@ class Coupon: NSObject {
     var adult_branch: Bool
     var distance: Double?
     var branch_folio: String!
+    var is_global: Bool
 
-    init(id: Int?, name: String?, description: String?, limit: String?, exp: String?, logo: String? ,branch_id:Int?, company_id: Int?, total_likes: Int?, user_like: Bool?, latitude: Double, longitude: Double, banner: String, category_id: Int, available: Int, taken: Bool, adult_branch: Bool, branch_folio: String) {
+    init(id: Int?, name: String?, description: String?, limit: String?, exp: String?, logo: String? ,branch_id:Int?, company_id: Int?, total_likes: Int?, user_like: Bool?, latitude: Double, longitude: Double, banner: String, category_id: Int, available: Int, taken: Bool, adult_branch: Bool, branch_folio: String, is_global: Bool) {
         
         self.id = id ?? 0
         self.name = name ?? ""
@@ -50,9 +51,10 @@ class Coupon: NSObject {
         self.taken = taken
         self.adult_branch = adult_branch ?? false
         self.branch_folio = branch_folio
+        self.is_global = is_global
         
     }
-    init(id: Int?, name: String?, description: String?, limit: String?, exp: String?, logo: String? ,branch_id:Int?, company_id: Int?, total_likes: Int?, user_like: Bool?, latitude: Double, longitude: Double, banner: String, category_id: Int, available: Int, taken: Bool, start_date: String, branch_folio: String) {
+    init(id: Int?, name: String?, description: String?, limit: String?, exp: String?, logo: String? ,branch_id:Int?, company_id: Int?, total_likes: Int?, user_like: Bool?, latitude: Double, longitude: Double, banner: String, category_id: Int, available: Int, taken: Bool, start_date: String, branch_folio: String, is_global: Bool) {
         
         self.id = id ?? 0
         self.name = name ?? ""
@@ -71,11 +73,12 @@ class Coupon: NSObject {
         self.taken = taken
         self.start_date = start_date
         self.branch_folio = branch_folio
+        self.is_global = is_global
         
         self.adult_branch = false
     }
     
-    init(id: Int?, name: String?, description: String?, limit: String?, exp: String?, logo: String? ,branch_id:Int?, company_id: Int?, total_likes: Int?, user_like: Bool?, latitude: Double, longitude: Double, banner: String, category_id: Int, available: Int, taken: Bool, taken_date: String, branch_folio: String){
+    init(id: Int?, name: String?, description: String?, limit: String?, exp: String?, logo: String? ,branch_id:Int?, company_id: Int?, total_likes: Int?, user_like: Bool?, latitude: Double, longitude: Double, banner: String, category_id: Int, available: Int, taken: Bool, taken_date: String, branch_folio: String, is_global: Bool){
         
         self.id = id ?? 0
         self.name = name ?? ""
@@ -94,6 +97,7 @@ class Coupon: NSObject {
         self.taken = taken
         self.taken_date = taken_date
         self.branch_folio = branch_folio
+        self.is_global = is_global
         
         self.adult_branch = false
     }

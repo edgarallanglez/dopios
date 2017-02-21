@@ -31,7 +31,7 @@ class PromoCollectionCell: UICollectionViewCell, FBSDKSharingDelegate {
     var viewController: UIViewController?
     var coordinate: CLLocationCoordinate2D?
     var coupon_id: Int!
-    var coupon:Coupon!
+    var coupon: Coupon!
     var branch_id: Int!
     
     func loadItem(_ coupon:Coupon, viewController: UIViewController) {
