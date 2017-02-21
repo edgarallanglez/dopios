@@ -400,8 +400,9 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                                                         let start_date = subJson["start_date"].string ?? ""
                                                         let branch_folio = subJson["folio"].string!
                                                         let branch_id = subJson["branch_id"].int!
+                                                        let is_global = subJson["is_global"].bool!
                                                         
-                                                        let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: category_id, available: available, taken: taken, start_date: start_date, branch_folio: branch_folio)
+                                                        let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: category_id, available: available, taken: taken, start_date: start_date, branch_folio: branch_folio, is_global: is_global)
                                                         
                                                         self.coupons.append(model)
                                                     }
@@ -472,8 +473,9 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                                                                 let start_date = subJson["start_date"].string!
                                                                 let branch_folio = subJson["folio"].string!
                                                                 let branch_id = subJson["branch_id"].int!
+                                                                let is_global = subJson["is_global"].bool!
                                                                 
-                                                                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: category_id, available: available, taken: taken, start_date: start_date, branch_folio: branch_folio)
+                                                                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: category_id, available: available, taken: taken, start_date: start_date, branch_folio: branch_folio, is_global: is_global)
                                                                 
                                                                 self.coupons.append(model)
                                                                 
@@ -547,12 +549,13 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                                                             var taken_date =  subJson["taken_date"].string!
                                                             let branch_folio = subJson["folio"].string!
 //                                                            let branch_id = subJson["branch_id"].int!
+                                                            let is_global = subJson["is_global"].bool!
 
                                                             let separators = CharacterSet(charactersIn: "T+")
                                                             let parts = taken_date.components(separatedBy: separators)
                                                             taken_date = "\(parts[0]) \(parts[1])"
                                                             
-                                                            let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: category_id, available: available, taken: true, taken_date: taken_date, branch_folio: branch_folio)
+                                                            let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: category_id, available: available, taken: true, taken_date: taken_date, branch_folio: branch_folio, is_global: is_global)
                                                             
                                                             self.myCoupons.append(model)
                                                         }
@@ -612,6 +615,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                                                                     let available = subJson["available"].int!
                                                                     let branch_folio = subJson["folio"].string!
 //                                                                    let branch_id = subJson["branch_id"].int
+                                                                    let is_global = subJson["is_global"].bool!
 
                                                                     let subcategory_id = subJson["subcategory_id"].int
                                                                     var adult_branch = false
@@ -619,7 +623,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                                                                         adult_branch = true
                                                                     }
                                                                     
-                                                                    let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: category_id, available: available, taken: true, adult_branch: adult_branch, branch_folio: branch_folio)
+                                                                    let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: category_id, available: available, taken: true, adult_branch: adult_branch, branch_folio: branch_folio, is_global: is_global)
                                                                     
                                                                     self.myCoupons.append(model)
                                                                     

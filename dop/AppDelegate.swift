@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Fabric
+//import Fabric
 import FBSDKLoginKit
 import AVFoundation
 import Alamofire

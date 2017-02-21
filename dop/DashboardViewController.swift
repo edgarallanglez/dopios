@@ -407,13 +407,14 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                 
                 let subcategory_id = subJson["subcategory_id"].int
                 let branch_folio = subJson["folio"].string!
+                let is_global = subJson["is_global"].bool!
 
                 var adult_branch = false
                 if(subcategory_id == 25){
                     adult_branch = true
                 }
                 
-                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: 1, available: available, taken: taken, adult_branch: adult_branch, branch_folio: branch_folio)
+                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: 1, available: available, taken: taken, adult_branch: adult_branch, branch_folio: branch_folio, is_global: is_global)
 
                 
                 self.trending.append(model)
@@ -514,13 +515,14 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                 
                 let subcategory_id = subJson["subcategory_id"].int
                 let branch_folio = subJson["folio"].string!
+                let is_global = subJson["is_global"].bool!
 
                 var adult_branch = false
                 if(subcategory_id == 25){
                     adult_branch = true
                 }
                 
-                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: 1, available: available, taken: taken, adult_branch: adult_branch, branch_folio: branch_folio)
+                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: 1, available: available, taken: taken, adult_branch: adult_branch, branch_folio: branch_folio, is_global: is_global)
 
                 model.end_date = end_date
                 
@@ -537,7 +539,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                         nil)![0] as! ToExpireCoupon
                     
                     var position = 0
-                    position = positionX+((margin+couponWidth)*index)
+                    position = positionX + ((margin+couponWidth) * index)
                     coupon_box.move(CGFloat(position),y: 0)
                     coupon_box.descriptionLbl.text = coupon.couponDescription
                     coupon_box.branchNameLbl.text = coupon.name
@@ -611,12 +613,13 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                 
                 let subcategory_id = subJson["subcategory_id"].int
                 let branch_folio = subJson["folio"].string!
+                let is_global = subJson["is_global"].bool!
 
                 var adult_branch = false
                 if subcategory_id == 25 { adult_branch = true }
                 
                 
-                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: 1, available: available, taken: taken, adult_branch: adult_branch, branch_folio: branch_folio)
+                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: 1, available: available, taken: taken, adult_branch: adult_branch, branch_folio: branch_folio, is_global: is_global)
 
                 model.distance = distance
                 

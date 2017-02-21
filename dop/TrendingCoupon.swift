@@ -275,7 +275,7 @@ class TrendingCoupon: UIView, ModalDelegate, FBSDKSharingDelegate {
             
             if modal.action_type == "redeem" {
                 
-                if coupon.available>0{
+                if coupon.available > 0 {
                     let view_controller  = viewController!.storyboard!.instantiateViewController(withIdentifier: "readQRView") as! ReadQRViewController
                     view_controller.coupon_id = self.coupon.id
                     view_controller.coupon = self.coupon
@@ -289,7 +289,7 @@ class TrendingCoupon: UIView, ModalDelegate, FBSDKSharingDelegate {
                         self.viewController!.navigationController?.pushViewController(view_controller, animated: true)
                         self.viewController!.hidesBottomBarWhenPushed = false
                     })
-                }else{
+                } else {
                     let error_modal: ModalViewController = ModalViewController(currentView: self.viewController!, type: ModalViewControllerType.AlertModal)
                     error_modal.willPresentCompletionHandler = { vc in
                         let navigation_controller = vc as! AlertModalViewController
@@ -358,7 +358,7 @@ class TrendingCoupon: UIView, ModalDelegate, FBSDKSharingDelegate {
     
     func share(_ sender: UITapGestureRecognizer) {
         let content : FBSDKShareLinkContent = FBSDKShareLinkContent()
-        content.contentURL = URL(string: "http://www.inmoon.io")
+        content.contentURL = URL(string: "http://www.dop.life")
         content.contentTitle = self.coupon.name
         content.imageURL = URL(string: "\(Utilities.dopImagesURL)\(self.coupon.company_id)/\(self.coupon.logo)")
         content.contentDescription = self.coupon.couponDescription
@@ -367,15 +367,17 @@ class TrendingCoupon: UIView, ModalDelegate, FBSDKSharingDelegate {
         let dialog: FBSDKShareDialog = FBSDKShareDialog()
         
         if UIApplication.shared.canOpenURL(URL(string: "fbauth2://")!) {
-            dialog.mode = FBSDKShareDialogMode.feedWeb
+            dialog.mode = FBSDKShareDialogMode.native
         }else{
-            dialog.mode = FBSDKShareDialogMode.feedWeb
+            dialog.mode = FBSDKShareDialogMode.native
         }
         dialog.shareContent = content
         dialog.delegate = self
         dialog.fromViewController = self.viewController
         dialog.show()
+        
     }
+    
     public func sharer(_ sharer: FBSDKSharing!, didFailWithError error: Error!) {
         //print(error.description)
     }

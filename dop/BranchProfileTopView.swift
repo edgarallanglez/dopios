@@ -87,7 +87,7 @@ class BranchProfileTopView: UIView {
         Utilities.fadeInFromBottomAnimation(self.follow_button, delay: 0, duration: 0.3, yPosition: 5)
         self.branch = branch
         self.branch_name.text = branch.name
-        if branch_logo.image == nil { self.downloadImage(self.branch) }
+        //if branch_logo.image == nil { self.downloadImage(self.branch) }
         if (parent_view.following != nil && parent_view.following == true) { setFollowingButton() }
     }
     
