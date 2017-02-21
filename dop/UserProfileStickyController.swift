@@ -385,14 +385,14 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if (searchViewIsOpen == true && vc.searchScrollView.isHidden == true) {
-            vc.searchScrollView.isHidden = false
-            Utilities.slideFromBottomAnimation(vc.searchScrollView, delay: 0, duration: 0.5, yPosition: 600)
+            //vc.searchScrollView.isHidden = false
+            //Utilities.slideFromBottomAnimation(vc.searchScrollView, delay: 0, duration: 0.5, yPosition: 600)
         }
         
         if searchText.characters.count == 0 { vc.searchScrollView.isHidden = true }
         else {
             vc.searchText = searchText as NSString!
-            vc.searchTimer()
+            //vc.searchTimer()
         }
     }
     
@@ -402,6 +402,8 @@ class UserProfileStickyController: UICollectionViewController, UserPaginationDel
         
         if vc.searchText != "" {
             vc.search()
+            vc.searchScrollView.isHidden = false
+            Utilities.slideFromBottomAnimation(vc.searchScrollView, delay: 0, duration: 0.5, yPosition: 600)
             searchBar.resignFirstResponder()
         }
     }
