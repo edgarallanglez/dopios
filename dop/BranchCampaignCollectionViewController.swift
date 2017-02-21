@@ -326,6 +326,7 @@ class BranchCampaignCollectionViewController: UICollectionViewController, ModalD
                 view_controller.coupon = self.selected_coupon
                 view_controller.coupon_id = self.selected_coupon.id
                 view_controller.branch_id = self.selected_coupon.branch_id
+
                 view_controller.branch_folio = self.selected_coupon.branch_folio
                 self.hidesBottomBarWhenPushed = true
                 self.parent_view.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.plain, target:nil, action:nil)
