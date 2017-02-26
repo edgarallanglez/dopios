@@ -147,6 +147,7 @@ class TrendingCoupon: UIView, ModalDelegate, FBSDKSharingDelegate {
         self.viewController = view
         self.frame.origin = CGPoint(x: x,y: y)
     }
+    
     func setCouponTaken() {
         self.takeCouponButton.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
         UIView.animate(withDuration: 0.8,
@@ -184,6 +185,7 @@ class TrendingCoupon: UIView, ModalDelegate, FBSDKSharingDelegate {
         self.coupon.setTakenCoupons(false, available: self.coupon.available)
         
     }
+    
     func setCouponTakenNotification() {
         self.takeCouponButton.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
         UIView.animate(withDuration: 0.8,
@@ -368,14 +370,15 @@ class TrendingCoupon: UIView, ModalDelegate, FBSDKSharingDelegate {
         
         let dialog: FBSDKShareDialog = FBSDKShareDialog()
         
+        dialog.shareContent = content
+        dialog.delegate = nil
+        dialog.fromViewController = self.viewController
         if UIApplication.shared.canOpenURL(URL(string: "fbauth2://")!) {
             dialog.mode = FBSDKShareDialogMode.native
         }else{
-            dialog.mode = FBSDKShareDialogMode.native
+            dialog.mode = FBSDKShareDialogMode.browser
         }
-        dialog.shareContent = content
-        dialog.delegate = self
-        dialog.fromViewController = self.viewController
+        
         dialog.show()
         
     }
