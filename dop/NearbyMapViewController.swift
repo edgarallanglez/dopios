@@ -87,6 +87,8 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
         let latitude = User.coordinate.latitude
         let longitude = User.coordinate.longitude
         filterArray = Utilities.filterArray
+
+        
         if self.nearbyMap != nil {
             self.nearbyMap.removeAnnotations(self.annotationArray)
         }
@@ -100,6 +102,9 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
         Utilities.fadeInViewAnimation(self.spinner!, delay: 0, duration: 0.3)
         NearbyMapController.getNearestBranches(params, success: {(branchesData) -> Void in
             let json = branchesData!
+            
+            print(json)
+            
             for (_, branch) in json["data"] {
                 let branch_id = branch["branch_id"].int
                 let company_id = branch["company_id"].int
@@ -124,9 +129,12 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
                     self.annotationArray.append(dropPin)
                     self.nearbyMap.addAnnotation(dropPin)
                     
-                    Utilities.fadeOutViewAnimation(self.spinner!, delay: 0, duration: 0.3)
+
                 }
             }
+            
+            Utilities.fadeOutViewAnimation(self.spinner!, delay: 0, duration: 0.3)
+
             },
             failure:{(branchesData)-> Void in
                 Utilities.fadeOutViewAnimation(self.spinner!, delay: 0, duration: 0.3)

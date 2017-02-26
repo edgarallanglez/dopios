@@ -711,6 +711,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                 view_controller.coupon = self.selected_coupon
                 view_controller.branch_id = self.selected_coupon.branch_id
                 view_controller.branch_folio = self.selected_coupon.branch_folio
+                view_controller.is_global = self.selected_coupon.is_global
                 self.hidesBottomBarWhenPushed = true
                 self.navigationController?.pushViewController(view_controller, animated: true)
                 self.hidesBottomBarWhenPushed = false

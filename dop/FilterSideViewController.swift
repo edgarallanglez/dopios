@@ -24,6 +24,9 @@ class FilterSideViewController: UIViewController {
     @IBOutlet weak var marisco: UISwitch!
     @IBOutlet weak var mexicana: UISwitch!
     @IBOutlet weak var sushi: UISwitch!
+    @IBOutlet var vegana: UISwitch!
+    @IBOutlet var saludable: UISwitch!
+  
     var foodCategoriesArray: [UISwitch] = []
     
     //services outlets
@@ -71,7 +74,9 @@ class FilterSideViewController: UIViewController {
                                      italiana,
                                      marisco,
                                      mexicana,
-                                     sushi ]
+                                     saludable,
+                                     sushi,
+                                     vegana]
         
         self.servicesCategoriesArray = [ automotriz,
                                          educacion,
