@@ -59,7 +59,7 @@ class PromoCollectionCell: UICollectionViewCell, FBSDKSharingDelegate {
     }
     @IBAction func share(_ sender: AnyObject) {
         let content : FBSDKShareLinkContent = FBSDKShareLinkContent()
-        content.contentURL = URL(string: "http://www.inmoon.io")
+        content.contentURL = URL(string: "http://www.dop.life")
         content.contentTitle = self.coupon.name
         content.imageURL = URL(string: "\(Utilities.dopImagesURL)\(self.coupon.company_id)/\(self.coupon.logo)")
         content.contentDescription = self.coupon_description?.text
@@ -70,7 +70,7 @@ class PromoCollectionCell: UICollectionViewCell, FBSDKSharingDelegate {
         let dialog: FBSDKShareDialog = FBSDKShareDialog()
         
         if UIApplication.shared.canOpenURL(URL(string: "fbauth2://")!) {
-            dialog.mode = FBSDKShareDialogMode.feedWeb
+            dialog.mode = FBSDKShareDialogMode.native
         }else{
             dialog.mode = FBSDKShareDialogMode.feedWeb
         }
