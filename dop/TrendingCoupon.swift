@@ -283,6 +283,8 @@ class TrendingCoupon: UIView, ModalDelegate, FBSDKSharingDelegate {
                     view_controller.coupon = self.coupon
                     view_controller.branch_id = self.coupon.branch_id
                     view_controller.branch_folio = self.coupon.branch_folio
+                    view_controller.is_global = self.coupon.is_global
+                    
                     print("FOLIO ES \(coupon.branch_folio)")
                     viewController?.hidesBottomBarWhenPushed = true
                     

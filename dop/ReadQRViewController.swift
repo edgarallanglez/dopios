@@ -29,6 +29,7 @@ class ReadQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
     var branch_folio: String!
     var spinner: MMMaterialDesignSpinner!
     var qr_problems_pressed: Bool = false
+    var is_global: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,7 +69,7 @@ class ReadQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                     self.qr_detected = true
                     
                     if let qr_code = metadataObj.stringValue {
-                        if qr_code == self.branch_folio! {
+                        if qr_code == self.branch_folio! || is_global {
                             self.sendQR(qr_code)
                         } else {
                             let modal: ModalViewController = ModalViewController(currentView: self, type: ModalViewControllerType.AlertModal)
@@ -125,6 +126,9 @@ class ReadQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                         }
                         if json["message"].string == "expired" {
                             error_message = "Esta promoción ha caducado"
+                        }
+                        if json["message"].string == "error_qr"{
+                            error_message =  "Ha ocurrido un error, al parecer el QR no es el correcto"
                         }
                         
                         error_modal.willPresentCompletionHandler = { vc in
