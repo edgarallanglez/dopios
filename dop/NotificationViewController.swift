@@ -385,16 +385,23 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     @IBAction func askPermission(_ sender: UIButton) {
-        if UIApplication.shared.isRegisteredForRemoteNotifications {
+        var push_asked: Bool = false
+        
+        if UserDefaults.standard.object(forKey: "push_asked") != nil {
+            push_asked = UserDefaults.standard.value(forKeyPath: "push_asked") as! Bool
+        }
+        if  push_asked {
+            let settingsUrl = URL(string: UIApplicationOpenSettingsURLString)
+            UIApplication.shared.openURL(settingsUrl!)
+        } else {
+
+            UIApplication.shared.registerForRemoteNotifications()
             UIApplication.shared.registerUserNotificationSettings(
                 UIUserNotificationSettings(types: [.alert, .sound, .badge],
                                            categories: nil)
             )
-            UIApplication.shared.registerForRemoteNotifications()
-        } else {
-            if let url = URL(string:UIApplicationOpenSettingsURLString) {
-                UIApplication.shared.openURL(url)
-            }
+            UserDefaults.standard.setValue(true, forKey: "push_asked")
+//            
         }
 
     }

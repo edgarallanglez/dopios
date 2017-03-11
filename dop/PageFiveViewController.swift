@@ -29,6 +29,7 @@ class PageFiveViewController: UIViewController {
     }
     
     @IBAction func askPermission(_ sender: UIButton) {
+        UserDefaults.standard.setValue(true, forKey: "push_asked")
         let status = UIApplication.shared.currentUserNotificationSettings
 
         
@@ -44,6 +45,7 @@ class PageFiveViewController: UIViewController {
             )
         }
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         Utilities.fadeInFromBottomAnimation(top_logo, delay: 0.5, duration: 1, yPosition: 20)
         Utilities.fadeInFromBottomAnimation(notification_view, delay: 0.5, duration: 1, yPosition: 20)

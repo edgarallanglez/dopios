@@ -141,7 +141,8 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
                 
                 
                 self.phone_view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(BranchAboutViewController.callToBranch(_:))))
-
+                self.phone.backgroundColor = Utilities.dop_detail_color
+                self.phone.textColor = UIColor.white
                 Utilities.fadeInFromBottomAnimation(self.contentView, delay: 0, duration: 1, yPosition: 20)
                 
                 Utilities.fadeOutViewAnimation(self.loader, delay: 0, duration: 0.3)

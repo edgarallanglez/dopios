@@ -60,7 +60,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
         super.viewDidLoad()
         UIApplication.shared.statusBarStyle = .lightContent
         
-        if UserDefaults.standard.object(forKey: "tutorial_checked") != nil{
+        if UserDefaults.standard.object(forKey: "tutorial_checked") != nil {
             tutorial_checked = UserDefaults.standard.value(forKeyPath: "tutorial_checked") as! Bool
         }
         
