@@ -414,7 +414,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                     adult_branch = true
                 }
                 
-                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: 1, available: available, taken: taken, adult_branch: adult_branch, branch_folio: branch_folio, is_global: is_global)
+                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: 0, available: available, taken: taken, adult_branch: adult_branch, branch_folio: branch_folio, is_global: is_global)
 
                 
                 self.trending.append(model)
@@ -522,7 +522,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                     adult_branch = true
                 }
                 
-                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: 1, available: available, taken: taken, adult_branch: adult_branch, branch_folio: branch_folio, is_global: is_global)
+                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: 0, available: available, taken: taken, adult_branch: adult_branch, branch_folio: branch_folio, is_global: is_global)
 
                 model.end_date = end_date
                 
@@ -619,7 +619,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                 if subcategory_id == 25 { adult_branch = true }
                 
                 
-                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: 1, available: available, taken: taken, adult_branch: adult_branch, branch_folio: branch_folio, is_global: is_global)
+                let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: 0, available: available, taken: taken, adult_branch: adult_branch, branch_folio: branch_folio, is_global: is_global)
 
                 model.distance = distance
                 
