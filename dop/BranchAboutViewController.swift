@@ -17,6 +17,7 @@ protocol AboutPageDelegate {
 class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     var delegate: AboutPageDelegate?
     
+    @IBOutlet weak var phone_button: UIButton!
     @IBOutlet var phone_view: UIView!
     @IBOutlet var address_view: UIView!
     @IBOutlet var contentView: UIView!
@@ -134,8 +135,13 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
                 default: drop_pin.typeOfAnnotation = "marker-services-icon"
                         break
                 }
+        
                 self.branch_description.text = model.about
+                self.phone_button.setTitle(model.phone, for: .normal)
+                self.phone_button.layer.cornerRadius = 3
+                self.phone_button.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: self.phone_button.frame.width - 25)
                 self.phone.text = model.phone
+                //self.phone_button.setImage(UIImage(named: "phone") , for: .normal)
                 self.branch_location_map.addAnnotation(drop_pin)
                 self.address.text = model.address
                 
@@ -164,7 +170,7 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
         })
     }
     func callToBranch(_ sender: UITapGestureRecognizer){
-        UIApplication.shared.openURL(URL(string: "tel://\(phone.text!)")!)
+        UIApplication.shared.openURL(URL(string: "tel://\(self.phone.text!)")!)
     }
     
     func reloadWithOffset(_ parent_scroll: UICollectionView) {
@@ -226,4 +232,9 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
         //mapItem.name = "\(self.coupon!.name)"
         mapItem.openInMaps(launchOptions: options)
     }
+    
+    @IBAction func callBranch(_ sender: UIButton) {
+        UIApplication.shared.openURL(URL(string: "tel://\(phone.text!)")!)
+    }
+    
 }

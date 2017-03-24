@@ -83,7 +83,7 @@ class BranchProfileStickyController: UICollectionViewController, BranchPaginatio
         
         // Setup Header
         self.collectionView?.register(BranchProfileStickyHeader.self, forSupplementaryViewOfKind: CSStickyHeaderParallaxHeader, withReuseIdentifier: "branchHeader")
-        self.layout?.parallaxHeaderReferenceSize = CGSize(width: self.view.frame.size.width, height: 250)
+        self.layout?.parallaxHeaderReferenceSize = CGSize(width: self.view.frame.size.width, height: 200)
         
         // Setup Section Header
         self.collectionView?.register(BranchProfileStickySectionHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "sectionHeader")
@@ -326,17 +326,16 @@ class BranchProfileStickyController: UICollectionViewController, BranchPaginatio
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         vc.searchActive = false;
     }
+    
     func setBadge(){
         self.notificationButton.image = UIImage(named: "notification-badge")
     }
+    
     func notification() {
         let vcNot = self.storyboard!.instantiateViewController(withIdentifier: "Notifications") as! NotificationViewController
         
         self.navigationController?.pushViewController(vcNot, animated: true)
         self.notificationButton.image = UIImage(named: "notification")
-        
-        /*vcNot.navigationController?.hidesBottomBarWhenPushed = true
-        self.navigationController?.pushViewController(vcNot, animated: true)*/
         
     }
 }

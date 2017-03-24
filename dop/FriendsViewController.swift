@@ -226,7 +226,8 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBAction func getFriends(_ sender: UIBarButtonItem) {
         let content: FBSDKAppInviteContent = FBSDKAppInviteContent()
         content.previewImageURL = URL(string: "http://45.55.7.118/branches/images/local/dop_logo.png")
-        content.appLinkURL = URL(string: "https://fb.me/927375797314743")
+        content.appLinkURL = URL(string: "https://fb.me/1422710034447981")
+        
         FBSDKAppInviteDialog.show(with: content, delegate: nil)
         
         //        var friendsRequest: FBRequest = FBRequest.requestForMyFriends()
