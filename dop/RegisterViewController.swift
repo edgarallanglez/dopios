@@ -368,7 +368,6 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                     /*case "birthday":
                      if self.birthday_text.text == "" { success=false; error_label.text = "Asegúrate de llenar todos los campos"; break }*/
                 default:
-                    success = true
                     break
                 }
             }

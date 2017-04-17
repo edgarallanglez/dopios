@@ -46,6 +46,22 @@ class CouponController {
         }
     }
     
+    class func getFavoriteCouponsWithSuccess(success succeed: @escaping ((_ couponsData: JSON?) -> Void),failure errorFound: @escaping ((_ couponsData: NSError?) -> Void)) {
+        let url = "\(Utilities.dopURL)coupon/favorites/for/user/get"
+        
+        Alamofire.request(url, method: .get, headers: User.userToken).validate().responseJSON { response in
+            
+            switch response.result {
+            case .success:
+                succeed(JSON(response.result.value))
+            case .failure(let error):
+                print(error)
+                errorFound(error as NSError)
+            }
+        }
+        
+    }
+    
     class func getAllCouponsByBranchWithSuccess(_ branch_id:Int,success succeed: @escaping ((_ couponsData: JSON?) -> Void),failure errorFound: @escaping ((_ couponsData: NSError?) -> Void)) {
         let url = "\(Utilities.dopURL)coupon/all/for/user/by/branch/\(branch_id)/get"
         

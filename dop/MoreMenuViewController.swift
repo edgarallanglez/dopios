@@ -21,6 +21,7 @@ class MoreMenuViewController: UITableViewController {
     @IBOutlet weak var trophyIcon: UIImageView!
     @IBOutlet weak var configIcon: UIImageView!
 
+    @IBOutlet var heartIcon: UIImageView!
     override func viewDidLoad() {
 //        self.userImage.layer.cornerRadius = self.userImage.frame.height / 2
 //        self.userImage.layer.masksToBounds = true
@@ -35,6 +36,9 @@ class MoreMenuViewController: UITableViewController {
         
         configIcon.image = configIcon.image!.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
         configIcon.tintColor = UIColor.gray
+        
+        heartIcon.image = heartIcon.image!.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        heartIcon.tintColor = UIColor.gray
     }
     
     override func viewWillAppear(_ animated: Bool) {
