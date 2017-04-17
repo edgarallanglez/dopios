@@ -197,9 +197,11 @@ class NearbyMapViewController: BaseViewController, CLLocationManagerDelegate, MK
     }
     
     func goToBranchProfile(_ sender: UIButton) {
-        let view_controller = self.storyboard!.instantiateViewController(withIdentifier: "BranchProfileStickyController") as! BranchProfileStickyController
+        let storyboard = UIStoryboard(name: "ProfileStoryboard", bundle: nil)
+        let view_controller = storyboard.instantiateViewController(withIdentifier: "BranchProfileStickyController") as! BranchProfileStickyController
         view_controller.branch_id = sender.tag
         self.navigationController?.pushViewController(view_controller, animated: true)
+        
     }
 
 

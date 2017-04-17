@@ -20,23 +20,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         if ((launchOptions) != nil) {
-        URLCache.shared.removeAllCachedResponses()
-        let notificationType = UIApplication.shared.currentUserNotificationSettings!.types
-        if notificationType.contains(UIUserNotificationType.alert) && !User.userToken.isEmpty  {
-            registerForPushNotifications(application)
+            URLCache.shared.removeAllCachedResponses()
+            let notificationType = UIApplication.shared.currentUserNotificationSettings!.types
+            if notificationType.contains(UIUserNotificationType.alert) && !User.userToken.isEmpty  {
+                registerForPushNotifications(application)
+            }
+            
+            if let notification = launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] as? [String: AnyObject] {
+                // 2
+                let aps = notification["aps"] as! [String: AnyObject]
+                let notification_data = notification["data"] as! [String: AnyObject]
+                
+                User.newestNotification = notification_data
+                // 3
+                (window?.rootViewController as? LoadingViewController)?.notification = notification_data
+            }
         }
         
-        if let notification = launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] as? [String: AnyObject] {
-            // 2
-            let aps = notification["aps"] as! [String: AnyObject]
-            let notification_data = notification["data"] as! [String: AnyObject]
-            
-            User.newestNotification = notification_data
-            // 3
-            (window?.rootViewController as? LoadingViewController)?.notification = notification_data
-        }
-        }
-
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
     

@@ -55,7 +55,8 @@ class ConnectionsPage: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
         
         let model: ConnectionModel = self.connection_array[(indexPath as NSIndexPath).row]
-        let view_controller = self.storyboard!.instantiateViewController(withIdentifier: "BranchProfileStickyController") as! BranchProfileStickyController
+        let storyboard = UIStoryboard(name: "ProfileStoryboard", bundle: nil)
+        let view_controller = storyboard.instantiateViewController(withIdentifier: "BranchProfileStickyController") as! BranchProfileStickyController
         view_controller.branch_id = model.branch_id
         //var rootViewController = self.window!.rootViewController as UINavigationController
         self.parent_view.navigationController?.pushViewController(view_controller, animated: true)

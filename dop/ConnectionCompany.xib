@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Montserrat-Light.otf">
+            <string>Montserrat-Light</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view alpha="0.0" contentMode="scaleToFill" id="iN0-l3-epB" customClass="ConnectionCompany" customModule="dop" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="102" height="106"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ksk-ta-mYh" userLabel="ContentView">
+                    <rect key="frame" x="0.0" y="0.0" width="102" height="106"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Awd-M8-iJy" userLabel="company_logo_view">
+                            <rect key="frame" x="16" y="5" width="70" height="70"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5AY-E6-M1C">
+                                    <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                            <integer key="value" value="35"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    </userDefinedRuntimeAttributes>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="70" id="Hh6-45-bTb"/>
+                                <constraint firstAttribute="trailing" secondItem="5AY-E6-M1C" secondAttribute="trailing" id="QgS-yg-UCH"/>
+                                <constraint firstItem="5AY-E6-M1C" firstAttribute="top" secondItem="Awd-M8-iJy" secondAttribute="top" id="icC-aC-Y7I"/>
+                                <constraint firstAttribute="bottom" secondItem="5AY-E6-M1C" secondAttribute="bottom" id="q2w-Ns-XsB"/>
+                                <constraint firstItem="5AY-E6-M1C" firstAttribute="leading" secondItem="Awd-M8-iJy" secondAttribute="leading" id="uvE-Qb-3kl"/>
+                                <constraint firstAttribute="width" secondItem="Awd-M8-iJy" secondAttribute="height" multiplier="1:1" id="xwO-T1-v4O"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="35"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mi Conexión" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8WN-Ld-lW1">
+                            <rect key="frame" x="0.0" y="80" width="102" height="17"/>
+                            <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="14"/>
+                            <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="8WN-Ld-lW1" firstAttribute="leading" secondItem="Ksk-ta-mYh" secondAttribute="leading" id="3Af-XV-jzJ"/>
+                        <constraint firstItem="Awd-M8-iJy" firstAttribute="top" secondItem="Ksk-ta-mYh" secondAttribute="top" constant="5" id="Rqt-xt-dLy"/>
+                        <constraint firstItem="8WN-Ld-lW1" firstAttribute="top" secondItem="Awd-M8-iJy" secondAttribute="bottom" constant="5" id="czj-RL-LuD"/>
+                        <constraint firstAttribute="trailing" secondItem="8WN-Ld-lW1" secondAttribute="trailing" id="jC3-gh-6Fu"/>
+                        <constraint firstItem="Awd-M8-iJy" firstAttribute="centerX" secondItem="Ksk-ta-mYh" secondAttribute="centerX" id="sMn-I3-VAG"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Ksk-ta-mYh" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="1Sg-79-xFO"/>
+                <constraint firstAttribute="trailing" secondItem="Ksk-ta-mYh" secondAttribute="trailing" id="bMi-d9-PRn"/>
+                <constraint firstAttribute="bottom" secondItem="Ksk-ta-mYh" secondAttribute="bottom" id="nqf-8V-obF"/>
+                <constraint firstItem="Ksk-ta-mYh" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="x6P-e7-JP5"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="company_logo" destination="5AY-E6-M1C" id="9Wt-hP-Fnk"/>
+                <outlet property="company_logo_view" destination="Awd-M8-iJy" id="kC4-3Z-vNB"/>
+                <outlet property="company_name" destination="8WN-Ld-lW1" id="MdC-Hi-ITd"/>
+            </connections>
+            <point key="canvasLocation" x="25.5" y="-213"/>
+        </view>
+    </objects>
+</document>

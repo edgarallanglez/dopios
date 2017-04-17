@@ -44,7 +44,18 @@ class MoreMenuViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if  (indexPath as NSIndexPath).section == 2 { setActionSheet() }
+        switch indexPath.section {
+        case 0:
+            let storyboard = UIStoryboard(name: "ProfileStoryboard", bundle: nil)
+            let view_controller = storyboard.instantiateViewController(withIdentifier: "UserProfileStickyController") as! UserProfileStickyController
+            view_controller.user_id = User.user_id
+            self.navigationController?.pushViewController(view_controller, animated: true)
+        case 2:
+            setActionSheet()
+        default:
+            print("\(indexPath.section)")
+        }
+
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
@@ -116,12 +127,8 @@ class MoreMenuViewController: UITableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "userProfile" {
-            let destination_view = segue.destination as! UserProfileStickyController
-            destination_view.user_image = UIImageView(image: userImage.image)
-            destination_view.user_id = User.user_id
-//            destination_view.person = PeopleModel(names: User.userName, surnames: User.userSurnames, user_id: User.user_id, birth_date: "1991-08-20", facebook_key: "", privacy_status: 0, main_image: User.userImageUrl, level: 0, exp: 20.0)
-        }
+        
+        
     }
     
 }

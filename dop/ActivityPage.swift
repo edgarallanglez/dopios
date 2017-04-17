@@ -117,9 +117,11 @@ class ActivityPage: UITableViewController, TTTAttributedLabelDelegate {
         let branch_id: Int = Int(splitter[1])!
         
         if segue == "branchProfile" {
-            let view_controller = self.storyboard!.instantiateViewController(withIdentifier: "BranchProfileStickyController") as! BranchProfileStickyController
+            let storyboard = UIStoryboard(name: "ProfileStoryboard", bundle: nil)
+            let view_controller = storyboard.instantiateViewController(withIdentifier: "BranchProfileStickyController") as! BranchProfileStickyController
             view_controller.branch_id = branch_id
             self.parent_view.navigationController?.pushViewController(view_controller, animated: true)
+
         }
     }
     

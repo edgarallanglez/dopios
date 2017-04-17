@@ -322,7 +322,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                 if let image = response.result.value{
                     imageView.image = image
                 } else {
-                    imageView.backgroundColor = Utilities.dopColor
+                    imageView.image = UIImage(named: "provisional_banner")
                 }
                 
                 Utilities.fadeInFromBottomAnimation(imageView, delay: 0, duration: 1, yPosition: 20)
@@ -362,7 +362,11 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
     
     
     func performSegueToBranch(_ sender: UIGestureRecognizer) {
-        let view_controller = self.storyboard!.instantiateViewController(withIdentifier: "BranchProfileStickyController") as! BranchProfileStickyController
+        let storyboard = UIStoryboard(name: "ProfileStoryboard", bundle: nil)
+        let view_controller = storyboard.instantiateViewController(withIdentifier: "BranchProfileStickyController") as! BranchProfileStickyController
+//        self.present(controller, animated: true, completion: nil)
+        
+
         view_controller.branch_id = (sender.view?.tag)!
         self.navigationController?.pushViewController(view_controller, animated: true)
         
@@ -404,7 +408,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                 //                    let categoryId = subJson["category_id"].int!
                 let available = subJson["available"].int!
                 let taken = subJson["taken"].bool!
-                
+                let end_date = subJson["end_date"].string ?? "Expiró"
                 let subcategory_id = subJson["subcategory_id"].int
                 let branch_folio = subJson["folio"].string!
                 let is_global = subJson["is_global"].bool!
@@ -415,8 +419,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                 }
                 
                 let model = Coupon(id: coupon_id, name: coupon_name, description: coupon_description, limit: coupon_limit, exp: coupon_exp, logo: coupon_logo, branch_id: branch_id, company_id: company_id,total_likes: total_likes, user_like: user_like, latitude: latitude, longitude: longitude, banner: banner, category_id: 0, available: available, taken: taken, adult_branch: adult_branch, branch_folio: branch_folio, is_global: is_global)
-
-                
+                model.end_date = end_date
                 self.trending.append(model)
             }
             

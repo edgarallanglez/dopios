@@ -88,13 +88,13 @@ class NearestCoupon: UIView, ModalDelegate {
 
     func pressActionButton(_ modal: ModalViewController) {
         if modal.action_type == "profile" {
-            let view_controller = viewController!.storyboard!.instantiateViewController(withIdentifier: "BranchProfileStickyController") as! BranchProfileStickyController
-            view_controller.coupon = self.coupon
-            view_controller.branch_id = coupon.branch_id
+            let storyboard = UIStoryboard(name: "ProfileStoryboard", bundle: nil)
+            let view_controller = storyboard.instantiateViewController(withIdentifier: "BranchProfileStickyController") as! BranchProfileStickyController
             
-            viewController!.navigationController?.pushViewController(view_controller, animated: true)
-            viewController?.hidesBottomBarWhenPushed = false
-            modal.dismiss(animated: true, completionHandler: nil)
+            view_controller.branch_id = coupon.branch_id
+            modal.dismiss(animated: true, completionHandler: { (modal) -> Void in
+                self.viewController!.navigationController?.pushViewController(view_controller, animated: true)
+            })
         }
         
         if modal.action_type == "redeem" {

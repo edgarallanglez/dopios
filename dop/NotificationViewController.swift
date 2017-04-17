@@ -325,7 +325,8 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         }
 
         if segue == "branchProfile" {
-            let view_controller = self.storyboard!.instantiateViewController(withIdentifier: "BranchProfileStickyController") as! BranchProfileStickyController
+            let storyboard = UIStoryboard(name: "ProfileStoryboard", bundle: nil)
+            let view_controller = storyboard.instantiateViewController(withIdentifier: "BranchProfileStickyController") as! BranchProfileStickyController
             view_controller.branch_id = object_id
             self.navigationController?.pushViewController(view_controller, animated: true)
         }

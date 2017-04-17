@@ -697,13 +697,18 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
     
     func pressActionButton(_ modal: ModalViewController) {
         if modal.action_type == "profile" {
-            let view_controller = self.storyboard!.instantiateViewController(withIdentifier: "BranchProfileStickyController") as! BranchProfileStickyController
+            print("Profile delegate modal")
+            
+            let storyboard = UIStoryboard(name: "ProfileStoryboard", bundle: nil)
+            let view_controller = storyboard.instantiateViewController(withIdentifier: "BranchProfileStickyController") as! BranchProfileStickyController
+ 
             view_controller.branch_id = self.selected_coupon.branch_id
-            view_controller.coupon = self.selected_coupon
-            self.navigationController?.pushViewController(view_controller, animated: true)
-            self.hidesBottomBarWhenPushed = false
-            modal.dismiss(animated: true, completionHandler: nil)
+            modal.dismiss(animated: true, completionHandler: { (modal) -> Void in
+                self.navigationController?.pushViewController(view_controller, animated: true)
+            })
         }
+
+        
         if modal.action_type == "redeem" {
             if(selected_coupon.available>0){
                 let view_controller  = self.storyboard!.instantiateViewController(withIdentifier: "readQRView") as! ReadQRViewController

@@ -103,7 +103,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
                 if model.main_image != "" {
                     Alamofire.request(imageUrl!).responseImage { response in
                         if let image = response.result.value{
-                            if (tableView.indexPath(for: cell) as NSIndexPath?)?.row == (indexPath as NSIndexPath).row {
+                            if (tableView.indexPath(for: cell)?.row == indexPath.row) {
                                 self.cachedFollowingImages[identifier] = image
                                 let cell_image_saved : UIImage = self.cachedFollowingImages[identifier]!
                                 cell.user_image.image = cell_image_saved
@@ -123,7 +123,13 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell: FriendCell = tableView.cellForRow(at: indexPath) as! FriendCell
-        self.performSegue(withIdentifier: "friendUserProfile", sender: cell)
+        let storyboard = UIStoryboard(name: "ProfileStoryboard", bundle: nil)
+        let view_controller = storyboard.instantiateViewController(withIdentifier: "UserProfileStickyController") as! UserProfileStickyController
+
+        view_controller.user_id = cell.friend_id
+        view_controller.person = cell.person
+        self.navigationController?.pushViewController(view_controller, animated: true)
+        tableView.deselectRow(at: indexPath, animated: false)
     }
     
     func getAllPeople() {
@@ -230,22 +236,6 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         FBSDKAppInviteDialog.show(with: content, delegate: nil)
         
-        //        var friendsRequest: FBRequest = FBRequest.requestForMyFriends()
-        //        friendsRequest.startWithCompletionHandler {
-        //            (connection: FBRequestConnection!, result:AnyObject!, error: NSError!) -> Void in
-        //                var resultdict = result as! NSDictionary
-        //                println("Result Dict: \(resultdict)")
-        //                var data: NSArray = resultdict.objectForKey("data") as! NSArray
-        //
-        //                for i in 0 ..< data.count {
-        //                    let valueDict : NSDictionary = data[i] as! NSDictionary
-        //                    let id = valueDict.objectForKey("id") as! String
-        //                    println("the id value is \(id)")
-        //                }
-        //
-        //                var friends = resultdict.objectForKey("data") as! NSArray
-        //                println("Found \(friends.count) friends")
-        //        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

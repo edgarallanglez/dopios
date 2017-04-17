@@ -12,23 +12,31 @@ import AlamofireImage
 
 class BranchProfileTopView: UIView {
     
+    @IBOutlet weak var banner_loader: MMMaterialDesignSpinner!
     @IBOutlet weak var branch_banner: UIImageView!
     @IBOutlet weak var branch_name: UILabel!
     @IBOutlet weak var branch_logo: UIImageView!
     @IBOutlet weak var follow_button: UIButton!
     @IBOutlet weak var follow_button_width: NSLayoutConstraint!
+    @IBOutlet weak var call_button: UIButton!
     
     var branch_id: Int!
     var parent_view: BranchProfileStickyController!
-    var branch: Branch!
     var alert_array = [AlertModel]()
     var spinner: MMMaterialDesignSpinner = MMMaterialDesignSpinner()
     var adult_branch: Bool!
     
+    var branch: Branch! {
+        didSet {
+            self.banner_loader.startAnimating()
+            self.downloadImage(branch)
+            self.setFollow()
+        }
+    }
     
     @IBAction func followBranch(_ sender: AnyObject) {
         self.follow_button.setImage(nil, for: UIControlState())
-        Utilities.setButtonSpinner(self.follow_button, spinner: self.spinner, spinner_size: 22, spinner_width: 1.5, spinner_color: UIColor.white )
+        Utilities.setButtonSpinner(self.follow_button, spinner: self.spinner, spinner_size: 22, spinner_width: 1.5, spinner_color: Utilities.dopColor)
         Utilities.fadeInViewAnimation(self.spinner, delay: 0, duration: 0.3)
         
         let params:[String: AnyObject] = [
@@ -43,8 +51,8 @@ class BranchProfileTopView: UIView {
                         UIButton.animate(withDuration: 0.3, delay: 0, options: UIViewAnimationOptions(), animations: {
                             Utilities.fadeOutViewAnimation(self.spinner, delay: 0, duration: 0.3)
                             self.follow_button.setImage(UIImage(named: "following-icon"), for: UIControlState())
-                            self.follow_button.contentEdgeInsets = UIEdgeInsetsMake(16, 16, 16, 16)
-                            self.follow_button.backgroundColor = Utilities.dopColor
+                            self.follow_button.contentEdgeInsets = UIEdgeInsetsMake(13, 13, 13, 13)
+                            self.follow_button.tintColor = Utilities.dopColor
                             self.layoutIfNeeded()
                             }, completion: { (Bool) in
                                 //print("error")
@@ -54,8 +62,8 @@ class BranchProfileTopView: UIView {
                         UIButton.animate(withDuration: 0.3, delay: 0, options: UIViewAnimationOptions(), animations: {
                             Utilities.fadeOutViewAnimation(self.spinner, delay: 0, duration: 0.3)
                             self.follow_button.setImage(UIImage(named: "follow-icon"), for: UIControlState())
-                            self.follow_button.contentEdgeInsets = UIEdgeInsetsMake(18, 18, 18, 18)
-                            self.follow_button.backgroundColor = Utilities.dop_detail_color
+                            self.follow_button.contentEdgeInsets = UIEdgeInsetsMake(16, 16, 16, 16)
+                            self.follow_button.tintColor = Utilities.dop_detail_color
                             self.layoutIfNeeded()
                             }, completion: { (Bool) in
                                 //print("error")
@@ -72,7 +80,6 @@ class BranchProfileTopView: UIView {
                     
                     modal.willPresentCompletionHandler = { vc in
                         let navigation_controller = vc as! AlertModalViewController
-                        
                         self.alert_array.append(AlertModel(alert_title: "¡Oops!", alert_image: "error", alert_description: "Ha ocurrido un error, al parecer es nuestra culpa :("))
                         
                         navigation_controller.setAlert(self.alert_array)
@@ -83,26 +90,17 @@ class BranchProfileTopView: UIView {
 
     }
     
-    func setFollow(_ branch: Branch) {
-        Utilities.fadeInFromBottomAnimation(self.follow_button, delay: 0, duration: 0.3, yPosition: 5)
-        self.branch = branch
-        self.branch_name.text = branch.name
-        //if branch_logo.image == nil { self.downloadImage(self.branch) }
-        if (parent_view.following != nil && parent_view.following == true) { setFollowingButton() }
+    func setFollow() {
+        if self.branch.following! { setFollowingButton() }
     }
     
     func setView(_ viewController: BranchProfileStickyController) {
         self.parent_view = viewController
-        self.branch_name.text = self.parent_view.coupon?.name
-        if parent_view.coupon != nil {
-            downloadImage(parent_view.coupon)
-            branch_logo.alpha = 1
-        }
         
-        Utilities.setMaterialDesignButton(self.follow_button, button_size: 50)
-        getBranchProfile()
-        
-        if (parent_view.coupon != nil && parent_view.coupon.adult_branch == true) {
+        Utilities.setMaterialDesignButton(self.follow_button, button_size: 46)
+        Utilities.setMaterialDesignButton(self.call_button, button_size: 46)
+ 
+        if (parent_view.coupon != nil && parent_view.coupon.adult_branch) {
             let adultsLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: parent_view.view.frame.width-20, height: 35))
             adultsLabel.text = "+18"
             adultsLabel.textAlignment = NSTextAlignment.right
@@ -113,52 +111,19 @@ class BranchProfileTopView: UIView {
             adultsLabel.layer.shadowRadius = 1
             self.addSubview(adultsLabel)
         }
+
     }
 
     
     func setFollowingButton() {
         UIButton.animate(withDuration: 0.5, delay: 0, options: UIViewAnimationOptions(), animations: {
             self.follow_button.setImage(UIImage(named: "following-icon"), for: UIControlState())
-            self.follow_button.contentEdgeInsets = UIEdgeInsetsMake(16, 16, 16, 16)
-            self.follow_button.backgroundColor = Utilities.dopColor
+            self.follow_button.contentEdgeInsets = UIEdgeInsetsMake(13, 13, 13, 13)
+            self.follow_button.tintColor = Utilities.dopColor
             self.layoutIfNeeded()
             }, completion: { (Bool) in
                 
-                
         })
-    }
-    
-    func downloadImage(_ model: Coupon) {
-        let imageUrl = URL(string: "\(Utilities.dopImagesURL)\(model.company_id)/\(model.logo)")
-        self.branch_logo.layer.cornerRadius = self.branch_logo.frame.width / 2
-        if self.branch_logo.image == nil {
-            Alamofire.request(imageUrl!).responseImage { response in
-                if let image = response.result.value {
-                    self.branch_logo.image = image
-                    Utilities.fadeInFromBottomAnimation(self.branch_logo, delay: 0, duration: 1, yPosition: 1)
-            
-                } else {
-                    self.branch_logo.alpha = 0.3
-                    self.branch_logo.image = UIImage(named: "dop-logo-transparent")
-                    self.branch_logo.backgroundColor = Utilities.lightGrayColor
-                }
-            }
-        }
-        
-//        if self.branch_banner.image == nil && !model.banner.isEmpty {
-//            let banner_url = URL(string: "\(Utilities.dopImagesURL)\(model.company_id)/\(model.banner)")
-//            
-//            Alamofire.request(banner_url!).responseImage { response in
-//                if var image = response.result.value{
-//                    image = image.applyLightEffect()
-//                    self.branch_banner.image = image
-//                    self.branch_name.textColor = UIColor.white
-//                    self.branch_name.shadowColor = UIColor.darkGray
-//                    Utilities.fadeInFromBottomAnimation(self.branch_banner, delay: 0, duration: 0.8, yPosition: 4)
-//                }
-//            }
-//            
-//        }
     }
     
     func downloadImage(_ model: Branch) {
@@ -173,71 +138,61 @@ class BranchProfileTopView: UIView {
             adultsLabel.layer.shadowRadius = 1
             self.addSubview(adultsLabel)
         }
-
-        let imageUrl = URL(string: "\(Utilities.dopImagesURL)\(model.company_id!)/\(model.logo!)")
-        if self.branch_logo.image == nil {
-            Alamofire.request(imageUrl!).responseImage { response in
-                if let image = response.result.value{
-                    self.branch_logo.image = image
-                    self.branch_logo.layer.cornerRadius = self.branch_logo.frame.width / 2
-                    Utilities.fadeInFromBottomAnimation(self.branch_logo, delay: 0, duration: 1, yPosition: 1)
-                } else {
-                    self.branch_logo.alpha = 0.3
-                    self.branch_logo.image = UIImage(named: "dop-logo-transparent")
-                    self.branch_logo.backgroundColor = Utilities.lightGrayColor
-                }
-            }
-        }
         
         if self.branch_banner.image == nil && !model.banner!.isEmpty {
             let banner_url = URL(string: "\(Utilities.dopImagesURL)\(model.company_id!)/\(model.banner!)")
             Alamofire.request(banner_url!).responseImage { response in
-                if var image = response.result.value{
-                    image = image.applyLightEffect()
+                if let image = response.result.value {
                     self.branch_banner.image = image
-                    self.branch_name.textColor = UIColor.white
-                    self.branch_name.shadowColor = UIColor.darkGray
+                    self.banner_loader.stopAnimating()
+                    Utilities.fadeOutViewAnimation(self.banner_loader, delay: 0, duration: 0.3)
+                    Utilities.fadeInFromBottomAnimation(self.branch_banner, delay: 0, duration: 0.8, yPosition: 4)
+                } else {
+                    self.branch_banner.image = UIImage(named: "provisional_banner")
+                    self.banner_loader.stopAnimating()
+                    Utilities.fadeOutViewAnimation(self.banner_loader, delay: 0, duration: 0.3)
                     Utilities.fadeInFromBottomAnimation(self.branch_banner, delay: 0, duration: 0.8, yPosition: 4)
                 }
             }
         } else {
-           // Utilities.fadeInFromBottomAnimation(self.branch_banner, delay: 0, duration: 0.8, yPosition: 4)
+            self.branch_banner.image = UIImage(named: "provisional_banner")
+            self.banner_loader.stopAnimating()
+            Utilities.fadeOutViewAnimation(self.banner_loader, delay: 0, duration: 0.3)
+            Utilities.fadeInFromBottomAnimation(self.branch_banner, delay: 0, duration: 0.8, yPosition: 4)
         }
     }
     
-    func getBranchProfile() {
-        BranchProfileController.getBranchProfileWithSuccess(parent_view.branch_id, success: { (data) -> Void in
-            let data = data!
-            var json = data["data"]
-
-            json = json[0]
-            let branch_id = json["branch_id"].int!
-            let latitude = json["latitude"].double
-            let longitude = json["longitude"].double
-            let following = json["following"].bool!
-            let branch_name = json["name"].string
-            let company_id = json["company_id"].int
-            let banner = json["banner"].string
-            let logo = json["logo"].string!
-            let about = json["about"].string ?? ""
-            let phone = json["phone"].string ?? ""
-            let adults_only = json["adults_only"].bool ?? false
-            let address = json["address"].string ?? ""
-            let folio = json["folio"].string!
+    @IBAction func callToCompany(_ sender: UIButton) {
+        var title: String!
+        var alert_controller: UIAlertController!
+        if self.branch.phone != nil {
+            title = self.branch.phone
+            alert_controller = UIAlertController(title: title, message: "¿Quieres llamar a \(self.branch.name)?", preferredStyle: UIAlertControllerStyle.alert)
             
-            let model = Branch(id: branch_id, name: branch_name, banner: banner, company_id: company_id, logo: logo, following: following, about: about, phone: phone, adults_only: adults_only, address: address, folio: folio)
+            let cancel_action = UIAlertAction(title: "Cancelar", style: .cancel) { (result: UIAlertAction) in
+                print("cancelado")
+            }
+            let ok_action = UIAlertAction(title: "Llamar", style: .default) { (result : UIAlertAction) -> Void in
+                let phone_id = self.branch.phone!
+                UIApplication.shared.openURL(URL(string: "tel://\(phone_id)")!)
+                
+            }
             
-            DispatchQueue.main.async(execute: {
-                self.downloadImage(model)
-            })
+            alert_controller.addAction(cancel_action)
+            alert_controller.addAction(ok_action)
+        } else {
+            title = "Sin Número"
+            alert_controller = UIAlertController(title: title, message: "¿Al parecer \(self.branch.name) no ha agregado un número de teléfono", preferredStyle: UIAlertControllerStyle.alert)
             
-        },
-        failure: { (error) -> Void in
-            DispatchQueue.main.async(execute: {
+            let ok_action = UIAlertAction(title: "OK", style: .default) { (result : UIAlertAction) -> Void in
+                print("ok")
+            }
+            
+            alert_controller.addAction(ok_action)
+        }
         
-//                Utilities.fadeOutViewAnimation(self.loader, delay: 0, duration: 0.3)
-            })
-        })
+        self.parent_view.present(alert_controller, animated: true, completion: nil)
     }
+    
     
 }

@@ -21,6 +21,8 @@ struct Branch {
     let adults_only: Bool?
     let address: String?
     let folio: String!
+    let category_id: Int!
+    let subcategory_id: Int!
     
     init(id: Int?, name: String?,  logo: String? ,banner: String?, company_id: Int?, latitude: Double, longitude: Double, following: Bool, folio: String!) {
         self.id = id ?? 0
@@ -37,6 +39,8 @@ struct Branch {
         self.logo = nil
         self.adults_only = nil
         self.address = nil
+        self.category_id = nil
+        self.subcategory_id = nil
     }
     
     init(id: Int?, name: String?, banner: String?, company_id: Int?, folio: String!) {
@@ -54,6 +58,8 @@ struct Branch {
         self.phone = nil
         self.adults_only = nil
         self.address = nil
+        self.category_id = nil
+        self.subcategory_id = nil
     }
     
     init(id: Int?, name: String?, banner: String?, company_id: Int?, adults_only: Bool?, folio: String!) {
@@ -71,6 +77,8 @@ struct Branch {
         self.about = nil
         self.phone = nil
         self.address = nil
+        self.category_id = nil
+        self.subcategory_id = nil
     }
     
     init(id: Int?, name: String?, distance: Double!, folio: String!) {
@@ -89,6 +97,8 @@ struct Branch {
         self.phone = nil
         self.adults_only = nil
         self.address = nil
+        self.category_id = nil
+        self.subcategory_id = nil
     }
     
     init(id: Int?, name: String?, banner: String?, company_id: Int?, logo: String!, following: Bool!, about: String?, phone: String?, adults_only: Bool?, address: String?, folio: String!) {
@@ -106,5 +116,26 @@ struct Branch {
         
         self.distance = nil
         self.location = nil
+        self.category_id = nil
+        self.subcategory_id = nil
+    }
+    
+    init(id: Int?, name: String?, banner: String?, company_id: Int?, logo: String!, following: Bool!, about: String?, phone: String?, adults_only: Bool?, address: String?, folio: String!, category_id: Int!, subcategory_id: Int!, location: CLLocationCoordinate2D) {
+        self.id = id ?? 0
+        self.name = name ?? ""
+        self.banner = banner ?? ""
+        self.company_id = company_id ?? 0
+        self.logo = logo
+        self.following = following
+        self.about = about
+        self.phone = phone
+        self.adults_only = adults_only
+        self.address = address
+        self.folio = folio
+        self.category_id = category_id
+        self.subcategory_id = subcategory_id
+        self.location = location
+        
+        self.distance = nil
     }
 }

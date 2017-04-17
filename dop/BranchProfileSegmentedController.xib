@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina5_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Montserrat-Light.otf">
+            <string>Montserrat-Light</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="BranchProfileSegmentedController" customModule="dop" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="66"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gEZ-ez-aes" userLabel="ContentView">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="66"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Gdr-LK-liw">
+                            <rect key="frame" x="15" y="8.6666666666666643" width="50" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="50" id="Vhh-GH-oci"/>
+                                <constraint firstAttribute="width" secondItem="Gdr-LK-liw" secondAttribute="height" multiplier="1:1" id="s18-pZ-UCO"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="..." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="beo-SY-m1L">
+                            <rect key="frame" x="80" y="21.666666666666664" width="220" height="22.999999999999993"/>
+                            <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="19"/>
+                            <color key="textColor" red="0.22352941176470587" green="0.22352941176470587" blue="0.22352941176470587" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2cb-q9-Gpz">
+                            <rect key="frame" x="320" y="15.666666666666664" width="35" height="35"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="filter-entertainment-bar" translatesAutoresizingMaskIntoConstraints="NO" id="rlO-gm-Yd8">
+                                    <rect key="frame" x="8" y="7.6666666666666661" width="20" height="20.000000000000007"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="tintColor" red="0.98431372549999996" green="0.1333333333" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="rlO-gm-Yd8" secondAttribute="height" multiplier="1:1" id="EcS-nv-QSg"/>
+                                        <constraint firstAttribute="width" constant="20" id="e9u-1f-Gpd"/>
+                                    </constraints>
+                                </imageView>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="rlO-gm-Yd8" firstAttribute="centerY" secondItem="2cb-q9-Gpz" secondAttribute="centerY" id="1nf-Zb-foU"/>
+                                <constraint firstItem="rlO-gm-Yd8" firstAttribute="centerX" secondItem="2cb-q9-Gpz" secondAttribute="centerX" id="A74-2Q-xvd"/>
+                                <constraint firstAttribute="width" constant="35" id="cbP-1b-NKb"/>
+                                <constraint firstAttribute="width" secondItem="2cb-q9-Gpz" secondAttribute="height" multiplier="1:1" id="jnX-Dp-bLf"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="beo-SY-m1L" firstAttribute="centerY" secondItem="gEZ-ez-aes" secondAttribute="centerY" id="8gz-lx-otd"/>
+                        <constraint firstItem="beo-SY-m1L" firstAttribute="leading" secondItem="Gdr-LK-liw" secondAttribute="trailing" constant="15" id="8oy-nc-fbJ"/>
+                        <constraint firstItem="2cb-q9-Gpz" firstAttribute="leading" secondItem="beo-SY-m1L" secondAttribute="trailing" constant="20" id="BU5-8a-rXS"/>
+                        <constraint firstAttribute="trailing" secondItem="2cb-q9-Gpz" secondAttribute="trailing" constant="20" id="DZ8-HH-18x"/>
+                        <constraint firstItem="Gdr-LK-liw" firstAttribute="centerY" secondItem="gEZ-ez-aes" secondAttribute="centerY" id="gRo-d1-zvg"/>
+                        <constraint firstItem="Gdr-LK-liw" firstAttribute="leading" secondItem="gEZ-ez-aes" secondAttribute="leading" constant="15" id="lJ2-4m-TQ6"/>
+                        <constraint firstItem="2cb-q9-Gpz" firstAttribute="centerY" secondItem="gEZ-ez-aes" secondAttribute="centerY" id="tQN-KV-15Q"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="gEZ-ez-aes" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Ct2-aS-m6X"/>
+                <constraint firstItem="gEZ-ez-aes" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Cty-h5-P9m"/>
+                <constraint firstAttribute="bottom" secondItem="gEZ-ez-aes" secondAttribute="bottom" id="LTb-SR-Kqm"/>
+                <constraint firstAttribute="trailing" secondItem="gEZ-ez-aes" secondAttribute="trailing" id="zL9-Ce-CUD"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="category_ring_view" destination="2cb-q9-Gpz" id="EvI-p2-gOl"/>
+                <outlet property="company_category" destination="rlO-gm-Yd8" id="rOI-c5-rWR"/>
+                <outlet property="company_logo" destination="Gdr-LK-liw" id="bo8-aI-XsV"/>
+                <outlet property="company_name" destination="beo-SY-m1L" id="FOL-ro-B98"/>
+            </connections>
+            <point key="canvasLocation" x="-10.5" y="-19"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="filter-entertainment-bar" width="66" height="66"/>
+    </resources>
+</document>

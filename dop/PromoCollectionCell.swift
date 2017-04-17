@@ -57,6 +57,7 @@ class PromoCollectionCell: UICollectionViewCell, FBSDKSharingDelegate {
             name: NSNotification.Name(rawValue: "takenOrLikeStatus"),
             object: nil)
     }
+    
     @IBAction func share(_ sender: AnyObject) {
         let content : FBSDKShareLinkContent = FBSDKShareLinkContent()
         content.contentURL = URL(string: "http://www.dop.life")
@@ -116,15 +117,25 @@ class PromoCollectionCell: UICollectionViewCell, FBSDKSharingDelegate {
     
     @IBAction func shareCoupon(_ sender: UIButton) {
         let content : FBSDKShareLinkContent = FBSDKShareLinkContent()
-        content.contentURL = URL(string: "https://www.inmoon.com.mx")
+        content.contentURL = URL(string: "http://www.dop.life")
         content.contentTitle = self.coupon.name
-        content.contentDescription = self.coupon_description?.text
-        content.imageURL = URL(string: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Facebook_Headquarters_Menlo_Park.jpg/2880px-Facebook_Headquarters_Menlo_Park.jpg") //NSURL(string: "\(Utilities.dopImagesURL)\(self.coupon.company_id)/\(self.coupon.logo)")
+        content.imageURL = URL(string: "\(Utilities.dopImagesURL)\(self.coupon.company_id)/\(self.coupon.logo)")
+        content.contentDescription = self.coupon.couponDescription
         
-                let dialog: FBSDKShareDialog = FBSDKShareDialog()
-        //        dialog.mode = FBSDKShareDialogModeShareSheet
-        dialog.mode = FBSDKShareDialogMode.browser
-        FBSDKShareDialog.show(from: self.viewController, with: content, delegate: self)
+        
+        let dialog: FBSDKShareDialog = FBSDKShareDialog()
+        
+        dialog.shareContent = content
+        dialog.delegate = nil
+        dialog.fromViewController = self.viewController
+        if UIApplication.shared.canOpenURL(URL(string: "fbauth2://")!) {
+            dialog.mode = FBSDKShareDialogMode.native
+        }else{
+            dialog.mode = FBSDKShareDialogMode.browser
+        }
+        
+        dialog.show()
+
     }
     
     public func sharer(_ sharer: FBSDKSharing!, didFailWithError error: Error!) {

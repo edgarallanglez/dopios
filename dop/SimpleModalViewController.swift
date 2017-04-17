@@ -79,10 +79,10 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate, MKMapView
             share_text.delegate = self
         }
 
-        if((map) != nil){
-            let tap = UITapGestureRecognizer(target: self, action: #selector(SimpleModalViewController.pressMap(_:)))
-            map.addGestureRecognizer(tap)
-        }
+//        if((map) != nil){
+//            let tap = UITapGestureRecognizer(target: self, action: #selector(SimpleModalViewController.pressMap(_:)))
+//            map.addGestureRecognizer(tap)
+//        }
 
         if((available_coupon) != nil){
             available_coupon.alpha = 0
@@ -302,34 +302,6 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate, MKMapView
         return annotationView
     }
     
-    func pressMap(_ sender: UITapGestureRecognizer){
-        //If Google Maps is installed...
-        if UIApplication.shared.canOpenURL(URL(string: "comgooglemaps://")!) {
-            let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-
-            let googleMaps = UIAlertAction(title: "Google Maps", style: .default, handler: {
-                (alert: UIAlertAction!) -> Void in
-                self.openGoogleMaps()
-            })
-            let appleMaps = UIAlertAction(title: "Apple Maps", style: .default, handler: {
-                (alert: UIAlertAction!) -> Void in
-                self.openAppleMaps()
-            })
-
-            let cancelAction = UIAlertAction(title: "Cancelar", style: .cancel, handler: {
-                (alert: UIAlertAction!) -> Void in
-            })
-
-            optionMenu.addAction(googleMaps)
-            optionMenu.addAction(appleMaps)
-            optionMenu.addAction(cancelAction)
-
-            self.present(optionMenu, animated: true, completion: nil)
-        }else{
-            self.openAppleMaps()
-        }
-    }
-    
     func openGoogleMaps(){
         let customURL = "comgooglemaps://?daddr=\(self.coupon!.location.latitude),\(self.coupon!.location.longitude)&directionsmode=driving"
         
@@ -508,6 +480,7 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate, MKMapView
 
         }
     }
+    
     @IBAction func share(_ sender: AnyObject) {
         let content : FBSDKShareLinkContent = FBSDKShareLinkContent()
         content.contentURL = URL(string: "http://www.dop.life")
@@ -557,5 +530,33 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate, MKMapView
         print("will enter foreground")
     }
     
+    @IBAction func triggerGPS(_ sender: UIButton) {
+        //If Google Maps is installed...
+        if UIApplication.shared.canOpenURL(URL(string: "comgooglemaps://")!) {
+            let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+            
+            let googleMaps = UIAlertAction(title: "Google Maps", style: .default, handler: {
+                (alert: UIAlertAction!) -> Void in
+                self.openGoogleMaps()
+            })
+            let appleMaps = UIAlertAction(title: "Apple Maps", style: .default, handler: {
+                (alert: UIAlertAction!) -> Void in
+                self.openAppleMaps()
+            })
+            
+            let cancelAction = UIAlertAction(title: "Cancelar", style: .cancel, handler: {
+                (alert: UIAlertAction!) -> Void in
+            })
+            
+            optionMenu.addAction(googleMaps)
+            optionMenu.addAction(appleMaps)
+            optionMenu.addAction(cancelAction)
+            
+            self.present(optionMenu, animated: true, completion: nil)
+        }else{
+            self.openAppleMaps()
+        }
+
+    }
     
 }

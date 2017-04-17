@@ -23,10 +23,10 @@ class NewsfeedCell: UITableViewCell {
     @IBOutlet var heartView: UIView!
 
     var viewController: NewsfeedViewController?
-
     var newsfeedNote: NewsfeedNote?
     var index: Int!
-
+    var cachedImages: [Int: UIImage] = [:]
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -35,8 +35,7 @@ class NewsfeedCell: UITableViewCell {
     func loadItem(_ newsfeed_note: NewsfeedNote, viewController: NewsfeedViewController, index: Int!) {
         self.index = index
         let newsfeed_activity = "\(newsfeed_note.branch_name.uppercased())"
-        downloadImage(URL(string: "\(Utilities.dopImagesURL)\(newsfeed_note.company_id)/\(newsfeed_note.branch_image)")!)
-
+    
         //downloadImage(NSURL(string: "\(newsfeed_note.user_image)")!)
 
         //////////
@@ -107,7 +106,9 @@ class NewsfeedCell: UITableViewCell {
     }
 
     func goToBranchProfile(_ sender: UIGestureRecognizer!){
-        let view_controller = self.viewController?.storyboard!.instantiateViewController(withIdentifier: "BranchProfileStickyController") as! BranchProfileStickyController
+        
+        let storyboard = UIStoryboard(name: "ProfileStoryboard", bundle: nil)
+        let view_controller = storyboard.instantiateViewController(withIdentifier: "BranchProfileStickyController") as! BranchProfileStickyController
         view_controller.branch_id = sender.view!.tag
         self.viewController!.navigationController?.pushViewController(view_controller, animated: true)
     }
@@ -142,11 +143,27 @@ class NewsfeedCell: UITableViewCell {
     }
 
     func downloadImage(_ url: URL) {
-        Alamofire.request(url).responseImage { response in
-            if let image = response.result.value{
-                self.branch_logo.image = image
+
+        if  self.cachedImages[self.index] != nil {
+            let cell_image_saved : UIImage = self.cachedImages[self.index]!
+            self.branch_logo.image = cell_image_saved
+            self.branch_logo.alpha = 1
+        } else {
+            self.branch_logo.alpha = 0.3
+            self.branch_logo.image = UIImage(named: "dop-logo-transparent")
+            self.branch_logo.backgroundColor = Utilities.lightGrayColor
+            
+            Alamofire.request(url).responseImage { response in
+                if let image = response.result.value {
+                    self.cachedImages[self.index] = image
+                    self.branch_logo.image = image
+                    UIView.animate(withDuration: 0.5, animations: {
+                        self.branch_logo.alpha = 1
+                    })
+                }
             }
         }
+
     }
 
     override func layoutIfNeeded() {

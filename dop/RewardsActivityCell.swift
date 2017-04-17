@@ -79,10 +79,12 @@ class RewardsActivityCell: UITableViewCell {
         }
     }
     
-    func goToBranchProfile(_ sender: UIGestureRecognizer!){
-        let view_controller = self.viewController?.storyboard!.instantiateViewController(withIdentifier: "BranchProfileStickyController") as! BranchProfileStickyController
+    func goToBranchProfile(_ sender: UIGestureRecognizer!) {
+        let storyboard = UIStoryboard(name: "ProfileStoryboard", bundle: nil)
+        let view_controller = storyboard.instantiateViewController(withIdentifier: "BranchProfileStickyController") as! BranchProfileStickyController
         view_controller.branch_id = sender.view!.tag
         self.viewController!.navigationController?.pushViewController(view_controller, animated: true)
+        
     }
     
     func likeActivity(_ sender: UITapGestureRecognizer){

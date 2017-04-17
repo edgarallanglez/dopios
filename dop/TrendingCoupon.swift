@@ -261,14 +261,16 @@ class TrendingCoupon: UIView, ModalDelegate, FBSDKSharingDelegate {
     }
     
     func pressActionButton(_ modal: ModalViewController) {
-        print("Delegate modal neter \(self.coupon.id) ---- \(modal.simple_modal?.coupon.id)")
+        //print("Delegate modal neter \(self.coupon.id) ---- \(modal.simple_modal?.coupon.id)")
         //if(self.coupon.id == modal.simple_modal?.coupon.id){
             if modal.action_type == "profile" {
                 print("Profile delegate modal")
                 
-                let view_controller = viewController!.storyboard!.instantiateViewController(withIdentifier: "BranchProfileStickyController") as! BranchProfileStickyController
-                view_controller.coupon = self.coupon
-                //view_controller.branch.adults_only = coupon.adult_branch
+                let storyboard = UIStoryboard(name: "ProfileStoryboard", bundle: nil)
+                let view_controller = storyboard.instantiateViewController(withIdentifier: "BranchProfileStickyController") as! BranchProfileStickyController
+                //        self.present(controller, animated: true, completion: nil)
+                
+                
                 view_controller.branch_id = coupon.branch_id
                 modal.dismiss(animated: true, completionHandler: { (modal) -> Void in
                     self.viewController!.navigationController?.pushViewController(view_controller, animated: true)

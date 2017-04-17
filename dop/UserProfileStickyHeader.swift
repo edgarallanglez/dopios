@@ -13,15 +13,19 @@ import Alamofire
 class UserProfileStickyHeader: UIView {
     
     @IBOutlet weak var follow_button_width: NSLayoutConstraint!
-    
     @IBOutlet weak var user_image: UIImageView!
     @IBOutlet weak var user_name: UILabel!
     @IBOutlet weak var user_level: UILabel!
-    
     @IBOutlet weak var follow_button: UIButton!
     @IBOutlet weak var exp_progress: KAProgressLabel!
     
     var parent_view: UserProfileStickyController!
+    var user: PeopleModel! {
+        didSet {
+            self.setView()
+        }
+    }
+    
     var user_id: Int!
     var percent: Double!
     var progress: Double!
@@ -33,28 +37,18 @@ class UserProfileStickyHeader: UIView {
     var following = false
     
     
-    func setView(_ parent_view_controller: UserProfileStickyController) {
+    func setView() {
         self.user_image.alpha = 0
-        self.parent_view = parent_view_controller
-        self.user_id = self.parent_view.user_id
         
-        if User.user_id == self.parent_view.user_id { self.follow_button.alpha = 0 }
-        Utilities.setMaterialDesignButton(self.follow_button, button_size: 50)
+        if User.user_id == self.user.user_id { self.follow_button.alpha = 0 }
+        Utilities.setMaterialDesignButton(self.follow_button, button_size: 46)
         
-        if parent_view.person != nil {
-            
-            if parent_view.user_image?.image != nil { user_image.image = parent_view_controller.user_image.image
-                Utilities.fadeInViewAnimation(self.user_image, delay: 0, duration: 0.5)
-            } else { if parent_view_controller.person.main_image != "" {downloadImage(URL(string: parent_view_controller.person.main_image)!)} else{ self.user_image.alpha = 0.3
-                self.user_image.image = UIImage(named: "dop-logo-transparent")
-                self.user_image.backgroundColor = Utilities.lightGrayColor } }
-            
-            self.user_exp = parent_view.person.exp
-            current_level = (self.parent_view.person?.level ?? 0)!
-            self.min_exp = Constanst.Levels["\(current_level)"].double!
-            self.level_up = Constanst.Levels["\(current_level + 1)"].double!
-            setProgressBar()
-        }
+        self.downloadImage(URL(string: user.main_image)!)
+        self.user_exp = user.exp
+        current_level = self.user.level ?? 0
+        self.min_exp = Constanst.Levels["\(current_level)"].double!
+        self.level_up = Constanst.Levels["\(current_level + 1)"].double!
+        //setProgressBar()
         
         user_image.layer.cornerRadius = user_image.frame.width / 2
         user_image.layer.masksToBounds = true
@@ -62,16 +56,16 @@ class UserProfileStickyHeader: UIView {
         user_name.text = self.parent_view.person?.names
         user_level.text = "Nivel \(current_level)"
         
-        if (parent_view.person?.is_friend != nil) { setFollowingButton((parent_view.person?.is_friend)!) }
-        self.layoutIfNeeded()
+        setFollowingButton(user.is_friend!)
+//        self.layoutIfNeeded()
     }
     
     @IBAction func followUnfollow(_ sender: UIButton) {
         self.follow_button.setImage(nil, for: UIControlState())
         
-        let params:[String: AnyObject] = [ "user_two_id": self.user_id as AnyObject ]
+        let params: [String: AnyObject] = [ "user_two_id": self.user_id as AnyObject ]
         
-        Utilities.setButtonSpinner(self.follow_button, spinner: self.spinner, spinner_size: 18, spinner_width: 1.5, spinner_color: UIColor.white )
+        Utilities.setButtonSpinner(self.follow_button, spinner: self.spinner, spinner_size: 16, spinner_width: 1.5, spinner_color: UIColor.white )
         Utilities.fadeInViewAnimation(self.spinner, delay: 0, duration: 0.3)
         
         if !self.following {
@@ -89,9 +83,9 @@ class UserProfileStickyHeader: UIView {
                                 self.following = true
                             default: break
                         }
-                        self.follow_button.contentEdgeInsets = UIEdgeInsetsMake(16, 16, 16, 16)
-                        self.follow_button.backgroundColor = Utilities.dopColor
-                        self.layoutIfNeeded()
+                        self.follow_button.contentEdgeInsets = UIEdgeInsetsMake(13, 13, 13, 13)
+                        self.follow_button.tintColor = Utilities.dopColor
+//                        self.layoutIfNeeded()
                         }, completion: { (Bool) in
                            //
                     })
@@ -102,8 +96,8 @@ class UserProfileStickyHeader: UIView {
                     DispatchQueue.main.async(execute: {
                         Utilities.fadeOutViewAnimation(self.spinner, delay: 0, duration: 0.3)
                         self.follow_button.setImage(UIImage(named: "follow-icon"), for: UIControlState())
-                        self.follow_button.backgroundColor = Utilities.dop_detail_color
-                        self.follow_button.contentEdgeInsets = UIEdgeInsetsMake(18, 18, 18, 18)
+                        self.follow_button.tintColor = Utilities.dop_detail_color
+                        self.follow_button.contentEdgeInsets = UIEdgeInsetsMake(16, 16, 16, 16)
                     })
             })
         } else {
@@ -115,9 +109,9 @@ class UserProfileStickyHeader: UIView {
                     UIButton.animate(withDuration: 0.5, delay: 0, options: UIViewAnimationOptions(), animations: {
                         Utilities.fadeOutViewAnimation(self.spinner, delay: 0, duration: 0.3)
                             self.follow_button.setImage(UIImage(named: "follow-icon"), for: UIControlState())
-                            self.follow_button.contentEdgeInsets = UIEdgeInsetsMake(18, 18, 18, 18)
-                            self.follow_button.backgroundColor = Utilities.dop_detail_color
-                            self.layoutIfNeeded()
+                            self.follow_button.contentEdgeInsets = UIEdgeInsetsMake(16, 16, 16, 16)
+                            self.follow_button.tintColor = Utilities.dop_detail_color
+//                            self.layoutIfNeeded()
                         }, completion: { (Bool) in
                             //
                     })
@@ -127,7 +121,7 @@ class UserProfileStickyHeader: UIView {
                 failure: { (data) -> Void in
                     DispatchQueue.main.async(execute: {
                         self.follow_button.setImage(UIImage(named: "following-icon"), for: UIControlState())
-                        self.follow_button.backgroundColor = Utilities.dopColor
+                        self.follow_button.tintColor = Utilities.dopColor
                     })
             })
         }
@@ -138,9 +132,9 @@ class UserProfileStickyHeader: UIView {
         if is_friend {
             UIButton.animate(withDuration: 0.5, delay: 0, options: UIViewAnimationOptions(), animations: {
                 self.follow_button.setImage(UIImage(named: "following-icon"), for: UIControlState())
-                self.follow_button.contentEdgeInsets = UIEdgeInsetsMake(16, 16, 16, 16)
-                self.follow_button.backgroundColor = Utilities.dopColor
-                self.layoutIfNeeded()
+                self.follow_button.contentEdgeInsets = UIEdgeInsetsMake(13, 13, 13, 13)
+                self.follow_button.tintColor = Utilities.dopColor
+//                self.layoutIfNeeded()
                 Utilities.fadeInFromBottomAnimation(self.follow_button, delay: 0, duration: 0.7, yPosition: 0)
                 }, completion: { (Bool) in
                     
@@ -149,9 +143,9 @@ class UserProfileStickyHeader: UIView {
         } else if self.parent_view.operation_id == 0 && self.user_id != User.user_id {
             UIButton.animate(withDuration: 0.5, delay: 0, options: UIViewAnimationOptions(), animations: {
                 self.follow_button.setImage(UIImage(named: "clock-icon"), for: UIControlState())
-                self.follow_button.contentEdgeInsets = UIEdgeInsetsMake(16, 16, 16, 16)
-                self.follow_button.backgroundColor = Utilities.dopColor
-                self.layoutIfNeeded()
+                self.follow_button.contentEdgeInsets = UIEdgeInsetsMake(13, 13, 13, 13)
+                self.follow_button.tintColor = Utilities.dopColor
+//                self.layoutIfNeeded()
                  Utilities.fadeInFromBottomAnimation(self.follow_button, delay: 0, duration: 0.7, yPosition: 0)
                 }, completion: { (Bool) in
                     
@@ -160,15 +154,15 @@ class UserProfileStickyHeader: UIView {
         } else if self.parent_view.operation_id == 4 {
             UIButton.animate(withDuration: 0.5, delay: 0, options: UIViewAnimationOptions(), animations: {
                 self.follow_button.setImage(UIImage(named: "follow-icon"), for: UIControlState())
-                self.follow_button.contentEdgeInsets = UIEdgeInsetsMake(18, 18, 18, 18)
-                self.follow_button.backgroundColor = Utilities.dop_detail_color
-                self.layoutIfNeeded()
+                self.follow_button.contentEdgeInsets = UIEdgeInsetsMake(16, 16, 16, 16)
+                self.follow_button.tintColor = Utilities.dop_detail_color
+//                self.layoutIfNeeded()
                 Utilities.fadeInFromBottomAnimation(self.follow_button, delay: 0, duration: 0.7, yPosition: 0)
                 }, completion: { (Bool) in
                     
             })
             
-        } else if self.user_id != User.user_id { Utilities.fadeInFromBottomAnimation(self.follow_button, delay: 0, duration: 0.7, yPosition: 0) }
+        } else if self.user.user_id != User.user_id { Utilities.fadeInFromBottomAnimation(self.follow_button, delay: 0, duration: 0.7, yPosition: 0) }
     }
     
     func downloadImage(_ url: URL) {
@@ -193,7 +187,7 @@ class UserProfileStickyHeader: UIView {
         exp_progress.trackColor = Utilities.lightGrayColor
         exp_progress.trackWidth = 3
         exp_progress.progressWidth = 3
-        percent = (((user_exp - min_exp) / (level_up - min_exp)))
+        percent = (((self.user_exp - self.min_exp) / (self.level_up - self.min_exp)))
         progress = 360 * percent
         exp_progress.setEndDegree(CGFloat(progress), timing: TPPropertyAnimationTimingEaseInEaseOut, duration: 1.5, delay: 0)
     }

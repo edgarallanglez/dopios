@@ -16,6 +16,7 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
     @IBOutlet var main_loader: MMMaterialDesignSpinner!
     var newsfeed = [NewsfeedNote]()
     var cachedImages: [String: UIImage] = [:]
+    var branch_images: [String: UIImage] = [:]
     var refreshControl: UIRefreshControl!
     
     var newsfeedTemporary = [NewsfeedNote]()
@@ -49,6 +50,7 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
             
 
             let imageUrl = URL(string: model.user_image)
+            let branch_image_url = URL(string: "\(Utilities.dopImagesURL)\(model.company_id)/\(model.branch_image)")!
             let identifier = "Cell\(indexPath.row)"
             
             
@@ -76,6 +78,29 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
                     }
                 }
             }
+            
+            if  self.branch_images[identifier] != nil {
+                let cell_image_saved : UIImage = self.branch_images[identifier]!
+                cell.branch_logo.image = cell_image_saved
+                cell.branch_logo.alpha = 1
+            } else {
+                cell.branch_logo.alpha = 0.3
+                cell.branch_logo.image = UIImage(named: "dop-logo-transparent")
+                cell.branch_logo.backgroundColor = Utilities.lightGrayColor
+                
+                Alamofire.request(branch_image_url).responseImage { response in
+                    if let image = response.result.value {
+                        self.branch_images[identifier] = image
+                        cell.branch_logo.image = image
+                        UIView.animate(withDuration: 0.5, animations: {
+                            cell.branch_logo.alpha = 1
+                        })
+                    }
+                }
+            }
+
+
+            
             cell.selectionStyle = UITableViewCellSelectionStyle.none
             return cell
         } else {
@@ -91,7 +116,8 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
         let branch_id: Int = Int(splitter[1])!
         
         if segue == "branchProfile" {
-            let view_controller = self.storyboard!.instantiateViewController(withIdentifier: "BranchProfileStickyController") as! BranchProfileStickyController
+            let storyboard = UIStoryboard(name: "ProfileStoryboard", bundle: nil)
+            let view_controller = storyboard.instantiateViewController(withIdentifier: "BranchProfileStickyController") as! BranchProfileStickyController
             view_controller.branch_id = branch_id
             self.navigationController?.pushViewController(view_controller, animated: true)
         }
@@ -334,7 +360,8 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
     func goToUserProfile(_ index: Int!) {
         let person: PeopleModel = self.people_array[index]
         
-        let view_controller = self.storyboard!.instantiateViewController(withIdentifier: "UserProfileStickyController") as! UserProfileStickyController
+        let storyboard = UIStoryboard(name: "ProfileStoryboard", bundle: nil)
+        let view_controller = storyboard.instantiateViewController(withIdentifier: "UserProfileStickyController") as! UserProfileStickyController
         view_controller.user_id = person.user_id
         view_controller.is_friend = person.is_friend
         view_controller.operation_id = person.operation_id!
@@ -343,9 +370,10 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let person: PeopleModel = self.people_array[(indexPath as NSIndexPath).row]
+        let person: PeopleModel = self.people_array[indexPath.row]
         
-        let view_controller = self.storyboard!.instantiateViewController(withIdentifier: "UserProfileStickyController") as! UserProfileStickyController
+        let storyboard = UIStoryboard(name: "ProfileStoryboard", bundle: nil)
+        let view_controller = storyboard.instantiateViewController(withIdentifier: "UserProfileStickyController") as! UserProfileStickyController
         view_controller.user_id = person.user_id
         view_controller.is_friend = person.is_friend
         view_controller.operation_id = person.operation_id!

@@ -16,13 +16,13 @@ struct ConnectionModel {
     let logo: String?
     let branch_follower_id: Int
     
-    init(branch_id: Int, name: String, company_id: Int, banner: String?, logo: String?, branch_follower_id: Int){
-        self.branch_id = branch_id
-        self.name = name
-        self.company_id = company_id
-        self.banner = banner
-        self.logo = logo
-        self.branch_follower_id = branch_follower_id
+    init(model: JSON){
+        self.name = model["name"].string!
+        self.company_id = model["company_id"].int ?? 0
+        self.branch_id =  model["branch_id" ].int!
+        self.logo =  model["logo"].string
+        self.banner = model["banner"].string ?? ""
+        self.branch_follower_id  = model["branch_follower_id"].int!
     }
     
 }
