@@ -35,7 +35,7 @@ class NewsfeedCell: UITableViewCell {
     func loadItem(_ newsfeed_note: NewsfeedNote, viewController: NewsfeedViewController, index: Int!) {
         self.index = index
         let newsfeed_activity = "\(newsfeed_note.branch_name.uppercased())"
-        downloadImage(URL(string: "\(Utilities.dopImagesURL)\(newsfeed_note.company_id)/\(newsfeed_note.branch_image)")!)
+        //downloadImage(URL(string: "\(Utilities.dopImagesURL)\(newsfeed_note.company_id)/\(newsfeed_note.branch_image)")!)
 
         //downloadImage(NSURL(string: "\(newsfeed_note.user_image)")!)
 

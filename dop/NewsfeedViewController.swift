@@ -16,6 +16,8 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
     @IBOutlet var main_loader: MMMaterialDesignSpinner!
     var newsfeed = [NewsfeedNote]()
     var cachedImages: [String: UIImage] = [:]
+    var branchesImages: [String: UIImage] = [:]
+
     var refreshControl: UIRefreshControl!
     
     var newsfeedTemporary = [NewsfeedNote]()
@@ -49,6 +51,9 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
             
 
             let imageUrl = URL(string: model.user_image)
+            
+            let branchImageUrl = URL(string: "\(Utilities.dopImagesURL)\(model.company_id)/\(model.branch_image)")!
+
             let identifier = "Cell\(indexPath.row)"
             
             
@@ -76,6 +81,27 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
                     }
                 }
             }
+            if  self.branchesImages[identifier] != nil {
+                let cell_image_saved : UIImage = self.branchesImages[identifier]!
+                cell.branch_logo.image = cell_image_saved
+                cell.branch_logo.alpha = 1
+                
+            } else {
+                cell.branch_logo.alpha = 0
+               
+                
+                
+                Alamofire.request(branchImageUrl).responseImage { response in
+                    if let image = response.result.value{
+                        self.branchesImages[identifier] = image
+                        cell.branch_logo.image = image
+                        UIView.animate(withDuration: 0.5, animations: {
+                            cell.branch_logo.alpha = 1
+                        })
+                    }
+                }
+            }
+
             cell.selectionStyle = UITableViewCellSelectionStyle.none
             return cell
         } else {
