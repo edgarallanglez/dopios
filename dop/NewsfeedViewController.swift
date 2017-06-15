@@ -24,6 +24,7 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
     
     let limit: Int = 6
     var offset: Int = 0
+    var first_cell_set: Bool = false
     
     @IBOutlet var empty_message: UILabel!
     @IBOutlet var tableView: UITableView!
@@ -37,7 +38,6 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-       
         
         if self.newsfeed.count != 0 {
             let cell: NewsfeedCell = tableView.dequeueReusableCell(withIdentifier: "NewsfeedCell", for: indexPath) as! NewsfeedCell
@@ -47,7 +47,10 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
 
             cell.newsfeed_description.delegate = self
             cell.loadItem(model, viewController: self, index: indexPath.row)
-            
+            if !self.first_cell_set {
+                cell.setTopBorder()
+                first_cell_set = true
+            }
 
             let imageUrl = URL(string: model.user_image)
             let branch_image_url = URL(string: "\(Utilities.dopImagesURL)\(model.company_id)/\(model.branch_image)")!
@@ -83,6 +86,7 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
                 let cell_image_saved : UIImage = self.branch_images[identifier]!
                 cell.branch_logo.image = cell_image_saved
                 cell.branch_logo.alpha = 1
+                
             } else {
                 cell.branch_logo.alpha = 0.3
                 cell.branch_logo.image = UIImage(named: "dop-logo-transparent")
@@ -129,7 +133,7 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
         self.refreshControl = UIRefreshControl()
         self.refreshControl.addTarget(self, action: #selector(NewsfeedViewController.refresh(_:)), for: UIControlEvents.valueChanged)
         self.tableView.addSubview(refreshControl)
-        
+        self.tableView.contentInset = UIEdgeInsetsMake(160, 0, 0, 0)
         let nib = UINib(nibName: "NewsfeedCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "NewsfeedCell")
         
@@ -157,7 +161,8 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
             if !self!.newsfeed.isEmpty { self!.getNewsfeedActivityWithOffset() }
         }
         
-        tableView.alpha = 0
+        //tableView.alpha = 0
+        tableView.backgroundColor = UIColor.clear
     }
     
     override func didReceiveMemoryWarning() {
@@ -172,9 +177,10 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
     func getNewsfeedActivity() {
         main_loader.startAnimating()
         empty_message.isHidden = true
-        newsfeedTemporary.removeAll(keepingCapacity: false)
-        cachedImages.removeAll(keepingCapacity: false)
-        people_array.removeAll(keepingCapacity: false)
+        newsfeedTemporary.removeAll()
+        cachedImages.removeAll()
+        branch_images.removeAll()
+        people_array.removeAll()
 
         
         Utilities.fadeInViewAnimation(main_loader, delay: 0, duration: 0.5)
@@ -236,7 +242,7 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
                 Utilities.fadeInFromBottomAnimation(self.tableView, delay: 0, duration: 1, yPosition: 20)
                 
                 if self.newsfeed.count > 0{
-                    self.tableView.backgroundColor = UIColor.white
+                    self.tableView.backgroundColor = UIColor.clear
                 }else{
                     self.tableView.separatorColor = .clear
                     self.empty_message.text = "NO HAY ACTIVIDAD PARA MOSTRAR"
@@ -344,19 +350,7 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
         }
         if cell.responds(to: #selector(setter: UIView.layoutMargins)) { cell.layoutMargins = UIEdgeInsets.zero }
     }
-//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//        if let cell = sender as? NewsfeedCell {
-//
-//            let i = tableView.indexPathForCell(cell)!.row
-//            let model = self.newsfeed[i]
-//
-//            if segue.identifier == "userProfile" {
-//                let vc = segue.destinationViewController as! UserProfileStickyController
-//                vc.user_id = model.user_id
-//                vc.user_image_path = model.user_image
-//            }
-//        }
-//    }
+
     func goToUserProfile(_ index: Int!) {
         let person: PeopleModel = self.people_array[index]
         

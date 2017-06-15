@@ -181,4 +181,15 @@ class NewsfeedCell: UITableViewCell {
         })
         
     }
+    
+    func setTopBorder() {
+        let path = UIBezierPath(roundedRect: self.bounds,
+                                byRoundingCorners:[.topRight, .topLeft],
+                                cornerRadii: CGSize(width: 10, height: 10))
+        
+        let maskLayer = CAShapeLayer()
+        
+        maskLayer.path = path.cgPath
+        self.layer.mask = maskLayer
+    }
 }

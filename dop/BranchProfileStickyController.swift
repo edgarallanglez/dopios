@@ -344,9 +344,9 @@ class BranchProfileStickyController: UICollectionViewController, UISearchBarDele
     
     func notification() {
         //let tabbar = self.tabBarController as! TabbarController!
-        let vcNot = self.storyboard!.instantiateViewController(withIdentifier: "Notifications") as! NotificationViewController
+        let notifications_view_controller = self.storyboard_flow!.instantiateViewController(withIdentifier: "Notifications") as! NotificationViewController
         
-        self.navigationController?.pushViewController(vcNot, animated: true)
+        self.navigationController?.pushViewController(notifications_view_controller, animated: true)
         self.notificationButton.image = UIImage(named: "notification")
         
         

@@ -95,18 +95,19 @@ class PeopleModel: NSObject {
     }
     
     init(model: JSON) {
-        self.user_id = model["user_id"].int!
-        self.main_image = model["main_image"].string!
         self.names = model["names"].string!
-        self.surnames = ""
+        self.surnames = model["surnames"].string ?? ""
+        self.facebook_key = model["facebook_key"].string ?? ""
+        self.user_id = model["user_id"].int!
+        self.birth_date = model["birth_date"].string ?? ""
+        self.privacy_status = model["privacy_status"].int ?? 0
+        self.main_image = model["main_image"].string ?? ""
+        self.level = model["level"].int ?? 0
+        self.exp = model["exp"].double ?? 0
+        self.is_friend = model["is_friend"].bool ?? false
+        self.operation_id = model["operation_id"].int ?? 5
         
-        self.is_friend = nil
         self.total_used = nil
         self.friend_id = nil
-        self.operation_id = nil
-        self.birth_date = nil
-        self.facebook_key = nil
-        self.privacy_status = nil
-        
     }
 }

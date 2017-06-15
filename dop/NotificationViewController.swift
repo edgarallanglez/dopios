@@ -317,11 +317,15 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         let segue: String = splitter[0]
         let object_id: Int = Int(splitter[1])!
         if segue == "userProfile" {
+                        
+            let storyboard = UIStoryboard(name: "ProfileStoryboard", bundle: nil)
+            let view_controller = storyboard.instantiateViewController(withIdentifier: "UserProfileStickyController") as! UserProfileStickyController
             let is_friend: Bool = (splitter[2] as NSString!).boolValue
-            let view_controller = self.storyboard!.instantiateViewController(withIdentifier: "UserProfileStickyController") as! UserProfileStickyController
             view_controller.user_id = object_id
             view_controller.is_friend = is_friend
+
             self.navigationController?.pushViewController(view_controller, animated: true)
+
         }
 
         if segue == "branchProfile" {

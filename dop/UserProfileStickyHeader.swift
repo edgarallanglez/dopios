@@ -63,7 +63,7 @@ class UserProfileStickyHeader: UIView {
     @IBAction func followUnfollow(_ sender: UIButton) {
         self.follow_button.setImage(nil, for: UIControlState())
         
-        let params: [String: AnyObject] = [ "user_two_id": self.user_id as AnyObject ]
+        let params: [String: AnyObject] = [ "user_two_id": self.user.user_id as AnyObject ]
         
         Utilities.setButtonSpinner(self.follow_button, spinner: self.spinner, spinner_size: 16, spinner_width: 1.5, spinner_color: UIColor.white )
         Utilities.fadeInViewAnimation(self.spinner, delay: 0, duration: 0.3)
@@ -140,7 +140,7 @@ class UserProfileStickyHeader: UIView {
                     
                     
             })
-        } else if self.parent_view.operation_id == 0 && self.user_id != User.user_id {
+        } else if self.user.operation_id == 0 && self.user.user_id != User.user_id {
             UIButton.animate(withDuration: 0.5, delay: 0, options: UIViewAnimationOptions(), animations: {
                 self.follow_button.setImage(UIImage(named: "clock-icon"), for: UIControlState())
                 self.follow_button.contentEdgeInsets = UIEdgeInsetsMake(13, 13, 13, 13)
@@ -151,7 +151,7 @@ class UserProfileStickyHeader: UIView {
                     
                     
             })
-        } else if self.parent_view.operation_id == 4 {
+        } else if self.user.operation_id == 4 {
             UIButton.animate(withDuration: 0.5, delay: 0, options: UIViewAnimationOptions(), animations: {
                 self.follow_button.setImage(UIImage(named: "follow-icon"), for: UIControlState())
                 self.follow_button.contentEdgeInsets = UIEdgeInsetsMake(16, 16, 16, 16)

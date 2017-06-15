@@ -198,21 +198,7 @@ class UserProfileStickyController: UICollectionViewController, UISearchBarDelega
             let json = profileData!
             print(json)
             for (_, subJson): (String, JSON) in json["data"] {
-                let names = subJson["names"].string!
-                let surnames = subJson["surnames"].string!
-                let facebook_key = subJson["facebook_key"].string ?? ""
-                let user_id = subJson["user_id"].int!
-                let birth_date = subJson["birth_date"].string ?? ""
-                let privacy_status = subJson["privacy_status"].int ?? 0
-                let main_image = subJson["main_image"].string ?? ""
-                let level = subJson["level"].int ?? 0
-                let exp = subJson["exp"].double ?? 0
-                let is_friend = subJson["is_friend"].bool!
-                //let total_used = subJson["total_used"].int!
-                
-                let model = PeopleModel(names: names, surnames: surnames, user_id: user_id, birth_date: birth_date, facebook_key: facebook_key, privacy_status: privacy_status, main_image: main_image, level: level, exp: exp)
-                
-                model.is_friend = is_friend
+                let model = PeopleModel(model: subJson)
                 self.person = model
                 self.top_view.setUser(user: self.person)
             }
@@ -329,9 +315,9 @@ class UserProfileStickyController: UICollectionViewController, UISearchBarDelega
     
     func notification() {
         //let tabbar = self.tabBarController as! TabbarController!
-        let vcNot = self.storyboard!.instantiateViewController(withIdentifier: "Notifications") as! NotificationViewController
+        let notifications_view_controller = self.storyboard_flow!.instantiateViewController(withIdentifier: "Notifications") as! NotificationViewController
         
-        self.navigationController?.pushViewController(vcNot, animated: true)
+        self.navigationController?.pushViewController(notifications_view_controller, animated: true)
         self.notificationButton.image = UIImage(named: "notification")
 
         
