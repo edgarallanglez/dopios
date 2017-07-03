@@ -8,17 +8,22 @@
 
 import UIKit
 
-@objc protocol BranchSegmentedControlDelegate {
-    @objc optional func setupIndex(_ index: Int)
-}
 
 class BranchProfileStickySectionHeader: UICollectionReusableView {
-    var delegate: BranchSegmentedControlDelegate?
     
-    let segmented_controller: BranchProfileSegmentedController = BranchProfileSegmentedController()
+    var segmented_controller: BranchProfileSegmentedController = BranchProfileSegmentedController()
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.clipsToBounds = true
+        segmented_controller = (Bundle.main.loadNibNamed("BranchProfileSegmentedController", owner: self, options: nil)?.first as? BranchProfileSegmentedController)!
+        
+        //self.addSubview(segmented_controller)
         commonInit()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.segmented_controller.frame = self.bounds
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -29,12 +34,10 @@ class BranchProfileStickySectionHeader: UICollectionReusableView {
     func commonInit() {
         self.addSubview(segmented_controller)
         segmented_controller.frame = self.bounds
-        segmented_controller.sendActions(for: UIControlEvents.touchUpInside)
-        segmented_controller.addTarget(self, action: #selector(BranchProfileStickySectionHeader.setSegmentedController), for: UIControlEvents.valueChanged)
-        
     }
     
-    func setSegmentedController() {
-        delegate?.setupIndex!(segmented_controller.selectedIndex)
+    func setBranch(model: Branch) {
+        segmented_controller.branch = model
     }
+    
 }

@@ -7,212 +7,66 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireImage
 
-@IBDesignable class BranchProfileSegmentedController: UIControl {
+class BranchProfileSegmentedController: UIView {
     
-    fileprivate var labels = [UILabel]()
-    var thumbView = UIView()
-    
-    var items: [String] = ["NOSOTROS", "CAMPAÑAS", "RANKING"] {
+    @IBOutlet weak var company_logo: UIImageView!
+    @IBOutlet weak var company_name: UILabel!
+    @IBOutlet weak var company_category: UIImageView!
+    @IBOutlet weak var category_ring_view: UIView!
+
+    var parent_view: BranchProfileStickyController!
+    var branch: Branch! {
         didSet {
-            setupLabels()
+            downloadImage(model: branch)
+            getCategoryView(subcategory_id: branch.subcategory_id!)
+            self.company_name.text = branch.name
         }
     }
     
-    var selectedIndex : Int = 0 {
-        didSet {
-            displayNewSelectedIndex()
-        }
-    }
-    
-    @IBInspectable var selectedLabelColor : UIColor = UIColor.darkGray {
-        didSet {
-            setSelectedColors()
-        }
-    }
-    
-    @IBInspectable var unselectedLabelColor : UIColor = UIColor.lightGray {
-        didSet {
-            setSelectedColors()
-        }
-    }
-    
-    @IBInspectable var thumbColor : CAGradientLayer = Utilities.Colors {
-        didSet {
-            setSelectedColors()
-        }
-    }
-    
-    @IBInspectable var borderColor : UIColor = UIColor.white {
-        didSet {
-            layer.borderColor = borderColor.cgColor
-        }
-    }
-    
-    @IBInspectable var font : UIFont! = UIFont.systemFont(ofSize: 12) {
-        didSet {
-            setFont()
-        }
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        setupView()
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        setupView()
-    }
-    
-    func setupView(){
-        
-        //        layer.cornerRadius = frame.height / 2
-        //        layer.borderColor = Utilities.dopColor.CGColor //UIColor(white: 1.0, alpha: 0.5).CGColor
-        backgroundColor = UIColor.white
-        
-        setupLabels()
-        
-        addIndividualItemConstraints(labels, mainView: self, padding: 0)
-        
-        insertSubview(thumbView, at: 0)
-    }
-    
-    func setupLabels(){
-        
-        for label in labels {
-            label.removeFromSuperview()
-        }
-        
-        labels.removeAll(keepingCapacity: true)
-        
-        for index in 1...items.count {
-            
-            let label = UILabel(frame: CGRect(x: 0, y: 0, width: 70, height: 40))
-            label.text = items[index - 1]
-            label.backgroundColor = UIColor.clear
-            label.textAlignment = .center
-            label.font = UIFont(name: "Montserrat-Light", size: 15)
-            label.textColor = index == 1 ? selectedLabelColor : unselectedLabelColor
-            label.translatesAutoresizingMaskIntoConstraints = false
-            self.addSubview(label)
-            labels.append(label)
-        }
-        
-        addIndividualItemConstraints(labels, mainView: self, padding: 0)
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        var selectFrame = self.bounds
-        let newWidth = selectFrame.width / CGFloat(items.count)
-        selectFrame.size.width = newWidth
-        thumbView.frame = selectFrame
-        let background = thumbColor
-        background.frame = CGRect(x: 0, y: 47, width: newWidth, height: 3)
-        thumbView.layer.insertSublayer(background, at: 0)
-        //        thumbView.layer.cornerRadius = thumbView.frame.height / 2
-        
-        displayNewSelectedIndex()
-    }
-    
-    override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
-        
-        let location = touch.location(in: self)
-        
-        var calculatedIndex : Int?
-        for (index, item) in labels.enumerated() {
-            if item.frame.contains(location) {
-                calculatedIndex = index
+    func downloadImage(model: Branch) {
+        let imageUrl = URL(string: "\(Utilities.dopImagesURL)\(model.company_id!)/\(model.logo!)")
+        if self.company_logo.image == nil {
+            Alamofire.request(imageUrl!).responseImage { response in
+                if let image = response.result.value {
+                    self.company_logo.image = image
+                    self.company_logo.layer.masksToBounds = true
+                    self.company_logo.layer.cornerRadius = self.company_logo.frame.width / 2
+                    Utilities.fadeInFromBottomAnimation(self.company_logo, delay: 0, duration: 1, yPosition: 1)
+                } else {
+                    self.company_logo.alpha = 0.3
+                    self.company_logo.image = UIImage(named: "dop-logo-transparent")
+                    self.company_logo.backgroundColor = Utilities.lightGrayColor
+                }
             }
         }
-        
-        if calculatedIndex != nil {
-            selectedIndex = calculatedIndex!
-            sendActions(for: .valueChanged)
-        }
-        
-        return false
     }
     
-    func displayNewSelectedIndex(){
-        for (_, item) in labels.enumerated() {
-            item.textColor = unselectedLabelColor
-        }
+    func getCategoryView(subcategory_id: Int) {
+        let categories = Constanst.Categories
         
-        let label = labels[selectedIndex]
-        label.textColor = selectedLabelColor
+        let icon = UIImage(named: categories["\(subcategory_id)"].string!)
+        self.company_category.image = icon
+        let ring_size = self.category_ring_view.frame.size.width
+        let gradient = CAGradientLayer()
+        gradient.frame =  CGRect(origin: CGPoint.zero, size: self.category_ring_view.frame.size)
+        gradient.colors = [Utilities.hexStringToUIColor(hex: "FE51AB").cgColor,
+                            Utilities.hexStringToUIColor(hex: "FC2873").cgColor]
         
-        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 0.8, options: [], animations: {
-            
-            self.thumbView.frame = label.frame
-            
-            }, completion: nil)
-    }
-    
-    func addIndividualItemConstraints(_ items: [UIView], mainView: UIView, padding: CGFloat) {
+        self.category_ring_view.layer.cornerRadius = self.category_ring_view.frame.width / 2
+        self.category_ring_view.layer.masksToBounds = true
         
-        let _ = mainView.constraints
+        let shape = CAShapeLayer()
+        shape.lineWidth = 2
+        shape.path = UIBezierPath(arcCenter: CGPoint(x: ring_size / 2, y: ring_size / 2), radius: CGFloat(ring_size / 2), startAngle: CGFloat(0), endAngle:CGFloat(M_PI * 2), clockwise: true).cgPath
+        shape.strokeColor = UIColor.black.cgColor
+        shape.fillColor = UIColor.clear.cgColor
+        gradient.mask = shape
         
-        for (index, button) in items.enumerated() {
-            
-            let topConstraint = NSLayoutConstraint(item: button, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: mainView, attribute: NSLayoutAttribute.top, multiplier: 1.0, constant: 0)
-            
-            let bottomConstraint = NSLayoutConstraint(item: button, attribute: NSLayoutAttribute.bottom, relatedBy: NSLayoutRelation.equal, toItem: mainView, attribute: NSLayoutAttribute.bottom, multiplier: 1.0, constant: 0)
-            
-            var rightConstraint : NSLayoutConstraint!
-            
-            if index == items.count - 1 {
-                
-                rightConstraint = NSLayoutConstraint(item: button, attribute: NSLayoutAttribute.right, relatedBy: NSLayoutRelation.equal, toItem: mainView, attribute: NSLayoutAttribute.right, multiplier: 1.0, constant: -padding)
-                
-            }else{
-                
-                let nextButton = items[index+1]
-                rightConstraint = NSLayoutConstraint(item: button, attribute: NSLayoutAttribute.right, relatedBy: NSLayoutRelation.equal, toItem: nextButton, attribute: NSLayoutAttribute.left, multiplier: 1.0, constant: -padding)
-            }
-            
-            
-            var leftConstraint : NSLayoutConstraint!
-            
-            if index == 0 {
-                
-                leftConstraint = NSLayoutConstraint(item: button, attribute: NSLayoutAttribute.left, relatedBy: NSLayoutRelation.equal, toItem: mainView, attribute: NSLayoutAttribute.left, multiplier: 1.0, constant: padding)
-                
-            }else{
-                
-                let prevButton = items[index-1]
-                leftConstraint = NSLayoutConstraint(item: button, attribute: NSLayoutAttribute.left, relatedBy: NSLayoutRelation.equal, toItem: prevButton, attribute: NSLayoutAttribute.right, multiplier: 1.0, constant: padding)
-                
-                let firstItem = items[0]
-                
-                let widthConstraint = NSLayoutConstraint(item: button, attribute: .width, relatedBy: NSLayoutRelation.equal, toItem: firstItem, attribute: .width, multiplier: 1.0  , constant: 0)
-                
-                mainView.addConstraint(widthConstraint)
-            }
-            
-            mainView.addConstraints([topConstraint, bottomConstraint, rightConstraint, leftConstraint])
-        }
-    }
-    
-    func setSelectedColors(){
-        for item in labels {
-            item.textColor = unselectedLabelColor
-        }
+        self.category_ring_view.layer.addSublayer(gradient)
         
-        if labels.count > 0 {
-            labels[0].textColor = selectedLabelColor
-        }
-        
-        thumbView.layer.insertSublayer(thumbColor, at: 0)
-    }
-    
-    func setFont(){
-        for item in labels {
-            item.font = font
-        }
     }
 }
 

@@ -27,7 +27,7 @@ class CouponDetailView: UIView, MKMapViewDelegate {
     var viewController: UIViewController?
     let regionRadius: CLLocationDistance = 1000
     
-    var readQRView: readQRViewController?
+    var readQRView: ReadQRViewController?
     
     @IBAction func triggerSegue(_ sender: UIButton) {
         self.viewController!.performSegue(withIdentifier: "branchProfile", sender: self)
@@ -39,7 +39,7 @@ class CouponDetailView: UIView, MKMapViewDelegate {
         
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        readQRView = storyboard.instantiateViewController(withIdentifier: "readQRView") as! readQRViewController
+        readQRView = storyboard.instantiateViewController(withIdentifier: "readQRView") as! ReadQRViewController
     }
     
     func centerMapOnLocation(_ location: CLLocationCoordinate2D) {

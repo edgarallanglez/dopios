@@ -29,8 +29,6 @@ class RewardsActivityCell: UITableViewCell {
         self.activity_model = model
         self.user_name.setTitle(model.names.uppercased(), for: UIControlState())
         
-        
-        
         downloadImage(URL(string: "\(Utilities.dopImagesURL)\(model.company_id)/\(model.branch_image)")!)
         
         self.total_likes.text = "\(model.total_likes)"
@@ -49,6 +47,7 @@ class RewardsActivityCell: UITableViewCell {
         activity_description.addLink(to: segue, with: newsfeed_activity_range)
         
         self.branch_image.tag = model.branch_id
+        self.branch_image.isUserInteractionEnabled = true
         self.branch_image.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(RewardsActivityCell.goToBranchProfile(_:))))
         
 //        self.moment.text = Utilities.friendlyDate(model.date)
@@ -80,10 +79,12 @@ class RewardsActivityCell: UITableViewCell {
         }
     }
     
-    func goToBranchProfile(_ sender: UIGestureRecognizer!){
-        let view_controller = self.viewController?.storyboard!.instantiateViewController(withIdentifier: "BranchProfileStickyController") as! BranchProfileStickyController
+    func goToBranchProfile(_ sender: UIGestureRecognizer!) {
+        let storyboard = UIStoryboard(name: "ProfileStoryboard", bundle: nil)
+        let view_controller = storyboard.instantiateViewController(withIdentifier: "BranchProfileStickyController") as! BranchProfileStickyController
         view_controller.branch_id = sender.view!.tag
         self.viewController!.navigationController?.pushViewController(view_controller, animated: true)
+        
     }
     
     func likeActivity(_ sender: UITapGestureRecognizer){
@@ -104,10 +105,8 @@ class RewardsActivityCell: UITableViewCell {
         print(params)
         NewsfeedController.likeFriendsActivityWithSuccess(params,
             success: { (data) -> Void in
-                DispatchQueue.main.async(execute: {
-                    let json = data!
-                    print(json)
-                })
+                let params: [String: AnyObject] = [ "user_two_id": self.activity_model?.user_id as AnyObject ]
+                self.sendPushNotification(params: params)
             },
             failure: { (error) -> Void in
                 DispatchQueue.main.async(execute: {
@@ -144,5 +143,13 @@ class RewardsActivityCell: UITableViewCell {
         super.layoutIfNeeded()
         self.user_image.layer.masksToBounds = true
         self.user_image.layer.cornerRadius = self.user_image.frame.width / 2
+    }
+    
+    func sendPushNotification(params: Parameters) {
+        UserProfileController.sendLikePushNotification(params, success: { (data) -> Void in
+        },
+                                                   failure: { (error) -> Void in
+        })
+        
     }
 }

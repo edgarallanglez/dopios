@@ -7,11 +7,17 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireImage
 
 class NearestCoupon: UIView, ModalDelegate {
 
     @IBOutlet var descriptionLbl: UILabel!
     @IBOutlet var branchNameLbl: UILabel!
+    @IBOutlet weak var branch_logo: UIImageView!
+    @IBOutlet weak var branch_logo_view: UIView!
+    @IBOutlet weak var distance_label: UILabel!
+    
     
     var viewController: UIViewController?
     var coupon: Coupon!
@@ -27,7 +33,9 @@ class NearestCoupon: UIView, ModalDelegate {
     func loadItem(_ coupon: Coupon, viewController: UIViewController) {
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(NearestCoupon.tapCoupon(_:))))
         self.coupon = coupon
-        self.descriptionLbl.text = coupon.couponDescription
+        self.descriptionLbl.text = coupon.name
+        self.branchNameLbl.text = coupon.couponDescription
+        self.distance_label.text = "\(Double(coupon.distance!).roundTo(places: 1)) km"
         self.viewController = viewController
         
         NotificationCenter.default.addObserver(
@@ -35,6 +43,29 @@ class NearestCoupon: UIView, ModalDelegate {
             selector: #selector(NearestCoupon.updateLikeAndTaken(_:)),
             name: NSNotification.Name(rawValue: "takenOrLikeStatus"),
             object: nil)
+        
+        Alamofire.request("\(Utilities.dopImagesURL)\(self.coupon.company_id)/\(self.coupon.logo)").responseImage { response in
+            if let image = response.result.value {
+                
+                self.branch_logo.image = image
+                self.branch_logo.alpha = 1
+                let container_layer: CALayer = CALayer()
+                container_layer.shadowColor = UIColor.lightGray.cgColor
+                container_layer.shadowRadius = 1
+                container_layer.shadowOffset = CGSize(width: 1.2, height: 1.2)
+                container_layer.shadowOpacity = 1
+                container_layer.contentsScale = 2.0
+                container_layer.addSublayer(self.branch_logo.layer)
+                
+                self.branch_logo_view.layer.addSublayer(container_layer)
+                self.branch_logo_view.layer.contentsScale = 2.0
+                self.branch_logo_view.layer.rasterizationScale = 12.0
+                self.branch_logo_view.layer.shouldRasterize = true
+                
+            } else {
+                print("HUEHUE")
+            }
+        }
     }
     
     func tapCoupon(_ sender:UITapGestureRecognizer){
@@ -51,26 +82,29 @@ class NearestCoupon: UIView, ModalDelegate {
         }
     }
     
-    func move(_ x: CGFloat, y: CGFloat){
+    func move(_ x: CGFloat, y: CGFloat) {
         self.frame.origin = CGPoint(x: x, y: y)
     }
 
     func pressActionButton(_ modal: ModalViewController) {
         if modal.action_type == "profile" {
-            let view_controller = viewController!.storyboard!.instantiateViewController(withIdentifier: "BranchProfileStickyController") as! BranchProfileStickyController
-            view_controller.coupon = self.coupon
+            let storyboard = UIStoryboard(name: "ProfileStoryboard", bundle: nil)
+            let view_controller = storyboard.instantiateViewController(withIdentifier: "BranchProfileStickyController") as! BranchProfileStickyController
+            
             view_controller.branch_id = coupon.branch_id
-            viewController!.navigationController?.pushViewController(view_controller, animated: true)
-            viewController?.hidesBottomBarWhenPushed = false
-            modal.dismiss(animated: true, completionHandler: nil)
+            modal.dismiss(animated: true, completionHandler: { (modal) -> Void in
+                self.viewController!.navigationController?.pushViewController(view_controller, animated: true)
+            })
         }
         
         if modal.action_type == "redeem" {
-            if coupon.available>0{
-                let view_controller  = viewController!.storyboard!.instantiateViewController(withIdentifier: "readQRView") as! readQRViewController
+            if coupon.available > 0 {
+                let view_controller  = viewController!.storyboard!.instantiateViewController(withIdentifier: "readQRView") as! ReadQRViewController
                 view_controller.coupon_id = self.coupon.id
                 view_controller.coupon = self.coupon
                 view_controller.branch_id = self.coupon.branch_id
+                view_controller.branch_folio = self.coupon.branch_folio
+                view_controller.is_global = self.coupon.is_global
                 
                 viewController?.hidesBottomBarWhenPushed = true
                 
@@ -101,7 +135,7 @@ class NearestCoupon: UIView, ModalDelegate {
     }
     
     func setViewCount() {
-        let params: [String: AnyObject] = ["coupon_id": self.coupon.id as AnyObject]
+        let params: [String: AnyObject] = ["coupon_id": self.coupon.id as AnyObject, "latitude": User.coordinate.latitude as AnyObject, "longitude": User.coordinate.longitude as AnyObject]
         CouponController.viewCouponWithSuccess(params, success: { (couponsData) -> Void in
             let json: JSON = JSON(couponsData)
             print(json)

@@ -67,5 +67,39 @@ class Constanst {
         return json
     }
     
+    class var Categories: JSON {
+        let json: JSON = JSON([
+            "0": "dop_logo_outline",
+            "1": "filter-food-alitas",
+            "2": "filter-food-bistro",
+            "3": "filter-food-cafeteria",
+            "4": "filter-food-china",
+            "5": "filter-food-comida-rapida",
+            "6": "filter-food-gourmet",
+            "7": "filter-food-italiana",
+            "8": "filter-food-mariscos",
+            "9": "filter-food-mexicana",
+            "10": "filter-food-sushi",
+            "11": "filter-services-automotriz",
+            "12": "filter-services-educacion",
+            "13": "filter-services-electronica",
+            "14": "filter-services-hogar",
+            "15": "filter-services-moda",
+            "16": "filter-services-viajes",
+            "17": "filter-services-salud",
+            "18": "filter-entertainment-bar",
+            "19": "filter-entertainment-cine",
+            "20": "filter-entertainment-club",
+            "21": "filter-entertainment-deportes",
+            "22": "filter-entertainment-park",
+            "23": "filter-entertrainment-teatro",
+            "24": "dop_logo_outline",
+            "25": "filter-entertainment-club",
+            "26": "filter-food-vegana",
+            "27": "filter-food-organic"
+            ])
+        return json
+    }
+    
 }
 

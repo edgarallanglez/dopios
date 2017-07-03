@@ -24,6 +24,9 @@ class FilterSideViewController: UIViewController {
     @IBOutlet weak var marisco: UISwitch!
     @IBOutlet weak var mexicana: UISwitch!
     @IBOutlet weak var sushi: UISwitch!
+    @IBOutlet var vegana: UISwitch!
+    @IBOutlet var saludable: UISwitch!
+  
     var foodCategoriesArray: [UISwitch] = []
     
     //services outlets
@@ -62,39 +65,59 @@ class FilterSideViewController: UIViewController {
         FilterSideViewController.open = false
     }
     override func viewDidLoad() {
-        self.foodCategoriesArray = [alitasAndBoneless,
-                                    bistro,
-                                    cafeteria,
-                                    comidaChina,
-                                    comidaRapida,
-                                    gourmet,
-                                    italiana,
-                                    marisco,
-                                    mexicana,
-                                    sushi]
+        self.foodCategoriesArray = [ alitasAndBoneless,
+                                     bistro,
+                                     cafeteria,
+                                     comidaChina,
+                                     comidaRapida,
+                                     gourmet,
+                                     italiana,
+                                     marisco,
+                                     mexicana,
+                                     saludable,
+                                     sushi,
+                                     vegana]
         
-        self.servicesCategoriesArray = [automotriz,
-                                        educacion,
-                                        electronica,
-                                        hogar,
-                                        moda,
-                                        viajes,
-                                        saludAndBelleza]
+        self.servicesCategoriesArray = [ automotriz,
+                                         educacion,
+                                         electronica,
+                                         hogar,
+                                         moda,
+                                         viajes,
+                                         saludAndBelleza ]
         
-        self.entertainmentCategoriesArray = [bar,
-                                             cine,
-                                             clubNocturno,
-                                             deporte,
-                                             parques,
-                                             teatro]
+        self.entertainmentCategoriesArray = [ bar,
+                                              cine,
+                                              clubNocturno,
+                                              deporte,
+                                              parques,
+                                              teatro ]
     }
     
     @IBAction func setFoodSubcategories(_ sender: UIButton) {
         activeFilters.removeAll()
-        for item in foodCategoriesArray {
-            if item.isOn {
-                activeFilters.append(item.tag)
+        switch filterSegmented.selectedIndex {
+        case 0:
+            for item in foodCategoriesArray {
+                if item.isOn {
+                    activeFilters.append(item.tag)
+                }
             }
+        case 1:
+            for item in servicesCategoriesArray {
+                if item.isOn {
+                    activeFilters.append(item.tag)
+                }
+            }
+
+        case 2:
+            for item in entertainmentCategoriesArray {
+                if item.isOn {
+                    activeFilters.append(item.tag)
+                }
+            }
+        default:
+            break
         }
         self.revealViewController().revealToggle(animated: true)
         setFilterArray()

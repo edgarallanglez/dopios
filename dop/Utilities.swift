@@ -10,6 +10,14 @@
 import Foundation
 import Alamofire
 
+extension Double {
+    /// Rounds the double to decimal places value
+    func roundTo(places:Int) -> Double {
+        let divisor = pow(10.0, Double(places))
+        return (self * divisor).rounded() / divisor
+    }
+}
+
 class Utilities {
     static var filterArray: [Int] = []
 
@@ -157,16 +165,27 @@ class Utilities {
 
     //FRIENDLY DATE FUNCTION
 
-    class func friendlyDate(_ date:String) -> String{
+    class func friendlyDate(_ date: String) -> String {
         let separators = CharacterSet(charactersIn: "T.")
         let parts = date.components(separatedBy: separators)
         let friendly_date = Date(dateString: "\(parts[0]) \(parts[1])")
         
         let friendly_date_str = timeAgoSinceDate(friendly_date, numericDates: false)
         
+
+        return friendly_date_str
+    }
+    
+    class func friendlyToDate(_ date: String) -> String {
+        let separators = CharacterSet(charactersIn: "T+")
+        let parts = date.components(separatedBy: separators)
+        let friendly_date = Date(dateString: "\(parts[0]) \(parts[1])")
+        
+        let friendly_date_str = timeToDate(friendly_date, numericDates: false)
         
         return friendly_date_str
     }
+    
 
     //CONSTANTS
 
@@ -223,6 +242,17 @@ class Utilities {
 
         UIView.animate(withDuration: duration, delay: delay, usingSpringWithDamping: 1, initialSpringVelocity: 2, options: UIViewAnimationOptions(), animations: ({
             view.frame.origin.y = finalYPosition
+            view.alpha = 1
+        }), completion: nil)
+    }
+    
+    class func fadeInFromRightAnimation(_ view: UIView, delay: TimeInterval, duration: TimeInterval, xPosition: CGFloat){
+        view.alpha = 0
+        let finalXPosition = view.frame.origin.x
+        view.frame.origin.x += xPosition
+        
+        UIView.animate(withDuration: duration, delay: delay, usingSpringWithDamping: 1, initialSpringVelocity: 2, options: UIViewAnimationOptions(), animations: ({
+            view.frame.origin.x = finalXPosition
             view.alpha = 1
         }), completion: nil)
     }
@@ -314,6 +344,29 @@ class Utilities {
         button.layer.cornerRadius = button.frame.width / 2
         self.applyMaterialDesignShadow(button)
     }
+    
+    public static func hexStringToUIColor (hex: String) -> UIColor {
+        var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+        
+        if (cString.hasPrefix("#")) {
+            cString.remove(at: cString.startIndex)
+        }
+        
+        if ((cString.characters.count) != 6) {
+            return UIColor.gray
+        }
+        
+        var rgbValue:UInt32 = 0
+        Scanner(string: cString).scanHexInt32(&rgbValue)
+        
+        return UIColor(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
+    }
+
 }
 
 /*

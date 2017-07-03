@@ -13,7 +13,7 @@ import UIKit
     fileprivate var labels = [UILabel]()
     var thumbView = UIView()
     
-    var items: [String] = ["MEDALLAS", "TROFEOS"] {
+    var items: [String] = ["TROFEOS", "MEDALLAS"] {
         didSet {
             setupLabels()
         }
@@ -49,7 +49,7 @@ import UIKit
         }
     }
     
-    @IBInspectable var font : UIFont! = UIFont.systemFont(ofSize: 12) {
+    @IBInspectable var font : UIFont! = UIFont.systemFont(ofSize: 10) {
         didSet {
             setFont()
         }
@@ -89,7 +89,7 @@ import UIKit
         
         for index in 1...items.count {
             
-            let label = UILabel(frame: CGRect(x: 0, y: 0, width: 70, height: 40))
+            let label = UILabel(frame: CGRect(x: 0, y: 0, width: 70, height: 50))
             label.text = items[index - 1]
             label.backgroundColor = UIColor.clear
             label.textAlignment = .center
@@ -99,7 +99,6 @@ import UIKit
             self.addSubview(label)
             labels.append(label)
         }
-        
         addIndividualItemConstraints(labels, mainView: self, padding: 0)
     }
     
@@ -111,7 +110,7 @@ import UIKit
         selectFrame.size.width = newWidth
         thumbView.frame = selectFrame
         let background = thumbColor
-        background.frame = CGRect(x: 0, y: 37, width: newWidth, height: 3)
+        background.frame = CGRect(x: 0, y: 47, width: newWidth, height: 3)
         thumbView.layer.insertSublayer(background, at: 0)
         //        thumbView.layer.cornerRadius = thumbView.frame.height / 2
         

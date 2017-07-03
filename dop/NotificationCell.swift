@@ -15,7 +15,8 @@ class NotificationCell: UITableViewCell {
     @IBOutlet var notification_view: UIView!
     @IBOutlet var notification_image: UIImageView!
     @IBOutlet var title: TTTAttributedLabel!
-
+    @IBOutlet weak var title_to_date_constraint: NSLayoutConstraint!
+    
     var viewController:UIViewController?
     var notification:Notification?
 
@@ -33,6 +34,7 @@ class NotificationCell: UITableViewCell {
             name: NSNotification.Name(rawValue: "takenOrLikeStatus"),
             object: nil)
         
+        notification_image.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(NotificationCell.segueToUser(_:))))
         
         var string_format = NSMutableAttributedString()
 
@@ -42,7 +44,6 @@ class NotificationCell: UITableViewCell {
         
         decline_btn.isHidden = true
         accept_btn.isHidden = true
-
 
         if notification.type == "newsfeed" {
 
@@ -75,6 +76,7 @@ class NotificationCell: UITableViewCell {
                     title.addLink(to: segue, with: launcher_range)
                     decline_btn.isHidden = false
                     accept_btn.isHidden = false
+                    self.title_to_date_constraint.constant = 35
 
                     break
                 case 1:
@@ -99,18 +101,6 @@ class NotificationCell: UITableViewCell {
             }
         }
 
-        /*if !notification.read {
-            notification_view.backgroundColor = Utilities.lightGrayColor
-            self.contentView.backgroundColor = Utilities.lightGrayColor
-        } else {
-            notification_view.backgroundColor = UIColor.whiteColor()
-            self.contentView.backgroundColor = UIColor.whiteColor()
-        }*/
-
-//        if notification.operation_id >= 2{
-//            notification_view.backgroundColor = Utilities.dopColor
-//            self.contentView.backgroundColor = Utilities.dopColor
-//        }
 
         self.date_label.text = Utilities.friendlyDate(notification.date)
         self.notification = notification
@@ -136,7 +126,7 @@ class NotificationCell: UITableViewCell {
 
     override func layoutIfNeeded() {
         super.layoutIfNeeded()
-        self.notification_image.layer.cornerRadius = self.notification_image.frame.width/2
+        self.notification_image.layer.cornerRadius = self.notification_image.frame.width / 2
         self.notification_image.layer.masksToBounds = true
     }
 
@@ -158,6 +148,16 @@ class NotificationCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
+    }
+    
+    func segueToUser(_ sender: UITapGestureRecognizer) {
+        let storyboard = UIStoryboard(name: "ProfileStoryboard", bundle: nil)
+        let view_controller = storyboard.instantiateViewController(withIdentifier: "UserProfileStickyController") as! UserProfileStickyController
+        let is_friend: Bool = (notification?.is_friend)!
+        view_controller.user_id = (notification?.launcher_id)!
+        view_controller.is_friend = is_friend
+        
+        self.viewController?.navigationController?.pushViewController(view_controller, animated: true)
     }
 
 }

@@ -95,6 +95,7 @@ class ModalViewController: MZFormSheetController {
         if alert_modal?.dismiss_button != nil { alert_modal!.dismiss_button.addTarget(self, action: #selector(ModalViewController.pressed(_:)), for: .touchUpInside) }
     }
     
+    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nil, bundle:nil)
     }

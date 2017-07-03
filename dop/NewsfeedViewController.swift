@@ -16,6 +16,7 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
     @IBOutlet var main_loader: MMMaterialDesignSpinner!
     var newsfeed = [NewsfeedNote]()
     var cachedImages: [String: UIImage] = [:]
+    var branch_images: [String: UIImage] = [:]
     var refreshControl: UIRefreshControl!
     
     var newsfeedTemporary = [NewsfeedNote]()
@@ -23,11 +24,13 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
     
     let limit: Int = 6
     var offset: Int = 0
+    var first_cell_set: Bool = false
     
+    @IBOutlet var empty_message: UILabel!
     @IBOutlet var tableView: UITableView!
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return newsfeed.count
+        return self.newsfeed.count
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -35,19 +38,23 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: NewsfeedCell = tableView.dequeueReusableCell(withIdentifier: "NewsfeedCell", for: indexPath) as! NewsfeedCell
         
-        if !newsfeed.isEmpty {
-            let model = self.newsfeed[(indexPath as NSIndexPath).row]
+        if self.newsfeed.count != 0 {
+            let cell: NewsfeedCell = tableView.dequeueReusableCell(withIdentifier: "NewsfeedCell", for: indexPath) as! NewsfeedCell
+            let model = self.newsfeed[indexPath.row]
             cell.newsfeed_description.linkAttributes = [NSForegroundColorAttributeName: Utilities.dopColor]
             cell.newsfeed_description.enabledTextCheckingTypes = NSTextCheckingResult.CheckingType.link.rawValue
-
-            cell.newsfeed_description.delegate = self
-            cell.loadItem(model, viewController: self, index: (indexPath as NSIndexPath).row)
             
-
+            cell.newsfeed_description.delegate = self
+            cell.loadItem(model, viewController: self, index: indexPath.row)
+            if !self.first_cell_set {
+                cell.setTopBorder()
+                first_cell_set = true
+            }
+            
             let imageUrl = URL(string: model.user_image)
-            let identifier = "Cell\((indexPath as NSIndexPath).row)"
+            let branch_image_url = URL(string: "\(Utilities.dopImagesURL)\(model.company_id)/\(model.branch_image)")!
+            let identifier = "Cell\(indexPath.row)"
             
             
             if  self.cachedImages[identifier] != nil {
@@ -55,70 +62,82 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
                 cell.user_image.image = cell_image_saved
                 cell.user_image.alpha = 1
                 cell.username_button.alpha = 1
-            
+                
             } else {
                 cell.user_image.alpha = 0.3
                 cell.user_image.image = UIImage(named: "dop-logo-transparent")
                 cell.user_image.backgroundColor = Utilities.lightGrayColor
-
+                
                 UIView.animate(withDuration: 0.5, animations: {
                     cell.username_button.alpha = 1
                 })
-                Alamofire.request(imageUrl!).responseImage { response in
-                    if let image = response.result.value{
-                        self.cachedImages[identifier] = image
-                        cell.user_image.image = image
+                if model.user_image != "" {
+                    Alamofire.request(imageUrl!).responseImage { response in
+                        
+                        if let image = response.result.value{
+                            self.cachedImages[identifier] = image
+                            cell.user_image.image = image
+                            UIView.animate(withDuration: 0.5, animations: {
+                                cell.user_image.alpha = 1
+                            })
+                        }
+                        
+                    }
+                }
+            }
+            
+            if  self.branch_images[identifier] != nil {
+                let cell_image_saved : UIImage = self.branch_images[identifier]!
+                cell.branch_logo.image = cell_image_saved
+                cell.branch_logo.alpha = 1
+                
+            } else {
+                cell.branch_logo.alpha = 0.3
+                cell.branch_logo.image = UIImage(named: "dop-logo-transparent")
+                cell.branch_logo.backgroundColor = Utilities.lightGrayColor
+                
+                Alamofire.request(branch_image_url).responseImage { response in
+                    if let image = response.result.value {
+                        self.branch_images[identifier] = image
+                        cell.branch_logo.image = image
                         UIView.animate(withDuration: 0.5, animations: {
-                            cell.user_image.alpha = 1
+                            cell.branch_logo.alpha = 1
                         })
                     }
                 }
-                /*Utilities.downloadImage(imageUrl!, completion: {(data, error) -> Void in
-                    if let image = data {
-                        DispatchQueue.main.async {
-                            var cell_image : UIImage = UIImage()
-                            cell_image = UIImage(data:image)!
-                            
-                            if (tableView.indexPath(for: cell) as NSIndexPath?)?.row == (indexPath as NSIndexPath).row {
-                                self.cachedImages[identifier] = cell_image
-                                let cell_image_saved : UIImage = self.cachedImages[identifier]!
-                                cell.user_image.image = cell_image_saved
-                                UIView.animate(withDuration: 0.5, animations: {
-                                    cell.user_image.alpha = 1
-                                })
-                            }
-                        }
-                    } else {
-                        print("Error")
-                    }
-                })*/
             }
+            
+            
+            
+            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            return cell
+        } else {
+            let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "default_view", for: indexPath)
+            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            return cell
         }
-        
-        cell.selectionStyle = UITableViewCellSelectionStyle.none
-        
-        return cell
     }
     
     func attributedLabel(_ label: TTTAttributedLabel!, didSelectLinkWith url: URL!) {
-        let splitter = String(describing: url).components(separatedBy: ":")
+        let splitter = String(describing: url!).components(separatedBy: ":")
         let segue: String = splitter[0]
         let branch_id: Int = Int(splitter[1])!
         
         if segue == "branchProfile" {
-            let view_controller = self.storyboard!.instantiateViewController(withIdentifier: "BranchProfileStickyController") as! BranchProfileStickyController
+            let storyboard = UIStoryboard(name: "ProfileStoryboard", bundle: nil)
+            let view_controller = storyboard.instantiateViewController(withIdentifier: "BranchProfileStickyController") as! BranchProfileStickyController
             view_controller.branch_id = branch_id
             self.navigationController?.pushViewController(view_controller, animated: true)
         }
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.refreshControl = UIRefreshControl()
         self.refreshControl.addTarget(self, action: #selector(NewsfeedViewController.refresh(_:)), for: UIControlEvents.valueChanged)
         self.tableView.addSubview(refreshControl)
-        
+        self.tableView.contentInset = UIEdgeInsetsMake(160, 0, 0, 0)
         let nib = UINib(nibName: "NewsfeedCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "NewsfeedCell")
         
@@ -146,7 +165,8 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
             if !self!.newsfeed.isEmpty { self!.getNewsfeedActivityWithOffset() }
         }
         
-        tableView.alpha = 0
+        //tableView.alpha = 0
+        tableView.backgroundColor = UIColor.clear
     }
     
     override func didReceiveMemoryWarning() {
@@ -160,14 +180,15 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
     
     func getNewsfeedActivity() {
         main_loader.startAnimating()
-
-        newsfeedTemporary.removeAll(keepingCapacity: false)
-        cachedImages.removeAll(keepingCapacity: false)
-        people_array.removeAll(keepingCapacity: false)
-
+        empty_message.isHidden = true
+        newsfeedTemporary.removeAll()
+        cachedImages.removeAll()
+        branch_images.removeAll()
+        people_array.removeAll()
+        
         
         Utilities.fadeInViewAnimation(main_loader, delay: 0, duration: 0.5)
-
+        
         NewsfeedController.getAllFriendsTakingCouponsWithSuccess(success: { (friendsData) -> Void in
             let json = friendsData!
             
@@ -197,7 +218,7 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
                 let operation_id = subJson["operation_id"].int ?? 5
                 let privacy_status = subJson["privacy_status"].int ?? 0
                 var formated_date = subJson["used_date"].string!
-
+                
                 
                 let person_model = PeopleModel(names: names, surnames: surnames, user_id: user_id, birth_date: "", facebook_key: "", privacy_status: privacy_status, main_image: main_image, is_friend: is_friend, level: level, exp: exp, operation_id: operation_id)
                 
@@ -206,7 +227,7 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
                 let separators = CharacterSet(charactersIn: "T+")
                 let parts = formated_date.components(separatedBy: separators)
                 formated_date = "\(parts[0]) \(parts[1])"
-
+                
                 let model = NewsfeedNote(client_coupon_id:client_coupon_id,friend_id: friend_id, user_id: user_id, branch_id: branch_id, coupon_name: name, branch_name: branch_name, names: names, surnames: surnames, user_image: main_image, company_id: company_id, branch_image: logo, total_likes:total_likes,user_like: user_like, date:date, formatedDate: formated_date, private_activity: false)
                 
                 self.newsfeedTemporary.append(model)
@@ -224,20 +245,31 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
                 
                 Utilities.fadeInFromBottomAnimation(self.tableView, delay: 0, duration: 1, yPosition: 20)
                 
+                if self.newsfeed.count > 0{
+                    self.tableView.backgroundColor = UIColor.clear
+                }else{
+                    self.tableView.separatorColor = .clear
+                    self.empty_message.text = "NO HAY ACTIVIDAD PARA MOSTRAR"
+                    self.empty_message.isHidden = false
+                }
+                
                 print("Printed")
                 print(json)
                 
                 self.offset = self.limit
             });
         },
-            
-        failure: { (error) -> Void in
-            DispatchQueue.main.async(execute: {
-                self.refreshControl.endRefreshing()
-                Utilities.fadeOutViewAnimation(self.main_loader, delay: 0, duration: 0.3)
-            })
+                                                                 
+                                                                 failure: { (error) -> Void in
+                                                                    DispatchQueue.main.async(execute: {
+                                                                        self.refreshControl.endRefreshing()
+                                                                        Utilities.fadeOutViewAnimation(self.main_loader, delay: 0, duration: 0.3)
+                                                                        
+                                                                        self.empty_message.text = "ERROR DE CONEXIÓN"
+                                                                        self.empty_message.isHidden = false
+                                                                    })
         })
-
+        
     }
     
     
@@ -303,14 +335,14 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
                 
                 print(json)
                 if newData { self.offset+=addedValues }
-
+                
             });
-            },
-            
-            failure: { (error) -> Void in
-                DispatchQueue.main.async(execute: {
-                    self.tableView.finishInfiniteScroll()
-                })
+        },
+                                                                       
+                                                                       failure: { (error) -> Void in
+                                                                        DispatchQueue.main.async(execute: {
+                                                                            self.tableView.finishInfiniteScroll()
+                                                                        })
         })
         
     }
@@ -322,23 +354,12 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
         }
         if cell.responds(to: #selector(setter: UIView.layoutMargins)) { cell.layoutMargins = UIEdgeInsets.zero }
     }
-//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//        if let cell = sender as? NewsfeedCell {
-//
-//            let i = tableView.indexPathForCell(cell)!.row
-//            let model = self.newsfeed[i]
-//
-//            if segue.identifier == "userProfile" {
-//                let vc = segue.destinationViewController as! UserProfileStickyController
-//                vc.user_id = model.user_id
-//                vc.user_image_path = model.user_image
-//            }
-//        }
-//    }
+    
     func goToUserProfile(_ index: Int!) {
         let person: PeopleModel = self.people_array[index]
         
-        let view_controller = self.storyboard!.instantiateViewController(withIdentifier: "UserProfileStickyController") as! UserProfileStickyController
+        let storyboard = UIStoryboard(name: "ProfileStoryboard", bundle: nil)
+        let view_controller = storyboard.instantiateViewController(withIdentifier: "UserProfileStickyController") as! UserProfileStickyController
         view_controller.user_id = person.user_id
         view_controller.is_friend = person.is_friend
         view_controller.operation_id = person.operation_id!
@@ -347,9 +368,10 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let person: PeopleModel = self.people_array[(indexPath as NSIndexPath).row]
+        let person: PeopleModel = self.people_array[indexPath.row]
         
-        let view_controller = self.storyboard!.instantiateViewController(withIdentifier: "UserProfileStickyController") as! UserProfileStickyController
+        let storyboard = UIStoryboard(name: "ProfileStoryboard", bundle: nil)
+        let view_controller = storyboard.instantiateViewController(withIdentifier: "UserProfileStickyController") as! UserProfileStickyController
         view_controller.user_id = person.user_id
         view_controller.is_friend = person.is_friend
         view_controller.operation_id = person.operation_id!
@@ -359,7 +381,9 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        self.refreshControl.endRefreshing()
+        if self.refreshControl.isRefreshing {
+            self.refreshControl.endRefreshing()
+        }
     }
-
+    
 }

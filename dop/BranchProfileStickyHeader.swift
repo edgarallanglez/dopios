@@ -16,7 +16,7 @@ class BranchProfileStickyHeader: UICollectionReusableView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.clipsToBounds = true
-        branch_profile = (Bundle.main.loadNibNamed("BranchProfileTopView", owner: self, options: nil)![0] as? BranchProfileTopView)!
+        branch_profile = (Bundle.main.loadNibNamed("BranchProfileTopView", owner: self, options: nil)?.first as? BranchProfileTopView)!
         
         self.addSubview(branch_profile)
     }
@@ -34,8 +34,9 @@ class BranchProfileStickyHeader: UICollectionReusableView {
         branch_profile.setView(viewController)
     }
     
-    func setBranchFollow(_ branch: Branch) {
-        branch_profile.setFollow(branch)
+    func setBranch(model: Branch) {
+        branch_profile.branch = model
     }
+    
 
 }

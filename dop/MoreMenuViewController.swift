@@ -21,12 +21,12 @@ class MoreMenuViewController: UITableViewController {
     @IBOutlet weak var trophyIcon: UIImageView!
     @IBOutlet weak var configIcon: UIImageView!
 
+    @IBOutlet var heartIcon: UIImageView!
     override func viewDidLoad() {
 //        self.userImage.layer.cornerRadius = self.userImage.frame.height / 2
 //        self.userImage.layer.masksToBounds = true
 //
         userName.text = User.userName
-        getUserImage()
         
         friendsIcon.image = friendsIcon.image!.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
         friendsIcon.tintColor = UIColor.gray
@@ -36,14 +36,30 @@ class MoreMenuViewController: UITableViewController {
         
         configIcon.image = configIcon.image!.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
         configIcon.tintColor = UIColor.gray
+        
+        heartIcon.image = heartIcon.image!.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        heartIcon.tintColor = UIColor.gray
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.topItem!.title = "Menú"
+        getUserImage()
+
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if  (indexPath as NSIndexPath).section == 2 { setActionSheet() }
+        switch indexPath.section {
+        case 0:
+            let storyboard = UIStoryboard(name: "ProfileStoryboard", bundle: nil)
+            let view_controller = storyboard.instantiateViewController(withIdentifier: "UserProfileStickyController") as! UserProfileStickyController
+            view_controller.user_id = User.user_id
+            self.navigationController?.pushViewController(view_controller, animated: true)
+        case 2:
+            setActionSheet()
+        default:
+            print("\(indexPath.section)")
+        }
+
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
@@ -52,18 +68,20 @@ class MoreMenuViewController: UITableViewController {
     }
     
     func getUserImage() {
-        let url: URL = URL(string: User.userImageUrl)!
+        if User.userImageUrl != ""{
+            let url: URL = URL(string: User.userImageUrl)!
+            
+            Alamofire.request(url).responseImage { response in
+                if let image = response.result.value{
+                    self.userImage.image = image
+                    self.userImage.alpha = 1
+                }
+            }
+        }
         userImage.image = UIImage(named: "dop-logo-transparent")
         userImage.backgroundColor = Utilities.lightGrayColor
         userImage.alpha = 0.3
 
-    
-        Alamofire.request(url).responseImage { response in
-            if let image = response.result.value{
-                self.userImage.image = image
-                self.userImage.alpha = 1
-            }
-        }
         
     }
     
@@ -97,11 +115,15 @@ class MoreMenuViewController: UITableViewController {
                 // The session state handler (in the app delegate) will be called automatically
                 let loginManager: FBSDKLoginManager = FBSDKLoginManager()
                 loginManager.logOut()
-                self.dismiss(animated: true, completion:nil)
                 User.activeSession = false
-                performSegue(withIdentifier: "loginController", sender: self)
+                self.dismiss(animated: true, completion:nil)
+                //performSegue(withIdentifier: "loginController", sender: self)
             }
-
+        case("email"):
+            A0SimpleKeychain().deleteEntry(forKey: "auth0-user-jwt")
+            User.activeSession = false
+            self.dismiss(animated: true, completion:nil)
+            //performSegue(withIdentifier: "loginController", sender: self)
         default:
             print("no hay sesion activa")
         }
@@ -109,12 +131,8 @@ class MoreMenuViewController: UITableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "userProfile" {
-            let destination_view = segue.destination as! UserProfileStickyController
-            destination_view.user_image = UIImageView(image: userImage.image)
-            destination_view.user_id = User.user_id
-//            destination_view.person = PeopleModel(names: User.userName, surnames: User.userSurnames, user_id: User.user_id, birth_date: "1991-08-20", facebook_key: "", privacy_status: 0, main_image: User.userImageUrl, level: 0, exp: 20.0)
-        }
+        
+        
     }
     
 }

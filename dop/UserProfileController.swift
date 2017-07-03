@@ -147,4 +147,47 @@ class UserProfileController: NSObject {
             }
         }
     }
+    
+    class func sendPushNotification(_ params: Parameters, success succeed: @escaping ((_ data: JSON?) -> Void), failure errorFound: @escaping ((_ data: Error?) -> Void)) {
+        let url = "\(Utilities.dopURL)notification/push/follow"
+        Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default ,headers: User.userToken).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                succeed(JSON(response.result.value))
+            case .failure(let error):
+                print(error)
+                errorFound(error)
+            }
+        }
+        
+    }
+    
+    class func sendLikePushNotification(_ params: Parameters, success succeed: @escaping ((_ data: JSON?) -> Void), failure errorFound: @escaping ((_ data: Error?) -> Void)) {
+        let url = "\(Utilities.dopURL)notification/push/like"
+        Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default ,headers: User.userToken).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                succeed(JSON(response.result.value))
+            case .failure(let error):
+                print(error)
+                errorFound(error)
+            }
+        }
+        
+    }
+    
+    class func getAlikePeople(_ user_id: Int, success succeed: @escaping ((_ data: JSON?) -> Void), failure errorFound: @escaping ((_ data: Error?) -> Void)) {
+            let url = "\(Utilities.dopURL)user/\(user_id)/similar/people"
+            
+            Alamofire.request(url, method: .get, encoding: JSONEncoding.default, headers: User.userToken).validate().responseJSON { response in
+                switch response.result {
+                case .success:
+                    succeed(JSON(response.result.value))
+                case .failure(let error):
+                    print(error)
+                    errorFound(error as Error)
+                }
+            }
+
+    }
 }

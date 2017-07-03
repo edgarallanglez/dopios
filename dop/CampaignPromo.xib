@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Montserrat-Light.otf">
+            <string>Montserrat-Light</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view autoresizesSubviews="NO" contentMode="scaleToFill" id="iN0-l3-epB" customClass="CampaignPromo" customModule="dop" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="170" height="200"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JQI-I6-2G8" userLabel="ContentView">
+                    <rect key="frame" x="0.0" y="0.0" width="170" height="200"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Company" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vVR-Ld-3bd">
+                            <rect key="frame" x="10" y="2" width="150" height="55"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="55" id="mME-vv-ho7"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="21"/>
+                            <color key="textColor" red="0.98431372549999996" green="0.1333333333" blue="0.43529411759999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="del-65-Vmt">
+                            <rect key="frame" x="10" y="57" width="150" height="80"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="80" id="HvD-HG-NkM"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="17"/>
+                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u4l-50-Guf">
+                            <rect key="frame" x="15" y="155" width="35" height="35"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" alpha="0.30000001192092896" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dop-logo-transparent" translatesAutoresizingMaskIntoConstraints="NO" id="wld-2f-QJb">
+                                    <rect key="frame" x="0.0" y="0.0" width="35" height="35"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="35" id="PPI-Dc-GLM"/>
+                                        <constraint firstAttribute="width" secondItem="wld-2f-QJb" secondAttribute="height" multiplier="1:1" id="SnT-nm-TGG"/>
+                                    </constraints>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                            <real key="value" value="17.5"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    </userDefinedRuntimeAttributes>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="wld-2f-QJb" firstAttribute="leading" secondItem="u4l-50-Guf" secondAttribute="leading" id="04Y-vn-uM4"/>
+                                <constraint firstAttribute="trailing" secondItem="wld-2f-QJb" secondAttribute="trailing" id="DSf-od-4cC"/>
+                                <constraint firstAttribute="width" constant="35" id="EIR-4k-T7F"/>
+                                <constraint firstItem="wld-2f-QJb" firstAttribute="top" secondItem="u4l-50-Guf" secondAttribute="top" id="HLv-Ic-XHl"/>
+                                <constraint firstAttribute="height" constant="35" id="ZDo-sQ-owE"/>
+                                <constraint firstItem="wld-2f-QJb" firstAttribute="centerY" secondItem="u4l-50-Guf" secondAttribute="centerY" id="cwX-GD-2Kh"/>
+                                <constraint firstAttribute="bottom" secondItem="wld-2f-QJb" secondAttribute="bottom" id="dIC-5f-YI0"/>
+                            </constraints>
+                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expira" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s3N-1R-ztT">
+                            <rect key="frame" x="58" y="163.5" width="102" height="18"/>
+                            <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="15"/>
+                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="vVR-Ld-3bd" firstAttribute="top" secondItem="JQI-I6-2G8" secondAttribute="top" constant="2" id="2Vt-ni-8wI"/>
+                        <constraint firstItem="del-65-Vmt" firstAttribute="leading" secondItem="JQI-I6-2G8" secondAttribute="leading" constant="10" id="2fU-0Y-6to"/>
+                        <constraint firstItem="u4l-50-Guf" firstAttribute="leading" secondItem="JQI-I6-2G8" secondAttribute="leading" constant="15" id="6vg-mm-IDP"/>
+                        <constraint firstItem="s3N-1R-ztT" firstAttribute="centerY" secondItem="u4l-50-Guf" secondAttribute="centerY" id="ABr-gd-1fc"/>
+                        <constraint firstItem="del-65-Vmt" firstAttribute="top" secondItem="vVR-Ld-3bd" secondAttribute="bottom" id="GLm-v3-1tx"/>
+                        <constraint firstItem="s3N-1R-ztT" firstAttribute="leading" secondItem="u4l-50-Guf" secondAttribute="trailing" constant="8" id="LY0-FV-AUZ"/>
+                        <constraint firstAttribute="trailing" secondItem="del-65-Vmt" secondAttribute="trailing" constant="10" id="NUg-Sm-bta"/>
+                        <constraint firstItem="vVR-Ld-3bd" firstAttribute="leading" secondItem="JQI-I6-2G8" secondAttribute="leading" constant="10" id="RKa-kP-yfr"/>
+                        <constraint firstAttribute="bottom" secondItem="u4l-50-Guf" secondAttribute="bottom" constant="10" id="et1-uM-rW0"/>
+                        <constraint firstAttribute="trailing" secondItem="vVR-Ld-3bd" secondAttribute="trailing" constant="10" id="kuT-jE-wbA"/>
+                        <constraint firstAttribute="trailing" secondItem="s3N-1R-ztT" secondAttribute="trailing" constant="10" id="zLy-15-b93"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="JQI-I6-2G8" secondAttribute="bottom" id="5Bf-3r-M8G"/>
+                <constraint firstAttribute="trailing" secondItem="JQI-I6-2G8" secondAttribute="trailing" id="7a2-0E-Jem"/>
+                <constraint firstItem="JQI-I6-2G8" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="VaH-Pe-lrD"/>
+                <constraint firstItem="JQI-I6-2G8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="jOV-Gy-DtK"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="campaign_description" destination="del-65-Vmt" id="tz9-03-Ctd"/>
+                <outlet property="company_logo_view" destination="u4l-50-Guf" id="M4H-Bl-qmS"/>
+                <outlet property="company_name" destination="vVR-Ld-3bd" id="Rnc-J8-BHg"/>
+                <outlet property="expire_date" destination="s3N-1R-ztT" id="JF0-R0-TX3"/>
+                <outlet property="logo" destination="wld-2f-QJb" id="RbI-N8-Npc"/>
+            </connections>
+            <point key="canvasLocation" x="61" y="77"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="dop-logo-transparent" width="16" height="16"/>
+    </resources>
+</document>

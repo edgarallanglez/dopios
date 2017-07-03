@@ -54,7 +54,11 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate, MKMapView
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(didBecomeActive), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
 
+        
         if((cancel_button) != nil){
             cancel_button.addTarget(self, action: #selector(SimpleModalViewController.buttonPressed(_:)), for: UIControlEvents.touchDown)
             cancel_button.addTarget(self, action: #selector(SimpleModalViewController.buttonReleased(_:)), for: UIControlEvents.touchDragOutside)
@@ -75,10 +79,10 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate, MKMapView
             share_text.delegate = self
         }
 
-        if((map) != nil){
-            let tap = UITapGestureRecognizer(target: self, action: #selector(SimpleModalViewController.pressMap(_:)))
-            map.addGestureRecognizer(tap)
-        }
+//        if((map) != nil){
+//            let tap = UITapGestureRecognizer(target: self, action: #selector(SimpleModalViewController.pressMap(_:)))
+//            map.addGestureRecognizer(tap)
+//        }
 
         if((available_coupon) != nil){
             available_coupon.alpha = 0
@@ -123,6 +127,7 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate, MKMapView
     }
 
     override func viewDidAppear(_ animated: Bool) {
+        print("YES")
         if(coupon != nil){
             self.branch_title.setTitle(self.coupon?.name.uppercased(), for: UIControlState())
             self.category_label.text = "".uppercased()
@@ -297,38 +302,19 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate, MKMapView
         return annotationView
     }
     
-    func pressMap(_ sender: UITapGestureRecognizer){
-        //If Google Maps is installed...
-        if UIApplication.shared.canOpenURL(URL(string: "comgooglemaps://")!) {
-            let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-
-            let googleMaps = UIAlertAction(title: "Google Maps", style: .default, handler: {
-                (alert: UIAlertAction!) -> Void in
-                self.openGoogleMaps()
-            })
-            let appleMaps = UIAlertAction(title: "Apple Maps", style: .default, handler: {
-                (alert: UIAlertAction!) -> Void in
-                self.openAppleMaps()
-            })
-
-            let cancelAction = UIAlertAction(title: "Cancelar", style: .cancel, handler: {
-                (alert: UIAlertAction!) -> Void in
-            })
-
-            optionMenu.addAction(googleMaps)
-            optionMenu.addAction(appleMaps)
-            optionMenu.addAction(cancelAction)
-
-            self.present(optionMenu, animated: true, completion: nil)
-        }else{
-            self.openAppleMaps()
-        }
-    }
-    
     func openGoogleMaps(){
         let customURL = "comgooglemaps://?daddr=\(self.coupon!.location.latitude),\(self.coupon!.location.longitude)&directionsmode=driving"
+        
+        if #available(iOS 10, *) {
+            UIApplication.shared.open(URL(string: customURL)!, options: [:],
+                                      completionHandler: {
+                                        (success) in
+                                        print("Listo")
+            })
+        } else {
+            UIApplication.shared.openURL(URL(string: customURL)!)
 
-        UIApplication.shared.openURL(URL(string: customURL)!)
+        }
     }
     func openAppleMaps() {
 
@@ -376,7 +362,8 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate, MKMapView
             case 1: drop_pin.typeOfAnnotation = "marker-food-icon"
             case 2: drop_pin.typeOfAnnotation = "marker-services-icon"
             case 3: drop_pin.typeOfAnnotation = "marker-entertainment-icon"
-        default: break
+            default: drop_pin.typeOfAnnotation = "marker-services-icon"
+            break
         }
 
         self.map.addAnnotation(drop_pin)
@@ -432,7 +419,7 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate, MKMapView
                         let params:[String: AnyObject] = [
                             "coupon_id" : self.coupon.id as AnyObject,
                             "status": false as AnyObject,
-                            "type": "take" as AnyObject]
+                            "type": "take" as AnyObject ]
 
                         self.takeCouponButton.isEnabled = false
                         self.takeCouponButton.tintColor = UIColor.darkGray
@@ -493,20 +480,26 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate, MKMapView
 
         }
     }
+    
     @IBAction func share(_ sender: AnyObject) {
         let content : FBSDKShareLinkContent = FBSDKShareLinkContent()
-        content.contentURL = URL(string: "http://www.inmoon.io")
+        content.contentURL = URL(string: "http://www.dop.life")
         content.contentTitle = self.coupon.name
         content.imageURL = URL(string: "\(Utilities.dopImagesURL)\(self.coupon.company_id)/\(self.coupon.logo)")
         content.contentDescription = self.coupon.couponDescription
+        
+//        let share: FBSDKShareButton = FBSDKShareButton()
+//        share.shareContent = content
+//        
+//        share.sendActions(for: .touchUpInside)
         
         
         let dialog: FBSDKShareDialog = FBSDKShareDialog()
         
         if UIApplication.shared.canOpenURL(URL(string: "fbauth2://")!) {
-            dialog.mode = FBSDKShareDialogMode.feedWeb
+            dialog.mode = FBSDKShareDialogMode.native
         }else{
-            dialog.mode = FBSDKShareDialogMode.feedWeb
+            dialog.mode = FBSDKShareDialogMode.native
         }
         dialog.shareContent = content
         dialog.delegate = self
@@ -514,6 +507,7 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate, MKMapView
         dialog.show()
         self.mz_dismissFormSheetController(animated: true, completionHandler: nil)
     }
+    
     func sharer(_ sharer: FBSDKSharing!, didFailWithError error: Error!) {
         //print(error.description)
     }
@@ -524,6 +518,45 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate, MKMapView
     
     func sharerDidCancel(_ sharer: FBSDKSharing!) {
         print("cancel share")
+    }
+    
+    
+    func didBecomeActive() {
+        print("did become active")
+        print(parent ?? "NO hay parent")
+    }
+    
+    func willEnterForeground() {
+        print("will enter foreground")
+    }
+    
+    @IBAction func triggerGPS(_ sender: UIButton) {
+        //If Google Maps is installed...
+        if UIApplication.shared.canOpenURL(URL(string: "comgooglemaps://")!) {
+            let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+            
+            let googleMaps = UIAlertAction(title: "Google Maps", style: .default, handler: {
+                (alert: UIAlertAction!) -> Void in
+                self.openGoogleMaps()
+            })
+            let appleMaps = UIAlertAction(title: "Apple Maps", style: .default, handler: {
+                (alert: UIAlertAction!) -> Void in
+                self.openAppleMaps()
+            })
+            
+            let cancelAction = UIAlertAction(title: "Cancelar", style: .cancel, handler: {
+                (alert: UIAlertAction!) -> Void in
+            })
+            
+            optionMenu.addAction(googleMaps)
+            optionMenu.addAction(appleMaps)
+            optionMenu.addAction(cancelAction)
+            
+            self.present(optionMenu, animated: true, completion: nil)
+        }else{
+            self.openAppleMaps()
+        }
+
     }
     
 }

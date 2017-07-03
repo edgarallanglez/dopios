@@ -1,7 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11198.2" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,12 +19,14 @@
             <rect key="frame" x="0.0" y="0.0" width="350" height="140"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="J8E-s9-4zJ" id="bbz-b2-924">
-                <frame key="frameInset" width="350" height="139.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="350" height="139.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B6D-71-qYf">
+                        <rect key="frame" x="0.0" y="0.0" width="350" height="139.5"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6wU-Yf-KFI">
+                                <rect key="frame" x="78" y="5" width="30" height="29"/>
                                 <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="14"/>
                                 <state key="normal" title="...">
                                     <color key="titleColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -29,14 +34,17 @@
                                 </state>
                             </button>
                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="..." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RXD-0w-sKL" customClass="TTTAttributedLabel">
+                                <rect key="frame" x="78" y="34" width="252" height="16"/>
                                 <color key="tintColor" red="0.98431372549999996" green="0.1333333333" blue="0.43529411759999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="13"/>
                                 <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cIr-qw-G3P" userLabel="heartView">
+                                <rect key="frame" x="304" y="101.5" width="45" height="36"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UgN-am-U0U">
+                                        <rect key="frame" x="30" y="11" width="15" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="15" id="jpL-rp-9YU"/>
                                             <constraint firstAttribute="height" constant="17" id="qJe-gP-gQx"/>
@@ -46,6 +54,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart" translatesAutoresizingMaskIntoConstraints="NO" id="1Eq-qp-4Q4">
+                                        <rect key="frame" x="5" y="8" width="20" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="20" id="7vF-3S-aTe"/>
                                             <constraint firstAttribute="width" secondItem="1Eq-qp-4Q4" secondAttribute="height" multiplier="1:1" id="BjO-u3-8Nn"/>
@@ -68,12 +77,14 @@
                                 </variation>
                             </view>
                             <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bEe-cm-phS">
+                                <rect key="frame" x="8" y="8" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="9Lo-Eo-9RX"/>
                                     <constraint firstAttribute="height" constant="50" id="XHf-KL-f2r"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hace" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DsU-n7-MEM">
+                                <rect key="frame" x="220" y="5" width="120" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="b1h-Xj-0RW"/>
                                 </constraints>
@@ -82,6 +93,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1io-b6-wMg">
+                                <rect key="frame" x="78" y="60" width="60" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="EH5-lB-pxJ"/>
                                     <constraint firstAttribute="width" secondItem="1io-b6-wMg" secondAttribute="height" multiplier="1:1" id="bPT-Nj-4Qr"/>

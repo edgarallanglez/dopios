@@ -20,7 +20,7 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
     var searchViewIsOpen: Bool = false
     var searchViewIsSegue: Bool = false
     
-    var cancelSearchButton:UIBarButtonItem!
+    var cancelSearchButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,12 +51,11 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
      
         
         
-        for subView in self.searchBar.subviews{
-            for subsubView in subView.subviews{
-                if let textField = subsubView as? UITextField{
+        for subView in self.searchBar.subviews {
+            for subsubView in subView.subviews {
+                if let textField = subsubView as? UITextField {
                     textField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("Buscar", comment: ""), attributes: [NSForegroundColorAttributeName: Utilities.extraLightGrayColor])
                     textField.textColor = UIColor.white
-
                 }
             }
         }
@@ -127,15 +126,15 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
     }
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if(searchViewIsOpen == true && vc.searchScrollView.isHidden == true){
-            vc.searchScrollView.isHidden = false
-            Utilities.slideFromBottomAnimation(vc.searchScrollView, delay: 0, duration: 0.5, yPosition: 600)
+            //vc.searchScrollView.isHidden = false
+            //Utilities.slideFromBottomAnimation(vc.searchScrollView, delay: 0, duration: 0.5, yPosition: 600)
         }
         
         if(searchText.characters.count == 0){
             vc.searchScrollView.isHidden = true
         }else{
             vc.searchText = searchText as NSString!
-            vc.searchTimer()
+            //vc.searchTimer()
         }
     }
     
@@ -145,6 +144,8 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
         
         if(vc.searchText != ""){
             vc.search()
+            vc.searchScrollView.isHidden = false
+            Utilities.slideFromBottomAnimation(vc.searchScrollView, delay: 0, duration: 0.5, yPosition: 600)
             searchBar.resignFirstResponder()
         }
     }
@@ -218,18 +219,19 @@ class BaseViewController: UIViewController, UISearchBarDelegate, UINavigationCon
             let object_id = params["id"] as! Int
             
             if vc.searchSegmentedController.selectedIndex == 0 {
-                let viewControllerToPresent = self.storyboard!.instantiateViewController(withIdentifier: "BranchProfileStickyController") as! BranchProfileStickyController
-                viewControllerToPresent.branch_id = object_id
-                self.navigationController?.pushViewController(viewControllerToPresent, animated: true)
-                
+                let storyboard = UIStoryboard(name: "ProfileStoryboard", bundle: nil)
+                let view_controller = storyboard.instantiateViewController(withIdentifier: "BranchProfileStickyController") as! BranchProfileStickyController
+                view_controller.branch_id = object_id
+                self.navigationController?.pushViewController(view_controller, animated: true)
             }
+            
             if vc.searchSegmentedController.selectedIndex == 1 {
-                let viewControllerToPresent = self.storyboard!.instantiateViewController(withIdentifier: "UserProfileStickyController") as! UserProfileStickyController
+                let storyboard = UIStoryboard(name: "ProfileStoryboard", bundle: nil)
+                let viewControllerToPresent = storyboard.instantiateViewController(withIdentifier: "UserProfileStickyController") as! UserProfileStickyController
                 viewControllerToPresent.user_id = object_id
                 viewControllerToPresent.is_friend = params["is_friend"] as! Bool
                 viewControllerToPresent.operation_id = params["operation_id"] as! Int
                 self.navigationController?.pushViewController(viewControllerToPresent, animated: true)
-                
             }
             
             searchBar.resignFirstResponder()

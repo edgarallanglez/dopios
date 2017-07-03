@@ -16,7 +16,7 @@ class SettingsViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if ((indexPath as NSIndexPath).section == 2) { setActionSheet() }
+        if indexPath.section == 2 { setActionSheet() }
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
@@ -35,6 +35,7 @@ class SettingsViewController: UITableViewController {
 
         SettingsController.setPrivacyWithSuccess("\(Utilities.dopURL)user/privacy_status/set", params: params,
             success: { (data) -> Void in
+                
                 User.privacy_status = (params["privacy_status"]?.intValue)!
             }, failure: { (data) -> Void in
                 sender.setOn(!currentState, animated:true)
@@ -61,6 +62,9 @@ class SettingsViewController: UITableViewController {
         
         self.present(actionSheet, animated: true, completion: nil)
     }
-
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        print("")
+    }
     
 }

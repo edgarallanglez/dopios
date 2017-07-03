@@ -12,9 +12,9 @@ class PeopleModel: NSObject {
     let names: String
     let surnames: String
     let user_id: Int
-    let birth_date: String
-    let facebook_key: String
-    let privacy_status: Int
+    let birth_date: String?
+    let facebook_key: String?
+    let privacy_status: Int?
     let main_image: String
     var level: Int!
     var exp: Double!
@@ -92,5 +92,22 @@ class PeopleModel: NSObject {
         self.exp = exp
         self.total_used = nil
         self.operation_id = operation_id
+    }
+    
+    init(model: JSON) {
+        self.names = model["names"].string!
+        self.surnames = model["surnames"].string ?? ""
+        self.facebook_key = model["facebook_key"].string ?? ""
+        self.user_id = model["user_id"].int!
+        self.birth_date = model["birth_date"].string ?? ""
+        self.privacy_status = model["privacy_status"].int ?? 0
+        self.main_image = model["main_image"].string ?? ""
+        self.level = model["level"].int ?? 0
+        self.exp = model["exp"].double ?? 0
+        self.is_friend = model["is_friend"].bool ?? false
+        self.operation_id = model["operation_id"].int ?? 5
+        
+        self.total_used = nil
+        self.friend_id = nil
     }
 }

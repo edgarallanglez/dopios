@@ -17,6 +17,7 @@ protocol AboutPageDelegate {
 class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     var delegate: AboutPageDelegate?
     
+    @IBOutlet weak var phone_button: UIButton!
     @IBOutlet var phone_view: UIView!
     @IBOutlet var address_view: UIView!
     @IBOutlet var contentView: UIView!
@@ -64,10 +65,6 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
         self.view.addSubview(loader)
     }
     
-//    override func viewWillAppear(animated: Bool) {
-//        delegate?.resizeAboutView!(330)
-//    }
-//    
     override func viewDidAppear(_ animated: Bool) {
         parent_view.view.setNeedsLayout()
     }
@@ -83,7 +80,7 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
         branch_location_map.setRegion(coordinate_region, animated: false)
     }
     
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView?{
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let reuse_id = "custom"
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuse_id)
         if mapView.userLocation == annotation as! NSObject { return nil }
@@ -91,9 +88,7 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuse_id)
             annotationView!.canShowCallout = true
             
-        } else {
-            annotationView?.annotation = annotation
-        }
+        } else { annotationView?.annotation = annotation }
         
         let customAnnotation = annotation as! Annotation
         annotationView!.image = UIImage(named: customAnnotation.typeOfAnnotation)
@@ -120,8 +115,9 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
             let phone = json["phone"].string ?? ""
             let adults_only = json["adults_only"].bool ?? false
             let address = json["address"].string ?? ""
+            let folio = json["folio"].string!
 
-            let model = Branch(id: branch_id, name: branch_name, banner: banner, company_id: company_id, logo: logo, following: following, about: about, phone: phone, adults_only: adults_only, address: address)
+            let model = Branch(id: branch_id, name: branch_name, banner: banner, company_id: company_id, logo: logo, following: following, about: about, phone: phone, adults_only: adults_only, address: address, folio: folio)
             
             
             self.branch_pin = CLLocation(latitude: latitude!, longitude: longitude!)
@@ -132,26 +128,34 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
                 let drop_pin = Annotation(coordinate: new_location, title: json["name"].string!, subTitle: "", branch_distance: "4.3", branch_id: branch_id, company_id: 0, logo: "")
                 
                 switch json["category_id"].int! {
+                    case 0: drop_pin.typeOfAnnotation = "marker-services-icon"
                     case 1: drop_pin.typeOfAnnotation = "marker-food-icon"
                     case 2: drop_pin.typeOfAnnotation = "marker-services-icon"
                     case 3: drop_pin.typeOfAnnotation = "marker-entertainment-icon"
-                default: break
+                default: drop_pin.typeOfAnnotation = "marker-services-icon"
+                        break
                 }
+        
                 self.branch_description.text = model.about
+                self.phone_button.setTitle(model.phone, for: .normal)
+                self.phone_button.layer.cornerRadius = 3
+                self.phone_button.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: self.phone_button.frame.width - 25)
                 self.phone.text = model.phone
+                //self.phone_button.setImage(UIImage(named: "phone") , for: .normal)
                 self.branch_location_map.addAnnotation(drop_pin)
                 self.address.text = model.address
                 
                 
                 self.phone_view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(BranchAboutViewController.callToBranch(_:))))
-
+                self.phone.backgroundColor = Utilities.dop_detail_color
+                self.phone.textColor = UIColor.white
                 Utilities.fadeInFromBottomAnimation(self.contentView, delay: 0, duration: 1, yPosition: 20)
                 
                 Utilities.fadeOutViewAnimation(self.loader, delay: 0, duration: 0.3)
 
                 self.delegate!.setFollow(model)
                 
-                if model.adults_only == true{
+                if model.adults_only! {
                     
                 }
             })
@@ -166,7 +170,7 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
         })
     }
     func callToBranch(_ sender: UITapGestureRecognizer){
-        UIApplication.shared.openURL(URL(string: "tel://\(phone.text!)")!)
+        UIApplication.shared.openURL(URL(string: "tel://\(self.phone.text!)")!)
     }
     
     func reloadWithOffset(_ parent_scroll: UICollectionView) {
@@ -228,4 +232,9 @@ class BranchAboutViewController: UIViewController, CLLocationManagerDelegate, MK
         //mapItem.name = "\(self.coupon!.name)"
         mapItem.openInMaps(launchOptions: options)
     }
+    
+    @IBAction func callBranch(_ sender: UIButton) {
+        UIApplication.shared.openURL(URL(string: "tel://\(phone.text!)")!)
+    }
+    
 }

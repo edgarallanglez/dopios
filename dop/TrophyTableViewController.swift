@@ -21,7 +21,7 @@ class TrophyTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         getTrophies()
-        self.table_view.contentInset = UIEdgeInsetsMake(0, 0, 49, 0)
+        self.table_view.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
         
     }
     
@@ -36,32 +36,40 @@ class TrophyTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: BadgeCell = tableView.dequeueReusableCell(withIdentifier: "BadgeCell", for: indexPath) as! BadgeCell
-        
+        cell.alpha = 0
         if(!trophy_list.isEmpty){
-            let model = self.trophy_list[(indexPath as NSIndexPath).row]
+            let model = self.trophy_list[indexPath.row]
             
             cell.loadItem(model)
             let imageUrl = URL(string: "\(Utilities.badgeURL)\(model.badge_id).png")
             
-            let identifier = "Cell\((indexPath as NSIndexPath).row)"
+            let identifier = "Cell\(indexPath.row)"
             
             if (self.cached_images[identifier] != nil){
                 let cell_image_saved : UIImage = self.cached_images[identifier]!
                 cell.badge_image.image = cell_image_saved
+                cell.alpha = 1
             } else {
                 cell.badge_image.alpha = 0
                 Alamofire.request(imageUrl!).responseImage { response in
-                    if let image = response.result.value{
+                    if let image = response.result.value {
                         cell.badge_image.image = image
                         UIView.animate(withDuration: 0.5, animations: {
-                            cell.badge_image.alpha = 1
+                            if model.earned {
+                                cell.setEarned()
+                                cell.contentView.backgroundColor = UIColor.white
+                            }
+                            else {
+                                cell.setNotEarned()
+                                cell.contentView.backgroundColor = Utilities.lightGrayColor
+                            }
+                            cell.alpha = 1
                         })
                     }
                 }
                 
             }
             
-            if !model.earned { cell.backgroundColor = Utilities.lightGrayColor }
         }
         
         cell.selectionStyle = UITableViewCellSelectionStyle.none

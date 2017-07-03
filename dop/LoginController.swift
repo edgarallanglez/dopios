@@ -25,9 +25,9 @@ class LoginController {
         
     }
     class func getPrivacyInfo(success succeed: @escaping ((_ userData: JSON?) -> Void), failure errorFound:@escaping ((_ userData: NSError?) -> Void )) {
-        let url = "\(Utilities.dopURL)user/privacy_status/get"
+        let url = "\(Utilities.dopURL)user/flags/get"
 
-        Alamofire.request(url, method: .get, encoding: JSONEncoding.default, headers: User.userToken).validate().responseJSON { response in
+        Alamofire.request(url, method: .get, headers: User.userToken).validate().responseJSON { response in
             switch response.result {
             case .success:
                 succeed(JSON(response.result.value))
@@ -38,5 +38,46 @@ class LoginController {
         }
     }
     
+    class func loginWithEmail(_ url: String, params: [String:AnyObject], success succeed: @escaping ((_ loginData: JSON?) -> Void),failure errorFound: @escaping ((_ loginData: NSError?) -> Void)) {
+        
+        Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                succeed(JSON(response.result.value ?? ""))
+            case .failure(let error):
+                print(error)
+                errorFound(error as NSError)
+            }
+        }
+        
+    }
+    
+    class func verifyEmail(_ url: String, params: [String:AnyObject], success succeed: @escaping ((_ loginData: JSON?) -> Void),failure errorFound: @escaping ((_ loginData: NSError?) -> Void)) {
+        
+        Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                succeed(JSON(response.result.value ?? ""))
+            case .failure(let error):
+                print(error)
+                errorFound(error as NSError)
+            }
+        }
+        
+    }
+    
+    class func forgotPassword(_ url: String, params: [String:AnyObject], success succeed: @escaping ((_ userData: JSON?) -> Void),failure errorFound: @escaping ((_ userData: NSError?) -> Void)) {
+        
+        Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                succeed(JSON(response.result.value ?? ""))
+            case .failure(let error):
+                print(error)
+                errorFound(error as NSError)
+            }
+        }
+        
+    }
     
 }
