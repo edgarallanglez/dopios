@@ -127,7 +127,8 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
 
         }, failure: { (error) -> Void in
             DispatchQueue.main.async(execute: {
-                print("Error")
+                print("Ocurrio un error")
+                self.performSegue(withIdentifier: "showLogin", sender: self)
             })
         })
 
@@ -180,6 +181,7 @@ class LoadingViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocat
     }
 
     override func viewDidAppear(_ animated: Bool) {
+        
         validateSession()
     }
 

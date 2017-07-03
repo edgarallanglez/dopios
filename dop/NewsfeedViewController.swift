@@ -44,14 +44,14 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
             let model = self.newsfeed[indexPath.row]
             cell.newsfeed_description.linkAttributes = [NSForegroundColorAttributeName: Utilities.dopColor]
             cell.newsfeed_description.enabledTextCheckingTypes = NSTextCheckingResult.CheckingType.link.rawValue
-
+            
             cell.newsfeed_description.delegate = self
             cell.loadItem(model, viewController: self, index: indexPath.row)
             if !self.first_cell_set {
                 cell.setTopBorder()
                 first_cell_set = true
             }
-
+            
             let imageUrl = URL(string: model.user_image)
             let branch_image_url = URL(string: "\(Utilities.dopImagesURL)\(model.company_id)/\(model.branch_image)")!
             let identifier = "Cell\(indexPath.row)"
@@ -62,22 +62,26 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
                 cell.user_image.image = cell_image_saved
                 cell.user_image.alpha = 1
                 cell.username_button.alpha = 1
-            
+                
             } else {
                 cell.user_image.alpha = 0.3
                 cell.user_image.image = UIImage(named: "dop-logo-transparent")
                 cell.user_image.backgroundColor = Utilities.lightGrayColor
-
+                
                 UIView.animate(withDuration: 0.5, animations: {
                     cell.username_button.alpha = 1
                 })
-                Alamofire.request(imageUrl!).responseImage { response in
-                    if let image = response.result.value{
-                        self.cachedImages[identifier] = image
-                        cell.user_image.image = image
-                        UIView.animate(withDuration: 0.5, animations: {
-                            cell.user_image.alpha = 1
-                        })
+                if model.user_image != "" {
+                    Alamofire.request(imageUrl!).responseImage { response in
+                        
+                        if let image = response.result.value{
+                            self.cachedImages[identifier] = image
+                            cell.user_image.image = image
+                            UIView.animate(withDuration: 0.5, animations: {
+                                cell.user_image.alpha = 1
+                            })
+                        }
+                        
                     }
                 }
             }
@@ -102,8 +106,8 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
                     }
                 }
             }
-
-
+            
+            
             
             cell.selectionStyle = UITableViewCellSelectionStyle.none
             return cell
@@ -126,7 +130,7 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
             self.navigationController?.pushViewController(view_controller, animated: true)
         }
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -181,10 +185,10 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
         cachedImages.removeAll()
         branch_images.removeAll()
         people_array.removeAll()
-
+        
         
         Utilities.fadeInViewAnimation(main_loader, delay: 0, duration: 0.5)
-
+        
         NewsfeedController.getAllFriendsTakingCouponsWithSuccess(success: { (friendsData) -> Void in
             let json = friendsData!
             
@@ -214,7 +218,7 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
                 let operation_id = subJson["operation_id"].int ?? 5
                 let privacy_status = subJson["privacy_status"].int ?? 0
                 var formated_date = subJson["used_date"].string!
-
+                
                 
                 let person_model = PeopleModel(names: names, surnames: surnames, user_id: user_id, birth_date: "", facebook_key: "", privacy_status: privacy_status, main_image: main_image, is_friend: is_friend, level: level, exp: exp, operation_id: operation_id)
                 
@@ -223,7 +227,7 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
                 let separators = CharacterSet(charactersIn: "T+")
                 let parts = formated_date.components(separatedBy: separators)
                 formated_date = "\(parts[0]) \(parts[1])"
-
+                
                 let model = NewsfeedNote(client_coupon_id:client_coupon_id,friend_id: friend_id, user_id: user_id, branch_id: branch_id, coupon_name: name, branch_name: branch_name, names: names, surnames: surnames, user_image: main_image, company_id: company_id, branch_image: logo, total_likes:total_likes,user_like: user_like, date:date, formatedDate: formated_date, private_activity: false)
                 
                 self.newsfeedTemporary.append(model)
@@ -255,17 +259,17 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
                 self.offset = self.limit
             });
         },
-            
-        failure: { (error) -> Void in
-            DispatchQueue.main.async(execute: {
-                self.refreshControl.endRefreshing()
-                Utilities.fadeOutViewAnimation(self.main_loader, delay: 0, duration: 0.3)
-                
-                self.empty_message.text = "ERROR DE CONEXIÓN"
-                self.empty_message.isHidden = false
-            })
+                                                                 
+                                                                 failure: { (error) -> Void in
+                                                                    DispatchQueue.main.async(execute: {
+                                                                        self.refreshControl.endRefreshing()
+                                                                        Utilities.fadeOutViewAnimation(self.main_loader, delay: 0, duration: 0.3)
+                                                                        
+                                                                        self.empty_message.text = "ERROR DE CONEXIÓN"
+                                                                        self.empty_message.isHidden = false
+                                                                    })
         })
-
+        
     }
     
     
@@ -331,14 +335,14 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
                 
                 print(json)
                 if newData { self.offset+=addedValues }
-
+                
             });
-            },
-            
-            failure: { (error) -> Void in
-                DispatchQueue.main.async(execute: {
-                    self.tableView.finishInfiniteScroll()
-                })
+        },
+                                                                       
+                                                                       failure: { (error) -> Void in
+                                                                        DispatchQueue.main.async(execute: {
+                                                                            self.tableView.finishInfiniteScroll()
+                                                                        })
         })
         
     }
@@ -350,7 +354,7 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
         }
         if cell.responds(to: #selector(setter: UIView.layoutMargins)) { cell.layoutMargins = UIEdgeInsets.zero }
     }
-
+    
     func goToUserProfile(_ index: Int!) {
         let person: PeopleModel = self.people_array[index]
         
@@ -381,5 +385,5 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
             self.refreshControl.endRefreshing()
         }
     }
-
+    
 }

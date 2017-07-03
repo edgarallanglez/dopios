@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="wsr-0B-cyM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="wsr-0B-cyM">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -3764,11 +3764,11 @@
                                 <exclude reference="IeW-td-Q9L"/>
                                 <exclude reference="Lfr-S9-fUU"/>
                                 <exclude reference="bjZ-FW-2oZ"/>
-                                <exclude reference="iot-Ll-zll"/>
                                 <exclude reference="1Qf-q4-Zwo"/>
                                 <exclude reference="4Xa-NB-3G3"/>
-                                <exclude reference="F13-uE-c1G"/>
                                 <exclude reference="NJB-LQ-w1J"/>
+                                <exclude reference="iot-Ll-zll"/>
+                                <exclude reference="F13-uE-c1G"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -3780,11 +3780,11 @@
                                 <include reference="IeW-td-Q9L"/>
                                 <include reference="Lfr-S9-fUU"/>
                                 <include reference="bjZ-FW-2oZ"/>
-                                <exclude reference="iot-Ll-zll"/>
                                 <include reference="1Qf-q4-Zwo"/>
                                 <include reference="4Xa-NB-3G3"/>
-                                <include reference="F13-uE-c1G"/>
                                 <include reference="NJB-LQ-w1J"/>
+                                <exclude reference="iot-Ll-zll"/>
+                                <include reference="F13-uE-c1G"/>
                             </mask>
                         </variation>
                     </view>
@@ -4307,7 +4307,7 @@
                                             </variation>
                                         </imageView>
                                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BLOQUEADA" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rA0-d5-7jM">
-                                            <rect key="frame" x="56.333333333333343" y="52" width="91" height="17"/>
+                                            <rect key="frame" x="57" y="52" width="91" height="17"/>
                                             <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                             <color key="textColor" red="0.36010122299194336" green="0.36671203374862671" blue="0.3987540602684021" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -4807,7 +4807,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No has tomado ninguna promoción aún" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YXf-Z9-RcB">
-                                <rect key="frame" x="39" y="120" width="336.66666666666669" height="20"/>
+                                <rect key="frame" x="39.666666666666657" y="120" width="336.66666666666663" height="20"/>
                                 <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="17"/>
                                 <color key="textColor" red="0.26379796862602234" green="0.2637900710105896" blue="0.26379451155662537" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -5842,7 +5842,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="400" height="30"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TENDENCIAS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="21f-xA-m8Z">
-                                                                <rect key="frame" x="144.33333333333331" y="5.6666666666666572" width="112.33333333333331" height="20"/>
+                                                                <rect key="frame" x="144" y="5.6666666666666572" width="112.33333333333331" height="20"/>
                                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
                                                                 <color key="textColor" red="0.60271793603897095" green="0.602699875831604" blue="0.60271012783050537" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -5949,7 +5949,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="400" height="30"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PRÓXIMAS A VENCER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eGZ-1j-2rL">
-                                                                <rect key="frame" x="107.33333333333331" y="5.6666666666666288" width="186.33333333333337" height="20"/>
+                                                                <rect key="frame" x="107" y="5.6666666666666288" width="186.33333333333331" height="20"/>
                                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
                                                                 <color key="textColor" red="0.60271793603897095" green="0.602699875831604" blue="0.60271012783050537" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -6792,7 +6792,7 @@
                                             </variation>
                                         </imageView>
                                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BLOQUEADA" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dYV-Jq-QHz">
-                                            <rect key="frame" x="57" y="52" width="91" height="17"/>
+                                            <rect key="frame" x="56.666666666666657" y="52" width="91" height="17"/>
                                             <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                             <color key="textColor" red="0.36010122299194336" green="0.36671203374862671" blue="0.3987540602684021" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>

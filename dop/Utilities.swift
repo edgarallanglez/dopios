@@ -172,7 +172,7 @@ class Utilities {
         
         let friendly_date_str = timeAgoSinceDate(friendly_date, numericDates: false)
         
-        
+
         return friendly_date_str
     }
     

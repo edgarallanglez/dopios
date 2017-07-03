@@ -583,6 +583,9 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, CLLocatio
     }
     
     func getFBUserData() {
+        A0SimpleKeychain().deleteEntry(forKey: "auth0-user-jwt")
+        
+        
         let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, first_name, middle_name,last_name, email, birthday, gender"])
         graphRequest.start(completionHandler: { (connection, result, error) -> Void in
             let json: JSON = JSON(result)

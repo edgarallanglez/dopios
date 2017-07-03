@@ -56,7 +56,23 @@ class CampaignPromo: UIView, ModalDelegate, FBSDKSharingDelegate {
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(CampaignPromo.tapCoupon(_:))))
         self.coupon = coupon
         self.campaign_description.text = coupon.couponDescription
-        self.expire_date.text = "\(Utilities.friendlyToDate(coupon.end_date!))"
+        print(coupon.exp)
+        
+        let date = Date().localDateString()
+        
+        let coupon_expiration = DateFormatter()
+        coupon_expiration.dateFormat = "yyy-MM-dd hh:mm:ss"
+        let coupon_expiration_date = coupon_expiration.date(from: self.coupon.end_date)
+        
+        let coupon_expiration_date_ = coupon_expiration_date?.localDateString()
+        
+        print("La fecha es \(date)  \(String(describing: coupon_expiration_date_))")
+        //if date > coupon_expiration_date! {
+            self.expire_date.text = "EXPIRADA"
+            //self.backgroundColor = Util
+        //}else{
+            self.expire_date.text = "\(Utilities.friendlyToDate(coupon.end_date!))"
+        //}
         self.view_controller = viewController
         self.main_storyboard = main_storyboard
         
@@ -167,5 +183,19 @@ class CampaignPromo: UIView, ModalDelegate, FBSDKSharingDelegate {
         
         dialog.show()
         
+    }
+}
+
+extension Date {
+    @nonobjc static var localFormatter: DateFormatter = {
+        let dateStringFormatter = DateFormatter()
+        dateStringFormatter.dateStyle = .medium
+        dateStringFormatter.timeStyle = .medium
+        return dateStringFormatter
+    }()
+    
+    func localDateString() -> String
+    {
+        return Date.localFormatter.string(from: self)
     }
 }
