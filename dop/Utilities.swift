@@ -31,6 +31,10 @@ class Utilities {
     class var badgeURL: String {
         return "http://45.55.7.118/badges/"
     }
+    
+    class var LOYALTY_URL: String {
+        return "http://45.55.7.118/loyalty/"
+    }
 
     class var dopColor: UIColor {
         return UIColor( red: 251.0/255.0 , green: 34.0/255.0 , blue: 111.0/255.0, alpha:1.0)
@@ -81,6 +85,33 @@ class Utilities {
 
         return gl
     }
+    
+    class var WhiteLayer: CAGradientLayer {
+        
+        let colorBottom = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0).cgColor
+        let colorTop = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0).cgColor
+
+        let gl: CAGradientLayer
+        
+        gl = CAGradientLayer()
+        gl.colors = [ colorTop, colorBottom]
+        gl.locations = [ 0.0, 1.0 ]
+        
+        return gl
+    }
+    
+    class var DefaultSelectedLayer: CAGradientLayer {
+        let colorBottom = UIColor(red: 238.0/255.0, green: 238.0/255.0, blue: 238.0/255.0, alpha: 1.0).cgColor
+        let colorTop = UIColor(red: 245.0/255.0, green: 245.0/255.0, blue: 245.0/255.0, alpha: 1.0).cgColor
+        
+        let gl: CAGradientLayer
+        
+        gl = CAGradientLayer()
+        gl.colors = [ colorTop, colorBottom]
+        gl.locations = [ 0.0, 1.0 ]
+        
+        return gl
+    }
 
 
     class func roundValue(_ value:Double,numberOfPlaces:Double)->Double{
@@ -91,6 +122,7 @@ class Utilities {
     }
 
     class func loadDataFromURL(_ url: URL, completion: @escaping (_ data: Data?, _ error: NSError?) -> Void) {
+        
         let session = URLSession.shared
         let request = NSMutableURLRequest(url: url)
         request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
@@ -369,8 +401,31 @@ class Utilities {
 
 }
 
-/*
-let time = NSDate(timeIntervalSince1970: timestamp).timeIntervalSinceNow
-let relativeTimeString = NSDate.relativeTimeInString(time)
-println(relativeTimeString)
-*/
+extension NSLayoutConstraint {
+    /**
+     Change multiplier constraint
+     
+     - parameter multiplier: CGFloat
+     - returns: NSLayoutConstraint
+     */
+    func setMultiplier(multiplier:CGFloat) -> Void {
+        
+        NSLayoutConstraint.deactivate([self])
+        
+        let newConstraint = NSLayoutConstraint(
+            item: firstItem,
+            attribute: firstAttribute,
+            relatedBy: relation,
+            toItem: secondItem,
+            attribute: secondAttribute,
+            multiplier: multiplier,
+            constant: constant)
+        
+        newConstraint.priority = priority
+        newConstraint.shouldBeArchived = self.shouldBeArchived
+        newConstraint.identifier = self.identifier
+        
+        NSLayoutConstraint.activate([newConstraint])
+        //return newConstraint
+    }
+}

@@ -33,7 +33,8 @@ class PageZeroViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         //Utilities.fadeInFromBottomAnimation(promo_container, delay: 0, duration: 1, yPosition: 20)
     }
-    func startFadeIn(){
+    
+    func startFadeIn() {
         Utilities.fadeInFromBottomAnimation(top_logo, delay: 0, duration: 1, yPosition: 20)
         Utilities.fadeInFromBottomAnimation(tutorial_title, delay: 0, duration: 1, yPosition: 20)
         Utilities.fadeInFromBottomAnimation(tutorial_description, delay: 0, duration: 1, yPosition: 20)

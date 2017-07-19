@@ -54,7 +54,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationWillResignActive(_ application: UIApplication) {
         print("ALO1")
-
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {

@@ -21,7 +21,7 @@ class ReadQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
     @IBOutlet var qr_instructions_view: UIView!
     @IBOutlet var qr_image: UIImageView!
     var qr_detected: Bool = false
-    var loader:CustomInfiniteIndicator?
+    var loader: CustomInfiniteIndicator?
     var alert_array = [AlertModel]()
     var coupon_id: Int?
     var coupon: Coupon!
@@ -30,13 +30,18 @@ class ReadQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
     var spinner: MMMaterialDesignSpinner!
     var qr_problems_pressed: Bool = false
     var is_global: Bool = false
+    var adult_branch: Bool = false
+    
+    var loyalty: Loyalty!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         
         if AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo) == AVAuthorizationStatus.authorized {
+            
             setCameraConfig()
+            
         } else {
             let background = Utilities.Colors
             background.frame = self.view.bounds
@@ -100,140 +105,166 @@ class ReadQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
         
         var params: [String: AnyObject]
         
-        params = [
-            "qr_code" : qr_code as AnyObject,
-            "coupon_id": self.coupon_id! as AnyObject,
-            "branch_id": self.branch_id! as AnyObject,
-            "latitude": User.coordinate.latitude as AnyObject? ?? 0 as AnyObject,
-            "longitude": User.coordinate.longitude as AnyObject? ?? 0 as AnyObject,
-            "first_using": User.first_using as AnyObject ]
-        
-        
-        ReadQRController.sendQRWithSuccess(params,
-            success: { (data) -> Void in
-                DispatchQueue.main.async(execute: {
-                    
-                    let json = data!
-                    print("JSON ES \(json)")
-                    if json["message"].string != nil {
-                        User.first_using = true
-                        Utilities.fadeOutViewAnimation(self.spinner, delay: 0, duration: 0.3)
-                        let error_modal: ModalViewController = ModalViewController(currentView: self, type: ModalViewControllerType.AlertModal)
-                        
-                        var error_message = "Esta promoción se ha terminado ☹️"
-                        if json["minutes"].string != nil {
-                            error_message = "Recientemente usaste esta promoción, intenta más tarde"
-                        }
-                        if json["message"].string == "expired" {
-                            error_message = "Esta promoción ha caducado"
-                        }
-                        if json["message"].string == "error_qr"{
-                            error_message =  "Ha ocurrido un error, al parecer el QR no es el correcto"
-                        }
-                        
-                        error_modal.willPresentCompletionHandler = { vc in
-                            let navigation_controller = vc as! AlertModalViewController
-                            var alert_array = [AlertModel]()
-                                
-                            alert_array.append(AlertModel(alert_title: "¡Oops!", alert_image: "error", alert_description: error_message))
-                            navigation_controller.setAlert(alert_array)
-                        }
-                        
-                        error_modal.didDismissCompletionHandler = { vc in
-                            self.qr_detected = false
-                            self.alert_array.removeAll()
-                        }
-                        
-                        error_modal.present(animated: true, completionHandler: nil)
-                        
-                    } else {
-                        let name = json["data"]["name"].string!
-                        let folio = json["folio"].string!
-                        Utilities.fadeOutViewAnimation(self.spinner, delay: 0, duration: 0.3)
-                        DispatchQueue.main.async(execute: {
-                            let modal: ModalViewController = ModalViewController(currentView: self, type: ModalViewControllerType.AlertModal)
-                        
-                            modal.willPresentCompletionHandler = { vc in
-                                let navigation_controller = vc as! AlertModalViewController
-                                if self.coupon.adult_branch {
-                                    navigation_controller.share_text.text = "  Esto no se compartirá 😏"
-                                    navigation_controller.share_view.isHidden = false
-                                    navigation_controller.share_activity.isOn = false
-                                    navigation_controller.share_activity.isHidden = true
-                                    
-                                } else {
-                                    navigation_controller.share_view.isHidden = false
-                                }
-                                self.alert_array.append(AlertModel(alert_title: "¡Felicidades!", alert_image: "success", alert_description: "Has redimido tu promoción con éxito en \(name)"))
-                                print(json)
-//                                
-                                let badges_array = json["reward"]["badges"].array ?? []
-                                if badges_array.count != 0 {
-                                    let badges = json["reward"]["badges"].array!
-                                    let badge_name: String = badges[0]["name"].string!
-                                    let badge_id: Int = badges[0]["badge_id"].int!
-                                    
-                                    self.alert_array.append(AlertModel(alert_title: "¡Felicidades!", alert_image: "\(badge_id)", alert_description: "Has desbloqueado una nueva medalla \(badge_name)"))
-                                }
-                                navigation_controller.setAlert(self.alert_array)
-                            }
-                            
-                            modal.willDismissCompletionHandler = { vc in
-                                let alert_modal = vc as! AlertModalViewController
-                                let params = ["folio": folio as AnyObject,
-                                              "privacy_status": !alert_modal.share_activity.isOn as AnyObject ]
-                                ReadQRController.setActivityPrivacy(params,
-                                        success: { (data) in
-                                            DispatchQueue.main.async {
-                                                print("privacy success")
-                                            }
-                                        },
-                                        failure: { (data) in
-                                            DispatchQueue.main.async {
-                                                print("privacy error")
-                                            }
-                                        }
-                                    )
-                                
-                                self.alert_array.removeAll()
-                                if alert_modal.alert_flag <= 1 {
-                                    self.navigationController?.popViewController(animated: true)
-                                }
-                            }
-                        
-                            modal.present(animated: true, completionHandler: nil)
-                            self.coupon?.available = (self.coupon?.available)! - 1
-                        })
-                    }
-                })
-                
+        if loyalty == nil {
+            params = [
+                "qr_code" : qr_code as AnyObject,
+                "coupon_id": self.coupon_id! as AnyObject,
+                "branch_id": self.branch_id! as AnyObject,
+                "latitude": User.coordinate.latitude as AnyObject? ?? 0 as AnyObject,
+                "longitude": User.coordinate.longitude as AnyObject? ?? 0 as AnyObject,
+                "first_using": User.first_using as AnyObject ]
+            
+            ReadQRController.sendQRWithSuccess(params,
+                                               success: { (data) -> Void in
+                                                DispatchQueue.main.async(execute: {
+                                                    self.setSuccessAlert(data: data!)
+                                                })
             },
-            failure: { (error) -> Void in
-                DispatchQueue.main.async(execute: {
-                    Utilities.fadeOutViewAnimation(self.spinner, delay: 0, duration: 0.3)
-
-                    let modal: ModalViewController = ModalViewController(currentView: self, type: ModalViewControllerType.AlertModal)
-                    
-                    modal.willPresentCompletionHandler = { vc in
-                        let navigation_controller = vc as! AlertModalViewController
-                    
-                        self.alert_array.append(AlertModel(alert_title: "¡Oops!", alert_image: "error", alert_description: "Ha ocurrido un error, al parecer es nuestra culpa 😬"))
-                        
-                        navigation_controller.setAlert(self.alert_array)
-                        
-                        modal.didDismissCompletionHandler = { vc in
-                            self.qr_detected = false
-                            self.alert_array.removeAll()
-                        }
-                    }
-                    modal.present(animated: true, completionHandler: nil)
-                })
+                                               failure: { (error) -> Void in
+                                                DispatchQueue.main.async(execute: {
+                                                    self.setErrorAlert()
+                                                })
             }
-    
-        )
+            )
+        } else {
+            params = [
+                "qr_code" : qr_code as AnyObject,
+                "loyalty_id": self.loyalty.loyalty_id! as AnyObject,
+                "branch_id": self.branch_id! as AnyObject,
+                "first_using": User.first_using as AnyObject ]
+            
+            ReadQRController.sendLoyaltyQRWithSuccess(params,
+                                               success: { (data) -> Void in
+                                                DispatchQueue.main.async(execute: {
+                                                    self.setSuccessAlert(data: data!)
+                                                })
+            },
+                                               failure: { (error) -> Void in
+                                                DispatchQueue.main.async(execute: {
+                                                    self.setErrorAlert()
+                                                })
+            }
+            )
+
+        }
         
     }
-
+        
+    func setSuccessAlert(data: JSON) {
+        let json = data
+        print("JSON ES \(json)")
+        if json["message"].string != nil {
+            User.first_using = true
+            Utilities.fadeOutViewAnimation(self.spinner, delay: 0, duration: 0.3)
+            let error_modal: ModalViewController = ModalViewController(currentView: self, type: ModalViewControllerType.AlertModal)
+            
+            var error_message = "Esta promoción se ha terminado ☹️"
+            if json["minutes"].string != nil {
+                error_message = "Recientemente usaste esta promoción, intenta más tarde"
+            }
+            if json["message"].string == "expired" {
+                error_message = "Esta promoción ha caducado"
+            }
+            if json["message"].string == "error_qr"{
+                error_message =  "Ha ocurrido un error, al parecer el QR no es el correcto"
+            }
+            
+            error_modal.willPresentCompletionHandler = { vc in
+                let navigation_controller = vc as! AlertModalViewController
+                var alert_array = [AlertModel]()
+                
+                alert_array.append(AlertModel(alert_title: "¡Oops!", alert_image: "error", alert_description: error_message))
+                navigation_controller.setAlert(alert_array)
+            }
+            
+            error_modal.didDismissCompletionHandler = { vc in
+                self.qr_detected = false
+                self.alert_array.removeAll()
+            }
+            
+            error_modal.present(animated: true, completionHandler: nil)
+            
+        } else {
+            let name = json["data"]["name"].string!
+            let folio = json["folio"].string ?? ""
+            Utilities.fadeOutViewAnimation(self.spinner, delay: 0, duration: 0.3)
+            DispatchQueue.main.async(execute: {
+                let modal: ModalViewController = ModalViewController(currentView: self, type: ModalViewControllerType.AlertModal)
+                
+                modal.willPresentCompletionHandler = { vc in
+                    let navigation_controller = vc as! AlertModalViewController
+                    if self.adult_branch {
+                        navigation_controller.share_text.text = "  Esto no se compartirá 😏"
+                        navigation_controller.share_view.isHidden = false
+                        navigation_controller.share_activity.isOn = false
+                        navigation_controller.share_activity.isHidden = true
+                        
+                    } else {
+                        navigation_controller.share_view.isHidden = false
+                    }
+                    self.alert_array.append(AlertModel(alert_title: "¡Felicidades!", alert_image: "success", alert_description: "Se ha contado tu visita con éxito en \(name)"))
+                    print(json)
+                    //
+                    let badges_array = json["reward"]["badges"].array ?? []
+                    if badges_array.count != 0 {
+                        let badges = json["reward"]["badges"].array!
+                        let badge_name: String = badges[0]["name"].string!
+                        let badge_id: Int = badges[0]["badge_id"].int!
+                        
+                        self.alert_array.append(AlertModel(alert_title: "¡Felicidades!", alert_image: "\(badge_id)", alert_description: "Has desbloqueado una nueva medalla \(badge_name)"))
+                    }
+                    navigation_controller.setAlert(self.alert_array)
+                }
+                
+                modal.willDismissCompletionHandler = { vc in
+                    let alert_modal = vc as! AlertModalViewController
+                    let params = ["folio": folio as AnyObject,
+                                  "privacy_status": !alert_modal.share_activity.isOn as AnyObject ]
+                    ReadQRController.setActivityPrivacy(params,
+                                                        success: { (data) in
+                                                            DispatchQueue.main.async {
+                                                                print("privacy success")
+                                                            }
+                    },
+                                                        failure: { (data) in
+                                                            DispatchQueue.main.async {
+                                                                print("privacy error")
+                                                            }
+                    }
+                    )
+                    
+                    self.alert_array.removeAll()
+                    if alert_modal.alert_flag <= 1 {
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                }
+                
+                modal.present(animated: true, completionHandler: nil)
+                self.coupon?.available = (self.coupon?.available)! - 1
+            })
+        }
+    }
+    
+    func setErrorAlert() {
+        Utilities.fadeOutViewAnimation(self.spinner, delay: 0, duration: 0.3)
+        
+        let modal: ModalViewController = ModalViewController(currentView: self, type: ModalViewControllerType.AlertModal)
+        
+        modal.willPresentCompletionHandler = { vc in
+            let navigation_controller = vc as! AlertModalViewController
+            
+            self.alert_array.append(AlertModel(alert_title: "¡Oops!", alert_image: "error", alert_description: "Ha ocurrido un error, al parecer es nuestra culpa 😬"))
+            
+            navigation_controller.setAlert(self.alert_array)
+            
+            modal.didDismissCompletionHandler = { vc in
+                self.qr_detected = false
+                self.alert_array.removeAll()
+            }
+        }
+        modal.present(animated: true, completionHandler: nil)
+    }
+    
     func pressActionButton(_ modal: ModalViewController) {
         modal.didDismissCompletionHandler = { vc in
             Utilities.fadeInViewAnimation(self.qr_image, delay: 0, duration: 0.3)
@@ -249,7 +280,7 @@ class ReadQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
     override var prefersStatusBarHidden: Bool {
         return true
     }
-    
+
     func setCameraConfig() {
 //        Utilities.setMaterialDesignButton(self., button_size: 50)
         problems_button.layer.borderColor = UIColor.white.cgColor
@@ -266,7 +297,12 @@ class ReadQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
         spinner.tintColor = Utilities.dopColor
         spinner.backgroundColor = UIColor.white
         
-        self.title = coupon.name
+        if coupon == nil {
+            self.title = loyalty.name
+        } else {
+            self.title = coupon.name
+        }
+        
         let input: AnyObject?
         
         do {
@@ -319,7 +355,7 @@ class ReadQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
             self.view.addSubview(spinner)
             spinner.alpha = 0
             
-            print("Category is \(self.coupon.categoryId)")
+            //print("Category is \(self.coupon.categoryId)")
             
 
         }

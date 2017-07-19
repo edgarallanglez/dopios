@@ -40,6 +40,20 @@ class BranchProfileController {
         }
     }
     
+    class func getBranchLoyaltyTimeline(_ branchId: Int, success: @escaping ((_ branchData: JSON?) -> Void), failure: @escaping ((_ branchData: NSError?) -> Void)) {
+        let url = "\(Utilities.dopURL)loyalty/\(branchId)/get"
+        
+        Alamofire.request(url, method: .get, headers: User.userToken).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                success(JSON(response.result.value))
+            case .failure(let error):
+                print(error)
+                failure(error as NSError)
+            }
+        }
+    }
+    
     class func followBranchWithSuccess(_ params: Parameters, success succeed: @escaping ((_ branchData: JSON?) -> Void),failure errorFound: @escaping ((_ branchData: NSError?) -> Void)) {
         let url = "\(Utilities.dopURL)company/branch/follow"
 

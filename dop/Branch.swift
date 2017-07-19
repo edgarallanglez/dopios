@@ -23,6 +23,8 @@ struct Branch {
     let folio: String!
     let category_id: Int!
     let subcategory_id: Int!
+    let facebook_url: String?
+    let instagram_url: String?
     
     init(id: Int?, name: String?,  logo: String? ,banner: String?, company_id: Int?, latitude: Double, longitude: Double, following: Bool, folio: String!) {
         self.id = id ?? 0
@@ -40,6 +42,8 @@ struct Branch {
         self.adults_only = nil
         self.address = nil
         self.category_id = nil
+        self.facebook_url = nil
+        self.instagram_url = nil
         self.subcategory_id = nil
     }
     
@@ -58,6 +62,8 @@ struct Branch {
         self.phone = nil
         self.adults_only = nil
         self.address = nil
+        self.facebook_url = nil
+        self.instagram_url = nil
         self.category_id = nil
         self.subcategory_id = nil
     }
@@ -79,6 +85,8 @@ struct Branch {
         self.address = nil
         self.category_id = nil
         self.subcategory_id = nil
+        self.facebook_url = nil
+        self.instagram_url = nil
     }
     
     init(id: Int?, name: String?, distance: Double!, folio: String!) {
@@ -99,6 +107,8 @@ struct Branch {
         self.address = nil
         self.category_id = nil
         self.subcategory_id = nil
+        self.facebook_url = nil
+        self.instagram_url = nil
     }
     
     init(id: Int?, name: String?, banner: String?, company_id: Int?, logo: String!, following: Bool!, about: String?, phone: String?, adults_only: Bool?, address: String?, folio: String!) {
@@ -117,6 +127,8 @@ struct Branch {
         self.distance = nil
         self.location = nil
         self.category_id = nil
+        self.facebook_url = nil
+        self.instagram_url = nil
         self.subcategory_id = nil
     }
     
@@ -135,6 +147,32 @@ struct Branch {
         self.category_id = category_id
         self.subcategory_id = subcategory_id
         self.location = location
+        
+        self.distance = nil
+        self.facebook_url = nil
+        self.instagram_url = nil
+    }
+    
+    init(model: JSON) {
+        self.id = model["branch_id"].int!
+        let latitude = model["latitude"].double!
+        let longitude = model["longitude"].double!
+        self.following = model["following"].bool!
+        self.name = model["name"].string!
+        self.company_id = model["company_id"].int
+        self.banner = model["banner"].string
+        self.logo = model["logo"].string!
+        self.about = model["about"].string ?? ""
+        self.phone = model["phone"].string ?? ""
+        self.adults_only = model["adults_only"].bool ?? false
+        self.address = model["address"].string ?? ""
+        self.folio = model["folio"].string!
+        self.category_id = model["category_id"].int!
+        self.subcategory_id = model["subcategory_id"].int!
+        self.facebook_url = model["facebook_url"].string ?? ""
+        self.instagram_url = model["instagram_url"].string ?? ""
+        
+        self.location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         
         self.distance = nil
     }

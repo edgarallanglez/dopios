@@ -1,16 +1,100 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Montserrat-Light.otf">
+            <string>Montserrat-Light</string>
+        </array>
+        <array key="Montserrat-Regular.otf">
+            <string>Montserrat-Regular</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" userLabel="Loyalty" customClass="LoyaltyReward" customModule="dop" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="130" height="170"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qhb-jx-zZj" userLabel="ContentView">
+                    <rect key="frame" x="0.0" y="0.0" width="130" height="170"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="248" verticalHuggingPriority="248" image="loyalty" translatesAutoresizingMaskIntoConstraints="NO" id="X0q-dr-n2L">
+                            <rect key="frame" x="2" y="0.0" width="125" height="125"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="125" id="KCV-0d-qch"/>
+                                <constraint firstAttribute="width" secondItem="X0q-dr-n2L" secondAttribute="height" multiplier="1:1" id="MDw-NB-zaI"/>
+                            </constraints>
+                        </imageView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dxk-la-3Dg">
+                            <rect key="frame" x="0.0" y="130" width="130" height="40"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4/3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rZa-2b-Npv">
+                                    <rect key="frame" x="52" y="10.5" width="25" height="20"/>
+                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
+                                    <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="7Lg-J8-5Ec"/>
+                                <constraint firstItem="rZa-2b-Npv" firstAttribute="centerY" secondItem="dxk-la-3Dg" secondAttribute="centerY" id="mcj-Sc-D9g"/>
+                                <constraint firstItem="rZa-2b-Npv" firstAttribute="centerX" secondItem="dxk-la-3Dg" secondAttribute="centerX" id="s7a-0X-Gu9"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="dxk-la-3Dg" firstAttribute="leading" secondItem="Qhb-jx-zZj" secondAttribute="leading" id="27l-vB-BgM"/>
+                        <constraint firstItem="X0q-dr-n2L" firstAttribute="centerX" secondItem="Qhb-jx-zZj" secondAttribute="centerX" id="72m-gN-bD9"/>
+                        <constraint firstAttribute="trailing" secondItem="dxk-la-3Dg" secondAttribute="trailing" id="Rm8-iu-vYD"/>
+                        <constraint firstAttribute="bottom" secondItem="dxk-la-3Dg" secondAttribute="bottom" id="bwP-7U-Y0v"/>
+                        <constraint firstItem="X0q-dr-n2L" firstAttribute="top" secondItem="Qhb-jx-zZj" secondAttribute="top" id="r6Z-kk-XTf"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="5"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="¡Pregunta por el sistema de lealtad!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XlI-pi-TtU">
+                    <rect key="frame" x="-60" y="117" width="250" height="41"/>
+                    <rect key="contentStretch" x="0.0" y="0.050000000000000003" width="1" height="1"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="250" id="kpQ-6U-twI"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="17"/>
+                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="XlI-pi-TtU" secondAttribute="bottom" constant="12" id="HT9-Gq-UKW"/>
+                <constraint firstItem="Qhb-jx-zZj" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="amv-NL-WsI"/>
+                <constraint firstItem="XlI-pi-TtU" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="ksI-la-zxU"/>
+                <constraint firstAttribute="bottom" secondItem="Qhb-jx-zZj" secondAttribute="bottom" id="qhE-8G-rfI"/>
+                <constraint firstAttribute="trailing" secondItem="Qhb-jx-zZj" secondAttribute="trailing" id="uBX-Ok-Xzj"/>
+                <constraint firstItem="Qhb-jx-zZj" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="xLM-bL-oL3"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="empty_bait" destination="XlI-pi-TtU" id="0xL-mU-CCW"/>
+                <outlet property="loyalty_logo" destination="X0q-dr-n2L" id="Hbt-ib-p16"/>
+                <outlet property="loyalty_progress" destination="rZa-2b-Npv" id="XVY-Fv-Zxh"/>
+            </connections>
+            <point key="canvasLocation" x="32.5" y="84"/>
         </view>
     </objects>
+    <resources>
+        <image name="loyalty" width="135" height="135"/>
+    </resources>
 </document>

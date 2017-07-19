@@ -7,26 +7,6 @@
 //
 
 import UIKit
-//
-//fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-//  switch (lhs, rhs) {
-//  case let (l?, r?):
-//    return l < r
-//  case (nil, _?):
-//    return true
-//  default:
-//    return false
-//  }
-//}
-//
-//fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-//  switch (lhs, rhs) {
-//  case let (l?, r?):
-//    return l > r
-//  default:
-//    return rhs < lhs
-//  }
-//}
 
 class BranchProfileStickyController: UICollectionViewController, UISearchBarDelegate {
     
@@ -43,6 +23,7 @@ class BranchProfileStickyController: UICollectionViewController, UISearchBarDele
     var content_cell: BranchProfileContentController!
     var following: Bool!
     var loaded: Int = 0
+    var height: CGFloat = 760
     
     var notificationButton: UIBarButtonItem!
     var vc: SearchViewController!
@@ -167,7 +148,7 @@ class BranchProfileStickyController: UICollectionViewController, UISearchBarDele
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
         
         let width = UIScreen.main.bounds.width
-        return CGSize(width: width, height: 560)
+        return CGSize(width: width, height: self.height)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -201,39 +182,19 @@ class BranchProfileStickyController: UICollectionViewController, UISearchBarDele
     
     func getBranchProfile() {
         BranchProfileController.getBranchProfileWithSuccess(branch_id, success: { (data) -> Void in
-            let data = data!
-            var json = data["data"]
-            
-            json = json[0]
-            let branch_id = json["branch_id"].int!
-            let latitude = json["latitude"].double!
-            let longitude = json["longitude"].double!
-            let following = json["following"].bool!
-            let branch_name = json["name"].string
-            let company_id = json["company_id"].int
-            let banner = json["banner"].string
-            let logo = json["logo"].string!
-            let about = json["about"].string ?? ""
-            let phone = json["phone"].string ?? ""
-            let adults_only = json["adults_only"].bool ?? false
-            let address = json["address"].string ?? ""
-            let folio = json["folio"].string!
-            let category_id = json["category_id"].int!
-            let subcategory_id = json["subcategory_id"].int!
-            
-            let location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-            let model = Branch(id: branch_id, name: branch_name,
-                               banner: banner, company_id: company_id,
-                               logo: logo, following: following, about: about,
-                               phone: phone, adults_only: adults_only,
-                               address: address, folio: folio, category_id: category_id,
-                               subcategory_id: subcategory_id, location: location)
+            let json = data?["data"][0]
+            let model = Branch(model: json!)
             self.branch = model
             
             DispatchQueue.main.async(execute: {
                 self.segmented_view.setBranch(model: self.branch)
                 self.top_view.setBranch(model: self.branch)
                 self.content_cell.branch = self.branch
+                
+                if self.branch.facebook_url == "" && self.branch.instagram_url == "" {
+                    self.height = 640
+                    self.invalidateLayout()
+                }
             })
             
         },
@@ -351,6 +312,11 @@ class BranchProfileStickyController: UICollectionViewController, UISearchBarDele
         
         
     }
+    
+//    override func present(_ viewControllerToPresent: UIViewController, animated flag: Bool,
+//                          completion: (() -> Void)? = nil) {
+//        
+//    }
 
 }
 

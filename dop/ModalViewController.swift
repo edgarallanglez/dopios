@@ -11,6 +11,7 @@ enum ModalViewControllerType: String {
     case Share
     case CouponDetail
     case AlertModal
+    case LoyaltyModal
 }
 
 @objc protocol ModalDelegate {
@@ -51,6 +52,7 @@ class ModalViewController: MZFormSheetController {
         self.parent_view = presentedFormSheetViewController
         var simple_modal : SimpleModalViewController!
         var alert_modal: AlertModalViewController!
+        var loyalty_modal: LoyaltyModalViewController!
         
         switch type {
             case .Share: simple_modal = presentedFormSheetViewController.storyboard?.instantiateViewController(withIdentifier: "ShareModal") as? SimpleModalViewController
@@ -60,7 +62,7 @@ class ModalViewController: MZFormSheetController {
                 self.presentedFormSheetSize = CGSize(width: width, height: 330)
                 simple_modal!.title_label.text = "Compartir"
                 simple_modal!.action_button.titleLabel!.text = "Compartir"
-                simple_modal!.share_text.contentInset = UIEdgeInsetsMake(0,-5,0,0)
+                simple_modal!.share_text.contentInset = UIEdgeInsetsMake(0,-5, 0, 0)
                 simple_modal!.twitter_button.addTarget(self, action: #selector(ModalViewController.tintButton(_:)), for: .touchUpInside)
                 simple_modal!.facebook_button.addTarget(self, action: #selector(ModalViewController.tintButton(_:)), for: .touchUpInside)
                 simple_modal!.instagram_button.addTarget(self, action: #selector(ModalViewController.tintButton(_:)), for: .touchUpInside)
@@ -88,11 +90,19 @@ class ModalViewController: MZFormSheetController {
                 let height = (UIScreen.main.bounds.height / 3) * 2
                 self.presentedFormSheetSize = CGSize(width: width, height: height)
             
+            case .LoyaltyModal: loyalty_modal = presentedFormSheetViewController.storyboard?.instantiateViewController(withIdentifier: "LoyaltyModalViewController") as? LoyaltyModalViewController
+                super.init(viewController: loyalty_modal)
+            
+                let width = UIScreen.main.bounds.width - 60
+                let height = (UIScreen.main.bounds.height / 3) * 2
+                self.presentedFormSheetSize = CGSize(width: width, height: height)
+            
         default: super.init(viewController: simple_modal!)
         }
 
         if simple_modal?.action_button != nil { simple_modal!.action_button.addTarget(self, action: #selector(ModalViewController.pressed(_:)), for: .touchUpInside) }
         if alert_modal?.dismiss_button != nil { alert_modal!.dismiss_button.addTarget(self, action: #selector(ModalViewController.pressed(_:)), for: .touchUpInside) }
+        if loyalty_modal?.action_button != nil { loyalty_modal!.action_button.addTarget(self, action: #selector(ModalViewController.pressed(_:)), for: .touchUpInside) }
     }
     
     

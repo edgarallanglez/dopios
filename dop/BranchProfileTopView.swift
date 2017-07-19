@@ -28,6 +28,7 @@ class BranchProfileTopView: UIView {
     
     var branch: Branch! {
         didSet {
+            self.banner_loader.lineWidth = 3
             self.banner_loader.startAnimating()
             self.downloadImage(branch)
             self.setFollow()

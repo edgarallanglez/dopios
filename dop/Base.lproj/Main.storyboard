@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="wsr-0B-cyM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="wsr-0B-cyM">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -778,7 +778,7 @@
             <objects>
                 <navigationController title=" " id="VaC-N9-SbM" customClass="NavigationController" customModule="dop" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="Kfj-AK-f4w"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="UmP-Ab-0o3">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="UmP-Ab-0o3">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -796,7 +796,7 @@
             <objects>
                 <navigationController id="UYx-HJ-H9q" customClass="NavigationController" customModule="dop" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="aaq-Fo-Sbs"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="EJr-2x-Kpf">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="EJr-2x-Kpf">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -2158,7 +2158,7 @@
             <objects>
                 <navigationController id="UCG-Z7-5ez" customClass="NavigationController" customModule="dop" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="zrt-eH-hFa"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="P5r-h9-BPk">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="P5r-h9-BPk">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -2389,7 +2389,7 @@
             <objects>
                 <navigationController id="FO0-I8-Mqn" customClass="NavigationController" customModule="dop" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="YsC-XT-hxW"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="WrZ-f1-xuK">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="WrZ-f1-xuK">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -3764,11 +3764,11 @@
                                 <exclude reference="IeW-td-Q9L"/>
                                 <exclude reference="Lfr-S9-fUU"/>
                                 <exclude reference="bjZ-FW-2oZ"/>
+                                <exclude reference="iot-Ll-zll"/>
                                 <exclude reference="1Qf-q4-Zwo"/>
                                 <exclude reference="4Xa-NB-3G3"/>
-                                <exclude reference="NJB-LQ-w1J"/>
-                                <exclude reference="iot-Ll-zll"/>
                                 <exclude reference="F13-uE-c1G"/>
+                                <exclude reference="NJB-LQ-w1J"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -3780,11 +3780,11 @@
                                 <include reference="IeW-td-Q9L"/>
                                 <include reference="Lfr-S9-fUU"/>
                                 <include reference="bjZ-FW-2oZ"/>
+                                <exclude reference="iot-Ll-zll"/>
                                 <include reference="1Qf-q4-Zwo"/>
                                 <include reference="4Xa-NB-3G3"/>
-                                <include reference="NJB-LQ-w1J"/>
-                                <exclude reference="iot-Ll-zll"/>
                                 <include reference="F13-uE-c1G"/>
+                                <include reference="NJB-LQ-w1J"/>
                             </mask>
                         </variation>
                     </view>
@@ -4307,7 +4307,7 @@
                                             </variation>
                                         </imageView>
                                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BLOQUEADA" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rA0-d5-7jM">
-                                            <rect key="frame" x="57" y="52" width="91" height="17"/>
+                                            <rect key="frame" x="56.666666666666657" y="52" width="91" height="17"/>
                                             <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                             <color key="textColor" red="0.36010122299194336" green="0.36671203374862671" blue="0.3987540602684021" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -4782,7 +4782,7 @@
                     <tabBarItem key="tabBarItem" title="" image="dop_logo_main" id="FqT-pf-zVh">
                         <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="-7"/>
                     </tabBarItem>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="tiV-k8-EeR">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="tiV-k8-EeR">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -4807,7 +4807,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No has tomado ninguna promoción aún" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YXf-Z9-RcB">
-                                <rect key="frame" x="39.666666666666657" y="120" width="336.66666666666663" height="20"/>
+                                <rect key="frame" x="39.333333333333343" y="120" width="336.66666666666663" height="20"/>
                                 <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="17"/>
                                 <color key="textColor" red="0.26379796862602234" green="0.2637900710105896" blue="0.26379451155662537" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -6734,7 +6734,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="U1W-BL-qLY" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="nGT-Na-jtp">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="nGT-Na-jtp">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -6792,7 +6792,7 @@
                                             </variation>
                                         </imageView>
                                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BLOQUEADA" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dYV-Jq-QHz">
-                                            <rect key="frame" x="56.666666666666657" y="52" width="91" height="17"/>
+                                            <rect key="frame" x="56.333333333333343" y="52" width="91" height="17"/>
                                             <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                             <color key="textColor" red="0.36010122299194336" green="0.36671203374862671" blue="0.3987540602684021" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -6966,6 +6966,7 @@
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XZw-3w-6Lb">
                                 <rect key="frame" x="15" y="0.0" width="310" height="55"/>
+                                <color key="tintColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="Ki3-xG-cdZ">
                                         <variation key="widthClass=compact" constant="55"/>
@@ -7356,6 +7357,7 @@
                                     <constraint firstAttribute="height" constant="30" id="TrR-SN-HP1"/>
                                     <constraint firstAttribute="width" constant="30" id="lqj-Om-sFy"/>
                                 </constraints>
+                                <color key="tintColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <inset key="contentEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
                                 <state key="normal" title="Button" image="close"/>
                                 <variation key="default">
@@ -7539,7 +7541,7 @@
                                     </constraint>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="18"/>
-                                <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <inset key="contentEdgeInsets" minX="13" minY="13" maxX="10" maxY="10"/>
                                 <state key="normal" image="close"/>
                                 <variation key="default">
@@ -8094,7 +8096,7 @@
         <image name="Login_flat_city" width="967" height="333"/>
         <image name="add-person" width="30" height="23"/>
         <image name="arrow-right" width="42" height="42"/>
-        <image name="close" width="30" height="30"/>
+        <image name="close" width="45" height="45"/>
         <image name="config" width="42" height="42"/>
         <image name="coupons-fav" width="30" height="30"/>
         <image name="dash-icon" width="30" height="30"/>

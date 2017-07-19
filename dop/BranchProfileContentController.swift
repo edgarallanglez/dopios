@@ -27,7 +27,18 @@ class BranchProfileContentController: UICollectionViewCell,
     @IBOutlet weak var loyalty_scroller: UIScrollView!
     @IBOutlet weak var company_about: UILabel!
     
+    @IBOutlet weak var social_view: UIView!
+    @IBOutlet weak var facebook_launcher: UIButton!
+    @IBOutlet weak var instagram_launcher: UIButton!
     
+    
+    // constraints in X
+    @IBOutlet weak var facebook_x: NSLayoutConstraint!
+    @IBOutlet weak var instagram_x: NSLayoutConstraint!
+    
+    // width constraints
+    @IBOutlet weak var facebook_width: NSLayoutConstraint!
+    @IBOutlet weak var instagram_width: NSLayoutConstraint!
     
     let regions_radius: CLLocationDistance = 500
     
@@ -45,6 +56,7 @@ class BranchProfileContentController: UICollectionViewCell,
     }
     
     var campaigns = [Coupon]()
+    var loyalties = [Loyalty]()
     var selected_campaign: Coupon!
     var custom_annotation: CLLocation!
     var cached_images: [String: UIImage] = [:]
@@ -55,9 +67,13 @@ class BranchProfileContentController: UICollectionViewCell,
     }
     
     func setLoaders() {
+        self.location_loader.lineWidth = 3
+        self.campaign_loader.lineWidth = 3
+        self.loyalty_loader.lineWidth = 3
+        
         self.location_loader.startAnimating()
         self.campaign_loader.startAnimating()
-        self.location_loader.startAnimating()
+        self.loyalty_loader.startAnimating()
     }
     
     func setContentView() {
@@ -94,6 +110,8 @@ class BranchProfileContentController: UICollectionViewCell,
         self.location_loader.stopAnimating()
         Utilities.fadeOutViewAnimation(self.location_loader, delay: 0, duration: 0.3)
         Utilities.fadeInFromBottomAnimation(self.company_location, delay: 0, duration: 0.7, yPosition: 20)
+        getLoyalty()
+        setupSocialLayout()
     }
     
     func centerMapOnLocation(_ location: CLLocation) {
@@ -240,6 +258,108 @@ class BranchProfileContentController: UICollectionViewCell,
         })
     }
     
+    func getLoyalty() {
+        
+        
+        BranchProfileController.getBranchLoyaltyTimeline(parent_view.branch_id,
+                                                         success: { (data) -> Void in
+                                                            let json =  data!
+                                                            
+                                                            print(json)
+                                                            for (_, sub_json): (String, JSON) in json["data"] {
+                                                                
+                                                                let model = Loyalty(model: sub_json)
+                                                                
+                                                                self.loyalties.append(model)
+                                                                
+                                                            }
+                                                            
+                                                            DispatchQueue.main.async(execute: {
+                                                                self.loyalty_scroller.delegate = self
+                                                                self.setLoyaltyScroller()
+                                                                
+                                                            });
+        },
+                                                         
+                                                         failure: { (error) -> Void in
+                                                            DispatchQueue.main.async(execute: {
+                                                                print("ERROOOOOOR")
+                                                            })
+        })
+    }
+    
+    func setLoyaltyScroller() {
+        if self.loyalties.count == 0 {
+            setEmptyLoyalty()
+        } else {
+            let margin = 20
+            let position_x = 20
+            let couponWidth = 130
+            
+            for (index, reward) in self.loyalties.enumerated() {
+                var position = 0
+                position = position_x + ((margin + couponWidth) * index)
+                
+                self.newLoyaltyCard(loyalty: reward, position: position, index: index)
+                
+            }
+            
+            let reward_scrollview_size = ((margin + couponWidth) * self.loyalties.count) + margin
+            self.loyalty_scroller.contentSize = CGSize(width: CGFloat(reward_scrollview_size), height: self.loyalty_scroller.frame.size.height)
+        }
+    }
+    
+    func newLoyaltyCard(loyalty: Loyalty, position: Int, index: Int) {
+        let loyalty_box = Bundle.main.loadNibNamed("LoyaltyReward", owner: self, options:
+            nil)?.first as! LoyaltyReward
+        
+        loyalty_box.loyalty_progress.text = "\(Int(loyalty.visit!))/\(Int(loyalty.goal!))"
+        loyalty_box.frame.origin.x = CGFloat(position)
+        let image_url = URL(string: "\(Utilities.LOYALTY_URL)\(loyalty.logo!)")
+
+        loyalty_box.loyalty_logo.alpha = 0
+        Alamofire.request(image_url!).responseImage { response in
+            if let image = response.result.value {
+                loyalty_box.loyalty_logo.image = image
+                loyalty.logo_image = image
+                loyalty_box.loyalty_logo.alpha = 1
+                Utilities.fadeInViewAnimation(loyalty_box.loyalty_logo, delay: 0, duration: 0.7)
+            } else {
+                loyalty_box.loyalty_logo.image = UIImage(named: "dop-logo-transparent")
+                loyalty_box.backgroundColor = Utilities.lightGrayColor
+                loyalty_box.loyalty_logo.alpha = 0.3
+            }
+            //Utilities.fadeInViewAnimation(coupon_box.logo, delay:0, duration:1)
+        }
+        
+        loyalty_box.setLoyaltyBox(loyalty, view_controller: self.parent_view, storyboard: self.parent_view.storyboard_flow!)
+
+
+        loyalty_box.tag = index
+        let delay: Double = 0.4 + (Double(index - 1) / 5)
+        self.loyalty_scroller.addSubview(loyalty_box)
+        Utilities.fadeInFromRightAnimation(loyalty_box, delay: delay, duration: 0.7, xPosition: 20)
+    }
+    
+    func setEmptyLoyalty() {
+        let loyalty_box = Bundle.main.loadNibNamed("LoyaltyReward", owner: self, options:
+            nil)?.first as! LoyaltyReward
+        
+        let screen = UIScreen.main.bounds.width
+        loyalty_box.alpha = 0
+        loyalty_box.frame.origin.x = (screen / 2) - (loyalty_box.frame.width / 2)
+        loyalty_box.frame.origin.y = ((self.loyalty_scroller.frame.height / 2) - 10) - (loyalty_box.frame.height / 2)
+
+        loyalty_box.loyalty_logo.image = UIImage(named: "loyalty")?.withRenderingMode(.alwaysTemplate)
+//        loyalty_box.loyalty_logo.contentMode = .center
+        loyalty_box.loyalty_logo.alpha = 0.3
+        loyalty_box.loyalty_logo.tintColor = UIColor.lightGray
+        loyalty_box.empty_bait.isHidden = false
+        loyalty_box.loyalty_progress.isHidden = true
+        self.loyalty_scroller.addSubview(loyalty_box)
+        Utilities.fadeInFromBottomAnimation(loyalty_box, delay: 0.2, duration: 0.7, yPosition: 20)
+    }
+    
     func pressMap(_ sender: UITapGestureRecognizer){
         //If Google Maps is installed...
         if UIApplication.shared.canOpenURL(URL(string: "comgooglemaps://")!) {
@@ -292,4 +412,59 @@ class BranchProfileContentController: UICollectionViewCell,
         mapItem.openInMaps(launchOptions: options)
     }
     
+    
+    @IBAction func facebookLauncher(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "ModalStoryboard", bundle: nil)
+        let view_controller = storyboard.instantiateViewController(withIdentifier: "WebViewController") as! WebViewController
+        
+        view_controller.webview_title = "facebook"
+        view_controller.url = self.branch.facebook_url
+        
+//        view_controller.modalTransitionStyle = .coverVertical
+        
+        let transition = CATransition()
+        transition.duration = 0.35
+        transition.type = kCATransitionMoveIn
+        transition.subtype = kCATransitionFromTop
+        transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        parent_view.view.window!.layer.add(transition, forKey: kCATransition)
+        view_controller.isModalInPopover = true
+        
+        parent_view.present(view_controller, animated: false)
+
+  
+    }
+    
+    @IBAction func instagramLauncher(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "ModalStoryboard", bundle: nil)
+        let view_controller = storyboard.instantiateViewController(withIdentifier: "WebViewController") as! WebViewController
+        
+        view_controller.webview_title = "Instagram"
+        view_controller.url = self.branch.instagram_url
+        
+        //        view_controller.modalTransitionStyle = .coverVertical
+        
+        let transition = CATransition()
+        transition.duration = 0.35
+        transition.type = kCATransitionMoveIn
+        transition.subtype = kCATransitionFromTop
+        transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        parent_view.view.window!.layer.add(transition, forKey: kCATransition)
+        view_controller.isModalInPopover = true
+        
+        parent_view.present(view_controller, animated: false)
+        
+    }
+    
+    func setupSocialLayout() {
+        if branch.facebook_url == "" && branch.instagram_url != "" {
+            facebook_launcher.isHidden = true
+            instagram_x.setMultiplier(multiplier: 1)
+            instagram_width.setMultiplier(multiplier: 0.8)
+        } else if branch.facebook_url != "" && branch.instagram_url == "" {
+            instagram_launcher.isHidden = true
+            facebook_x.setMultiplier(multiplier: 1)
+            facebook_width.setMultiplier(multiplier: 0.8)
+        }
+    }
 }

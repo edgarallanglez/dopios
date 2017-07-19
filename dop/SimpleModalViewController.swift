@@ -127,7 +127,6 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate, MKMapView
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        print("YES")
         if(coupon != nil){
             self.branch_title.setTitle(self.coupon?.name.uppercased(), for: UIControlState())
             self.category_label.text = "".uppercased()

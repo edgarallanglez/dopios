@@ -197,7 +197,7 @@ class NewsfeedViewController: BaseViewController, UITableViewDataSource, UITable
                 let client_coupon_id = subJson["clients_coupon_id"].int
                 let friend_id = subJson["friends_id"].string
                 var exchange_date = subJson["exchange_date"].string
-                let main_image = subJson["main_image"].string
+                let main_image = subJson["main_image"].string ?? ""
                 let names = subJson["names"].string
                 let company_id = subJson["company_id"].int ?? 0
                 var longitude = subJson["longitude"].string
