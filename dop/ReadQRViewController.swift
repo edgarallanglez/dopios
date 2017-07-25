@@ -134,20 +134,18 @@ class ReadQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                 "first_using": User.first_using as AnyObject ]
             
             ReadQRController.sendLoyaltyQRWithSuccess(params,
-                                               success: { (data) -> Void in
-                                                DispatchQueue.main.async(execute: {
-                                                    self.setSuccessAlert(data: data!)
-                                                })
-            },
-                                               failure: { (error) -> Void in
-                                                DispatchQueue.main.async(execute: {
-                                                    self.setErrorAlert()
-                                                })
-            }
+                                                      success: { (data) -> Void in
+                                                        DispatchQueue.main.async(execute: {
+                                                            self.setSuccessAlert(data: data!)
+                                                        })
+                                                      },
+                                                      failure: { (error) -> Void in
+                                                        DispatchQueue.main.async(execute: {
+                                                            self.setErrorAlert()
+                                                        })
+                                                      }
             )
-
         }
-        
     }
         
     func setSuccessAlert(data: JSON) {

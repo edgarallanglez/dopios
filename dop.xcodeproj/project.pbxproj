@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		6D010A4A1E5A93940052EE57 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D010A321E5A91390052EE57 /* Bolts.framework */; };
 		6D06F6451F106363004F7DFE /* AlamofireImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6D6636F01F106277003F6DCE /* AlamofireImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		6D06F6461F106363004F7DFE /* JWTDecode.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6D6642561F105D7E0048477D /* JWTDecode.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6D07C8611C4DA7A30051EA28 /* BranchProfileStickyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D07C8601C4DA7A30051EA28 /* BranchProfileStickyController.swift */; };
 		6D0CCD601DDE3E2900DBA9B0 /* TTTTimeIntervalFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D0CCD5F1DDE3E2900DBA9B0 /* TTTTimeIntervalFormatter.m */; };
 		6D12C3241F1546C70010641F /* WhiteModalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D12C3231F1546C70010641F /* WhiteModalButton.swift */; };
@@ -29,15 +28,14 @@
 		6D62A9DB1E956EEB00CE55DB /* ConnectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D62A9DA1E956EEB00CE55DB /* ConnectionModel.swift */; };
 		6D6636FD1F106287003F6DCE /* AlamofireImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D6636F01F106277003F6DCE /* AlamofireImage.framework */; };
 		6D6641FE1F1055F00048477D /* Loyalty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6641FD1F1055F00048477D /* Loyalty.swift */; };
-		6D6642631F105E080048477D /* JWTDecode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D6642561F105D7E0048477D /* JWTDecode.framework */; };
 		6D6F3A901E8192EB00B1198E /* ProfileStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D6F3A8F1E8192EB00B1198E /* ProfileStoryboard.storyboard */; };
 		6D74D9DC1E8C4B3F000AF56B /* CSStickyHeaderFlowLayout.h in Sources */ = {isa = PBXBuildFile; fileRef = 6DBB43931C29C4E5001FEDAF /* CSStickyHeaderFlowLayout.h */; };
 		6D74D9DD1E8C4B3F000AF56B /* CSStickyHeaderFlowLayoutAttributes.h in Sources */ = {isa = PBXBuildFile; fileRef = 6DBB43951C29C4E5001FEDAF /* CSStickyHeaderFlowLayoutAttributes.h */; };
 		6D81DF151C4EA7340068168D /* BranchProfileStickyHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D81DF141C4EA7340068168D /* BranchProfileStickyHeader.swift */; };
 		6D81DF171C4EA7490068168D /* BranchProfileStickySectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D81DF161C4EA7490068168D /* BranchProfileStickySectionHeader.swift */; };
 		6D81DF1C1C4EA8370068168D /* BranchProfileSegmentedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D81DF1B1C4EA8370068168D /* BranchProfileSegmentedController.swift */; };
-		6D8860291EB549F8009B9180 /* NewsfeedHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D8860281EB549F8009B9180 /* NewsfeedHeaderView.xib */; };
-		6D88603E1EB54C5C009B9180 /* NewsfeedHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D88603D1EB54C5C009B9180 /* NewsfeedHeaderView.swift */; };
+		6D8860291EB549F8009B9180 /* NewsfeedFirstCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D8860281EB549F8009B9180 /* NewsfeedFirstCell.xib */; };
+		6D88603E1EB54C5C009B9180 /* NewsfeedFirstCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D88603D1EB54C5C009B9180 /* NewsfeedFirstCell.swift */; };
 		6D8D326A1C89EDDA00DA0DBD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8D32691C89EDDA00DA0DBD /* Constants.swift */; };
 		6D9080D51C319EED00DA3072 /* UserProfileStickyHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9080D41C319EED00DA3072 /* UserProfileStickyHeader.swift */; };
 		6D9080DE1C319FF600DA3072 /* UserProfileStickyHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D9080DD1C319FF600DA3072 /* UserProfileStickyHeader.xib */; };
@@ -69,10 +67,13 @@
 		6D9F5A1C1C2094ED005D0EBE /* RewardsSegmentedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9F5A1B1C2094ED005D0EBE /* RewardsSegmentedController.swift */; };
 		6D9F5A1E1C209626005D0EBE /* BadgeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9F5A1D1C209626005D0EBE /* BadgeModel.swift */; };
 		6DA97AED1F10644100AEF6AB /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6DA97AE01F10643400AEF6AB /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6DB0012E1F2128FE00E1417E /* LoyaltyCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0012D1F2128FE00E1417E /* LoyaltyCollectionCell.swift */; };
 		6DBB43971C29C4E5001FEDAF /* CSStickyHeaderFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DBB43941C29C4E5001FEDAF /* CSStickyHeaderFlowLayout.m */; };
 		6DBB43981C29C4E5001FEDAF /* CSStickyHeaderFlowLayoutAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DBB43961C29C4E5001FEDAF /* CSStickyHeaderFlowLayoutAttributes.m */; };
 		6DC2A4AC1C84B8C0006E47D6 /* KAProgressLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DC2A4A91C84B8C0006E47D6 /* KAProgressLabel.m */; };
 		6DC2A4AD1C84B8C0006E47D6 /* TPPropertyAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DC2A4AB1C84B8C0006E47D6 /* TPPropertyAnimation.m */; };
+		6DC67D4C1F2668D70069C30B /* JWTDecode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DC67D411F2668CE0069C30B /* JWTDecode.framework */; };
+		6DC67D4D1F2668D70069C30B /* JWTDecode.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6DC67D411F2668CE0069C30B /* JWTDecode.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6DCB40FF1E5A747B00077B42 /* libc.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DCB40FD1E5A747B00077B42 /* libc.dylib */; };
 		6DCB41001E5A747B00077B42 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DCB40FE1E5A747B00077B42 /* libc++.dylib */; };
 		6DCEAA201C8F416F00C3F214 /* MMMaterialDesignSpinner.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DCEAA1F1C8F416F00C3F214 /* MMMaterialDesignSpinner.m */; };
@@ -174,10 +175,7 @@
 		A060F77C1B6FE4BA009D6ADB /* PromoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A060F77B1B6FE4BA009D6ADB /* PromoViewController.swift */; };
 		A060F7821B70184F009D6ADB /* PromoCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A060F7811B70184F009D6ADB /* PromoCollectionCell.swift */; };
 		A060F7841B701EFE009D6ADB /* heart.png in Resources */ = {isa = PBXBuildFile; fileRef = A060F7831B701EFE009D6ADB /* heart.png */; };
-		A060F7861B702FAC009D6ADB /* CouponDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A060F7851B702FAC009D6ADB /* CouponDetailViewController.swift */; };
 		A060F7891B717DB9009D6ADB /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = A060F7881B717DB9009D6ADB /* UIImage+ImageEffects.m */; };
-		A060F78C1B72A307009D6ADB /* CouponDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A060F78B1B72A307009D6ADB /* CouponDetailView.xib */; };
-		A060F78E1B72B475009D6ADB /* CouponDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A060F78D1B72B475009D6ADB /* CouponDetailView.swift */; };
 		A0646AE91C2C649700527B90 /* SimpleModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0646AE81C2C649700527B90 /* SimpleModalViewController.swift */; };
 		A0646AF31C2C773A00527B90 /* ModalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0646AF21C2C773A00527B90 /* ModalButton.swift */; };
 		A065EB321BA8E60A003B7390 /* DashboardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A065EB311BA8E60A003B7390 /* DashboardController.swift */; };
@@ -186,7 +184,7 @@
 		A06B357C1B9F667D003C90EF /* NearbyBranch.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06B357B1B9F667D003C90EF /* NearbyBranch.swift */; };
 		A082F4831B18CEE6001C8C52 /* NewsfeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A082F4821B18CEE6001C8C52 /* NewsfeedViewController.swift */; };
 		A082F4851B18CF01001C8C52 /* NewsfeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A082F4841B18CF01001C8C52 /* NewsfeedController.swift */; };
-		A082F4871B18E4FF001C8C52 /* NewsfeedNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A082F4861B18E4FF001C8C52 /* NewsfeedNote.swift */; };
+		A082F4871B18E4FF001C8C52 /* Newsfeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = A082F4861B18E4FF001C8C52 /* Newsfeed.swift */; };
 		A082F48A1B1920F8001C8C52 /* NewsfeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A082F4881B1920F8001C8C52 /* NewsfeedCell.swift */; };
 		A082F48B1B1920F8001C8C52 /* NewsfeedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A082F4891B1920F8001C8C52 /* NewsfeedCell.xib */; };
 		A086ACDF1BB09496003133BA /* Branch.swift in Sources */ = {isa = PBXBuildFile; fileRef = A086ACDE1BB09496003133BA /* Branch.swift */; };
@@ -229,8 +227,6 @@
 		A0EC05B41B7D622A003CADB2 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EC05B31B7D622A003CADB2 /* LoadingViewController.swift */; };
 		A0F1E0291BF272BD0092C1F4 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F1E0281BF272BD0092C1F4 /* NavigationController.swift */; };
 		A0F1E0321BF3D3000092C1F4 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F1E0311BF3D3000092C1F4 /* BaseViewController.swift */; };
-		A0F7E9201AFAE48500A4F0F2 /* CouponCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F7E91E1AFAE48500A4F0F2 /* CouponCell.swift */; };
-		A0F7E9211AFAE48500A4F0F2 /* CouponCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0F7E91F1AFAE48500A4F0F2 /* CouponCell.xib */; };
 		A0F8DE621DF9CB0A003A01F8 /* LoginTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F8DE611DF9CB0A003A01F8 /* LoginTextView.swift */; };
 		A0F8DE7A1DFA4DA8003A01F8 /* A0SimpleKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F8DE761DFA4DA8003A01F8 /* A0SimpleKeychain.m */; };
 		A0F8DE7B1DFA4DA8003A01F8 /* A0SimpleKeychain+KeyPair.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F8DE781DFA4DA8003A01F8 /* A0SimpleKeychain+KeyPair.m */; };
@@ -291,48 +287,6 @@
 			remoteGlobalIDString = 4C4D4EC11B92976900C96855;
 			remoteInfo = "AlamofireImage watchOS";
 		};
-		6D6642551F105D7E0048477D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6D66424C1F105D7D0048477D /* JWTDecode.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 5F0068E21B3B46240048928E;
-			remoteInfo = "JWTDecode-iOS";
-		};
-		6D6642571F105D7E0048477D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6D66424C1F105D7D0048477D /* JWTDecode.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 5F0068ED1B3B46240048928E;
-			remoteInfo = "JWTDecode-iOSTests";
-		};
-		6D6642591F105D7E0048477D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6D66424C1F105D7D0048477D /* JWTDecode.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 5F0069091B3B532E0048928E;
-			remoteInfo = "JWTDecode-OSX";
-		};
-		6D66425B1F105D7E0048477D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6D66424C1F105D7D0048477D /* JWTDecode.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 5F0069131B3B532E0048928E;
-			remoteInfo = "JWTDecode-OSXTests";
-		};
-		6D66425D1F105D7E0048477D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6D66424C1F105D7D0048477D /* JWTDecode.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 918A8E5B1D63D2E1001F787B;
-			remoteInfo = "JWTDecode-tvOS";
-		};
-		6D66425F1F105D7E0048477D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6D66424C1F105D7D0048477D /* JWTDecode.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 918A8E6C1D63D4E5001F787B;
-			remoteInfo = "JWTDecode-tvOSTests";
-		};
 		6DA97ADF1F10643400AEF6AB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6DA97AD41F10643400AEF6AB /* Alamofire.xcodeproj */;
@@ -382,6 +336,55 @@
 			remoteGlobalIDString = E4202FE01B667AA100C997FB;
 			remoteInfo = "Alamofire watchOS";
 		};
+		6DC67D401F2668CE0069C30B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6DC67D371F2668CD0069C30B /* JWTDecode.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5F0068E21B3B46240048928E;
+			remoteInfo = "JWTDecode-iOS";
+		};
+		6DC67D421F2668CE0069C30B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6DC67D371F2668CD0069C30B /* JWTDecode.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5F0068ED1B3B46240048928E;
+			remoteInfo = "JWTDecode-iOSTests";
+		};
+		6DC67D441F2668CE0069C30B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6DC67D371F2668CD0069C30B /* JWTDecode.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5F0069091B3B532E0048928E;
+			remoteInfo = "JWTDecode-OSX";
+		};
+		6DC67D461F2668CE0069C30B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6DC67D371F2668CD0069C30B /* JWTDecode.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5F0069131B3B532E0048928E;
+			remoteInfo = "JWTDecode-OSXTests";
+		};
+		6DC67D481F2668CE0069C30B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6DC67D371F2668CD0069C30B /* JWTDecode.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 918A8E5B1D63D2E1001F787B;
+			remoteInfo = "JWTDecode-tvOS";
+		};
+		6DC67D4A1F2668CE0069C30B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6DC67D371F2668CD0069C30B /* JWTDecode.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 918A8E6C1D63D4E5001F787B;
+			remoteInfo = "JWTDecode-tvOSTests";
+		};
+		6DC67D4E1F2668D70069C30B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6DC67D371F2668CD0069C30B /* JWTDecode.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 5F0068E11B3B46240048928E;
+			remoteInfo = "JWTDecode-iOS";
+		};
 		9D33261F1AF7ED1C00498801 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9D3326011AF7ED1C00498801 /* Project object */;
@@ -408,9 +411,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				6DC67D4D1F2668D70069C30B /* JWTDecode.framework in Embed Frameworks */,
 				6DA97AED1F10644100AEF6AB /* Alamofire.framework in Embed Frameworks */,
 				6D06F6451F106363004F7DFE /* AlamofireImage.framework in Embed Frameworks */,
-				6D06F6461F106363004F7DFE /* JWTDecode.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -439,13 +442,12 @@
 		6D62A9DA1E956EEB00CE55DB /* ConnectionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionModel.swift; sourceTree = "<group>"; };
 		6D6636E31F106276003F6DCE /* AlamofireImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AlamofireImage.xcodeproj; path = "../../SDK/AlamofireImage-master/AlamofireImage.xcodeproj"; sourceTree = "<group>"; };
 		6D6641FD1F1055F00048477D /* Loyalty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Loyalty.swift; sourceTree = "<group>"; };
-		6D66424C1F105D7D0048477D /* JWTDecode.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JWTDecode.xcodeproj; path = "../../../Downloads/JWTDecode.swift-master/JWTDecode.xcodeproj"; sourceTree = "<group>"; };
 		6D6F3A8F1E8192EB00B1198E /* ProfileStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ProfileStoryboard.storyboard; sourceTree = "<group>"; };
 		6D81DF141C4EA7340068168D /* BranchProfileStickyHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BranchProfileStickyHeader.swift; sourceTree = "<group>"; };
 		6D81DF161C4EA7490068168D /* BranchProfileStickySectionHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BranchProfileStickySectionHeader.swift; sourceTree = "<group>"; };
 		6D81DF1B1C4EA8370068168D /* BranchProfileSegmentedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BranchProfileSegmentedController.swift; sourceTree = "<group>"; };
-		6D8860281EB549F8009B9180 /* NewsfeedHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsfeedHeaderView.xib; sourceTree = "<group>"; };
-		6D88603D1EB54C5C009B9180 /* NewsfeedHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsfeedHeaderView.swift; sourceTree = "<group>"; };
+		6D8860281EB549F8009B9180 /* NewsfeedFirstCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsfeedFirstCell.xib; sourceTree = "<group>"; };
+		6D88603D1EB54C5C009B9180 /* NewsfeedFirstCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsfeedFirstCell.swift; sourceTree = "<group>"; };
 		6D8D32691C89EDDA00DA0DBD /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		6D9080D41C319EED00DA3072 /* UserProfileStickyHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileStickyHeader.swift; sourceTree = "<group>"; };
 		6D9080DD1C319FF600DA3072 /* UserProfileStickyHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserProfileStickyHeader.xib; sourceTree = "<group>"; };
@@ -477,6 +479,7 @@
 		6D9F5A1B1C2094ED005D0EBE /* RewardsSegmentedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewardsSegmentedController.swift; sourceTree = "<group>"; };
 		6D9F5A1D1C209626005D0EBE /* BadgeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadgeModel.swift; sourceTree = "<group>"; };
 		6DA97AD41F10643400AEF6AB /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = "../../SDK/Alamofire-master/Alamofire.xcodeproj"; sourceTree = "<group>"; };
+		6DB0012D1F2128FE00E1417E /* LoyaltyCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoyaltyCollectionCell.swift; sourceTree = "<group>"; };
 		6DBB43931C29C4E5001FEDAF /* CSStickyHeaderFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSStickyHeaderFlowLayout.h; sourceTree = "<group>"; };
 		6DBB43941C29C4E5001FEDAF /* CSStickyHeaderFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSStickyHeaderFlowLayout.m; sourceTree = "<group>"; };
 		6DBB43951C29C4E5001FEDAF /* CSStickyHeaderFlowLayoutAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSStickyHeaderFlowLayoutAttributes.h; sourceTree = "<group>"; };
@@ -485,6 +488,7 @@
 		6DC2A4A91C84B8C0006E47D6 /* KAProgressLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KAProgressLabel.m; sourceTree = "<group>"; };
 		6DC2A4AA1C84B8C0006E47D6 /* TPPropertyAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPPropertyAnimation.h; sourceTree = "<group>"; };
 		6DC2A4AB1C84B8C0006E47D6 /* TPPropertyAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPPropertyAnimation.m; sourceTree = "<group>"; };
+		6DC67D371F2668CD0069C30B /* JWTDecode.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JWTDecode.xcodeproj; path = "../../SDK/JWTDecode.swift-master/JWTDecode.xcodeproj"; sourceTree = "<group>"; };
 		6DCB40FD1E5A747B00077B42 /* libc.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libc.dylib; sourceTree = "<group>"; };
 		6DCB40FE1E5A747B00077B42 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = "libc++.dylib"; sourceTree = "<group>"; };
 		6DCEAA1E1C8F416F00C3F214 /* MMMaterialDesignSpinner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMMaterialDesignSpinner.h; sourceTree = "<group>"; };
@@ -622,11 +626,8 @@
 		A060F77D1B700355009D6ADB /* starbucks_banner.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = starbucks_banner.jpg; sourceTree = "<group>"; };
 		A060F7811B70184F009D6ADB /* PromoCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromoCollectionCell.swift; sourceTree = "<group>"; };
 		A060F7831B701EFE009D6ADB /* heart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heart.png; sourceTree = "<group>"; };
-		A060F7851B702FAC009D6ADB /* CouponDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CouponDetailViewController.swift; sourceTree = "<group>"; };
 		A060F7871B717DB9009D6ADB /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		A060F7881B717DB9009D6ADB /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
-		A060F78B1B72A307009D6ADB /* CouponDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CouponDetailView.xib; sourceTree = "<group>"; };
-		A060F78D1B72B475009D6ADB /* CouponDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CouponDetailView.swift; sourceTree = "<group>"; };
 		A0646AE81C2C649700527B90 /* SimpleModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleModalViewController.swift; sourceTree = "<group>"; };
 		A0646AF21C2C773A00527B90 /* ModalButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalButton.swift; sourceTree = "<group>"; };
 		A065EB311BA8E60A003B7390 /* DashboardController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardController.swift; sourceTree = "<group>"; };
@@ -635,7 +636,7 @@
 		A06B357B1B9F667D003C90EF /* NearbyBranch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyBranch.swift; sourceTree = "<group>"; };
 		A082F4821B18CEE6001C8C52 /* NewsfeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsfeedViewController.swift; sourceTree = "<group>"; };
 		A082F4841B18CF01001C8C52 /* NewsfeedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsfeedController.swift; sourceTree = "<group>"; };
-		A082F4861B18E4FF001C8C52 /* NewsfeedNote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsfeedNote.swift; sourceTree = "<group>"; };
+		A082F4861B18E4FF001C8C52 /* Newsfeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Newsfeed.swift; sourceTree = "<group>"; };
 		A082F4881B1920F8001C8C52 /* NewsfeedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsfeedCell.swift; sourceTree = "<group>"; };
 		A082F4891B1920F8001C8C52 /* NewsfeedCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsfeedCell.xib; sourceTree = "<group>"; };
 		A086ACDE1BB09496003133BA /* Branch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Branch.swift; sourceTree = "<group>"; };
@@ -703,8 +704,6 @@
 		A0EC05B31B7D622A003CADB2 /* LoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		A0F1E0281BF272BD0092C1F4 /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		A0F1E0311BF3D3000092C1F4 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
-		A0F7E91E1AFAE48500A4F0F2 /* CouponCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CouponCell.swift; sourceTree = "<group>"; };
-		A0F7E91F1AFAE48500A4F0F2 /* CouponCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CouponCell.xib; sourceTree = "<group>"; };
 		A0F8DE611DF9CB0A003A01F8 /* LoginTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginTextView.swift; sourceTree = "<group>"; };
 		A0F8DE751DFA4DA8003A01F8 /* A0SimpleKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = A0SimpleKeychain.h; sourceTree = "<group>"; };
 		A0F8DE761DFA4DA8003A01F8 /* A0SimpleKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = A0SimpleKeychain.m; sourceTree = "<group>"; };
@@ -725,7 +724,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6D6636FD1F106287003F6DCE /* AlamofireImage.framework in Frameworks */,
-				6D6642631F105E080048477D /* JWTDecode.framework in Frameworks */,
 				A0EB97D61B0BA7A5005112EF /* Foundation.framework in Frameworks */,
 				A01D17E21C2B2A98002FC5F2 /* Accelerate.framework in Frameworks */,
 				A0FB84361BFFF07D0099B2F4 /* AVFoundation.framework in Frameworks */,
@@ -737,6 +735,7 @@
 				A0EC059D1B7D1FD5003CADB2 /* UIKit.framework in Frameworks */,
 				A0EC059B1B7D1ED1003CADB2 /* CoreGraphics.framework in Frameworks */,
 				A05F78311B505DED00371708 /* Accounts.framework in Frameworks */,
+				6DC67D4C1F2668D70069C30B /* JWTDecode.framework in Frameworks */,
 				A05F782F1B503A4E00371708 /* Social.framework in Frameworks */,
 				9D2CEA2D1BFCE4BD0088B6BC /* FBSDKShareKit.framework in Frameworks */,
 				6DCB40FF1E5A747B00077B42 /* libc.dylib in Frameworks */,
@@ -772,7 +771,7 @@
 			children = (
 				6DA97AD41F10643400AEF6AB /* Alamofire.xcodeproj */,
 				6D6636E31F106276003F6DCE /* AlamofireImage.xcodeproj */,
-				6D66424C1F105D7D0048477D /* JWTDecode.xcodeproj */,
+				6DC67D371F2668CD0069C30B /* JWTDecode.xcodeproj */,
 				6DCB40FD1E5A747B00077B42 /* libc.dylib */,
 				6DCB40FE1E5A747B00077B42 /* libc++.dylib */,
 				A01D17E11C2B2A98002FC5F2 /* Accelerate.framework */,
@@ -835,19 +834,6 @@
 				6D6636F81F106277003F6DCE /* AlamofireImage.framework */,
 				6D6636FA1F106277003F6DCE /* AlamofireImage tvOS Tests.xctest */,
 				6D6636FC1F106277003F6DCE /* AlamofireImage.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		6D66424D1F105D7D0048477D /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				6D6642561F105D7E0048477D /* JWTDecode.framework */,
-				6D6642581F105D7E0048477D /* JWTDecode-iOSTests.xctest */,
-				6D66425A1F105D7E0048477D /* JWTDecode.framework */,
-				6D66425C1F105D7E0048477D /* JWTDecode-OSXTests.xctest */,
-				6D66425E1F105D7E0048477D /* JWTDecode.framework */,
-				6D6642601F105D7E0048477D /* JWTDecode-tvOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -933,6 +919,19 @@
 			name = KAProgress;
 			sourceTree = "<group>";
 		};
+		6DC67D381F2668CD0069C30B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6DC67D411F2668CE0069C30B /* JWTDecode.framework */,
+				6DC67D431F2668CE0069C30B /* JWTDecode-iOSTests.xctest */,
+				6DC67D451F2668CE0069C30B /* JWTDecode.framework */,
+				6DC67D471F2668CE0069C30B /* JWTDecode-OSXTests.xctest */,
+				6DC67D491F2668CE0069C30B /* JWTDecode.framework */,
+				6DC67D4B1F2668CE0069C30B /* JWTDecode-tvOSTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		6DCEAA161C8F411300C3F214 /* MDSpinner */ = {
 			isa = PBXGroup;
 			children = (
@@ -992,7 +991,6 @@
 				6D4104761E859DBC00F5E4EA /* BranchProfileContentController.swift */,
 				9DA7AA9E1B50309400297690 /* BranchProfileController.swift */,
 				6D07C8601C4DA7A30051EA28 /* BranchProfileStickyController.swift */,
-				6D6641FD1F1055F00048477D /* Loyalty.swift */,
 			);
 			name = BranchProfile;
 			sourceTree = "<group>";
@@ -1059,7 +1057,7 @@
 				9DC2713A1C0776E600C6F825 /* App Flow */,
 				9D7FA0791BBC513000EAEC36 /* Badge */,
 				9D0C16821B4DC6AE0088DE2F /* BranchProfile */,
-				A09AB4E61AFA9609004287F7 /* Coupon */,
+				A09AB4E61AFA9609004287F7 /* Campaign */,
 				A0646AF11C2C649D00527B90 /* CustomModals */,
 				A065EB301BA8E413003B7390 /* Dashboard */,
 				A0B6EA5D1C32FB09003F17DF /* Error */,
@@ -1212,10 +1210,11 @@
 			isa = PBXGroup;
 			children = (
 				A0D2BB801E74899900C4F281 /* FavoriteCouponsViewController.swift */,
+				6DB0012D1F2128FE00E1417E /* LoyaltyCollectionCell.swift */,
 				A060F7811B70184F009D6ADB /* PromoCollectionCell.swift */,
-				A060F77B1B6FE4BA009D6ADB /* PromoViewController.swift */,
 				A012554C1C939C920037E812 /* PromoCollectionViewLayout.swift */,
 				9DE55C431BB07C0A005F9776 /* PromoSegmentedController.swift */,
+				A060F77B1B6FE4BA009D6ADB /* PromoViewController.swift */,
 			);
 			name = Promotions;
 			sourceTree = "<group>";
@@ -1305,8 +1304,8 @@
 				A0646AF21C2C773A00527B90 /* ModalButton.swift */,
 				A0B6EA541C31BB82003F17DF /* ModalViewController.swift */,
 				A0646AE81C2C649700527B90 /* SimpleModalViewController.swift */,
-				6D12C3231F1546C70010641F /* WhiteModalButton.swift */,
 				6D9E97601F1E74E00039B938 /* WebViewController.swift */,
+				6D12C3231F1546C70010641F /* WhiteModalButton.swift */,
 			);
 			name = CustomModals;
 			sourceTree = "<group>";
@@ -1343,12 +1342,12 @@
 			isa = PBXGroup;
 			children = (
 				A082F4821B18CEE6001C8C52 /* NewsfeedViewController.swift */,
-				A082F4861B18E4FF001C8C52 /* NewsfeedNote.swift */,
+				A082F4861B18E4FF001C8C52 /* Newsfeed.swift */,
 				A082F4841B18CF01001C8C52 /* NewsfeedController.swift */,
 				A082F4881B1920F8001C8C52 /* NewsfeedCell.swift */,
 				A082F4891B1920F8001C8C52 /* NewsfeedCell.xib */,
-				6D8860281EB549F8009B9180 /* NewsfeedHeaderView.xib */,
-				6D88603D1EB54C5C009B9180 /* NewsfeedHeaderView.swift */,
+				6D8860281EB549F8009B9180 /* NewsfeedFirstCell.xib */,
+				6D88603D1EB54C5C009B9180 /* NewsfeedFirstCell.swift */,
 			);
 			name = Newsfeed;
 			sourceTree = "<group>";
@@ -1362,18 +1361,14 @@
 			name = TTTAttributedLabel;
 			sourceTree = "<group>";
 		};
-		A09AB4E61AFA9609004287F7 /* Coupon */ = {
+		A09AB4E61AFA9609004287F7 /* Campaign */ = {
 			isa = PBXGroup;
 			children = (
-				A060F78B1B72A307009D6ADB /* CouponDetailView.xib */,
-				A060F78D1B72B475009D6ADB /* CouponDetailView.swift */,
-				A060F7851B702FAC009D6ADB /* CouponDetailViewController.swift */,
-				A09AB4E01AF99136004287F7 /* CouponController.swift */,
 				A09AB4E41AFA880E004287F7 /* Coupon.swift */,
-				A0F7E91E1AFAE48500A4F0F2 /* CouponCell.swift */,
-				A0F7E91F1AFAE48500A4F0F2 /* CouponCell.xib */,
+				A09AB4E01AF99136004287F7 /* CouponController.swift */,
+				6D6641FD1F1055F00048477D /* Loyalty.swift */,
 			);
-			name = Coupon;
+			name = Campaign;
 			sourceTree = "<group>";
 		};
 		A0A06CA31C860EE400701C8F /* SocketIO */ = {
@@ -1489,6 +1484,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				6DC67D4F1F2668D70069C30B /* PBXTargetDependency */,
 			);
 			name = dop;
 			productName = dop;
@@ -1572,8 +1568,8 @@
 					ProjectRef = 6D6636E31F106276003F6DCE /* AlamofireImage.xcodeproj */;
 				},
 				{
-					ProductGroup = 6D66424D1F105D7D0048477D /* Products */;
-					ProjectRef = 6D66424C1F105D7D0048477D /* JWTDecode.xcodeproj */;
+					ProductGroup = 6DC67D381F2668CD0069C30B /* Products */;
+					ProjectRef = 6DC67D371F2668CD0069C30B /* JWTDecode.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -1634,48 +1630,6 @@
 			remoteRef = 6D6636FB1F106277003F6DCE /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		6D6642561F105D7E0048477D /* JWTDecode.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = JWTDecode.framework;
-			remoteRef = 6D6642551F105D7E0048477D /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		6D6642581F105D7E0048477D /* JWTDecode-iOSTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "JWTDecode-iOSTests.xctest";
-			remoteRef = 6D6642571F105D7E0048477D /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		6D66425A1F105D7E0048477D /* JWTDecode.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = JWTDecode.framework;
-			remoteRef = 6D6642591F105D7E0048477D /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		6D66425C1F105D7E0048477D /* JWTDecode-OSXTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "JWTDecode-OSXTests.xctest";
-			remoteRef = 6D66425B1F105D7E0048477D /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		6D66425E1F105D7E0048477D /* JWTDecode.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = JWTDecode.framework;
-			remoteRef = 6D66425D1F105D7E0048477D /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		6D6642601F105D7E0048477D /* JWTDecode-tvOSTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "JWTDecode-tvOSTests.xctest";
-			remoteRef = 6D66425F1F105D7E0048477D /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		6DA97AE01F10643400AEF6AB /* Alamofire.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -1725,6 +1679,48 @@
 			remoteRef = 6DA97AEB1F10643400AEF6AB /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		6DC67D411F2668CE0069C30B /* JWTDecode.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = JWTDecode.framework;
+			remoteRef = 6DC67D401F2668CE0069C30B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		6DC67D431F2668CE0069C30B /* JWTDecode-iOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "JWTDecode-iOSTests.xctest";
+			remoteRef = 6DC67D421F2668CE0069C30B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		6DC67D451F2668CE0069C30B /* JWTDecode.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = JWTDecode.framework;
+			remoteRef = 6DC67D441F2668CE0069C30B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		6DC67D471F2668CE0069C30B /* JWTDecode-OSXTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "JWTDecode-OSXTests.xctest";
+			remoteRef = 6DC67D461F2668CE0069C30B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		6DC67D491F2668CE0069C30B /* JWTDecode.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = JWTDecode.framework;
+			remoteRef = 6DC67D481F2668CE0069C30B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		6DC67D4B1F2668CE0069C30B /* JWTDecode-tvOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "JWTDecode-tvOSTests.xctest";
+			remoteRef = 6DC67D4A1F2668CE0069C30B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -1768,8 +1764,7 @@
 				9D3889151BE3E03B00209B9B /* request-icon.png in Resources */,
 				A082F48B1B1920F8001C8C52 /* NewsfeedCell.xib in Resources */,
 				6D9770031CDBB97B000C0670 /* SF-UI-Text-RegularItalic.otf in Resources */,
-				A060F78C1B72A307009D6ADB /* CouponDetailView.xib in Resources */,
-				6D8860291EB549F8009B9180 /* NewsfeedHeaderView.xib in Resources */,
+				6D8860291EB549F8009B9180 /* NewsfeedFirstCell.xib in Resources */,
 				9D3889141BE3E03B00209B9B /* news-icon.png in Resources */,
 				A02D660D1DFF1707004E34A2 /* Register.storyboard in Resources */,
 				A086ACE11BB2157A003133BA /* TrendingCoupon.xib in Resources */,
@@ -1782,7 +1777,6 @@
 				6DF89AFE1E9461C60046D1F6 /* Trophy.xib in Resources */,
 				6D976FFF1CDBB97B000C0670 /* SF-UI-Text-LightItalic.otf in Resources */,
 				A0FE26D31B9AB5EB004EB402 /* search@x3.png in Resources */,
-				A0F7E9211AFAE48500A4F0F2 /* CouponCell.xib in Resources */,
 				6D976FFD1CDBB97B000C0670 /* SF-UI-Text-HeavyItalic.otf in Resources */,
 				6D6F3A901E8192EB00B1198E /* ProfileStoryboard.storyboard in Resources */,
 				6D41047F1E85AF4200F5E4EA /* CompanyBranch.xib in Resources */,
@@ -1836,7 +1830,6 @@
 				A01D17DD1C2B2A15002FC5F2 /* MZFormSheetSegue.m in Sources */,
 				6D34641F1C6AC611003621EA /* AlertModalViewController.swift in Sources */,
 				A0FB84341BFFF0630099B2F4 /* ReadQRViewController.swift in Sources */,
-				A060F7861B702FAC009D6ADB /* CouponDetailViewController.swift in Sources */,
 				A0C3AC2E1B9525D5005636E7 /* CustomInfiniteIndicator.swift in Sources */,
 				A0DF72931B13AEBF006EE8F4 /* FriendsController.swift in Sources */,
 				6D9F5A111C208894005D0EBE /* BadgeController.swift in Sources */,
@@ -1855,7 +1848,7 @@
 				6DDF35CF1DFC7CE500539558 /* PageThreeViewController.swift in Sources */,
 				6D0CCD601DDE3E2900DBA9B0 /* TTTTimeIntervalFormatter.m in Sources */,
 				A0DF72911B13A66C006EE8F4 /* FriendsViewController.swift in Sources */,
-				6D88603E1EB54C5C009B9180 /* NewsfeedHeaderView.swift in Sources */,
+				6D88603E1EB54C5C009B9180 /* NewsfeedFirstCell.swift in Sources */,
 				6D9F5A1E1C209626005D0EBE /* BadgeModel.swift in Sources */,
 				A0662A361BA0CEF5006D6278 /* LoadingCell.swift in Sources */,
 				A06B357C1B9F667D003C90EF /* NearbyBranch.swift in Sources */,
@@ -1872,7 +1865,7 @@
 				6D9F5A1C1C2094ED005D0EBE /* RewardsSegmentedController.swift in Sources */,
 				9DB6121A1B192FCC004B8DB8 /* NearbyMapController.swift in Sources */,
 				6D5C957A1C2B06460017B166 /* UserProfileHeader.swift in Sources */,
-				A082F4871B18E4FF001C8C52 /* NewsfeedNote.swift in Sources */,
+				A082F4871B18E4FF001C8C52 /* Newsfeed.swift in Sources */,
 				9DB327CC1B863C77006BF882 /* MoreMenuController.swift in Sources */,
 				6D12C3241F1546C70010641F /* WhiteModalButton.swift in Sources */,
 				A0EB97B21B051F02005112EF /* LoginController.swift in Sources */,
@@ -1899,11 +1892,11 @@
 				A0D2BB811E74899900C4F281 /* FavoriteCouponsViewController.swift in Sources */,
 				A01D17E01C2B2A15002FC5F2 /* UIViewController+TargetViewController.m in Sources */,
 				6D8D326A1C89EDDA00DA0DBD /* Constants.swift in Sources */,
-				A060F78E1B72B475009D6ADB /* CouponDetailView.swift in Sources */,
 				A082F48A1B1920F8001C8C52 /* NewsfeedCell.swift in Sources */,
 				A09AB4E51AFA880E004287F7 /* Coupon.swift in Sources */,
 				9D33260F1AF7ED1C00498801 /* AppDelegate.swift in Sources */,
 				9D0DB4711B17D2DB0009FE6C /* NearbyMapViewController.swift in Sources */,
+				6DB0012E1F2128FE00E1417E /* LoyaltyCollectionCell.swift in Sources */,
 				A060F7821B70184F009D6ADB /* PromoCollectionCell.swift in Sources */,
 				A0DF72951B13E262006EE8F4 /* Friend.swift in Sources */,
 				6DEFEAB91DCBA99D00E65F9F /* ReadQRHelpViewController.swift in Sources */,
@@ -1921,7 +1914,6 @@
 				A01D17EA1C2B2BFB002FC5F2 /* MZAppearance.m in Sources */,
 				9D9C9C911BB2155B00D9F986 /* Annotation.swift in Sources */,
 				6D5C957C1C2B16020017B166 /* CollectionViewSectionHeader.swift in Sources */,
-				A0F7E9201AFAE48500A4F0F2 /* CouponCell.swift in Sources */,
 				6DDF35CD1DFC700100539558 /* PageTwoViewController.swift in Sources */,
 				6D6641FE1F1055F00048477D /* Loyalty.swift in Sources */,
 				A0FCF9D81B98D59200BB4537 /* SearchViewController.swift in Sources */,
@@ -1961,6 +1953,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		6DC67D4F1F2668D70069C30B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "JWTDecode-iOS";
+			targetProxy = 6DC67D4E1F2668D70069C30B /* PBXContainerItemProxy */;
+		};
 		9D3326201AF7ED1C00498801 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 9D3326081AF7ED1C00498801 /* dop */;

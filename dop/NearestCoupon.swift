@@ -34,7 +34,7 @@ class NearestCoupon: UIView, ModalDelegate {
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(NearestCoupon.tapCoupon(_:))))
         self.coupon = coupon
         self.descriptionLbl.text = coupon.name
-        self.branchNameLbl.text = coupon.couponDescription
+        self.branchNameLbl.text = coupon.coupon_description
         self.distance_label.text = "\(Double(coupon.distance!).roundTo(places: 1)) km"
         self.viewController = viewController
         

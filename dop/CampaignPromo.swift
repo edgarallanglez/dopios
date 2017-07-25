@@ -55,7 +55,7 @@ class CampaignPromo: UIView, ModalDelegate, FBSDKSharingDelegate {
 
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(CampaignPromo.tapCoupon(_:))))
         self.coupon = coupon
-        self.campaign_description.text = coupon.couponDescription
+        self.campaign_description.text = coupon.coupon_description
         print(coupon.exp)
         
         let date = Date().localDateString()
@@ -167,7 +167,7 @@ class CampaignPromo: UIView, ModalDelegate, FBSDKSharingDelegate {
         content.contentURL = URL(string: "http://www.dop.life")
         content.contentTitle = self.coupon.name
         content.imageURL = URL(string: "\(Utilities.dopImagesURL)\(self.coupon.company_id)/\(self.coupon.logo)")
-        content.contentDescription = self.coupon.couponDescription
+        content.contentDescription = self.coupon.coupon_description
         
         
         let dialog: FBSDKShareDialog = FBSDKShareDialog()

@@ -25,7 +25,7 @@ import UIKit
         }
     }
     
-    @IBInspectable var selectedLabelColor : UIColor = UIColor.darkGray {
+    @IBInspectable var selectedLabelColor : UIColor = Utilities.dark_gray {
         didSet {
             setSelectedColors()
         }
@@ -49,7 +49,7 @@ import UIKit
         }
     }
     
-    @IBInspectable var font : UIFont! = UIFont.systemFont(ofSize: 10) {
+    @IBInspectable var font : UIFont! = UIFont.systemFont(ofSize: 12) {
         didSet {
             setFont()
         }
@@ -93,7 +93,7 @@ import UIKit
             label.text = items[index - 1]
             label.backgroundColor = UIColor.clear
             label.textAlignment = .center
-            label.font = UIFont(name: "Montserrat-Light", size: 13)
+            label.font = UIFont(name: "Montserrat-Regular", size: 15)
             label.textColor = index == 1 ? selectedLabelColor : unselectedLabelColor
             label.translatesAutoresizingMaskIntoConstraints = false
             self.addSubview(label)
@@ -182,7 +182,7 @@ import UIKit
                 
                 leftConstraint = NSLayoutConstraint(item: button, attribute: NSLayoutAttribute.left, relatedBy: NSLayoutRelation.equal, toItem: mainView, attribute: NSLayoutAttribute.left, multiplier: 1.0, constant: padding)
                 
-            }else{
+            } else {
                 
                 let prevButton = items[index-1]
                 leftConstraint = NSLayoutConstraint(item: button, attribute: NSLayoutAttribute.left, relatedBy: NSLayoutRelation.equal, toItem: prevButton, attribute: NSLayoutAttribute.right, multiplier: 1.0, constant: padding)

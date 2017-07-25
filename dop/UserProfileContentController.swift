@@ -42,6 +42,10 @@ class UserProfileContentController: UICollectionViewCell, UIScrollViewDelegate {
     var alike_array = [PeopleModel]()
     
     func setLoaders() {
+        connection_loader.lineWidth = 3
+        reward_loader.lineWidth = 3
+        common_loader.lineWidth = 3
+        
         connection_loader.startAnimating()
         reward_loader.startAnimating()
         common_loader.startAnimating()

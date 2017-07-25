@@ -24,6 +24,7 @@ class WebViewController: UIViewController, UIWebViewDelegate {
         web_view_loader.startAnimating()
         web_title.text = self.webview_title!
         
+        
         let url = URL(string: self.url)!
         url_request = URLRequest(url: url)
         web_view.loadRequest(url_request)
@@ -40,6 +41,11 @@ class WebViewController: UIViewController, UIWebViewDelegate {
     
     func webViewDidFinishLoad(_ webView: UIWebView) {
         web_view_loader.stopAnimating()
+        if web_view.canGoBack {
+            Utilities.fadeInViewAnimation(web_view_tools, delay: 0, duration: 0.5)
+        } else {
+            Utilities.fadeOutViewAnimation(web_view_tools, delay: 0, duration: 0.5)
+        }
     }
     
     @IBAction func closeView(_ sender: UIButton) {
@@ -52,15 +58,6 @@ class WebViewController: UIViewController, UIWebViewDelegate {
     
     @IBAction func goBack(_ sender: UIButton) {
         self.web_view.goBack()
-    }
-    
-    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-        
-//        if request.url != self.url_request.url {
-            web_view_tools.isHidden = false
-//        }
-        
-        return true
     }
     
 }

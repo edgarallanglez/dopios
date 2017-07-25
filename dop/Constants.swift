@@ -96,7 +96,8 @@ class Constanst {
             "24": "dop_logo_outline",
             "25": "filter-entertainment-club",
             "26": "filter-food-vegana",
-            "27": "filter-food-organic"
+            "27": "filter-food-organic",
+            "28": "filter-services-gas"
             ])
         return json
     }

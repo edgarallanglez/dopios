@@ -544,7 +544,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                     var position = 0
                     position = positionX + ((margin+couponWidth) * index)
                     coupon_box.move(CGFloat(position),y: 0)
-                    coupon_box.descriptionLbl.text = coupon.couponDescription
+                    coupon_box.descriptionLbl.text = coupon.coupon_description
                     coupon_box.branchNameLbl.text = coupon.name
                     coupon_box.branchNameLbl.sizeToFit()
                     coupon_box.loadItem(coupon, viewController: self)
@@ -648,7 +648,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
                     var position = 0
                     position = positionX+((margin + couponWidth) * index)
                     coupon_box.move(CGFloat(position),y: 0)
-                    coupon_box.descriptionLbl.text = coupon.couponDescription
+                    coupon_box.descriptionLbl.text = coupon.coupon_description
                     coupon_box.branchNameLbl.text = coupon.name
                     coupon_box.branchNameLbl.sizeToFit()
                     coupon_box.loadItem(coupon, viewController: self)
@@ -711,27 +711,7 @@ class DashboardViewController: BaseViewController, CLLocationManagerDelegate, UI
             obtained_location = true
         }
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let i = (sender! as AnyObject).tag
-        
-        let model = self.trending[i!]
-        if segue.identifier == "couponDetail" {
-            let coupon_box: TrendingCoupon = sender as! TrendingCoupon
-            let view = segue.destination as! CouponDetailViewController
-            view.couponsName = model.name
-            view.couponsDescription = model.couponDescription
-            view.location = model.location
-            view.branchId = model.branch_id
-            view.couponId = model.id
-            view.logo = coupon_box.logo.image
-            view.banner = model.banner
-            view.companyId = model.company_id
-            view.categoryId = model.categoryId
-        }
-        
-    }
-    
+
     @IBAction func goToPage(_ sender: AnyObject) {
         let page = branchesScroll.frame.size.width * CGFloat(pageControl.currentPage)
         branchesScroll.setContentOffset(CGPoint(x: page, y: 0), animated: true)

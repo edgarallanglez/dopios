@@ -11,6 +11,7 @@ import Foundation
 class Loyalty: NSObject {
     let loyalty_id: Int!
     let owner_id: Int!
+    let company_id: Int!
     let name: String!
     let about: String?
     let type: String!
@@ -24,6 +25,7 @@ class Loyalty: NSObject {
     init(model: JSON) {
         self.loyalty_id = model["loyalty_id"].int!
         self.owner_id = model["owner_id"].int!
+        self.company_id = model["company_id"].int!
         self.name = model["name"].string!
         self.about = model["description"].string!
         self.type = model["type"].string!

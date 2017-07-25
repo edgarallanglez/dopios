@@ -11,7 +11,7 @@ import Foundation
 class Coupon: NSObject {
     let id: Int
     let name: String
-    let couponDescription: String
+    let coupon_description: String
     let limit: String
     let exp: String
     let logo: String
@@ -21,13 +21,13 @@ class Coupon: NSObject {
     var user_like: Bool
     let location: CLLocationCoordinate2D
     let banner: String
-    var categoryId: Int = 2
+    var category_id: Int = 2
     var available: Int
     var taken: Bool!
     var end_date: String!
     var taken_date: String!
     var start_date: String!
-    var adult_branch: Bool
+    var adult_branch: Bool?
     var distance: Double?
     var branch_folio: String!
     var is_global: Bool
@@ -36,7 +36,7 @@ class Coupon: NSObject {
         
         self.id = id ?? 0
         self.name = name ?? ""
-        self.couponDescription = description ?? ""
+        self.coupon_description = description ?? ""
         self.limit = limit ?? ""
         self.exp = exp ?? ""
         self.logo = logo ?? ""
@@ -46,7 +46,7 @@ class Coupon: NSObject {
         self.user_like = user_like ?? false
         self.location = CLLocationCoordinate2DMake(latitude, longitude) 
         self.banner = banner
-        self.categoryId = category_id
+        self.category_id = category_id
         self.available = available
         self.taken = taken
         self.adult_branch = adult_branch ?? false
@@ -58,7 +58,7 @@ class Coupon: NSObject {
         
         self.id = id ?? 0
         self.name = name ?? ""
-        self.couponDescription = description ?? ""
+        self.coupon_description = description ?? ""
         self.limit = limit ?? ""
         self.exp = exp ?? ""
         self.logo = logo ?? ""
@@ -68,7 +68,7 @@ class Coupon: NSObject {
         self.user_like = user_like ?? false
         self.location = CLLocationCoordinate2DMake(latitude, longitude) 
         self.banner = banner
-        self.categoryId = category_id
+        self.category_id = category_id
         self.available = available
         self.taken = taken
         self.start_date = start_date
@@ -82,7 +82,7 @@ class Coupon: NSObject {
         
         self.id = id ?? 0
         self.name = name ?? ""
-        self.couponDescription = description ?? ""
+        self.coupon_description = description ?? ""
         self.limit = limit ?? ""
         self.exp = exp ?? ""
         self.logo = logo ?? ""
@@ -92,12 +92,35 @@ class Coupon: NSObject {
         self.user_like = user_like ?? false
         self.location = CLLocationCoordinate2DMake(latitude, longitude) 
         self.banner = banner
-        self.categoryId = category_id
+        self.category_id = category_id
         self.available = available
         self.taken = taken
         self.taken_date = taken_date
         self.branch_folio = branch_folio
         self.is_global = is_global
+        
+        self.adult_branch = false
+    }
+    
+    init(model: JSON) {
+        self.id = model["coupon_id"].int!
+        self.name = model["name"].string ?? ""
+        self.coupon_description = model["description"].string ?? ""
+        self.limit = model["limit"].string ?? ""
+        self.exp = "2017-09-30"
+        self.logo = model["logo"].string ?? ""
+        self.company_id = model["company_id"].int!
+        self.total_likes = model["total_likes"].int ?? 0
+        self.user_like = model["user_like"].bool ?? false
+        self.location = CLLocationCoordinate2DMake(model["latitude"].double!, model["longitude"].double!)
+        self.banner = model["banner"].string ?? ""
+        self.category_id = model["category_id"].int!
+        self.available = model["available"].int!
+        self.taken = model["taken"].bool!
+        self.start_date = model["start_date"].string ?? ""
+        self.branch_folio = model["folio"].string!
+        self.branch_id = model["branch_id"].int!
+        self.is_global = model["is_global"].bool!
         
         self.adult_branch = false
     }
@@ -111,4 +134,5 @@ class Coupon: NSObject {
         self.taken = user_take
         self.available = available
     }
+
 }

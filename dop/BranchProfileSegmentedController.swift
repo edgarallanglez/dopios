@@ -47,7 +47,7 @@ class BranchProfileSegmentedController: UIView {
     func getCategoryView(subcategory_id: Int) {
         let categories = Constanst.Categories
         
-        let icon = UIImage(named: categories["\(subcategory_id)"].string!)
+        let icon = UIImage(named: categories["\(subcategory_id)"].string ?? "dop-logo-outline")
         self.company_category.image = icon
         let ring_size = self.category_ring_view.frame.size.width
         let gradient = CAGradientLayer()

@@ -11,14 +11,6 @@ import Alamofire
 import AlamofireImage
 
 class ToExpireCoupon: UIView, ModalDelegate {
-
-    /*
-    // Only override drawRect: if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func drawRect(rect: CGRect) {
-        // Drawing code
-    }
-    */
     
     @IBOutlet weak var branch_logo_view: UIView!
     @IBOutlet weak var branch_logo: UIImageView!
@@ -38,7 +30,7 @@ class ToExpireCoupon: UIView, ModalDelegate {
         
         self.coupon = coupon
         self.descriptionLbl.text = coupon.name
-        self.branchNameLbl.text = coupon.couponDescription
+        self.branchNameLbl.text = coupon.coupon_description
         self.expire_date.text = "\(Utilities.friendlyToDate(coupon.end_date!))"
         self.viewController = viewController
         

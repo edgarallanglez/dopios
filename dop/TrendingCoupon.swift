@@ -39,7 +39,7 @@ class TrendingCoupon: UIView, ModalDelegate, FBSDKSharingDelegate {
         self.coupon = coupon
         
         self.likes.text = String(coupon.total_likes)
-        self.descriptionLbl.text = coupon.couponDescription
+        self.descriptionLbl.text = coupon.coupon_description
         self.viewController = viewController
         if coupon.user_like == true { self.heart.tintColor = Utilities.dopColor } else { self.heart.tintColor = UIColor.lightGray }
         if coupon.taken == true { self.takeCouponButton.tintColor = Utilities.dopColor } else { self.takeCouponButton.tintColor = UIColor.darkGray }
@@ -367,7 +367,7 @@ class TrendingCoupon: UIView, ModalDelegate, FBSDKSharingDelegate {
         content.contentURL = URL(string: "http://www.dop.life")
         content.contentTitle = self.coupon.name
         content.imageURL = URL(string: "\(Utilities.dopImagesURL)\(self.coupon.company_id)/\(self.coupon.logo)")
-        content.contentDescription = self.coupon.couponDescription
+        content.contentDescription = self.coupon.coupon_description
         
         
         let dialog: FBSDKShareDialog = FBSDKShareDialog()

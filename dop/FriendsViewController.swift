@@ -30,10 +30,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         mainLoader.lineWidth = 3.0
         
         friendScrollView.isScrollEnabled = false
-        
-        
         getAllPeople()
-        
     }
     /*func scrollViewDidScroll(scrollView: UIScrollView) {
      let pagenumber = Int(scrollView.contentOffset.x / scrollView.frame.size.width)

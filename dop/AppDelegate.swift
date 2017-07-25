@@ -7,7 +7,6 @@
 //
 
 import UIKit
-//import Fabric
 import FBSDKLoginKit
 import AVFoundation
 import Alamofire
@@ -76,16 +75,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         print("Complete");
         completionHandler(UIBackgroundFetchResult.newData)
-        
-        //getData();
-        
-    }
-    func getData() -> Void{
-            let localNotification:UILocalNotification = UILocalNotification()
-            localNotification.alertAction = "Testing notifications on iOS8"
-            localNotification.alertBody = "Movie Count: \(1)"
-            localNotification.fireDate = Date(timeIntervalSinceNow: 1)
-            UIApplication.shared.scheduleLocalNotification(localNotification)
     }
     
     func registerForPushNotifications(_ application: UIApplication) {

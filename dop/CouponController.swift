@@ -10,7 +10,7 @@ class CouponController {
     typealias ServiceResponse = (NSDictionary?, NSError?) -> Void
 
   
-    class func getAllCouponsWithSuccess(_ limit:Int,success succeed: @escaping ((_ couponsData: JSON?) -> Void),failure errorFound: @escaping ((_ couponsData: NSError?) -> Void)) {
+    class func getAllCouponsWithSuccess(_ limit: Int, success succeed: @escaping ((_ couponsData: JSON?) -> Void),failure errorFound: @escaping ((_ couponsData: NSError?) -> Void)) {
         let url = "\(Utilities.dopURL)coupon/all/for/user/get/?limit=\(limit)"
 
         Alamofire.request(url, method: .get, headers: User.userToken).validate().responseJSON { response in
@@ -26,7 +26,7 @@ class CouponController {
         
     }
     
-    class func getAllCouponsOffsetWithSuccess(_ start_date: String,offset: Int,success succeed: @escaping ((_ couponsData: JSON?) -> Void),failure errorFound: @escaping ((_ couponsData: NSError?) -> Void)) {
+    class func getAllCouponsOffsetWithSuccess(_ start_date: String, offset: Int,success succeed: @escaping ((_ couponsData: JSON?) -> Void),failure errorFound: @escaping ((_ couponsData: NSError?) -> Void)) {
         let url = "\(Utilities.dopURL)coupon/all/for/user/offset/get"
 
         let params: Parameters = [
@@ -60,6 +60,20 @@ class CouponController {
             }
         }
         
+    }
+    
+    class func getLoyaltyTimeline(_ limit: Int, success: @escaping ((_ data: JSON?) -> Void), failure: @escaping ((_ data: NSError?) -> Void)) {
+        let url = "\(Utilities.dopURL)loyalty/all/get/?limit=\(limit)"
+        
+        Alamofire.request(url, method: .get, headers: User.userToken).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                success(JSON(response.result.value))
+            case .failure(let error):
+                print(error)
+                failure(error as NSError)
+            }
+        }
     }
     
     class func getAllCouponsByBranchWithSuccess(_ branch_id:Int,success succeed: @escaping ((_ couponsData: JSON?) -> Void),failure errorFound: @escaping ((_ couponsData: NSError?) -> Void)) {

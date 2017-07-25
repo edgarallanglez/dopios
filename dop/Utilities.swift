@@ -51,7 +51,11 @@ class Utilities {
     class var dop_bronze_color: UIColor {
         return UIColor( red: 236.0/255.0 , green: 144.0/255.0 , blue: 71.0/255.0, alpha:1.0)
     }
-
+    
+    class var dark_gray: UIColor {
+        return hexStringToUIColor(hex: "333333")
+    }
+    
     class var lightGrayColor: UIColor {
         return UIColor( red: 243.0/255.0 , green: 243.0/255.0 , blue: 243.0/255.0, alpha:1.0)
     }
@@ -397,6 +401,21 @@ class Utilities {
             blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
             alpha: CGFloat(1.0)
         )
+    }
+    
+    public static func setShadowWithClip(view_to_shadow: UIView) {
+        let container_layer: CALayer = CALayer()
+        container_layer.shadowColor = UIColor.black.cgColor
+        container_layer.shadowRadius = 4.5
+        container_layer.shadowOffset = CGSize(width: 0, height: 2.2)
+        container_layer.shadowOpacity = 0.38
+        container_layer.contentsScale = 2.0
+        container_layer.addSublayer(view_to_shadow.layer)
+        
+        view_to_shadow.layer.addSublayer(container_layer)
+        view_to_shadow.layer.contentsScale = 2.0
+        view_to_shadow.layer.rasterizationScale = 12.0
+        view_to_shadow.layer.shouldRasterize = true
     }
 
 }

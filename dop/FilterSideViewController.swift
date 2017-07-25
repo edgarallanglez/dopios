@@ -33,6 +33,7 @@ class FilterSideViewController: UIViewController {
     @IBOutlet weak var automotriz: UISwitch!
     @IBOutlet weak var educacion: UISwitch!
     @IBOutlet weak var electronica: UISwitch!
+    @IBOutlet weak var gas: UISwitch!
     @IBOutlet weak var hogar: UISwitch!
     @IBOutlet weak var moda: UISwitch!
     @IBOutlet weak var viajes: UISwitch!
@@ -81,6 +82,7 @@ class FilterSideViewController: UIViewController {
         self.servicesCategoriesArray = [ automotriz,
                                          educacion,
                                          electronica,
+                                         gas,
                                          hogar,
                                          moda,
                                          viajes,

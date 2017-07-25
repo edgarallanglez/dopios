@@ -11,7 +11,7 @@ import UIKit
 class CouponDetailViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate {
 
     @IBOutlet var tableView: UITableView!
-    var newsfeed = [NewsfeedNote]()
+    var newsfeed = [Newsfeed]()
     var cachedImages: [String: UIImage] = [:]
     
     var customView :CouponDetailView = CouponDetailView()
@@ -206,32 +206,10 @@ class CouponDetailViewController: BaseViewController, UITableViewDelegate, UITab
         ]
         
         CouponController.getPeopleTakingSpecificCouponWithSuccess(params,
-            success: { (peopleData) -> Void in
-                let json = peopleData!
-            
-                for (_, subJson): (String, JSON) in json["data"] {
-                    let client_coupon_id = subJson["clients_coupon_id"].int
-                    let friend_id = subJson["friends_id"].string
-                    let exchange_date = subJson["exchange_date"].string
-                    let main_image = subJson["main_image"].string
-                    let names = subJson["names"].string
-                
-                    let longitude = subJson["longitude"].string
-                    let latitude = subJson["latitude"].string
-                    let branch_id =  subJson["branch_id" ].int
-                    let coupon_id =  subJson["coupon_id"].string
-                    let logo =  subJson["logo"].string
-                    let surnames =  subJson["surnames"].string
-                    let user_id =  subJson["user_id"].int
-                    let name =  subJson["name"].string
-                    let company_id = subJson["company_id"].int ?? 0
-                    let branch_name =  subJson["branch_name"].string
-                    let total_likes =  subJson["total_likes"].int
-                    let user_like =  subJson["user_like"].bool
-                    let date =  subJson["used_date"].string
-
-                    let model = NewsfeedNote(client_coupon_id:client_coupon_id,friend_id: friend_id, user_id: user_id, branch_id: branch_id, coupon_name: name, branch_name: branch_name, names: names, surnames: surnames, user_image: main_image, company_id: company_id, branch_image: logo, total_likes:total_likes,user_like: user_like, date:date, formatedDate: "", private_activity: false)
-                
+            success: { (data) -> Void in
+                let json = data!
+                for (_, sub_json): (String, JSON) in json["data"] {
+                    let model = Newsfeed(model: sub_json)
                     self.newsfeed.append(model)
                 }
                 DispatchQueue.main.async(execute: {

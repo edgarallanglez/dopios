@@ -133,7 +133,7 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate, MKMapView
             self.map.delegate = self
             self.centerMapOnLocation((self.coupon?.location)!)
             self.setBranchAnnotation()
-            self.coupon_description.text = coupon?.couponDescription
+            self.coupon_description.text = coupon?.coupon_description
 
             description_title.alpha = 0
             description_separator.alpha = 0
@@ -357,7 +357,7 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate, MKMapView
     func setBranchAnnotation () {
         let drop_pin : Annotation = Annotation(coordinate: (coupon?.location)!, title: coupon!.name, subTitle: "Los mejores", branch_distance: "4.3", branch_id: coupon!.branch_id, company_id: coupon!.company_id, logo: "")
 
-        switch coupon!.categoryId {
+        switch coupon!.category_id {
             case 1: drop_pin.typeOfAnnotation = "marker-food-icon"
             case 2: drop_pin.typeOfAnnotation = "marker-services-icon"
             case 3: drop_pin.typeOfAnnotation = "marker-entertainment-icon"
@@ -485,7 +485,7 @@ class SimpleModalViewController: UIViewController, UITextViewDelegate, MKMapView
         content.contentURL = URL(string: "http://www.dop.life")
         content.contentTitle = self.coupon.name
         content.imageURL = URL(string: "\(Utilities.dopImagesURL)\(self.coupon.company_id)/\(self.coupon.logo)")
-        content.contentDescription = self.coupon.couponDescription
+        content.contentDescription = self.coupon.coupon_description
         
 //        let share: FBSDKShareButton = FBSDKShareButton()
 //        share.shareContent = content

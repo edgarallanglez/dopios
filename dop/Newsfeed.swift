@@ -8,9 +8,9 @@
 
 import UIKit
 
-class NewsfeedNote: NSObject {
+class Newsfeed: NSObject {
     let client_coupon_id: Int
-    let friend_id:String
+    let friend_id: Int
     let user_id: Int
     let branch_id: Int
     let coupon_name: String
@@ -26,11 +26,11 @@ class NewsfeedNote: NSObject {
     var formatedDate: String
     var private_activity: Bool
     
-    init(client_coupon_id: Int!,friend_id:String!, user_id:Int!, branch_id:Int!, coupon_name: String!,
+    init(client_coupon_id: Int!,friend_id: Int!, user_id:Int!, branch_id:Int!, coupon_name: String!,
          branch_name: String!, names: String!, surnames: String!, user_image: String!, company_id: Int!,
          branch_image: String!, total_likes:Int!,user_like:Bool!, date:String!, formatedDate:String!, private_activity: Bool ) {
         self.client_coupon_id = client_coupon_id ?? 0
-        self.friend_id = friend_id ?? ""
+        self.friend_id = friend_id ?? 0
         self.user_id = user_id ?? 0
         self.branch_id = branch_id ?? 0
         self.coupon_name = coupon_name ?? ""
@@ -50,5 +50,24 @@ class NewsfeedNote: NSObject {
     func setUserLike(_ user_like: Bool!,total_likes: Int!){
         self.user_like = user_like
         self.total_likes = total_likes
+    }
+    
+    init(model: JSON) {
+        self.client_coupon_id = model["clients_coupon_id"].int ?? 0
+        self.friend_id = model["friends_id"].int ?? 0
+        self.names = model["names"].string ?? ""
+        self.branch_image =  model["logo"].string ?? ""
+        self.surnames =  model["surnames"].string ?? ""
+        self.company_id = model["company_id"].int ?? 0
+        self.branch_id =  model["branch_id" ].int ?? 0
+        self.coupon_name =  model["name"].string ?? ""
+        self.user_id =  model["user_id"].int ?? 0
+        self.user_image = model["main_image"].string ?? ""
+        self.branch_name =  model["branch_name"].string ?? ""
+        self.total_likes =  model["total_likes"].int ?? 0
+        self.user_like =  model["user_like"].bool ?? false
+        self.date =  model["used_date"].string ?? ""
+        self.formatedDate = model["used_date"].string ?? ""
+        self.private_activity = model["privacy_activity"].bool ?? false
     }
 }

@@ -13,7 +13,7 @@ import UIKit
     fileprivate var labels = [UILabel]()
     var thumbView = UIView()
     
-    var items: [String] = ["GENERAL", "MIS PROMOCIONES"] {
+    var items: [String] = ["PROMOCIÓN", "LEALTAD"] {
         didSet {
             setupLabels()
         }
@@ -25,7 +25,7 @@ import UIKit
         }
     }
     
-    @IBInspectable var selectedLabelColor : UIColor = UIColor.darkGray {
+    @IBInspectable var selectedLabelColor : UIColor = Utilities.dark_gray {
         didSet {
             setSelectedColors()
         }
@@ -49,7 +49,7 @@ import UIKit
         }
     }
     
-    @IBInspectable var font : UIFont! = UIFont.systemFont(ofSize: 10) {
+    @IBInspectable var font : UIFont! = UIFont.systemFont(ofSize: 12) {
         didSet {
             setFont()
         }
@@ -93,7 +93,7 @@ import UIKit
             label.text = items[index - 1]
             label.backgroundColor = UIColor.clear
             label.textAlignment = .center
-            label.font = UIFont(name: "Montserrat-Light", size: 13)
+            label.font = UIFont(name: "Montserrat-Regular", size: 15)
             label.textColor = index == 1 ? selectedLabelColor : unselectedLabelColor
             label.translatesAutoresizingMaskIntoConstraints = false
             self.addSubview(label)

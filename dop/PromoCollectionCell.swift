@@ -12,14 +12,7 @@ import FBSDKLoginKit
 import FBSDKShareKit
 
 class PromoCollectionCell: UICollectionViewCell, FBSDKSharingDelegate {
-    /*!
-     @abstract Sent to the delegate when the sharer encounters an error.
-     @param sharer The FBSDKSharing that completed.
-     @param error The error.
-     */
 
-
-    
     @IBOutlet var coupon_description: UILabel!
     @IBOutlet var branch_banner: UIImageView!
     @IBOutlet var heart: UIImageView!
@@ -35,7 +28,7 @@ class PromoCollectionCell: UICollectionViewCell, FBSDKSharingDelegate {
     var branch_id: Int!
     
     func loadItem(_ coupon:Coupon, viewController: UIViewController) {
-        coupon_description.text = coupon.couponDescription
+        coupon_description.text = coupon.coupon_description
         self.branch_id = coupon.branch_id
         self.coupon_id = coupon.id
         //self.shareButton.setBackgroundImage(UIImage(named: "share-icon"), forState: UIControlState.Normal)
@@ -120,7 +113,7 @@ class PromoCollectionCell: UICollectionViewCell, FBSDKSharingDelegate {
         content.contentURL = URL(string: "http://www.dop.life")
         content.contentTitle = self.coupon.name
         content.imageURL = URL(string: "\(Utilities.dopImagesURL)\(self.coupon.company_id)/\(self.coupon.logo)")
-        content.contentDescription = self.coupon.couponDescription
+        content.contentDescription = self.coupon.coupon_description
         
         
         let dialog: FBSDKShareDialog = FBSDKShareDialog()

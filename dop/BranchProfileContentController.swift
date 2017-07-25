@@ -259,8 +259,6 @@ class BranchProfileContentController: UICollectionViewCell,
     }
     
     func getLoyalty() {
-        
-        
         BranchProfileController.getBranchLoyaltyTimeline(parent_view.branch_id,
                                                          success: { (data) -> Void in
                                                             let json =  data!
@@ -355,6 +353,7 @@ class BranchProfileContentController: UICollectionViewCell,
         loyalty_box.loyalty_logo.alpha = 0.3
         loyalty_box.loyalty_logo.tintColor = UIColor.lightGray
         loyalty_box.empty_bait.isHidden = false
+        loyalty_box.empty_bait.text = "¡\(branch.name) aún no cuenta con programa de lealtad!"
         loyalty_box.loyalty_progress.isHidden = true
         self.loyalty_scroller.addSubview(loyalty_box)
         Utilities.fadeInFromBottomAnimation(loyalty_box, delay: 0.2, duration: 0.7, yPosition: 20)
