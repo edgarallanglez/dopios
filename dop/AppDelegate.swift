@@ -13,7 +13,7 @@ import Alamofire
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -35,43 +35,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 (window?.rootViewController as? LoadingViewController)?.notification = notification_data
             }
         }
-        
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
     
     
     func application(_ application: UIApplication,
-        open url: URL,
-        sourceApplication: String?,
-        annotation: Any) -> Bool {
-            return FBSDKApplicationDelegate.sharedInstance().application(
-                application,
-                open: url,
-                sourceApplication: sourceApplication,
-                annotation: annotation)
+                     open url: URL,
+                     sourceApplication: String?,
+                     annotation: Any) -> Bool {
+        return FBSDKApplicationDelegate.sharedInstance().application(
+            application,
+            open: url,
+            sourceApplication: sourceApplication,
+            annotation: annotation)
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
         print("ALO1")
     }
-
+    
     func applicationDidEnterBackground(_ application: UIApplication) {
         //SocketIOManager.sharedInstance.closeConnection()
     }
-
+    
     func applicationWillEnterForeground(_ application: UIApplication) {
-
+        
     }
-
+    
     func applicationDidBecomeActive(_ application: UIApplication) {
         print("ALO2")
         //SocketIOManager.sharedInstance.establishConnection()
     }
-
+    
     func applicationWillTerminate(_ application: UIApplication) {
-
+        
     }
-
+    
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         print("Complete");
         completionHandler(UIBackgroundFetchResult.newData)
@@ -90,7 +89,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         else { application.registerForRemoteNotifications() }
     }
-
+    
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         let tokenChars = (deviceToken as NSData).bytes.bindMemory(to: CChar.self, capacity: deviceToken.count)
         var tokenString: String = ""

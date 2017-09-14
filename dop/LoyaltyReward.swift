@@ -28,7 +28,7 @@ class LoyaltyReward: UIView, ModalDelegate {
     
     func triggerModal(_ sender: UITapGestureRecognizer) {
         let controller_from_main: UIViewController = self.current_storyboard.instantiateInitialViewController()!
-        //setViewCount()
+        setViewCount()
         
         let modal_storyboard = UIStoryboard(name: "ModalStoryboard", bundle: nil)
         let view_controller = modal_storyboard.instantiateInitialViewController()!
@@ -86,5 +86,21 @@ class LoyaltyReward: UIView, ModalDelegate {
             }
         }
 
+    }
+    
+    func setViewCount() {
+        let params: [String: AnyObject] = [ "loyalty_id": self.loyalty.loyalty_id as AnyObject,
+                                            "latitude": User.coordinate.latitude as AnyObject,
+                                            "longitude": User.coordinate.longitude as AnyObject ]
+        
+        CouponController.viewLoyaltyWithSuccess(params,
+                                                success: { (data) -> Void in
+                                                    //let json: JSON = JSON(data!)
+                                                    print("👍")
+        },
+                                                failure: { (data) -> Void in
+                                                    print("👎")
+        }
+        )
     }
 }

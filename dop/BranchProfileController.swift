@@ -26,6 +26,26 @@ class BranchProfileController {
         }
     }
     
+    class func viewSocialWithSuccess(_ params:[String: AnyObject],
+                                      success succeed: @escaping ((_ data: JSON?) -> Void),
+                                      failure errorFound: @escaping ((_ data: NSError?) -> Void)) {
+        let url = "\(Utilities.dopURL)company/branch/social/view"
+        
+        Alamofire.request(url, method: .post,
+                          parameters: params,
+                          encoding: JSONEncoding.default,
+                          headers: User.userToken).validate().responseJSON { response in
+                            
+                            switch response.result {
+                            case .success:
+                                succeed(JSON(response.result.value))
+                            case .failure(let error):
+                                print(error)
+                                errorFound(error as NSError)
+                            }
+        }
+    }
+    
     class func getBranchCouponTimeline(_ branchId: Int, success: @escaping ((_ branchData: JSON?) -> Void), failure: @escaping ((_ branchData: NSError?) -> Void)) {
         let url = "\(Utilities.dopURL)coupon/all/\(branchId)/get"
 
