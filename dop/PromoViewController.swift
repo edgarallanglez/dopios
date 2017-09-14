@@ -80,8 +80,8 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
         self.promo_collection_view.infiniteScrollIndicatorView = loader
         self.promo_collection_view.infiniteScrollIndicatorView?.tintColor = Utilities.dopColor
         //
-        self.loyalty_collection_view.infiniteScrollIndicatorView = loader
-        self.loyalty_collection_view.infiniteScrollIndicatorView?.tintColor = Utilities.dopColor
+//        self.loyalty_collection_view.infiniteScrollIndicatorView = loader
+//        self.loyalty_collection_view.infiniteScrollIndicatorView?.tintColor = Utilities.dopColor
         
         // Set custom indicator margin
         //promo_collection_view.infiniteScrollIndicatorMargin = 49
@@ -93,12 +93,12 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
             }
         }
         
-        loyalty_collection_view.addInfiniteScroll { [weak self] (scrollView) -> Void in
-            if !(self?.loyalties.isEmpty)! {
-//                self.getTakenCouponsWithOffset()
-            }
-        }
-        
+//        loyalty_collection_view.addInfiniteScroll { [weak self] (scrollView) -> Void in
+//            if !(self?.loyalties.isEmpty)! {
+////                self.getTakenCouponsWithOffset()
+//            }
+//        }
+//        
         let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(PromoViewController.swipe(_:)))
         rightSwipe.direction = .right
         
@@ -244,13 +244,13 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
         if promoSegmentedController.selectedIndex == 0 { selected_coupon = self.coupons[indexPath.row] as Coupon }
         else { selected_loyalty = self.loyalties[indexPath.row] as Loyalty }
         
-        if selected_coupon != nil {
+        if selected_coupon != nil && promoSegmentedController.selectedIndex == 0 {
             let modal:ModalViewController = ModalViewController(currentView: self, type: ModalViewControllerType.CouponDetail)
             modal.willPresentCompletionHandler = { vc in
                 let navigationController = vc as! SimpleModalViewController
                 navigationController.coupon = self.selected_coupon
             }
-            setViewCount(selected_coupon.id)
+            setCouponViewCount(selected_coupon.id)
             modal.delegate = self
             modal.present(animated: true, completionHandler: nil)
         } else {
@@ -263,7 +263,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                     let navigationController = view_controller as! LoyaltyModalViewController
                     navigationController.loyalty = self.selected_loyalty
                 }
-                
+                self.setLoyaltyViewCount(self.selected_loyalty.loyalty_id)
                 modal.present(animated: true, completionHandler: nil)
                 modal.delegate = self
             }
@@ -283,7 +283,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
         else { getCoupons() }
     }
     
-    func setViewCount(_ coupon_id: Int) {
+    func setCouponViewCount(_ coupon_id: Int) {
         let params: [String: AnyObject] = ["coupon_id": coupon_id as AnyObject,
                                            "latitude": User.coordinate.latitude as AnyObject,
                                            "longitude": User.coordinate.longitude as AnyObject ]
@@ -293,6 +293,22 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
         },
                                                failure: { (data) -> Void in
                                                 print("👎")
+        }
+        )
+    }
+    
+    func setLoyaltyViewCount(_ loyalty_id: Int) {
+        let params: [String: AnyObject] = ["loyalty_id": loyalty_id as AnyObject,
+                                           "latitude": User.coordinate.latitude as AnyObject,
+                                           "longitude": User.coordinate.longitude as AnyObject]
+        
+        CouponController.viewLoyaltyWithSuccess(params,
+                                                success: { (data) -> Void in
+                                                    let json: JSON = JSON(data!)
+                                                    print("👍")
+        },
+                                                failure: { (data) -> Void in
+                                                    print("👎")
         }
         )
     }

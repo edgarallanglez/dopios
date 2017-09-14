@@ -32,7 +32,6 @@ class ParticleEmmiter: NSObject {
         let pink_800 = UIColor(red: 173/255, green: 20/255, blue: 87/255, alpha: 1)
         let pink_400 = UIColor(red: 245/255, green: 0/255, blue: 87/255, alpha: 1)
         let amber_200 = UIColor(red: 251/255, green: 225/255, blue: 106/255, alpha: 1)
-//        let amber_600 = UIColor(red: 255/255, green: 179/255, blue: 0/255, alpha: 1)
         let light_green_200 = UIColor(red: 178/255, green: 255/255, blue: 89/255, alpha: 1)
         let blue_200 = UIColor(red: 64/255, green: 196/255, blue: 255/255, alpha: 1)
         let purple_200 = UIColor(red: 179/255, green: 157/255, blue: 219/255, alpha: 1)

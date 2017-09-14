@@ -419,7 +419,7 @@ class BranchProfileContentController: UICollectionViewCell,
         view_controller.webview_title = "facebook"
         view_controller.url = self.branch.facebook_url
         
-//        view_controller.modalTransitionStyle = .coverVertical
+        setSocialView(type: "facebook")
         
         let transition = CATransition()
         transition.duration = 0.35
@@ -441,7 +441,7 @@ class BranchProfileContentController: UICollectionViewCell,
         view_controller.webview_title = "Instagram"
         view_controller.url = self.branch.instagram_url
         
-        //        view_controller.modalTransitionStyle = .coverVertical
+        setSocialView(type: "instagram")
         
         let transition = CATransition()
         transition.duration = 0.35
@@ -453,6 +453,24 @@ class BranchProfileContentController: UICollectionViewCell,
         
         parent_view.present(view_controller, animated: false)
         
+    }
+    
+    func setSocialView(type: String) {
+        let params: [String: AnyObject] = [ "owner_id": self.branch.id as AnyObject,
+                                            "type": type as AnyObject,
+                                            "latitude": User.coordinate.latitude as AnyObject,
+                                            "longitude": User.coordinate.longitude as AnyObject ]
+        
+        BranchProfileController.viewSocialWithSuccess(params,
+                                                success: { (data) -> Void in
+                                                    //let json: JSON = JSON(data!)
+                                                    print("👍")
+        },
+                                                failure: { (data) -> Void in
+                                                    print("👎")
+        }
+        )
+
     }
     
     func setupSocialLayout() {

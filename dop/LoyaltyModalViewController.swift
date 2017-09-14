@@ -33,7 +33,7 @@ class LoyaltyModalViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
         
         
-        if((action_button) != nil){
+        if((action_button) != nil) {
             action_button.addTarget(self, action: #selector(LoyaltyModalViewController.buttonPressed(_:)), for: UIControlEvents.touchDown)
             action_button.addTarget(self, action: #selector(LoyaltyModalViewController.buttonReleased(_:)), for: UIControlEvents.touchDragOutside)
             action_button.addTarget(self, action: #selector(LoyaltyModalViewController.actionTouched(_:)), for: UIControlEvents.touchUpInside)
@@ -42,11 +42,7 @@ class LoyaltyModalViewController: UIViewController {
         if((close_button) != nil){
             close_button.addTarget(self, action: #selector(LoyaltyModalViewController.closePressed(_:)), for: .touchDown)
         }
-    
-
     }
-    
-    
     
     func buttonPressed(_ sender: WhiteModalButton){
         sender.isSelected = true
@@ -74,9 +70,7 @@ class LoyaltyModalViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         if loyalty != nil { setModal() }
-        
         if action_button != nil { action_button.layoutIfNeeded() }
-        
     }
     
     override func didReceiveMemoryWarning() {
