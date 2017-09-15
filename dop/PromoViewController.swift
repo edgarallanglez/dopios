@@ -289,7 +289,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
                                            "longitude": User.coordinate.longitude as AnyObject ]
         CouponController.viewCouponWithSuccess(params,
                                                success: { (data) -> Void in
-                                                print("👍")
+                                                print("👍 view")
         },
                                                failure: { (data) -> Void in
                                                 print("👎")
@@ -305,7 +305,7 @@ class PromoViewController: BaseViewController, UICollectionViewDelegate, UIColle
         CouponController.viewLoyaltyWithSuccess(params,
                                                 success: { (data) -> Void in
                                                     let json: JSON = JSON(data!)
-                                                    print("👍")
+                                                    print("👍 view")
         },
                                                 failure: { (data) -> Void in
                                                     print("👎")

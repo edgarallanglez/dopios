@@ -15,6 +15,10 @@ import SocketIO
 class LoyaltyModalViewController: UIViewController {
     
 
+    
+    let socket = SocketIOClient(socketURL: URL(string: "http://45.55.7.118:5000")!, config: [.log(true), .compress])
+    
+    
     @IBOutlet weak var close_button: UIButton!
     @IBOutlet weak var action_button: WhiteModalButton!
     @IBOutlet weak var loyalty_name: UIButton!
@@ -26,14 +30,14 @@ class LoyaltyModalViewController: UIViewController {
     var loyalty: Loyalty!
     var percent: Double!
     var progress: Double!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(didBecomeActive), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
-        
-        
+//        
+//        NotificationCenter.default.addObserver(self, selector: #selector(didBecomeActive), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+//        
+//        
         if((action_button) != nil) {
             action_button.addTarget(self, action: #selector(LoyaltyModalViewController.buttonPressed(_:)), for: UIControlEvents.touchDown)
             action_button.addTarget(self, action: #selector(LoyaltyModalViewController.buttonReleased(_:)), for: UIControlEvents.touchDragOutside)
@@ -150,8 +154,8 @@ class LoyaltyModalViewController: UIViewController {
     }
     
     
-    func didBecomeActive() { }
-    
-    func willEnterForeground() { }
+    func didBecomeActive() {
+        print("entro el socket")
+    }
     
 }
