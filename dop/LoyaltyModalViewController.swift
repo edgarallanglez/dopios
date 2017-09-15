@@ -10,10 +10,14 @@
 import UIKit
 import Alamofire
 import AlamofireImage
+import SocketIO
 
-class LoyaltyModalViewController: UIViewController,SocketIODelegate {
+class LoyaltyModalViewController: UIViewController {
+
     
-
+    let socket = SocketIOClient(socketURL: URL(string: "http://45.55.7.118:5000")!, config: [.log(true), .compress])
+    
+    
     @IBOutlet weak var close_button: UIButton!
     @IBOutlet weak var action_button: WhiteModalButton!
     @IBOutlet weak var loyalty_name: UIButton!
@@ -25,14 +29,14 @@ class LoyaltyModalViewController: UIViewController,SocketIODelegate {
     var loyalty: Loyalty!
     var percent: Double!
     var progress: Double!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(didBecomeActive), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
-        
-        
+//        
+//        NotificationCenter.default.addObserver(self, selector: #selector(didBecomeActive), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+//        
+//        
         if((action_button) != nil) {
             action_button.addTarget(self, action: #selector(LoyaltyModalViewController.buttonPressed(_:)), for: UIControlEvents.touchDown)
             action_button.addTarget(self, action: #selector(LoyaltyModalViewController.buttonReleased(_:)), for: UIControlEvents.touchDragOutside)
@@ -43,45 +47,23 @@ class LoyaltyModalViewController: UIViewController,SocketIODelegate {
             close_button.addTarget(self, action: #selector(LoyaltyModalViewController.closePressed(_:)), for: .touchDown)
         }
         
-        let socketIO: SocketIO = SocketIO()
-        socketIO.useSecure = false
-        socketIO.delegate = self
-
-        socketIO.connect(toHost:"45.55.7.118", onPort: 443)
-        
-        
-        //let socket = SocketIOClient(socketURL: NSURL(string:"http://45.55.7.118:443")!, config:["log": true,"forcePolling":true])
-        //let socket = SocketIOClient(socketURL: URL(string:"http://45.55.7.118:443")!,config: [.log(true),.compress])
-        /*socket.on("connect") {data, ack in
-            print("COnectado a \(data)")
+        socket.on(clientEvent: .connect) {data, ack in
+            print("socket connected")
         }
-        socket.connect()*/
-
-    }
-    func socketIODidConnect(socket: SocketIO) {
-        print("socket.io connected.")
-        //socketIO.sendEvent("join room", withData: User.userToken)
-        //socketIO.sendEvent("notification", withData: User.userToken)
-    }
-    
-    func socketIO(socket: SocketIO, didReceiveEvent packet: SocketIOPacket) {
-        print("didReceiveEvent >>> data: %@", packet.dataAsJSON())
         
-        /*let cb: SocketIOCallback = { argsData in
-         let response: [NSObject : AnyObject] = argsData as! [NSObject : AnyObject]
-         print("ack arrived: %@", response)
-         self.socketIO.disconnectForced()
-         
-         }*/
+        socket.on("currentAmount") {data, ack in
+            if let cur = data[0] as? Double {
+                self.socket.emitWithAck("canUpdate", cur).timingOut(after: 0) {data in
+                    self.socket.emit("update", ["amount": cur + 2.50])
+                }
+                
+                ack.with("Got your currentAmount", "dude")
+            }
+        }
+        
+        socket.connect()
     }
-    func socketIODidDisconnect(socket: SocketIO!, disconnectedWithError error: NSError!) {
-        //socketIO.connectToHost("inmoon.com.mx", onPort: 443, withParams: nil, withNamespace: "/app")
-    }
-    func socketIO(_ socket: SocketIO!, onError error: Error!) {
-        print("Error de sockets")
-    }
-    
-    
+
     func buttonPressed(_ sender: WhiteModalButton){
         sender.isSelected = true
     }
@@ -161,8 +143,8 @@ class LoyaltyModalViewController: UIViewController,SocketIODelegate {
     }
     
     
-    func didBecomeActive() { }
-    
-    func willEnterForeground() { }
+    func didBecomeActive() {
+        print("entro el socket")
+    }
     
 }
