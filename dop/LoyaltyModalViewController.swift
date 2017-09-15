@@ -44,10 +44,10 @@ class LoyaltyModalViewController: UIViewController,SocketIODelegate {
         }
         
         let socketIO: SocketIO = SocketIO()
-        socketIO.useSecure = true
+        socketIO.useSecure = false
         socketIO.delegate = self
 
-        socketIO.connect(toHost:"45.55.7.118/socket.io", onPort: 5000, withParams: ["log":true,"forcePolling":true])
+        socketIO.connect(toHost:"45.55.7.118", onPort: 443)
         
         
         //let socket = SocketIOClient(socketURL: NSURL(string:"http://45.55.7.118:443")!, config:["log": true,"forcePolling":true])
