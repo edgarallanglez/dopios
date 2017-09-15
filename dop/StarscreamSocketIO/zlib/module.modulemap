@@ -1,0 +1,18 @@
+module SSCZLib [system] {
+    header "include.h"
+    link "z"
+    export *
+}
+module SSCommonCrypto [system] {
+    header "include.h"
+    export *
+}
+
+module CommonCrypto [system] {
+    header "/usr/include/CommonCrypto/CommonCrypto.h"
+    export *
+}
+module SSCZLib [system] {
+    header "/usr/include/CommonCrypto/zlip.h"
+    export *
+}

@@ -9,7 +9,7 @@
 import UIKit
 
 class SocketIOManager: NSObject {
-    static let sharedInstance = SocketIOManager()
+    /*static let sharedInstance = SocketIOManager()
     
     var socket: SocketIOClient = SocketIOClient(socketURL: NSURL(string: "https://inmoon.com.mx:443")!, options:["log": false])
     
@@ -55,5 +55,5 @@ class SocketIOManager: NSObject {
             let messageDictionary = [String: AnyObject]()
             completionHandler(info: messageDictionary)
         }
-    }
+    }*/
 }
