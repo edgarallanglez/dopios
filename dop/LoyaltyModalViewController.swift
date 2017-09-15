@@ -11,7 +11,7 @@ import UIKit
 import Alamofire
 import AlamofireImage
 
-class LoyaltyModalViewController: UIViewController {
+class LoyaltyModalViewController: UIViewController,SocketIODelegate {
     
 
     @IBOutlet weak var close_button: UIButton!
@@ -42,7 +42,45 @@ class LoyaltyModalViewController: UIViewController {
         if((close_button) != nil){
             close_button.addTarget(self, action: #selector(LoyaltyModalViewController.closePressed(_:)), for: .touchDown)
         }
+        
+        let socketIO: SocketIO = SocketIO()
+        socketIO.useSecure = true
+        socketIO.delegate = self
+
+        socketIO.connect(toHost:"45.55.7.118/socket.io", onPort: 5000, withParams: ["log":true,"forcePolling":true])
+        
+        
+        //let socket = SocketIOClient(socketURL: NSURL(string:"http://45.55.7.118:443")!, config:["log": true,"forcePolling":true])
+        //let socket = SocketIOClient(socketURL: URL(string:"http://45.55.7.118:443")!,config: [.log(true),.compress])
+        /*socket.on("connect") {data, ack in
+            print("COnectado a \(data)")
+        }
+        socket.connect()*/
+
     }
+    func socketIODidConnect(socket: SocketIO) {
+        print("socket.io connected.")
+        //socketIO.sendEvent("join room", withData: User.userToken)
+        //socketIO.sendEvent("notification", withData: User.userToken)
+    }
+    
+    func socketIO(socket: SocketIO, didReceiveEvent packet: SocketIOPacket) {
+        print("didReceiveEvent >>> data: %@", packet.dataAsJSON())
+        
+        /*let cb: SocketIOCallback = { argsData in
+         let response: [NSObject : AnyObject] = argsData as! [NSObject : AnyObject]
+         print("ack arrived: %@", response)
+         self.socketIO.disconnectForced()
+         
+         }*/
+    }
+    func socketIODidDisconnect(socket: SocketIO!, disconnectedWithError error: NSError!) {
+        //socketIO.connectToHost("inmoon.com.mx", onPort: 443, withParams: nil, withNamespace: "/app")
+    }
+    func socketIO(_ socket: SocketIO!, onError error: Error!) {
+        print("Error de sockets")
+    }
+    
     
     func buttonPressed(_ sender: WhiteModalButton){
         sender.isSelected = true
