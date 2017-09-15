@@ -10,8 +10,9 @@
 import UIKit
 import Alamofire
 import AlamofireImage
+import SocketIO
 
-class LoyaltyModalViewController: UIViewController,SocketIODelegate {
+class LoyaltyModalViewController: UIViewController {
     
 
     @IBOutlet weak var close_button: UIButton!
@@ -43,42 +44,30 @@ class LoyaltyModalViewController: UIViewController,SocketIODelegate {
             close_button.addTarget(self, action: #selector(LoyaltyModalViewController.closePressed(_:)), for: .touchDown)
         }
         
-        let socketIO: SocketIO = SocketIO()
+        /*let socketIO: SocketIO = SocketIO()
         socketIO.useSecure = false
         socketIO.delegate = self
 
-        socketIO.connect(toHost:"45.55.7.118", onPort: 443)
+        socketIO.connect(toHost:"45.55.7.118", onPort: 443)*/
         
         
-        //let socket = SocketIOClient(socketURL: NSURL(string:"http://45.55.7.118:443")!, config:["log": true,"forcePolling":true])
-        //let socket = SocketIOClient(socketURL: URL(string:"http://45.55.7.118:443")!,config: [.log(true),.compress])
+        let socket = SocketIOClient(socketURL: NSURL(string:"http://45.55.7.118:5000")!, config:["log": true,"forcePolling":true,"secure":false])
+    
+        /*let socket = SocketIOClient(socketURL: URL(string:"http://45.55.7.118:443")!,config: [.log(true),.compress,.sec])*/
         /*socket.on("connect") {data, ack in
             print("COnectado a \(data)")
+        }*/
+        socket.on(clientEvent: .connect) {data, ack in
+            print("socket connected \(data)")
         }
-        socket.connect()*/
-
-    }
-    func socketIODidConnect(socket: SocketIO) {
-        print("socket.io connected.")
-        //socketIO.sendEvent("join room", withData: User.userToken)
-        //socketIO.sendEvent("notification", withData: User.userToken)
-    }
     
-    func socketIO(socket: SocketIO, didReceiveEvent packet: SocketIOPacket) {
-        print("didReceiveEvent >>> data: %@", packet.dataAsJSON())
-        
-        /*let cb: SocketIOCallback = { argsData in
-         let response: [NSObject : AnyObject] = argsData as! [NSObject : AnyObject]
-         print("ack arrived: %@", response)
-         self.socketIO.disconnectForced()
-         
-         }*/
-    }
-    func socketIODidDisconnect(socket: SocketIO!, disconnectedWithError error: NSError!) {
-        //socketIO.connectToHost("inmoon.com.mx", onPort: 443, withParams: nil, withNamespace: "/app")
-    }
-    func socketIO(_ socket: SocketIO!, onError error: Error!) {
-        print("Error de sockets")
+        socket.onAny {
+            print("got event: \($0.event) with items \($0.items)")
+            
+        }
+
+        socket.connect()
+
     }
     
     
