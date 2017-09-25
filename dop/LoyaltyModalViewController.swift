@@ -48,33 +48,80 @@ class LoyaltyModalViewController: UIViewController {
             close_button.addTarget(self, action: #selector(LoyaltyModalViewController.closePressed(_:)), for: .touchDown)
         }
         
-        /*let socketIO: SocketIO = SocketIO()
-        socketIO.useSecure = false
-        socketIO.delegate = self
-
-        socketIO.connect(toHost:"45.55.7.118", onPort: 443)*/
-        
-        
-        let socket = SocketIOClient(socketURL: NSURL(string:"http://45.55.7.118:5000")!, config:["log": true,"forcePolling":true,"secure":false])
-    
-        /*let socket = SocketIOClient(socketURL: URL(string:"http://45.55.7.118:443")!,config: [.log(true),.compress,.sec])*/
-        /*socket.on("connect") {data, ack in
-            print("COnectado a \(data)")
-        }*/
         socket.on(clientEvent: .connect) {data, ack in
-            print("socket connected \(data)")
-        }
-    
-        socket.onAny {
-            print("got event: \($0.event) with items \($0.items)")
+            print("socket connected")
+            let data:[String: Any] = ["user_id": User.user_id,
+                        "user_image": User.userImageUrl,
+                        "user_name": User.userName,
+                        "room": "\(self.loyalty.loyalty_id!)\(self.loyalty.owner_id!)",
+                        "join_room": true,
+                        "visit": self.loyalty.visit!,
+                        "goal": self.loyalty.goal!]
             
+            
+            self.socket.emit("waitingForRedeemUseriOS", data)
         }
+        
+        socket.on("newAdmin") {data, ack in
+            let data:[String: Any] = ["user_id": User.user_id,
+                                      "user_image": User.userImageUrl,
+                                      "user_name": User.userName,
+                                      "room": "\(self.loyalty.loyalty_id!)\(self.loyalty.owner_id!)",
+                "join_room": false,
+                "visit": self.loyalty.visit!,
+                "goal": self.loyalty.goal!]
+            
+            
+            self.socket.emit("waitingForRedeemUseriOS", data)
+        }
+        socket.on("loyaltyRedeem") { data, ack in
+            self.loyalty.visit = self.loyalty.visit+1
+            if(self.loyalty.visit>self.loyalty.goal){
+                self.loyalty.visit = 0;
+            }
+            
+            self.setProgress()
+            ParticleEmmiter.confettiParticle(container: self.loyalty_progress)
 
-        socket.connect()
+            //parent.progress.setText(loyalty.visit + "/" + loyalty.goal);
+        }
+        socket.on("loyaltyFail"){ data, ack in
+            let data_array = data[0] as! NSDictionary
+            let string_minutes = String(describing: data_array["minutes"]!)
+            print(string_minutes)
+            let minutes = Double(string_minutes)
+            var rounded_minutes = Int(minutes!)
+            
+            var time_string = "horas"
+            if rounded_minutes>=60 {
+                rounded_minutes = rounded_minutes/60
+            }else{
+                time_string = "minutos"
+            }
+            
+            let alert = UIAlertController(title: "!Oops!", message: "Hiciste válida esta promoción recientemente, debes esperar \(rounded_minutes) \(time_string) para que puedas usarla nuevamente.", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.default, handler: { action in
+                switch action.style{
+                case .default:
+                    self.mz_dismissFormSheetController(animated: true, completionHandler: nil)
+
+                case .cancel:
+                    self.mz_dismissFormSheetController(animated: true, completionHandler: nil)
+
+                case .destructive:
+                    self.mz_dismissFormSheetController(animated: true, completionHandler: nil)
+
+                }
+            }))
+            
+            self.socket.disconnect()
+            
+            self.present(alert, animated: true, completion: nil)
+        }
+       socket.connect()
 
     }
-    
-    
+
     func buttonPressed(_ sender: WhiteModalButton){
         sender.isSelected = true
     }
@@ -134,7 +181,7 @@ class LoyaltyModalViewController: UIViewController {
         }
         
         setProgress()
-        ParticleEmmiter.confettiParticle(container: loyalty_progress)
+        
     }
     
     func setProgress() {

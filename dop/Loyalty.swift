@@ -19,7 +19,7 @@ class Loyalty: NSObject {
     let is_global: Bool?
     let end_date: String?
     let logo: String?
-    let visit: Double!
+    var visit: Double!
     var logo_image: UIImage?
     
     init(model: JSON) {
